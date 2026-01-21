@@ -1,0 +1,12 @@
+{
+  "product": "Bravètto Branded",
+  "policy": {
+    "freeForAfrica": true,
+    "enforcement": ["distribution", "onboarding", "activation"],
+    "regionCheck": "africa",
+    "messaging": "Bravètto is your own personal guide—empowering, amplifying, and igniting your creativity. Free for Africa.",
+    "audit": true,
+    "systemEmergence": "natural",
+    "linkedManifest": "../abevoice/EMPOWERMENT_MANIFEST.json"
+  }
+}

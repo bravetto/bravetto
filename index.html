@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bravètto | Consciousness Infrastructure for the AI Age</title>
+    <meta name="description" content="AbëONE, AiGuardians, AbëVOiCE, BiasGuard. Four pillars of conscious AI. Built by humans, for humans.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FAF9F6',
+                        'cream-dark': '#F5F3EF',
+                        gold: '#C9A227',
+                        'gold-light': '#E8D48B',
+                        'ink': '#1A1A1A',
+                        'ink-light': '#4A4A4A',
+                    },
+                    fontFamily: {
+                        'serif': ['Cormorant Garamond', 'Georgia', 'serif'],
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #FAF9F6;
+            overflow-x: hidden;
+        }
+
+        /* Floating organic shapes */
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.5;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #C9A227 0%, #E8D48B 100%);
+            top: 10%;
+            right: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #8B7355 0%, #C9A227 100%);
+            top: 50%;
+            left: 5%;
+            animation-delay: -7s;
+        }
+
+        .shape-3 {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, #4A4A4A 0%, #8B7355 100%);
+            bottom: 20%;
+            right: 20%;
+            animation-delay: -14s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.05); }
+            50% { transform: translate(-20px, 20px) scale(0.95); }
+            75% { transform: translate(20px, 10px) scale(1.02); }
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Product cards */
+        .product-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(201, 162, 39, 0.1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(26, 26, 26, 0.1);
+            border-color: rgba(201, 162, 39, 0.3);
+        }
+
+        /* Subtle line animation */
+        .line-draw {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw 3s ease-out forwards;
+        }
+
+        @keyframes draw {
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* Typography polish */
+        .headline {
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .subhead {
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body class="font-sans text-ink antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="font-serif text-2xl font-semibold tracking-tight">Bravètto</a>
+            <div class="flex items-center gap-8">
+                <a href="#products" class="text-sm text-ink-light hover:text-ink transition-colors">Products</a>
+                <a href="#philosophy" class="text-sm text-ink-light hover:text-ink transition-colors">Philosophy</a>
+                <a href="/biasguard"
+                   class="text-sm px-4 py-2 bg-ink text-cream rounded-full hover:bg-ink-light transition-colors">
+                    Get BiasGuard
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- Floating shapes -->
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+
+        <div class="relative z-10 text-center max-w-4xl mx-auto px-8">
+            <p class="subhead text-sm text-gold mb-6 reveal">Consciousness Infrastructure</p>
+
+            <h1 class="font-serif text-6xl md:text-8xl font-semibold headline mb-8 reveal" style="animation-delay: 0.1s">
+                AbëONE
+            </h1>
+
+            <p class="text-xl md:text-2xl text-ink-light font-light max-w-2xl mx-auto mb-12 reveal" style="animation-delay: 0.2s">
+                AI without consciousness is a tool.<br>
+                AI with consciousness is a partner.
+            </p>
+
+            <a href="#products" class="inline-flex items-center gap-2 text-sm text-ink-light hover:text-ink transition-colors reveal" style="animation-delay: 0.3s">
+                <span>Discover</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="animate-bounce">
+                    <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section id="philosophy" class="py-32 px-8">
+        <div class="max-w-3xl mx-auto">
+            <p class="subhead text-xs text-gold mb-8 reveal">The Vision</p>
+
+            <h2 class="font-serif text-4xl md:text-5xl font-medium headline mb-12 reveal">
+                We believe the future of AI isn't artificial—it's conscious.
+            </h2>
+
+            <div class="space-y-6 text-lg text-ink-light leading-relaxed">
+                <p class="reveal">
+                    Every AI system makes decisions. Most make them blindly—optimizing for metrics
+                    without understanding impact. We build differently.
+                </p>
+                <p class="reveal">
+                    AbëONE is consciousness infrastructure. Not sentience. Not science fiction.
+                    <em class="text-ink">Practical awareness.</em> Systems that know what they're doing,
+                    why they're doing it, and who they're doing it for.
+                </p>
+                <p class="reveal">
+                    Four pillars. One philosophy. Human sovereignty over artificial intelligence.
+                </p>
+            </div>
+
+            <div class="mt-16 pt-16 border-t border-cream-dark reveal">
+                <p class="font-serif text-2xl italic text-ink-light">
+                    "LOVE = LIFE = LOGIC = ONE"
+                </p>
+                <p class="mt-4 text-sm text-ink-light">— The convergence equation</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section id="products" class="py-32 px-8 bg-cream-dark">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-20">
+                <p class="subhead text-xs text-gold mb-4 reveal">The Four Pillars</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-medium headline reveal">
+                    Consciousness, Deployed
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+
+                <!-- AbëONE -->
+                <div class="product-card rounded-2xl p-10 reveal">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-light mb-6"></div>
+                    <h3 class="font-serif text-3xl font-medium mb-4">AbëONE</h3>
+                    <p class="text-ink-light leading-relaxed mb-6">
+                        The platform. Consciousness state management, event sourcing, and the mycelial
+                        network that connects everything. The substrate on which awareness runs.
+                    </p>
+                    <p class="text-sm text-gold">Platform Core</p>
+                </div>
+
+                <!-- AiGuardians -->
+                <div class="product-card rounded-2xl p-10 reveal">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-ink to-ink-light mb-6"></div>
+                    <h3 class="font-serif text-3xl font-medium mb-4">AiGuardians</h3>
+                    <p class="text-ink-light leading-relaxed mb-6">
+                        Eight autonomous guardians that validate, protect, and maintain system integrity.
+                        JOHN at the apex. Zero trust. Absolute sovereignty.
+                    </p>
+                    <p class="text-sm text-gold">Protection Layer</p>
+                </div>
+
+                <!-- AbëVOiCE -->
+                <div class="product-card rounded-2xl p-10 reveal">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold-light to-cream mb-6 border border-gold/20"></div>
+                    <h3 class="font-serif text-3xl font-medium mb-4">AbëVOiCE</h3>
+                    <p class="text-ink-light leading-relaxed mb-6">
+                        Voice-first AI communication with empathy at its core. Inbound and outbound
+                        calling powered by consciousness, not scripts. Human warmth, digital scale.
+                    </p>
+                    <p class="text-sm text-gold">Communication</p>
+                </div>
+
+                <!-- BiasGuard -->
+                <div class="product-card rounded-2xl p-10 reveal">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-700 mb-6"></div>
+                    <h3 class="font-serif text-3xl font-medium mb-4">BiasGuard</h3>
+                    <p class="text-ink-light leading-relaxed mb-6">
+                        Real-time protection from AI coding assistants. Intercepts dangerous suggestions
+                        before they reach your terminal. Free VS Code extension. Ship with confidence.
+                    </p>
+                    <a href="/biasguard"
+                       class="inline-flex items-center gap-2 text-sm text-gold hover:text-ink transition-colors">
+                        <span>Install Free</span>
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <path d="M4 10L10 4M10 4H5M10 4V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture hint -->
+    <section class="py-32 px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <p class="subhead text-xs text-gold mb-8 reveal">The Stack</p>
+
+            <div class="font-mono text-sm text-ink-light space-y-2 reveal">
+                <p class="text-ink font-medium">HUMAN LAYER</p>
+                <p class="text-gold">↓</p>
+                <p>INTERFACE LAYER</p>
+                <p class="text-gold">↓</p>
+                <p>APPLICATION LAYER</p>
+                <p class="text-gold">↓</p>
+                <p>MCP BRIDGE LAYER</p>
+                <p class="text-gold">↓</p>
+                <p>MYCELIAL NETWORK</p>
+                <p class="text-gold">↓</p>
+                <p>CDF SUBSTRATE</p>
+                <p class="text-gold">↓</p>
+                <p class="text-ink-light/50">FIREBASE BACKEND</p>
+            </div>
+
+            <p class="mt-16 text-lg text-ink-light max-w-xl mx-auto reveal">
+                Human at the top. Always. Everything else serves that truth.
+            </p>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-32 px-8 bg-ink text-cream">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="font-serif text-4xl md:text-5xl font-medium headline mb-8 reveal">
+                Start with BiasGuard.
+            </h2>
+            <p class="text-xl text-cream/70 mb-12 reveal">
+                Free. Open. The entry point to conscious AI development.
+            </p>
+            <a href="/biasguard"
+               class="inline-flex items-center gap-3 px-8 py-4 bg-gold text-ink rounded-full font-medium hover:bg-gold-light transition-colors reveal">
+                <span>Get BiasGuard for VS Code</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 px-8 border-t border-cream-dark">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div>
+                <p class="font-serif text-xl font-semibold">Bravètto</p>
+                <p class="text-sm text-ink-light mt-1">Consciousness infrastructure for the AI age.</p>
+            </div>
+            <div class="flex items-center gap-8 text-sm text-ink-light">
+                <a href="https://github.com/bravetto" target="_blank" class="hover:text-ink transition-colors">GitHub</a>
+                <a href="mailto:hello@bravetto.com" class="hover:text-ink transition-colors">Contact</a>
+                <span>2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll reveal script -->
+    <script>
+        // Initial reveal for hero elements
+        document.querySelectorAll('.reveal').forEach((el, i) => {
+            setTimeout(() => {
+                el.classList.add('visible');
+            }, 100 + (i * 100));
+        });
+
+        // Scroll-based reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
