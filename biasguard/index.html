@@ -117,43 +117,16 @@
                         before they reach your terminal.
                     </p>
 
-                    <div class="space-y-4 mb-8 reveal reveal-delay-3">
-                        <!-- One-click install command -->
-                        <div class="bg-ink rounded-xl p-4">
-                            <p class="text-xs text-cream/50 mb-2">Copy & paste into terminal:</p>
-                            <div class="flex items-center gap-3">
-                                <code id="install-cmd" class="text-guard-green font-mono text-sm flex-1 overflow-x-auto">curl -sL bravetto.com/biasguard/biasguard-4.2.5.vsix -o /tmp/biasguard.vsix && code --install-extension /tmp/biasguard.vsix && rm /tmp/biasguard.vsix</code>
-                                <button onclick="copyInstallCmd()" class="shrink-0 px-3 py-2 bg-guard-green text-white rounded-lg text-sm font-medium hover:bg-guard-green/80 transition-colors">
-                                    <span id="copy-text">Copy</span>
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Or manual download -->
-                        <div class="flex items-center gap-4">
-                            <span class="text-sm text-ink-light">or</span>
-                            <a href="/biasguard/biasguard-4.2.5.vsix"
-                               download
-                               class="inline-flex items-center gap-2 text-sm text-guard-green hover:underline">
-                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
-                                    <path d="M10 3v10M6 9l4 4 4-4M4 15h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                                <span>Download .vsix manually</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <p class="text-sm text-ink-light reveal reveal-delay-4">
-                        Version 4.2.5 &middot; Works with VS Code 1.85+
-                    </p>
+                    <button onclick="copyInstall()" class="w-full px-8 py-5 bg-guard-green text-white text-lg font-semibold rounded-2xl hover:bg-green-600 transition-all hover:scale-[1.02] active:scale-100 reveal reveal-delay-3">
+                        <span id="btn-text">Copy Install Command</span>
+                    </button>
+                    <p class="text-center text-sm text-ink-light mt-3 reveal reveal-delay-4">Paste into Terminal. Done.</p>
 
                     <script>
-                        function copyInstallCmd() {
-                            const cmd = document.getElementById('install-cmd').innerText;
-                            navigator.clipboard.writeText(cmd);
-                            const btn = document.getElementById('copy-text');
-                            btn.innerText = 'Copied!';
-                            setTimeout(() => btn.innerText = 'Copy', 2000);
+                        function copyInstall() {
+                            navigator.clipboard.writeText('curl -sL https://bravetto.com/biasguard/biasguard-4.2.5.vsix -o /tmp/bg.vsix && code --install-extension /tmp/bg.vsix');
+                            document.getElementById('btn-text').innerText = 'Copied! Paste in Terminal';
+                            setTimeout(() => document.getElementById('btn-text').innerText = 'Copy Install Command', 3000);
                         }
                     </script>
                 </div>
