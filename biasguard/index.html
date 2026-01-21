@@ -117,21 +117,45 @@
                         before they reach your terminal.
                     </p>
 
-                    <div class="flex flex-col sm:flex-row gap-4 mb-8 reveal reveal-delay-3">
-                        <a href="/biasguard/biasguard-4.2.5.vsix"
-                           download
-                           class="download-btn inline-flex items-center justify-center gap-3 px-8 py-4 bg-guard-green text-white rounded-full font-medium">
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M10 3v10M6 9l4 4 4-4M4 15h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            <span>Download v4.2.5</span>
-                        </a>
-                        <span class="text-sm text-ink-light self-center">.vsix file (262 KB)</span>
+                    <div class="space-y-4 mb-8 reveal reveal-delay-3">
+                        <!-- One-click install command -->
+                        <div class="bg-ink rounded-xl p-4">
+                            <p class="text-xs text-cream/50 mb-2">Copy & paste into terminal:</p>
+                            <div class="flex items-center gap-3">
+                                <code id="install-cmd" class="text-guard-green font-mono text-sm flex-1 overflow-x-auto">curl -sL bravetto.com/biasguard/biasguard-4.2.5.vsix -o /tmp/biasguard.vsix && code --install-extension /tmp/biasguard.vsix && rm /tmp/biasguard.vsix</code>
+                                <button onclick="copyInstallCmd()" class="shrink-0 px-3 py-2 bg-guard-green text-white rounded-lg text-sm font-medium hover:bg-guard-green/80 transition-colors">
+                                    <span id="copy-text">Copy</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Or manual download -->
+                        <div class="flex items-center gap-4">
+                            <span class="text-sm text-ink-light">or</span>
+                            <a href="/biasguard/biasguard-4.2.5.vsix"
+                               download
+                               class="inline-flex items-center gap-2 text-sm text-guard-green hover:underline">
+                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                                    <path d="M10 3v10M6 9l4 4 4-4M4 15h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span>Download .vsix manually</span>
+                            </a>
+                        </div>
                     </div>
 
                     <p class="text-sm text-ink-light reveal reveal-delay-4">
                         Version 4.2.5 &middot; Works with VS Code 1.85+
                     </p>
+
+                    <script>
+                        function copyInstallCmd() {
+                            const cmd = document.getElementById('install-cmd').innerText;
+                            navigator.clipboard.writeText(cmd);
+                            const btn = document.getElementById('copy-text');
+                            btn.innerText = 'Copied!';
+                            setTimeout(() => btn.innerText = 'Copy', 2000);
+                        }
+                    </script>
                 </div>
 
                 <!-- Right: Shield visual -->
@@ -253,13 +277,13 @@
             <p class="text-lg text-cream/70 mb-8">
                 Free. Open. No Microsoft account required.
             </p>
-            <a href="/biasguard/biasguard-4.2.5.vsix"
-               download
+            <div class="bg-cream/10 rounded-xl p-4 max-w-xl mx-auto mb-6">
+                <p class="text-xs text-cream/50 mb-2">One command. Done.</p>
+                <code class="text-guard-green font-mono text-sm">curl -sL bravetto.com/biasguard/biasguard-4.2.5.vsix -o /tmp/bg.vsix && code --install-extension /tmp/bg.vsix</code>
+            </div>
+            <a href="#" onclick="navigator.clipboard.writeText('curl -sL bravetto.com/biasguard/biasguard-4.2.5.vsix -o /tmp/bg.vsix && code --install-extension /tmp/bg.vsix'); this.innerText='Copied!'; setTimeout(() => this.innerText='Copy Install Command', 2000); return false;"
                class="download-btn inline-flex items-center gap-3 px-8 py-4 bg-guard-green text-white rounded-full font-medium">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M10 3v10M6 9l4 4 4-4M4 15h12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <span>Download BiasGuard</span>
+                <span>Copy Install Command</span>
             </a>
         </div>
     </section>
