@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pimp My Mac - Free AI Optimizer for Apple Silicon | Bravètto</title>
+    <meta
+      name="description"
+      content="Free optimization tool for Apple Silicon AI developers. Auto-detects M1/M2/M3 specs and generates optimized training configs. Part of ABE-41M project."
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#FAF9F6",
+              "cream-dark": "#F5F3EF",
+              gold: "#C9A227",
+              "gold-light": "#E8D48B",
+              ink: "#1A1A1A",
+              "ink-light": "#4A4A4A",
+            },
+            fontFamily: {
+              serif: ["Cormorant Garamond", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: #faf9f6;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+      .float {
+        animation: float 6s ease-in-out infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header
+      class="fixed top-0 left-0 right-0 z-50 bg-cream/80 backdrop-blur-md border-b border-gold/10"
+    >
+      <div
+        class="container mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <a
+          href="https://www.bravetto.com"
+          class="font-serif text-2xl font-bold text-ink"
+        >
+          Bravètto
+        </a>
+        <a
+          href="https://github.com/BravettoBackendTeam/abe-41M"
+          target="_blank"
+          class="px-6 py-2 bg-gold hover:bg-gold-light text-cream rounded-lg transition-colors font-sans font-medium"
+        >
+          View on GitHub
+        </a>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="relative pt-32 pb-20 overflow-hidden">
+      <div
+        class="absolute inset-0 bg-gradient-to-br from-gold-light/20 via-cream to-gold-light/10"
+      ></div>
+
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-5xl mx-auto text-center mb-16">
+          <div class="inline-block mb-8 float">
+            <span class="text-9xl">🔥</span>
+          </div>
+          <h1
+            class="font-serif text-6xl md:text-8xl font-bold text-ink mb-8 leading-tight"
+          >
+            Pimp My Mac
+          </h1>
+          <p class="text-2xl md:text-3xl text-ink-light leading-relaxed mb-12">
+            Free optimization tool for Apple Silicon AI developers
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="https://github.com/BravettoBackendTeam/abe-41M/blob/main/pimp_my_mac.py"
+              target="_blank"
+              class="inline-flex items-center justify-center space-x-3 px-10 py-5 bg-gold hover:bg-gold-light text-cream font-sans font-medium rounded-xl transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 text-lg"
+            >
+              <span>Download Now</span>
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                ></path>
+              </svg>
+            </a>
+            <a
+              href="#how-it-works"
+              class="inline-flex items-center justify-center px-10 py-5 border-2 border-gold hover:border-gold-light text-gold hover:text-gold-light font-sans font-medium rounded-xl transition-all duration-300 text-lg"
+            >
+              See How It Works
+            </a>
+          </div>
+        </div>
+
+        <!-- Demo Terminal -->
+        <div class="max-w-4xl mx-auto">
+          <div
+            class="bg-ink rounded-2xl shadow-2xl overflow-hidden border-2 border-gold/20 transform hover:scale-105 transition-transform duration-500"
+          >
+            <div
+              class="bg-ink-light px-6 py-3 flex items-center space-x-2 border-b border-gold/10"
+            >
+              <div class="w-3 h-3 rounded-full bg-red-500"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500"></div>
+              <span class="ml-4 text-gold-light font-mono text-sm"
+                >pimp_my_mac.py</span
+              >
+            </div>
+            <div
+              class="p-8 md:p-12 font-mono text-sm md:text-base leading-loose"
+            >
+              <div class="text-gold-light mb-6">$ python pimp_my_mac.py</div>
+              <div class="text-green-400 mb-3">
+                🔍 Detected: M3 Max with 48GB RAM
+              </div>
+              <div class="text-gold mb-3">
+                🎯 Target: Maximum performance optimization
+              </div>
+              <div class="text-cream mt-6 mb-3">
+                💾 Creating optimized configurations...
+              </div>
+              <div class="text-green-400 ml-4 mb-2">
+                ✅ Training: m3_max_training.yaml
+              </div>
+              <div class="text-green-400 ml-4 mb-2">
+                ✅ SDK: m3_max_sdk_example.py
+              </div>
+              <div class="text-green-400 ml-4 mb-6">
+                ✅ Benchmark: m3_max_benchmark.yaml
+              </div>
+              <div class="text-gold-light mb-2">⚡ Batch size: 12 (3x M1)</div>
+              <div class="text-gold-light mb-2">
+                🧠 Sequence length: 1024 (2x M1)
+              </div>
+              <div class="text-gold-light mb-6">🔥 Data workers: 8</div>
+              <div class="text-green-400 text-lg animate-pulse">
+                ✅ Your Mac is now PIMPED and ready to ROCK!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="how-it-works" class="py-20 bg-cream-dark/30">
+      <div class="container mx-auto px-6">
+        <h2 class="font-serif text-5xl font-bold text-ink text-center mb-16">
+          What It Does
+        </h2>
+        <div class="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+          <div
+            class="text-center p-8 bg-cream rounded-2xl shadow-lg hover:shadow-2xl transition-shadow"
+          >
+            <div class="text-6xl mb-6">⚡</div>
+            <h3 class="font-serif text-2xl font-semibold text-ink mb-4">
+              Auto-Detect Hardware
+            </h3>
+            <p class="text-ink-light leading-relaxed">
+              Instantly recognizes your Mac specs:<br />
+              M1, M2, M3, M3 Max, M3 Pro<br />
+              8GB, 16GB, 32GB, 48GB, 64GB RAM
+            </p>
+          </div>
+          <div
+            class="text-center p-8 bg-cream rounded-2xl shadow-lg hover:shadow-2xl transition-shadow"
+          >
+            <div class="text-6xl mb-6">🎯</div>
+            <h3 class="font-serif text-2xl font-semibold text-ink mb-4">
+              Generate Configs
+            </h3>
+            <p class="text-ink-light leading-relaxed">
+              Creates optimized YAML configs for:<br />
+              Training (batch size, workers)<br />
+              Inference (sequence length, device)
+            </p>
+          </div>
+          <div
+            class="text-center p-8 bg-cream rounded-2xl shadow-lg hover:shadow-2xl transition-shadow"
+          >
+            <div class="text-6xl mb-6">🚀</div>
+            <h3 class="font-serif text-2xl font-semibold text-ink mb-4">
+              Ready to Use
+            </h3>
+            <p class="text-ink-light leading-relaxed">
+              Outputs plug-and-play configs:<br />
+              Training YAML + SDK example<br />
+              Benchmark suite included
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Performance Stats -->
+    <section class="py-20">
+      <div class="container mx-auto px-6">
+        <div
+          class="max-w-5xl mx-auto bg-gradient-to-br from-gold-light/20 to-gold/10 rounded-3xl p-12 border-2 border-gold/20"
+        >
+          <h2 class="font-serif text-4xl font-bold text-ink text-center mb-12">
+            Real Performance Gains
+          </h2>
+          <div class="grid md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div class="font-serif text-5xl font-bold text-gold mb-3">
+                37K+
+              </div>
+              <div class="text-ink-light">Tokens/sec<br />on M3 Max</div>
+            </div>
+            <div>
+              <div class="font-serif text-5xl font-bold text-gold mb-3">3x</div>
+              <div class="text-ink-light">Faster than<br />M1 baseline</div>
+            </div>
+            <div>
+              <div class="font-serif text-5xl font-bold text-gold mb-3">8x</div>
+              <div class="text-ink-light">Larger batch<br />sizes</div>
+            </div>
+            <div>
+              <div class="font-serif text-5xl font-bold text-gold mb-3">
+                Free
+              </div>
+              <div class="text-ink-light">Open source<br />forever</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Start -->
+    <section class="py-20 bg-cream-dark/30">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="font-serif text-5xl font-bold text-ink text-center mb-12">
+            Quick Start
+          </h2>
+          <div
+            class="bg-ink rounded-2xl p-8 md:p-12 font-mono text-sm md:text-base text-cream leading-loose"
+          >
+            <div class="mb-4 text-gold-light">
+              # 1. Clone ABE-41M repository
+            </div>
+            <div class="mb-8 text-green-400">
+              git clone https://github.com/BravettoBackendTeam/abe-41M.git
+            </div>
+
+            <div class="mb-4 text-gold-light"># 2. Run the optimizer</div>
+            <div class="mb-8 text-green-400">python pimp_my_mac.py</div>
+
+            <div class="mb-4 text-gold-light"># 3. Use generated configs</div>
+            <div class="text-green-400">
+              python unified_training.py --config configs/m3_max_training.yaml
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About ABE-41M -->
+    <section class="py-20">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="font-serif text-5xl font-bold text-ink mb-6">
+            Part of ABE-41M
+          </h2>
+          <p class="text-xl text-ink-light leading-relaxed mb-8">
+            Pimp My Mac is part of the
+            <strong class="text-ink">ABE-41M</strong> project — a 41-million
+            parameter spiking neural network optimized for conversational AI.
+            Built with biological inspiration and hardware efficiency in mind.
+          </p>
+          <a
+            href="https://github.com/BravettoBackendTeam/abe-41M"
+            target="_blank"
+            class="inline-flex items-center space-x-2 text-gold hover:text-gold-light font-semibold text-lg"
+          >
+            <span>Explore ABE-41M</span>
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              ></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <section class="py-20 bg-gradient-to-br from-gold-light/30 to-gold/20">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="font-serif text-5xl font-bold text-ink mb-6">
+          Ready to Pimp Your Mac?
+        </h2>
+        <p class="text-xl text-ink-light mb-10">
+          Free. Open source. Optimized for Apple Silicon.
+        </p>
+        <a
+          href="https://github.com/BravettoBackendTeam/abe-41M/blob/main/pimp_my_mac.py"
+          target="_blank"
+          class="inline-flex items-center space-x-3 px-12 py-6 bg-gold hover:bg-gold-light text-cream font-sans font-medium rounded-xl transition-all duration-300 shadow-2xl hover:shadow-3xl transform hover:-translate-y-1 text-xl"
+        >
+          <span>Download Pimp My Mac</span>
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+            ></path>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-ink text-cream py-12">
+      <div class="container mx-auto px-6 text-center">
+        <div class="mb-6">
+          <a
+            href="https://www.bravetto.com"
+            class="font-serif text-3xl font-bold text-gold-light hover:text-gold transition-colors"
+          >
+            Bravètto
+          </a>
+        </div>
+        <p class="text-cream/60 mb-6">
+          Consciousness Infrastructure for the AI Age
+        </p>
+        <div class="flex justify-center space-x-8 text-cream/60">
+          <a
+            href="https://github.com/bravetto"
+            target="_blank"
+            class="hover:text-gold-light transition-colors"
+            >GitHub</a
+          >
+          <a
+            href="https://www.linkedin.com/company/bravetto"
+            target="_blank"
+            class="hover:text-gold-light transition-colors"
+            >LinkedIn</a
+          >
+          <a
+            href="https://www.bravetto.com/pages/contact"
+            class="hover:text-gold-light transition-colors"
+            >Contact</a
+          >
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
