@@ -124,7 +124,7 @@
 
                     <script>
                         function copyInstall() {
-                            navigator.clipboard.writeText('curl -sL https://bravetto.com/biasguard/biasguard-4.2.5.vsix -o /tmp/bg.vsix && code --install-extension /tmp/bg.vsix');
+                            navigator.clipboard.writeText('curl -sL https://bravetto.com/biasguard/biasguard-4.3.1.vsix -o /tmp/bg.vsix && code --install-extension /tmp/bg.vsix');
                             document.getElementById('btn-text').innerText = 'Copied! Paste in Terminal';
                             setTimeout(() => document.getElementById('btn-text').innerText = 'Copy Install Command', 3000);
                         }
@@ -170,7 +170,7 @@
                     <div class="flex-1">
                         <h3 class="font-medium text-lg mb-2">Install via terminal</h3>
                         <div class="code-block">
-                            <pre><code class="font-mono text-sm text-guard-green">code --install-extension ~/Downloads/biasguard-4.2.5.vsix</code></pre>
+                            <pre><code class="font-mono text-sm text-guard-green">code --install-extension ~/Downloads/biasguard-4.3.1.vsix</code></pre>
                         </div>
                     </div>
                 </div>
@@ -252,9 +252,9 @@
             </p>
             <div class="bg-cream/10 rounded-xl p-4 max-w-xl mx-auto mb-6">
                 <p class="text-xs text-cream/50 mb-2">One command. Done.</p>
-                <code class="text-guard-green font-mono text-sm">curl -sL bravetto.com/biasguard/biasguard-4.2.5.vsix -o /tmp/bg.vsix && code --install-extension /tmp/bg.vsix</code>
+                <code class="text-guard-green font-mono text-sm">curl -sL bravetto.com/biasguard/biasguard-4.3.1.vsix -o /tmp/bg.vsix && code --install-extension /tmp/bg.vsix</code>
             </div>
-            <a href="#" onclick="navigator.clipboard.writeText('curl -sL bravetto.com/biasguard/biasguard-4.2.5.vsix -o /tmp/bg.vsix && code --install-extension /tmp/bg.vsix'); this.innerText='Copied!'; setTimeout(() => this.innerText='Copy Install Command', 2000); return false;"
+            <a href="#" onclick="navigator.clipboard.writeText('curl -sL bravetto.com/biasguard/biasguard-4.3.1.vsix -o /tmp/bg.vsix && code --install-extension /tmp/bg.vsix'); this.innerText='Copied!'; setTimeout(() => this.innerText='Copy Install Command', 2000); return false;"
                class="download-btn inline-flex items-center gap-3 px-8 py-4 bg-guard-green text-white rounded-full font-medium">
                 <span>Copy Install Command</span>
             </a>
