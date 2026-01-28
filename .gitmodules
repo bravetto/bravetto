@@ -1,0 +1,3 @@
+[submodule "scream-machine"]
+	path = scream-machine
+	url = https://github.com/mataluni-bravetto/scream-machine
