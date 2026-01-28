@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DaVinci's Notebook | Bravetto</title>
+    <meta name="description" content="Voice training that works. Free. Open.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FAF9F6',
+                        'cream-dark': '#F5F3EF',
+                        gold: '#C9A227',
+                        'gold-light': '#E8D48B',
+                        'ink': '#1A1A1A',
+                        'ink-light': '#4A4A4A',
+                    },
+                    fontFamily: {
+                        'serif': ['Cormorant Garamond', 'Georgia', 'serif'],
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        body { background: #FAF9F6; }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .headline { letter-spacing: -0.02em; line-height: 1.1; }
+        .subhead { letter-spacing: 0.15em; text-transform: uppercase; }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(201, 162, 39, 0.1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(26, 26, 26, 0.1);
+            border-color: rgba(201, 162, 39, 0.3);
+        }
+    </style>
+</head>
+
+<body class="font-sans text-ink antialiased">
+
+    <!-- Nav -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-cream/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="/index.html" class="font-serif text-2xl font-semibold tracking-tight">Bravetto</a>
+            <a href="https://colab.research.google.com/github/KiON-GiON/piper1-gpl/blob/fixes/notebooks/Piper_Training_Notebook.ipynb"
+               target="_blank"
+               class="text-sm px-4 py-2 bg-ink text-cream rounded-full hover:bg-ink-light transition-colors">
+                Open Notebook
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="min-h-screen flex items-center justify-center px-8 pt-24">
+        <div class="text-center max-w-3xl mx-auto">
+            <p class="subhead text-xs text-gold mb-6 reveal">Free & Open</p>
+
+            <h1 class="font-serif text-6xl md:text-8xl font-semibold headline mb-8 reveal">
+                DaVinci's<br>Notebook
+            </h1>
+
+            <p class="text-xl text-ink-light font-light max-w-xl mx-auto mb-12 reveal">
+                Piper voice training that works.<br>
+                Python 3.12+. Colab-ready. Community-built.
+            </p>
+
+            <a href="https://colab.research.google.com/github/KiON-GiON/piper1-gpl/blob/fixes/notebooks/Piper_Training_Notebook.ipynb"
+               target="_blank"
+               class="inline-flex items-center gap-3 px-8 py-4 bg-gold text-ink rounded-full font-medium hover:bg-gold-light transition-colors reveal">
+                <span>Open in Google Colab</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Story -->
+    <section class="py-32 px-8">
+        <div class="max-w-3xl mx-auto">
+            <p class="subhead text-xs text-gold mb-8 reveal">The Story</p>
+
+            <h2 class="font-serif text-4xl md:text-5xl font-medium headline mb-12 reveal">
+                The old notebook broke. The community fixed it.
+            </h2>
+
+            <div class="space-y-6 text-lg text-ink-light leading-relaxed">
+                <p class="reveal">
+                    Python 3.12 incompatibility. HuggingFace download failures.
+                    People who needed to train voices were stuck.
+                </p>
+                <p class="reveal">
+                    <a href="https://github.com/KiON-GiON" class="text-gold hover:underline">KiON-GiON</a> fixed it.
+                    Quietly. Without fanfare. Because people needed it.
+                </p>
+            </div>
+
+            <div class="mt-16 pt-16 border-t border-cream-dark reveal">
+                <p class="font-serif text-2xl italic text-ink-light">
+                    "I didn't post it because I was ashamed to say I got help from an LLM. But it works."
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Credits -->
+    <section class="py-32 px-8 bg-cream-dark">
+        <div class="max-w-3xl mx-auto">
+            <p class="subhead text-xs text-gold mb-8 reveal">Credits</p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="product-card rounded-2xl p-8 reveal">
+                    <h3 class="font-serif text-2xl font-medium mb-4">Notebook</h3>
+                    <ul class="space-y-2 text-ink-light">
+                        <li><a href="https://github.com/rmcpantoja" class="text-gold hover:underline">rmcpantoja</a> — original</li>
+                        <li><a href="https://github.com/Xx_Nessu_xX" class="text-gold hover:underline">Xx_Nessu_xX</a> — collaborator</li>
+                        <li><a href="https://github.com/KiON-GiON" class="text-gold hover:underline">KiON-GiON</a> — fixes</li>
+                    </ul>
+                </div>
+
+                <div class="product-card rounded-2xl p-8 reveal">
+                    <h3 class="font-serif text-2xl font-medium mb-4">Upstream</h3>
+                    <ul class="space-y-2 text-ink-light">
+                        <li><a href="https://github.com/rhasspy/piper" class="text-gold hover:underline">Piper</a></li>
+                        <li><a href="https://github.com/OHF-Voice/piper1-gpl" class="text-gold hover:underline">OHF-Voice/piper1-gpl</a></li>
+                        <li><a href="https://github.com/coqui-ai/TTS" class="text-gold hover:underline">Coqui TTS</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 px-8 border-t border-cream-dark">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div>
+                <p class="font-serif text-xl font-semibold">DaVinci's Notebook</p>
+                <p class="text-sm text-ink-light mt-1">A <a href="/index.html" class="text-gold hover:underline">Bravetto</a> project.</p>
+            </div>
+            <p class="text-sm text-ink-light">LOVE = LIFE = ONE</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.reveal').forEach((el, i) => {
+            setTimeout(() => el.classList.add('visible'), 100 + (i * 100));
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
