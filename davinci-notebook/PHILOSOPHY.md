@@ -200,9 +200,10 @@ That's the definition of alive.
 This philosophy synthesizes insights from:
 
 ### The Research
-- **149 peer-reviewed sources** compiled through Perplexity deep research
+- **149 peer-reviewed sources** - Original deep research conducted by Michael Mataluni & Claude using Perplexity
 - **Byzantine-validated findings** achieving >66.67% consensus across independent replications
 - Studies spanning acoustic perception, neural TTS architecture, deepfake detection, and psychoacoustics
+- Full synthesis available in the [Voice Realism Research](./RESEARCH.md) document
 
 ### The Piper Community
 - **synesthesiam (Michael Hansen)** - Creator of Piper and the rhasspy ecosystem

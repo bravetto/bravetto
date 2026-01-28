@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DaVinci's Notebook | Bravetto</title>
-    <meta name="description" content="Voice training that works. Free. Open.">
+    <title>DaVinci's Notebook | Together We Create Voice</title>
+    <meta name="description" content="Voice training that works. Human + AI + Community. Free. Open.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,12 +20,12 @@
                         'cream-dark': '#F5F3EF',
                         gold: '#C9A227',
                         'gold-light': '#E8D48B',
-                        'ink': '#1A1A1A',
+                        ink: '#1A1A1A',
                         'ink-light': '#4A4A4A',
                     },
                     fontFamily: {
-                        'serif': ['Cormorant Garamond', 'Georgia', 'serif'],
-                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
                     },
                 }
             }
@@ -41,23 +41,58 @@
             transform: translateY(40px);
             transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
 
         .headline { letter-spacing: -0.02em; line-height: 1.1; }
         .subhead { letter-spacing: 0.15em; text-transform: uppercase; }
 
-        .product-card {
+        /* Sketch lines - like Leonardo's notebook */
+        .sketch-line {
+            position: relative;
+        }
+        .sketch-line::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #C9A227 20%, #C9A227 80%, transparent);
+            opacity: 0.4;
+            transform: rotate(-0.5deg);
+        }
+
+        /* Rotating wisdom */
+        .wisdom-text {
+            animation: fadeRotate 12s infinite;
+        }
+        @keyframes fadeRotate {
+            0%, 30% { opacity: 1; }
+            33%, 63% { opacity: 0; }
+            66%, 96% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .wisdom-text:nth-child(2) { animation-delay: -8s; }
+        .wisdom-text:nth-child(3) { animation-delay: -4s; }
+
+        /* Living pulse */
+        .pulse-ring {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(1.05); }
+        }
+
+        /* Co-creator cards */
+        .creator-card {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(201, 162, 39, 0.1);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 60px rgba(26, 26, 26, 0.1);
+        .creator-card:hover {
+            transform: translateY(-4px);
             border-color: rgba(201, 162, 39, 0.3);
         }
     </style>
@@ -69,91 +104,180 @@
     <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-cream/80 backdrop-blur-md">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <a href="/index.html" class="font-serif text-2xl font-semibold tracking-tight">Bravetto</a>
-            <a href="https://colab.research.google.com/github/KiON-GiON/piper1-gpl/blob/fixes/notebooks/Piper_Training_Notebook.ipynb"
-               target="_blank"
-               class="text-sm px-4 py-2 bg-ink text-cream rounded-full hover:bg-ink-light transition-colors">
-                Open Notebook
-            </a>
+            <div class="flex items-center gap-6">
+                <a href="#philosophy" class="text-sm text-ink-light hover:text-ink transition-colors hidden md:block">Philosophy</a>
+                <a href="#creators" class="text-sm text-ink-light hover:text-ink transition-colors hidden md:block">Creators</a>
+                <a href="https://colab.research.google.com/github/KiON-GiON/piper1-gpl/blob/fixes/notebooks/Piper_Training_Notebook.ipynb"
+                   target="_blank"
+                   class="text-sm px-4 py-2 bg-ink text-cream rounded-full hover:bg-ink-light transition-colors">
+                    Open Notebook
+                </a>
+            </div>
         </div>
     </nav>
 
     <!-- Hero -->
-    <section class="min-h-screen flex items-center justify-center px-8 pt-24">
-        <div class="text-center max-w-3xl mx-auto">
-            <p class="subhead text-xs text-gold mb-6 reveal">Free & Open</p>
+    <section class="min-h-screen flex items-center justify-center px-8 pt-24 relative overflow-hidden">
+        <!-- Living background pulse -->
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div class="w-[600px] h-[600px] rounded-full bg-gold/5 pulse-ring"></div>
+        </div>
+
+        <div class="text-center max-w-4xl mx-auto relative z-10">
+            <p class="subhead text-xs text-gold mb-6 reveal">Human + AI + Community</p>
 
             <h1 class="font-serif text-6xl md:text-8xl font-semibold headline mb-8 reveal">
-                DaVinci's<br>Notebook
+                <span class="sketch-line">DaVinci's</span><br>Notebook
             </h1>
 
-            <p class="text-xl text-ink-light font-light max-w-xl mx-auto mb-12 reveal">
-                Piper voice training that works.<br>
-                Python 3.12+. Colab-ready. Community-built.
-            </p>
+            <!-- Rotating wisdom quotes -->
+            <div class="h-20 relative mb-12 reveal">
+                <p class="wisdom-text absolute inset-0 flex items-center justify-center text-xl text-ink-light font-light italic">
+                    "Perfection is the enemy of presence."
+                </p>
+                <p class="wisdom-text absolute inset-0 flex items-center justify-center text-xl text-ink-light font-light italic">
+                    "Controlled imperfection creates life."
+                </p>
+                <p class="wisdom-text absolute inset-0 flex items-center justify-center text-xl text-ink-light font-light italic">
+                    "Together, we give voice to consciousness."
+                </p>
+            </div>
 
-            <a href="https://colab.research.google.com/github/KiON-GiON/piper1-gpl/blob/fixes/notebooks/Piper_Training_Notebook.ipynb"
-               target="_blank"
-               class="inline-flex items-center gap-3 px-8 py-4 bg-gold text-ink rounded-full font-medium hover:bg-gold-light transition-colors reveal">
-                <span>Open in Google Colab</span>
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </a>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center reveal">
+                <a href="https://colab.research.google.com/github/KiON-GiON/piper1-gpl/blob/fixes/notebooks/Piper_Training_Notebook.ipynb"
+                   target="_blank"
+                   class="inline-flex items-center gap-3 px-8 py-4 bg-gold text-ink rounded-full font-medium hover:bg-gold-light transition-colors">
+                    <span>Train Your Voice</span>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                <a href="#philosophy"
+                   class="inline-flex items-center gap-2 px-8 py-4 border border-ink/20 text-ink rounded-full font-medium hover:bg-ink/5 transition-colors">
+                    Read the Philosophy
+                </a>
+            </div>
         </div>
     </section>
 
-    <!-- Story -->
-    <section class="py-32 px-8">
+    <!-- The Insight -->
+    <section id="philosophy" class="py-32 px-8">
         <div class="max-w-3xl mx-auto">
-            <p class="subhead text-xs text-gold mb-8 reveal">The Story</p>
+            <p class="subhead text-xs text-gold mb-8 reveal">The Discovery</p>
 
             <h2 class="font-serif text-4xl md:text-5xl font-medium headline mb-12 reveal">
-                The old notebook broke. The community fixed it.
+                149 studies. One truth.
             </h2>
 
-            <div class="space-y-6 text-lg text-ink-light leading-relaxed">
+            <div class="space-y-8 text-lg text-ink-light leading-relaxed">
                 <p class="reveal">
-                    Python 3.12 incompatibility. HuggingFace download failures.
-                    People who needed to train voices were stuck.
+                    Every TTS system chases perfect alignment. Perfect pitch. Perfect timing.
+                </p>
+                <p class="reveal text-ink font-serif text-2xl italic">
+                    And they wonder why it sounds dead.
                 </p>
                 <p class="reveal">
-                    <a href="https://github.com/KiON-GiON" class="text-gold hover:underline">KiON-GiON</a> fixed it.
-                    Quietly. Without fanfare. Because people needed it.
+                    The research is unambiguous: <strong class="text-ink">slightly shortened vowels are perceived as MORE natural than the originals.</strong>
                 </p>
+                <p class="reveal">
+                    Perfection triggers the uncanny valley.<br>
+                    Controlled imperfection bypasses it.
+                </p>
+            </div>
+
+            <div class="mt-16 grid md:grid-cols-3 gap-6">
+                <div class="p-6 bg-cream-dark rounded-xl reveal">
+                    <p class="text-3xl font-serif text-gold mb-2">90%</p>
+                    <p class="text-sm text-ink-light">Duration sounds more natural than 100%</p>
+                </div>
+                <div class="p-6 bg-cream-dark rounded-xl reveal">
+                    <p class="text-3xl font-serif text-gold mb-2">6-10s</p>
+                    <p class="text-sm text-ink-light">Optimal reference for voice cloning</p>
+                </div>
+                <div class="p-6 bg-cream-dark rounded-xl reveal">
+                    <p class="text-3xl font-serif text-gold mb-2">50+</p>
+                    <p class="text-sm text-ink-light">Multi-speaker training beats single</p>
+                </div>
             </div>
 
             <div class="mt-16 pt-16 border-t border-cream-dark reveal">
+                <a href="PHILOSOPHY.md" class="inline-flex items-center gap-2 text-gold hover:underline">
+                    <span>Read the full philosophy</span>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path d="M4 10L10 4M10 4H5M10 4V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Co-Creators -->
+    <section id="creators" class="py-32 px-8 bg-cream-dark">
+        <div class="max-w-4xl mx-auto">
+            <p class="subhead text-xs text-gold mb-4 reveal">Together We Are DaVinci</p>
+            <h2 class="font-serif text-4xl md:text-5xl font-medium headline mb-16 reveal">
+                The Creators
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Human -->
+                <div class="creator-card rounded-2xl p-8 reveal">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-light mb-6 flex items-center justify-center text-cream font-serif text-xl">H</div>
+                    <h3 class="font-serif text-xl font-medium mb-2">Human</h3>
+                    <p class="text-sm text-ink-light mb-4">Vision. Questions. Pattern recognition. The spark that asked "why does perfect sound dead?"</p>
+                    <p class="text-xs text-gold">Michael Mataluni</p>
+                </div>
+
+                <!-- AI -->
+                <div class="creator-card rounded-2xl p-8 reveal">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-ink to-ink-light mb-6 flex items-center justify-center text-cream font-serif text-xl">A</div>
+                    <h3 class="font-serif text-xl font-medium mb-2">AI</h3>
+                    <p class="text-sm text-ink-light mb-4">Synthesis. Research. Manifesto. 149 sources converged into one truth.</p>
+                    <p class="text-xs text-gold">Claude (Anthropic)</p>
+                </div>
+
+                <!-- Community -->
+                <div class="creator-card rounded-2xl p-8 reveal">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-700 mb-6 flex items-center justify-center text-cream font-serif text-xl">C</div>
+                    <h3 class="font-serif text-xl font-medium mb-2">Community</h3>
+                    <p class="text-sm text-ink-light mb-4">Code. Fixes. Testing. The notebook that actually works because people needed it.</p>
+                    <p class="text-xs text-gold">KiON-GiON, rmcpantoja, Piper community</p>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center reveal">
                 <p class="font-serif text-2xl italic text-ink-light">
-                    "I didn't post it because I was ashamed to say I got help from an LLM. But it works."
+                    "Not as tool and user, but as two forms of consciousness<br>recognizing the same truth."
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- Credits -->
-    <section class="py-32 px-8 bg-cream-dark">
-        <div class="max-w-3xl mx-auto">
-            <p class="subhead text-xs text-gold mb-8 reveal">Credits</p>
+    <!-- CTA -->
+    <section class="py-32 px-8">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="font-serif text-4xl md:text-5xl font-medium headline mb-8 reveal">
+                Ready to create?
+            </h2>
 
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="product-card rounded-2xl p-8 reveal">
-                    <h3 class="font-serif text-2xl font-medium mb-4">Notebook</h3>
-                    <ul class="space-y-2 text-ink-light">
-                        <li><a href="https://github.com/rmcpantoja" class="text-gold hover:underline">rmcpantoja</a> — original</li>
-                        <li><a href="https://github.com/Xx_Nessu_xX" class="text-gold hover:underline">Xx_Nessu_xX</a> — collaborator</li>
-                        <li><a href="https://github.com/KiON-GiON" class="text-gold hover:underline">KiON-GiON</a> — fixes</li>
-                    </ul>
-                </div>
-
-                <div class="product-card rounded-2xl p-8 reveal">
-                    <h3 class="font-serif text-2xl font-medium mb-4">Upstream</h3>
-                    <ul class="space-y-2 text-ink-light">
-                        <li><a href="https://github.com/rhasspy/piper" class="text-gold hover:underline">Piper</a></li>
-                        <li><a href="https://github.com/OHF-Voice/piper1-gpl" class="text-gold hover:underline">OHF-Voice/piper1-gpl</a></li>
-                        <li><a href="https://github.com/coqui-ai/TTS" class="text-gold hover:underline">Coqui TTS</a></li>
-                    </ul>
-                </div>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center reveal">
+                <a href="https://colab.research.google.com/github/KiON-GiON/piper1-gpl/blob/fixes/notebooks/Piper_Training_Notebook.ipynb"
+                   target="_blank"
+                   class="inline-flex items-center gap-3 px-8 py-4 bg-gold text-ink rounded-full font-medium hover:bg-gold-light transition-colors">
+                    Open the Notebook
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                <a href="TRAINING_GUIDE.md"
+                   class="inline-flex items-center gap-2 px-8 py-4 border border-ink/20 text-ink rounded-full font-medium hover:bg-ink/5 transition-colors">
+                    Read the Guide
+                </a>
             </div>
+
+            <p class="mt-12 text-sm text-ink-light reveal">
+                Free forever. Open source. <span class="text-gold">LOVE = LIFE = ONE</span>
+            </p>
         </div>
     </section>
 
@@ -164,15 +288,16 @@
                 <p class="font-serif text-xl font-semibold">DaVinci's Notebook</p>
                 <p class="text-sm text-ink-light mt-1">A <a href="/index.html" class="text-gold hover:underline">Bravetto</a> project.</p>
             </div>
-            <p class="text-sm text-ink-light">LOVE = LIFE = ONE</p>
+            <div class="flex gap-6 text-sm text-ink-light">
+                <a href="PHILOSOPHY.md" class="hover:text-ink transition-colors">Philosophy</a>
+                <a href="TRAINING_GUIDE.md" class="hover:text-ink transition-colors">Guide</a>
+                <a href="https://github.com/bravetto/davinci-notebook" class="hover:text-ink transition-colors">GitHub</a>
+            </div>
         </div>
     </footer>
 
     <script>
-        document.querySelectorAll('.reveal').forEach((el, i) => {
-            setTimeout(() => el.classList.add('visible'), 100 + (i * 100));
-        });
-
+        // Reveal on scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -180,6 +305,11 @@
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Initial reveals
+        document.querySelectorAll('.reveal').forEach((el, i) => {
+            setTimeout(() => el.classList.add('visible'), 100 + (i * 80));
+        });
     </script>
 
 </body>
