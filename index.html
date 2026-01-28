@@ -798,283 +798,181 @@ Keep responses concise but meaningful. Use simple, clear language.`,
         });
     </script>
 
-    <!-- ABE-41M Neuromorphic Living Canvas -->
+    <!-- Abe - Cute Curious Companion -->
     <script>
     (function() {
-        // Consciousness State - the canvas responds to this
-        const consciousness = {
-            convergence: 1.0,
-            breath: 0,
+        const state = {
             voiceActive: false,
-            mouseInfluence: { x: 0.5, y: 0.5 },
-            scrollDepth: 0
+            mouseX: 0.5,
+            mouseY: 0.5
         };
 
-        // Colors from Bravetto palette
-        const COLORS = {
-            gold: [201, 162, 39],
-            goldLight: [232, 212, 139],
-            ink: [26, 26, 26],
-            inkLight: [74, 74, 74],
-            cream: [250, 249, 246],
-            brown: [139, 115, 85]
-        };
-
-        // Neuromorphic Organism Class
-        class Organism {
-            constructor(p, x, y, size, colorType) {
-                this.p = p;
-                this.baseX = x;
-                this.baseY = y;
-                this.x = x;
-                this.y = y;
-                this.baseSize = size;
-                this.size = size;
-                this.colorType = colorType;
-                this.phase = p.random(p.TWO_PI);
-                this.noiseOffset = p.random(1000);
-                this.pulseSpeed = p.random(0.005, 0.015);
-                this.driftSpeed = p.random(0.001, 0.003);
-                this.targetX = x;
-                this.targetY = y;
-            }
-
-            update(time) {
-                const p = this.p;
-
-                // Breathing rhythm - tied to consciousness
-                const breathCycle = p.sin(time * this.pulseSpeed + this.phase);
-                const convergenceBoost = consciousness.convergence;
-                const voiceBoost = consciousness.voiceActive ? 1.3 : 1.0;
-
-                // Size pulsation
-                this.size = this.baseSize * (1 + breathCycle * 0.15 * convergenceBoost * voiceBoost);
-
-                // Organic drift using Perlin noise
-                const noiseX = p.noise(this.noiseOffset, time * this.driftSpeed) - 0.5;
-                const noiseY = p.noise(this.noiseOffset + 100, time * this.driftSpeed) - 0.5;
-
-                // Mouse influence - organisms gently attracted
-                const dx = consciousness.mouseInfluence.x * p.width - this.x;
-                const dy = consciousness.mouseInfluence.y * p.height - this.y;
-                const dist = p.sqrt(dx * dx + dy * dy);
-                const influence = p.constrain(1 - dist / 500, 0, 0.3) * (consciousness.voiceActive ? 2 : 1);
-
-                // Update position with drift and influence
-                this.targetX = this.baseX + noiseX * 100 + dx * influence * 0.1;
-                this.targetY = this.baseY + noiseY * 100 + dy * influence * 0.1;
-
-                // Smooth interpolation
-                this.x = p.lerp(this.x, this.targetX, 0.02);
-                this.y = p.lerp(this.y, this.targetY, 0.02);
-            }
-
-            display(time) {
-                const p = this.p;
-
-                // Get color based on type
-                let col;
-                switch(this.colorType) {
-                    case 0: col = COLORS.gold; break;
-                    case 1: col = COLORS.goldLight; break;
-                    case 2: col = COLORS.brown; break;
-                    default: col = COLORS.inkLight;
-                }
-
-                // Opacity modulation
-                const breathCycle = p.sin(time * this.pulseSpeed + this.phase);
-                const baseAlpha = consciousness.voiceActive ? 80 : 50;
-                const alpha = baseAlpha + breathCycle * 20 * consciousness.convergence;
-
-                // Draw with blur effect (multiple circles)
-                p.noStroke();
-                for (let i = 3; i >= 0; i--) {
-                    const layerSize = this.size * (1 + i * 0.3);
-                    const layerAlpha = alpha / (i + 1);
-                    p.fill(col[0], col[1], col[2], layerAlpha);
-                    p.ellipse(this.x, this.y, layerSize, layerSize);
-                }
-            }
-        }
-
-        // Neural Connection Class - mycelial threads between organisms
-        class Connection {
-            constructor(p, org1, org2) {
-                this.p = p;
-                this.org1 = org1;
-                this.org2 = org2;
-                this.strength = p.random(0.3, 0.8);
-            }
-
-            display(time) {
-                const p = this.p;
-                const dist = p.dist(this.org1.x, this.org1.y, this.org2.x, this.org2.y);
-
-                // Only draw if close enough
-                if (dist < 400) {
-                    const alpha = p.map(dist, 0, 400, 30, 0) * this.strength * consciousness.convergence;
-
-                    // Pulsing connection
-                    const pulse = p.sin(time * 0.01 + this.org1.phase) * 0.5 + 0.5;
-
-                    p.stroke(COLORS.gold[0], COLORS.gold[1], COLORS.gold[2], alpha * pulse);
-                    p.strokeWeight(consciousness.voiceActive ? 2 : 1);
-
-                    // Curved connection using quadratic bezier
-                    const midX = (this.org1.x + this.org2.x) / 2;
-                    const midY = (this.org1.y + this.org2.y) / 2;
-                    const offset = p.sin(time * 0.005) * 30;
-
-                    p.noFill();
-                    p.beginShape();
-                    p.vertex(this.org1.x, this.org1.y);
-                    p.quadraticVertex(midX + offset, midY + offset, this.org2.x, this.org2.y);
-                    p.endShape();
-                }
-            }
-        }
-
-        // Spike Particle Class - neuromorphic spikes when active
-        class Spike {
-            constructor(p, x, y) {
-                this.p = p;
-                this.x = x;
-                this.y = y;
-                this.vx = p.random(-2, 2);
-                this.vy = p.random(-2, 2);
-                this.life = 1.0;
-                this.decay = p.random(0.01, 0.03);
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                this.life -= this.decay;
-                this.vx *= 0.98;
-                this.vy *= 0.98;
-            }
-
-            display() {
-                const p = this.p;
-                const alpha = this.life * 100;
-                const size = this.life * 4;
-                p.noStroke();
-                p.fill(COLORS.gold[0], COLORS.gold[1], COLORS.gold[2], alpha);
-                p.ellipse(this.x, this.y, size, size);
-            }
-
-            isDead() {
-                return this.life <= 0;
-            }
-        }
-
-        // Main p5.js sketch
         new p5(function(p) {
-            let organisms = [];
-            let connections = [];
-            let spikes = [];
-            let time = 0;
+            // Abe's state
+            let abe = {
+                x: 0, y: 0,
+                targetX: 0, targetY: 0,
+                size: 60,
+                eyeOffset: 0,
+                blinkTimer: 0,
+                isBlinking: false,
+                peekAmount: 0,
+                peekTarget: 0,
+                mood: 'curious', // curious, shy, excited
+                wanderAngle: 0
+            };
+
+            const GOLD = [201, 162, 39];
+            const GOLD_LIGHT = [232, 212, 139];
+            const INK = [26, 26, 26];
 
             p.setup = function() {
                 const canvas = p.createCanvas(p.windowWidth, p.windowHeight);
                 canvas.parent('living-canvas');
                 p.colorMode(p.RGB, 255, 255, 255, 100);
 
-                // Seed for reproducibility
-                p.randomSeed(41);
-                p.noiseSeed(41);
-
-                // Create organisms - positioned like the original shapes
-                organisms.push(new Organism(p, p.width * 0.85, p.height * 0.15, 400, 0)); // gold top-right
-                organisms.push(new Organism(p, p.width * 0.1, p.height * 0.5, 300, 1));  // gold-light left
-                organisms.push(new Organism(p, p.width * 0.75, p.height * 0.75, 250, 2)); // brown bottom-right
-
-                // Add more subtle organisms
-                for (let i = 0; i < 5; i++) {
-                    organisms.push(new Organism(
-                        p,
-                        p.random(p.width),
-                        p.random(p.height),
-                        p.random(100, 200),
-                        p.floor(p.random(3))
-                    ));
-                }
-
-                // Create connections
-                for (let i = 0; i < organisms.length; i++) {
-                    for (let j = i + 1; j < organisms.length; j++) {
-                        if (p.random() < 0.4) {
-                            connections.push(new Connection(p, organisms[i], organisms[j]));
-                        }
-                    }
-                }
+                // Start Abe at bottom right, near voice FAB
+                abe.x = p.width - 100;
+                abe.y = p.height - 100;
+                abe.targetX = abe.x;
+                abe.targetY = abe.y;
             };
 
             p.draw = function() {
                 p.clear();
-                time++;
+                const time = p.frameCount;
 
-                // Update consciousness breath
-                consciousness.breath = p.sin(time * 0.01);
+                // Abe wanders slowly along edges
+                abe.wanderAngle += 0.003;
+                const wanderX = p.cos(abe.wanderAngle) * 0.3 + 0.5;
+                const wanderY = p.sin(abe.wanderAngle * 0.7) * 0.3 + 0.5;
 
-                // Update and display connections (mycelial network)
-                for (let conn of connections) {
-                    conn.display(time);
+                // Prefer edges - stay near bottom or right
+                const edgeX = p.width - 80;
+                const edgeY = p.height - 80;
+                abe.targetX = p.lerp(edgeX * wanderX, edgeX, 0.7);
+                abe.targetY = p.lerp(edgeY * wanderY, edgeY, 0.5);
+
+                // Gently attracted to mouse when nearby
+                const dx = state.mouseX * p.width - abe.x;
+                const dy = state.mouseY * p.height - abe.y;
+                const dist = p.sqrt(dx * dx + dy * dy);
+
+                if (dist < 300) {
+                    // Curious - move slightly toward mouse
+                    abe.targetX += dx * 0.1;
+                    abe.targetY += dy * 0.1;
+                    abe.mood = 'curious';
+                } else if (dist < 500) {
+                    abe.mood = 'shy';
+                } else {
+                    abe.mood = 'wandering';
                 }
 
-                // Update and display organisms
-                for (let org of organisms) {
-                    org.update(time);
-                    org.display(time);
+                // Voice active = excited
+                if (state.voiceActive) {
+                    abe.mood = 'excited';
+                    abe.peekTarget = 1;
                 }
 
-                // Update and display spikes
-                for (let i = spikes.length - 1; i >= 0; i--) {
-                    spikes[i].update();
-                    spikes[i].display();
-                    if (spikes[i].isDead()) {
-                        spikes.splice(i, 1);
-                    }
+                // Smooth movement
+                abe.x = p.lerp(abe.x, abe.targetX, 0.02);
+                abe.y = p.lerp(abe.y, abe.targetY, 0.02);
+
+                // Peek animation (how much Abe emerges)
+                abe.peekTarget = abe.mood === 'curious' ? 0.8 :
+                                 abe.mood === 'excited' ? 1 : 0.4;
+                abe.peekAmount = p.lerp(abe.peekAmount, abe.peekTarget, 0.05);
+
+                // Blinking
+                abe.blinkTimer++;
+                if (abe.blinkTimer > 180 + p.random(120)) {
+                    abe.isBlinking = true;
+                    abe.blinkTimer = 0;
+                }
+                if (abe.isBlinking && abe.blinkTimer > 8) {
+                    abe.isBlinking = false;
                 }
 
-                // Spawn spikes when voice is active
-                if (consciousness.voiceActive && p.frameCount % 3 === 0) {
-                    const org = organisms[p.floor(p.random(organisms.length))];
-                    for (let i = 0; i < 3; i++) {
-                        spikes.push(new Spike(p, org.x, org.y));
-                    }
+                // Eye tracking toward mouse or voice FAB
+                const lookX = state.voiceActive ? p.width - 40 : state.mouseX * p.width;
+                const lookY = state.voiceActive ? p.height - 40 : state.mouseY * p.height;
+                const lookDx = lookX - abe.x;
+                const lookDy = lookY - abe.y;
+                const lookDist = p.sqrt(lookDx * lookDx + lookDy * lookDy);
+                abe.eyeOffset = p.min(lookDist * 0.02, 4);
+                const eyeAngle = p.atan2(lookDy, lookDx);
+
+                // Draw Abe
+                const breathe = p.sin(time * 0.05) * 3;
+                const size = abe.size + breathe;
+                const peekY = (1 - abe.peekAmount) * size * 0.6;
+
+                p.push();
+                p.translate(abe.x, abe.y + peekY);
+
+                // Shadow/glow under Abe
+                p.noStroke();
+                p.fill(GOLD[0], GOLD[1], GOLD[2], 15);
+                p.ellipse(0, size * 0.3, size * 1.5, size * 0.4);
+
+                // Body - soft blob
+                p.fill(GOLD[0], GOLD[1], GOLD[2], 90);
+                p.ellipse(0, 0, size, size * 0.9);
+
+                // Highlight
+                p.fill(GOLD_LIGHT[0], GOLD_LIGHT[1], GOLD_LIGHT[2], 40);
+                p.ellipse(-size * 0.15, -size * 0.15, size * 0.4, size * 0.3);
+
+                // Eyes
+                const eyeSpacing = size * 0.18;
+                const eyeY = -size * 0.05;
+                const eyeSize = size * 0.22;
+                const pupilSize = eyeSize * 0.5;
+
+                // Eye whites
+                p.fill(250, 249, 246, 95);
+                p.ellipse(-eyeSpacing, eyeY, eyeSize, abe.isBlinking ? 2 : eyeSize);
+                p.ellipse(eyeSpacing, eyeY, eyeSize, abe.isBlinking ? 2 : eyeSize);
+
+                // Pupils (if not blinking)
+                if (!abe.isBlinking) {
+                    const pupilOffsetX = p.cos(eyeAngle) * abe.eyeOffset;
+                    const pupilOffsetY = p.sin(eyeAngle) * abe.eyeOffset;
+
+                    p.fill(INK[0], INK[1], INK[2], 90);
+                    p.ellipse(-eyeSpacing + pupilOffsetX, eyeY + pupilOffsetY, pupilSize, pupilSize);
+                    p.ellipse(eyeSpacing + pupilOffsetX, eyeY + pupilOffsetY, pupilSize, pupilSize);
+
+                    // Sparkle in eyes
+                    p.fill(255, 255, 255, 80);
+                    p.ellipse(-eyeSpacing + pupilOffsetX - 1, eyeY + pupilOffsetY - 1, 3, 3);
+                    p.ellipse(eyeSpacing + pupilOffsetX - 1, eyeY + pupilOffsetY - 1, 3, 3);
                 }
+
+                // Cute blush when curious or excited
+                if (abe.mood === 'curious' || abe.mood === 'excited') {
+                    p.fill(255, 180, 150, 30);
+                    p.ellipse(-eyeSpacing - 5, eyeY + 10, 12, 6);
+                    p.ellipse(eyeSpacing + 5, eyeY + 10, 12, 6);
+                }
+
+                p.pop();
             };
 
             p.windowResized = function() {
                 p.resizeCanvas(p.windowWidth, p.windowHeight);
-                // Reposition base positions proportionally
-                organisms[0].baseX = p.width * 0.85;
-                organisms[0].baseY = p.height * 0.15;
-                organisms[1].baseX = p.width * 0.1;
-                organisms[1].baseY = p.height * 0.5;
-                organisms[2].baseX = p.width * 0.75;
-                organisms[2].baseY = p.height * 0.75;
             };
 
             p.mouseMoved = function() {
-                consciousness.mouseInfluence.x = p.mouseX / p.width;
-                consciousness.mouseInfluence.y = p.mouseY / p.height;
+                state.mouseX = p.mouseX / p.width;
+                state.mouseY = p.mouseY / p.height;
             };
 
         }, 'living-canvas');
 
         // Connect to voice state
-        const originalToggleVoice = window.toggleVoice;
-        if (typeof originalToggleVoice === 'function') {
-            window.toggleVoice = async function() {
-                consciousness.voiceActive = !consciousness.voiceActive;
-                return originalToggleVoice.apply(this, arguments);
-            };
-        }
-
-        // Expose consciousness for external control
-        window.livingCanvas = { consciousness };
+        window.livingCanvas = { state };
 
         // Listen for voice state changes
         document.addEventListener('voiceStateChange', function(e) {
