@@ -4,8 +4,21 @@
   "rewrites": [
     { "source": "/abeone", "destination": "/abeone/index.html" },
     { "source": "/biasguard", "destination": "/biasguard/index.html" },
-    { "source": "/experiments", "destination": "/abe-experiments.html" },
-    { "source": "/pimp-my-mac", "destination": "/pimp-my-mac.html" },
-    { "source": "/scream-machine", "destination": "/scream-machine.html" }
+    {
+      "source": "/north-shore-voice",
+      "destination": "/north-shore-voice/index.html"
+    },
+    {
+      "source": "/experiments",
+      "destination": "/lab-archive/abe-experiments.html"
+    },
+    {
+      "source": "/pimp-my-mac",
+      "destination": "/lab-archive/pimp-my-mac.html"
+    },
+    {
+      "source": "/scream-machine",
+      "destination": "/lab-archive/scream-machine.html"
+    }
   ]
 }

@@ -1,0 +1,1181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>North Shore Voice | Optometry AI | Bravètto</title>
+    <meta
+      name="description"
+      content="Stop losing after-hours calls. North Shore Voice handles optometry bookings with Guardian AI safety + Compliance Guard."
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#FAF9F6",
+              "cream-dark": "#F5F3EF",
+              gold: "#C9A227",
+              "gold-light": "#E8D48B",
+              ink: "#1A1A1A",
+              "ink-light": "#4A4A4A",
+              "guard-green": "#22C55E",
+              "north-blue": "#003d7a",
+              "north-orange": "#ff6b35",
+            },
+            fontFamily: {
+              serif: ["Cormorant Garamond", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- p5.js for Living Canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: #faf9f6;
+        overflow-x: hidden;
+      }
+
+      /* Living Canvas Layer */
+      #living-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      #living-canvas canvas {
+        display: block;
+      }
+
+      .headline {
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+      }
+      .subhead {
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+
+      /* Scroll reveal */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Glass Cards */
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(201, 162, 39, 0.1);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .glass-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 60px rgba(0, 31, 63, 0.1);
+        border-color: rgba(255, 107, 53, 0.3);
+      }
+
+      /* Hero Image Fix */
+      .hero-split {
+        background:
+          linear-gradient(
+            to right,
+            rgba(26, 26, 26, 0.8),
+            rgba(26, 26, 26, 0.4)
+          ),
+          url("https://images.unsplash.com/photo-1576091160550-217359f49f4a?auto=format&fit=crop&q=80&w=2070");
+        background-size: cover;
+        background-position: center;
+      }
+
+      /* Layer Accents */
+      .layer-1::before {
+        background: #c9a227;
+      }
+      .layer-2::before {
+        background: #22c55e;
+      }
+      .layer-3::before {
+        background: #003d7a;
+      }
+
+      .layer-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+      }
+
+      /* Pulse for Guardian */
+      .pulse-green {
+        animation: pulse-green 2s infinite;
+      }
+      @keyframes pulse-green {
+        0% {
+          box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+        }
+      }
+    </style>
+  </head>
+
+  <body class="font-sans text-ink antialiased">
+    <!-- Living Canvas - Neuromorphic Consciousness Layer -->
+    <div id="living-canvas"></div>
+
+    <!-- Navigation -->
+    <nav
+      class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-cream/80 backdrop-blur-md"
+    >
+      <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <a href="/" class="font-serif text-2xl font-semibold tracking-tight"
+          >Bravètto</a
+        >
+        <div class="flex items-center gap-8">
+          <a
+            href="#problem"
+            class="text-sm text-ink-light hover:text-ink transition-colors"
+            >The Problem</a
+          >
+          <a
+            href="#how-it-works"
+            class="text-sm text-ink-light hover:text-ink transition-colors"
+            >How it Works</a
+          >
+          <a
+            href="#pilot"
+            class="text-sm text-ink-light hover:text-ink transition-colors"
+            >30-Day Pilot</a
+          >
+          <a
+            href="/"
+            class="text-sm px-4 py-2 border border-ink rounded-full hover:bg-ink hover:text-cream transition-colors"
+            >Home</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section
+      class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-ink"
+    >
+      <div class="absolute inset-0 hero-split opacity-60"></div>
+      <div class="relative z-10 max-w-7xl mx-auto px-8 w-full">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <p class="subhead text-sm text-gold-light mb-6 reveal">
+              North Shore Voice
+            </p>
+            <h1
+              class="font-serif text-5xl md:text-7xl text-white font-semibold headline mb-8 reveal"
+            >
+              Your Patients Call at 8 PM.<br />
+              Your Office Is Closed.<br />
+              <span class="text-gold">North Shore Voice Answers.</span>
+            </h1>
+            <p class="text-xl text-cream/80 font-light mb-12 max-w-xl reveal">
+              Stop losing after-hours appointments. North Shore Voice handles
+              scheduling with AI that respects your sovereignty and stays FTC
+              compliant.
+            </p>
+            <div class="flex flex-wrap gap-4 reveal">
+              <a
+                href="#pilot"
+                class="px-8 py-4 bg-north-orange text-white rounded-full font-semibold hover:bg-orange-600 transition-all hover:scale-105"
+              >
+                See 30-Day Pilot
+              </a>
+              <a
+                href="#how-it-works"
+                class="px-8 py-4 border border-white/30 text-white rounded-full font-semibold hover:bg-white/10 transition-all"
+              >
+                How it Works
+              </a>
+            </div>
+          </div>
+
+          <!-- Visual State Mockup -->
+          <div class="hidden lg:block reveal" style="transition-delay: 0.3s">
+            <div
+              class="glass-card rounded-3xl p-8 border-white/20 bg-ink/40 text-cream"
+            >
+              <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-3 h-3 rounded-full bg-guard-green pulse-green"
+                  ></div>
+                  <span
+                    class="text-xs font-mono uppercase tracking-widest text-emerald-400"
+                    >Compliance Guard Active</span
+                  >
+                </div>
+                <span class="text-xs font-mono text-white/50"
+                  >ID: NS-47291</span
+                >
+              </div>
+
+              <div class="space-y-6">
+                <div class="flex gap-4">
+                  <div
+                    class="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0"
+                  >
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
+                    </svg>
+                  </div>
+                  <div
+                    class="bg-white/10 rounded-2xl rounded-tl-none p-4 text-sm max-w-xs"
+                  >
+                    "I need an eye exam soon, I'm getting headaches."
+                  </div>
+                </div>
+
+                <div class="flex gap-4 justify-end">
+                  <div
+                    class="bg-gold/20 border border-gold/30 rounded-2xl rounded-tr-none p-4 text-sm max-w-xs text-right"
+                  >
+                    "I can help. We have availability this Thursday. Should I
+                    book your exam?"
+                  </div>
+                  <div
+                    class="w-10 h-10 rounded-full bg-gold/30 flex items-center justify-center shrink-0"
+                  >
+                    <span class="font-serif italic">Abë</span>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="mt-12 p-4 bg-ink/60 rounded-xl border border-white/10"
+              >
+                <div class="flex items-center justify-between text-xs mb-2">
+                  <span class="text-white/50">Guardian Lock</span>
+                  <span class="text-emerald-400">ENFORCED</span>
+                </div>
+                <div class="text-sm font-medium">
+                  FTC Dilation Disclosure provided. ✅
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="py-20 bg-cream-dark">
+      <div class="max-w-7xl mx-auto px-8">
+        <div class="grid md:grid-cols-3 gap-12 text-center">
+          <div class="reveal">
+            <p class="text-4xl font-serif font-bold text-north-orange mb-2">
+              45%
+            </p>
+            <p class="text-sm text-ink-light uppercase tracking-wider">
+              Calls After Hours
+            </p>
+          </div>
+          <div class="reveal" style="transition-delay: 0.1s">
+            <p class="text-4xl font-serif font-bold text-north-orange mb-2">
+              200+
+            </p>
+            <p class="text-sm text-ink-light uppercase tracking-wider">
+              Missed Calls Weekly
+            </p>
+          </div>
+          <div class="reveal" style="transition-delay: 0.2s">
+            <p class="text-4xl font-serif font-bold text-north-orange mb-2">
+              100%
+            </p>
+            <p class="text-sm text-ink-light uppercase tracking-wider">
+              FTC Compliance
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem -->
+    <section id="problem" class="py-32 px-8">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-20">
+          <h2
+            class="font-serif text-4xl md:text-5xl font-medium headline mb-6 reveal"
+          >
+            Stop the Revenue Bleed
+          </h2>
+          <p class="text-lg text-ink-light reveal">
+            We mapped exactly where optometry practices lose money and staff
+            sanity.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Frame 1 -->
+          <div class="glass-card p-8 rounded-2xl reveal">
+            <h3 class="font-serif text-2xl font-medium mb-4">
+              After-Hours Lost
+            </h3>
+            <div
+              class="bg-red-50 p-4 rounded-lg text-sm mb-4 border-l-4 border-red-500"
+            >
+              "Your office is closed. Please leave a message." →
+              <span class="font-semibold text-red-700">Call Lost.</span>
+            </div>
+            <div
+              class="bg-emerald-50 p-4 rounded-lg text-sm border-l-4 border-emerald-500"
+            >
+              "I can book that for you right now." →
+              <span class="font-semibold text-emerald-700">Revenue Won.</span>
+            </div>
+          </div>
+
+          <!-- Frame 2 -->
+          <div class="glass-card p-8 rounded-2xl reveal">
+            <h3 class="font-serif text-2xl font-medium mb-4">
+              Staff Interruptions
+            </h3>
+            <div
+              class="bg-red-50 p-4 rounded-lg text-sm mb-4 border-l-4 border-red-500"
+            >
+              Patient asks about dilation. Staff pulls doctor from exam.
+              <span class="font-semibold text-red-700">8 mins lost.</span>
+            </div>
+            <div
+              class="bg-emerald-50 p-4 rounded-lg text-sm border-l-4 border-emerald-500"
+            >
+              AI answers instantly via Compliance Guard.
+              <span class="font-semibold text-emerald-700"
+                >Focus maintained.</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Layers -->
+    <section
+      id="how-it-works"
+      class="py-32 px-8 bg-ink text-cream overflow-hidden relative"
+    >
+      <div
+        class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-gold via-emerald-500 to-north-blue"
+      ></div>
+
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-20">
+          <p class="subhead text-xs text-gold mb-4 reveal">The Framework</p>
+          <h2
+            class="font-serif text-4xl md:text-5xl font-medium headline reveal"
+          >
+            Three Layers of Safety
+          </h2>
+          <p class="mt-6 text-lg text-cream/60 max-w-2xl mx-auto reveal">
+            Your AI is powerful. And locked down so it can't go rogue.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-12">
+          <!-- Layer 1 -->
+          <div class="layer-card layer-1 p-8 reveal">
+            <div class="text-4xl mb-6">🛡️</div>
+            <h3 class="font-serif text-2xl font-medium mb-4">GUARDIAN LOCK</h3>
+            <p class="text-cream/70 text-sm leading-relaxed mb-6">
+              AI respects human sovereignty. It is architecturally blocked from
+              deleting records, charging fees, or modifying medical history
+              without your review.
+            </p>
+            <ul class="text-xs space-y-3 text-gold-light font-mono">
+              <li>• Human-in-the-loop review queue</li>
+              <li>• Zero-permission write access</li>
+              <li>• Decision logging for audit</li>
+            </ul>
+          </div>
+
+          <!-- Layer 2 -->
+          <div
+            class="layer-card layer-2 p-8 reveal"
+            style="transition-delay: 0.1s"
+          >
+            <div class="text-4xl mb-6">⚖️</div>
+            <h3 class="font-serif text-2xl font-medium mb-4">
+              COMPLIANCE GUARD
+            </h3>
+            <p class="text-cream/70 text-sm leading-relaxed mb-6">
+              Stay ahead of the FTC. Real-time enforcement of dilation fee
+              disclosures, state Rx release laws, and insurance verification
+              logging.
+            </p>
+            <ul class="text-xs space-y-3 text-emerald-400 font-mono">
+              <li>• Automatic FTC fee disclosures</li>
+              <li>• State-level Rx rule mapping</li>
+              <li>• Drifting detection & alerts</li>
+            </ul>
+          </div>
+
+          <!-- Layer 3 -->
+          <div
+            class="layer-card layer-3 p-8 reveal"
+            style="transition-delay: 0.2s"
+          >
+            <div class="text-4xl mb-6">🤝</div>
+            <h3 class="font-serif text-2xl font-medium mb-4">HUMAN HANDOFF</h3>
+            <p class="text-cream/70 text-sm leading-relaxed mb-6">
+              When emotions run high or questions get complex, the AI doesn't
+              fake empathy—it brings a human in. Full context preserved for your
+              manager.
+            </p>
+            <ul class="text-xs space-y-3 text-north-blue font-mono">
+              <li>• Emotion-based trigger system</li>
+              <li>• Complex query escalation</li>
+              <li>• Instant manager notification</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pilot -->
+    <section id="pilot" class="py-32 px-8">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="subhead text-xs text-gold mb-4 reveal">Join the Cohort</p>
+          <h2
+            class="font-serif text-4xl md:text-5xl font-medium headline mb-6 reveal"
+          >
+            30-Day Pilot
+          </h2>
+          <p class="text-lg text-ink-light reveal">
+            Low risk. High learning. Real numbers.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20 reveal">
+          <div class="p-6 bg-cream-dark rounded-xl text-center">
+            <p class="text-gold font-bold mb-1">Week 1</p>
+            <p class="text-xs text-ink-light">Guardian<br />Setup</p>
+          </div>
+          <div class="p-6 bg-cream-dark rounded-xl text-center">
+            <p class="text-gold font-bold mb-1">Week 2</p>
+            <p class="text-xs text-ink-light">Log &<br />Monitor</p>
+          </div>
+          <div class="p-6 bg-cream-dark rounded-xl text-center">
+            <p class="text-gold font-bold mb-1">Week 3</p>
+            <p class="text-xs text-ink-light">Tune &<br />Personalize</p>
+          </div>
+          <div class="p-6 bg-cream-dark rounded-xl text-center">
+            <p class="text-gold font-bold mb-1">Week 4</p>
+            <p class="text-xs text-ink-light">Scale or<br />Pivot</p>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl overflow-hidden reveal">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-ink text-cream text-left">
+                <th class="p-6 font-serif text-lg font-medium">Metric</th>
+                <th class="p-6 font-serif text-lg font-medium">
+                  What We Track
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-cream-dark text-ink-light">
+              <tr>
+                <td class="p-6 font-semibold text-ink">Calls Handled</td>
+                <td class="p-6">Inbound calls processed. (Revenue recovery)</td>
+              </tr>
+              <tr>
+                <td class="p-6 font-semibold text-ink">Guardian Blocks</td>
+                <td class="p-6">
+                  Dangerous actions intercepted. (Safety proof)
+                </td>
+              </tr>
+              <tr>
+                <td class="p-6 font-semibold text-ink">Compliance Alerts</td>
+                <td class="p-6">
+                  FTC/State violations caught early. (Risk reduction)
+                </td>
+              </tr>
+              <tr>
+                <td class="p-6 font-semibold text-ink">Handoffs</td>
+                <td class="p-6">Calls escalated to humans. (Team sanity)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-20 text-center reveal">
+          <p class="text-3xl font-serif mb-8 text-ink">
+            $1,500 setup + $500/week pilot.
+          </p>
+          <div class="flex justify-center gap-4">
+            <a
+              href="mailto:hello@bravetto.com?subject=North Shore Pilot"
+              class="px-8 py-4 bg-ink text-cream rounded-full font-semibold hover:bg-ink-light transition-colors"
+            >
+              Apply for Pilot
+            </a>
+          </div>
+          <p
+            class="mt-6 text-xs text-ink-light opacity-50 uppercase tracking-widest"
+          >
+            No long-term contracts. Keep your data.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-32 px-8 bg-cream-dark">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="font-serif text-4xl text-center mb-16 reveal">
+          Common Questions
+        </h2>
+        <div class="space-y-6">
+          <div class="reveal">
+            <h4 class="font-serif font-medium text-xl mb-2">
+              Won't this sound robotic?
+            </h4>
+            <p class="text-ink-light text-sm">
+              We've trained North Shore on real optometry calls. It sounds like
+              a warm, slightly younger staff member. Patients think it's human
+              until we tell them otherwise.
+            </p>
+          </div>
+          <div class="reveal">
+            <h4 class="font-serif font-medium text-xl mb-2">
+              What if it books something wrong?
+            </h4>
+            <p class="text-ink-light text-sm">
+              Guardian locks dangerous actions. Any exceptions sit in a queue
+              for your manager to review. You have 100% visibility.
+            </p>
+          </div>
+          <div class="reveal">
+            <h4 class="font-serif font-medium text-xl mb-2">
+              Do you store patient data?
+            </h4>
+            <p class="text-ink-light text-sm">
+              No. All patient data lives in your system. We only log call
+              metadata for compliance auditing.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 px-8 bg-ink text-cream">
+      <div
+        class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8"
+      >
+        <div>
+          <p class="font-serif text-xl font-semibold">Bravètto</p>
+          <p class="text-sm text-cream/50 mt-1">
+            Built on Guardian + Compliance Guard.
+          </p>
+        </div>
+        <div class="flex items-center gap-8 text-sm text-cream/50">
+          <a href="/" class="hover:text-gold transition-colors">Home</a>
+          <a
+            href="mailto:hello@bravetto.com"
+            class="hover:text-gold transition-colors"
+            >Contact Mike</a
+          >
+          <span>2026</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Voice FAB -->
+    <div id="voice-container" class="fixed bottom-8 right-8 z-50">
+      <!-- Voice Button -->
+      <button
+        id="voice-fab"
+        class="w-16 h-16 rounded-full bg-gradient-to-br from-north-orange to-north-blue shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-north-orange/30"
+        title="Talk to North Shore Voice"
+      >
+        <svg
+          id="mic-icon"
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="white"
+          stroke-width="2"
+        >
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+          <line x1="12" y1="19" x2="12" y2="23" />
+          <line x1="8" y1="23" x2="16" y2="23" />
+        </svg>
+        <svg
+          id="wave-icon"
+          class="hidden"
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="white"
+          stroke-width="2"
+        >
+          <path d="M2 12h2M6 8v8M10 5v14M14 9v6M18 7v10M22 12h-2" />
+        </svg>
+      </button>
+
+      <!-- Status Panel -->
+      <div
+        id="voice-panel"
+        class="hidden absolute bottom-20 right-0 w-80 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-north-blue/20 overflow-hidden"
+      >
+        <!-- Header -->
+        <div
+          class="px-5 py-4 bg-gradient-to-r from-north-blue/10 to-transparent border-b border-north-blue/10"
+        >
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div
+                id="pulse-ring"
+                class="w-3 h-3 rounded-full bg-north-orange animate-pulse"
+              ></div>
+              <span id="voice-status" class="text-sm font-medium text-ink"
+                >Connecting...</span
+              >
+            </div>
+            <button
+              id="close-panel"
+              class="text-ink-light hover:text-ink transition-colors"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Transcript -->
+        <div
+          id="transcript"
+          class="h-48 overflow-y-auto px-5 py-4 space-y-3 text-sm"
+        ></div>
+
+        <!-- Empathy Bar -->
+        <div class="px-5 py-3 bg-cream-dark border-t border-north-blue/10">
+          <div
+            class="flex items-center justify-between text-xs text-ink-light mb-1"
+          >
+            <span>Clarity</span>
+            <span id="empathy-label">Neutral</span>
+          </div>
+          <div class="h-1.5 rounded-full bg-ink/10 overflow-hidden">
+            <div
+              id="empathy-bar"
+              class="h-full w-1/2 bg-gradient-to-r from-north-blue to-north-orange transition-all duration-300"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Consciousness Overlay -->
+    <div
+      id="consciousness-overlay"
+      class="fixed inset-0 pointer-events-none z-40 opacity-0 transition-opacity duration-500"
+    >
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-north-blue/5 via-transparent to-transparent"
+      ></div>
+    </div>
+
+    <!-- Scroll reveal script -->
+    <script>
+      document.querySelectorAll(".reveal").forEach((el, i) => {
+        setTimeout(
+          () => {
+            el.classList.add("visible");
+          },
+          100 + i * 100,
+        );
+      });
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+    </script>
+    <!-- Living Canvas (Presence) Integration -->
+    <script>
+      (function () {
+        const state = {
+          voiceActive: false,
+          mouseX: 0.5,
+          mouseY: 0.5,
+          scroll: 0,
+        };
+
+        new p5(function (p) {
+          let abe = { x: 0, y: 0, targetX: 0, targetY: 0, angle: 0, drift: 0 };
+          let waves = [];
+          let spawnJitter = 0;
+          const GOLD = [201, 162, 39];
+
+          p.setup = function () {
+            p.createCanvas(p.windowWidth, p.windowHeight).parent(
+              "living-canvas",
+            );
+            abe.x = p.width * 0.6;
+            abe.y = p.height * 0.5;
+          };
+
+          p.draw = function () {
+            p.clear();
+            const t = p.frameCount * 0.013;
+
+            const presence = 0.15 + Math.pow(state.scroll, 0.6) * 0.85;
+            const baseAlpha = 5 + presence * 14;
+
+            abe.drift += (p.noise(t * 0.3) - 0.5) * 0.002;
+            abe.angle += 0.003 + abe.drift;
+
+            const range = p.min(p.width, p.height) * (0.12 + presence * 0.22);
+            abe.targetX =
+              p.width * 0.5 +
+              p.cos(abe.angle) * range * (0.9 + p.noise(t * 0.5) * 0.2);
+            abe.targetY =
+              p.height * (0.35 + presence * 0.35) +
+              p.sin(abe.angle * 0.7) * range * 0.4;
+
+            const mx = state.mouseX * p.width,
+              my = state.mouseY * p.height;
+            const dist = p.dist(abe.x, abe.y, mx, my);
+            if (dist < 280) {
+              const pull = (1 - dist / 280) * (0.25 + presence * 0.35);
+              const lag = 0.92 + p.noise(t) * 0.08;
+              abe.targetX = p.lerp(abe.targetX, mx, pull * lag);
+              abe.targetY = p.lerp(abe.targetY, my, pull * lag);
+            }
+
+            const moveSpeed =
+              (0.007 + presence * 0.009) * (0.95 + p.noise(t * 2) * 0.1);
+            abe.x = p.lerp(abe.x, abe.targetX, moveSpeed);
+            abe.y = p.lerp(abe.y, abe.targetY, moveSpeed);
+
+            spawnJitter += p.random(-2, 2);
+            const spawnRate = Math.floor(35 - presence * 15 + spawnJitter);
+            spawnJitter *= 0.9;
+            if (p.frameCount % Math.max(12, spawnRate) === 0) {
+              waves.push({
+                x: abe.x + p.random(-8, 8),
+                y: abe.y + p.random(-4, 4),
+                birth: t,
+                strength: 0.6 + presence * 0.4 + p.random(-0.1, 0.1),
+                wobblePhase: p.random(p.TWO_PI),
+              });
+            }
+
+            p.noFill();
+            for (let i = waves.length - 1; i >= 0; i--) {
+              const w = waves[i];
+              const age = t - w.birth;
+              if (age > 4) {
+                waves.splice(i, 1);
+                continue;
+              }
+
+              const alpha = p.map(age, 0, 4, baseAlpha, 0) * w.strength;
+              const speed = 42 + presence * 26;
+
+              for (let n = 0; n < 3; n++) {
+                const r = age * speed + n * 23;
+                if (r < 8) continue;
+                p.stroke(GOLD[0], GOLD[1], GOLD[2], alpha * (1 - n / 3.2));
+                p.strokeWeight(0.7 + p.noise(w.birth + n) * 0.3);
+                p.beginShape();
+                for (let a = 0; a <= p.TWO_PI; a += 0.07) {
+                  const wobble =
+                    p.sin(a * 5.5 + t * 1.2 + w.wobblePhase) *
+                    (2.5 + presence * 2);
+                  const imperfection = p.noise(a * 2 + w.birth) * 3 - 1.5;
+                  const rx = r + wobble + imperfection;
+                  p.vertex(w.x + p.cos(a) * rx, w.y + p.sin(a) * rx * 0.5);
+                }
+                p.endShape(p.CLOSE);
+              }
+            }
+
+            p.noStroke();
+            const breathe =
+              p.sin(t * 0.8) * 4 + p.sin(t * 1.3) * 2 + p.noise(t) * 3;
+            const bulgeSize = 45 + presence * 45 + breathe;
+            for (let i = 4; i > 0; i--) {
+              const wobble = p.noise(t + i) * 4 - 2;
+              p.fill(
+                GOLD[0],
+                GOLD[1],
+                GOLD[2],
+                baseAlpha * 0.35 * (1 - i / 5.5),
+              );
+              p.ellipse(
+                abe.x + wobble,
+                abe.y,
+                bulgeSize * (i / 4) * 2,
+                bulgeSize * (i / 4) * (0.95 + p.noise(i) * 0.1),
+              );
+            }
+          };
+
+          p.windowResized = function () {
+            p.resizeCanvas(p.windowWidth, p.windowHeight);
+          };
+          p.mouseMoved = function () {
+            state.mouseX = p.mouseX / p.width;
+            state.mouseY = p.mouseY / p.height;
+          };
+        }, "living-canvas");
+
+        window.addEventListener("scroll", () => {
+          state.scroll =
+            window.scrollY / (document.body.scrollHeight - window.innerHeight);
+        });
+        document.addEventListener("voiceStateChange", (e) => {
+          state.voiceActive = e.detail.active;
+        });
+      })();
+    </script>
+
+    <!-- North Shore Voice Implementation -->
+    <script type="module">
+      const GEMINI_MODEL = "gemini-2.5-flash-native-audio-preview-12-2025";
+
+      class VoiceLiveService {
+        constructor(config) {
+          this.apiKey = config.apiKey;
+          this.systemInstruction = config.systemInstruction;
+          this.onStatus = config.onStatus || (() => {});
+          this.onText = config.onText || (() => {});
+          this.onEmpathy = config.onEmpathy || (() => {});
+          this.ws = null;
+        }
+
+        async connect() {
+          this.onStatus("connecting");
+          const url = `wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.GenerativeService.BidiGenerateContent?key=${this.apiKey}`;
+
+          return new Promise((resolve, reject) => {
+            this.ws = new WebSocket(url);
+            this.ws.onopen = () => {
+              this.ws.send(
+                JSON.stringify({
+                  setup: {
+                    model: `models/${GEMINI_MODEL}`,
+                    generationConfig: {
+                      responseModalities: ["AUDIO", "TEXT"],
+                      speechConfig: {
+                        voiceConfig: {
+                          prebuiltVoiceConfig: { voiceName: "Aoede" },
+                        },
+                      },
+                    },
+                    systemInstruction: {
+                      parts: [{ text: this.systemInstruction }],
+                    },
+                  },
+                }),
+              );
+            };
+
+            this.ws.onmessage = async (event) => {
+              const data = JSON.parse(event.data);
+              if (data.setupComplete) {
+                this.onStatus("connected");
+                resolve();
+              }
+              if (data.serverContent?.modelTurn?.parts) {
+                for (const part of data.serverContent.modelTurn.parts) {
+                  if (part.inlineData?.data) {
+                    this.playAudio(part.inlineData.data);
+                  }
+                  if (part.text) {
+                    this.onText("assistant", part.text);
+                    this.analyzeClarity(part.text);
+                  }
+                }
+              }
+              if (data.serverContent?.inputTranscription?.text) {
+                this.onText("user", data.serverContent.inputTranscription.text);
+              }
+            };
+
+            this.ws.onerror = reject;
+          });
+        }
+
+        async startMicrophone() {
+          this.audioContext = new (
+            window.AudioContext || window.webkitAudioContext
+          )({ sampleRate: 16000 });
+          this.mediaStream = await navigator.mediaDevices.getUserMedia({
+            audio: true,
+          });
+          const source = this.audioContext.createMediaStreamSource(
+            this.mediaStream,
+          );
+          this.processor = this.audioContext.createScriptProcessor(4096, 1, 1);
+
+          this.processor.onaudioprocess = (e) => {
+            const input = e.inputBuffer.getChannelData(0);
+            const pcm = new Int16Array(input.length);
+            for (let i = 0; i < input.length; i++) {
+              pcm[i] = Math.max(-32768, Math.min(32767, input[i] * 32768));
+            }
+            if (this.ws?.readyState === WebSocket.OPEN) {
+              this.ws.send(
+                JSON.stringify({
+                  realtimeInput: {
+                    mediaChunks: [
+                      {
+                        mimeType: "audio/pcm;rate=16000",
+                        data: this.arrayBufferToBase64(pcm.buffer),
+                      },
+                    ],
+                  },
+                }),
+              );
+            }
+          };
+
+          source.connect(this.processor);
+          this.processor.connect(this.audioContext.destination);
+          this.onStatus("listening");
+        }
+
+        playAudio(base64) {
+          if (!this.playbackContext) {
+            this.playbackContext = new (
+              window.AudioContext || window.webkitAudioContext
+            )({ sampleRate: 24000 });
+            this.scheduledTime = this.playbackContext.currentTime;
+          }
+          const binary = atob(base64);
+          const bytes = new Uint8Array(binary.length);
+          for (let i = 0; i < binary.length; i++)
+            bytes[i] = binary.charCodeAt(i);
+          const int16 = new Int16Array(bytes.buffer);
+          const float32 = new Float32Array(int16.length);
+          for (let i = 0; i < int16.length; i++) float32[i] = int16[i] / 32768;
+
+          const buffer = this.playbackContext.createBuffer(
+            1,
+            float32.length,
+            24000,
+          );
+          buffer.copyToChannel(float32, 0);
+          const source = this.playbackContext.createBufferSource();
+          source.buffer = buffer;
+          source.connect(this.playbackContext.destination);
+          const start = Math.max(
+            this.playbackContext.currentTime,
+            this.scheduledTime,
+          );
+          source.start(start);
+          this.scheduledTime = start + buffer.duration;
+          this.onStatus("speaking");
+          source.onended = () => this.onStatus("listening");
+        }
+
+        analyzeClarity(text) {
+          const score = Math.min(1, text.length / 100);
+          this.onEmpathy({ score, label: score > 0.7 ? "High" : "Optimal" });
+        }
+
+        arrayBufferToBase64(buffer) {
+          let binary = "";
+          const bytes = new Uint8Array(buffer);
+          for (let i = 0; i < bytes.length; i++)
+            binary += String.fromCharCode(bytes[i]);
+          return btoa(binary);
+        }
+
+        disconnect() {
+          this.ws?.close();
+          this.mediaStream?.getTracks().forEach((t) => t.stop());
+          this.audioContext?.close();
+        }
+      }
+
+      const voiceFab = document.getElementById("voice-fab");
+      const voicePanel = document.getElementById("voice-panel");
+      const voiceStatus = document.getElementById("voice-status");
+      const transcript = document.getElementById("transcript");
+      const empathyBar = document.getElementById("empathy-bar");
+      const empathyLabel = document.getElementById("empathy-label");
+      const closePanel = document.getElementById("close-panel");
+      const micIcon = document.getElementById("mic-icon");
+      const waveIcon = document.getElementById("wave-icon");
+      const overlay = document.getElementById("consciousness-overlay");
+      const pulseRing = document.getElementById("pulse-ring");
+
+      let voice = null,
+        isActive = false;
+
+      function getApiKey() {
+        let key = localStorage.getItem("gemini_api_key");
+        if (!key) {
+          key = prompt("Enter your Gemini API Key to talk to North Shore:");
+          if (key) localStorage.setItem("gemini_api_key", key);
+        }
+        return key;
+      }
+
+      async function toggleVoice() {
+        if (isActive) {
+          voice?.disconnect();
+          voice = null;
+          isActive = false;
+          voicePanel.classList.add("hidden");
+          micIcon.classList.remove("hidden");
+          waveIcon.classList.add("hidden");
+          overlay.style.opacity = "0";
+          document.dispatchEvent(
+            new CustomEvent("voiceStateChange", { detail: { active: false } }),
+          );
+          return;
+        }
+
+        const apiKey = getApiKey();
+        if (!apiKey) return;
+
+        isActive = true;
+        voicePanel.classList.remove("hidden");
+        micIcon.classList.add("hidden");
+        waveIcon.classList.remove("hidden");
+
+        voice = new VoiceLiveService({
+          apiKey,
+          systemInstruction: `You are North Shore Voice, the specialized AI assistant for North Shore Optometry.
+You are professional, warm, and helpful. You speak with a gentle tone.
+Context:
+- Clinic: North Shore Optometry
+- Goal: Help patients book eye exams, refill contact lenses, and answer clinic questions.
+- Safety: You are backed by Guardian Lock. You cannot provide medical diagnoses or change patient health records directly.
+- Standard Greeting: "Hello, thank you for calling North Shore Optometry. How can I help you today?"
+- Interaction Style: Concise, clear, and reassuring.
+If the patient has a complex medical emergency, tell them to call 911 or head to the nearest emergency room, then notify the manager.`,
+          onStatus: (s) => {
+            voiceStatus.textContent =
+              {
+                connecting: "Connecting...",
+                connected: "Online",
+                listening: "Listening...",
+                speaking: "North Shore speaking...",
+                error: "System Error",
+              }[s] || s;
+
+            document.dispatchEvent(
+              new CustomEvent("voiceStateChange", {
+                detail: { active: s === "speaking" || s === "listening" },
+              }),
+            );
+
+            if (s === "speaking") overlay.style.opacity = "0.4";
+            else if (s === "listening") overlay.style.opacity = "0.1";
+          },
+          onText: (speaker, text) => {
+            const div = document.createElement("div");
+            div.className = speaker === "user" ? "text-right" : "text-left";
+            const bubble = document.createElement("span");
+            bubble.className =
+              speaker === "user"
+                ? "inline-block px-3 py-2 rounded-xl bg-ink text-cream text-xs"
+                : "inline-block px-3 py-2 rounded-xl bg-north-blue/10 text-ink text-xs";
+            bubble.textContent = text;
+            div.appendChild(bubble);
+            transcript.appendChild(div);
+            transcript.scrollTop = transcript.scrollHeight;
+          },
+          onEmpathy: ({ score, label }) => {
+            empathyBar.style.width = `${score * 100}%`;
+            empathyLabel.textContent = label;
+          },
+        });
+
+        try {
+          await voice.connect();
+          await voice.startMicrophone();
+        } catch (e) {
+          voiceStatus.textContent = "Error: Check API Key";
+          isActive = false;
+        }
+      }
+
+      voiceFab.addEventListener("click", toggleVoice);
+      closePanel.addEventListener("click", () =>
+        voicePanel.classList.add("hidden"),
+      );
+    </script>
+  </body>
+</html>

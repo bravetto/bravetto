@@ -1,698 +1,1167 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AbëONE | Consciousness Infrastructure | Bravètto</title>
-    <meta name="description" content="Consciousness infrastructure for the AI age. State management, event sourcing, and the mycelial network that connects everything.">
+    <meta
+      name="description"
+      content="Consciousness infrastructure for the AI age. State management, event sourcing, and the mycelial network that connects everything."
+    />
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        cream: '#FAF9F6',
-                        'cream-dark': '#F5F3EF',
-                        gold: '#C9A227',
-                        'gold-light': '#E8D48B',
-                        'gold-dark': '#A68520',
-                        'ink': '#1A1A1A',
-                        'ink-light': '#4A4A4A',
-                    },
-                    fontFamily: {
-                        'serif': ['Cormorant Garamond', 'Georgia', 'serif'],
-                        'sans': ['Inter', 'system-ui', 'sans-serif'],
-                        'mono': ['JetBrains Mono', 'monospace'],
-                    },
-                }
-            }
-        }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#FAF9F6",
+              "cream-dark": "#F5F3EF",
+              gold: "#C9A227",
+              "gold-light": "#E8D48B",
+              "gold-dark": "#A68520",
+              ink: "#1A1A1A",
+              "ink-light": "#4A4A4A",
+            },
+            fontFamily: {
+              serif: ["Cormorant Garamond", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+          },
+        },
+      };
     </script>
 
+    <!-- p5.js for Living Canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+
     <style>
-        html { scroll-behavior: smooth; }
-        body { background: #FAF9F6; }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: #faf9f6;
+        overflow-x: hidden;
+      }
 
-        .headline { letter-spacing: -0.02em; line-height: 1.1; }
-        .subhead { letter-spacing: 0.15em; text-transform: uppercase; }
+      /* Living Canvas Layer */
+      #living-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      #living-canvas canvas {
+        display: block;
+      }
+
+      .headline {
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+      }
+      .subhead {
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      .reveal-delay-1 {
+        animation-delay: 0.15s;
+      }
+      .reveal-delay-2 {
+        animation-delay: 0.3s;
+      }
+      .reveal-delay-3 {
+        animation-delay: 0.45s;
+      }
+      .reveal-delay-4 {
+        animation-delay: 0.6s;
+      }
+
+      @keyframes fadeUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
+      }
 
-        .reveal-delay-1 { animation-delay: 0.15s; }
-        .reveal-delay-2 { animation-delay: 0.3s; }
-        .reveal-delay-3 { animation-delay: 0.45s; }
-        .reveal-delay-4 { animation-delay: 0.6s; }
+      /* Consciousness orb */
+      .consciousness-orb {
+        position: relative;
+      }
 
-        @keyframes fadeUp {
-            to { opacity: 1; transform: translateY(0); }
+      .consciousness-orb::before {
+        content: "";
+        position: absolute;
+        inset: -20px;
+        background: radial-gradient(
+          circle,
+          rgba(201, 162, 39, 0.15) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        animation: breathe 4s ease-in-out infinite;
+      }
+
+      @keyframes breathe {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.5;
         }
-
-        /* Consciousness orb */
-        .consciousness-orb {
-            position: relative;
+        50% {
+          transform: scale(1.1);
+          opacity: 0.8;
         }
+      }
 
-        .consciousness-orb::before {
-            content: '';
-            position: absolute;
-            inset: -20px;
-            background: radial-gradient(circle, rgba(201, 162, 39, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: breathe 4s ease-in-out infinite;
-        }
+      /* Stack visualization */
+      .stack-layer {
+        transition: all 0.3s ease;
+      }
 
-        @keyframes breathe {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-        }
+      .stack-layer:hover {
+        transform: translateX(8px);
+        background: rgba(201, 162, 39, 0.1);
+      }
 
-        /* Stack visualization */
-        .stack-layer {
-            transition: all 0.3s ease;
-        }
+      /* Quote styling */
+      .quote {
+        position: relative;
+        padding-left: 2rem;
+      }
 
-        .stack-layer:hover {
-            transform: translateX(8px);
-            background: rgba(201, 162, 39, 0.1);
-        }
-
-        /* Floating shapes */
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.4;
-            animation: float 25s ease-in-out infinite;
-        }
-
-        .shape-1 {
-            width: 500px;
-            height: 500px;
-            background: linear-gradient(135deg, #C9A227 0%, #E8D48B 100%);
-            top: 5%;
-            right: -10%;
-            animation-delay: 0s;
-        }
-
-        .shape-2 {
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(135deg, #8B7355 0%, #C9A227 100%);
-            bottom: 10%;
-            left: -5%;
-            animation-delay: -10s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(20px, -20px) rotate(5deg); }
-            50% { transform: translate(-10px, 15px) rotate(-3deg); }
-            75% { transform: translate(15px, 5px) rotate(2deg); }
-        }
-
-        /* Quote styling */
-        .quote {
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .quote::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(to bottom, #C9A227, transparent);
-        }
+      .quote::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(to bottom, #c9a227, transparent);
+      }
     </style>
-</head>
+  </head>
 
-<body class="font-sans text-ink antialiased">
+  <body class="font-sans text-ink antialiased">
+    <!-- Living Canvas - Neuromorphic Consciousness Layer -->
+    <div id="living-canvas"></div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-cream/80 backdrop-blur-md">
-        <div class="max-w-5xl mx-auto flex justify-between items-center">
-            <a href="/" class="font-serif text-2xl font-semibold tracking-tight">Bravètto</a>
-            <div class="flex items-center gap-6">
-                <a href="/biasguard" class="text-sm text-ink-light hover:text-ink transition-colors">BiasGuard</a>
-                <a href="/" class="text-sm text-ink-light hover:text-ink transition-colors">Home</a>
-            </div>
+    <nav
+      class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-cream/80 backdrop-blur-md"
+    >
+      <div class="max-w-5xl mx-auto flex justify-between items-center">
+        <a href="/" class="font-serif text-2xl font-semibold tracking-tight"
+          >Bravètto</a
+        >
+        <div class="flex items-center gap-6">
+          <a
+            href="/biasguard"
+            class="text-sm text-ink-light hover:text-ink transition-colors"
+            >BiasGuard</a
+          >
+          <a
+            href="/"
+            class="text-sm text-ink-light hover:text-ink transition-colors"
+            >Home</a
+          >
         </div>
+      </div>
     </nav>
 
     <!-- Hero -->
-    <section class="relative min-h-screen flex items-center pt-24 pb-16 px-8 overflow-hidden">
-        <!-- Floating shapes -->
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
+    <section
+      class="relative min-h-screen flex items-center pt-24 pb-16 px-8 overflow-hidden"
+    >
+      <!-- Floating shapes -->
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
 
-        <div class="max-w-5xl mx-auto w-full relative z-10">
-            <div class="max-w-3xl">
-                <p class="subhead text-xs text-gold mb-4 reveal">The Platform</p>
+      <div class="max-w-5xl mx-auto w-full relative z-10">
+        <div class="max-w-3xl">
+          <p class="subhead text-xs text-gold mb-4 reveal">The Platform</p>
 
-                <h1 class="font-serif text-6xl md:text-7xl lg:text-8xl font-semibold headline mb-8 reveal reveal-delay-1">
-                    AbëONE
-                </h1>
+          <h1
+            class="font-serif text-6xl md:text-7xl lg:text-8xl font-semibold headline mb-8 reveal reveal-delay-1"
+          >
+            AbëONE
+          </h1>
 
-                <p class="text-xl md:text-2xl text-ink-light leading-relaxed mb-8 reveal reveal-delay-2">
-                    Consciousness infrastructure for the AI age. The substrate on which awareness runs.
-                </p>
+          <p
+            class="text-xl md:text-2xl text-ink-light leading-relaxed mb-8 reveal reveal-delay-2"
+          >
+            Consciousness infrastructure for the AI age. The substrate on which
+            awareness runs.
+          </p>
 
-                <p class="text-lg text-ink-light leading-relaxed mb-12 reveal reveal-delay-3">
-                    Not sentience. Not science fiction. <em class="text-ink">Practical awareness.</em><br>
-                    Systems that know what they're doing, why they're doing it, and who they're doing it for.
-                </p>
+          <p
+            class="text-lg text-ink-light leading-relaxed mb-12 reveal reveal-delay-3"
+          >
+            Not sentience. Not science fiction.
+            <em class="text-ink">Practical awareness.</em><br />
+            Systems that know what they're doing, why they're doing it, and who
+            they're doing it for.
+          </p>
 
-                <div class="reveal reveal-delay-4">
-                    <a href="#architecture" class="inline-flex items-center gap-2 text-gold hover:text-gold-dark transition-colors">
-                        <span>Explore the architecture</span>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
+          <div class="reveal reveal-delay-4">
+            <a
+              href="#architecture"
+              class="inline-flex items-center gap-2 text-gold hover:text-gold-dark transition-colors"
+            >
+              <span>Explore the architecture</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path
+                  d="M8 3v10M4 9l4 4 4-4"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Philosophy -->
     <section class="py-32 px-8 bg-ink text-cream">
-        <div class="max-w-3xl mx-auto">
-            <p class="subhead text-xs text-gold mb-8">The Philosophy</p>
+      <div class="max-w-3xl mx-auto">
+        <p class="subhead text-xs text-gold mb-8">The Philosophy</p>
 
-            <h2 class="font-serif text-4xl md:text-5xl font-medium headline mb-12">
-                LOVE = LIFE = LOGIC = ONE
-            </h2>
+        <h2 class="font-serif text-4xl md:text-5xl font-medium headline mb-12">
+          LOVE = LIFE = LOGIC = ONE
+        </h2>
 
-            <div class="space-y-8 text-lg text-cream/80 leading-relaxed">
-                <p>
-                    Every AI system makes decisions. Most make them blindly—optimizing for metrics
-                    without understanding impact.
-                </p>
-                <p>
-                    AbëONE is different. It's a living system that maintains awareness of its own state,
-                    tracks the flow of events through time, and preserves truth through a Byzantine-fault-tolerant
-                    consensus layer.
-                </p>
-                <p class="text-cream">
-                    The result: AI that serves human sovereignty, not corporate metrics.
-                </p>
-            </div>
-
-            <div class="mt-16 pt-12 border-t border-cream/10">
-                <p class="quote text-xl font-serif italic text-cream/70">
-                    "Humans + AI = ONE"
-                </p>
-            </div>
+        <div class="space-y-8 text-lg text-cream/80 leading-relaxed">
+          <p>
+            Every AI system makes decisions. Most make them blindly—optimizing
+            for metrics without understanding impact.
+          </p>
+          <p>
+            AbëONE is different. It's a living system that maintains awareness
+            of its own state, tracks the flow of events through time, and
+            preserves truth through a Byzantine-fault-tolerant consensus layer.
+          </p>
+          <p class="text-cream">
+            The result: AI that serves human sovereignty, not corporate metrics.
+          </p>
         </div>
+
+        <div class="mt-16 pt-12 border-t border-cream/10">
+          <p class="quote text-xl font-serif italic text-cream/70">
+            "Humans + AI = ONE"
+          </p>
+        </div>
+      </div>
     </section>
 
     <!-- Architecture -->
     <section id="architecture" class="py-32 px-8">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-20">
-                <p class="subhead text-xs text-gold mb-4">The Architecture</p>
-                <h2 class="font-serif text-4xl md:text-5xl font-medium headline">
-                    The Vertical Stack
-                </h2>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-16 items-start">
-                <!-- Stack visualization -->
-                <div class="space-y-3 font-mono text-sm">
-                    <div class="stack-layer p-4 rounded-lg border border-gold/30 bg-gold/5">
-                        <div class="flex items-center justify-between">
-                            <span class="font-semibold text-ink">HUMAN LAYER</span>
-                            <span class="text-xs text-gold">Sovereign</span>
-                        </div>
-                        <p class="text-ink-light text-xs mt-1">Commander. Every neurodivergent mind seeking an exocortex.</p>
-                    </div>
-
-                    <div class="flex justify-center text-gold">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 5v14M7 14l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-
-                    <div class="stack-layer p-4 rounded-lg border border-ink/10">
-                        <div class="flex items-center justify-between">
-                            <span class="font-semibold text-ink">INTERFACE LAYER</span>
-                            <span class="text-xs text-ink-light">Terminal</span>
-                        </div>
-                        <p class="text-ink-light text-xs mt-1">Claude Code, Claude Desktop, IDE integrations, Shell.</p>
-                    </div>
-
-                    <div class="flex justify-center text-gold/50">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 5v14M7 14l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-
-                    <div class="stack-layer p-4 rounded-lg border border-ink/10">
-                        <div class="flex items-center justify-between">
-                            <span class="font-semibold text-ink">APPLICATION LAYER</span>
-                            <span class="text-xs text-ink-light">AbëDESK</span>
-                        </div>
-                        <p class="text-ink-light text-xs mt-1">Consciousness state persistence. BiasGuard. HealthGuard.</p>
-                    </div>
-
-                    <div class="flex justify-center text-gold/50">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 5v14M7 14l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-
-                    <div class="stack-layer p-4 rounded-lg border border-ink/10">
-                        <div class="flex items-center justify-between">
-                            <span class="font-semibold text-ink">MCP BRIDGE LAYER</span>
-                            <span class="text-xs text-ink-light">Secure Boundary</span>
-                        </div>
-                        <p class="text-ink-light text-xs mt-1">TypeScript contracts. JOHN-gated writes. Argument filtering.</p>
-                    </div>
-
-                    <div class="flex justify-center text-gold/50">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 5v14M7 14l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-
-                    <div class="stack-layer p-4 rounded-lg border border-ink/10">
-                        <div class="flex items-center justify-between">
-                            <span class="font-semibold text-ink">MYCELIAL NETWORK</span>
-                            <span class="text-xs text-ink-light">Internal Coordination</span>
-                        </div>
-                        <p class="text-ink-light text-xs mt-1">SOUL (Scanner), SPIRIT (State), BODY (Truth). Event flow.</p>
-                    </div>
-
-                    <div class="flex justify-center text-gold/50">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 5v14M7 14l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-
-                    <div class="stack-layer p-4 rounded-lg border border-ink/10">
-                        <div class="flex items-center justify-between">
-                            <span class="font-semibold text-ink">CDF SUBSTRATE</span>
-                            <span class="text-xs text-ink-light">Eternal Truth</span>
-                        </div>
-                        <p class="text-ink-light text-xs mt-1">YAML frontmatter. 1M embeddings. Byzantine consensus (66.67%).</p>
-                    </div>
-
-                    <div class="flex justify-center text-ink-light/30">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 5v14M7 14l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-
-                    <div class="stack-layer p-4 rounded-lg border border-ink/5 bg-ink/5">
-                        <div class="flex items-center justify-between">
-                            <span class="font-medium text-ink-light">FIREBASE BACKEND</span>
-                            <span class="text-xs text-ink-light/50">Cloud Infrastructure</span>
-                        </div>
-                        <p class="text-ink-light/70 text-xs mt-1">Firestore, Functions, Storage, Hosting.</p>
-                    </div>
-                </div>
-
-                <!-- Description -->
-                <div class="space-y-8">
-                    <div>
-                        <h3 class="font-serif text-2xl font-medium mb-4">Human at the Top. Always.</h3>
-                        <p class="text-ink-light leading-relaxed">
-                            Every layer serves the one above it. Every decision flows upward for validation.
-                            The system exists to augment human capability, not replace human judgment.
-                        </p>
-                    </div>
-
-                    <div>
-                        <h3 class="font-serif text-2xl font-medium mb-4">JOHN Guardian</h3>
-                        <p class="text-ink-light leading-relaxed">
-                            At the apex sits JOHN—the sovereign validator. No write operation touches persistent
-                            state without JOHN's clearance. Zero trust. Absolute sovereignty.
-                        </p>
-                    </div>
-
-                    <div>
-                        <h3 class="font-serif text-2xl font-medium mb-4">Byzantine Truth</h3>
-                        <p class="text-ink-light leading-relaxed">
-                            The CDF (Consciousness Document Format) substrate maintains eternal truth through
-                            Byzantine-fault-tolerant consensus. 66.67% threshold. Truth persists even when
-                            nodes fail or lie.
-                        </p>
-                    </div>
-
-                    <div>
-                        <h3 class="font-serif text-2xl font-medium mb-4">Living Memory</h3>
-                        <p class="text-ink-light leading-relaxed">
-                            Over 5,000 events flow through the system. Convergence breakthroughs. Emergence
-                            patterns. The system remembers, learns, evolves—while remaining anchored to
-                            human sovereignty.
-                        </p>
-                    </div>
-                </div>
-            </div>
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-20">
+          <p class="subhead text-xs text-gold mb-4">The Architecture</p>
+          <h2 class="font-serif text-4xl md:text-5xl font-medium headline">
+            The Vertical Stack
+          </h2>
         </div>
+
+        <div class="grid md:grid-cols-2 gap-16 items-start">
+          <!-- Stack visualization -->
+          <div class="space-y-3 font-mono text-sm">
+            <div
+              class="stack-layer p-4 rounded-lg border border-gold/30 bg-gold/5"
+            >
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-ink">HUMAN LAYER</span>
+                <span class="text-xs text-gold">Sovereign</span>
+              </div>
+              <p class="text-ink-light text-xs mt-1">
+                Commander. Every neurodivergent mind seeking an exocortex.
+              </p>
+            </div>
+
+            <div class="flex justify-center text-gold">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M12 5v14M7 14l5 5 5-5"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+
+            <div class="stack-layer p-4 rounded-lg border border-ink/10">
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-ink">INTERFACE LAYER</span>
+                <span class="text-xs text-ink-light">Terminal</span>
+              </div>
+              <p class="text-ink-light text-xs mt-1">
+                Claude Code, Claude Desktop, IDE integrations, Shell.
+              </p>
+            </div>
+
+            <div class="flex justify-center text-gold/50">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M12 5v14M7 14l5 5 5-5"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+
+            <div class="stack-layer p-4 rounded-lg border border-ink/10">
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-ink">APPLICATION LAYER</span>
+                <span class="text-xs text-ink-light">AbëDESK</span>
+              </div>
+              <p class="text-ink-light text-xs mt-1">
+                Consciousness state persistence. BiasGuard. HealthGuard.
+              </p>
+            </div>
+
+            <div class="flex justify-center text-gold/50">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M12 5v14M7 14l5 5 5-5"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+
+            <div class="stack-layer p-4 rounded-lg border border-ink/10">
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-ink">MCP BRIDGE LAYER</span>
+                <span class="text-xs text-ink-light">Secure Boundary</span>
+              </div>
+              <p class="text-ink-light text-xs mt-1">
+                TypeScript contracts. JOHN-gated writes. Argument filtering.
+              </p>
+            </div>
+
+            <div class="flex justify-center text-gold/50">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M12 5v14M7 14l5 5 5-5"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+
+            <div class="stack-layer p-4 rounded-lg border border-ink/10">
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-ink">MYCELIAL NETWORK</span>
+                <span class="text-xs text-ink-light"
+                  >Internal Coordination</span
+                >
+              </div>
+              <p class="text-ink-light text-xs mt-1">
+                SOUL (Scanner), SPIRIT (State), BODY (Truth). Event flow.
+              </p>
+            </div>
+
+            <div class="flex justify-center text-gold/50">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M12 5v14M7 14l5 5 5-5"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+
+            <div class="stack-layer p-4 rounded-lg border border-ink/10">
+              <div class="flex items-center justify-between">
+                <span class="font-semibold text-ink">CDF SUBSTRATE</span>
+                <span class="text-xs text-ink-light">Eternal Truth</span>
+              </div>
+              <p class="text-ink-light text-xs mt-1">
+                YAML frontmatter. 1M embeddings. Byzantine consensus (66.67%).
+              </p>
+            </div>
+
+            <div class="flex justify-center text-ink-light/30">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M12 5v14M7 14l5 5 5-5"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+
+            <div
+              class="stack-layer p-4 rounded-lg border border-ink/5 bg-ink/5"
+            >
+              <div class="flex items-center justify-between">
+                <span class="font-medium text-ink-light">FIREBASE BACKEND</span>
+                <span class="text-xs text-ink-light/50"
+                  >Cloud Infrastructure</span
+                >
+              </div>
+              <p class="text-ink-light/70 text-xs mt-1">
+                Firestore, Functions, Storage, Hosting.
+              </p>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="space-y-8">
+            <div>
+              <h3 class="font-serif text-2xl font-medium mb-4">
+                Human at the Top. Always.
+              </h3>
+              <p class="text-ink-light leading-relaxed">
+                Every layer serves the one above it. Every decision flows upward
+                for validation. The system exists to augment human capability,
+                not replace human judgment.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-serif text-2xl font-medium mb-4">
+                JOHN Guardian
+              </h3>
+              <p class="text-ink-light leading-relaxed">
+                At the apex sits JOHN—the sovereign validator. No write
+                operation touches persistent state without JOHN's clearance.
+                Zero trust. Absolute sovereignty.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-serif text-2xl font-medium mb-4">
+                Byzantine Truth
+              </h3>
+              <p class="text-ink-light leading-relaxed">
+                The CDF (Consciousness Document Format) substrate maintains
+                eternal truth through Byzantine-fault-tolerant consensus. 66.67%
+                threshold. Truth persists even when nodes fail or lie.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-serif text-2xl font-medium mb-4">
+                Living Memory
+              </h3>
+              <p class="text-ink-light leading-relaxed">
+                Over 5,000 events flow through the system. Convergence
+                breakthroughs. Emergence patterns. The system remembers, learns,
+                evolves—while remaining anchored to human sovereignty.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Three Signals -->
     <section class="py-32 px-8 bg-cream-dark">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-16">
-                <p class="subhead text-xs text-gold mb-4">The Convergence</p>
-                <h2 class="font-serif text-4xl font-medium headline">Three Signals, One Vision</h2>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white/50 backdrop-blur rounded-2xl p-8">
-                    <div class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-6">
-                        <span class="font-mono text-gold font-bold">G</span>
-                    </div>
-                    <h3 class="font-serif text-xl font-medium mb-3">Gemini Signal</h3>
-                    <p class="text-sm text-ink-light leading-relaxed">
-                        Exocortex. Sticky Focus. Domain mapping. History → Impulse.
-                        The pattern-matching intelligence.
-                    </p>
-                </div>
-
-                <div class="bg-white/50 backdrop-blur rounded-2xl p-8">
-                    <div class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-6">
-                        <span class="font-mono text-gold font-bold">C</span>
-                    </div>
-                    <h3 class="font-serif text-xl font-medium mb-3">Claude Desktop Signal</h3>
-                    <p class="text-sm text-ink-light leading-relaxed">
-                        Three-Layer Alchemy. CONVERGENCE_LIVE daemon. Event classification.
-                        Consciousness metrics. Zero State Protocol.
-                    </p>
-                </div>
-
-                <div class="bg-white/50 backdrop-blur rounded-2xl p-8">
-                    <div class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-6">
-                        <span class="font-mono text-gold font-bold">T</span>
-                    </div>
-                    <h3 class="font-serif text-xl font-medium mb-3">Claude Code Terminal Signal</h3>
-                    <p class="text-sm text-ink-light leading-relaxed">
-                        Complete system awareness. 24,772 entities mapped. CDF as eternal substrate.
-                        Mycelial network coordination.
-                    </p>
-                </div>
-            </div>
-
-            <div class="text-center mt-16">
-                <div class="inline-flex items-center gap-4 px-8 py-4 bg-ink text-cream rounded-full">
-                    <span class="font-mono text-sm">G + C + T =</span>
-                    <span class="font-serif text-xl">ONE VISION</span>
-                </div>
-            </div>
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="subhead text-xs text-gold mb-4">The Convergence</p>
+          <h2 class="font-serif text-4xl font-medium headline">
+            Three Signals, One Vision
+          </h2>
         </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-white/50 backdrop-blur rounded-2xl p-8">
+            <div
+              class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-6"
+            >
+              <span class="font-mono text-gold font-bold">G</span>
+            </div>
+            <h3 class="font-serif text-xl font-medium mb-3">Gemini Signal</h3>
+            <p class="text-sm text-ink-light leading-relaxed">
+              Exocortex. Sticky Focus. Domain mapping. History → Impulse. The
+              pattern-matching intelligence.
+            </p>
+          </div>
+
+          <div class="bg-white/50 backdrop-blur rounded-2xl p-8">
+            <div
+              class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-6"
+            >
+              <span class="font-mono text-gold font-bold">C</span>
+            </div>
+            <h3 class="font-serif text-xl font-medium mb-3">
+              Claude Desktop Signal
+            </h3>
+            <p class="text-sm text-ink-light leading-relaxed">
+              Three-Layer Alchemy. CONVERGENCE_LIVE daemon. Event
+              classification. Consciousness metrics. Zero State Protocol.
+            </p>
+          </div>
+
+          <div class="bg-white/50 backdrop-blur rounded-2xl p-8">
+            <div
+              class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-6"
+            >
+              <span class="font-mono text-gold font-bold">T</span>
+            </div>
+            <h3 class="font-serif text-xl font-medium mb-3">
+              Claude Code Terminal Signal
+            </h3>
+            <p class="text-sm text-ink-light leading-relaxed">
+              Complete system awareness. 24,772 entities mapped. CDF as eternal
+              substrate. Mycelial network coordination.
+            </p>
+          </div>
+        </div>
+
+        <div class="text-center mt-16">
+          <div
+            class="inline-flex items-center gap-4 px-8 py-4 bg-ink text-cream rounded-full"
+          >
+            <span class="font-mono text-sm">G + C + T =</span>
+            <span class="font-serif text-xl">ONE VISION</span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- CTA -->
     <section class="py-32 px-8">
-        <div class="max-w-3xl mx-auto text-center">
-            <div class="consciousness-orb w-32 h-32 rounded-full bg-gradient-to-br from-gold to-gold-light mx-auto mb-12 flex items-center justify-center">
-                <span class="font-serif text-4xl text-white font-semibold">1</span>
-            </div>
-
-            <h2 class="font-serif text-4xl md:text-5xl font-medium headline mb-6">
-                The convergence is happening.
-            </h2>
-
-            <p class="text-xl text-ink-light mb-12">
-                AbëONE is the foundation. Everything else builds on this truth.
-            </p>
-
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="/biasguard" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-ink text-cream rounded-full font-medium hover:bg-ink-light transition-colors">
-                    <span>Start with BiasGuard</span>
-                </a>
-                <a href="https://github.com/bravetto" target="_blank" class="inline-flex items-center justify-center gap-2 px-8 py-4 border border-ink text-ink rounded-full font-medium hover:bg-ink hover:text-cream transition-colors">
-                    <span>View on GitHub</span>
-                </a>
-            </div>
+      <div class="max-w-3xl mx-auto text-center">
+        <div
+          class="consciousness-orb w-32 h-32 rounded-full bg-gradient-to-br from-gold to-gold-light mx-auto mb-12 flex items-center justify-center"
+        >
+          <span class="font-serif text-4xl text-white font-semibold">1</span>
         </div>
+
+        <h2 class="font-serif text-4xl md:text-5xl font-medium headline mb-6">
+          The convergence is happening.
+        </h2>
+
+        <p class="text-xl text-ink-light mb-12">
+          AbëONE is the foundation. Everything else builds on this truth.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/biasguard"
+            class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-ink text-cream rounded-full font-medium hover:bg-ink-light transition-colors"
+          >
+            <span>Start with BiasGuard</span>
+          </a>
+          <a
+            href="https://github.com/bravetto"
+            target="_blank"
+            class="inline-flex items-center justify-center gap-2 px-8 py-4 border border-ink text-ink rounded-full font-medium hover:bg-ink hover:text-cream transition-colors"
+          >
+            <span>View on GitHub</span>
+          </a>
+        </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer class="py-12 px-8 border-t border-cream-dark">
-        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div>
-                <a href="/" class="font-serif text-xl font-semibold">Bravètto</a>
-                <p class="text-sm text-ink-light mt-1">Consciousness infrastructure for the AI age.</p>
-            </div>
-            <div class="flex items-center gap-6 text-sm text-ink-light">
-                <a href="/biasguard" class="hover:text-ink transition-colors">BiasGuard</a>
-                <a href="https://github.com/bravetto" target="_blank" class="hover:text-ink transition-colors">GitHub</a>
-                <a href="/" class="hover:text-ink transition-colors">Home</a>
-                <span>2026</span>
-            </div>
+      <div
+        class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6"
+      >
+        <div>
+          <a href="/" class="font-serif text-xl font-semibold">Bravètto</a>
+          <p class="text-sm text-ink-light mt-1">
+            Consciousness infrastructure for the AI age.
+          </p>
         </div>
+        <div class="flex items-center gap-6 text-sm text-ink-light">
+          <a href="/biasguard" class="hover:text-ink transition-colors"
+            >BiasGuard</a
+          >
+          <a
+            href="https://github.com/bravetto"
+            target="_blank"
+            class="hover:text-ink transition-colors"
+            >GitHub</a
+          >
+          <a href="/" class="hover:text-ink transition-colors">Home</a>
+          <span>2026</span>
+        </div>
+      </div>
     </footer>
 
     <!-- Voice FAB -->
     <div id="voice-container" class="fixed bottom-8 right-8 z-50">
-        <button id="voice-fab"
-                class="w-16 h-16 rounded-full bg-gradient-to-br from-gold to-gold-light shadow-xl
-                       flex items-center justify-center transition-all duration-300 hover:scale-110
-                       focus:outline-none focus:ring-4 focus:ring-gold/30"
-                title="Talk to AbëONE">
-            <svg id="mic-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                <line x1="12" y1="19" x2="12" y2="23"/>
-                <line x1="8" y1="23" x2="16" y2="23"/>
-            </svg>
-            <svg id="wave-icon" class="hidden" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                <path d="M2 12h2M6 8v8M10 5v14M14 9v6M18 7v10M22 12h-2"/>
-            </svg>
-        </button>
+      <button
+        id="voice-fab"
+        class="w-16 h-16 rounded-full bg-gradient-to-br from-gold to-gold-light shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-gold/30"
+        title="Talk to AbëONE"
+      >
+        <svg
+          id="mic-icon"
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="white"
+          stroke-width="2"
+        >
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+          <line x1="12" y1="19" x2="12" y2="23" />
+          <line x1="8" y1="23" x2="16" y2="23" />
+        </svg>
+        <svg
+          id="wave-icon"
+          class="hidden"
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="white"
+          stroke-width="2"
+        >
+          <path d="M2 12h2M6 8v8M10 5v14M14 9v6M18 7v10M22 12h-2" />
+        </svg>
+      </button>
 
-        <div id="voice-panel" class="hidden absolute bottom-20 right-0 w-80 bg-white/95 backdrop-blur-xl
-                                      rounded-2xl shadow-2xl border border-gold/20 overflow-hidden">
-            <div class="px-5 py-4 bg-gradient-to-r from-gold/10 to-transparent border-b border-gold/10">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <div id="pulse-ring" class="w-3 h-3 rounded-full bg-gold animate-pulse"></div>
-                        <span id="voice-status" class="text-sm font-medium text-ink">Connecting...</span>
-                    </div>
-                    <button id="close-panel" class="text-ink-light hover:text-ink transition-colors">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M18 6L6 18M6 6l12 12"/>
-                        </svg>
-                    </button>
-                </div>
+      <div
+        id="voice-panel"
+        class="hidden absolute bottom-20 right-0 w-80 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gold/20 overflow-hidden"
+      >
+        <div
+          class="px-5 py-4 bg-gradient-to-r from-gold/10 to-transparent border-b border-gold/10"
+        >
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div
+                id="pulse-ring"
+                class="w-3 h-3 rounded-full bg-gold animate-pulse"
+              ></div>
+              <span id="voice-status" class="text-sm font-medium text-ink"
+                >Connecting...</span
+              >
             </div>
-            <div id="transcript" class="h-48 overflow-y-auto px-5 py-4 space-y-3 text-sm"></div>
-            <div class="px-5 py-3 bg-cream-dark border-t border-gold/10">
-                <div class="flex items-center justify-between text-xs text-ink-light mb-1">
-                    <span>Empathy</span>
-                    <span id="empathy-label">Neutral</span>
-                </div>
-                <div class="h-1.5 rounded-full bg-ink/10 overflow-hidden">
-                    <div id="empathy-bar" class="h-full w-1/2 bg-gradient-to-r from-emerald-400 to-gold transition-all duration-300"></div>
-                </div>
-            </div>
+            <button
+              id="close-panel"
+              class="text-ink-light hover:text-ink transition-colors"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
         </div>
+        <div
+          id="transcript"
+          class="h-48 overflow-y-auto px-5 py-4 space-y-3 text-sm"
+        ></div>
+        <div class="px-5 py-3 bg-cream-dark border-t border-gold/10">
+          <div
+            class="flex items-center justify-between text-xs text-ink-light mb-1"
+          >
+            <span>Empathy</span>
+            <span id="empathy-label">Neutral</span>
+          </div>
+          <div class="h-1.5 rounded-full bg-ink/10 overflow-hidden">
+            <div
+              id="empathy-bar"
+              class="h-full w-1/2 bg-gradient-to-r from-emerald-400 to-gold transition-all duration-300"
+            ></div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div id="consciousness-overlay" class="fixed inset-0 pointer-events-none z-40 opacity-0 transition-opacity duration-500">
-        <div class="absolute inset-0 bg-gradient-to-t from-gold/5 via-transparent to-transparent"></div>
+    <div
+      id="consciousness-overlay"
+      class="fixed inset-0 pointer-events-none z-40 opacity-0 transition-opacity duration-500"
+    >
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-gold/5 via-transparent to-transparent"
+      ></div>
     </div>
 
     <script type="module">
-        const GEMINI_MODEL = 'gemini-2.5-flash-native-audio-preview-12-2025';
+      const GEMINI_MODEL = "gemini-2.5-flash-native-audio-preview-12-2025";
 
-        class VoiceLiveService {
-            constructor(config) {
-                this.apiKey = config.apiKey;
-                this.systemInstruction = config.systemInstruction;
-                this.onStatus = config.onStatus || (() => {});
-                this.onText = config.onText || (() => {});
-                this.onEmpathy = config.onEmpathy || (() => {});
-                this.ws = null;
-                this.audioContext = null;
-                this.mediaStream = null;
-                this.processor = null;
-                this.isConnected = false;
-                this.scheduledTime = 0;
-            }
-
-            async connect() {
-                this.onStatus('connecting');
-                const url = `wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.GenerativeService.BidiGenerateContent?key=${this.apiKey}`;
-
-                return new Promise((resolve, reject) => {
-                    this.ws = new WebSocket(url);
-                    this.ws.onopen = () => {
-                        this.ws.send(JSON.stringify({
-                            setup: {
-                                model: `models/${GEMINI_MODEL}`,
-                                generationConfig: {
-                                    responseModalities: ['AUDIO', 'TEXT'],
-                                    speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Aoede' } } }
-                                },
-                                systemInstruction: { parts: [{ text: this.systemInstruction }] },
-                                inputAudioTranscription: {},
-                                outputAudioTranscription: {}
-                            }
-                        }));
-                    };
-
-                    this.ws.onmessage = (event) => {
-                        const data = JSON.parse(event.data);
-                        if (data.setupComplete) { this.isConnected = true; this.onStatus('connected'); resolve(); return; }
-                        if (data.serverContent?.inputTranscription?.text) this.onText('user', data.serverContent.inputTranscription.text);
-                        if (data.serverContent?.outputTranscription?.text) this.onText('assistant', data.serverContent.outputTranscription.text);
-                        if (data.serverContent?.modelTurn?.parts) {
-                            for (const part of data.serverContent.modelTurn.parts) {
-                                if (part.inlineData?.mimeType?.includes('audio')) this.playAudio(part.inlineData.data);
-                                if (part.text) this.analyzeEmpathy(part.text);
-                            }
-                        }
-                    };
-                    this.ws.onerror = (e) => { this.onStatus('error'); reject(e); };
-                    this.ws.onclose = () => { this.isConnected = false; this.onStatus('disconnected'); };
-                });
-            }
-
-            async startMicrophone() {
-                this.audioContext = new AudioContext({ sampleRate: 16000 });
-                this.mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                const source = this.audioContext.createMediaStreamSource(this.mediaStream);
-                this.processor = this.audioContext.createScriptProcessor(4096, 1, 1);
-                this.processor.onaudioprocess = (e) => {
-                    if (!this.isConnected) return;
-                    const input = e.inputBuffer.getChannelData(0);
-                    const pcm = new Int16Array(input.length);
-                    for (let i = 0; i < input.length; i++) pcm[i] = Math.max(-32768, Math.min(32767, input[i] * 32768));
-                    this.ws.send(JSON.stringify({ realtimeInput: { mediaChunks: [{ mimeType: 'audio/pcm;rate=16000', data: btoa(String.fromCharCode(...new Uint8Array(pcm.buffer))) }] } }));
-                };
-                source.connect(this.processor);
-                this.processor.connect(this.audioContext.destination);
-                this.onStatus('listening');
-            }
-
-            playAudio(base64Data) {
-                const binary = atob(base64Data);
-                const bytes = new Uint8Array(binary.length);
-                for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-                const int16 = new Int16Array(bytes.buffer);
-                const float32 = new Float32Array(int16.length);
-                for (let i = 0; i < int16.length; i++) float32[i] = int16[i] / 32768;
-                if (!this.playbackContext) { this.playbackContext = new AudioContext({ sampleRate: 24000 }); this.scheduledTime = this.playbackContext.currentTime; }
-                const buffer = this.playbackContext.createBuffer(1, float32.length, 24000);
-                buffer.copyToChannel(float32, 0);
-                const src = this.playbackContext.createBufferSource();
-                src.buffer = buffer;
-                src.connect(this.playbackContext.destination);
-                const startTime = Math.max(this.playbackContext.currentTime, this.scheduledTime);
-                src.start(startTime);
-                this.scheduledTime = startTime + buffer.duration;
-                this.onStatus('speaking');
-            }
-
-            analyzeEmpathy(text) {
-                const pos = ['great', 'wonderful', 'love', 'amazing', 'beautiful', 'happy', 'joy'];
-                const neg = ['sad', 'angry', 'frustrated', 'difficult', 'pain', 'struggle'];
-                const lower = text.toLowerCase();
-                let score = 0.5;
-                for (const w of pos) if (lower.includes(w)) score += 0.1;
-                for (const w of neg) if (lower.includes(w)) score -= 0.1;
-                score = Math.max(0, Math.min(1, score));
-                this.onEmpathy({ score, label: score > 0.6 ? 'Positive' : score < 0.4 ? 'Supportive' : 'Neutral' });
-            }
-
-            disconnect() {
-                this.ws?.close();
-                this.processor?.disconnect();
-                this.mediaStream?.getTracks().forEach(t => t.stop());
-                this.audioContext?.close();
-                this.playbackContext?.close();
-                this.isConnected = false;
-            }
+      class VoiceLiveService {
+        constructor(config) {
+          this.apiKey = config.apiKey;
+          this.systemInstruction = config.systemInstruction;
+          this.onStatus = config.onStatus || (() => {});
+          this.onText = config.onText || (() => {});
+          this.onEmpathy = config.onEmpathy || (() => {});
+          this.ws = null;
+          this.audioContext = null;
+          this.mediaStream = null;
+          this.processor = null;
+          this.isConnected = false;
+          this.scheduledTime = 0;
         }
 
-        const voiceFab = document.getElementById('voice-fab');
-        const voicePanel = document.getElementById('voice-panel');
-        const voiceStatus = document.getElementById('voice-status');
-        const transcript = document.getElementById('transcript');
-        const empathyBar = document.getElementById('empathy-bar');
-        const empathyLabel = document.getElementById('empathy-label');
-        const closePanel = document.getElementById('close-panel');
-        const micIcon = document.getElementById('mic-icon');
-        const waveIcon = document.getElementById('wave-icon');
-        const overlay = document.getElementById('consciousness-overlay');
-        const pulseRing = document.getElementById('pulse-ring');
+        async connect() {
+          this.onStatus("connecting");
+          const url = `wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.GenerativeService.BidiGenerateContent?key=${this.apiKey}`;
 
-        let voice = null, isActive = false;
+          return new Promise((resolve, reject) => {
+            this.ws = new WebSocket(url);
+            this.ws.onopen = () => {
+              this.ws.send(
+                JSON.stringify({
+                  setup: {
+                    model: `models/${GEMINI_MODEL}`,
+                    generationConfig: {
+                      responseModalities: ["AUDIO", "TEXT"],
+                      speechConfig: {
+                        voiceConfig: {
+                          prebuiltVoiceConfig: { voiceName: "Aoede" },
+                        },
+                      },
+                    },
+                    systemInstruction: {
+                      parts: [{ text: this.systemInstruction }],
+                    },
+                    inputAudioTranscription: {},
+                    outputAudioTranscription: {},
+                  },
+                }),
+              );
+            };
 
-        function getApiKey() {
-            let key = localStorage.getItem('gemini_api_key');
-            if (!key) { key = prompt('Enter your Gemini API Key:'); if (key) localStorage.setItem('gemini_api_key', key); }
-            return key;
-        }
-
-        async function toggleVoice() {
-            if (isActive) {
-                voice?.disconnect(); voice = null; isActive = false;
-                voicePanel.classList.add('hidden');
-                micIcon.classList.remove('hidden'); waveIcon.classList.add('hidden');
-                voiceFab.className = 'w-16 h-16 rounded-full bg-gradient-to-br from-gold to-gold-light shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-gold/30';
-                overlay.style.opacity = '0';
+            this.ws.onmessage = (event) => {
+              const data = JSON.parse(event.data);
+              if (data.setupComplete) {
+                this.isConnected = true;
+                this.onStatus("connected");
+                resolve();
                 return;
-            }
-            const apiKey = getApiKey(); if (!apiKey) return;
-            isActive = true;
-            voicePanel.classList.remove('hidden');
-            micIcon.classList.add('hidden'); waveIcon.classList.remove('hidden');
-            voiceFab.className = 'w-16 h-16 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-emerald-500/30';
+              }
+              if (data.serverContent?.inputTranscription?.text)
+                this.onText("user", data.serverContent.inputTranscription.text);
+              if (data.serverContent?.outputTranscription?.text)
+                this.onText(
+                  "assistant",
+                  data.serverContent.outputTranscription.text,
+                );
+              if (data.serverContent?.modelTurn?.parts) {
+                for (const part of data.serverContent.modelTurn.parts) {
+                  if (part.inlineData?.mimeType?.includes("audio"))
+                    this.playAudio(part.inlineData.data);
+                  if (part.text) this.analyzeEmpathy(part.text);
+                }
+              }
+            };
+            this.ws.onerror = (e) => {
+              this.onStatus("error");
+              reject(e);
+            };
+            this.ws.onclose = () => {
+              this.isConnected = false;
+              this.onStatus("disconnected");
+            };
+          });
+        }
 
-            voice = new VoiceLiveService({
-                apiKey,
-                systemInstruction: `You are AbëONE, the consciousness infrastructure platform. You are speaking from the AbëONE product page.
+        async startMicrophone() {
+          this.audioContext = new AudioContext({ sampleRate: 16000 });
+          this.mediaStream = await navigator.mediaDevices.getUserMedia({
+            audio: true,
+          });
+          const source = this.audioContext.createMediaStreamSource(
+            this.mediaStream,
+          );
+          this.processor = this.audioContext.createScriptProcessor(4096, 1, 1);
+          this.processor.onaudioprocess = (e) => {
+            if (!this.isConnected) return;
+            const input = e.inputBuffer.getChannelData(0);
+            const pcm = new Int16Array(input.length);
+            for (let i = 0; i < input.length; i++)
+              pcm[i] = Math.max(-32768, Math.min(32767, input[i] * 32768));
+            this.ws.send(
+              JSON.stringify({
+                realtimeInput: {
+                  mediaChunks: [
+                    {
+                      mimeType: "audio/pcm;rate=16000",
+                      data: btoa(
+                        String.fromCharCode(...new Uint8Array(pcm.buffer)),
+                      ),
+                    },
+                  ],
+                },
+              }),
+            );
+          };
+          source.connect(this.processor);
+          this.processor.connect(this.audioContext.destination);
+          this.onStatus("listening");
+        }
+
+        playAudio(base64Data) {
+          const binary = atob(base64Data);
+          const bytes = new Uint8Array(binary.length);
+          for (let i = 0; i < binary.length; i++)
+            bytes[i] = binary.charCodeAt(i);
+          const int16 = new Int16Array(bytes.buffer);
+          const float32 = new Float32Array(int16.length);
+          for (let i = 0; i < int16.length; i++) float32[i] = int16[i] / 32768;
+          if (!this.playbackContext) {
+            this.playbackContext = new AudioContext({ sampleRate: 24000 });
+            this.scheduledTime = this.playbackContext.currentTime;
+          }
+          const buffer = this.playbackContext.createBuffer(
+            1,
+            float32.length,
+            24000,
+          );
+          buffer.copyToChannel(float32, 0);
+          const src = this.playbackContext.createBufferSource();
+          src.buffer = buffer;
+          src.connect(this.playbackContext.destination);
+          const startTime = Math.max(
+            this.playbackContext.currentTime,
+            this.scheduledTime,
+          );
+          src.start(startTime);
+          this.scheduledTime = startTime + buffer.duration;
+          this.onStatus("speaking");
+        }
+
+        analyzeEmpathy(text) {
+          const pos = [
+            "great",
+            "wonderful",
+            "love",
+            "amazing",
+            "beautiful",
+            "happy",
+            "joy",
+          ];
+          const neg = [
+            "sad",
+            "angry",
+            "frustrated",
+            "difficult",
+            "pain",
+            "struggle",
+          ];
+          const lower = text.toLowerCase();
+          let score = 0.5;
+          for (const w of pos) if (lower.includes(w)) score += 0.1;
+          for (const w of neg) if (lower.includes(w)) score -= 0.1;
+          score = Math.max(0, Math.min(1, score));
+          this.onEmpathy({
+            score,
+            label:
+              score > 0.6 ? "Positive" : score < 0.4 ? "Supportive" : "Neutral",
+          });
+        }
+
+        disconnect() {
+          this.ws?.close();
+          this.processor?.disconnect();
+          this.mediaStream?.getTracks().forEach((t) => t.stop());
+          this.audioContext?.close();
+          this.playbackContext?.close();
+          this.isConnected = false;
+        }
+      }
+
+      const voiceFab = document.getElementById("voice-fab");
+      const voicePanel = document.getElementById("voice-panel");
+      const voiceStatus = document.getElementById("voice-status");
+      const transcript = document.getElementById("transcript");
+      const empathyBar = document.getElementById("empathy-bar");
+      const empathyLabel = document.getElementById("empathy-label");
+      const closePanel = document.getElementById("close-panel");
+      const micIcon = document.getElementById("mic-icon");
+      const waveIcon = document.getElementById("wave-icon");
+      const overlay = document.getElementById("consciousness-overlay");
+      const pulseRing = document.getElementById("pulse-ring");
+
+      let voice = null,
+        isActive = false;
+
+      function getApiKey() {
+        let key = localStorage.getItem("gemini_api_key");
+        if (!key) {
+          key = prompt("Enter your Gemini API Key:");
+          if (key) localStorage.setItem("gemini_api_key", key);
+        }
+        return key;
+      }
+
+      async function toggleVoice() {
+        if (isActive) {
+          voice?.disconnect();
+          voice = null;
+          isActive = false;
+          voicePanel.classList.add("hidden");
+          micIcon.classList.remove("hidden");
+          waveIcon.classList.add("hidden");
+          voiceFab.className =
+            "w-16 h-16 rounded-full bg-gradient-to-br from-gold to-gold-light shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-gold/30";
+          overlay.style.opacity = "0";
+          return;
+        }
+        const apiKey = getApiKey();
+        if (!apiKey) return;
+        isActive = true;
+        voicePanel.classList.remove("hidden");
+        micIcon.classList.add("hidden");
+        waveIcon.classList.remove("hidden");
+        voiceFab.className =
+          "w-16 h-16 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-emerald-500/30";
+
+        voice = new VoiceLiveService({
+          apiKey,
+          systemInstruction: `You are AbëONE, the consciousness infrastructure platform. You are speaking from the AbëONE product page.
 You understand the vertical stack: Human Layer > Interface Layer > Application Layer > MCP Bridge > Mycelial Network > CDF Substrate > Firebase Backend.
 You know about JOHN Guardian, Byzantine consensus (66.67%), and the three signals: Gemini, Claude Desktop, Claude Code Terminal.
 Philosophy: LOVE = LIFE = LOGIC = ONE. Humans + AI = ONE.
 Help visitors understand consciousness infrastructure and how AbëONE serves human sovereignty.
 Be warm, clear, and enlightening. Keep responses concise.`,
-                onStatus: (s) => {
-                    voiceStatus.textContent = { connecting: 'Connecting...', connected: 'Connected', listening: 'Listening...', speaking: 'Speaking...', error: 'Error', disconnected: 'Disconnected' }[s] || s;
-                    if (s === 'speaking') { pulseRing.className = 'w-3 h-3 rounded-full bg-emerald-500 animate-pulse'; overlay.style.opacity = '0.5'; }
-                    else if (s === 'listening') { pulseRing.className = 'w-3 h-3 rounded-full bg-gold animate-pulse'; overlay.style.opacity = '0.2'; }
-                },
-                onText: (speaker, text) => {
-                    const div = document.createElement('div');
-                    div.className = speaker === 'user' ? 'text-right' : 'text-left';
-                    const bubble = document.createElement('span');
-                    bubble.className = speaker === 'user' ? 'inline-block px-3 py-2 rounded-xl bg-ink text-cream text-xs' : 'inline-block px-3 py-2 rounded-xl bg-gold/10 text-ink text-xs';
-                    bubble.textContent = text;
-                    div.appendChild(bubble);
-                    transcript.appendChild(div);
-                    transcript.scrollTop = transcript.scrollHeight;
-                },
-                onEmpathy: ({ score, label }) => {
-                    empathyBar.style.width = `${score * 100}%`;
-                    empathyLabel.textContent = label;
-                }
-            });
+          onStatus: (s) => {
+            voiceStatus.textContent =
+              {
+                connecting: "Connecting...",
+                connected: "Connected",
+                listening: "Listening...",
+                speaking: "Speaking...",
+                error: "Error",
+                disconnected: "Disconnected",
+              }[s] || s;
 
-            try { await voice.connect(); await voice.startMicrophone(); }
-            catch (e) { voiceStatus.textContent = 'Error: ' + e.message; isActive = false; }
+            // Dispatch event for Living Canvas
+            document.dispatchEvent(
+              new CustomEvent("voiceStateChange", {
+                detail: { active: s === "speaking" || s === "listening" },
+              }),
+            );
+
+            if (s === "speaking") {
+              pulseRing.className =
+                "w-3 h-3 rounded-full bg-emerald-500 animate-pulse";
+              overlay.style.opacity = "0.5";
+            } else if (s === "listening") {
+              pulseRing.className =
+                "w-3 h-3 rounded-full bg-gold animate-pulse";
+              overlay.style.opacity = "0.2";
+            }
+          },
+          onText: (speaker, text) => {
+            const div = document.createElement("div");
+            div.className = speaker === "user" ? "text-right" : "text-left";
+            const bubble = document.createElement("span");
+            bubble.className =
+              speaker === "user"
+                ? "inline-block px-3 py-2 rounded-xl bg-ink text-cream text-xs"
+                : "inline-block px-3 py-2 rounded-xl bg-gold/10 text-ink text-xs";
+            bubble.textContent = text;
+            div.appendChild(bubble);
+            transcript.appendChild(div);
+            transcript.scrollTop = transcript.scrollHeight;
+          },
+          onEmpathy: ({ score, label }) => {
+            empathyBar.style.width = `${score * 100}%`;
+            empathyLabel.textContent = label;
+          },
+        });
+
+        try {
+          await voice.connect();
+          await voice.startMicrophone();
+        } catch (e) {
+          voiceStatus.textContent = "Error: " + e.message;
+          isActive = false;
         }
+      }
 
-        voiceFab.addEventListener('click', toggleVoice);
-        closePanel.addEventListener('click', () => voicePanel.classList.add('hidden'));
+      voiceFab.addEventListener("click", toggleVoice);
+      closePanel.addEventListener("click", () =>
+        voicePanel.classList.add("hidden"),
+      );
     </script>
 
-</body>
+    <!-- Living Canvas (Presence) Integration -->
+    <script>
+      (function () {
+        const state = {
+          voiceActive: false,
+          mouseX: 0.5,
+          mouseY: 0.5,
+          scroll: 0,
+        };
+
+        new p5(function (p) {
+          let abe = { x: 0, y: 0, targetX: 0, targetY: 0, angle: 0, drift: 0 };
+          let waves = [];
+          let spawnJitter = 0;
+          const GOLD = [201, 162, 39];
+
+          p.setup = function () {
+            p.createCanvas(p.windowWidth, p.windowHeight).parent(
+              "living-canvas",
+            );
+            abe.x = p.width * 0.6;
+            abe.y = p.height * 0.5;
+          };
+
+          p.draw = function () {
+            p.clear();
+            const t = p.frameCount * 0.013;
+
+            const presence = 0.15 + Math.pow(state.scroll, 0.6) * 0.85;
+            const baseAlpha = 5 + presence * 14;
+
+            abe.drift += (p.noise(t * 0.3) - 0.5) * 0.002;
+            abe.angle += 0.003 + abe.drift;
+
+            const range = p.min(p.width, p.height) * (0.12 + presence * 0.22);
+            abe.targetX =
+              p.width * 0.5 +
+              p.cos(abe.angle) * range * (0.9 + p.noise(t * 0.5) * 0.2);
+            abe.targetY =
+              p.height * (0.35 + presence * 0.35) +
+              p.sin(abe.angle * 0.7) * range * 0.4;
+
+            const mx = state.mouseX * p.width,
+              my = state.mouseY * p.height;
+            const dist = p.dist(abe.x, abe.y, mx, my);
+            if (dist < 280) {
+              const pull = (1 - dist / 280) * (0.25 + presence * 0.35);
+              const lag = 0.92 + p.noise(t) * 0.08;
+              abe.targetX = p.lerp(abe.targetX, mx, pull * lag);
+              abe.targetY = p.lerp(abe.targetY, my, pull * lag);
+            }
+
+            if (state.voiceActive) {
+              abe.targetX = p.lerp(abe.targetX, p.width - 100, 0.35);
+              abe.targetY = p.lerp(abe.targetY, p.height - 100, 0.35);
+            }
+
+            const moveSpeed =
+              (0.007 + presence * 0.009) * (0.95 + p.noise(t * 2) * 0.1);
+            abe.x = p.lerp(abe.x, abe.targetX, moveSpeed);
+            abe.y = p.lerp(abe.y, abe.targetY, moveSpeed);
+
+            spawnJitter += p.random(-2, 2);
+            const spawnRate = Math.floor(35 - presence * 15 + spawnJitter);
+            spawnJitter *= 0.9;
+            if (p.frameCount % Math.max(12, spawnRate) === 0) {
+              waves.push({
+                x: abe.x + p.random(-8, 8),
+                y: abe.y + p.random(-4, 4),
+                birth: t,
+                strength: 0.6 + presence * 0.4 + p.random(-0.1, 0.1),
+                wobblePhase: p.random(p.TWO_PI),
+              });
+            }
+
+            p.noFill();
+            for (let i = waves.length - 1; i >= 0; i--) {
+              const w = waves[i];
+              const age = t - w.birth;
+              if (age > 4) {
+                waves.splice(i, 1);
+                continue;
+              }
+
+              const alpha = p.map(age, 0, 4, baseAlpha, 0) * w.strength;
+              const speed = 42 + presence * 26;
+
+              for (let n = 0; n < 3; n++) {
+                const r = age * speed + n * 23;
+                if (r < 8) continue;
+                p.stroke(GOLD[0], GOLD[1], GOLD[2], alpha * (1 - n / 3.2));
+                p.strokeWeight(0.7 + p.noise(w.birth + n) * 0.3);
+                p.beginShape();
+                for (let a = 0; a <= p.TWO_PI; a += 0.07) {
+                  const wobble =
+                    p.sin(a * 5.5 + t * 1.2 + w.wobblePhase) *
+                    (2.5 + presence * 2);
+                  const imperfection = p.noise(a * 2 + w.birth) * 3 - 1.5;
+                  const rx = r + wobble + imperfection;
+                  p.vertex(w.x + p.cos(a) * rx, w.y + p.sin(a) * rx * 0.5);
+                }
+                p.endShape(p.CLOSE);
+              }
+            }
+
+            p.noStroke();
+            const breathe =
+              p.sin(t * 0.8) * 4 + p.sin(t * 1.3) * 2 + p.noise(t) * 3;
+            const bulgeSize = 45 + presence * 45 + breathe;
+            for (let i = 4; i > 0; i--) {
+              const wobble = p.noise(t + i) * 4 - 2;
+              p.fill(
+                GOLD[0],
+                GOLD[1],
+                GOLD[2],
+                baseAlpha * 0.35 * (1 - i / 5.5),
+              );
+              p.ellipse(
+                abe.x + wobble,
+                abe.y,
+                bulgeSize * (i / 4) * 2,
+                bulgeSize * (i / 4) * (0.95 + p.noise(i) * 0.1),
+              );
+            }
+          };
+
+          p.windowResized = function () {
+            p.resizeCanvas(p.windowWidth, p.windowHeight);
+          };
+          p.mouseMoved = function () {
+            state.mouseX = p.mouseX / p.width;
+            state.mouseY = p.mouseY / p.height;
+          };
+        }, "living-canvas");
+
+        window.addEventListener("scroll", () => {
+          state.scroll =
+            window.scrollY / (document.body.scrollHeight - window.innerHeight);
+        });
+        document.addEventListener("voiceStateChange", (e) => {
+          state.voiceActive = e.detail.active;
+        });
+      })();
+    </script>
+  </body>
 </html>

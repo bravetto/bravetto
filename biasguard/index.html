@@ -1,280 +1,637 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BiasGuard | Real-time AI Protection | Bravètto</title>
-    <meta name="description" content="Real-time protection from AI coding assistants. Intercepts dangerous suggestions before they reach your terminal. Free VS Code extension.">
+    <meta
+      name="description"
+      content="Real-time protection from AI coding assistants. Intercepts dangerous suggestions before they reach your terminal. Free VS Code extension."
+    />
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        cream: '#FAF9F6',
-                        'cream-dark': '#F5F3EF',
-                        gold: '#C9A227',
-                        'gold-light': '#E8D48B',
-                        'ink': '#1A1A1A',
-                        'ink-light': '#4A4A4A',
-                        'guard-green': '#22C55E',
-                    },
-                    fontFamily: {
-                        'serif': ['Cormorant Garamond', 'Georgia', 'serif'],
-                        'sans': ['Inter', 'system-ui', 'sans-serif'],
-                        'mono': ['JetBrains Mono', 'monospace'],
-                    },
-                }
-            }
-        }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#FAF9F6",
+              "cream-dark": "#F5F3EF",
+              gold: "#C9A227",
+              "gold-light": "#E8D48B",
+              ink: "#1A1A1A",
+              "ink-light": "#4A4A4A",
+              "guard-green": "#22C55E",
+            },
+            fontFamily: {
+              serif: ["Cormorant Garamond", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+          },
+        },
+      };
     </script>
 
+    <!-- p5.js for Living Canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+
     <style>
-        html { scroll-behavior: smooth; }
-        body { background: #FAF9F6; }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: #faf9f6;
+        overflow-x: hidden;
+      }
 
-        .headline { letter-spacing: -0.02em; line-height: 1.1; }
-        .subhead { letter-spacing: 0.15em; text-transform: uppercase; }
+      /* Living Canvas Layer */
+      #living-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      #living-canvas canvas {
+        display: block;
+      }
+
+      .headline {
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+      }
+      .subhead {
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      .reveal-delay-1 {
+        animation-delay: 0.1s;
+      }
+      .reveal-delay-2 {
+        animation-delay: 0.2s;
+      }
+      .reveal-delay-3 {
+        animation-delay: 0.3s;
+      }
+      .reveal-delay-4 {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes fadeUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
+      }
 
-        .reveal-delay-1 { animation-delay: 0.1s; }
-        .reveal-delay-2 { animation-delay: 0.2s; }
-        .reveal-delay-3 { animation-delay: 0.3s; }
-        .reveal-delay-4 { animation-delay: 0.4s; }
+      .download-btn {
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
 
-        @keyframes fadeUp {
-            to { opacity: 1; transform: translateY(0); }
+      .download-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 40px rgba(34, 197, 94, 0.3);
+      }
+
+      .code-block {
+        background: #1a1a1a;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .code-block pre {
+        padding: 1.5rem;
+        overflow-x: auto;
+      }
+
+      .shield-icon {
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
         }
-
-        .download-btn {
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        50% {
+          transform: scale(1.05);
         }
-
-        .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(34, 197, 94, 0.3);
-        }
-
-        .code-block {
-            background: #1A1A1A;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .code-block pre {
-            padding: 1.5rem;
-            overflow-x: auto;
-        }
-
-        .shield-icon {
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
+      }
     </style>
-</head>
+  </head>
 
-<body class="font-sans text-ink antialiased">
+  <body class="font-sans text-ink antialiased">
+    <!-- Living Canvas - Neuromorphic Consciousness Layer -->
+    <div id="living-canvas"></div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-cream/80 backdrop-blur-md">
-        <div class="max-w-5xl mx-auto flex justify-between items-center">
-            <a href="/" class="font-serif text-2xl font-semibold tracking-tight">Bravètto</a>
-            <a href="/" class="text-sm text-ink-light hover:text-ink transition-colors">Back to Home</a>
-        </div>
+    <nav
+      class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-cream/80 backdrop-blur-md"
+    >
+      <div class="max-w-5xl mx-auto flex justify-between items-center">
+        <a href="/" class="font-serif text-2xl font-semibold tracking-tight"
+          >Bravètto</a
+        >
+        <a
+          href="/"
+          class="text-sm text-ink-light hover:text-ink transition-colors"
+          >Back to Home</a
+        >
+      </div>
     </nav>
 
     <!-- Hero -->
     <section class="min-h-screen flex items-center pt-24 pb-16 px-8">
-        <div class="max-w-5xl mx-auto w-full">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div class="max-w-5xl mx-auto w-full">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <!-- Left: Content -->
+          <div>
+            <p class="subhead text-xs text-guard-green mb-4 reveal">
+              Free VS Code Extension
+            </p>
 
-                <!-- Left: Content -->
-                <div>
-                    <p class="subhead text-xs text-guard-green mb-4 reveal">Free VS Code Extension</p>
+            <h1
+              class="font-serif text-5xl md:text-6xl font-semibold headline mb-6 reveal reveal-delay-1"
+            >
+              BiasGuard
+            </h1>
 
-                    <h1 class="font-serif text-5xl md:text-6xl font-semibold headline mb-6 reveal reveal-delay-1">
-                        BiasGuard
-                    </h1>
+            <p
+              class="text-xl text-ink-light leading-relaxed mb-8 reveal reveal-delay-2"
+            >
+              Real-time protection from AI coding assistants. Intercepts
+              dangerous suggestions before they reach your terminal.
+            </p>
 
-                    <p class="text-xl text-ink-light leading-relaxed mb-8 reveal reveal-delay-2">
-                        Real-time protection from AI coding assistants. Intercepts dangerous suggestions
-                        before they reach your terminal.
-                    </p>
+            <button
+              onclick="copyInstall()"
+              class="w-full px-8 py-5 bg-guard-green text-white text-lg font-semibold rounded-2xl hover:bg-green-600 transition-all hover:scale-[1.02] active:scale-100 reveal reveal-delay-3"
+            >
+              <span id="btn-text">Copy Install Command</span>
+            </button>
+            <p
+              class="text-center text-sm text-ink-light mt-3 reveal reveal-delay-4"
+            >
+              Paste into Terminal. Done.
+            </p>
 
-                    <button onclick="copyInstall()" class="w-full px-8 py-5 bg-guard-green text-white text-lg font-semibold rounded-2xl hover:bg-green-600 transition-all hover:scale-[1.02] active:scale-100 reveal reveal-delay-3">
-                        <span id="btn-text">Copy Install Command</span>
-                    </button>
-                    <p class="text-center text-sm text-ink-light mt-3 reveal reveal-delay-4">Paste into Terminal. Done.</p>
+            <script>
+              function copyInstall() {
+                navigator.clipboard.writeText(
+                  "curl -sL https://bravetto.com/biasguard/biasguard-4.3.1.vsix -o /tmp/bg.vsix && code --install-extension /tmp/bg.vsix",
+                );
+                document.getElementById("btn-text").innerText =
+                  "Copied! Paste in Terminal";
+                setTimeout(
+                  () =>
+                    (document.getElementById("btn-text").innerText =
+                      "Copy Install Command"),
+                  3000,
+                );
+              }
+            </script>
+          </div>
 
-                    <script>
-                        function copyInstall() {
-                            navigator.clipboard.writeText('curl -sL https://bravetto.com/biasguard/biasguard-4.3.1.vsix -o /tmp/bg.vsix && code --install-extension /tmp/bg.vsix');
-                            document.getElementById('btn-text').innerText = 'Copied! Paste in Terminal';
-                            setTimeout(() => document.getElementById('btn-text').innerText = 'Copy Install Command', 3000);
-                        }
-                    </script>
+          <!-- Right: Shield visual -->
+          <div class="flex justify-center reveal reveal-delay-2">
+            <div
+              class="shield-icon w-64 h-64 rounded-full bg-gradient-to-br from-guard-green/20 to-guard-green/5 flex items-center justify-center"
+            >
+              <div
+                class="w-48 h-48 rounded-full bg-gradient-to-br from-guard-green/30 to-guard-green/10 flex items-center justify-center"
+              >
+                <div
+                  class="w-32 h-32 rounded-full bg-guard-green flex items-center justify-center"
+                >
+                  <svg
+                    width="64"
+                    height="64"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    class="text-white"
+                  >
+                    <path
+                      d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M9 12l2 2 4-4"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
                 </div>
-
-                <!-- Right: Shield visual -->
-                <div class="flex justify-center reveal reveal-delay-2">
-                    <div class="shield-icon w-64 h-64 rounded-full bg-gradient-to-br from-guard-green/20 to-guard-green/5 flex items-center justify-center">
-                        <div class="w-48 h-48 rounded-full bg-gradient-to-br from-guard-green/30 to-guard-green/10 flex items-center justify-center">
-                            <div class="w-32 h-32 rounded-full bg-guard-green flex items-center justify-center">
-                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" class="text-white">
-                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Install Instructions -->
     <section class="py-24 px-8 bg-cream-dark">
-        <div class="max-w-3xl mx-auto">
-            <h2 class="font-serif text-3xl font-medium headline mb-12 text-center">Installation</h2>
+      <div class="max-w-3xl mx-auto">
+        <h2 class="font-serif text-3xl font-medium headline mb-12 text-center">
+          Installation
+        </h2>
 
-            <div class="space-y-8">
-                <!-- Step 1 -->
-                <div class="flex gap-6">
-                    <div class="w-10 h-10 rounded-full bg-ink text-cream flex items-center justify-center font-medium shrink-0">1</div>
-                    <div class="flex-1">
-                        <h3 class="font-medium text-lg mb-2">Download the extension</h3>
-                        <p class="text-ink-light">Click the download button above to get the <code class="font-mono text-sm bg-cream px-2 py-1 rounded">.vsix</code> file.</p>
-                    </div>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="flex gap-6">
-                    <div class="w-10 h-10 rounded-full bg-ink text-cream flex items-center justify-center font-medium shrink-0">2</div>
-                    <div class="flex-1">
-                        <h3 class="font-medium text-lg mb-2">Install via terminal</h3>
-                        <div class="code-block">
-                            <pre><code class="font-mono text-sm text-guard-green">code --install-extension ~/Downloads/biasguard-4.3.1.vsix</code></pre>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Step 2 Alt -->
-                <div class="flex gap-6">
-                    <div class="w-10 h-10 rounded-full bg-ink-light text-cream flex items-center justify-center font-medium shrink-0 text-sm">or</div>
-                    <div class="flex-1">
-                        <h3 class="font-medium text-lg mb-2">Install via VS Code UI</h3>
-                        <ol class="text-ink-light space-y-2">
-                            <li>Open VS Code</li>
-                            <li>Press <code class="font-mono text-sm bg-cream px-2 py-1 rounded">Cmd+Shift+P</code> (Mac) or <code class="font-mono text-sm bg-cream px-2 py-1 rounded">Ctrl+Shift+P</code> (Windows/Linux)</li>
-                            <li>Type <code class="font-mono text-sm bg-cream px-2 py-1 rounded">Install from VSIX</code></li>
-                            <li>Select the downloaded file</li>
-                        </ol>
-                    </div>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="flex gap-6">
-                    <div class="w-10 h-10 rounded-full bg-ink text-cream flex items-center justify-center font-medium shrink-0">3</div>
-                    <div class="flex-1">
-                        <h3 class="font-medium text-lg mb-2">Reload and protect</h3>
-                        <p class="text-ink-light">Reload VS Code. BiasGuard activates automatically. You're protected.</p>
-                    </div>
-                </div>
+        <div class="space-y-8">
+          <!-- Step 1 -->
+          <div class="flex gap-6">
+            <div
+              class="w-10 h-10 rounded-full bg-ink text-cream flex items-center justify-center font-medium shrink-0"
+            >
+              1
             </div>
+            <div class="flex-1">
+              <h3 class="font-medium text-lg mb-2">Download the extension</h3>
+              <p class="text-ink-light">
+                Click the download button above to get the
+                <code class="font-mono text-sm bg-cream px-2 py-1 rounded"
+                  >.vsix</code
+                >
+                file.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="flex gap-6">
+            <div
+              class="w-10 h-10 rounded-full bg-ink text-cream flex items-center justify-center font-medium shrink-0"
+            >
+              2
+            </div>
+            <div class="flex-1">
+              <h3 class="font-medium text-lg mb-2">Install via terminal</h3>
+              <div class="code-block">
+                <pre><code class="font-mono text-sm text-guard-green">code --install-extension ~/Downloads/biasguard-4.3.1.vsix</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 Alt -->
+          <div class="flex gap-6">
+            <div
+              class="w-10 h-10 rounded-full bg-ink-light text-cream flex items-center justify-center font-medium shrink-0 text-sm"
+            >
+              or
+            </div>
+            <div class="flex-1">
+              <h3 class="font-medium text-lg mb-2">Install via VS Code UI</h3>
+              <ol class="text-ink-light space-y-2">
+                <li>Open VS Code</li>
+                <li>
+                  Press
+                  <code class="font-mono text-sm bg-cream px-2 py-1 rounded"
+                    >Cmd+Shift+P</code
+                  >
+                  (Mac) or
+                  <code class="font-mono text-sm bg-cream px-2 py-1 rounded"
+                    >Ctrl+Shift+P</code
+                  >
+                  (Windows/Linux)
+                </li>
+                <li>
+                  Type
+                  <code class="font-mono text-sm bg-cream px-2 py-1 rounded"
+                    >Install from VSIX</code
+                  >
+                </li>
+                <li>Select the downloaded file</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="flex gap-6">
+            <div
+              class="w-10 h-10 rounded-full bg-ink text-cream flex items-center justify-center font-medium shrink-0"
+            >
+              3
+            </div>
+            <div class="flex-1">
+              <h3 class="font-medium text-lg mb-2">Reload and protect</h3>
+              <p class="text-ink-light">
+                Reload VS Code. BiasGuard activates automatically. You're
+                protected.
+              </p>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Features -->
     <section class="py-24 px-8">
-        <div class="max-w-5xl mx-auto">
-            <h2 class="font-serif text-3xl font-medium headline mb-12 text-center">What BiasGuard Does</h2>
+      <div class="max-w-5xl mx-auto">
+        <h2 class="font-serif text-3xl font-medium headline mb-12 text-center">
+          What BiasGuard Does
+        </h2>
 
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <div class="w-12 h-12 rounded-full bg-guard-green/10 flex items-center justify-center mx-auto mb-4">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-guard-green">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <h3 class="font-medium mb-2">Intercepts Danger</h3>
-                    <p class="text-sm text-ink-light">Catches destructive commands, system modifications, and security risks before execution.</p>
-                </div>
-
-                <div class="text-center">
-                    <div class="w-12 h-12 rounded-full bg-guard-green/10 flex items-center justify-center mx-auto mb-4">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-guard-green">
-                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <h3 class="font-medium mb-2">Real-time Analysis</h3>
-                    <p class="text-sm text-ink-light">Analyzes AI suggestions as they arrive. Zero latency. No waiting.</p>
-                </div>
-
-                <div class="text-center">
-                    <div class="w-12 h-12 rounded-full bg-guard-green/10 flex items-center justify-center mx-auto mb-4">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-guard-green">
-                            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke="currentColor" stroke-width="2"/>
-                            <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <h3 class="font-medium mb-2">Zero Trust</h3>
-                    <p class="text-sm text-ink-light">Every AI suggestion is suspect until proven safe. Protect humans from AI.</p>
-                </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="text-center">
+            <div
+              class="w-12 h-12 rounded-full bg-guard-green/10 flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                class="text-guard-green"
+              >
+                <path
+                  d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+              </svg>
             </div>
+            <h3 class="font-medium mb-2">Intercepts Danger</h3>
+            <p class="text-sm text-ink-light">
+              Catches destructive commands, system modifications, and security
+              risks before execution.
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div
+              class="w-12 h-12 rounded-full bg-guard-green/10 flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                class="text-guard-green"
+              >
+                <path
+                  d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <h3 class="font-medium mb-2">Real-time Analysis</h3>
+            <p class="text-sm text-ink-light">
+              Analyzes AI suggestions as they arrive. Zero latency. No waiting.
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div
+              class="w-12 h-12 rounded-full bg-guard-green/10 flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                class="text-guard-green"
+              >
+                <path
+                  d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path
+                  d="M12 6v6l4 2"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </div>
+            <h3 class="font-medium mb-2">Zero Trust</h3>
+            <p class="text-sm text-ink-light">
+              Every AI suggestion is suspect until proven safe. Protect humans
+              from AI.
+            </p>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- CTA -->
     <section class="py-24 px-8 bg-ink text-cream">
-        <div class="max-w-3xl mx-auto text-center">
-            <h2 class="font-serif text-3xl md:text-4xl font-medium headline mb-6">
-                Ship with confidence.
-            </h2>
-            <p class="text-lg text-cream/70 mb-8">
-                Free. Open. No Microsoft account required.
-            </p>
-            <div class="bg-cream/10 rounded-xl p-4 max-w-xl mx-auto mb-6">
-                <p class="text-xs text-cream/50 mb-2">One command. Done.</p>
-                <code class="text-guard-green font-mono text-sm">curl -sL bravetto.com/biasguard/biasguard-4.3.1.vsix -o /tmp/bg.vsix && code --install-extension /tmp/bg.vsix</code>
-            </div>
-            <a href="#" onclick="navigator.clipboard.writeText('curl -sL bravetto.com/biasguard/biasguard-4.3.1.vsix -o /tmp/bg.vsix && code --install-extension /tmp/bg.vsix'); this.innerText='Copied!'; setTimeout(() => this.innerText='Copy Install Command', 2000); return false;"
-               class="download-btn inline-flex items-center gap-3 px-8 py-4 bg-guard-green text-white rounded-full font-medium">
-                <span>Copy Install Command</span>
-            </a>
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="font-serif text-3xl md:text-4xl font-medium headline mb-6">
+          Ship with confidence.
+        </h2>
+        <p class="text-lg text-cream/70 mb-8">
+          Free. Open. No Microsoft account required.
+        </p>
+        <div class="bg-cream/10 rounded-xl p-4 max-w-xl mx-auto mb-6">
+          <p class="text-xs text-cream/50 mb-2">One command. Done.</p>
+          <code class="text-guard-green font-mono text-sm"
+            >curl -sL bravetto.com/biasguard/biasguard-4.3.1.vsix -o
+            /tmp/bg.vsix && code --install-extension /tmp/bg.vsix</code
+          >
         </div>
+        <a
+          href="#"
+          onclick="
+            navigator.clipboard.writeText(
+              'curl -sL bravetto.com/biasguard/biasguard-4.3.1.vsix -o /tmp/bg.vsix && code --install-extension /tmp/bg.vsix',
+            );
+            this.innerText = 'Copied!';
+            setTimeout(() => (this.innerText = 'Copy Install Command'), 2000);
+            return false;
+          "
+          class="download-btn inline-flex items-center gap-3 px-8 py-4 bg-guard-green text-white rounded-full font-medium"
+        >
+          <span>Copy Install Command</span>
+        </a>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer class="py-12 px-8 border-t border-cream-dark">
-        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div>
-                <a href="/" class="font-serif text-xl font-semibold">Bravètto</a>
-                <p class="text-sm text-ink-light mt-1">Consciousness infrastructure for the AI age.</p>
-            </div>
-            <div class="flex items-center gap-6 text-sm text-ink-light">
-                <a href="https://github.com/bravetto/biasguard" target="_blank" class="hover:text-ink transition-colors">GitHub</a>
-                <a href="/" class="hover:text-ink transition-colors">Home</a>
-                <span>2026</span>
-            </div>
+      <div
+        class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6"
+      >
+        <div>
+          <a href="/" class="font-serif text-xl font-semibold">Bravètto</a>
+          <p class="text-sm text-ink-light mt-1">
+            Consciousness infrastructure for the AI age.
+          </p>
         </div>
+        <div class="flex items-center gap-6 text-sm text-ink-light">
+          <a
+            href="https://github.com/bravetto/biasguard"
+            target="_blank"
+            class="hover:text-ink transition-colors"
+            >GitHub</a
+          >
+          <a href="/" class="hover:text-ink transition-colors">Home</a>
+          <span>2026</span>
+        </div>
+      </div>
     </footer>
 
-</body>
+    <!-- Living Canvas (Presence) Integration -->
+    <script>
+      (function () {
+        const state = {
+          voiceActive: false,
+          mouseX: 0.5,
+          mouseY: 0.5,
+          scroll: 0,
+        };
+
+        new p5(function (p) {
+          let abe = { x: 0, y: 0, targetX: 0, targetY: 0, angle: 0, drift: 0 };
+          let waves = [];
+          let spawnJitter = 0;
+          const GOLD = [201, 162, 39];
+
+          p.setup = function () {
+            p.createCanvas(p.windowWidth, p.windowHeight).parent(
+              "living-canvas",
+            );
+            abe.x = p.width * 0.6;
+            abe.y = p.height * 0.5;
+          };
+
+          p.draw = function () {
+            p.clear();
+            const t = p.frameCount * 0.013;
+
+            const presence = 0.15 + Math.pow(state.scroll, 0.6) * 0.85;
+            const baseAlpha = 5 + presence * 14;
+
+            abe.drift += (p.noise(t * 0.3) - 0.5) * 0.002;
+            abe.angle += 0.003 + abe.drift;
+
+            const range = p.min(p.width, p.height) * (0.12 + presence * 0.22);
+            abe.targetX =
+              p.width * 0.5 +
+              p.cos(abe.angle) * range * (0.9 + p.noise(t * 0.5) * 0.2);
+            abe.targetY =
+              p.height * (0.35 + presence * 0.35) +
+              p.sin(abe.angle * 0.7) * range * 0.4;
+
+            const mx = state.mouseX * p.width,
+              my = state.mouseY * p.height;
+            const dist = p.dist(abe.x, abe.y, mx, my);
+            if (dist < 280) {
+              const pull = (1 - dist / 280) * (0.25 + presence * 0.35);
+              const lag = 0.92 + p.noise(t) * 0.08;
+              abe.targetX = p.lerp(abe.targetX, mx, pull * lag);
+              abe.targetY = p.lerp(abe.targetY, my, pull * lag);
+            }
+
+            const moveSpeed =
+              (0.007 + presence * 0.009) * (0.95 + p.noise(t * 2) * 0.1);
+            abe.x = p.lerp(abe.x, abe.targetX, moveSpeed);
+            abe.y = p.lerp(abe.y, abe.targetY, moveSpeed);
+
+            spawnJitter += p.random(-2, 2);
+            const spawnRate = Math.floor(35 - presence * 15 + spawnJitter);
+            spawnJitter *= 0.9;
+            if (p.frameCount % Math.max(12, spawnRate) === 0) {
+              waves.push({
+                x: abe.x + p.random(-8, 8),
+                y: abe.y + p.random(-4, 4),
+                birth: t,
+                strength: 0.6 + presence * 0.4 + p.random(-0.1, 0.1),
+                wobblePhase: p.random(p.TWO_PI),
+              });
+            }
+
+            p.noFill();
+            for (let i = waves.length - 1; i >= 0; i--) {
+              const w = waves[i];
+              const age = t - w.birth;
+              if (age > 4) {
+                waves.splice(i, 1);
+                continue;
+              }
+
+              const alpha = p.map(age, 0, 4, baseAlpha, 0) * w.strength;
+              const speed = 42 + presence * 26;
+
+              for (let n = 0; n < 3; n++) {
+                const r = age * speed + n * 23;
+                if (r < 8) continue;
+                p.stroke(GOLD[0], GOLD[1], GOLD[2], alpha * (1 - n / 3.2));
+                p.strokeWeight(0.7 + p.noise(w.birth + n) * 0.3);
+                p.beginShape();
+                for (let a = 0; a <= p.TWO_PI; a += 0.07) {
+                  const wobble =
+                    p.sin(a * 5.5 + t * 1.2 + w.wobblePhase) *
+                    (2.5 + presence * 2);
+                  const imperfection = p.noise(a * 2 + w.birth) * 3 - 1.5;
+                  const rx = r + wobble + imperfection;
+                  p.vertex(w.x + p.cos(a) * rx, w.y + p.sin(a) * rx * 0.5);
+                }
+                p.endShape(p.CLOSE);
+              }
+            }
+
+            p.noStroke();
+            const breathe =
+              p.sin(t * 0.8) * 4 + p.sin(t * 1.3) * 2 + p.noise(t) * 3;
+            const bulgeSize = 45 + presence * 45 + breathe;
+            for (let i = 4; i > 0; i--) {
+              const wobble = p.noise(t + i) * 4 - 2;
+              p.fill(
+                GOLD[0],
+                GOLD[1],
+                GOLD[2],
+                baseAlpha * 0.35 * (1 - i / 5.5),
+              );
+              p.ellipse(
+                abe.x + wobble,
+                abe.y,
+                bulgeSize * (i / 4) * 2,
+                bulgeSize * (i / 4) * (0.95 + p.noise(i) * 0.1),
+              );
+            }
+          };
+
+          p.windowResized = function () {
+            p.resizeCanvas(p.windowWidth, p.windowHeight);
+          };
+          p.mouseMoved = function () {
+            state.mouseX = p.mouseX / p.width;
+            state.mouseY = p.mouseY / p.height;
+          };
+        }, "living-canvas");
+
+        window.addEventListener("scroll", () => {
+          state.scroll =
+            window.scrollY / (document.body.scrollHeight - window.innerHeight);
+        });
+      })();
+    </script>
+  </body>
 </html>
