@@ -19,6 +19,10 @@
     {
       "source": "/scream-machine",
       "destination": "/lab-archive/scream-machine.html"
+    },
+    {
+      "source": "/davinci-notebook",
+      "destination": "/davinci-notebook/index.html"
     }
   ]
 }
