@@ -2,6 +2,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
+    { "source": "/aec", "destination": "/aec.html" },
     { "source": "/abeone", "destination": "/abeone/index.html" },
     { "source": "/biasguard", "destination": "/biasguard/index.html" },
     {
