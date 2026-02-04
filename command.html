@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Command | AI Executive Intelligence | Bravetto</title>
+    <meta
+      name="description"
+      content="Stop drowning in data. Start making decisions. AI that turns your calls, emails, CRM, and chaos into actionable intelligence."
+    />
+    <link rel="canonical" href="https://bravetto.com/command" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#FAF9F6",
+              "cream-dark": "#F5F3EF",
+              gold: "#C9A227",
+              "gold-light": "#E8D48B",
+              ink: "#1A1A1A",
+              "ink-light": "#4A4A4A",
+              revenue: "#22C55E",
+              customer: "#3B82F6",
+              team: "#A855F7",
+              alert: "#EF4444",
+              warning: "#F59E0B",
+            },
+            fontFamily: {
+              serif: ["Cormorant Garamond", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      html { scroll-behavior: smooth; }
+      body { background: #1A1A1A; color: #FAF9F6; overflow-x: hidden; }
+
+      .headline { letter-spacing: -0.02em; line-height: 1.1; }
+      .subhead { letter-spacing: 0.15em; text-transform: uppercase; }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.visible { opacity: 1; transform: translateY(0); }
+
+      /* Glowing orb */
+      .command-orb {
+        background: radial-gradient(circle at 30% 30%, #C9A227, #1A1A1A);
+        box-shadow: 0 0 60px rgba(201, 162, 39, 0.3), 0 0 120px rgba(201, 162, 39, 0.1);
+        animation: pulse-glow 4s ease-in-out infinite;
+      }
+
+      @keyframes pulse-glow {
+        0%, 100% { box-shadow: 0 0 60px rgba(201, 162, 39, 0.3), 0 0 120px rgba(201, 162, 39, 0.1); }
+        50% { box-shadow: 0 0 80px rgba(201, 162, 39, 0.5), 0 0 160px rgba(201, 162, 39, 0.2); }
+      }
+
+      /* Data streams */
+      @keyframes stream {
+        0% { transform: translateY(100%); opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { transform: translateY(-100%); opacity: 0; }
+      }
+
+      .data-stream {
+        animation: stream 3s linear infinite;
+      }
+
+      /* Metric cards */
+      .metric-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(20px);
+        transition: all 0.3s ease;
+      }
+
+      .metric-card:hover {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(201, 162, 39, 0.3);
+        transform: translateY(-2px);
+      }
+
+      /* Connection lines */
+      .connection-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        animation: ping 2s ease-in-out infinite;
+      }
+
+      @keyframes ping {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.5); opacity: 0.5; }
+      }
+
+      /* Briefing card */
+      .briefing-card {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.1), rgba(201, 162, 39, 0.02));
+        border: 1px solid rgba(201, 162, 39, 0.2);
+      }
+
+      /* Light sections */
+      .light-section {
+        background: #FAF9F6;
+        color: #1A1A1A;
+      }
+    </style>
+  </head>
+
+  <body class="font-sans antialiased">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-ink/80 backdrop-blur-md">
+      <div class="max-w-5xl mx-auto flex justify-between items-center">
+        <a href="/" class="font-serif text-2xl font-semibold tracking-tight text-cream">Bravetto</a>
+        <div class="flex items-center gap-6">
+          <a href="/abeone" class="text-sm text-cream/60 hover:text-cream transition-colors">AbëONE</a>
+          <a href="/" class="text-sm text-cream/60 hover:text-cream transition-colors">Home</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="relative min-h-screen flex items-center pt-24 pb-16 px-8 overflow-hidden">
+      <!-- Background visualization -->
+      <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <div class="command-orb w-96 h-96 rounded-full opacity-20"></div>
+        </div>
+      </div>
+
+      <div class="max-w-5xl mx-auto w-full relative z-10">
+        <div class="text-center max-w-3xl mx-auto">
+          <p class="subhead text-xs text-gold mb-6 reveal">Executive Intelligence</p>
+
+          <h1 class="font-serif text-6xl md:text-7xl lg:text-8xl font-semibold headline mb-8 reveal">
+            Command
+          </h1>
+
+          <p class="text-xl md:text-2xl text-cream/70 leading-relaxed mb-4 reveal">
+            You have the data.
+          </p>
+          <p class="text-xl md:text-2xl text-cream leading-relaxed mb-8 reveal">
+            You don't have the <em>information</em>.
+          </p>
+
+          <p class="text-lg text-cream/50 leading-relaxed max-w-xl mx-auto reveal">
+            Every call. Every email. Every CRM update. Every Slack message.<br/>
+            Transformed into decisions you can make in seconds.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Problem -->
+    <section class="py-32 px-8">
+      <div class="max-w-4xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <div>
+            <p class="subhead text-xs text-alert mb-4 reveal">The Reality</p>
+            <h2 class="font-serif text-4xl font-medium headline mb-8 reveal">
+              Your day is 90% context-switching.
+            </h2>
+
+            <div class="space-y-6 text-cream/70 reveal">
+              <p>Meetings. Emails. Herding cats. Putting out fires.</p>
+              <p>You open Salesforce. 47 opportunities. Which one matters <em class="text-cream">right now</em>?</p>
+              <p>You had 6 calls today. What did you promise? What did you forget?</p>
+              <p>Your team is waiting on decisions. But you're still catching up on <em class="text-cream">yesterday</em>.</p>
+            </div>
+          </div>
+
+          <!-- Chaos visualization -->
+          <div class="reveal">
+            <div class="relative h-80">
+              <!-- Floating data fragments -->
+              <div class="absolute top-0 left-1/4 p-3 bg-white/5 rounded-lg border border-white/10 text-xs text-cream/50 transform -rotate-3">
+                <span class="text-customer">●</span> 47 open opportunities
+              </div>
+              <div class="absolute top-12 right-0 p-3 bg-white/5 rounded-lg border border-white/10 text-xs text-cream/50 transform rotate-2">
+                <span class="text-alert">●</span> 23 unread emails
+              </div>
+              <div class="absolute top-28 left-0 p-3 bg-white/5 rounded-lg border border-white/10 text-xs text-cream/50 transform rotate-1">
+                <span class="text-team">●</span> 4 contractors waiting
+              </div>
+              <div class="absolute top-40 right-1/4 p-3 bg-white/5 rounded-lg border border-white/10 text-xs text-cream/50 transform -rotate-2">
+                <span class="text-revenue">●</span> Q4 pipeline review
+              </div>
+              <div class="absolute top-52 left-1/3 p-3 bg-white/5 rounded-lg border border-white/10 text-xs text-cream/50 transform rotate-3">
+                <span class="text-warning">●</span> 3 escalations
+              </div>
+              <div class="absolute bottom-8 right-1/3 p-3 bg-white/5 rounded-lg border border-white/10 text-xs text-cream/50 transform -rotate-1">
+                <span class="text-customer">●</span> Client call notes?
+              </div>
+
+              <!-- Question mark in center -->
+              <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <span class="font-serif text-6xl text-cream/20">?</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Transformation -->
+    <section class="py-32 px-8 light-section">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="subhead text-xs text-gold mb-4 reveal">The Transformation</p>
+          <h2 class="font-serif text-4xl md:text-5xl font-medium headline reveal">
+            Data → Information → Decision
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Data -->
+          <div class="text-center reveal">
+            <div class="w-20 h-20 rounded-full bg-ink/5 mx-auto mb-6 flex items-center justify-center">
+              <span class="font-mono text-2xl text-ink/30">01</span>
+            </div>
+            <h3 class="font-serif text-xl font-medium mb-3">Raw Data</h3>
+            <p class="text-ink-light text-sm leading-relaxed">
+              6 calls. 47 emails. 12 Slack threads. 3 CRM updates. 2 project status changes.
+              <br/><br/>
+              <span class="text-ink/40">You have this.</span>
+            </p>
+          </div>
+
+          <!-- Arrow -->
+          <div class="hidden md:flex items-center justify-center">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" class="text-gold">
+              <path d="M5 20h30M25 10l10 10-10 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <!-- Information -->
+          <div class="text-center reveal">
+            <div class="w-20 h-20 rounded-full bg-gold/10 mx-auto mb-6 flex items-center justify-center">
+              <span class="font-mono text-2xl text-gold">02</span>
+            </div>
+            <h3 class="font-serif text-xl font-medium mb-3">Intelligence</h3>
+            <p class="text-ink-light text-sm leading-relaxed">
+              "The Acme deal is at risk. You promised a proposal by Friday. Two team members are blocked on your decision about the Phoenix project."
+              <br/><br/>
+              <span class="text-gold">Command gives you this.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Daily Briefing -->
+    <section class="py-32 px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <div class="reveal">
+            <p class="subhead text-xs text-gold mb-4">The Morning Ritual</p>
+            <h2 class="font-serif text-4xl font-medium headline mb-8">
+              "Good morning.<br/>Here's what matters."
+            </h2>
+
+            <p class="text-cream/70 leading-relaxed mb-8">
+              You walk in. Coffee in hand. You ask one question:<br/>
+              <em class="text-cream">"What do I need to know?"</em>
+            </p>
+
+            <p class="text-cream/70 leading-relaxed">
+              Command has already analyzed every call, every email, every update from yesterday.
+              It knows your priorities: <span class="text-revenue">revenue</span>,
+              <span class="text-customer">customer happiness</span>,
+              <span class="text-team">team health</span>.
+            </p>
+          </div>
+
+          <!-- Briefing visualization -->
+          <div class="reveal">
+            <div class="briefing-card rounded-2xl p-6">
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center">
+                  <span class="text-gold text-lg">☀️</span>
+                </div>
+                <div>
+                  <p class="font-medium text-cream">Daily Briefing</p>
+                  <p class="text-xs text-cream/50">Tuesday, February 4, 2026 • 8:02 AM</p>
+                </div>
+              </div>
+
+              <div class="space-y-4">
+                <div class="p-4 bg-alert/10 border border-alert/20 rounded-lg">
+                  <div class="flex items-start gap-3">
+                    <span class="text-alert">🔴</span>
+                    <div>
+                      <p class="text-sm font-medium text-cream">Critical: Acme proposal due Friday</p>
+                      <p class="text-xs text-cream/60 mt-1">You committed to this on Monday's call. No draft started yet. Revenue at risk: $45,000</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="p-4 bg-warning/10 border border-warning/20 rounded-lg">
+                  <div class="flex items-start gap-3">
+                    <span class="text-warning">🟡</span>
+                    <div>
+                      <p class="text-sm font-medium text-cream">Blocked: 2 contractors waiting on decisions</p>
+                      <p class="text-xs text-cream/60 mt-1">Phoenix project scope and Martinez vendor selection. Combined billable hours on hold: 24</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="p-4 bg-customer/10 border border-customer/20 rounded-lg">
+                  <div class="flex items-start gap-3">
+                    <span class="text-customer">🔵</span>
+                    <div>
+                      <p class="text-sm font-medium text-cream">Pattern: Similar to Q2 project slip</p>
+                      <p class="text-xs text-cream/60 mt-1">The Zenith project is showing same communication patterns that preceded the DataCorp delay last quarter.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="p-4 bg-revenue/10 border border-revenue/20 rounded-lg">
+                  <div class="flex items-start gap-3">
+                    <span class="text-revenue">🟢</span>
+                    <div>
+                      <p class="text-sm font-medium text-cream">Opportunity: $127K in stale quotes</p>
+                      <p class="text-xs text-cream/60 mt-1">7 proposals sent 10+ days ago with no follow-up. Highest probability: TechFlow ($52K, warm signals in email)</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-cream/10 text-center">
+                <p class="text-xs text-cream/40">Analyzed: 6 calls • 47 emails • 12 CRM updates • 3 project systems</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What Matters -->
+    <section class="py-32 px-8 light-section">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="subhead text-xs text-gold mb-4 reveal">Your Priorities</p>
+          <h2 class="font-serif text-4xl font-medium headline reveal">
+            The Four Things That Matter
+          </h2>
+          <p class="mt-6 text-lg text-ink-light max-w-2xl mx-auto reveal">
+            Command learns what you care about. Everything else is noise.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-6">
+          <!-- Revenue -->
+          <div class="bg-white rounded-2xl p-6 border border-ink/5 shadow-sm reveal">
+            <div class="w-12 h-12 rounded-full bg-revenue/10 flex items-center justify-center mb-4">
+              <span class="text-2xl">💰</span>
+            </div>
+            <h3 class="font-serif text-xl font-medium mb-2">Revenue</h3>
+            <p class="text-ink-light text-sm leading-relaxed">
+              Where's the money? What deals are slipping? What quotes need follow-up? What's the real pipeline health?
+            </p>
+            <div class="mt-4 pt-4 border-t border-ink/5">
+              <p class="text-xs text-ink/50">Tracks: Salesforce, proposals, contracts, invoices</p>
+            </div>
+          </div>
+
+          <!-- Customers -->
+          <div class="bg-white rounded-2xl p-6 border border-ink/5 shadow-sm reveal">
+            <div class="w-12 h-12 rounded-full bg-customer/10 flex items-center justify-center mb-4">
+              <span class="text-2xl">😊</span>
+            </div>
+            <h3 class="font-serif text-xl font-medium mb-2">Customer Joy</h3>
+            <p class="text-ink-light text-sm leading-relaxed">
+              Who's happy? Who's at risk? What promises were made? What expectations are we missing?
+            </p>
+            <div class="mt-4 pt-4 border-t border-ink/5">
+              <p class="text-xs text-ink/50">Tracks: Calls, emails, support tickets, NPS</p>
+            </div>
+          </div>
+
+          <!-- Team -->
+          <div class="bg-white rounded-2xl p-6 border border-ink/5 shadow-sm reveal">
+            <div class="w-12 h-12 rounded-full bg-team/10 flex items-center justify-center mb-4">
+              <span class="text-2xl">👥</span>
+            </div>
+            <h3 class="font-serif text-xl font-medium mb-2">Team Health</h3>
+            <p class="text-ink-light text-sm leading-relaxed">
+              Who's blocked? Who's overloaded? What decisions are people waiting on? Where's friction building?
+            </p>
+            <div class="mt-4 pt-4 border-t border-ink/5">
+              <p class="text-xs text-ink/50">Tracks: Slack, project tools, 1:1 notes, blockers</p>
+            </div>
+          </div>
+
+          <!-- Time -->
+          <div class="bg-white rounded-2xl p-6 border border-ink/5 shadow-sm reveal">
+            <div class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-4">
+              <span class="text-2xl">⏰</span>
+            </div>
+            <h3 class="font-serif text-xl font-medium mb-2">Your Time</h3>
+            <p class="text-ink-light text-sm leading-relaxed">
+              What can wait? What can't? What should you delegate? What's the highest-leverage use of the next hour?
+            </p>
+            <div class="mt-4 pt-4 border-t border-ink/5">
+              <p class="text-xs text-ink/50">Tracks: Calendar, commitments, deadlines, patterns</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Connections -->
+    <section class="py-32 px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="subhead text-xs text-gold mb-4 reveal">The Integration</p>
+          <h2 class="font-serif text-4xl font-medium headline reveal">
+            Command Connects To Everything
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 reveal">
+          <!-- Connection cards -->
+          <div class="metric-card rounded-xl p-4 flex items-center gap-4">
+            <div class="connection-dot bg-customer"></div>
+            <div>
+              <p class="font-medium text-cream text-sm">Salesforce</p>
+              <p class="text-xs text-cream/50">Pipeline, deals, contacts</p>
+            </div>
+          </div>
+
+          <div class="metric-card rounded-xl p-4 flex items-center gap-4">
+            <div class="connection-dot bg-revenue"></div>
+            <div>
+              <p class="font-medium text-cream text-sm">Email</p>
+              <p class="text-xs text-cream/50">Gmail, Outlook, any IMAP</p>
+            </div>
+          </div>
+
+          <div class="metric-card rounded-xl p-4 flex items-center gap-4">
+            <div class="connection-dot bg-team"></div>
+            <div>
+              <p class="font-medium text-cream text-sm">Slack / Teams</p>
+              <p class="text-xs text-cream/50">Messages, channels, DMs</p>
+            </div>
+          </div>
+
+          <div class="metric-card rounded-xl p-4 flex items-center gap-4">
+            <div class="connection-dot bg-gold"></div>
+            <div>
+              <p class="font-medium text-cream text-sm">Calendar</p>
+              <p class="text-xs text-cream/50">Google, Outlook, Apple</p>
+            </div>
+          </div>
+
+          <div class="metric-card rounded-xl p-4 flex items-center gap-4">
+            <div class="connection-dot bg-warning"></div>
+            <div>
+              <p class="font-medium text-cream text-sm">Phone / Calls</p>
+              <p class="text-xs text-cream/50">Recordings, transcripts</p>
+            </div>
+          </div>
+
+          <div class="metric-card rounded-xl p-4 flex items-center gap-4">
+            <div class="connection-dot bg-alert"></div>
+            <div>
+              <p class="font-medium text-cream text-sm">ConnectWise / PSA</p>
+              <p class="text-xs text-cream/50">Tickets, projects, time</p>
+            </div>
+          </div>
+
+          <div class="metric-card rounded-xl p-4 flex items-center gap-4">
+            <div class="connection-dot bg-customer"></div>
+            <div>
+              <p class="font-medium text-cream text-sm">HubSpot</p>
+              <p class="text-xs text-cream/50">Marketing, sales, service</p>
+            </div>
+          </div>
+
+          <div class="metric-card rounded-xl p-4 flex items-center gap-4">
+            <div class="connection-dot bg-team"></div>
+            <div>
+              <p class="font-medium text-cream text-sm">Project Tools</p>
+              <p class="text-xs text-cream/50">Asana, Monday, Jira</p>
+            </div>
+          </div>
+
+          <div class="metric-card rounded-xl p-4 flex items-center gap-4">
+            <div class="connection-dot bg-revenue"></div>
+            <div>
+              <p class="font-medium text-cream text-sm">QuickBooks / Xero</p>
+              <p class="text-xs text-cream/50">Invoices, AR, cash flow</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-center text-cream/40 text-sm mt-8 reveal">
+          + any system with an API. We build custom connectors.
+        </p>
+      </div>
+    </section>
+
+    <!-- The Conversation -->
+    <section class="py-32 px-8 light-section">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="subhead text-xs text-gold mb-4 reveal">The Interface</p>
+          <h2 class="font-serif text-4xl font-medium headline reveal">
+            Just Ask
+          </h2>
+          <p class="mt-6 text-lg text-ink-light reveal">
+            No dashboards to learn. No reports to run. Just conversation.
+          </p>
+        </div>
+
+        <!-- Conversation examples -->
+        <div class="space-y-6 reveal">
+          <div class="flex gap-4 items-start">
+            <div class="w-10 h-10 rounded-full bg-ink flex items-center justify-center flex-shrink-0">
+              <span class="text-cream text-sm font-medium">You</span>
+            </div>
+            <div class="bg-ink text-cream rounded-2xl rounded-tl-none p-4 max-w-lg">
+              <p>"What are the most important things from yesterday that I can't forget?"</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4 items-start justify-end">
+            <div class="bg-gold/10 border border-gold/20 rounded-2xl rounded-tr-none p-4 max-w-lg">
+              <p class="text-ink">Three things you committed to: the Acme proposal by Friday, calling Jennifer back about the Phoenix scope, and reviewing the Martinez contract before EOD today.</p>
+              <p class="text-ink mt-3">Two patterns I noticed: TechFlow mentioned budget concerns twice—might need a pricing conversation. And your 2pm got moved three times this week—the client may be having internal issues.</p>
+            </div>
+            <div class="w-10 h-10 rounded-full bg-gold flex items-center justify-center flex-shrink-0">
+              <span class="text-ink text-sm font-medium">AI</span>
+            </div>
+          </div>
+
+          <div class="flex gap-4 items-start">
+            <div class="w-10 h-10 rounded-full bg-ink flex items-center justify-center flex-shrink-0">
+              <span class="text-cream text-sm font-medium">You</span>
+            </div>
+            <div class="bg-ink text-cream rounded-2xl rounded-tl-none p-4 max-w-lg">
+              <p>"Where are we leaving money on the table?"</p>
+            </div>
+          </div>
+
+          <div class="flex gap-4 items-start justify-end">
+            <div class="bg-gold/10 border border-gold/20 rounded-2xl rounded-tr-none p-4 max-w-lg">
+              <p class="text-ink">$127,000 in quotes older than 10 days with no follow-up. The warmest one is TechFlow at $52K—they opened your proposal 4 times and Jennifer mentioned "just need to get approval" in your last call.</p>
+              <p class="text-ink mt-3">Also: DataCorp's renewal is in 6 weeks and no one has started the conversation. They're worth $84K annually and mentioned evaluating competitors in a support ticket last month.</p>
+            </div>
+            <div class="w-10 h-10 rounded-full bg-gold flex items-center justify-center flex-shrink-0">
+              <span class="text-ink text-sm font-medium">AI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- End of Day -->
+    <section class="py-32 px-8">
+      <div class="max-w-4xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <div class="reveal">
+            <p class="subhead text-xs text-gold mb-4">End of Day</p>
+            <h2 class="font-serif text-4xl font-medium headline mb-8">
+              "What did I miss?"
+            </h2>
+
+            <p class="text-cream/70 leading-relaxed mb-6">
+              5:30 PM. You're about to head out. One question:
+            </p>
+
+            <p class="text-cream/70 leading-relaxed">
+              Command scans everything from today. Every call. Every email you sent and received.
+              Every update in every system. And tells you what fell through the cracks.
+            </p>
+          </div>
+
+          <div class="reveal">
+            <div class="briefing-card rounded-2xl p-6">
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center">
+                  <span class="text-gold text-lg">🌙</span>
+                </div>
+                <div>
+                  <p class="font-medium text-cream">End of Day Summary</p>
+                  <p class="text-xs text-cream/50">Tuesday, February 4 • 5:34 PM</p>
+                </div>
+              </div>
+
+              <div class="space-y-3 text-sm">
+                <div class="flex items-start gap-3">
+                  <span class="text-revenue">✓</span>
+                  <p class="text-cream/80">Acme proposal drafted and sent for review</p>
+                </div>
+                <div class="flex items-start gap-3">
+                  <span class="text-revenue">✓</span>
+                  <p class="text-cream/80">Phoenix scope decision made—Katie notified</p>
+                </div>
+                <div class="flex items-start gap-3">
+                  <span class="text-warning">○</span>
+                  <p class="text-cream/80">Martinez contract review—not started (due tomorrow)</p>
+                </div>
+                <div class="flex items-start gap-3">
+                  <span class="text-alert">!</span>
+                  <p class="text-cream/80">Jennifer called back—you missed it. She left voicemail about timeline concerns.</p>
+                </div>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-cream/10">
+                <p class="text-xs text-cream/50">Tomorrow's first priority: Return Jennifer's call before 9am. She's your biggest deal this quarter.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-32 px-8 light-section">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="w-24 h-24 rounded-full command-orb mx-auto mb-12 reveal"></div>
+
+        <h2 class="font-serif text-4xl md:text-5xl font-medium headline mb-6 reveal">
+          Stop drowning in data.<br/>Start making decisions.
+        </h2>
+
+        <p class="text-xl text-ink-light mb-12 reveal">
+          Command connects to your world and tells you what matters.<br/>
+          So you can do what only you can do: lead.
+        </p>
+
+        <div class="space-y-4 reveal">
+          <a
+            href="mailto:hello@bravetto.com?subject=Command%20Executive%20Intelligence"
+            class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-ink text-cream rounded-full font-medium hover:bg-ink-light transition-colors"
+          >
+            <span>Get Command</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+
+          <p class="text-sm text-ink-light">
+            Or call: <a href="tel:+18127865927" class="text-gold hover:underline">812-786-5927</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-8 border-t border-cream-dark light-section">
+      <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <div>
+          <a href="/" class="font-serif text-xl font-semibold text-ink">Bravetto</a>
+          <p class="text-sm text-ink-light mt-1">Consciousness infrastructure for the AI age.</p>
+        </div>
+        <div class="flex items-center gap-6 text-sm text-ink-light">
+          <a href="/abeone" class="hover:text-ink transition-colors">AbëONE</a>
+          <a href="/neuromorphic" class="hover:text-ink transition-colors">Neuromorphic</a>
+          <a href="https://github.com/bravetto" target="_blank" class="hover:text-ink transition-colors">GitHub</a>
+          <span>2026</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll reveal -->
+    <script>
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>
