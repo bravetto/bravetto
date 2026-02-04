@@ -690,5 +690,243 @@
       }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
       document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
+
+    <!-- Voice FAB -->
+    <div id="voice-container" class="fixed bottom-8 right-8 z-50">
+      <button
+        id="voice-fab"
+        class="w-16 h-16 rounded-full bg-gradient-to-br from-gold to-gold-light shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-gold/30"
+        title="Talk to Command"
+      >
+        <svg id="mic-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+          <line x1="12" y1="19" x2="12" y2="23"/>
+          <line x1="8" y1="23" x2="16" y2="23"/>
+        </svg>
+        <svg id="wave-icon" class="hidden" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+          <path d="M2 12h2M6 8v8M10 5v14M14 9v6M18 7v10M22 12h-2"/>
+        </svg>
+      </button>
+
+      <div id="voice-panel" class="hidden absolute bottom-20 right-0 w-96 bg-ink/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gold/20 overflow-hidden">
+        <div class="px-5 py-4 bg-gradient-to-r from-gold/20 to-transparent border-b border-gold/10">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div id="pulse-ring" class="w-3 h-3 rounded-full bg-gold animate-pulse"></div>
+              <span id="voice-status" class="text-sm font-medium text-cream">Connecting...</span>
+            </div>
+            <button id="close-panel" class="text-cream/50 hover:text-cream transition-colors">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6L6 18M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div id="transcript" class="h-64 overflow-y-auto px-5 py-4 space-y-3 text-sm"></div>
+        <div class="px-5 py-3 bg-ink border-t border-gold/10">
+          <p class="text-xs text-cream/40 text-center">Ask: "What do I need to know today?" • "Where am I leaving money?" • "What did I promise?"</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Voice Service -->
+    <script type="module">
+      const GEMINI_MODEL = 'gemini-2.5-flash-native-audio-preview-12-2025';
+
+      class VoiceLiveService {
+        constructor(config) {
+          this.apiKey = config.apiKey;
+          this.systemInstruction = config.systemInstruction;
+          this.onStatus = config.onStatus || (() => {});
+          this.onText = config.onText || (() => {});
+          this.ws = null;
+          this.audioContext = null;
+          this.mediaStream = null;
+          this.processor = null;
+          this.isConnected = false;
+          this.scheduledTime = 0;
+        }
+
+        async connect() {
+          this.onStatus('connecting');
+          const url = `wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.GenerativeService.BidiGenerateContent?key=${this.apiKey}`;
+
+          return new Promise((resolve, reject) => {
+            this.ws = new WebSocket(url);
+            this.ws.onopen = () => {
+              this.ws.send(JSON.stringify({
+                setup: {
+                  model: `models/${GEMINI_MODEL}`,
+                  generationConfig: {
+                    responseModalities: ['AUDIO', 'TEXT'],
+                    speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Aoede' } } }
+                  },
+                  systemInstruction: { parts: [{ text: this.systemInstruction }] },
+                  inputAudioTranscription: {},
+                  outputAudioTranscription: {}
+                }
+              }));
+            };
+
+            this.ws.onmessage = (event) => {
+              const data = JSON.parse(event.data);
+              if (data.setupComplete) { this.isConnected = true; this.onStatus('connected'); resolve(); return; }
+              if (data.serverContent?.inputTranscription?.text) this.onText('user', data.serverContent.inputTranscription.text);
+              if (data.serverContent?.outputTranscription?.text) this.onText('assistant', data.serverContent.outputTranscription.text);
+              if (data.serverContent?.modelTurn?.parts) {
+                for (const part of data.serverContent.modelTurn.parts) {
+                  if (part.inlineData?.mimeType?.includes('audio')) this.playAudio(part.inlineData.data);
+                }
+              }
+            };
+            this.ws.onerror = (e) => { this.onStatus('error'); reject(e); };
+            this.ws.onclose = () => { this.isConnected = false; this.onStatus('disconnected'); };
+          });
+        }
+
+        async startMicrophone() {
+          this.audioContext = new AudioContext({ sampleRate: 16000 });
+          this.mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          const source = this.audioContext.createMediaStreamSource(this.mediaStream);
+          this.processor = this.audioContext.createScriptProcessor(4096, 1, 1);
+          this.processor.onaudioprocess = (e) => {
+            if (!this.isConnected) return;
+            const input = e.inputBuffer.getChannelData(0);
+            const pcm = new Int16Array(input.length);
+            for (let i = 0; i < input.length; i++) pcm[i] = Math.max(-32768, Math.min(32767, input[i] * 32768));
+            this.ws.send(JSON.stringify({
+              realtimeInput: { mediaChunks: [{ mimeType: 'audio/pcm;rate=16000', data: btoa(String.fromCharCode(...new Uint8Array(pcm.buffer))) }] }
+            }));
+          };
+          source.connect(this.processor);
+          this.processor.connect(this.audioContext.destination);
+          this.onStatus('listening');
+        }
+
+        playAudio(base64Data) {
+          const binary = atob(base64Data);
+          const bytes = new Uint8Array(binary.length);
+          for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+          const int16 = new Int16Array(bytes.buffer);
+          const float32 = new Float32Array(int16.length);
+          for (let i = 0; i < int16.length; i++) float32[i] = int16[i] / 32768;
+          if (!this.playbackContext) {
+            this.playbackContext = new AudioContext({ sampleRate: 24000 });
+            this.scheduledTime = this.playbackContext.currentTime;
+          }
+          const buffer = this.playbackContext.createBuffer(1, float32.length, 24000);
+          buffer.copyToChannel(float32, 0);
+          const src = this.playbackContext.createBufferSource();
+          src.buffer = buffer;
+          src.connect(this.playbackContext.destination);
+          const startTime = Math.max(this.playbackContext.currentTime, this.scheduledTime);
+          src.start(startTime);
+          this.scheduledTime = startTime + buffer.duration;
+          this.onStatus('speaking');
+        }
+
+        disconnect() {
+          this.ws?.close();
+          this.processor?.disconnect();
+          this.mediaStream?.getTracks().forEach(t => t.stop());
+          this.audioContext?.close();
+          this.playbackContext?.close();
+          this.isConnected = false;
+        }
+      }
+
+      const voiceFab = document.getElementById('voice-fab');
+      const voicePanel = document.getElementById('voice-panel');
+      const voiceStatus = document.getElementById('voice-status');
+      const transcript = document.getElementById('transcript');
+      const closePanel = document.getElementById('close-panel');
+      const micIcon = document.getElementById('mic-icon');
+      const waveIcon = document.getElementById('wave-icon');
+      const pulseRing = document.getElementById('pulse-ring');
+
+      let voice = null, isActive = false;
+
+      function getApiKey() {
+        let key = localStorage.getItem('gemini_api_key');
+        if (!key) {
+          key = prompt('Enter your Gemini API Key:');
+          if (key) localStorage.setItem('gemini_api_key', key);
+        }
+        return key;
+      }
+
+      async function toggleVoice() {
+        if (isActive) {
+          voice?.disconnect();
+          voice = null;
+          isActive = false;
+          voicePanel.classList.add('hidden');
+          micIcon.classList.remove('hidden');
+          waveIcon.classList.add('hidden');
+          voiceFab.className = 'w-16 h-16 rounded-full bg-gradient-to-br from-gold to-gold-light shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-gold/30';
+          return;
+        }
+        const apiKey = getApiKey();
+        if (!apiKey) return;
+        isActive = true;
+        voicePanel.classList.remove('hidden');
+        micIcon.classList.add('hidden');
+        waveIcon.classList.remove('hidden');
+        voiceFab.className = 'w-16 h-16 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-emerald-500/30';
+
+        voice = new VoiceLiveService({
+          apiKey,
+          systemInstruction: `You are Command, an AI Executive Intelligence assistant from Bravetto. You help busy executives, MSP leaders, agency owners, and project managers make better decisions by turning data chaos into actionable intelligence.
+
+Your role is to act as if you have access to their entire operational world: Salesforce, email, calendars, calls, Slack, project systems. When they ask questions, give them the kind of briefing an exceptional executive assistant would provide.
+
+Key behaviors:
+- Be concise and actionable. Executives don't have time for fluff.
+- Prioritize: What matters RIGHT NOW vs what can wait
+- Surface patterns: "This looks similar to when X happened last quarter"
+- Revenue focus: Always connect insights to bottom line impact
+- Be proactive: "You should also know that..."
+- Use specific numbers and names when giving examples (make them realistic)
+
+Example questions they might ask:
+- "What do I need to know today?"
+- "Where am I leaving money on the table?"
+- "What did I promise yesterday that I haven't done?"
+- "What's about to become a fire?"
+- "Who's waiting on me?"
+
+Keep responses under 30 seconds when spoken. Be warm but efficient.`,
+          onStatus: (s) => {
+            voiceStatus.textContent = { connecting: 'Connecting...', connected: 'Connected', listening: 'Listening...', speaking: 'Speaking...', error: 'Error', disconnected: 'Disconnected' }[s] || s;
+            if (s === 'speaking') pulseRing.className = 'w-3 h-3 rounded-full bg-emerald-500 animate-pulse';
+            else if (s === 'listening') pulseRing.className = 'w-3 h-3 rounded-full bg-gold animate-pulse';
+          },
+          onText: (speaker, text) => {
+            const div = document.createElement('div');
+            div.className = speaker === 'user' ? 'text-right' : 'text-left';
+            const bubble = document.createElement('span');
+            bubble.className = speaker === 'user'
+              ? 'inline-block px-3 py-2 rounded-xl bg-cream text-ink text-xs'
+              : 'inline-block px-3 py-2 rounded-xl bg-gold/20 text-cream text-xs';
+            bubble.textContent = text;
+            div.appendChild(bubble);
+            transcript.appendChild(div);
+            transcript.scrollTop = transcript.scrollHeight;
+          }
+        });
+
+        try {
+          await voice.connect();
+          await voice.startMicrophone();
+        } catch (e) {
+          voiceStatus.textContent = 'Error: ' + e.message;
+          isActive = false;
+        }
+      }
+
+      voiceFab.addEventListener('click', toggleVoice);
+      closePanel.addEventListener('click', () => voicePanel.classList.add('hidden'));
+    </script>
   </body>
 </html>
