@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Did We Just Become Best Friends?</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-dark: #0a0a0f;
+      --bg-card: rgba(255,255,255,0.03);
+      --accent-purple: #9b59b6;
+      --accent-pink: #e91e8c;
+      --accent-gold: #f4d03f;
+      --accent-cyan: #00d4ff;
+      --text-primary: #ffffff;
+      --text-muted: rgba(255,255,255,0.7);
+      --text-dim: rgba(255,255,255,0.4);
+      --border: rgba(255,255,255,0.1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      position: relative;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(155, 89, 182, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(233, 30, 140, 0.1) 0%, transparent 50%),
+        var(--bg-dark);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 0.6rem 1.5rem;
+      background: rgba(155, 89, 182, 0.15);
+      border: 1px solid rgba(155, 89, 182, 0.4);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-purple);
+      margin-bottom: 2rem;
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(155, 89, 182, 0.2); }
+      50% { box-shadow: 0 0 40px rgba(155, 89, 182, 0.4); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #fff 0%, var(--accent-purple) 50%, var(--accent-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-quote {
+      font-size: 1.6rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .hero-answer {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      margin-bottom: 3rem;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.5; }
+      50% { transform: translateX(-50%) translateY(12px); opacity: 1; }
+    }
+
+    /* ========== SECTIONS ========== */
+    section {
+      padding: 5rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    /* ========== THE PITCH ========== */
+    .pitch-grid {
+      display: grid;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .pitch-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .pitch-card:hover {
+      border-color: var(--accent-purple);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(155, 89, 182, 0.1);
+    }
+
+    .pitch-card h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--accent-purple);
+    }
+
+    .pitch-card p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    /* ========== MOVIE QUOTES ========== */
+    .quotes-section {
+      background:
+        radial-gradient(ellipse at 50% 50%, rgba(233, 30, 140, 0.08) 0%, transparent 70%);
+      padding: 6rem 2rem;
+    }
+
+    .quote-block {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 4rem;
+    }
+
+    .quote-block:last-child {
+      margin-bottom: 0;
+    }
+
+    .quote-text {
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .quote-text::before {
+      content: '"';
+      position: absolute;
+      left: -2rem;
+      top: -1rem;
+      font-size: 4rem;
+      color: var(--accent-purple);
+      opacity: 0.3;
+    }
+
+    .quote-context {
+      font-size: 1rem;
+      color: var(--accent-pink);
+      font-weight: 500;
+    }
+
+    /* ========== THE SPECS ========== */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .spec-item {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .spec-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .spec-label {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .spec-value {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .spec-value.green { color: #00ff88; }
+    .spec-value.gold { color: var(--accent-gold); }
+
+    /* ========== CTA ========== */
+    .cta-section {
+      text-align: center;
+      padding: 6rem 2rem;
+      background:
+        radial-gradient(ellipse at 50% 100%, rgba(155, 89, 182, 0.15) 0%, transparent 60%);
+    }
+
+    .cta-section h2 {
+      margin-bottom: 1rem;
+    }
+
+    .cta-sub {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+      color: white;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(155, 89, 182, 0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent-purple);
+      background: rgba(155, 89, 182, 0.1);
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--accent-purple);
+      text-decoration: none;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2.5rem; }
+      .hero-quote { font-size: 1.2rem; }
+      .hero-answer { font-size: 1.6rem; }
+      .quote-text { font-size: 1.2rem; }
+      .quote-text::before { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">For GracefulGoddess & Her Lucky Man</div>
+    <h1>Did We Just Become<br>Best Friends?</h1>
+    <p class="hero-quote">"Married, early thirties, happily partnered with a self-aware cuck husband who enjoys the front-row seat..."</p>
+    <p class="hero-answer">YUP.</p>
+    <span class="scroll-hint">scroll down</span>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- THE PITCH -->
+  <section>
+    <h2>What You Asked For</h2>
+    <div class="pitch-grid">
+      <div class="pitch-card">
+        <h3>"Make me laugh"</h3>
+        <p>You're reading a Step Brothers-themed landing page I built in the middle of the night because I thought it would be funny. I think we're off to a good start.</p>
+      </div>
+      <div class="pitch-card">
+        <h3>"Treat us both like adults"</h3>
+        <p>The dynamic you've described is beautiful when done right. Husband present, supportive, cheering you on. I respect the hell out of that. No drama, no ego trips, no weird energy. Just adults having fun.</p>
+      </div>
+      <div class="pitch-card">
+        <h3>"Clear communication"</h3>
+        <p>I'm literally building you a website instead of a "hey" message. I think it's safe to say I communicate. Boundaries? Expectations? Test results? Let's talk about all of it. Zero ambiguity.</p>
+      </div>
+      <div class="pitch-card">
+        <h3>"Turn a shared fantasy into one hell of a memory"</h3>
+        <p>That's the goal. Not awkward. Not weird. Just genuinely good. The kind of thing all three of us look back on and think "that was fucking awesome."</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- STEP BROTHERS QUOTES -->
+  <section class="quotes-section">
+    <h2>The Step Brothers Energy</h2>
+
+    <div class="quote-block">
+      <p class="quote-text">You wanna go do karate in the garage?</p>
+      <p class="quote-context">Translation: I'm down for whatever sounds fun</p>
+    </div>
+
+    <div class="quote-block">
+      <p class="quote-text">This house is a fucking prison!</p>
+      <p class="quote-context">Translation: Life's too short for boring</p>
+    </div>
+
+    <div class="quote-block">
+      <p class="quote-text">So much room for activities!</p>
+      <p class="quote-context">Translation: I appreciate creative logistics</p>
+    </div>
+
+    <div class="quote-block">
+      <p class="quote-text">I'm not gonna call him Dad. Even if there's a fire.</p>
+      <p class="quote-context">Translation: I know my role and I'm comfortable in it</p>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- THE SPECS -->
+  <section>
+    <h2>The Boring But Important Stuff</h2>
+    <div class="specs-grid">
+      <div class="spec-item">
+        <div class="spec-icon">🧪</div>
+        <div class="spec-label">Test Results</div>
+        <div class="spec-value green">Recent & Clean</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-icon">🎯</div>
+        <div class="spec-label">Discretion</div>
+        <div class="spec-value">Ironclad</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-icon">📍</div>
+        <div class="spec-label">Location</div>
+        <div class="spec-value">11 miles works</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-icon">📏</div>
+        <div class="spec-label">The Other Thing</div>
+        <div class="spec-value gold">Generous</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>So... Bunk Beds?</h2>
+    <p class="cta-sub">I mean, metaphorically. Unless you're into that.</p>
+    <div class="cta-buttons">
+      <a href="https://feeld.co" class="btn btn-primary" target="_blank">
+        Let's Talk on Feeld
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Built at midnight with good intentions and caffeine.</p>
+    <p style="margin-top: 0.5rem; font-size: 0.8rem;">No Catalina Wine Mixers were harmed in the making of this page.</p>
+  </footer>
+
+</body>
+</html>
