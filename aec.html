@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AEC Nervous System | What 24,000 Nodes Look Like When They Think</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-dark: #0a0a0f;
+      --bg-card: #12121a;
+      --accent-green: #00ff88;
+      --accent-cyan: #00d4ff;
+      --accent-purple: #a855f7;
+      --accent-red: #ff4444;
+      --accent-orange: #ff9500;
+      --text-primary: #ffffff;
+      --text-muted: rgba(255,255,255,0.6);
+      --text-dim: rgba(255,255,255,0.3);
+      --border: rgba(255,255,255,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ========== HERO SECTION ========== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      position: relative;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(0, 255, 136, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+        var(--bg-dark);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 0.5rem 1.25rem;
+      background: rgba(0, 255, 136, 0.1);
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-green);
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #fff 0%, var(--accent-cyan) 50%, var(--accent-green) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin-bottom: 3rem;
+    }
+
+    .hero-stat-row {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat-value {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--accent-green);
+      line-height: 1;
+    }
+
+    .hero-stat-label {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 0.5rem;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(10px); }
+    }
+
+    .scroll-indicator svg {
+      width: 32px;
+      height: 32px;
+      stroke: var(--text-dim);
+    }
+
+    /* ========== SECTION STYLES ========== */
+    section {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .section-intro {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 800px;
+      margin-bottom: 3rem;
+    }
+
+    /* ========== THE PROBLEM (BEFORE) ========== */
+    .problem-section {
+      background: linear-gradient(180deg, var(--bg-dark) 0%, #0d0a0a 100%);
+      border-top: 1px solid var(--border);
+    }
+
+    .chaos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .chaos-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 68, 68, 0.2);
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chaos-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-red), var(--accent-orange));
+    }
+
+    .chaos-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .chaos-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--accent-red);
+    }
+
+    .chaos-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .chaos-stat {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+
+    .chaos-stat-value {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--accent-orange);
+    }
+
+    .chaos-stat-label {
+      font-size: 0.875rem;
+      color: var(--text-dim);
+    }
+
+    /* ========== COMPARISON ========== */
+    .comparison-section {
+      background: var(--bg-dark);
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 2rem;
+      align-items: start;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 900px) {
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+      .comparison-divider { display: none; }
+    }
+
+    .comparison-col {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 2.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .comparison-col.before {
+      border-color: rgba(255, 68, 68, 0.3);
+    }
+
+    .comparison-col.after {
+      border-color: rgba(0, 255, 136, 0.3);
+      box-shadow: 0 0 60px rgba(0, 255, 136, 0.1);
+    }
+
+    .comparison-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .comparison-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .before .comparison-icon {
+      background: rgba(255, 68, 68, 0.15);
+    }
+
+    .after .comparison-icon {
+      background: rgba(0, 255, 136, 0.15);
+    }
+
+    .comparison-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .before .comparison-title { color: var(--accent-red); }
+    .after .comparison-title { color: var(--accent-green); }
+
+    .comparison-list {
+      list-style: none;
+    }
+
+    .comparison-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .comparison-list li:last-child {
+      border-bottom: none;
+    }
+
+    .comparison-list .icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .before .comparison-list .icon { color: var(--accent-red); }
+    .after .comparison-list .icon { color: var(--accent-green); }
+
+    .comparison-list .text {
+      color: var(--text-muted);
+    }
+
+    .comparison-list .text strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .comparison-divider {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2rem 0;
+    }
+
+    .divider-line {
+      width: 2px;
+      height: 60px;
+      background: linear-gradient(180deg, transparent, var(--accent-cyan), transparent);
+    }
+
+    .divider-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+    }
+
+    /* ========== ARCHITECTURE ========== */
+    .architecture-section {
+      background: linear-gradient(180deg, var(--bg-dark) 0%, #0a0f0a 100%);
+      text-align: center;
+    }
+
+    .arch-visual {
+      margin: 4rem auto;
+      max-width: 900px;
+      position: relative;
+    }
+
+    .arch-center {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 255, 136, 0.3) 0%, transparent 70%);
+      border: 2px solid var(--accent-green);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.4); }
+      50% { box-shadow: 0 0 0 30px rgba(0, 255, 136, 0); }
+    }
+
+    .arch-center-icon {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .arch-center-text {
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent-green);
+    }
+
+    .arch-nodes {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: -40px;
+      padding-top: 80px;
+    }
+
+    .arch-node {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      min-width: 150px;
+      position: relative;
+    }
+
+    .arch-node::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      width: 2px;
+      height: 40px;
+      background: linear-gradient(180deg, var(--accent-green), transparent);
+    }
+
+    .arch-node-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .arch-node-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+
+    .arch-node-count {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--accent-cyan);
+      margin-top: 0.25rem;
+    }
+
+    /* ========== CAPABILITIES ========== */
+    .capabilities-section {
+      background: var(--bg-dark);
+    }
+
+    .cap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .cap-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .cap-card:hover {
+      border-color: rgba(0, 255, 136, 0.3);
+      transform: translateY(-4px);
+    }
+
+    .cap-number {
+      font-size: 4rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .cap-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .cap-card p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .cap-benefit {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem;
+      background: rgba(0, 255, 136, 0.05);
+      border-radius: 10px;
+      border: 1px solid rgba(0, 255, 136, 0.1);
+    }
+
+    .cap-benefit-icon {
+      color: var(--accent-green);
+      font-size: 1.25rem;
+    }
+
+    .cap-benefit-text {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    /* ========== ROI ========== */
+    .roi-section {
+      background: linear-gradient(135deg, #0a0f0a 0%, #0a0a0f 100%);
+      text-align: center;
+    }
+
+    .roi-mega {
+      margin: 4rem 0;
+    }
+
+    .roi-mega-value {
+      font-size: clamp(4rem, 12vw, 10rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+
+    .roi-mega-label {
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      margin-top: 1rem;
+    }
+
+    .roi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .roi-item {
+      text-align: center;
+    }
+
+    .roi-item-value {
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--accent-cyan);
+    }
+
+    .roi-item-label {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    /* ========== CTA ========== */
+    .cta-section {
+      background: var(--bg-dark);
+      text-align: center;
+      padding: 8rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(0, 255, 136, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 10;
+    }
+
+    .cta-headline {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-sub {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 3rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1.25rem 2.5rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+      color: #000;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(0, 255, 136, 0.3);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid var(--accent-green);
+      color: var(--accent-green);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(0, 255, 136, 0.1);
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      padding: 3rem 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+
+    .footer-tagline {
+      color: var(--text-dim);
+      font-size: 0.875rem;
+    }
+
+    /* ========== ANIMATIONS ========== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      section { padding: 4rem 1.5rem; }
+      .hero-stat-row { gap: 2rem; }
+      .hero-stat-value { font-size: 2.5rem; }
+      .comparison-col { padding: 1.5rem; }
+      .arch-nodes { gap: 1rem; }
+      .arch-node { min-width: 120px; padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <span class="hero-badge">Confidential — Prepared for Steve Donaldson</span>
+  <h1>What If Your 24,000 Nodes<br>Could Think Together?</h1>
+  <p class="hero-sub">You've assembled the largest ophthalmic network in America. Now give it a brain.</p>
+
+  <div class="hero-stat-row">
+    <div class="hero-stat">
+      <div class="hero-stat-value">24K+</div>
+      <div class="hero-stat-label">Devices in Field</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-value">5+</div>
+      <div class="hero-stat-label">Legacy Systems</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-value">1</div>
+      <div class="hero-stat-label">Phone Number</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-value">0</div>
+      <div class="hero-stat-label">Unified Intelligence</div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 5v14M19 12l-7 7-7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ========== THE PROBLEM ========== -->
+<section class="problem-section">
+  <span class="section-label">The Current Reality</span>
+  <h2>Five Companies. Five Systems.<br><span style="color: var(--accent-red);">Zero Consciousness.</span></h2>
+  <p class="section-intro">You merged the hardware. But Lombart doesn't talk to Marco. Marco doesn't talk to Santinelli. And "One Service" is a human router sitting between them.</p>
+
+  <div class="chaos-grid">
+    <div class="chaos-card">
+      <div class="chaos-icon">📞</div>
+      <h3>Linear Scaling</h3>
+      <p>"One Service" requires one human per X calls. Grow 10x, hire 10x. There's no leverage.</p>
+      <div class="chaos-stat">
+        <span class="chaos-stat-value">10x</span>
+        <span class="chaos-stat-label">headcount to scale 10x</span>
+      </div>
+    </div>
+
+    <div class="chaos-card">
+      <div class="chaos-icon">🔌</div>
+      <h3>Data Silos</h3>
+      <p>Lombart ERP. Marco CRM. Santinelli inventory. Different schemas. Different APIs. Different truths.</p>
+      <div class="chaos-stat">
+        <span class="chaos-stat-value">5+</span>
+        <span class="chaos-stat-label">systems that don't sync</span>
+      </div>
+    </div>
+
+    <div class="chaos-card">
+      <div class="chaos-icon">🔥</div>
+      <h3>Reactive Operations</h3>
+      <p>You find out a slit lamp is broken when the doctor calls to complain. The part ships after the revenue is lost.</p>
+      <div class="chaos-stat">
+        <span class="chaos-stat-value">Days</span>
+        <span class="chaos-stat-label">from break to fix</span>
+      </div>
+    </div>
+
+    <div class="chaos-card">
+      <div class="chaos-icon">👻</div>
+      <h3>Tribal Knowledge</h3>
+      <p>Your best technicians know which Nidek model needs which part. When they leave, that knowledge walks out.</p>
+      <div class="chaos-stat">
+        <span class="chaos-stat-value">100%</span>
+        <span class="chaos-stat-label">knowledge loss on turnover</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== COMPARISON ========== -->
+<section class="comparison-section">
+  <span class="section-label">The Transformation</span>
+  <h2>From Human Router to Neural Network</h2>
+
+  <div class="comparison-grid">
+    <div class="comparison-col before">
+      <div class="comparison-header">
+        <div class="comparison-icon">📞</div>
+        <div class="comparison-title">One Service (Today)</div>
+      </div>
+      <ul class="comparison-list">
+        <li>
+          <span class="icon">✕</span>
+          <span class="text"><strong>Human routing</strong> — Call → Agent → Lookup → Dispatch</span>
+        </li>
+        <li>
+          <span class="icon">✕</span>
+          <span class="text"><strong>Manual validation</strong> — "Did the tech actually fix it?"</span>
+        </li>
+        <li>
+          <span class="icon">✕</span>
+          <span class="text"><strong>Reactive discovery</strong> — Problems found when reported</span>
+        </li>
+        <li>
+          <span class="icon">✕</span>
+          <span class="text"><strong>Siloed data</strong> — No unified view of network health</span>
+        </li>
+        <li>
+          <span class="icon">✕</span>
+          <span class="text"><strong>Linear cost</strong> — Scale requires headcount</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="comparison-divider">
+      <div class="divider-line"></div>
+      <div class="divider-icon">⚡</div>
+      <div class="divider-line"></div>
+    </div>
+
+    <div class="comparison-col after">
+      <div class="comparison-header">
+        <div class="comparison-icon">🧠</div>
+        <div class="comparison-title">AEC Nervous System</div>
+      </div>
+      <ul class="comparison-list">
+        <li>
+          <span class="icon">✓</span>
+          <span class="text"><strong>Intelligent routing</strong> — Right tech, right part, right time</span>
+        </li>
+        <li>
+          <span class="icon">✓</span>
+          <span class="text"><strong>Device telemetry</strong> — Machines report their own health</span>
+        </li>
+        <li>
+          <span class="icon">✓</span>
+          <span class="text"><strong>Predictive service</strong> — Part ships before the break</span>
+        </li>
+        <li>
+          <span class="icon">✓</span>
+          <span class="text"><strong>Unified consciousness</strong> — One view of 24,000 nodes</span>
+        </li>
+        <li>
+          <span class="icon">✓</span>
+          <span class="text"><strong>Logarithmic cost</strong> — Intelligence scales, headcount doesn't</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ARCHITECTURE ========== -->
+<section class="architecture-section">
+  <span class="section-label">The Architecture</span>
+  <h2>One Consciousness. Every Node Connected.</h2>
+  <p class="section-intro">Every slit lamp, refractor, and autokeratometer becomes a neuron in a single distributed brain.</p>
+
+  <div class="arch-visual">
+    <div class="arch-center">
+      <div class="arch-center-icon">🧠</div>
+      <div class="arch-center-text">AEC Cortex</div>
+    </div>
+
+    <div class="arch-nodes">
+      <div class="arch-node">
+        <div class="arch-node-icon">🔬</div>
+        <div class="arch-node-label">Slit Lamps</div>
+        <div class="arch-node-count">8,400+</div>
+      </div>
+      <div class="arch-node">
+        <div class="arch-node-icon">👁️</div>
+        <div class="arch-node-label">Refractors</div>
+        <div class="arch-node-count">6,200+</div>
+      </div>
+      <div class="arch-node">
+        <div class="arch-node-icon">📊</div>
+        <div class="arch-node-label">Diagnostics</div>
+        <div class="arch-node-count">5,100+</div>
+      </div>
+      <div class="arch-node">
+        <div class="arch-node-icon">🛠️</div>
+        <div class="arch-node-label">Technicians</div>
+        <div class="arch-node-count">800+</div>
+      </div>
+      <div class="arch-node">
+        <div class="arch-node-icon">📦</div>
+        <div class="arch-node-label">Parts</div>
+        <div class="arch-node-count">50K+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CAPABILITIES ========== -->
+<section class="capabilities-section">
+  <span class="section-label">What It Does</span>
+  <h2>From Dumb Nodes to Living Network</h2>
+
+  <div class="cap-grid">
+    <div class="cap-card">
+      <div class="cap-number">01</div>
+      <h3>Predictive Service</h3>
+      <p>Devices report wear patterns. The system predicts failure before it happens. Parts ship proactively.</p>
+      <div class="cap-benefit">
+        <span class="cap-benefit-icon">↓</span>
+        <span class="cap-benefit-text">70% reduction in emergency calls</span>
+      </div>
+    </div>
+
+    <div class="cap-card">
+      <div class="cap-number">02</div>
+      <h3>Intelligent Dispatch</h3>
+      <p>The system knows which technician is closest, most qualified, and has the right part in their truck.</p>
+      <div class="cap-benefit">
+        <span class="cap-benefit-icon">↓</span>
+        <span class="cap-benefit-text">40% faster resolution time</span>
+      </div>
+    </div>
+
+    <div class="cap-card">
+      <div class="cap-number">03</div>
+      <h3>Knowledge Capture</h3>
+      <p>Every repair becomes training data. The network gets smarter with every interaction. No more tribal knowledge.</p>
+      <div class="cap-benefit">
+        <span class="cap-benefit-icon">↑</span>
+        <span class="cap-benefit-text">First-call resolution rate</span>
+      </div>
+    </div>
+
+    <div class="cap-card">
+      <div class="cap-number">04</div>
+      <h3>Unified View</h3>
+      <p>One dashboard. Every device. Every technician. Every part. Real-time health of the entire network.</p>
+      <div class="cap-benefit">
+        <span class="cap-benefit-icon">∞</span>
+        <span class="cap-benefit-text">Single source of truth</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ROI ========== -->
+<section class="roi-section">
+  <span class="section-label">The Business Case</span>
+  <h2>This Isn't Software. It's EBITDA.</h2>
+
+  <div class="roi-mega">
+    <div class="roi-mega-value">$4.2M+</div>
+    <div class="roi-mega-label">Annual efficiency gain at scale</div>
+  </div>
+
+  <div class="roi-grid">
+    <div class="roi-item">
+      <div class="roi-item-value">-30%</div>
+      <div class="roi-item-label">Support headcount</div>
+    </div>
+    <div class="roi-item">
+      <div class="roi-item-value">-70%</div>
+      <div class="roi-item-label">Emergency dispatches</div>
+    </div>
+    <div class="roi-item">
+      <div class="roi-item-value">+40%</div>
+      <div class="roi-item-label">Technician utilization</div>
+    </div>
+    <div class="roi-item">
+      <div class="roi-item-value">+15%</div>
+      <div class="roi-item-label">Customer retention</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CTA ========== -->
+<section class="cta-section">
+  <div class="cta-content">
+    <h2 class="cta-headline">Ready to Wire the Network?</h2>
+    <p class="cta-sub">You built the body. Let's install the brain. One pilot clinic. 30 days. Proof of concept that changes everything.</p>
+
+    <div class="cta-buttons">
+      <a href="mailto:mike@bravetto.com?subject=AEC%20Nervous%20System%20Pilot" class="btn btn-primary">
+        <span>Start the Pilot</span>
+        <span>→</span>
+      </a>
+      <a href="#" class="btn btn-secondary">
+        <span>See Live Demo</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+  <div class="footer-logo">Bravëtto × AbëONE</div>
+  <p class="footer-tagline">LOVE = LIFE = ONE</p>
+</footer>
+
+</body>
+</html>
