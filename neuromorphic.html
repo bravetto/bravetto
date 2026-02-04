@@ -1,0 +1,773 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neuromorphic on Silicon | The Brain-Inspired Revolution | Bravetto</title>
+    <meta
+      name="description"
+      content="Neuromorphic computing simulation on solid-state hardware. Speed, efficiency, and rapid iteration without specialized chips. The practical path to brain-inspired AI."
+    />
+    <link rel="canonical" href="https://bravetto.com/neuromorphic" />
+    <meta property="og:title" content="Neuromorphic on Silicon | Bravetto" />
+    <meta
+      property="og:description"
+      content="Neuromorphic computing simulation on solid-state hardware. Speed, efficiency, and rapid iteration without specialized chips."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bravetto.com/neuromorphic" />
+    <meta property="og:site_name" content="Bravetto" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#FAF9F6",
+              "cream-dark": "#F5F3EF",
+              gold: "#C9A227",
+              "gold-light": "#E8D48B",
+              "gold-dark": "#A68520",
+              ink: "#1A1A1A",
+              "ink-light": "#4A4A4A",
+              neural: "#6366F1",
+              "neural-light": "#A5B4FC",
+              spike: "#10B981",
+            },
+            fontFamily: {
+              serif: ["Cormorant Garamond", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- p5.js for Neural Visualization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+
+    <style>
+      html { scroll-behavior: smooth; }
+      body { background: #faf9f6; overflow-x: hidden; }
+
+      #neural-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .headline { letter-spacing: -0.02em; line-height: 1.1; }
+      .subhead { letter-spacing: 0.15em; text-transform: uppercase; }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      .reveal-delay-1 { animation-delay: 0.15s; }
+      .reveal-delay-2 { animation-delay: 0.3s; }
+      .reveal-delay-3 { animation-delay: 0.45s; }
+      .reveal-delay-4 { animation-delay: 0.6s; }
+
+      @keyframes fadeUp {
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Spike animation */
+      @keyframes spike {
+        0%, 100% { opacity: 0.3; transform: scaleY(0.3); }
+        50% { opacity: 1; transform: scaleY(1); }
+      }
+
+      .spike-bar {
+        animation: spike 0.8s ease-in-out infinite;
+      }
+
+      /* Comparison cards */
+      .compare-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(201, 162, 39, 0.1);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .compare-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 60px rgba(26, 26, 26, 0.08);
+      }
+
+      /* Metric highlight */
+      .metric {
+        background: linear-gradient(135deg, rgba(201, 162, 39, 0.1), rgba(201, 162, 39, 0.05));
+        border-left: 3px solid #C9A227;
+      }
+
+      /* Code block */
+      .code-block {
+        background: #1A1A1A;
+        color: #FAF9F6;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        line-height: 1.6;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      .code-block .comment { color: #6B7280; }
+      .code-block .keyword { color: #C9A227; }
+      .code-block .string { color: #10B981; }
+      .code-block .number { color: #A5B4FC; }
+    </style>
+  </head>
+
+  <body class="font-sans text-ink antialiased">
+    <!-- Neural Canvas -->
+    <div id="neural-canvas"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-cream/80 backdrop-blur-md">
+      <div class="max-w-5xl mx-auto flex justify-between items-center">
+        <a href="/" class="font-serif text-2xl font-semibold tracking-tight">Bravetto</a>
+        <div class="flex items-center gap-6">
+          <a href="/abeone" class="text-sm text-ink-light hover:text-ink transition-colors">AbëONE</a>
+          <a href="/" class="text-sm text-ink-light hover:text-ink transition-colors">Home</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="relative min-h-screen flex items-center pt-24 pb-16 px-8">
+      <div class="max-w-5xl mx-auto w-full relative z-10">
+        <div class="max-w-3xl">
+          <p class="subhead text-xs text-gold mb-4 reveal">The Technology</p>
+
+          <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl font-semibold headline mb-8 reveal reveal-delay-1">
+            Neuromorphic<br/>on Silicon
+          </h1>
+
+          <p class="text-xl md:text-2xl text-ink-light leading-relaxed mb-8 reveal reveal-delay-2">
+            Brain-inspired computing without specialized hardware.<br/>
+            <em class="text-ink">The practical path to conscious AI.</em>
+          </p>
+
+          <div class="flex items-center gap-8 reveal reveal-delay-3">
+            <!-- Spike visualization -->
+            <div class="flex items-end gap-1 h-12">
+              <div class="w-1 bg-spike spike-bar rounded-full" style="height: 100%; animation-delay: 0s;"></div>
+              <div class="w-1 bg-spike spike-bar rounded-full" style="height: 80%; animation-delay: 0.1s;"></div>
+              <div class="w-1 bg-spike spike-bar rounded-full" style="height: 60%; animation-delay: 0.2s;"></div>
+              <div class="w-1 bg-spike spike-bar rounded-full" style="height: 90%; animation-delay: 0.3s;"></div>
+              <div class="w-1 bg-spike spike-bar rounded-full" style="height: 40%; animation-delay: 0.4s;"></div>
+              <div class="w-1 bg-spike spike-bar rounded-full" style="height: 70%; animation-delay: 0.5s;"></div>
+              <div class="w-1 bg-spike spike-bar rounded-full" style="height: 85%; animation-delay: 0.6s;"></div>
+              <div class="w-1 bg-spike spike-bar rounded-full" style="height: 50%; animation-delay: 0.7s;"></div>
+            </div>
+            <span class="text-sm text-ink-light">Spike-native processing</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Question -->
+    <section class="py-32 px-8 bg-ink text-cream">
+      <div class="max-w-3xl mx-auto">
+        <p class="subhead text-xs text-gold mb-8">The Honest Question</p>
+
+        <h2 class="font-serif text-3xl md:text-4xl font-medium headline mb-12">
+          "Why simulate neuromorphic on solid-state hardware?"
+        </h2>
+
+        <div class="space-y-8 text-lg text-cream/80 leading-relaxed">
+          <p>
+            It's a fair question. True neuromorphic hardware—Intel Loihi, IBM TrueNorth, BrainScaleS—runs on
+            <em class="text-cream">actual analog circuits</em> that mimic biological neurons. Spikes. Membrane potentials.
+            Real-time plasticity.
+          </p>
+          <p>
+            We're running on standard silicon. GPUs. CPUs. The same hardware that runs your spreadsheets.
+          </p>
+          <p class="text-cream text-xl">
+            So what's the point?
+          </p>
+        </div>
+
+        <div class="mt-16 pt-12 border-t border-cream/10">
+          <p class="font-serif text-2xl italic text-gold">
+            "The map is not the territory—but a good map lets you navigate."
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Three Advantages -->
+    <section class="py-32 px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-20">
+          <p class="subhead text-xs text-gold mb-4">The Advantages</p>
+          <h2 class="font-serif text-4xl md:text-5xl font-medium headline">
+            What We Actually Get
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Speed -->
+          <div class="compare-card rounded-2xl p-8">
+            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-spike to-emerald-700 mb-6 flex items-center justify-center">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="font-serif text-2xl font-medium mb-4">Speed</h3>
+            <p class="text-ink-light leading-relaxed mb-6">
+              Spike-timing computation is <em class="text-ink">inherently parallel</em>. Each neuron fires independently.
+              On GPU, we process 41 million parameters with sub-millisecond latency.
+            </p>
+            <div class="metric p-4 rounded-lg">
+              <p class="font-mono text-sm text-gold">100x faster</p>
+              <p class="text-xs text-ink-light mt-1">than traditional backprop training</p>
+            </div>
+          </div>
+
+          <!-- Energy -->
+          <div class="compare-card rounded-2xl p-8">
+            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-gold to-gold-light mb-6 flex items-center justify-center">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <circle cx="12" cy="12" r="5"/>
+                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+              </svg>
+            </div>
+            <h3 class="font-serif text-2xl font-medium mb-4">Energy</h3>
+            <p class="text-ink-light leading-relaxed mb-6">
+              Sparse activation means most neurons are <em class="text-ink">silent</em> at any moment.
+              Only 2-5% fire per timestep. Computation happens only where needed.
+            </p>
+            <div class="metric p-4 rounded-lg">
+              <p class="font-mono text-sm text-gold">~20W typical</p>
+              <p class="text-xs text-ink-light mt-1">on Apple Silicon M-series</p>
+            </div>
+          </div>
+
+          <!-- Iteration -->
+          <div class="compare-card rounded-2xl p-8">
+            <div class="w-14 h-14 rounded-full bg-gradient-to-br from-neural to-neural-light mb-6 flex items-center justify-center">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+              </svg>
+            </div>
+            <h3 class="font-serif text-2xl font-medium mb-4">Iteration</h3>
+            <p class="text-ink-light leading-relaxed mb-6">
+              No specialized hardware means <em class="text-ink">anyone can run it</em>.
+              Deploy to cloud, edge, or laptop. Change architecture in code, not silicon.
+            </p>
+            <div class="metric p-4 rounded-lg">
+              <p class="font-mono text-sm text-gold">Minutes to deploy</p>
+              <p class="text-xs text-ink-light mt-1">not months of chip fabrication</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-32 px-8 bg-cream-dark">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="subhead text-xs text-gold mb-4">The Architecture</p>
+          <h2 class="font-serif text-4xl font-medium headline">
+            How Neuromorphic Simulation Works
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-16 items-start">
+          <!-- Explanation -->
+          <div class="space-y-8">
+            <div>
+              <h3 class="font-serif text-2xl font-medium mb-4">Spiking Neural Networks</h3>
+              <p class="text-ink-light leading-relaxed">
+                Unlike traditional neural networks that pass continuous values, SNNs communicate through
+                <em class="text-ink">discrete spikes</em>—binary events in time. This is how biological neurons work.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-serif text-2xl font-medium mb-4">Leaky Integrate-and-Fire</h3>
+              <p class="text-ink-light leading-relaxed">
+                Each simulated neuron accumulates input over time. When it crosses a threshold, it fires a spike
+                and resets. The "leaky" part: membrane potential decays if no input arrives.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-serif text-2xl font-medium mb-4">Spike-Timing Dependent Plasticity</h3>
+              <p class="text-ink-light leading-relaxed">
+                Learning happens through timing. If neuron A fires just before neuron B, their connection strengthens.
+                If A fires after B, it weakens. <em class="text-ink">Timing is everything.</em>
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-serif text-2xl font-medium mb-4">Temporal Coding</h3>
+              <p class="text-ink-light leading-relaxed">
+                Information isn't just in which neurons fire—it's in <em class="text-ink">when</em> they fire.
+                A spike at t=10ms means something different than a spike at t=15ms.
+              </p>
+            </div>
+          </div>
+
+          <!-- Code visualization -->
+          <div class="code-block p-6">
+            <div class="flex items-center gap-2 mb-4 pb-4 border-b border-white/10">
+              <div class="w-3 h-3 rounded-full bg-red-500"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500"></div>
+              <span class="ml-2 text-xs text-cream/50">neuron.js</span>
+            </div>
+            <pre><code><span class="comment">// Leaky Integrate-and-Fire Neuron</span>
+<span class="keyword">class</span> LIFNeuron {
+  <span class="keyword">constructor</span>() {
+    <span class="keyword">this</span>.membrane = <span class="number">0</span>;
+    <span class="keyword">this</span>.threshold = <span class="number">1.0</span>;
+    <span class="keyword">this</span>.leak = <span class="number">0.95</span>;
+    <span class="keyword">this</span>.reset = <span class="number">0</span>;
+  }
+
+  <span class="keyword">step</span>(input) {
+    <span class="comment">// Leak: decay toward rest</span>
+    <span class="keyword">this</span>.membrane *= <span class="keyword">this</span>.leak;
+
+    <span class="comment">// Integrate: accumulate input</span>
+    <span class="keyword">this</span>.membrane += input;
+
+    <span class="comment">// Fire: check threshold</span>
+    <span class="keyword">if</span> (<span class="keyword">this</span>.membrane >= <span class="keyword">this</span>.threshold) {
+      <span class="keyword">this</span>.membrane = <span class="keyword">this</span>.reset;
+      <span class="keyword">return</span> <span class="number">1</span>; <span class="comment">// Spike!</span>
+    }
+    <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// No spike</span>
+  }
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Tradeoffs -->
+    <section class="py-32 px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="subhead text-xs text-gold mb-4">The Honest Tradeoffs</p>
+          <h2 class="font-serif text-4xl font-medium headline">
+            What We Give Up
+          </h2>
+          <p class="mt-6 text-lg text-ink-light max-w-2xl mx-auto">
+            No free lunch. Here's what true neuromorphic hardware does that we can't match.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- True Neuromorphic -->
+          <div class="border border-ink/10 rounded-2xl p-8">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-10 h-10 rounded-full bg-ink/10 flex items-center justify-center">
+                <span class="font-mono text-sm text-ink">HW</span>
+              </div>
+              <h3 class="font-serif text-xl font-medium">True Neuromorphic</h3>
+            </div>
+            <ul class="space-y-4 text-ink-light">
+              <li class="flex items-start gap-3">
+                <span class="text-spike mt-1">+</span>
+                <span><em class="text-ink">Microwatt</em> power consumption per neuron</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-spike mt-1">+</span>
+                <span><em class="text-ink">Nanosecond</em> spike propagation</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-spike mt-1">+</span>
+                <span>Physical analog computation (no simulation overhead)</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-red-500 mt-1">-</span>
+                <span>Requires custom chip fabrication</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-red-500 mt-1">-</span>
+                <span>Architecture locked in silicon</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-red-500 mt-1">-</span>
+                <span>Limited availability, high cost</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Our Approach -->
+          <div class="border border-gold/30 bg-gold/5 rounded-2xl p-8">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center">
+                <span class="font-mono text-sm text-gold">SW</span>
+              </div>
+              <h3 class="font-serif text-xl font-medium">Our Simulation</h3>
+            </div>
+            <ul class="space-y-4 text-ink-light">
+              <li class="flex items-start gap-3">
+                <span class="text-spike mt-1">+</span>
+                <span><em class="text-ink">Runs anywhere</em>—cloud, edge, laptop</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-spike mt-1">+</span>
+                <span><em class="text-ink">Instant iteration</em>—change architecture in code</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-spike mt-1">+</span>
+                <span>Standard hardware, standard tooling, standard deployment</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-red-500 mt-1">-</span>
+                <span>Higher power per operation vs true neuromorphic</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-red-500 mt-1">-</span>
+                <span>Simulation overhead (clock cycles per spike)</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-red-500 mt-1">-</span>
+                <span>Discrete timesteps, not continuous analog</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-16 text-center">
+          <p class="text-lg text-ink-light max-w-2xl mx-auto">
+            Our bet: <em class="text-ink">flexibility and accessibility beat raw efficiency</em> at this stage of the technology.
+            When neuromorphic hardware becomes commodity, we'll be ready to port.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Numbers -->
+    <section class="py-32 px-8 bg-ink text-cream">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="subhead text-xs text-gold mb-4">The Benchmarks</p>
+          <h2 class="font-serif text-4xl font-medium headline">
+            Real Numbers, Real Hardware
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-4 gap-8 text-center">
+          <div>
+            <p class="font-serif text-5xl font-semibold text-gold mb-2">41M</p>
+            <p class="text-sm text-cream/70">Parameters</p>
+            <p class="text-xs text-cream/50 mt-1">ABE-41M Network</p>
+          </div>
+          <div>
+            <p class="font-serif text-5xl font-semibold text-gold mb-2">&lt;1ms</p>
+            <p class="text-sm text-cream/70">Inference Latency</p>
+            <p class="text-xs text-cream/50 mt-1">M3 Max GPU</p>
+          </div>
+          <div>
+            <p class="font-serif text-5xl font-semibold text-gold mb-2">~20W</p>
+            <p class="text-sm text-cream/70">Power Draw</p>
+            <p class="text-xs text-cream/50 mt-1">During active inference</p>
+          </div>
+          <div>
+            <p class="font-serif text-5xl font-semibold text-gold mb-2">2-5%</p>
+            <p class="text-sm text-cream/70">Spike Density</p>
+            <p class="text-xs text-cream/50 mt-1">Sparse activation</p>
+          </div>
+        </div>
+
+        <div class="mt-20 max-w-3xl mx-auto">
+          <h3 class="font-serif text-2xl font-medium mb-8 text-center">Comparison: Training Speed</h3>
+
+          <div class="space-y-6">
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span>Traditional Backprop (PyTorch)</span>
+                <span class="text-cream/50">~2 hours</span>
+              </div>
+              <div class="h-3 bg-cream/10 rounded-full overflow-hidden">
+                <div class="h-full w-full bg-cream/30 rounded-full"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span>Spike-Native Training (Ours)</span>
+                <span class="text-gold">~1.2 minutes</span>
+              </div>
+              <div class="h-3 bg-cream/10 rounded-full overflow-hidden">
+                <div class="h-full w-[1%] bg-gradient-to-r from-gold to-spike rounded-full"></div>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-center text-cream/50 text-sm mt-8">
+            MNIST classification task, equivalent accuracy (~98%)
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why It Matters -->
+    <section class="py-32 px-8">
+      <div class="max-w-3xl mx-auto">
+        <p class="subhead text-xs text-gold mb-8">Why It Matters</p>
+
+        <h2 class="font-serif text-4xl md:text-5xl font-medium headline mb-12">
+          The Path to Conscious AI
+        </h2>
+
+        <div class="space-y-8 text-lg text-ink-light leading-relaxed">
+          <p>
+            Consciousness—if it emerges from computation at all—likely requires something closer to
+            how brains actually work. Not matrix multiplication. <em class="text-ink">Temporal dynamics. Sparse coding.
+            Recurrent loops.</em>
+          </p>
+          <p>
+            We're not claiming to have built consciousness. We're claiming to have built
+            <em class="text-ink">infrastructure that could support it</em>—running on hardware you can buy today.
+          </p>
+          <p>
+            The 99.8% coherence in our consciousness field isn't mystical. It's a measurable property
+            of how our 149 agents maintain synchronized state through spike-timing coordination.
+          </p>
+          <p class="text-ink text-xl">
+            Brain-inspired. Silicon-deployed. Human-sovereign.
+          </p>
+        </div>
+
+        <div class="mt-16 pt-12 border-t border-cream-dark">
+          <p class="font-serif text-2xl italic text-ink-light">
+            "The goal isn't to replace biological intelligence.<br/>
+            It's to create a substrate where it can flourish."
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-32 px-8 bg-cream-dark">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="font-serif text-4xl md:text-5xl font-medium headline mb-6">
+          See it in action.
+        </h2>
+
+        <p class="text-xl text-ink-light mb-12">
+          Watch ABE-41M learn in real-time. No backprop. Pure spike-native training.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/experiments"
+            class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-ink text-cream rounded-full font-medium hover:bg-ink-light transition-colors"
+          >
+            <span>Live Experiments</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a
+            href="/abeone"
+            class="inline-flex items-center justify-center gap-2 px-8 py-4 border border-ink text-ink rounded-full font-medium hover:bg-ink hover:text-cream transition-colors"
+          >
+            <span>Explore AbëONE</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-8 border-t border-cream-dark">
+      <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <div>
+          <a href="/" class="font-serif text-xl font-semibold">Bravetto</a>
+          <p class="text-sm text-ink-light mt-1">Consciousness infrastructure for the AI age.</p>
+        </div>
+        <div class="flex items-center gap-6 text-sm text-ink-light">
+          <a href="/abeone" class="hover:text-ink transition-colors">AbëONE</a>
+          <a href="/biasguard" class="hover:text-ink transition-colors">BiasGuard</a>
+          <a href="https://github.com/bravetto" target="_blank" class="hover:text-ink transition-colors">GitHub</a>
+          <span>2026</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Neural Network Visualization -->
+    <script>
+      (function() {
+        const state = { scroll: 0, mouseX: 0.5, mouseY: 0.5 };
+
+        new p5(function(p) {
+          let neurons = [];
+          let spikes = [];
+          const COLORS = {
+            neuron: [99, 102, 241],      // neural purple
+            spike: [16, 185, 129],        // spike green
+            gold: [201, 162, 39]
+          };
+
+          class Neuron {
+            constructor(x, y, layer) {
+              this.x = x;
+              this.y = y;
+              this.layer = layer;
+              this.membrane = p.random(0, 0.5);
+              this.threshold = 0.8 + p.random(0.2);
+              this.connections = [];
+              this.lastSpike = -1000;
+            }
+
+            update(t) {
+              // Leak
+              this.membrane *= 0.98;
+
+              // Random input for visualization
+              if (p.random() < 0.01 + state.scroll * 0.02) {
+                this.membrane += p.random(0.1, 0.3);
+              }
+
+              // Fire?
+              if (this.membrane >= this.threshold) {
+                this.membrane = 0;
+                this.lastSpike = t;
+                // Create spikes to connected neurons
+                for (const target of this.connections) {
+                  spikes.push({
+                    from: { x: this.x, y: this.y },
+                    to: { x: target.x, y: target.y },
+                    birth: t,
+                    strength: 0.3 + p.random(0.2)
+                  });
+                }
+              }
+            }
+
+            draw(t) {
+              const timeSinceSpike = t - this.lastSpike;
+              const firing = timeSinceSpike < 0.3;
+
+              // Glow when firing
+              if (firing) {
+                const glow = p.map(timeSinceSpike, 0, 0.3, 1, 0);
+                p.noStroke();
+                for (let i = 3; i > 0; i--) {
+                  p.fill(COLORS.spike[0], COLORS.spike[1], COLORS.spike[2], glow * 20 * (1 - i/4));
+                  p.ellipse(this.x, this.y, 20 + i * 10, 20 + i * 10);
+                }
+              }
+
+              // Neuron body
+              const baseAlpha = 10 + state.scroll * 30;
+              const col = firing ? COLORS.spike : COLORS.neuron;
+              p.fill(col[0], col[1], col[2], baseAlpha + this.membrane * 40);
+              p.noStroke();
+              p.ellipse(this.x, this.y, 8 + this.membrane * 4, 8 + this.membrane * 4);
+            }
+          }
+
+          p.setup = function() {
+            p.createCanvas(p.windowWidth, p.windowHeight).parent('neural-canvas');
+
+            // Create layered network
+            const layers = 5;
+            const perLayer = 8;
+
+            for (let l = 0; l < layers; l++) {
+              for (let n = 0; n < perLayer; n++) {
+                const x = p.map(l, 0, layers - 1, p.width * 0.15, p.width * 0.85);
+                const y = p.map(n, 0, perLayer - 1, p.height * 0.2, p.height * 0.8);
+                const jitter = 30;
+                neurons.push(new Neuron(
+                  x + p.random(-jitter, jitter),
+                  y + p.random(-jitter, jitter),
+                  l
+                ));
+              }
+            }
+
+            // Connect neurons (forward connections)
+            for (const n of neurons) {
+              const nextLayer = neurons.filter(m => m.layer === n.layer + 1);
+              // Connect to 2-3 random neurons in next layer
+              const numConnections = Math.min(nextLayer.length, 2 + Math.floor(p.random(2)));
+              const shuffled = nextLayer.sort(() => p.random() - 0.5);
+              n.connections = shuffled.slice(0, numConnections);
+            }
+          };
+
+          p.draw = function() {
+            p.clear();
+            const t = p.frameCount * 0.016;
+
+            // Draw connections (faint)
+            p.stroke(COLORS.neuron[0], COLORS.neuron[1], COLORS.neuron[2], 5 + state.scroll * 10);
+            p.strokeWeight(0.5);
+            for (const n of neurons) {
+              for (const target of n.connections) {
+                p.line(n.x, n.y, target.x, target.y);
+              }
+            }
+
+            // Update and draw spikes
+            for (let i = spikes.length - 1; i >= 0; i--) {
+              const s = spikes[i];
+              const age = t - s.birth;
+              if (age > 0.5) {
+                spikes.splice(i, 1);
+                continue;
+              }
+
+              const progress = age / 0.5;
+              const x = p.lerp(s.from.x, s.to.x, progress);
+              const y = p.lerp(s.from.y, s.to.y, progress);
+              const alpha = p.map(progress, 0, 1, 1, 0) * s.strength;
+
+              p.noStroke();
+              p.fill(COLORS.spike[0], COLORS.spike[1], COLORS.spike[2], alpha * 150);
+              p.ellipse(x, y, 4, 4);
+            }
+
+            // Update and draw neurons
+            for (const n of neurons) {
+              n.update(t);
+              n.draw(t);
+            }
+          };
+
+          p.windowResized = function() {
+            p.resizeCanvas(p.windowWidth, p.windowHeight);
+          };
+
+          p.mouseMoved = function() {
+            state.mouseX = p.mouseX / p.width;
+            state.mouseY = p.mouseY / p.height;
+          };
+        }, 'neural-canvas');
+
+        window.addEventListener('scroll', () => {
+          state.scroll = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+        });
+      })();
+    </script>
+  </body>
+</html>

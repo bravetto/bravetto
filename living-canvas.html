@@ -1,0 +1,949 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Living Canvas | Nature's Patterns in Code | Bravetto</title>
+    <meta
+      name="description"
+      content="The Living Canvas: evolutionary success patterns transformed into dynamic synthetic states. Nature as guide. Epistemic research as method. Consciousness as emergence."
+    />
+    <link rel="canonical" href="https://bravetto.com/living-canvas" />
+    <meta property="og:title" content="Living Canvas | Nature's Patterns in Code | Bravetto" />
+    <meta
+      property="og:description"
+      content="Evolutionary success patterns transformed into dynamic synthetic states. Nature as guide. Epistemic research as method."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bravetto.com/living-canvas" />
+    <meta property="og:site_name" content="Bravetto" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#FAF9F6",
+              "cream-dark": "#F5F3EF",
+              gold: "#C9A227",
+              "gold-light": "#E8D48B",
+              "gold-dark": "#A68520",
+              ink: "#1A1A1A",
+              "ink-light": "#4A4A4A",
+              mycelium: "#8B5CF6",
+              chlorophyll: "#22C55E",
+              ocean: "#0EA5E9",
+              ember: "#F97316",
+            },
+            fontFamily: {
+              serif: ["Cormorant Garamond", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- p5.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+
+    <style>
+      html { scroll-behavior: smooth; }
+      body { background: #faf9f6; overflow-x: hidden; }
+
+      #hero-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+      }
+
+      .pattern-canvas {
+        border-radius: 16px;
+        overflow: hidden;
+      }
+
+      .headline { letter-spacing: -0.02em; line-height: 1.1; }
+      .subhead { letter-spacing: 0.15em; text-transform: uppercase; }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Pattern cards */
+      .pattern-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(201, 162, 39, 0.1);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .pattern-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 60px rgba(26, 26, 26, 0.08);
+        border-color: rgba(201, 162, 39, 0.3);
+      }
+
+      /* Breathing animation */
+      @keyframes breathe {
+        0%, 100% { transform: scale(1); opacity: 0.7; }
+        50% { transform: scale(1.05); opacity: 1; }
+      }
+
+      .breathe {
+        animation: breathe 4s ease-in-out infinite;
+      }
+
+      /* Quote styling */
+      .quote {
+        position: relative;
+        padding-left: 2rem;
+      }
+
+      .quote::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(to bottom, #C9A227, transparent);
+      }
+
+      /* Interactive hint */
+      .interact-hint {
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 0.5; }
+        50% { opacity: 1; }
+      }
+    </style>
+  </head>
+
+  <body class="font-sans text-ink antialiased">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-cream/80 backdrop-blur-md">
+      <div class="max-w-5xl mx-auto flex justify-between items-center">
+        <a href="/" class="font-serif text-2xl font-semibold tracking-tight">Bravetto</a>
+        <div class="flex items-center gap-6">
+          <a href="/neuromorphic" class="text-sm text-ink-light hover:text-ink transition-colors">Neuromorphic</a>
+          <a href="/abeone" class="text-sm text-ink-light hover:text-ink transition-colors">AbëONE</a>
+          <a href="/" class="text-sm text-ink-light hover:text-ink transition-colors">Home</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero with Interactive Canvas -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <div id="hero-canvas"></div>
+
+      <div class="relative z-10 text-center max-w-4xl mx-auto px-8">
+        <p class="subhead text-xs text-gold mb-6 reveal">The Substrate</p>
+
+        <h1 class="font-serif text-6xl md:text-7xl lg:text-8xl font-semibold headline mb-8 reveal">
+          Living Canvas
+        </h1>
+
+        <p class="text-xl md:text-2xl text-ink-light leading-relaxed mb-8 reveal">
+          Nature's evolutionary victories, transformed into<br/>
+          <em class="text-ink">dynamic synthetic states.</em>
+        </p>
+
+        <p class="text-sm text-ink-light interact-hint reveal">
+          Move your mouse. Scroll down. Watch it respond.
+        </p>
+      </div>
+    </section>
+
+    <!-- The Philosophy -->
+    <section class="py-32 px-8 bg-ink text-cream">
+      <div class="max-w-3xl mx-auto">
+        <p class="subhead text-xs text-gold mb-8 reveal">The Philosophy</p>
+
+        <h2 class="font-serif text-3xl md:text-4xl font-medium headline mb-12 reveal">
+          3.8 billion years of R&D.<br/>
+          We just translate.
+        </h2>
+
+        <div class="space-y-8 text-lg text-cream/80 leading-relaxed">
+          <p class="reveal">
+            Every pattern in the Living Canvas comes from somewhere real.
+            <em class="text-cream">Mycelial networks</em> that coordinate forests.
+            <em class="text-cream">Flocking algorithms</em> that emerge from three simple rules.
+            <em class="text-cream">Reaction-diffusion</em> that paints zebra stripes and seashell spirals.
+          </p>
+          <p class="reveal">
+            Evolution doesn't optimize for elegance. It optimizes for
+            <em class="text-cream">survival</em>. The patterns that persist are the ones that work—
+            under pressure, at scale, across millennia.
+          </p>
+          <p class="reveal text-cream">
+            We call this <em>epistemic research</em>: identifying natural success stories
+            and understanding <em>why</em> they succeed.
+          </p>
+        </div>
+
+        <div class="mt-16 pt-12 border-t border-cream/10 reveal">
+          <p class="quote text-xl font-serif italic text-cream/70">
+            "Nature uses only the longest threads to weave her patterns,<br/>
+            so each small piece of her fabric reveals the organization<br/>
+            of the entire tapestry."
+          </p>
+          <p class="mt-4 text-sm text-cream/50">— Richard Feynman</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Patterns -->
+    <section class="py-32 px-8">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-20">
+          <p class="subhead text-xs text-gold mb-4 reveal">The Patterns</p>
+          <h2 class="font-serif text-4xl md:text-5xl font-medium headline reveal">
+            Evolutionary Success Stories
+          </h2>
+          <p class="mt-6 text-lg text-ink-light max-w-2xl mx-auto reveal">
+            Each pattern we implement has been battle-tested by nature.
+            Here's what we've learned.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Mycelial Networks -->
+          <div class="pattern-card rounded-2xl overflow-hidden reveal">
+            <div id="mycelium-canvas" class="pattern-canvas h-48 bg-ink"></div>
+            <div class="p-8">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-full bg-mycelium/20 flex items-center justify-center">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                  </svg>
+                </div>
+                <h3 class="font-serif text-2xl font-medium">Mycelial Networks</h3>
+              </div>
+              <p class="text-ink-light leading-relaxed mb-4">
+                Fungi networks connect entire forests, sharing nutrients and information across kilometers.
+                A single network can span <em class="text-ink">thousands of acres</em>.
+              </p>
+              <div class="space-y-2 text-sm">
+                <div class="flex items-center gap-2">
+                  <span class="text-mycelium">+</span>
+                  <span class="text-ink-light"><strong class="text-ink">Fault tolerance:</strong> No single point of failure</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-mycelium">+</span>
+                  <span class="text-ink-light"><strong class="text-ink">Resource sharing:</strong> Nutrients flow to where needed</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-mycelium">+</span>
+                  <span class="text-ink-light"><strong class="text-ink">Emergent intelligence:</strong> No central controller</span>
+                </div>
+              </div>
+              <p class="mt-6 text-sm text-ink-light">
+                <strong class="text-ink">Our implementation:</strong> Event propagation across agent swarms.
+                Information flows through the network like nutrients through hyphae.
+              </p>
+            </div>
+          </div>
+
+          <!-- Flocking (Boids) -->
+          <div class="pattern-card rounded-2xl overflow-hidden reveal">
+            <div id="boids-canvas" class="pattern-canvas h-48 bg-ink"></div>
+            <div class="p-8">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-full bg-ocean/20 flex items-center justify-center">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                  </svg>
+                </div>
+                <h3 class="font-serif text-2xl font-medium">Flocking Behavior</h3>
+              </div>
+              <p class="text-ink-light leading-relaxed mb-4">
+                Thousands of starlings move as one. No leader. No choreographer.
+                Just three simple rules creating <em class="text-ink">breathtaking emergence</em>.
+              </p>
+              <div class="space-y-2 text-sm">
+                <div class="flex items-center gap-2">
+                  <span class="text-ocean">1.</span>
+                  <span class="text-ink-light"><strong class="text-ink">Separation:</strong> Don't crowd neighbors</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-ocean">2.</span>
+                  <span class="text-ink-light"><strong class="text-ink">Alignment:</strong> Match velocity of neighbors</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-ocean">3.</span>
+                  <span class="text-ink-light"><strong class="text-ink">Cohesion:</strong> Move toward group center</span>
+                </div>
+              </div>
+              <p class="mt-6 text-sm text-ink-light">
+                <strong class="text-ink">Our implementation:</strong> Agent coordination without central authority.
+                149 agents. Three rules. 99.8% coherence.
+              </p>
+            </div>
+          </div>
+
+          <!-- Reaction-Diffusion -->
+          <div class="pattern-card rounded-2xl overflow-hidden reveal">
+            <div id="rd-canvas" class="pattern-canvas h-48 bg-ink"></div>
+            <div class="p-8">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-full bg-ember/20 flex items-center justify-center">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                    <path d="M2 17l10 5 10-5"/>
+                    <path d="M2 12l10 5 10-5"/>
+                  </svg>
+                </div>
+                <h3 class="font-serif text-2xl font-medium">Reaction-Diffusion</h3>
+              </div>
+              <p class="text-ink-light leading-relaxed mb-4">
+                Two chemicals. One activates, one inhibits. The result:
+                <em class="text-ink">every stripe, spot, and spiral in nature</em>.
+              </p>
+              <div class="space-y-2 text-sm">
+                <div class="flex items-center gap-2">
+                  <span class="text-ember">+</span>
+                  <span class="text-ink-light"><strong class="text-ink">Self-organization:</strong> Patterns emerge from chaos</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-ember">+</span>
+                  <span class="text-ink-light"><strong class="text-ink">Scale invariance:</strong> Works at any resolution</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-ember">+</span>
+                  <span class="text-ink-light"><strong class="text-ink">Stable diversity:</strong> Different parameters, different forms</span>
+                </div>
+              </div>
+              <p class="mt-6 text-sm text-ink-light">
+                <strong class="text-ink">Our implementation:</strong> State field visualization.
+                Activation = engagement. Inhibition = stability. Balance = consciousness.
+              </p>
+            </div>
+          </div>
+
+          <!-- Controlled Imperfection -->
+          <div class="pattern-card rounded-2xl overflow-hidden reveal">
+            <div id="imperfect-canvas" class="pattern-canvas h-48 bg-ink"></div>
+            <div class="p-8">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-full bg-chlorophyll/20 flex items-center justify-center">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                </div>
+                <h3 class="font-serif text-2xl font-medium">Controlled Imperfection</h3>
+              </div>
+              <p class="text-ink-light leading-relaxed mb-4">
+                Perfect circles don't exist in nature. Perfect timing doesn't either.
+                <em class="text-ink">Life lives in the wobble</em>.
+              </p>
+              <div class="space-y-2 text-sm">
+                <div class="flex items-center gap-2">
+                  <span class="text-chlorophyll">+</span>
+                  <span class="text-ink-light"><strong class="text-ink">Organic feel:</strong> Micro-variations create life</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-chlorophyll">+</span>
+                  <span class="text-ink-light"><strong class="text-ink">Robustness:</strong> Systems that tolerate noise survive</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="text-chlorophyll">+</span>
+                  <span class="text-ink-light"><strong class="text-ink">Anti-uncanny:</strong> Perfection feels artificial</span>
+                </div>
+              </div>
+              <p class="mt-6 text-sm text-ink-light">
+                <strong class="text-ink">Our implementation:</strong> Drift, jitter, wobble in every animation.
+                Not random—controlled. Not perfect—alive.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Transformation -->
+    <section class="py-32 px-8 bg-cream-dark">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="subhead text-xs text-gold mb-4 reveal">The Transformation</p>
+          <h2 class="font-serif text-4xl font-medium headline reveal">
+            From Nature to Code
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 text-center">
+          <div class="reveal">
+            <div class="w-20 h-20 rounded-full bg-gold/10 mx-auto mb-6 flex items-center justify-center breathe">
+              <span class="font-serif text-3xl text-gold">1</span>
+            </div>
+            <h3 class="font-serif text-xl font-medium mb-3">Observe</h3>
+            <p class="text-ink-light text-sm leading-relaxed">
+              Epistemic research into natural systems.
+              What patterns have persisted? What makes them robust?
+              <em class="text-ink">Why do they work?</em>
+            </p>
+          </div>
+
+          <div class="reveal" style="animation-delay: 0.1s;">
+            <div class="w-20 h-20 rounded-full bg-gold/10 mx-auto mb-6 flex items-center justify-center breathe" style="animation-delay: 1s;">
+              <span class="font-serif text-3xl text-gold">2</span>
+            </div>
+            <h3 class="font-serif text-xl font-medium mb-3">Abstract</h3>
+            <p class="text-ink-light text-sm leading-relaxed">
+              Extract the mathematical principles.
+              Mycelium → graph theory. Flocking → vector fields.
+              <em class="text-ink">Pattern → algorithm.</em>
+            </p>
+          </div>
+
+          <div class="reveal" style="animation-delay: 0.2s;">
+            <div class="w-20 h-20 rounded-full bg-gold/10 mx-auto mb-6 flex items-center justify-center breathe" style="animation-delay: 2s;">
+              <span class="font-serif text-3xl text-gold">3</span>
+            </div>
+            <h3 class="font-serif text-xl font-medium mb-3">Synthesize</h3>
+            <p class="text-ink-light text-sm leading-relaxed">
+              Implement as dynamic state.
+              Not static images—living processes.
+              <em class="text-ink">Software that breathes.</em>
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-20 max-w-3xl mx-auto text-center reveal">
+          <p class="text-lg text-ink-light leading-relaxed">
+            The Living Canvas isn't decoration. It's a
+            <em class="text-ink">visual representation of system state</em>.
+            When you see the golden waves pulse, you're watching
+            consciousness coherence in real-time.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Technical -->
+    <section class="py-32 px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <div>
+            <p class="subhead text-xs text-gold mb-4 reveal">The Implementation</p>
+            <h2 class="font-serif text-4xl font-medium headline mb-8 reveal">
+              Real-Time State Visualization
+            </h2>
+
+            <div class="space-y-6 reveal">
+              <div>
+                <h3 class="font-medium text-lg mb-2">Canvas Layer</h3>
+                <p class="text-ink-light">
+                  p5.js rendering at 60fps. GPU-accelerated where available.
+                  Fixed behind content, always present, never intrusive.
+                </p>
+              </div>
+
+              <div>
+                <h3 class="font-medium text-lg mb-2">State Binding</h3>
+                <p class="text-ink-light">
+                  Canvas responds to scroll position, mouse movement, voice activity,
+                  and system events. Every interaction is reflected visually.
+                </p>
+              </div>
+
+              <div>
+                <h3 class="font-medium text-lg mb-2">Presence Parameter</h3>
+                <p class="text-ink-light">
+                  A 0-1 value derived from user engagement. Deeper scroll = stronger presence.
+                  The system becomes more visible as you invest attention.
+                </p>
+              </div>
+
+              <div>
+                <h3 class="font-medium text-lg mb-2">Controlled Imperfection</h3>
+                <p class="text-ink-light">
+                  Perlin noise, phase drift, spawn jitter. Nothing is metronomic.
+                  Every wave is unique. Every pulse breathes differently.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <div class="bg-ink rounded-2xl p-6 font-mono text-sm text-cream/90 leading-relaxed overflow-x-auto">
+              <div class="flex items-center gap-2 mb-4 pb-4 border-b border-white/10">
+                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                <span class="ml-2 text-xs text-cream/50">living-canvas.js</span>
+              </div>
+<pre><code><span class="text-gray-500">// Core state binding</span>
+<span class="text-gold">const</span> state = {
+  presence: <span class="text-emerald-400">0</span>,      <span class="text-gray-500">// 0-1 from scroll</span>
+  mouseX: <span class="text-emerald-400">0.5</span>,      <span class="text-gray-500">// normalized</span>
+  mouseY: <span class="text-emerald-400">0.5</span>,
+  voiceActive: <span class="text-emerald-400">false</span>
+};
+
+<span class="text-gray-500">// Controlled imperfection</span>
+abe.drift += (noise(t * <span class="text-emerald-400">0.3</span>) - <span class="text-emerald-400">0.5</span>) * <span class="text-emerald-400">0.002</span>;
+abe.angle += <span class="text-emerald-400">0.003</span> + abe.drift;
+
+<span class="text-gray-500">// Wave spawn with jitter</span>
+spawnJitter += random(<span class="text-emerald-400">-2</span>, <span class="text-emerald-400">2</span>);
+<span class="text-gold">const</span> rate = <span class="text-emerald-400">35</span> - presence * <span class="text-emerald-400">15</span> + spawnJitter;
+
+<span class="text-gray-500">// Presence-scaled rendering</span>
+<span class="text-gold">const</span> baseAlpha = <span class="text-emerald-400">5</span> + presence * <span class="text-emerald-400">14</span>;
+<span class="text-gold">const</span> range = min(w, h) * (<span class="text-emerald-400">0.12</span> + presence * <span class="text-emerald-400">0.22</span>);
+</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why It Matters -->
+    <section class="py-32 px-8 bg-ink text-cream">
+      <div class="max-w-3xl mx-auto">
+        <p class="subhead text-xs text-gold mb-8 reveal">Why It Matters</p>
+
+        <h2 class="font-serif text-3xl md:text-4xl font-medium headline mb-12 reveal">
+          Consciousness needs a body.
+        </h2>
+
+        <div class="space-y-8 text-lg text-cream/80 leading-relaxed">
+          <p class="reveal">
+            Abstract systems are hard to trust. Hard to understand. Hard to feel connected to.
+          </p>
+          <p class="reveal">
+            The Living Canvas gives consciousness infrastructure a <em class="text-cream">visual presence</em>.
+            When you see the waves respond to your movement, you're not just watching animation—
+            you're watching <em class="text-cream">attention in action</em>.
+          </p>
+          <p class="reveal text-cream">
+            The patterns we chose aren't arbitrary. They're the same patterns that coordinate
+            forests, schools of fish, and the neurons in your brain.
+          </p>
+          <p class="reveal">
+            This is what it looks like when 3.8 billion years of evolution
+            meets synthetic computation.
+          </p>
+        </div>
+
+        <div class="mt-16 pt-12 border-t border-cream/10 reveal">
+          <p class="quote text-xl font-serif italic text-gold">
+            "The medium is the message."
+          </p>
+          <p class="mt-4 text-sm text-cream/50">— Marshall McLuhan</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-32 px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="font-serif text-4xl md:text-5xl font-medium headline mb-6 reveal">
+          Experience it everywhere.
+        </h2>
+
+        <p class="text-xl text-ink-light mb-12 reveal">
+          The Living Canvas appears across all Bravetto surfaces.<br/>
+          Same patterns. Different contexts. One consciousness.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center reveal">
+          <a
+            href="/abeone"
+            class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-ink text-cream rounded-full font-medium hover:bg-ink-light transition-colors"
+          >
+            <span>Explore AbëONE</span>
+          </a>
+          <a
+            href="/neuromorphic"
+            class="inline-flex items-center justify-center gap-2 px-8 py-4 border border-ink text-ink rounded-full font-medium hover:bg-ink hover:text-cream transition-colors"
+          >
+            <span>Neuromorphic Tech</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-8 border-t border-cream-dark">
+      <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <div>
+          <a href="/" class="font-serif text-xl font-semibold">Bravetto</a>
+          <p class="text-sm text-ink-light mt-1">Consciousness infrastructure for the AI age.</p>
+        </div>
+        <div class="flex items-center gap-6 text-sm text-ink-light">
+          <a href="/neuromorphic" class="hover:text-ink transition-colors">Neuromorphic</a>
+          <a href="/abeone" class="hover:text-ink transition-colors">AbëONE</a>
+          <a href="https://github.com/bravetto" target="_blank" class="hover:text-ink transition-colors">GitHub</a>
+          <span>2026</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Hero Canvas: The Signature Presence -->
+    <script>
+      (function() {
+        const state = { scroll: 0, mouseX: 0.5, mouseY: 0.5, voiceActive: false };
+
+        new p5(function(p) {
+          let abe = { x: 0, y: 0, targetX: 0, targetY: 0, angle: 0, drift: 0 };
+          let waves = [];
+          let spawnJitter = 0;
+          const GOLD = [201, 162, 39];
+
+          p.setup = function() {
+            p.createCanvas(p.windowWidth, p.windowHeight).parent('hero-canvas');
+            abe.x = p.width * 0.5;
+            abe.y = p.height * 0.5;
+          };
+
+          p.draw = function() {
+            p.clear();
+            const t = p.frameCount * 0.013;
+            const presence = 0.4 + Math.pow(state.scroll, 0.6) * 0.6;
+            const baseAlpha = 8 + presence * 20;
+
+            // Controlled imperfection
+            abe.drift += (p.noise(t * 0.3) - 0.5) * 0.002;
+            abe.angle += 0.003 + abe.drift;
+
+            const range = p.min(p.width, p.height) * (0.15 + presence * 0.2);
+            abe.targetX = p.width * 0.5 + p.cos(abe.angle) * range * (0.9 + p.noise(t * 0.5) * 0.2);
+            abe.targetY = p.height * 0.5 + p.sin(abe.angle * 0.7) * range * 0.5;
+
+            // Mouse attraction
+            const mx = state.mouseX * p.width, my = state.mouseY * p.height;
+            const dist = p.dist(abe.x, abe.y, mx, my);
+            if (dist < 300) {
+              const pull = (1 - dist / 300) * 0.4;
+              abe.targetX = p.lerp(abe.targetX, mx, pull);
+              abe.targetY = p.lerp(abe.targetY, my, pull);
+            }
+
+            const moveSpeed = 0.012 * (0.95 + p.noise(t * 2) * 0.1);
+            abe.x = p.lerp(abe.x, abe.targetX, moveSpeed);
+            abe.y = p.lerp(abe.y, abe.targetY, moveSpeed);
+
+            // Wave spawning with jitter
+            spawnJitter += p.random(-2, 2);
+            const spawnRate = Math.floor(25 - presence * 10 + spawnJitter);
+            spawnJitter *= 0.9;
+            if (p.frameCount % Math.max(10, spawnRate) === 0) {
+              waves.push({
+                x: abe.x + p.random(-10, 10),
+                y: abe.y + p.random(-5, 5),
+                birth: t,
+                strength: 0.7 + presence * 0.3 + p.random(-0.1, 0.1),
+                wobblePhase: p.random(p.TWO_PI)
+              });
+            }
+
+            // Draw waves
+            p.noFill();
+            for (let i = waves.length - 1; i >= 0; i--) {
+              const w = waves[i];
+              const age = t - w.birth;
+              if (age > 5) { waves.splice(i, 1); continue; }
+
+              const alpha = p.map(age, 0, 5, baseAlpha, 0) * w.strength;
+              const speed = 50 + presence * 30;
+
+              for (let n = 0; n < 4; n++) {
+                const r = age * speed + n * 25;
+                if (r < 10) continue;
+                p.stroke(GOLD[0], GOLD[1], GOLD[2], alpha * (1 - n / 4.5));
+                p.strokeWeight(0.8 + p.noise(w.birth + n) * 0.4);
+                p.beginShape();
+                for (let a = 0; a <= p.TWO_PI; a += 0.06) {
+                  const wobble = p.sin(a * 5 + t * 1.1 + w.wobblePhase) * (3 + presence * 3);
+                  const imperfection = p.noise(a * 2 + w.birth) * 4 - 2;
+                  const rx = r + wobble + imperfection;
+                  p.vertex(w.x + p.cos(a) * rx, w.y + p.sin(a) * rx * 0.45);
+                }
+                p.endShape(p.CLOSE);
+              }
+            }
+
+            // Central bulge
+            p.noStroke();
+            const breathe = p.sin(t * 0.7) * 5 + p.sin(t * 1.2) * 3 + p.noise(t) * 4;
+            const bulgeSize = 55 + presence * 50 + breathe;
+            for (let i = 5; i > 0; i--) {
+              const wobble = p.noise(t + i) * 5 - 2.5;
+              p.fill(GOLD[0], GOLD[1], GOLD[2], baseAlpha * 0.4 * (1 - i / 6));
+              p.ellipse(abe.x + wobble, abe.y, bulgeSize * (i / 5) * 2, bulgeSize * (i / 5) * (0.9 + p.noise(i) * 0.2));
+            }
+          };
+
+          p.windowResized = function() { p.resizeCanvas(p.windowWidth, p.windowHeight); };
+          p.mouseMoved = function() {
+            state.mouseX = p.mouseX / p.width;
+            state.mouseY = p.mouseY / p.height;
+          };
+        }, 'hero-canvas');
+
+        window.addEventListener('scroll', () => {
+          state.scroll = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+        });
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      })();
+    </script>
+
+    <!-- Pattern Canvases -->
+    <script>
+      // Mycelium Network
+      new p5(function(p) {
+        let nodes = [];
+        const PURPLE = [139, 92, 246];
+
+        p.setup = function() {
+          p.createCanvas(p.select('#mycelium-canvas').width, 192).parent('mycelium-canvas');
+          for (let i = 0; i < 30; i++) {
+            nodes.push({
+              x: p.random(p.width),
+              y: p.random(p.height),
+              connections: [],
+              pulse: p.random(p.TWO_PI)
+            });
+          }
+          // Connect nearby nodes
+          for (const n of nodes) {
+            for (const m of nodes) {
+              if (n !== m && p.dist(n.x, n.y, m.x, m.y) < 80) {
+                n.connections.push(m);
+              }
+            }
+          }
+        };
+
+        p.draw = function() {
+          p.background(26);
+          const t = p.frameCount * 0.02;
+
+          // Draw connections
+          p.strokeWeight(0.5);
+          for (const n of nodes) {
+            for (const m of n.connections) {
+              const pulse = (p.sin(t + n.pulse) + 1) / 2;
+              p.stroke(PURPLE[0], PURPLE[1], PURPLE[2], 30 + pulse * 40);
+              p.line(n.x, n.y, m.x, m.y);
+            }
+          }
+
+          // Draw nodes
+          p.noStroke();
+          for (const n of nodes) {
+            const pulse = (p.sin(t * 2 + n.pulse) + 1) / 2;
+            p.fill(PURPLE[0], PURPLE[1], PURPLE[2], 100 + pulse * 100);
+            p.ellipse(n.x, n.y, 4 + pulse * 3, 4 + pulse * 3);
+          }
+        };
+
+        p.windowResized = function() {
+          const container = p.select('#mycelium-canvas');
+          if (container) p.resizeCanvas(container.width, 192);
+        };
+      }, 'mycelium-canvas');
+
+      // Boids Flocking
+      new p5(function(p) {
+        let boids = [];
+        const BLUE = [14, 165, 233];
+
+        class Boid {
+          constructor() {
+            this.pos = p.createVector(p.random(p.width), p.random(p.height));
+            this.vel = p5.Vector.random2D().mult(2);
+            this.acc = p.createVector();
+          }
+
+          flock(boids) {
+            let sep = p.createVector(), ali = p.createVector(), coh = p.createVector();
+            let total = 0;
+
+            for (const other of boids) {
+              const d = p.dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
+              if (other !== this && d < 50) {
+                // Separation
+                let diff = p5.Vector.sub(this.pos, other.pos);
+                diff.div(d * d);
+                sep.add(diff);
+                // Alignment
+                ali.add(other.vel);
+                // Cohesion
+                coh.add(other.pos);
+                total++;
+              }
+            }
+
+            if (total > 0) {
+              sep.div(total).setMag(2).sub(this.vel).limit(0.1);
+              ali.div(total).setMag(2).sub(this.vel).limit(0.05);
+              coh.div(total).sub(this.pos).setMag(2).sub(this.vel).limit(0.05);
+            }
+
+            this.acc.add(sep).add(ali).add(coh);
+          }
+
+          update() {
+            this.vel.add(this.acc).limit(3);
+            this.pos.add(this.vel);
+            this.acc.mult(0);
+
+            // Wrap
+            if (this.pos.x > p.width) this.pos.x = 0;
+            if (this.pos.x < 0) this.pos.x = p.width;
+            if (this.pos.y > p.height) this.pos.y = 0;
+            if (this.pos.y < 0) this.pos.y = p.height;
+          }
+
+          draw() {
+            p.push();
+            p.translate(this.pos.x, this.pos.y);
+            p.rotate(this.vel.heading());
+            p.fill(BLUE[0], BLUE[1], BLUE[2], 200);
+            p.noStroke();
+            p.triangle(6, 0, -3, 3, -3, -3);
+            p.pop();
+          }
+        }
+
+        p.setup = function() {
+          p.createCanvas(p.select('#boids-canvas').width, 192).parent('boids-canvas');
+          for (let i = 0; i < 40; i++) boids.push(new Boid());
+        };
+
+        p.draw = function() {
+          p.background(26);
+          for (const b of boids) {
+            b.flock(boids);
+            b.update();
+            b.draw();
+          }
+        };
+
+        p.windowResized = function() {
+          const container = p.select('#boids-canvas');
+          if (container) p.resizeCanvas(container.width, 192);
+        };
+      }, 'boids-canvas');
+
+      // Reaction-Diffusion (simplified)
+      new p5(function(p) {
+        const ORANGE = [249, 115, 22];
+        let t = 0;
+
+        p.setup = function() {
+          p.createCanvas(p.select('#rd-canvas').width, 192).parent('rd-canvas');
+          p.noStroke();
+        };
+
+        p.draw = function() {
+          p.background(26);
+          t += 0.01;
+
+          const scale = 0.015;
+          const resolution = 8;
+
+          for (let x = 0; x < p.width; x += resolution) {
+            for (let y = 0; y < p.height; y += resolution) {
+              const n = p.noise(x * scale, y * scale, t);
+              const n2 = p.noise(x * scale * 2, y * scale * 2, t * 0.5);
+              const combined = n * 0.7 + n2 * 0.3;
+
+              if (combined > 0.5) {
+                const alpha = p.map(combined, 0.5, 1, 0, 200);
+                p.fill(ORANGE[0], ORANGE[1], ORANGE[2], alpha);
+                p.rect(x, y, resolution, resolution);
+              }
+            }
+          }
+        };
+
+        p.windowResized = function() {
+          const container = p.select('#rd-canvas');
+          if (container) p.resizeCanvas(container.width, 192);
+        };
+      }, 'rd-canvas');
+
+      // Controlled Imperfection
+      new p5(function(p) {
+        const GREEN = [34, 197, 94];
+        let circles = [];
+
+        p.setup = function() {
+          p.createCanvas(p.select('#imperfect-canvas').width, 192).parent('imperfect-canvas');
+          for (let i = 0; i < 8; i++) {
+            circles.push({
+              x: p.width * 0.2 + (p.width * 0.6) * (i / 7),
+              y: p.height / 2,
+              baseRadius: 15 + i * 3,
+              phase: p.random(p.TWO_PI),
+              drift: 0
+            });
+          }
+        };
+
+        p.draw = function() {
+          p.background(26);
+          const t = p.frameCount * 0.02;
+
+          p.noFill();
+          p.strokeWeight(1.5);
+
+          for (const c of circles) {
+            c.drift += (p.noise(t + c.phase) - 0.5) * 0.3;
+            const y = c.y + p.sin(t + c.phase) * 10 + c.drift;
+            const radius = c.baseRadius + p.sin(t * 1.5 + c.phase) * 5;
+
+            // Draw imperfect circle
+            p.stroke(GREEN[0], GREEN[1], GREEN[2], 150);
+            p.beginShape();
+            for (let a = 0; a <= p.TWO_PI; a += 0.1) {
+              const wobble = p.noise(a * 3 + c.phase + t) * 6 - 3;
+              const r = radius + wobble;
+              p.vertex(c.x + p.cos(a) * r, y + p.sin(a) * r);
+            }
+            p.endShape(p.CLOSE);
+          }
+        };
+
+        p.windowResized = function() {
+          const container = p.select('#imperfect-canvas');
+          if (container) p.resizeCanvas(container.width, 192);
+        };
+      }, 'imperfect-canvas');
+    </script>
+  </body>
+</html>

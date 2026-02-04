@@ -4,6 +4,8 @@
   "rewrites": [
     { "source": "/graceful", "destination": "/graceful.html" },
     { "source": "/aec", "destination": "/aec.html" },
+    { "source": "/neuromorphic", "destination": "/neuromorphic.html" },
+    { "source": "/living-canvas", "destination": "/living-canvas.html" },
     { "source": "/abeone", "destination": "/abeone/index.html" },
     { "source": "/biasguard", "destination": "/biasguard/index.html" },
     {
