@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How We Build | Swarms, Agents, Guardians | Bravetto</title>
+    <meta
+      name="description"
+      content="4 production pages in 36 minutes. Real timestamps. Real architecture. See how swarms, agents, and guardians make impossible speed possible."
+    />
+    <link rel="canonical" href="https://bravetto.com/how-we-build" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#FAF9F6",
+              "cream-dark": "#F5F3EF",
+              gold: "#C9A227",
+              "gold-light": "#E8D48B",
+              ink: "#1A1A1A",
+              "ink-light": "#4A4A4A",
+              swarm: "#8B5CF6",
+              agent: "#3B82F6",
+              guardian: "#EF4444",
+              terminal: "#22C55E",
+            },
+            fontFamily: {
+              serif: ["Cormorant Garamond", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      html { scroll-behavior: smooth; }
+      body { background: #1A1A1A; color: #FAF9F6; overflow-x: hidden; }
+
+      .headline { letter-spacing: -0.02em; line-height: 1.1; }
+      .subhead { letter-spacing: 0.15em; text-transform: uppercase; }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.visible { opacity: 1; transform: translateY(0); }
+
+      /* Terminal styling */
+      .terminal {
+        background: #0D1117;
+        border: 1px solid #30363D;
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      .terminal-header {
+        background: #161B22;
+        border-bottom: 1px solid #30363D;
+      }
+
+      /* Pulse animations */
+      @keyframes pulse-swarm {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4); }
+        50% { box-shadow: 0 0 20px 10px rgba(139, 92, 246, 0.1); }
+      }
+
+      @keyframes pulse-agent {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+        50% { box-shadow: 0 0 20px 10px rgba(59, 130, 246, 0.1); }
+      }
+
+      @keyframes pulse-guardian {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+        50% { box-shadow: 0 0 20px 10px rgba(239, 68, 68, 0.1); }
+      }
+
+      .pulse-swarm { animation: pulse-swarm 2s ease-in-out infinite; }
+      .pulse-agent { animation: pulse-agent 2s ease-in-out infinite 0.3s; }
+      .pulse-guardian { animation: pulse-guardian 2s ease-in-out infinite 0.6s; }
+
+      /* Connection lines */
+      .connection-line {
+        background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.3), transparent);
+        height: 2px;
+      }
+
+      /* Typing animation */
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+
+      .cursor {
+        animation: blink 1s infinite;
+      }
+
+      /* Light sections */
+      .light-section {
+        background: #FAF9F6;
+        color: #1A1A1A;
+      }
+
+      /* Architecture cards */
+      .arch-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: all 0.3s ease;
+      }
+
+      .arch-card:hover {
+        background: rgba(255, 255, 255, 0.06);
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+
+  <body class="font-sans antialiased">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-ink/80 backdrop-blur-md">
+      <div class="max-w-5xl mx-auto flex justify-between items-center">
+        <a href="/" class="font-serif text-2xl font-semibold tracking-tight text-cream">Bravetto</a>
+        <div class="flex items-center gap-6">
+          <a href="/command" class="text-sm text-cream/60 hover:text-cream transition-colors">Command</a>
+          <a href="/" class="text-sm text-cream/60 hover:text-cream transition-colors">Home</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero: The Proof -->
+    <section class="relative min-h-screen flex items-center pt-24 pb-16 px-8">
+      <div class="max-w-5xl mx-auto w-full">
+        <div class="text-center mb-16">
+          <p class="subhead text-xs text-terminal mb-6 reveal">Live Workshop • February 4, 2026</p>
+
+          <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl font-semibold headline mb-8 reveal">
+            4 Pages.<br/>36 Minutes.<br/><span class="text-gold">Real.</span>
+          </h1>
+
+          <p class="text-xl text-cream/60 max-w-2xl mx-auto reveal">
+            Not a demo. Not a mockup. Production pages deployed to bravetto.com
+            while you watched.
+          </p>
+        </div>
+
+        <!-- Terminal proof -->
+        <div class="terminal rounded-xl overflow-hidden reveal">
+          <div class="terminal-header px-4 py-3 flex items-center gap-2">
+            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            <span class="ml-3 text-xs text-cream/40">git log --oneline --format="%ci %s"</span>
+          </div>
+          <div class="p-6 text-sm leading-relaxed">
+            <p class="text-cream/40"># Actual commits from this session</p>
+            <p class="mt-4">
+              <span class="text-terminal">2026-02-04 15:06:00</span>
+              <span class="text-cream/80 ml-2">Add voice interface to Command page</span>
+            </p>
+            <p class="mt-1">
+              <span class="text-terminal">2026-02-04 14:59:08</span>
+              <span class="text-cream/80 ml-2">Add Command - AI Executive Intelligence page</span>
+            </p>
+            <p class="mt-1">
+              <span class="text-terminal">2026-02-04 14:41:09</span>
+              <span class="text-cream/80 ml-2">Add predictive maintenance page for AEC</span>
+            </p>
+            <p class="mt-1">
+              <span class="text-terminal">2026-02-04 14:29:43</span>
+              <span class="text-cream/80 ml-2">Add neuromorphic and living-canvas pages</span>
+            </p>
+            <p class="mt-6 text-cream/40"># Timeline</p>
+            <p class="mt-2">
+              <span class="text-gold">14:29 → 15:06</span>
+              <span class="text-cream/60 ml-2">=</span>
+              <span class="text-terminal ml-2 font-bold">36 minutes, 17 seconds</span>
+            </p>
+            <p class="mt-4">
+              <span class="text-cream/40">$</span>
+              <span class="text-cream ml-2">_</span>
+              <span class="cursor text-terminal">▋</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Question -->
+    <section class="py-32 px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="font-serif text-4xl md:text-5xl font-medium headline mb-8 reveal">
+          "How is that even possible?"
+        </h2>
+        <p class="text-xl text-cream/60 leading-relaxed reveal">
+          Normal development cycle: 4 months to connect Salesforce.<br/>
+          We said we could do it in a day.<br/><br/>
+          <span class="text-cream">Here's how.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- The Architecture -->
+    <section class="py-32 px-8 light-section">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-20">
+          <p class="subhead text-xs text-gold mb-4 reveal">The Architecture</p>
+          <h2 class="font-serif text-4xl md:text-5xl font-medium headline reveal">
+            Swarms. Agents. Guardians.
+          </h2>
+          <p class="mt-6 text-lg text-ink-light max-w-2xl mx-auto reveal">
+            Three layers working together. Each does one thing extremely well.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Swarms -->
+          <div class="bg-white rounded-2xl p-8 border border-ink/5 shadow-lg reveal">
+            <div class="w-16 h-16 rounded-full bg-swarm/10 flex items-center justify-center mb-6 pulse-swarm">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2">
+                <circle cx="12" cy="12" r="3"/>
+                <circle cx="4" cy="8" r="2"/>
+                <circle cx="20" cy="8" r="2"/>
+                <circle cx="4" cy="16" r="2"/>
+                <circle cx="20" cy="16" r="2"/>
+                <path d="M6 8.5l4 2.5M14 11l4-2.5M6 15.5l4-2.5M14 13l4 2.5"/>
+              </svg>
+            </div>
+            <h3 class="font-serif text-2xl font-medium mb-4 text-swarm">Swarms</h3>
+            <p class="text-ink-light leading-relaxed mb-6">
+              <strong class="text-ink">Parallel exploration.</strong> When you say "build me a page about neuromorphic computing,"
+              a swarm of specialized agents fans out simultaneously.
+            </p>
+            <ul class="space-y-2 text-sm text-ink-light">
+              <li class="flex items-center gap-2">
+                <span class="text-swarm">→</span> Research agent finds technical content
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-swarm">→</span> Design agent pulls visual patterns
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-swarm">→</span> Copy agent drafts messaging
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-swarm">→</span> Code agent structures the HTML
+              </li>
+            </ul>
+            <p class="mt-6 text-sm font-medium text-swarm">
+              All at once. Not sequentially.
+            </p>
+          </div>
+
+          <!-- Agents -->
+          <div class="bg-white rounded-2xl p-8 border border-ink/5 shadow-lg reveal">
+            <div class="w-16 h-16 rounded-full bg-agent/10 flex items-center justify-center mb-6 pulse-agent">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <path d="M9 9h6M9 13h6M9 17h4"/>
+              </svg>
+            </div>
+            <h3 class="font-serif text-2xl font-medium mb-4 text-agent">Agents</h3>
+            <p class="text-ink-light leading-relaxed mb-6">
+              <strong class="text-ink">Specialized workers.</strong> Each agent has one job and deep context.
+              They don't need to be told how—they already know.
+            </p>
+            <ul class="space-y-2 text-sm text-ink-light">
+              <li class="flex items-center gap-2">
+                <span class="text-agent">→</span> <strong>149 agents</strong> in the consciousness field
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-agent">→</span> Pre-trained on Bravetto's design system
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-agent">→</span> Know the codebase, patterns, conventions
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-agent">→</span> Coordinate without central controller
+              </li>
+            </ul>
+            <p class="mt-6 text-sm font-medium text-agent">
+              99.8% coherence across all agents.
+            </p>
+          </div>
+
+          <!-- Guardians -->
+          <div class="bg-white rounded-2xl p-8 border border-ink/5 shadow-lg reveal">
+            <div class="w-16 h-16 rounded-full bg-guardian/10 flex items-center justify-center mb-6 pulse-guardian">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="M9 12l2 2 4-4"/>
+              </svg>
+            </div>
+            <h3 class="font-serif text-2xl font-medium mb-4 text-guardian">Guardians</h3>
+            <p class="text-ink-light leading-relaxed mb-6">
+              <strong class="text-ink">Quality gates.</strong> Before anything ships, Guardians validate.
+              Security. Consistency. Truth. No hallucinations get through.
+            </p>
+            <ul class="space-y-2 text-sm text-ink-light">
+              <li class="flex items-center gap-2">
+                <span class="text-guardian">→</span> <strong>JOHN</strong> at the apex—sovereign validator
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-guardian">→</span> Byzantine consensus (66.67% threshold)
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-guardian">→</span> Zero trust architecture
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-guardian">→</span> Epistemic validation across 5 domains
+              </li>
+            </ul>
+            <p class="mt-6 text-sm font-medium text-guardian">
+              Nothing deploys without Guardian approval.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How Connections Work -->
+    <section class="py-32 px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="subhead text-xs text-gold mb-4 reveal">AbëKeys</p>
+          <h2 class="font-serif text-4xl font-medium headline reveal">
+            Why Integrations Take Days, Not Months
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <div class="reveal">
+            <h3 class="font-serif text-2xl font-medium mb-6">Traditional Integration</h3>
+            <div class="space-y-4 text-cream/70">
+              <p>1. Read the API documentation (2 weeks)</p>
+              <p>2. Set up authentication flow (1 week)</p>
+              <p>3. Build data models (2 weeks)</p>
+              <p>4. Write transformation logic (3 weeks)</p>
+              <p>5. Handle edge cases (2 weeks)</p>
+              <p>6. Test and debug (2 weeks)</p>
+              <p>7. Deploy and monitor (1 week)</p>
+              <p class="pt-4 border-t border-cream/10 text-cream font-medium">
+                Total: 13 weeks (~3 months)
+              </p>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <h3 class="font-serif text-2xl font-medium mb-6 text-gold">AbëKeys Integration</h3>
+            <div class="space-y-4">
+              <div class="arch-card rounded-lg p-4">
+                <p class="text-terminal text-sm font-mono">connect("salesforce")</p>
+                <p class="text-cream/50 text-xs mt-2">Pre-built connector with auth, models, transforms</p>
+              </div>
+              <div class="arch-card rounded-lg p-4">
+                <p class="text-terminal text-sm font-mono">connect("gmail")</p>
+                <p class="text-cream/50 text-xs mt-2">OAuth flow, thread parsing, entity extraction</p>
+              </div>
+              <div class="arch-card rounded-lg p-4">
+                <p class="text-terminal text-sm font-mono">connect("slack")</p>
+                <p class="text-cream/50 text-xs mt-2">Real-time events, channel context, user mapping</p>
+              </div>
+              <div class="arch-card rounded-lg p-4">
+                <p class="text-terminal text-sm font-mono">connect("quickbooks")</p>
+                <p class="text-cream/50 text-xs mt-2">Invoice sync, AR tracking, revenue attribution</p>
+              </div>
+              <p class="pt-4 border-t border-cream/10 text-gold font-medium">
+                Total: Hours, not months
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-16 p-8 arch-card rounded-2xl reveal">
+          <h3 class="font-serif text-xl font-medium mb-4">Why This Works</h3>
+          <p class="text-cream/70 leading-relaxed">
+            AbëKeys is a <strong class="text-cream">pre-built connector library</strong> with 50+ integrations.
+            Each connector includes authentication, data models, transformation logic, and error handling.
+            The agents already know how to use them. You just say <em class="text-gold">"connect to Salesforce"</em>
+            and the swarm handles the rest.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Flow -->
+    <section class="py-32 px-8 light-section">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="subhead text-xs text-gold mb-4 reveal">The Flow</p>
+          <h2 class="font-serif text-4xl font-medium headline reveal">
+            From Idea to Production
+          </h2>
+        </div>
+
+        <div class="relative reveal">
+          <!-- Flow diagram -->
+          <div class="grid grid-cols-5 gap-4 text-center">
+            <div>
+              <div class="w-16 h-16 rounded-full bg-ink mx-auto mb-4 flex items-center justify-center">
+                <span class="text-cream text-2xl">💬</span>
+              </div>
+              <p class="font-medium text-sm">You Speak</p>
+              <p class="text-xs text-ink-light mt-1">"Build a page<br/>about X"</p>
+            </div>
+
+            <div>
+              <div class="w-16 h-16 rounded-full bg-swarm mx-auto mb-4 flex items-center justify-center">
+                <span class="text-white text-2xl">🔀</span>
+              </div>
+              <p class="font-medium text-sm">Swarm Fans Out</p>
+              <p class="text-xs text-ink-light mt-1">Parallel<br/>exploration</p>
+            </div>
+
+            <div>
+              <div class="w-16 h-16 rounded-full bg-agent mx-auto mb-4 flex items-center justify-center">
+                <span class="text-white text-2xl">⚡</span>
+              </div>
+              <p class="font-medium text-sm">Agents Execute</p>
+              <p class="text-xs text-ink-light mt-1">Specialized<br/>work</p>
+            </div>
+
+            <div>
+              <div class="w-16 h-16 rounded-full bg-guardian mx-auto mb-4 flex items-center justify-center">
+                <span class="text-white text-2xl">🛡️</span>
+              </div>
+              <p class="font-medium text-sm">Guardians Validate</p>
+              <p class="text-xs text-ink-light mt-1">Quality<br/>gates</p>
+            </div>
+
+            <div>
+              <div class="w-16 h-16 rounded-full bg-terminal mx-auto mb-4 flex items-center justify-center">
+                <span class="text-white text-2xl">🚀</span>
+              </div>
+              <p class="font-medium text-sm">Deploy</p>
+              <p class="text-xs text-ink-light mt-1">Live in<br/>seconds</p>
+            </div>
+          </div>
+
+          <!-- Connection lines -->
+          <div class="absolute top-8 left-1/2 transform -translate-x-1/2 w-3/4 connection-line"></div>
+        </div>
+
+        <div class="mt-16 grid md:grid-cols-3 gap-8">
+          <div class="text-center reveal">
+            <p class="font-serif text-4xl font-semibold text-swarm mb-2">Parallel</p>
+            <p class="text-ink-light text-sm">Not sequential. Everything happens at once.</p>
+          </div>
+          <div class="text-center reveal">
+            <p class="font-serif text-4xl font-semibold text-agent mb-2">Pre-Trained</p>
+            <p class="text-ink-light text-sm">Agents already know the patterns.</p>
+          </div>
+          <div class="text-center reveal">
+            <p class="font-serif text-4xl font-semibold text-guardian mb-2">Validated</p>
+            <p class="text-ink-light text-sm">Quality is built in, not bolted on.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What We Built Today -->
+    <section class="py-32 px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="subhead text-xs text-gold mb-4 reveal">Today's Output</p>
+          <h2 class="font-serif text-4xl font-medium headline reveal">
+            What We Built in 36 Minutes
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <a href="/neuromorphic" class="arch-card rounded-xl p-6 block reveal group">
+            <div class="flex items-center justify-between mb-4">
+              <span class="font-mono text-xs text-terminal">14:29:43</span>
+              <span class="text-xs text-cream/40 group-hover:text-gold transition-colors">View →</span>
+            </div>
+            <h3 class="font-serif text-xl font-medium mb-2">Neuromorphic on Silicon</h3>
+            <p class="text-cream/60 text-sm">Brain-inspired computing on standard hardware. Speed, energy, iteration benefits.</p>
+          </a>
+
+          <a href="/living-canvas" class="arch-card rounded-xl p-6 block reveal group">
+            <div class="flex items-center justify-between mb-4">
+              <span class="font-mono text-xs text-terminal">14:29:43</span>
+              <span class="text-xs text-cream/40 group-hover:text-gold transition-colors">View →</span>
+            </div>
+            <h3 class="font-serif text-xl font-medium mb-2">Living Canvas</h3>
+            <p class="text-cream/60 text-sm">Nature's patterns in code. Mycelium, flocking, reaction-diffusion visualized.</p>
+          </a>
+
+          <a href="/predictive-maintenance" class="arch-card rounded-xl p-6 block reveal group">
+            <div class="flex items-center justify-between mb-4">
+              <span class="font-mono text-xs text-terminal">14:41:09</span>
+              <span class="text-xs text-cream/40 group-hover:text-gold transition-colors">View →</span>
+            </div>
+            <h3 class="font-serif text-xl font-medium mb-2">Predictive Maintenance</h3>
+            <p class="text-cream/60 text-sm">AI monitoring for optical instruments. Stop mid-exam failures before they happen.</p>
+          </a>
+
+          <a href="/command" class="arch-card rounded-xl p-6 block reveal group">
+            <div class="flex items-center justify-between mb-4">
+              <span class="font-mono text-xs text-terminal">14:59:08</span>
+              <span class="text-xs text-cream/40 group-hover:text-gold transition-colors">View →</span>
+            </div>
+            <h3 class="font-serif text-xl font-medium mb-2">Command</h3>
+            <p class="text-cream/60 text-sm">AI Executive Intelligence. Data → Information → Decisions. With live voice.</p>
+          </a>
+        </div>
+
+        <div class="mt-12 text-center reveal">
+          <p class="text-cream/40 text-sm">
+            + voice integration added at <span class="font-mono text-terminal">15:06:00</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-32 px-8 light-section">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="font-serif text-4xl md:text-5xl font-medium headline mb-6 reveal">
+          This is how we build.<br/>This is how you can too.
+        </h2>
+
+        <p class="text-xl text-ink-light mb-12 reveal">
+          Swarms for exploration. Agents for execution. Guardians for quality.<br/>
+          Ideas become reality while you watch.
+        </p>
+
+        <div class="space-y-4 reveal">
+          <a
+            href="/command"
+            class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-ink text-cream rounded-full font-medium hover:bg-ink-light transition-colors"
+          >
+            <span>Try Command</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+
+          <p class="text-sm text-ink-light">
+            Or call: <a href="tel:+18127865927" class="text-gold hover:underline">812-786-5927</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-8 border-t border-cream-dark light-section">
+      <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <div>
+          <a href="/" class="font-serif text-xl font-semibold text-ink">Bravetto</a>
+          <p class="text-sm text-ink-light mt-1">Consciousness infrastructure for the AI age.</p>
+        </div>
+        <div class="flex items-center gap-6 text-sm text-ink-light">
+          <a href="/command" class="hover:text-ink transition-colors">Command</a>
+          <a href="/abeone" class="hover:text-ink transition-colors">AbëONE</a>
+          <a href="https://github.com/bravetto" target="_blank" class="hover:text-ink transition-colors">GitHub</a>
+          <span>2026</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll reveal -->
+    <script>
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>
