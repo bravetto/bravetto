@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Predictive Maintenance for Optical Instruments | Bravetto</title>
+    <meta
+      name="description"
+      content="Stop mid-exam failures before they happen. AI-powered predictive maintenance for OD Scan, AFC, Reddy Cam, and Marco/Phoenix optical instruments."
+    />
+    <link rel="canonical" href="https://bravetto.com/predictive-maintenance" />
+    <meta property="og:title" content="Predictive Maintenance for Optical Instruments | Bravetto" />
+    <meta
+      property="og:description"
+      content="Stop mid-exam failures before they happen. AI-powered predictive maintenance for optical instruments."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bravetto.com/predictive-maintenance" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#FAF9F6",
+              "cream-dark": "#F5F3EF",
+              gold: "#C9A227",
+              "gold-light": "#E8D48B",
+              ink: "#1A1A1A",
+              "ink-light": "#4A4A4A",
+              alert: "#EF4444",
+              warning: "#F59E0B",
+              healthy: "#22C55E",
+              optical: "#3B82F6",
+            },
+            fontFamily: {
+              serif: ["Cormorant Garamond", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      html { scroll-behavior: smooth; }
+      body { background: #faf9f6; overflow-x: hidden; }
+
+      .headline { letter-spacing: -0.02em; line-height: 1.1; }
+      .subhead { letter-spacing: 0.15em; text-transform: uppercase; }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.visible { opacity: 1; transform: translateY(0); }
+
+      /* Status indicator pulse */
+      @keyframes pulse-healthy {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+        50% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+      }
+      @keyframes pulse-warning {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); }
+        50% { box-shadow: 0 0 0 8px rgba(245, 158, 11, 0); }
+      }
+      @keyframes pulse-alert {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+        50% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+      }
+
+      .pulse-healthy { animation: pulse-healthy 2s ease-in-out infinite; }
+      .pulse-warning { animation: pulse-warning 1.5s ease-in-out infinite; }
+      .pulse-alert { animation: pulse-alert 1s ease-in-out infinite; }
+
+      /* Device card */
+      .device-card {
+        background: white;
+        border: 1px solid rgba(0,0,0,0.08);
+        transition: all 0.3s ease;
+      }
+      .device-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+      }
+
+      /* Layer cards */
+      .layer-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(201, 162, 39, 0.1);
+      }
+
+      /* Timeline */
+      .timeline-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        position: relative;
+      }
+      .timeline-dot::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 2px;
+        height: 40px;
+        background: linear-gradient(to bottom, currentColor, transparent);
+      }
+      .timeline-dot:last-child::after { display: none; }
+    </style>
+  </head>
+
+  <body class="font-sans text-ink antialiased">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-cream/80 backdrop-blur-md">
+      <div class="max-w-5xl mx-auto flex justify-between items-center">
+        <a href="/" class="font-serif text-2xl font-semibold tracking-tight">Bravetto</a>
+        <div class="flex items-center gap-6">
+          <a href="/abeone" class="text-sm text-ink-light hover:text-ink transition-colors">AbëONE</a>
+          <a href="/" class="text-sm text-ink-light hover:text-ink transition-colors">Home</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="relative min-h-screen flex items-center pt-24 pb-16 px-8">
+      <div class="max-w-5xl mx-auto w-full">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <div>
+            <p class="subhead text-xs text-alert mb-4 reveal">The Problem</p>
+
+            <h1 class="font-serif text-5xl md:text-6xl font-semibold headline mb-8 reveal">
+              Mid-Exam<br/>Failures<br/><span class="text-ink-light">Kill.</span>
+            </h1>
+
+            <p class="text-xl text-ink-light leading-relaxed mb-6 reveal">
+              Patient in the chair. Eyes dilated. Refraction halfway done.
+            </p>
+            <p class="text-xl text-ink leading-relaxed mb-8 reveal">
+              <em>"I cannot operate."</em>
+            </p>
+
+            <p class="text-lg text-ink-light leading-relaxed reveal">
+              Reschedule. Apologize. Lose revenue.<br/>
+              Lose trust. Lose the patient.
+            </p>
+          </div>
+
+          <!-- Simulated device status dashboard -->
+          <div class="reveal">
+            <div class="bg-ink rounded-2xl p-6 text-cream">
+              <div class="flex items-center justify-between mb-6">
+                <span class="font-mono text-xs text-cream/50">FLEET STATUS</span>
+                <span class="font-mono text-xs text-cream/50">LIVE</span>
+              </div>
+
+              <!-- Device list -->
+              <div class="space-y-4">
+                <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+                  <div class="flex items-center gap-3">
+                    <div class="w-3 h-3 rounded-full bg-healthy pulse-healthy"></div>
+                    <span class="text-sm">OD Scan 3 — Exam 1</span>
+                  </div>
+                  <span class="font-mono text-xs text-healthy">HEALTHY</span>
+                </div>
+
+                <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+                  <div class="flex items-center gap-3">
+                    <div class="w-3 h-3 rounded-full bg-warning pulse-warning"></div>
+                    <span class="text-sm">OD Scan 3 — Exam 2</span>
+                  </div>
+                  <span class="font-mono text-xs text-warning">DISK 87%</span>
+                </div>
+
+                <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+                  <div class="flex items-center gap-3">
+                    <div class="w-3 h-3 rounded-full bg-healthy pulse-healthy"></div>
+                    <span class="text-sm">AFC — Exam 1</span>
+                  </div>
+                  <span class="font-mono text-xs text-healthy">HEALTHY</span>
+                </div>
+
+                <div class="flex items-center justify-between p-3 bg-alert/20 rounded-lg border border-alert/30">
+                  <div class="flex items-center gap-3">
+                    <div class="w-3 h-3 rounded-full bg-alert pulse-alert"></div>
+                    <span class="text-sm">Reddy Cam 3100 — Exam 3</span>
+                  </div>
+                  <span class="font-mono text-xs text-alert">MOTOR DRIFT</span>
+                </div>
+
+                <div class="flex items-center justify-between p-3 bg-white/5 rounded-lg">
+                  <div class="flex items-center gap-3">
+                    <div class="w-3 h-3 rounded-full bg-healthy pulse-healthy"></div>
+                    <span class="text-sm">Reddy Cam 3100 — Exam 4</span>
+                  </div>
+                  <span class="font-mono text-xs text-healthy">HEALTHY</span>
+                </div>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
+                <span class="text-xs text-cream/50">4 healthy · 1 warning · 1 critical</span>
+                <span class="text-xs text-gold">View Details →</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Opportunity -->
+    <section class="py-32 px-8 bg-ink text-cream">
+      <div class="max-w-3xl mx-auto">
+        <p class="subhead text-xs text-gold mb-8 reveal">The Opportunity</p>
+
+        <h2 class="font-serif text-3xl md:text-4xl font-medium headline mb-12 reveal">
+          You already have the data.<br/>
+          You're just not using it.
+        </h2>
+
+        <div class="space-y-8 text-lg text-cream/80 leading-relaxed">
+          <p class="reveal">
+            Every OD Scan 3, AFC, and Reddy Cam in the field is already connected.
+            You pull usage data for billing—<em class="text-cream">8 cents per color</em>.
+          </p>
+          <p class="reveal">
+            That same connection can pull <em class="text-cream">diagnostic data</em>.
+            Windows event logs. SMART drive status. Error frequencies.
+            Calibration drift. Network latency.
+          </p>
+          <p class="reveal text-cream text-xl">
+            The instruments are already talking.<br/>
+            We just need to listen.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- What We Monitor -->
+    <section class="py-32 px-8">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="subhead text-xs text-gold mb-4 reveal">The Layers</p>
+          <h2 class="font-serif text-4xl md:text-5xl font-medium headline reveal">
+            What We Can Monitor
+          </h2>
+          <p class="mt-6 text-lg text-ink-light max-w-2xl mx-auto reveal">
+            Three layers of visibility. From easy wins to deep diagnostics.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- PC/Software Layer -->
+          <div class="layer-card rounded-2xl p-8 reveal">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 rounded-full bg-healthy/20 flex items-center justify-center">
+                <span class="font-mono text-sm text-healthy font-bold">PC</span>
+              </div>
+              <div>
+                <h3 class="font-serif text-xl font-medium">Software Layer</h3>
+                <p class="text-xs text-healthy">EASY — Deploy Now</p>
+              </div>
+            </div>
+
+            <ul class="space-y-4 text-sm text-ink-light">
+              <li class="flex items-start gap-3">
+                <span class="text-healthy mt-0.5">●</span>
+                <div>
+                  <strong class="text-ink">Hard Drive SMART</strong>
+                  <p class="text-xs mt-1">Predict drive failure weeks ahead. 94% accuracy on mechanical drives.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-healthy mt-0.5">●</span>
+                <div>
+                  <strong class="text-ink">Database Growth</strong>
+                  <p class="text-xs mt-1">Track DB size trends. Alert before "disk full" kills the exam.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-healthy mt-0.5">●</span>
+                <div>
+                  <strong class="text-ink">Event Log Patterns</strong>
+                  <p class="text-xs mt-1">Windows errors correlate with failures. We learn the signatures.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-healthy mt-0.5">●</span>
+                <div>
+                  <strong class="text-ink">Memory & Crash Trends</strong>
+                  <p class="text-xs mt-1">Rising crash frequency = degradation. Flag before it's critical.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Network Layer -->
+          <div class="layer-card rounded-2xl p-8 reveal">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 rounded-full bg-warning/20 flex items-center justify-center">
+                <span class="font-mono text-sm text-warning font-bold">NET</span>
+              </div>
+              <div>
+                <h3 class="font-serif text-xl font-medium">Network Layer</h3>
+                <p class="text-xs text-warning">MEDIUM — Requires Access</p>
+              </div>
+            </div>
+
+            <ul class="space-y-4 text-sm text-ink-light">
+              <li class="flex items-start gap-3">
+                <span class="text-warning mt-0.5">●</span>
+                <div>
+                  <strong class="text-ink">Head ↔ Base Latency</strong>
+                  <p class="text-xs mt-1">OD Scan head and base have separate IPs. Monitor their conversation.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-warning mt-0.5">●</span>
+                <div>
+                  <strong class="text-ink">Packet Loss</strong>
+                  <p class="text-xs mt-1">Intermittent drops between components = cable or connection issue.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-warning mt-0.5">●</span>
+                <div>
+                  <strong class="text-ink">IP Conflicts</strong>
+                  <p class="text-xs mt-1">Two devices, same IP = random failures. We detect it instantly.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-warning mt-0.5">●</span>
+                <div>
+                  <strong class="text-ink">Connection Drops</strong>
+                  <p class="text-xs mt-1">Frequency and timing of drops reveal network infrastructure issues.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Hardware Layer -->
+          <div class="layer-card rounded-2xl p-8 reveal">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-12 h-12 rounded-full bg-optical/20 flex items-center justify-center">
+                <span class="font-mono text-sm text-optical font-bold">HW</span>
+              </div>
+              <div>
+                <h3 class="font-serif text-xl font-medium">Hardware Layer</h3>
+                <p class="text-xs text-optical">ADVANCED — OEM Data Required</p>
+              </div>
+            </div>
+
+            <ul class="space-y-4 text-sm text-ink-light">
+              <li class="flex items-start gap-3">
+                <span class="text-optical mt-0.5">●</span>
+                <div>
+                  <strong class="text-ink">Chopper Motor Timing</strong>
+                  <p class="text-xs mt-1">Drift in cycle time = bearing wear. Predict replacement window.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-optical mt-0.5">●</span>
+                <div>
+                  <strong class="text-ink">Laser Power Output</strong>
+                  <p class="text-xs mt-1">Degradation curve predicts when laser needs service.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-optical mt-0.5">●</span>
+                <div>
+                  <strong class="text-ink">Thermal Sensors</strong>
+                  <p class="text-xs mt-1">Most PCBs have them. Trend analysis catches cooling failures.</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-optical mt-0.5">●</span>
+                <div>
+                  <strong class="text-ink">Calibration Drift</strong>
+                  <p class="text-xs mt-1">If cal data is stored, increasing drift = alignment issues brewing.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Architecture -->
+    <section class="py-32 px-8 bg-cream-dark">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="subhead text-xs text-gold mb-4 reveal">The Architecture</p>
+          <h2 class="font-serif text-4xl font-medium headline reveal">
+            OD Scan 3: Inside the Machine
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <!-- Diagram -->
+          <div class="reveal">
+            <div class="bg-white rounded-2xl p-8 border border-ink/10">
+              <div class="space-y-6">
+                <!-- Head unit -->
+                <div class="border-2 border-optical rounded-xl p-4">
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="font-mono text-sm font-medium text-optical">HEAD UNIT</span>
+                    <span class="font-mono text-xs text-ink-light">192.168.1.10</span>
+                  </div>
+                  <div class="grid grid-cols-3 gap-2 text-center">
+                    <div class="bg-optical/10 rounded-lg p-3">
+                      <div class="text-2xl mb-1">⚙️</div>
+                      <span class="text-xs text-ink-light">Chopper<br/>Motor</span>
+                    </div>
+                    <div class="bg-optical/10 rounded-lg p-3">
+                      <div class="text-2xl mb-1">💡</div>
+                      <span class="text-xs text-ink-light">Laser<br/>Assembly</span>
+                    </div>
+                    <div class="bg-optical/10 rounded-lg p-3">
+                      <div class="text-2xl mb-1">📷</div>
+                      <span class="text-xs text-ink-light">Optical<br/>Sensors</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Connection -->
+                <div class="flex justify-center">
+                  <div class="w-0.5 h-8 bg-gradient-to-b from-optical to-healthy"></div>
+                </div>
+
+                <!-- Base unit -->
+                <div class="border-2 border-healthy rounded-xl p-4">
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="font-mono text-sm font-medium text-healthy">BASE UNIT (PC)</span>
+                    <span class="font-mono text-xs text-ink-light">192.168.1.11</span>
+                  </div>
+                  <div class="grid grid-cols-4 gap-2 text-center">
+                    <div class="bg-healthy/10 rounded-lg p-2">
+                      <span class="text-xs text-ink-light">CPU</span>
+                    </div>
+                    <div class="bg-healthy/10 rounded-lg p-2">
+                      <span class="text-xs text-ink-light">RAM</span>
+                    </div>
+                    <div class="bg-healthy/10 rounded-lg p-2">
+                      <span class="text-xs text-ink-light">HDD</span>
+                    </div>
+                    <div class="bg-healthy/10 rounded-lg p-2">
+                      <span class="text-xs text-ink-light">DB</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Network out -->
+                <div class="flex justify-center">
+                  <div class="w-0.5 h-8 bg-gradient-to-b from-healthy to-gold"></div>
+                </div>
+
+                <!-- Monitoring -->
+                <div class="border-2 border-gold rounded-xl p-4 bg-gold/5">
+                  <div class="text-center">
+                    <span class="font-mono text-sm font-medium text-gold">BRAVETTO MONITORING</span>
+                    <p class="text-xs text-ink-light mt-1">Pattern recognition · Failure prediction · Alerts</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Explanation -->
+          <div class="space-y-6 reveal">
+            <div>
+              <h3 class="font-serif text-xl font-medium mb-2">Two IPs, One Instrument</h3>
+              <p class="text-ink-light">
+                The OD Scan 3 head and base are separate networked components.
+                When they can't talk to each other properly, the exam dies.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-serif text-xl font-medium mb-2">Multiple Failure Points</h3>
+              <p class="text-ink-light">
+                Chopper motor. Laser. Sensors. PC components. Network connection.
+                Any one of these can fail mid-exam with zero warning—unless you're watching.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-serif text-xl font-medium mb-2">The Billing Connection</h3>
+              <p class="text-ink-light">
+                You already reach into these devices for usage data.
+                That same path can pull diagnostic telemetry. Same connection.
+                New intelligence.
+              </p>
+            </div>
+
+            <div class="p-4 bg-gold/10 rounded-lg border border-gold/30">
+              <p class="text-sm font-medium text-ink">
+                Key Question: What diagnostic data are these instruments already logging?
+              </p>
+              <p class="text-xs text-ink-light mt-2">
+                Even basic Windows Event Viewer + device logs give us enough to start predicting failures.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline to Failure -->
+    <section class="py-32 px-8">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="subhead text-xs text-gold mb-4 reveal">The Timeline</p>
+          <h2 class="font-serif text-4xl font-medium headline reveal">
+            From First Sign to Failure
+          </h2>
+          <p class="mt-6 text-lg text-ink-light reveal">
+            Most failures don't happen suddenly. They announce themselves—weeks in advance.
+          </p>
+        </div>
+
+        <div class="relative reveal">
+          <!-- Timeline -->
+          <div class="space-y-12">
+            <div class="flex gap-8 items-start">
+              <div class="flex-shrink-0 w-24 text-right">
+                <span class="font-mono text-sm text-healthy">Day -30</span>
+              </div>
+              <div class="timeline-dot bg-healthy text-healthy"></div>
+              <div class="flex-1 pb-8">
+                <h4 class="font-medium mb-1">SMART Warning Appears</h4>
+                <p class="text-sm text-ink-light">Hard drive reports first reallocated sector. Still working fine. No user-visible impact.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-8 items-start">
+              <div class="flex-shrink-0 w-24 text-right">
+                <span class="font-mono text-sm text-healthy">Day -21</span>
+              </div>
+              <div class="timeline-dot bg-healthy text-healthy"></div>
+              <div class="flex-1 pb-8">
+                <h4 class="font-medium mb-1">Event Log Pattern Detected</h4>
+                <p class="text-sm text-ink-light">Increasing disk I/O errors in Windows Event Viewer. Pattern matches known pre-failure signature.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-8 items-start">
+              <div class="flex-shrink-0 w-24 text-right">
+                <span class="font-mono text-sm text-warning">Day -14</span>
+              </div>
+              <div class="timeline-dot bg-warning text-warning"></div>
+              <div class="flex-1 pb-8">
+                <h4 class="font-medium mb-1">⚠️ Alert: Schedule Service</h4>
+                <p class="text-sm text-ink-light">System flags device for proactive service. Technician can replace drive during next scheduled maintenance.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-8 items-start">
+              <div class="flex-shrink-0 w-24 text-right">
+                <span class="font-mono text-sm text-warning">Day -7</span>
+              </div>
+              <div class="timeline-dot bg-warning text-warning"></div>
+              <div class="flex-1 pb-8">
+                <h4 class="font-medium mb-1">Performance Degradation</h4>
+                <p class="text-sm text-ink-light">Scan times increasing. Database queries slowing. User might notice slight delays.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-8 items-start">
+              <div class="flex-shrink-0 w-24 text-right">
+                <span class="font-mono text-sm text-alert">Day 0</span>
+              </div>
+              <div class="timeline-dot bg-alert text-alert"></div>
+              <div class="flex-1">
+                <h4 class="font-medium mb-1 text-alert">❌ Without Monitoring: Failure</h4>
+                <p class="text-sm text-ink-light">"I cannot operate." Mid-exam. Patient waiting. Revenue lost. Trust damaged.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Intervention callout -->
+          <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-healthy/10 border-2 border-healthy rounded-xl p-4 max-w-xs text-center">
+            <span class="text-healthy font-mono text-sm font-bold">WITH MONITORING</span>
+            <p class="text-sm text-ink mt-2">Drive replaced at Day -10. Zero patient impact. Zero downtime.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROI -->
+    <section class="py-32 px-8 bg-ink text-cream">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="subhead text-xs text-gold mb-4 reveal">The Math</p>
+          <h2 class="font-serif text-4xl font-medium headline reveal">
+            One Prevented Failure Pays for a Year
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 text-center reveal">
+          <div class="p-8 bg-white/5 rounded-2xl">
+            <p class="font-serif text-5xl font-semibold text-alert mb-2">$800</p>
+            <p class="text-sm text-cream/70">Average revenue lost</p>
+            <p class="text-xs text-cream/50 mt-1">per mid-exam failure<br/>(reschedule + lost upsells)</p>
+          </div>
+
+          <div class="p-8 bg-white/5 rounded-2xl">
+            <p class="font-serif text-5xl font-semibold text-warning mb-2">$350</p>
+            <p class="text-sm text-cream/70">Emergency service call</p>
+            <p class="text-xs text-cream/50 mt-1">vs $150 scheduled<br/>(2.3x cost premium)</p>
+          </div>
+
+          <div class="p-8 bg-white/5 rounded-2xl">
+            <p class="font-serif text-5xl font-semibold text-healthy mb-2">∞</p>
+            <p class="text-sm text-cream/70">Patient trust</p>
+            <p class="text-xs text-cream/50 mt-1">"They couldn't even finish my exam"<br/>= reviews + referrals lost</p>
+          </div>
+        </div>
+
+        <div class="mt-16 max-w-2xl mx-auto text-center reveal">
+          <p class="text-lg text-cream/80">
+            A practice with 5 instruments averaging 2 failures/year per device loses
+            <span class="text-gold font-semibold">$8,000+ annually</span> in preventable costs.
+          </p>
+          <p class="text-sm text-cream/50 mt-4">
+            Predictive maintenance catches 70-90% of failures before they impact patients.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-32 px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="font-serif text-4xl md:text-5xl font-medium headline mb-6 reveal">
+          Let's find out what<br/>your instruments know.
+        </h2>
+
+        <p class="text-xl text-ink-light mb-12 reveal">
+          We start with what's already being logged.<br/>
+          No new hardware. No disruption. Just intelligence.
+        </p>
+
+        <div class="space-y-4 reveal">
+          <a
+            href="mailto:hello@bravetto.com?subject=Predictive%20Maintenance%20for%20Optical%20Instruments"
+            class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-ink text-cream rounded-full font-medium hover:bg-ink-light transition-colors"
+          >
+            <span>Start the Conversation</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+
+          <p class="text-sm text-ink-light">
+            Or call: <a href="tel:+18127865927" class="text-gold hover:underline">812-786-5927</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-8 border-t border-cream-dark">
+      <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <div>
+          <a href="/" class="font-serif text-xl font-semibold">Bravetto</a>
+          <p class="text-sm text-ink-light mt-1">Consciousness infrastructure for the AI age.</p>
+        </div>
+        <div class="flex items-center gap-6 text-sm text-ink-light">
+          <a href="/abeone" class="hover:text-ink transition-colors">AbëONE</a>
+          <a href="/neuromorphic" class="hover:text-ink transition-colors">Neuromorphic</a>
+          <a href="https://github.com/bravetto" target="_blank" class="hover:text-ink transition-colors">GitHub</a>
+          <span>2026</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll reveal -->
+    <script>
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>
