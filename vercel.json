@@ -9,6 +9,7 @@
     { "source": "/predictive-maintenance", "destination": "/predictive-maintenance.html" },
     { "source": "/command", "destination": "/command.html" },
     { "source": "/how-we-build", "destination": "/how-we-build.html" },
+    { "source": "/abekeys", "destination": "/abekeys.html" },
     { "source": "/abeone", "destination": "/abeone/index.html" },
     { "source": "/biasguard", "destination": "/biasguard/index.html" },
     {
