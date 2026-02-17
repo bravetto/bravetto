@@ -2,6 +2,10 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
+    { "source": "/war-room", "destination": "/war-room.html" },
+    { "source": "/aec-demo", "destination": "/aec-demo.html" },
+    { "source": "/aec-roi", "destination": "/aec-roi.html" },
+    { "source": "/north-shore-playbook", "destination": "/north-shore-playbook.html" },
     { "source": "/graceful", "destination": "/graceful.html" },
     { "source": "/aec", "destination": "/aec.html" },
     { "source": "/neuromorphic", "destination": "/neuromorphic.html" },
@@ -10,6 +14,7 @@
     { "source": "/command", "destination": "/command.html" },
     { "source": "/how-we-build", "destination": "/how-we-build.html" },
     { "source": "/abekeys", "destination": "/abekeys.html" },
+    { "source": "/abevoice", "destination": "/abevoice.html" },
     { "source": "/abeone", "destination": "/abeone/index.html" },
     { "source": "/biasguard", "destination": "/biasguard/index.html" },
     {

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>North Shore Optometry — Meeting Playbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f5; --surface: #ffffff; --card: #f5f2ed; --border: #e2ddd5;
+    --deep: #1a1814; --warm: #8b6914; --warm-bg: rgba(139,105,20,0.06);
+    --warm-border: rgba(139,105,20,0.15); --teal: #0f766e;
+    --teal-bg: rgba(15,118,110,0.06); --teal-border: rgba(15,118,110,0.15);
+    --coral: #c2410c; --text: #3d3832; --muted: #8a8279; --accent: #5b4a1e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 860px; margin: 0 auto; padding: 48px 32px 80px; }
+  .header { margin-bottom: 56px; padding-bottom: 32px; border-bottom: 2px solid var(--deep); }
+  .header .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--warm); margin-bottom: 16px; }
+  h1 { font-family: 'Fraunces', serif; font-size: 40px; font-weight: 500; color: var(--deep); line-height: 1.15; margin-bottom: 8px; }
+  .header .sub { font-size: 16px; color: var(--muted); font-weight: 300; }
+  .audience { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 56px; }
+  .person { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .person .role { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; color: var(--warm); margin-bottom: 8px; }
+  .person .name { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 500; color: var(--deep); margin-bottom: 6px; }
+  .person .needs { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .section { margin-bottom: 48px; }
+  .section-head { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .section-num { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; color: var(--warm); background: var(--warm-bg); border: 1px solid var(--warm-border); padding: 4px 10px; border-radius: 6px; }
+  h2 { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 500; color: var(--deep); }
+  .script-block { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; overflow: hidden; }
+  .script-meta { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; background: var(--card); border-bottom: 1px solid var(--border); }
+  .script-meta .audience-tag { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+  .script-meta .audience-tag.jim { color: var(--warm); }
+  .script-meta .audience-tag.trish { color: var(--teal); }
+  .script-meta .audience-tag.larry { color: var(--coral); }
+  .script-meta .audience-tag.all { color: var(--deep); }
+  .script-meta .timer { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); }
+  .script-body { padding: 20px; }
+  .script-body .direction { font-size: 12px; color: var(--muted); font-style: italic; margin-bottom: 10px; }
+  .script-body .say { font-size: 15px; line-height: 1.7; color: var(--deep); }
+  .script-body .say strong { color: var(--warm); font-weight: 600; }
+  .objection-grid { display: flex; flex-direction: column; gap: 12px; }
+  .objection { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .objection .obj-q { padding: 14px 20px; background: var(--card); border-bottom: 1px solid var(--border); font-size: 14px; font-weight: 600; color: var(--deep); }
+  .objection .obj-q::before { content: '\201C'; color: var(--muted); margin-right: 2px; }
+  .objection .obj-q::after { content: '\201D'; color: var(--muted); margin-left: 2px; }
+  .objection .obj-a { padding: 14px 20px; font-size: 14px; color: var(--text); line-height: 1.6; }
+  .objection .obj-a strong { color: var(--deep); font-weight: 600; }
+  .rev-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+  .rev-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px 20px; text-align: center; }
+  .rev-card .rev-phase { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; margin-bottom: 10px; }
+  .rev-card:nth-child(1) .rev-phase { color: var(--warm); }
+  .rev-card:nth-child(2) .rev-phase { color: var(--teal); }
+  .rev-card:nth-child(3) .rev-phase { color: var(--coral); }
+  .rev-card .rev-title { font-family: 'Fraunces', serif; font-size: 20px; color: var(--deep); margin-bottom: 8px; }
+  .rev-card .rev-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .guardrail-box { background: var(--warm-bg); border: 1px solid var(--warm-border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+  .guardrail-box h3 { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 500; color: var(--deep); margin-bottom: 12px; }
+  .guardrail-box .rule { font-size: 14px; color: var(--text); margin-bottom: 8px; padding-left: 20px; position: relative; }
+  .guardrail-box .rule::before { content: '\2192'; position: absolute; left: 0; color: var(--warm); font-weight: 600; }
+  .abe-card { background: var(--teal-bg); border: 1px solid var(--teal-border); border-radius: 12px; padding: 28px; margin-bottom: 24px; }
+  .abe-card h3 { font-family: 'Fraunces', serif; font-size: 18px; color: var(--deep); margin-bottom: 12px; }
+  .abe-stats { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; margin-top: 16px; }
+  .abe-stat { text-align: center; padding: 12px; background: rgba(255,255,255,0.6); border-radius: 8px; }
+  .abe-stat .val { font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 500; color: var(--teal); }
+  .abe-stat .lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+  .closing-section { text-align: center; padding: 40px 32px; background: var(--deep); color: var(--bg); border-radius: 16px; margin-top: 48px; }
+  .closing-section h2 { font-family: 'Fraunces', serif; color: #f0c040; font-size: 28px; margin-bottom: 16px; }
+  .closing-section .line { font-size: 15px; color: rgba(250,248,245,0.7); margin-bottom: 8px; line-height: 1.6; }
+  .closing-section .gold { color: #f0c040; font-weight: 600; }
+  @media (max-width: 700px) {
+    .audience, .rev-grid { grid-template-columns: 1fr; }
+    .abe-stats { grid-template-columns: 1fr 1fr; }
+    h1 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div class="eyebrow">Bravetto × North Shore Optometry</div>
+    <h1>Meeting Playbook</h1>
+    <div class="sub">Tuesday, February 17, 2026 — Jim · Trish · Larry</div>
+  </div>
+  <div class="audience">
+    <div class="person">
+      <div class="role">Owner</div>
+      <div class="name">Jim</div>
+      <div class="needs">Never miss a customer call. 24/7 coverage. Zero missed revenue. His phone is his lifeline.</div>
+    </div>
+    <div class="person">
+      <div class="role">Sales</div>
+      <div class="name">Trish</div>
+      <div class="needs">Outbound campaigns. Recall reminders. Rebooking lapsed patients. Growth engine.</div>
+    </div>
+    <div class="person">
+      <div class="role">Operations</div>
+      <div class="name">Larry</div>
+      <div class="needs">Call analytics. Volume trends. Sentiment data. Peak hours. Daily insights.</div>
+    </div>
+  </div>
+  <div class="abe-card">
+    <h3>Abe — AI Patient Concierge</h3>
+    <div style="font-size:14px; color: var(--text); line-height:1.6;">Warm, professional, concise. Answers every call. Handles hours, location, insurance, services. Collects booking data — name, day, time, phone, reason for visit. Confirms details. Promises staff follow-up. Never diagnoses. Never says "I'm AI" unless asked.</div>
+    <div class="abe-stats">
+      <div class="abe-stat"><div class="val">24/7</div><div class="lbl">Coverage</div></div>
+      <div class="abe-stat"><div class="val">~90s</div><div class="lbl">Per Call</div></div>
+      <div class="abe-stat"><div class="val">5</div><div class="lbl">Intents</div></div>
+      <div class="abe-stat"><div class="val">0</div><div class="lbl">Missed Calls</div></div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-head"><div class="section-num">PHASES</div><h2>Three Phases of Revenue</h2></div>
+    <div class="rev-grid">
+      <div class="rev-card">
+        <div class="rev-phase">Phase 1 — Now</div>
+        <div class="rev-title">Inbound Capture</div>
+        <div class="rev-desc">Every call answered. Every booking captured. Staff confirms in the morning. Zero missed appointments.</div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-phase">Phase 2 — 60 Days</div>
+        <div class="rev-title">Outbound Growth</div>
+        <div class="rev-desc">Recall campaigns. Refill reminders. Rebooking lapsed patients. Abe calls them, not your staff.</div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-phase">Phase 3 — 90 Days</div>
+        <div class="rev-title">Intelligence</div>
+        <div class="rev-desc">Every call transcribed and scored. Volume, sentiment, peak hours, what patients ask about. Daily.</div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-head"><div class="section-num">SCRIPT</div><h2>The Close — Minute by Minute</h2></div>
+    <div class="script-block">
+      <div class="script-meta"><span class="audience-tag jim">→ Jim</span><span class="timer">0:00 – 1:30</span></div>
+      <div class="script-body">
+        <div class="direction">Open with the problem he feels every day.</div>
+        <div class="say">"Jim, every missed call is a missed appointment. Every missed appointment is lost revenue. Right now, if the phone rings at 6:15 PM or during a Saturday rush — it goes to voicemail. <strong>Your phone will never go unanswered again.</strong> Every caller gets a warm, professional voice. Every booking request gets captured. Your staff sees the list in the morning and confirms."</div>
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="script-meta"><span class="audience-tag trish">→ Trish</span><span class="timer">1:30 – 3:00</span></div>
+      <div class="script-body">
+        <div class="direction">Show her Phase 2 — the growth engine.</div>
+        <div class="say">"Trish, Phase 1 is inbound. Phase 2 is where it gets exciting. <strong>Recall campaigns. Refill reminders. Rebooking lapsed patients.</strong> Abe calls them — not your staff. You set the list, Abe does the outreach. Your team handles the patients who show up."</div>
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="script-meta"><span class="audience-tag larry">→ Larry</span><span class="timer">3:00 – 4:30</span></div>
+      <div class="script-body">
+        <div class="direction">Give him the data he's never had.</div>
+        <div class="say">"Larry, every single call is transcribed, sentiment-scored, and summarized. <strong>You see call volume by hour, peak days, what patients are asking about, and how they feel.</strong> Daily report. No manual work. You'll know more about your patients' needs than any practice in the area."</div>
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="script-meta"><span class="audience-tag all">→ Everyone</span><span class="timer">4:30 – 5:30</span></div>
+      <div class="script-body">
+        <div class="direction">Play a sample call if possible. Or describe what callers hear.</div>
+        <div class="say">"Here's what your callers experience. The phone rings. Abe picks up: <strong>'Hi, thanks for calling North Shore Optometry. This is Abe, how can I help you today?'</strong> Warm. Natural. 1-2 sentences. Collects their name, their preferred time, their number. Confirms everything. Promises your team will follow up. Done in 90 seconds."</div>
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="script-meta"><span class="audience-tag jim">→ Jim</span><span class="timer">5:30 – 7:00</span></div>
+      <div class="script-body">
+        <div class="direction">What it never does. The guardrails.</div>
+        <div class="say">"Jim, here's what Abe never does. <strong>Never diagnoses. Never gives medical advice. Never shares patient data. Never sounds like a robot.</strong> If a caller asks something outside scope, Abe takes their number and promises a callback. Your staff always has the final word."</div>
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="script-meta"><span class="audience-tag jim">→ Jim</span><span class="timer">7:00 – 8:00</span></div>
+      <div class="script-body">
+        <div class="direction">The number. Simple. Clean.</div>
+        <div class="say">"This is what it costs. <strong>Phase 1 starts now.</strong> We handle inbound. Your phone number works today. Phase 2 adds outbound at 60 days. Phase 3 adds analytics at 90 days. You'll see value in the first week."</div>
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="script-meta"><span class="audience-tag all">→ Everyone</span><span class="timer">8:00 – 9:00</span></div>
+      <div class="script-body">
+        <div class="direction">The close. Say it once. Then silence.</div>
+        <div class="say">"The phone number is already live. The voice is already built. <strong>The only question is: do we turn it on this week, or do you keep missing calls?</strong>"</div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-head"><div class="section-num">DESIGN</div><h2>Revenue Event + Failure Posture</h2></div>
+    <div class="guardrail-box">
+      <h3>The Revenue Event: Captured Booking</h3>
+      <div class="rule">Success = caller provides name, day, time, phone, reason for visit</div>
+      <div class="rule">Abe confirms details and promises staff follow-up</div>
+      <div class="rule">Staff confirms the appointment — Abe never says "you're booked"</div>
+      <div class="rule">A caller ready to book must never hang up without data captured</div>
+    </div>
+    <div class="guardrail-box" style="background: var(--teal-bg); border-color: var(--teal-border);">
+      <h3>When Something Breaks</h3>
+      <div class="rule" style="color: var(--text);">Abe says: "I'm having a little trouble — can I get your name and number so someone can call you right back?"</div>
+      <div class="rule" style="color: var(--text);">Max latency: 3 seconds. Max turns: 10. Max silence retries: 2.</div>
+      <div class="rule" style="color: var(--text);">TTS failure → Polly robot voice (keep call alive)</div>
+      <div class="rule" style="color: var(--text);">LLM failure → pre-cached intent response</div>
+      <div class="rule" style="color: var(--text);">Worst case: Abe captures info and promises callback. Never dead air. Never confusion.</div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-head"><div class="section-num">OBJECTIONS</div><h2>If They Push Back</h2></div>
+    <div class="objection-grid">
+      <div class="objection">
+        <div class="obj-q">What if patients don't like talking to AI?</div>
+        <div class="obj-a">Most callers won't know. Abe sounds natural, uses 1-2 sentences, never says "I'm an AI." If someone asks directly, Abe is honest. The experience feels like calling a warm, helpful receptionist. <strong>The goal isn't to fool anyone — it's to help everyone.</strong></div>
+      </div>
+      <div class="objection">
+        <div class="obj-q">What if it gives wrong medical information?</div>
+        <div class="obj-a"><strong>It can't.</strong> Abe is hardcoded to never diagnose, never give medical advice, never share patient data. If a caller asks a medical question, Abe says: "That's a great question for the doctor — let me get you scheduled." It deflects to booking every time.</div>
+      </div>
+      <div class="objection">
+        <div class="obj-q">We already have a phone system that works fine.</div>
+        <div class="obj-a">Does it answer at 6:15 PM? Does it answer during Saturday rush? Does it capture every booking request when staff is with patients? <strong>Every missed call is a missed appointment.</strong> Abe doesn't replace your phone system — it makes sure nobody falls through the cracks.</div>
+      </div>
+      <div class="objection">
+        <div class="obj-q">How do we know if it's actually working?</div>
+        <div class="obj-a">Every call is transcribed and summarized. <strong>Larry sees a daily report:</strong> how many calls, what they asked, how they felt, what was captured. More data in week one than you've had in the entire history of the practice.</div>
+      </div>
+      <div class="objection">
+        <div class="obj-q">Can we try it before we commit?</div>
+        <div class="obj-a"><strong>That's exactly what Phase 1 is.</strong> We turn it on. You watch it work. If you don't see value in two weeks, we turn it off. You risk nothing. The phone number is already live.</div>
+      </div>
+      <div class="objection">
+        <div class="obj-q">What happens if the technology fails mid-call?</div>
+        <div class="obj-a">Abe captures their name and number, says "someone from our team will call you right back," and ends the call cleanly. <strong>The worst thing that can happen is: a patient gets a callback.</strong> That's already better than voicemail.</div>
+      </div>
+    </div>
+  </div>
+  <div class="closing-section">
+    <h2>The Bridge</h2>
+    <div class="line">Ryan McArdle connects both deals.</div>
+    <div class="line">His father Jim owns North Shore. Ryan brought in AEC.</div>
+    <div class="line" style="margin-top: 16px;"><span class="gold">AEC is the proof.</span> North Shore is the relationship.</div>
+    <div class="line"><span class="gold">Both write checks.</span></div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AEC — The Nervous System ROI</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050810;
+    --surface: #0d1220;
+    --card: #111a2e;
+    --border: #1e2d4a;
+    --gold: #f0c040;
+    --gold-glow: rgba(240,192,64,0.08);
+    --blue: #3b82f6;
+    --green: #10b981;
+    --red: #ef4444;
+    --orange: #f97316;
+    --purple: #8b5cf6;
+    --text: #c8d4e8;
+    --muted: #6b7f9e;
+    --white: #f0f4fa;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+  }
+  .slide {
+    width: 1100px;
+    max-width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 48px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .slide::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(240,192,64,0.06), transparent 70%);
+    pointer-events: none;
+  }
+  .header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+  }
+  .header-left .tag {
+    display: inline-block;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--gold);
+    background: var(--gold-glow);
+    border: 1px solid rgba(240,192,64,0.2);
+    padding: 5px 14px; border-radius: 100px;
+    margin-bottom: 14px;
+  }
+  .header-left h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px; font-weight: 400;
+    color: var(--white); line-height: 1.2;
+  }
+  .header-right { text-align: right; padding-top: 8px; }
+  .header-right .big-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 48px; color: var(--gold); line-height: 1;
+  }
+  .header-right .big-label {
+    font-size: 12px; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px;
+  }
+  .nervous-system {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 0; align-items: center;
+    margin-bottom: 40px; padding: 28px 24px;
+    background: var(--card); border-radius: 14px;
+    border: 1px solid var(--border);
+  }
+  .ns-block { text-align: center; padding: 16px; }
+  .ns-block .icon { font-size: 28px; margin-bottom: 8px; }
+  .ns-block .name { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 3px; }
+  .ns-block .system { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  .ns-block .spend { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--gold); margin-top: 6px; }
+  .ns-arrow { text-align: center; color: var(--gold); opacity: 0.5; display: flex; align-items: center; justify-content: center; }
+  .ns-center .name { color: var(--gold) !important; font-size: 16px !important; font-weight: 700 !important; }
+  .ns-center {
+    background: var(--gold-glow); border-radius: 12px;
+    border: 1px solid rgba(240,192,64,0.2); padding: 20px !important;
+  }
+  .levers {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px; margin-bottom: 40px;
+  }
+  .lever {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 24px 20px;
+    position: relative; overflow: hidden;
+  }
+  .lever::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .lever:nth-child(1)::before { background: var(--blue); }
+  .lever:nth-child(2)::before { background: var(--green); }
+  .lever:nth-child(3)::before { background: var(--purple); }
+  .lever .lever-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; margin-bottom: 10px; }
+  .lever:nth-child(1) .lever-label { color: var(--blue); }
+  .lever:nth-child(2) .lever-label { color: var(--green); }
+  .lever:nth-child(3) .lever-label { color: var(--purple); }
+  .lever .lever-stat { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--white); line-height: 1; margin-bottom: 6px; }
+  .lever .lever-desc { font-size: 13px; color: var(--muted); line-height: 1.4; }
+  .lever .lever-how { margin-top: 12px; font-size: 12px; color: var(--text); line-height: 1.5; padding-top: 12px; border-top: 1px solid var(--border); }
+  .compound-row {
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    margin-bottom: 40px; padding: 20px;
+    background: var(--gold-glow); border: 1px solid rgba(240,192,64,0.2); border-radius: 12px;
+  }
+  .compound-row .formula { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--muted); }
+  .compound-row .result { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--gold); }
+  .compound-row .equals { font-size: 20px; color: var(--gold); opacity: 0.5; }
+  .bottom-row { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; }
+  .bottom-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 18px 16px; text-align: center;
+  }
+  .bottom-card .bc-num { font-family: 'DM Serif Display', serif; font-size: 26px; color: var(--white); margin-bottom: 4px; }
+  .bottom-card .bc-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  .bottom-card.highlight { border-color: rgba(240,192,64,0.3); background: var(--gold-glow); }
+  .bottom-card.highlight .bc-num { color: var(--gold); }
+  .guarantee { margin-top: 24px; text-align: center; padding: 16px; }
+  .guarantee .line { font-size: 15px; color: var(--text); }
+  .guarantee .line strong { color: var(--gold); font-weight: 700; }
+  @media (max-width: 800px) {
+    .slide { padding: 24px 20px; }
+    .nervous-system { grid-template-columns: 1fr; gap: 8px; }
+    .ns-arrow { transform: rotate(90deg); }
+    .levers { grid-template-columns: 1fr; }
+    .bottom-row { grid-template-columns: 1fr 1fr; }
+    .header-row { flex-direction: column; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="header-row">
+    <div class="header-left">
+      <div class="tag">Advancing Eyecare × Bravetto</div>
+      <h1>The Nervous System<br>Your $2.7M Stack Needs</h1>
+    </div>
+    <div class="header-right">
+      <div class="big-num">$50K</div>
+      <div class="big-label">Per Month / 120 Users</div>
+    </div>
+  </div>
+  <div class="nervous-system">
+    <div class="ns-block">
+      <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 0 0-4.8 3.6A4 4 0 0 0 4 9.5a4.5 4.5 0 0 0 1.2 8.3A3.5 3.5 0 0 0 8.5 22h1a.5.5 0 0 0 .5-.5V12"/><path d="M12 2a5 5 0 0 1 4.8 3.6A4 4 0 0 1 20 9.5a4.5 4.5 0 0 1-1.2 8.3A3.5 3.5 0 0 1 15.5 22h-1a.5.5 0 0 1-.5-.5V12"/><path d="M8 9h8"/><path d="M9 13h6"/></svg></div>
+      <div class="name">Brain</div>
+      <div class="system">Salesforce + SAP</div>
+      <div class="spend">$1.5M+/yr</div>
+    </div>
+    <div class="ns-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
+    <div class="ns-block ns-center">
+      <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+      <div class="name">AB1 Nervous System</div>
+      <div class="system">Orchestration Layer</div>
+      <div class="spend">$50K/mo</div>
+    </div>
+    <div class="ns-arrow"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
+    <div class="ns-block">
+      <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-4 0v1"/><path d="M14 10V4a2 2 0 0 0-4 0v6"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></div>
+      <div class="name">Hands</div>
+      <div class="system">Vonage + Field Teams</div>
+      <div class="spend">$200K+/yr</div>
+    </div>
+  </div>
+  <div class="levers">
+    <div class="lever">
+      <div class="lever-label">Lever 1 — More Clients</div>
+      <div class="lever-stat">+38%</div>
+      <div class="lever-desc">Monthly client reach</div>
+      <div class="lever-how">Cross-sell across 8 companies. A Marco client doesn't know about Santinelli. The agent surfaces it during the call.</div>
+    </div>
+    <div class="lever">
+      <div class="lever-label">Lever 2 — Higher Value</div>
+      <div class="lever-stat">+28%</div>
+      <div class="lever-desc">Transaction value</div>
+      <div class="lever-how">Service contracts in 60 seconds, not 2 hours. Your $5M business that dropped to $3.5M — we rebuild it with automation.</div>
+    </div>
+    <div class="lever">
+      <div class="lever-label">Lever 3 — More Frequency</div>
+      <div class="lever-stat">+24%</div>
+      <div class="lever-desc">Purchase frequency</div>
+      <div class="lever-how">PM contracts expire silently. The system watches expiration and triggers renewal outreach automatically.</div>
+    </div>
+  </div>
+  <div class="compound-row">
+    <span class="formula">1.38 × 1.28 × 1.24</span>
+    <span class="equals">=</span>
+    <span class="result">119% Compounded Growth</span>
+  </div>
+  <div class="bottom-row">
+    <div class="bottom-card"><div class="bc-num">120</div><div class="bc-label">Users</div></div>
+    <div class="bottom-card"><div class="bc-num">6</div><div class="bc-label">Workflows</div></div>
+    <div class="bottom-card"><div class="bc-num">90</div><div class="bc-label">Days to Prove</div></div>
+    <div class="bottom-card highlight"><div class="bc-num">40%</div><div class="bc-label">Or You Walk</div></div>
+  </div>
+  <div class="guarantee">
+    <div class="line"><strong>40% cycle time reduction in 90 days</strong> — or terminate with no penalty.</div>
+    <div class="line" style="margin-top:6px; color: var(--muted); font-size: 13px;">12-month rate lock. Month 1 on us. Start Monday.</div>
+  </div>
+</div>
+</body>
+</html>
