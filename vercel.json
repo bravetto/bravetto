@@ -2,6 +2,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
+    { "source": "/aec-proposal", "destination": "/aec-proposal.html" },
     { "source": "/war-room", "destination": "/war-room.html" },
     { "source": "/aec-demo", "destination": "/aec-demo.html" },
     { "source": "/aec-roi", "destination": "/aec-roi.html" },

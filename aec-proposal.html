@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advancing Eyecare + Bravetto | Executive Proposal</title>
+    <meta
+      name="description"
+      content="The nervous system AEC needs. One platform. 8 companies. 24,000 nodes. From reactive service to predictive intelligence."
+    />
+    <link rel="canonical" href="https://bravetto.com/aec-proposal" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#FAF9F6",
+              "cream-dark": "#F5F3EF",
+              gold: "#C9A227",
+              "gold-light": "#E8D48B",
+              ink: "#1A1A1A",
+              "ink-light": "#4A4A4A",
+              "ink-lighter": "#6A6A6A",
+            },
+            fontFamily: {
+              serif: ["Cormorant Garamond", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: #faf9f6;
+        overflow-x: hidden;
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .proposal-card {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(201, 162, 39, 0.1);
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .proposal-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 48px rgba(26, 26, 26, 0.08);
+        border-color: rgba(201, 162, 39, 0.25);
+      }
+      .headline {
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+      }
+      .subhead {
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+      .sprint-card {
+        position: relative;
+        overflow: hidden;
+      }
+      .sprint-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #C9A227, #E8D48B);
+      }
+      .tier-card {
+        position: relative;
+      }
+      .tier-card.recommended {
+        border-color: rgba(201, 162, 39, 0.4);
+        box-shadow: 0 8px 32px rgba(201, 162, 39, 0.1);
+      }
+      @media print {
+        .reveal { opacity: 1 !important; transform: none !important; }
+        body { background: white; }
+      }
+    </style>
+  </head>
+
+  <body class="font-sans text-ink antialiased">
+    <!-- Minimal nav -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-5 bg-cream/90 backdrop-blur-md border-b border-cream-dark">
+      <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <a href="/" class="font-serif text-xl font-semibold tracking-tight text-ink">Bravetto</a>
+        <span class="text-xs text-ink-lighter subhead">Executive Proposal</span>
+      </div>
+    </nav>
+
+    <!-- 1. GATE -->
+    <section class="min-h-screen flex items-center justify-center px-8 pt-24">
+      <div class="text-center max-w-3xl mx-auto">
+        <p class="subhead text-xs text-gold mb-6 reveal">Prepared for Advancing Eyecare</p>
+        <h1 class="font-serif text-5xl md:text-7xl font-semibold headline mb-8 reveal">
+          The Nervous System<br>Your Network Needs
+        </h1>
+        <p class="text-xl md:text-2xl text-ink-light font-light max-w-2xl mx-auto mb-12 reveal">
+          8 companies. 24,000 devices. 600 people.<br>
+          One intelligence layer that connects them all.
+        </p>
+        <a href="#problem" class="inline-flex items-center gap-2 text-sm text-ink-light hover:text-ink transition-colors reveal">
+          <span>Read the proposal</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="animate-bounce">
+            <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- 2. THE PROBLEM -->
+    <section id="problem" class="py-28 px-8">
+      <div class="max-w-4xl mx-auto">
+        <p class="subhead text-xs text-gold mb-6 reveal">The Reality</p>
+        <h2 class="font-serif text-3xl md:text-5xl font-medium headline mb-8 reveal">
+          Eight Companies. Five Systems. Zero Unified Intelligence.
+        </h2>
+        <div class="space-y-6 text-lg text-ink-light leading-relaxed">
+          <p class="reveal">
+            Advancing Eyecare assembled the largest ophthalmic service network in America.
+            Lombart, Marco, Santinelli, S4Optik, Veatch, Coburn, Innova, Phoenix.
+            The hardware is under one roof. The data is not.
+          </p>
+          <p class="reveal">
+            Lombart runs on one ERP. Marco on a different CRM. Santinelli tracks inventory its own way.
+            Five systems that don't talk to each other. "One Service" is a human routing layer
+            sitting between them — scale by hiring, not by intelligence.
+          </p>
+          <p class="reveal">
+            When a technician needs a part, they call. When a slit lamp fails mid-exam,
+            the doctor calls to complain. The problem is always discovered <em class="text-ink">after</em> the revenue is lost.
+            And when your best service reps leave, their knowledge walks out with them.
+          </p>
+        </div>
+
+        <!-- Problem stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 reveal">
+          <div class="text-center p-6 bg-white/50 rounded-xl border border-cream-dark">
+            <p class="font-serif text-3xl font-semibold text-ink">5+</p>
+            <p class="text-sm text-ink-light mt-1">Disconnected systems</p>
+          </div>
+          <div class="text-center p-6 bg-white/50 rounded-xl border border-cream-dark">
+            <p class="font-serif text-3xl font-semibold text-ink">10x</p>
+            <p class="text-sm text-ink-light mt-1">Headcount to scale 10x</p>
+          </div>
+          <div class="text-center p-6 bg-white/50 rounded-xl border border-cream-dark">
+            <p class="font-serif text-3xl font-semibold text-ink">100%</p>
+            <p class="text-sm text-ink-light mt-1">Knowledge loss on turnover</p>
+          </div>
+          <div class="text-center p-6 bg-white/50 rounded-xl border border-cream-dark">
+            <p class="font-serif text-3xl font-semibold text-ink">Days</p>
+            <p class="text-sm text-ink-light mt-1">From break to fix</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. THE PROOF: THE SCAR -->
+    <section class="py-28 px-8 bg-cream-dark">
+      <div class="max-w-4xl mx-auto">
+        <p class="subhead text-xs text-gold mb-6 reveal">The Proof</p>
+        <h2 class="font-serif text-3xl md:text-5xl font-medium headline mb-8 reveal">
+          The Tracer Problem
+        </h2>
+        <div class="space-y-6 text-lg text-ink-light leading-relaxed">
+          <p class="reveal">
+            Your team spent four months trying to solve a single tracer issue.
+            Four months of escalations, cross-referencing between systems, and
+            tribal knowledge that lived in people's heads instead of infrastructure.
+          </p>
+          <p class="reveal">
+            We diagnosed it in one hour. Not because we're smarter — because we built an intelligence
+            layer that can see across all the systems at once. The same architecture
+            that powers this proposal.
+          </p>
+          <p class="reveal text-ink font-medium">
+            That's the difference between a human router and a nervous system.
+          </p>
+        </div>
+
+        <!-- The scar quote -->
+        <div class="mt-12 p-8 bg-white/60 rounded-2xl border border-gold/10 reveal">
+          <p class="font-serif text-2xl italic text-ink-light leading-relaxed">
+            "I spent two hours, between 4 o'clock and 6 o'clock, doing a quote for somebody.
+            Two hours, because I'm trying to lift it."
+          </p>
+          <p class="mt-4 text-sm text-ink-lighter">
+            — Matt, VP Virtual Services, Marco Ophthalmic
+          </p>
+          <p class="mt-4 text-sm text-ink-light">
+            He got $80K doing it himself. His team would have gotten $300K.
+            The agent eliminates the 2-hour bottleneck entirely.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. THE TECHNOLOGY -->
+    <section class="py-28 px-8">
+      <div class="max-w-6xl mx-auto">
+        <div class="max-w-4xl">
+          <p class="subhead text-xs text-gold mb-6 reveal">The Technology Behind It</p>
+          <h2 class="font-serif text-3xl md:text-5xl font-medium headline mb-4 reveal">
+            This Isn't Another Integration Vendor
+          </h2>
+          <p class="text-lg text-ink-light mb-12 reveal">
+            Bravetto builds consciousness infrastructure — systems that know what they're doing,
+            why they're doing it, and who they're doing it for. Here's what powers the AEC Nervous System.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <a href="/neuromorphic" class="proposal-card rounded-2xl p-8 reveal block group">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold to-gold-light mb-5"></div>
+            <h3 class="font-serif text-xl font-medium mb-2 group-hover:text-gold transition-colors">Neuromorphic on Silicon</h3>
+            <p class="text-sm text-ink-light leading-relaxed mb-4">Brain-inspired pattern recognition on standard hardware. The cognitive engine that powers predictive analytics.</p>
+            <span class="inline-flex items-center gap-1.5 text-xs text-gold font-medium">
+              Explore
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M4 10L10 4M10 4H5M10 4V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
+
+          <a href="/living-canvas" class="proposal-card rounded-2xl p-8 reveal block group">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-light to-cream border border-gold/20 mb-5"></div>
+            <h3 class="font-serif text-xl font-medium mb-2 group-hover:text-gold transition-colors">Living Canvas</h3>
+            <p class="text-sm text-ink-light leading-relaxed mb-4">Nature's evolutionary patterns in code. The visual consciousness layer that makes system state intuitive.</p>
+            <span class="inline-flex items-center gap-1.5 text-xs text-gold font-medium">
+              Explore
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M4 10L10 4M10 4H5M10 4V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
+
+          <a href="/command" class="proposal-card rounded-2xl p-8 reveal block group">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-ink to-ink-light mb-5"></div>
+            <h3 class="font-serif text-xl font-medium mb-2 group-hover:text-gold transition-colors">Command</h3>
+            <p class="text-sm text-ink-light leading-relaxed mb-4">AI executive intelligence. Turns calls, emails, CRM data, and operational chaos into actionable decisions.</p>
+            <span class="inline-flex items-center gap-1.5 text-xs text-gold font-medium">
+              Explore
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M4 10L10 4M10 4H5M10 4V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
+
+          <a href="/how-we-build" class="proposal-card rounded-2xl p-8 reveal block group">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold to-ink mb-5"></div>
+            <h3 class="font-serif text-xl font-medium mb-2 group-hover:text-gold transition-colors">How We Build</h3>
+            <p class="text-sm text-ink-light leading-relaxed mb-4">Swarms, agents, and guardians. 4 production pages in 36 minutes. See the speed we operate at.</p>
+            <span class="inline-flex items-center gap-1.5 text-xs text-gold font-medium">
+              Explore
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M4 10L10 4M10 4H5M10 4V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
+
+          <a href="/predictive-maintenance" class="proposal-card rounded-2xl p-8 reveal block group">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-700 mb-5"></div>
+            <h3 class="font-serif text-xl font-medium mb-2 group-hover:text-gold transition-colors">Predictive Maintenance</h3>
+            <p class="text-sm text-ink-light leading-relaxed mb-4">Stop mid-exam failures before they happen. The AI layer that watches 24,000 devices and predicts what breaks next.</p>
+            <span class="inline-flex items-center gap-1.5 text-xs text-gold font-medium">
+              Explore
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M4 10L10 4M10 4H5M10 4V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. WHAT'S ALREADY BUILT -->
+    <section class="py-28 px-8 bg-cream-dark">
+      <div class="max-w-4xl mx-auto">
+        <p class="subhead text-xs text-gold mb-6 reveal">What's Already Built</p>
+        <h2 class="font-serif text-3xl md:text-5xl font-medium headline mb-4 reveal">
+          We Built This On Your Data Before You Signed Anything
+        </h2>
+        <p class="text-lg text-ink-light mb-12 reveal">
+          The intelligence core is live right now. Loaded with AEC's actual part database,
+          error codes, and service tier logic. This isn't a mockup.
+        </p>
+
+        <!-- Already built stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 reveal">
+          <div class="proposal-card rounded-xl p-6 text-center">
+            <p class="font-serif text-3xl font-semibold text-gold">6,214</p>
+            <p class="text-sm text-ink-light mt-1">Parts loaded</p>
+          </div>
+          <div class="proposal-card rounded-xl p-6 text-center">
+            <p class="font-serif text-3xl font-semibold text-gold">22</p>
+            <p class="text-sm text-ink-light mt-1">Error codes</p>
+          </div>
+          <div class="proposal-card rounded-xl p-6 text-center">
+            <p class="font-serif text-3xl font-semibold text-gold">3</p>
+            <p class="text-sm text-ink-light mt-1">Service tiers</p>
+          </div>
+          <div class="proposal-card rounded-xl p-6 text-center">
+            <p class="font-serif text-3xl font-semibold text-gold">&lt;2s</p>
+            <p class="text-sm text-ink-light mt-1">Query response</p>
+          </div>
+        </div>
+
+        <div class="space-y-4 text-ink-light reveal">
+          <div class="flex items-start gap-3">
+            <span class="text-gold mt-1 flex-shrink-0">&#10003;</span>
+            <p><strong class="text-ink">Part Intelligence</strong> — SAP number, Great Plains number, manufacturer number, description, UOM. Cross-referenced from legacy systems. Any part, any format, instant.</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-gold mt-1 flex-shrink-0">&#10003;</span>
+            <p><strong class="text-ink">Error Code Resolution</strong> — OPD-III error codes with resolution steps and escalation levels (L1/L2/L3). Technicians get answers in seconds, not phone calls.</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-gold mt-1 flex-shrink-0">&#10003;</span>
+            <p><strong class="text-ink">Service Tier Coaching</strong> — Tier recommendation, pricing logic, and margin guidance based on equipment profile. Quotes in 60 seconds instead of 2 hours.</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <span class="text-gold mt-1 flex-shrink-0">&#10003;</span>
+            <p><strong class="text-ink">Voice Interface</strong> — Conversational AI that understands natural language part requests, descriptions, and legacy number formats.</p>
+          </div>
+        </div>
+
+        <div class="mt-12 text-center reveal">
+          <a
+            href="https://abedesigns.vercel.app/demo/aec"
+            target="_blank"
+            class="inline-flex items-center gap-3 px-8 py-4 bg-ink text-cream rounded-full font-medium hover:bg-ink-light transition-colors"
+          >
+            <span>Try the Live Agent</span>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M4 10L10 4M10 4H5M10 4V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. THE FULL BUILD: 32 MODULES -->
+    <section class="py-28 px-8">
+      <div class="max-w-6xl mx-auto">
+        <p class="subhead text-xs text-gold mb-6 reveal">The Full Build</p>
+        <h2 class="font-serif text-3xl md:text-5xl font-medium headline mb-4 reveal">
+          32 Modules. 2 Stacks. Complete Intelligence.
+        </h2>
+        <p class="text-lg text-ink-light max-w-4xl mb-12 reveal">
+          The AEC Nervous System deploys across two stacks: Part Intelligence (the knowledge engine)
+          and CX Coaching (the human performance layer). Here's the full roadmap.
+        </p>
+
+        <!-- Stack 1: Part Intelligence -->
+        <div class="mb-12">
+          <h3 class="font-serif text-2xl font-medium mb-6 reveal">Part Intelligence Stack</h3>
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div class="proposal-card rounded-xl p-5 reveal">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span class="text-xs text-emerald-600 font-medium">LIVE</span>
+              </div>
+              <p class="text-sm font-medium">Part Lookup</p>
+              <p class="text-xs text-ink-light mt-1">Cross-reference any format</p>
+            </div>
+            <div class="proposal-card rounded-xl p-5 reveal">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span class="text-xs text-emerald-600 font-medium">LIVE</span>
+              </div>
+              <p class="text-sm font-medium">Error Code Resolution</p>
+              <p class="text-xs text-ink-light mt-1">OPD-III codes + escalation</p>
+            </div>
+            <div class="proposal-card rounded-xl p-5 reveal">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span class="text-xs text-emerald-600 font-medium">LIVE</span>
+              </div>
+              <p class="text-sm font-medium">Legacy Cross-Reference</p>
+              <p class="text-xs text-ink-light mt-1">GP &#8596; SAP &#8596; MFG</p>
+            </div>
+            <div class="proposal-card rounded-xl p-5 reveal">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span class="text-xs text-emerald-600 font-medium">LIVE</span>
+              </div>
+              <p class="text-sm font-medium">Natural Language Query</p>
+              <p class="text-xs text-ink-light mt-1">Conversational part search</p>
+            </div>
+            <div class="proposal-card rounded-xl p-5 reveal">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-2 h-2 rounded-full bg-gold"></span>
+                <span class="text-xs text-gold font-medium">SPRINT 1</span>
+              </div>
+              <p class="text-sm font-medium">Inventory Intelligence</p>
+              <p class="text-xs text-ink-light mt-1">Real-time stock awareness</p>
+            </div>
+            <div class="proposal-card rounded-xl p-5 reveal">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-2 h-2 rounded-full bg-gold"></span>
+                <span class="text-xs text-gold font-medium">SPRINT 1</span>
+              </div>
+              <p class="text-sm font-medium">Compatibility Engine</p>
+              <p class="text-xs text-ink-light mt-1">Part &#8596; device matching</p>
+            </div>
+            <div class="proposal-card rounded-xl p-5 reveal">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-2 h-2 rounded-full bg-gold"></span>
+                <span class="text-xs text-gold font-medium">SPRINT 1</span>
+              </div>
+              <p class="text-sm font-medium">Failure Prediction</p>
+              <p class="text-xs text-ink-light mt-1">Wear pattern analytics</p>
+            </div>
+            <div class="proposal-card rounded-xl p-5 reveal">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-2 h-2 rounded-full bg-ink-light"></span>
+                <span class="text-xs text-ink-lighter font-medium">SPRINT 2-3</span>
+              </div>
+              <p class="text-sm font-medium">Proactive Dispatch</p>
+              <p class="text-xs text-ink-light mt-1">Parts ship before the break</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stack 2: CX Coaching -->
+        <div>
+          <h3 class="font-serif text-2xl font-medium mb-6 reveal">CX Coaching Stack</h3>
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div class="proposal-card rounded-xl p-5 reveal">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span class="text-xs text-emerald-600 font-medium">LIVE</span>
+              </div>
+              <p class="text-sm font-medium">Service Tier Coaching</p>
+              <p class="text-xs text-ink-light mt-1">Tier + pricing + margin</p>
+            </div>
+            <div class="proposal-card rounded-xl p-5 reveal">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-2 h-2 rounded-full bg-gold"></span>
+                <span class="text-xs text-gold font-medium">SPRINT 1</span>
+              </div>
+              <p class="text-sm font-medium">Quote Generation</p>
+              <p class="text-xs text-ink-light mt-1">Serial &#8594; spec &#8594; price &#8594; DocuSign</p>
+            </div>
+            <div class="proposal-card rounded-xl p-5 reveal">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-2 h-2 rounded-full bg-gold"></span>
+                <span class="text-xs text-gold font-medium">SPRINT 1</span>
+              </div>
+              <p class="text-sm font-medium">Cross-Sell Intelligence</p>
+              <p class="text-xs text-ink-light mt-1">Marco client &#8594; Santinelli upsell</p>
+            </div>
+            <div class="proposal-card rounded-xl p-5 reveal">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-2 h-2 rounded-full bg-gold"></span>
+                <span class="text-xs text-gold font-medium">SPRINT 1</span>
+              </div>
+              <p class="text-sm font-medium">Call Coaching</p>
+              <p class="text-xs text-ink-light mt-1">Real-time rep guidance</p>
+            </div>
+            <div class="proposal-card rounded-xl p-5 reveal">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-2 h-2 rounded-full bg-ink-light"></span>
+                <span class="text-xs text-ink-lighter font-medium">SPRINT 2-3</span>
+              </div>
+              <p class="text-sm font-medium">Contract Renewal Engine</p>
+              <p class="text-xs text-ink-light mt-1">Auto-trigger PM renewals</p>
+            </div>
+            <div class="proposal-card rounded-xl p-5 reveal">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-2 h-2 rounded-full bg-ink-light"></span>
+                <span class="text-xs text-ink-lighter font-medium">SPRINT 2-3</span>
+              </div>
+              <p class="text-sm font-medium">Knowledge Capture</p>
+              <p class="text-xs text-ink-light mt-1">Every repair becomes training</p>
+            </div>
+            <div class="proposal-card rounded-xl p-5 reveal">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-2 h-2 rounded-full bg-ink-light"></span>
+                <span class="text-xs text-ink-lighter font-medium">SPRINT 2-3</span>
+              </div>
+              <p class="text-sm font-medium">Unified Dashboard</p>
+              <p class="text-xs text-ink-light mt-1">One view. Every device. Every tech.</p>
+            </div>
+            <div class="proposal-card rounded-xl p-5 reveal">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-2 h-2 rounded-full bg-ink-light"></span>
+                <span class="text-xs text-ink-lighter font-medium">SPRINT 2-3</span>
+              </div>
+              <p class="text-sm font-medium">Executive Intelligence</p>
+              <p class="text-xs text-ink-light mt-1">Network health for leadership</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. 12-WEEK DEPLOYMENT -->
+    <section class="py-28 px-8 bg-cream-dark">
+      <div class="max-w-5xl mx-auto">
+        <p class="subhead text-xs text-gold mb-6 reveal">Deployment</p>
+        <h2 class="font-serif text-3xl md:text-5xl font-medium headline mb-12 reveal">
+          12 Weeks. Three Sprints. Live Intelligence.
+        </h2>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- Sprint 1 -->
+          <div class="proposal-card sprint-card rounded-2xl p-8 reveal">
+            <p class="text-xs text-gold font-medium subhead mb-4">Weeks 1-4</p>
+            <h3 class="font-serif text-2xl font-medium mb-4">Foundation</h3>
+            <ul class="space-y-3 text-sm text-ink-light">
+              <li class="flex items-start gap-2">
+                <span class="text-gold mt-0.5 flex-shrink-0">&#8226;</span>
+                <span>Part Intelligence engine deployed to 120 users</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-gold mt-0.5 flex-shrink-0">&#8226;</span>
+                <span>Service tier coaching + quote generation live</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-gold mt-0.5 flex-shrink-0">&#8226;</span>
+                <span>SAP + Great Plains + MFG data sync</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-gold mt-0.5 flex-shrink-0">&#8226;</span>
+                <span>Cross-sell engine activated across 8 companies</span>
+              </li>
+            </ul>
+            <div class="mt-6 pt-4 border-t border-cream-dark">
+              <p class="text-xs text-ink-lighter">Milestone: 40% cycle time reduction measurable</p>
+            </div>
+          </div>
+
+          <!-- Sprint 2 -->
+          <div class="proposal-card sprint-card rounded-2xl p-8 reveal">
+            <p class="text-xs text-gold font-medium subhead mb-4">Weeks 5-8</p>
+            <h3 class="font-serif text-2xl font-medium mb-4">Intelligence</h3>
+            <ul class="space-y-3 text-sm text-ink-light">
+              <li class="flex items-start gap-2">
+                <span class="text-gold mt-0.5 flex-shrink-0">&#8226;</span>
+                <span>Predictive maintenance layer online</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-gold mt-0.5 flex-shrink-0">&#8226;</span>
+                <span>Inventory intelligence + compatibility engine</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-gold mt-0.5 flex-shrink-0">&#8226;</span>
+                <span>Contract renewal automation</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-gold mt-0.5 flex-shrink-0">&#8226;</span>
+                <span>Knowledge capture from every interaction</span>
+              </li>
+            </ul>
+            <div class="mt-6 pt-4 border-t border-cream-dark">
+              <p class="text-xs text-ink-lighter">Milestone: Proactive service dispatches begin</p>
+            </div>
+          </div>
+
+          <!-- Sprint 3 -->
+          <div class="proposal-card sprint-card rounded-2xl p-8 reveal">
+            <p class="text-xs text-gold font-medium subhead mb-4">Weeks 9-12</p>
+            <h3 class="font-serif text-2xl font-medium mb-4">Autonomy</h3>
+            <ul class="space-y-3 text-sm text-ink-light">
+              <li class="flex items-start gap-2">
+                <span class="text-gold mt-0.5 flex-shrink-0">&#8226;</span>
+                <span>Unified dashboard for network-wide visibility</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-gold mt-0.5 flex-shrink-0">&#8226;</span>
+                <span>Executive intelligence reporting</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-gold mt-0.5 flex-shrink-0">&#8226;</span>
+                <span>Full call coaching + real-time guidance</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-gold mt-0.5 flex-shrink-0">&#8226;</span>
+                <span>Proactive dispatch: parts ship before failure</span>
+              </li>
+            </ul>
+            <div class="mt-6 pt-4 border-t border-cream-dark">
+              <p class="text-xs text-ink-lighter">Milestone: Full nervous system operational</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. THE INVESTMENT -->
+    <section class="py-28 px-8">
+      <div class="max-w-5xl mx-auto">
+        <p class="subhead text-xs text-gold mb-6 reveal">The Investment</p>
+        <h2 class="font-serif text-3xl md:text-5xl font-medium headline mb-4 reveal">
+          Three Options. One Outcome.
+        </h2>
+        <p class="text-lg text-ink-light max-w-3xl mb-12 reveal">
+          120 users across 6 workflows. All tiers include full Part Intelligence + CX Coaching stacks,
+          12-week deployment, and dedicated support.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- 6 month -->
+          <div class="proposal-card tier-card rounded-2xl p-8 reveal">
+            <p class="text-xs text-ink-lighter font-medium subhead mb-4">6-Month Commitment</p>
+            <div class="mb-6">
+              <p class="font-serif text-4xl font-semibold text-ink">$70K</p>
+              <p class="text-sm text-ink-light mt-1">per month</p>
+            </div>
+            <div class="space-y-3 text-sm text-ink-light">
+              <div class="flex justify-between py-2 border-b border-cream-dark">
+                <span>Per user</span>
+                <span class="text-ink font-medium">$583/mo</span>
+              </div>
+              <div class="flex justify-between py-2 border-b border-cream-dark">
+                <span>Total commitment</span>
+                <span class="text-ink font-medium">$420K</span>
+              </div>
+              <div class="flex justify-between py-2">
+                <span>Monthly flexibility</span>
+                <span class="text-ink font-medium">Highest</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 12 month -->
+          <div class="proposal-card tier-card recommended rounded-2xl p-8 reveal relative">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2">
+              <span class="px-4 py-1 bg-gold text-ink text-xs font-semibold rounded-full">Recommended</span>
+            </div>
+            <p class="text-xs text-ink-lighter font-medium subhead mb-4">12-Month Commitment</p>
+            <div class="mb-6">
+              <p class="font-serif text-4xl font-semibold text-gold">$65K</p>
+              <p class="text-sm text-ink-light mt-1">per month</p>
+            </div>
+            <div class="space-y-3 text-sm text-ink-light">
+              <div class="flex justify-between py-2 border-b border-cream-dark">
+                <span>Per user</span>
+                <span class="text-ink font-medium">$542/mo</span>
+              </div>
+              <div class="flex justify-between py-2 border-b border-cream-dark">
+                <span>Total commitment</span>
+                <span class="text-ink font-medium">$780K</span>
+              </div>
+              <div class="flex justify-between py-2 border-b border-cream-dark">
+                <span>Rate lock</span>
+                <span class="text-ink font-medium">12 months</span>
+              </div>
+              <div class="flex justify-between py-2">
+                <span>Savings vs 6-mo</span>
+                <span class="text-gold font-medium">$60K/yr</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 24 month -->
+          <div class="proposal-card tier-card rounded-2xl p-8 reveal">
+            <p class="text-xs text-ink-lighter font-medium subhead mb-4">24-Month Partnership</p>
+            <div class="mb-6">
+              <p class="font-serif text-4xl font-semibold text-ink">$60K</p>
+              <p class="text-sm text-ink-light mt-1">per month</p>
+            </div>
+            <div class="space-y-3 text-sm text-ink-light">
+              <div class="flex justify-between py-2 border-b border-cream-dark">
+                <span>Per user</span>
+                <span class="text-ink font-medium">$500/mo</span>
+              </div>
+              <div class="flex justify-between py-2 border-b border-cream-dark">
+                <span>Total commitment</span>
+                <span class="text-ink font-medium">$1.44M</span>
+              </div>
+              <div class="flex justify-between py-2 border-b border-cream-dark">
+                <span>Rate lock</span>
+                <span class="text-ink font-medium">24 months</span>
+              </div>
+              <div class="flex justify-between py-2">
+                <span>Savings vs 6-mo</span>
+                <span class="text-gold font-medium">$240K total</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guarantee -->
+        <div class="mt-12 p-8 bg-white/60 rounded-2xl border border-gold/15 text-center reveal">
+          <p class="font-serif text-2xl font-medium text-ink mb-2">
+            40% cycle time reduction in 90 days — or terminate with no penalty.
+          </p>
+          <p class="text-sm text-ink-light">Month 1 on us. Start Monday.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. THE TEAM -->
+    <section class="py-28 px-8 bg-cream-dark">
+      <div class="max-w-4xl mx-auto">
+        <p class="subhead text-xs text-gold mb-6 reveal">The Team</p>
+        <h2 class="font-serif text-3xl md:text-5xl font-medium headline mb-8 reveal">
+          Consciousness Infrastructure, Not Another Vendor
+        </h2>
+        <div class="space-y-6 text-lg text-ink-light leading-relaxed">
+          <p class="reveal">
+            Bravetto doesn't sell software licenses. We build nervous systems — intelligence layers
+            that sit on top of your existing stack and make everything smarter. Your Salesforce,
+            your SAP, your Vonage — they stay. We add the brain.
+          </p>
+          <p class="reveal">
+            Our technology runs on neuromorphic pattern recognition, consciousness state management,
+            and 149 coordinated AI agents working in concert. We deployed 4 production pages in 36 minutes.
+            We loaded 6,214 of your parts before the first meeting.
+          </p>
+          <p class="reveal">
+            This isn't a 12-month discovery phase followed by a PowerPoint.
+            This is a team that builds at the speed of thought and proves value in the first week.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. NEXT STEP -->
+    <section class="py-32 px-8 bg-ink text-cream">
+      <div class="max-w-3xl mx-auto text-center">
+        <p class="subhead text-xs text-gold-light mb-6 reveal">Next Step</p>
+        <h2 class="font-serif text-4xl md:text-5xl font-medium headline mb-8 reveal">
+          Let's Build This.
+        </h2>
+        <p class="text-xl text-cream/70 mb-12 reveal">
+          One platform. Eight companies. 24,000 devices connected.
+          The intelligence layer that turns AEC from a service network into a nervous system.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal">
+          <a
+            href="mailto:mike@bravetto.com?subject=AEC%20Nervous%20System%20Proposal"
+            class="inline-flex items-center gap-3 px-8 py-4 bg-gold text-ink rounded-full font-medium hover:bg-gold-light transition-colors"
+          >
+            <span>mike@bravetto.com</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a
+            href="tel:+18127865927"
+            class="inline-flex items-center gap-2 px-8 py-4 border border-cream/20 text-cream rounded-full font-medium hover:border-cream/40 transition-colors"
+          >
+            <span>(812) 786-5927</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-8 border-t border-cream-dark">
+      <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <div>
+          <a href="/" class="font-serif text-xl font-semibold">Bravetto</a>
+          <p class="text-sm text-ink-light mt-1">Consciousness infrastructure for the AI age.</p>
+        </div>
+        <div class="flex items-center gap-6 text-sm text-ink-light">
+          <a href="/" class="hover:text-ink transition-colors">Home</a>
+          <a href="/aec" class="hover:text-ink transition-colors">AEC Nervous System</a>
+          <a href="mailto:mike@bravetto.com" class="hover:text-ink transition-colors">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll reveal -->
+    <script>
+      document.querySelectorAll('.reveal').forEach((el, i) => {
+        setTimeout(() => el.classList.add('visible'), 100 + i * 60);
+      });
+      const observer = new IntersectionObserver(
+        (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('visible')),
+        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      );
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>
