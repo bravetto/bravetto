@@ -24,15 +24,15 @@
     },
     {
       "source": "/experiments",
-      "destination": "/lab-archive/abe-experiments.html"
+      "destination": "/lab-archive/abe-experiments"
     },
     {
       "source": "/pimp-my-mac",
-      "destination": "/lab-archive/pimp-my-mac.html"
+      "destination": "/lab-archive/pimp-my-mac"
     },
     {
       "source": "/scream-machine",
-      "destination": "/lab-archive/scream-machine.html"
+      "destination": "/lab-archive/scream-machine"
     },
     {
       "source": "/davinci-notebook",
