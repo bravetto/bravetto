@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AEC Master Contract | AEC-ONE-001</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d1018;
+      --surface: #151b2a;
+      --line: #2a334d;
+      --gold: #f0c040;
+      --text: #e7ecf6;
+      --muted: #92a0ba;
+      --ok: #34d399;
+      --warn: #f59e0b;
+      --ink: #0b1020;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(240, 192, 64, 0.08), transparent 45%),
+        radial-gradient(circle at 90% 90%, rgba(59, 130, 246, 0.08), transparent 45%),
+        var(--bg);
+      color: var(--text);
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 28px;
+    }
+    .topline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .pill {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .pill.live {
+      color: #052e24;
+      border-color: rgba(52, 211, 153, 0.4);
+      background: rgba(52, 211, 153, 0.9);
+    }
+    .eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding: 6px 12px;
+      border: 1px solid rgba(240, 192, 64, 0.3);
+      border-radius: 999px;
+      background: rgba(240, 192, 64, 0.08);
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+    .sub {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .section-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--gold);
+      margin: 22px 0 10px;
+      font-weight: 600;
+    }
+    .para {
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .item {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .value {
+      font-size: 15px;
+      line-height: 1.45;
+    }
+    .value strong {
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .rule-list {
+      margin: 8px 0 14px;
+      padding-left: 20px;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .rule-list li { margin-bottom: 6px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+    th {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.02);
+    }
+    tr:last-child td { border-bottom: none; }
+    .status {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+    .status.open {
+      color: #111827;
+      background: var(--warn);
+    }
+    .status.ready {
+      color: #052e24;
+      background: var(--ok);
+    }
+    .status.active {
+      color: var(--ink);
+      background: var(--gold);
+    }
+    .signature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 10px;
+    }
+    .signature-card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.02);
+      min-height: 122px;
+    }
+    .sig-line {
+      height: 1px;
+      background: var(--line);
+      margin: 28px 0 8px;
+    }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .links a {
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 13px;
+    }
+    .links a.primary {
+      border-color: rgba(240, 192, 64, 0.35);
+      background: rgba(240, 192, 64, 0.1);
+      color: var(--gold);
+    }
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+      .signature-grid { grid-template-columns: 1fr; }
+      .card { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <div class="topline">
+        <span class="pill">Contract ID: AEC-ONE-001</span>
+        <span class="pill">Version: 1.1</span>
+        <span class="pill live">Execution Active</span>
+      </div>
+      <p class="eyebrow">Advancing Eyecare x Bravetto</p>
+      <h1>AEC Master Contract</h1>
+      <p class="sub">Single measurable outcome, single accountable owner, single closure decision, single closure gate.</p>
+
+      <div class="grid">
+        <article class="item">
+          <p class="label">Sign Date</p>
+          <p class="value"><strong>Friday, February 20, 2026</strong></p>
+        </article>
+        <article class="item">
+          <p class="label">Contract Term</p>
+          <p class="value">90-day outcome window ending <strong>Thursday, May 21, 2026</strong>.</p>
+        </article>
+        <article class="item">
+          <p class="label">Objective ID</p>
+          <p class="value"><strong>AEC-ONE-001</strong></p>
+        </article>
+        <article class="item">
+          <p class="label">Accountable Owner (Bravetto)</p>
+          <p class="value">Mike Mataluni (Bravetto)</p>
+        </article>
+        <article class="item">
+          <p class="label">Measurable Outcome</p>
+          <p class="value"><strong>40% cycle time reduction</strong> across 120 users and 6 workflows inside <strong>90 days</strong>.</p>
+        </article>
+        <article class="item">
+          <p class="label">Closure Rule</p>
+          <p class="value">If the day-90 metric is not met, AEC may terminate with no penalty.</p>
+        </article>
+      </div>
+
+      <h2 class="section-title">Execution Clauses</h2>
+      <ol class="rule-list">
+        <li>Performance guarantee is measured against agreed baseline cycle time captured in week one.</li>
+        <li>Weekly metric reviews are required. Missing data does not pause the calendar.</li>
+        <li>AbeSHADOWs wave files are a contracted final phase deliverable and are in-scope for this term.</li>
+        <li>All resulting training, repair, and sales resources are delivered to AEC as operational assets.</li>
+      </ol>
+
+      <h2 class="section-title">Delivery Gates</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Gate</th>
+            <th>Date</th>
+            <th>Pass Criteria</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Gate 1</td>
+            <td>Sun, Mar 22, 2026</td>
+            <td>Part Intelligence + quote coaching live for 120 users, baseline locked.</td>
+            <td><span class="status active">active</span></td>
+          </tr>
+          <tr>
+            <td>Gate 2</td>
+            <td>Tue, Apr 21, 2026</td>
+            <td>Renewal automation, knowledge capture, and field coaching in production.</td>
+            <td><span class="status open">open</span></td>
+          </tr>
+          <tr>
+            <td>Gate 3</td>
+            <td>Thu, May 21, 2026</td>
+            <td>Independent metric review confirms 40% cycle time reduction.</td>
+            <td><span class="status open">open</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 class="section-title">Final Phase Addendum: AbeSHADOWs Wave Files</h2>
+      <p class="para">
+        Trigger: Bryan's final phase email (received pre-signing). Source assets are AbeSHADOWs wave files encoding Greg's company knowledge.
+        Bravetto converts these into operational intelligence artifacts for AEC.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Deliverable</th>
+            <th>Due</th>
+            <th>Acceptance Evidence</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Wave intake + transcript pack</td>
+            <td>Tue, Feb 24, 2026</td>
+            <td>Timestamped ingest log, transcript bundle, speaker map.</td>
+            <td><span class="status active">active</span></td>
+          </tr>
+          <tr>
+            <td>Repair intelligence resources</td>
+            <td>Tue, Mar 10, 2026</td>
+            <td>Error-resolution trees, escalation ladders, technician quick refs.</td>
+            <td><span class="status open">open</span></td>
+          </tr>
+          <tr>
+            <td>Sales enablement resources</td>
+            <td>Tue, Mar 17, 2026</td>
+            <td>Quote scripts, objection handling map, cross-sell prompts.</td>
+            <td><span class="status open">open</span></td>
+          </tr>
+          <tr>
+            <td>Training corpus for AEC teams</td>
+            <td>Tue, Mar 24, 2026</td>
+            <td>Role-based modules, score rubrics, and onboarding runbook.</td>
+            <td><span class="status open">open</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 class="section-title">Signatures</h2>
+      <div class="signature-grid">
+        <article class="signature-card">
+          <p class="label">Bravetto</p>
+          <p class="value"><strong>Mike Mataluni</strong><br>Authorized Signatory</p>
+          <div class="sig-line"></div>
+          <p class="value">Signed: Friday, February 20, 2026</p>
+        </article>
+        <article class="signature-card">
+          <p class="label">Advancing Eyecare</p>
+          <p class="value"><strong>Authorized Signatory</strong><br>Name + Title</p>
+          <div class="sig-line"></div>
+          <p class="value">Sign Date: Friday, February 20, 2026</p>
+        </article>
+      </div>
+
+      <div class="links">
+        <a class="primary" href="mailto:mike@bravetto.com?subject=AEC%20Master%20Contract%20AEC-ONE-001%20%28Signed%20Feb%2020%2C%202026%29">Email Contract</a>
+        <a class="primary" href="/aec-paperwork">Open Paperwork Packet</a>
+        <a class="primary" href="/aec-proposal">Open Executive Proposal</a>
+        <a href="/aec-roi">Open ROI Sheet</a>
+        <a href="/aec-demo">Open 90-Second Demo</a>
+        <a href="/aec">Open System Narrative</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

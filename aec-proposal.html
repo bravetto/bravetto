@@ -110,7 +110,10 @@
     <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-5 bg-cream/90 backdrop-blur-md border-b border-cream-dark">
       <div class="max-w-6xl mx-auto flex justify-between items-center">
         <a href="/" class="font-serif text-xl font-semibold tracking-tight text-ink">Bravetto</a>
-        <span class="text-xs text-ink-lighter subhead">Executive Proposal</span>
+        <div class="flex items-center gap-5">
+          <a href="/aec-one-pattern" class="text-xs text-gold subhead hover:opacity-80 transition-opacity">One Pattern</a>
+          <span class="text-xs text-ink-lighter subhead">Executive Proposal</span>
+        </div>
       </div>
     </nav>
 
@@ -131,6 +134,36 @@
             <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
+      </div>
+    </section>
+
+    <!-- Objective contract -->
+    <section class="px-8 pb-16">
+      <div class="max-w-5xl mx-auto">
+        <div class="proposal-card rounded-2xl p-8 reveal">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+              <p class="subhead text-xs text-gold mb-3">One Pattern Contract</p>
+              <p class="text-sm text-ink-light leading-relaxed">
+                Objective <span class="text-ink font-medium">AEC-ONE-001</span>:
+                40% cycle time reduction across 120 users and 6 workflows in 90 days.
+                Signed <span class="text-ink font-medium">Friday, February 20, 2026</span>.
+                If not achieved, AEC may terminate with no penalty.
+              </p>
+            </div>
+            <div class="flex flex-wrap items-center gap-3">
+              <a href="/aec-one-pattern" class="inline-flex items-center gap-2 px-5 py-3 border border-gold/30 rounded-full text-sm text-gold hover:bg-gold/5 transition-colors">
+                <span>Open full contract</span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M4 10L10 4M10 4H5M10 4V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <a href="/aec-paperwork" class="inline-flex items-center gap-2 px-5 py-3 border border-gold/20 rounded-full text-sm text-ink-light hover:bg-white/40 transition-colors">
+                <span>Open paperwork</span>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 

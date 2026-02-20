@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AEC Paperwork Packet</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f1118;
+      --surface: #171c2a;
+      --line: #2a334d;
+      --text: #e8edf8;
+      --muted: #94a2bb;
+      --gold: #f0c040;
+      --ok: #34d399;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(circle at 90% 10%, rgba(52, 211, 153, 0.07), transparent 40%),
+        radial-gradient(circle at 10% 90%, rgba(240, 192, 64, 0.08), transparent 45%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 36px 20px;
+    }
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .card {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 18px;
+      padding: 26px;
+      margin-bottom: 16px;
+    }
+    .eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--gold);
+      border: 1px solid rgba(240, 192, 64, 0.35);
+      border-radius: 999px;
+      padding: 6px 10px;
+      margin-bottom: 14px;
+      background: rgba(240, 192, 64, 0.09);
+    }
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+    .sub {
+      color: var(--muted);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 12px 0;
+    }
+    .item {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .k {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 7px;
+    }
+    .v {
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    .v strong { color: var(--gold); }
+    ol {
+      margin-top: 10px;
+      padding-left: 20px;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+    li { margin-bottom: 6px; }
+    .status {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #063126;
+      background: var(--ok);
+      padding: 4px 8px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .links a {
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 13px;
+    }
+    .links a.primary {
+      color: var(--gold);
+      border-color: rgba(240, 192, 64, 0.35);
+      background: rgba(240, 192, 64, 0.08);
+    }
+    @media (max-width: 760px) {
+      .row { grid-template-columns: 1fr; }
+      .card { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <span class="status">Send Now Packet</span>
+      <p class="eyebrow">Advancing Eyecare x Bravetto</p>
+      <h1>AEC Paperwork Packet</h1>
+      <p class="sub">Everything needed to review, sign, and initiate execution immediately.</p>
+
+      <div class="row">
+        <article class="item">
+          <p class="k">Contract</p>
+          <p class="v"><strong>AEC-ONE-001</strong> signed Friday, February 20, 2026.</p>
+        </article>
+        <article class="item">
+          <p class="k">Guaranteed Outcome</p>
+          <p class="v">40% cycle time reduction in 90 days, or terminate with no penalty.</p>
+        </article>
+        <article class="item">
+          <p class="k">Final Phase Scope</p>
+          <p class="v">AbeSHADOWs wave files transformed into AEC training, repair, and sales resources.</p>
+        </article>
+        <article class="item">
+          <p class="k">Day 90 Date</p>
+          <p class="v">Thursday, May 21, 2026</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="card">
+      <p class="k">Included Artifacts</p>
+      <ol>
+        <li>Master contract and signature block (`/aec-one-pattern`).</li>
+        <li>Executive proposal with deployment and investment terms (`/aec-proposal`).</li>
+        <li>ROI sheet with guarantee framing (`/aec-roi`).</li>
+        <li>90-second demo script on live data (`/aec-demo`).</li>
+        <li>AbeSHADOWs addendum schedule embedded in the master contract.</li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <p class="k">Execution Ready Message</p>
+      <p class="v">
+        Subject: <strong>AEC-ONE-001 | Signed Friday Feb 20 | Execute Now</strong><br>
+        Body: Contract is active. Day-90 target date is May 21, 2026. We begin Gate 1 immediately, including the AbeSHADOWs wave-to-resource pipeline for Greg's knowledge transfer.
+      </p>
+
+      <div class="links">
+        <a class="primary" href="mailto:mike@bravetto.com?subject=AEC-ONE-001%20%7C%20Signed%20Friday%20Feb%2020%20%7C%20Execute%20Now">Send Launch Email</a>
+        <a class="primary" href="/aec-one-pattern">Open Master Contract</a>
+        <a href="/aec-proposal">Open Proposal</a>
+        <a href="/aec-roi">Open ROI</a>
+        <a href="/aec-demo">Open Demo Script</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -81,6 +81,34 @@
     font-size: 12px; color: var(--muted);
     text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px;
   }
+  .objective-strip {
+    margin-bottom: 26px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(240,192,64,0.25);
+    background: rgba(240,192,64,0.06);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 14px;
+  }
+  .objective-strip .label {
+    font-size: 11px;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .objective-strip .text {
+    font-size: 13px;
+    color: var(--text);
+  }
+  .objective-strip a {
+    color: var(--gold);
+    font-size: 12px;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(240,192,64,0.4);
+  }
   .nervous-system {
     display: grid;
     grid-template-columns: 1fr auto 1fr auto 1fr;
@@ -162,6 +190,11 @@
       <div class="big-num">$50K</div>
       <div class="big-label">Per Month / 120 Users</div>
     </div>
+  </div>
+  <div class="objective-strip">
+    <span class="label">AEC-ONE-001</span>
+    <span class="text">Signed Fri, Feb 20, 2026. 40% cycle time reduction in 90 days across 120 users and 6 workflows.</span>
+    <a href="/aec-one-pattern">contract</a>
   </div>
   <div class="nervous-system">
     <div class="ns-block">
