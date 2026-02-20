@@ -8,6 +8,7 @@
     { "source": "/aec-roi", "destination": "/aec-roi.html" },
     { "source": "/aec-one-pattern", "destination": "/aec-one-pattern.html" },
     { "source": "/aec-paperwork", "destination": "/aec-paperwork.html" },
+    { "source": "/aec-experience", "destination": "/aec-experience.html" },
     { "source": "/north-shore-playbook", "destination": "/north-shore-playbook.html" },
     { "source": "/graceful", "destination": "/graceful.html" },
     { "source": "/aec", "destination": "/aec.html" },

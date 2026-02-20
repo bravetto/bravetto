@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AEC Experience | Bravetto</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0e17;
+      --surface: #131825;
+      --surface2: #1a2030;
+      --line: #252e45;
+      --gold: #f0c040;
+      --text: #e8edf6;
+      --muted: #8a99b8;
+      --ok: #34d399;
+      --blue: #3b82f6;
+      --ink: #080c14;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 28px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(10,14,23,0.95);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-brand {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .topbar-links { display: flex; gap: 8px; }
+    .topbar-links a {
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      transition: all 0.2s;
+    }
+    .topbar-links a:hover { color: var(--text); border-color: var(--gold); }
+    .topbar-links a.gold { color: var(--gold); border-color: rgba(240,192,64,0.4); background: rgba(240,192,64,0.08); }
+
+    /* HERO */
+    .hero {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 24px 40px;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(240,192,64,0.35);
+      border-radius: 999px;
+      padding: 7px 14px;
+      background: rgba(240,192,64,0.08);
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 400;
+      line-height: 1.08;
+      margin-bottom: 16px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+    .hero-sub {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.55;
+      max-width: 640px;
+      margin: 0 auto 28px;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: var(--gold);
+    }
+    .stat-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* VOICE CTA */
+    .voice-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px 40px;
+    }
+    .voice-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 32px;
+      text-align: center;
+    }
+    .voice-card h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    .voice-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    .voice-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--gold);
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .voice-btn:hover { transform: scale(1.03); box-shadow: 0 0 30px rgba(240,192,64,0.3); }
+    .voice-btn svg { width: 20px; height: 20px; }
+    .voice-examples {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .voice-example {
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 12px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    /* LIVE PRODUCT */
+    .product-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px 24px 40px;
+    }
+    .product-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .product-header h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+    .product-header p { color: var(--muted); font-size: 0.85rem; }
+    .product-frame {
+      width: 100%;
+      height: 700px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--surface);
+    }
+    .product-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .product-note {
+      text-align: center;
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* CEO GRID */
+    .exec-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+    .exec-section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .exec-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .exec-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px;
+    }
+    .exec-role {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--gold);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .exec-headline {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .exec-body {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* SHADOWS */
+    .shadows-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+    .shadows-section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .shadows-sub {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+    }
+    .shadows-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .shadow-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--blue);
+      border-radius: 14px;
+      padding: 18px;
+    }
+    .shadow-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #93c5fd;
+      margin-bottom: 6px;
+    }
+    .shadow-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    .shadow-date {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* GUARANTEE */
+    .guarantee {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+    .guarantee-card {
+      background: linear-gradient(135deg, rgba(240,192,64,0.06), rgba(52,211,153,0.04));
+      border: 1px solid rgba(240,192,64,0.25);
+      border-radius: 18px;
+      padding: 36px;
+      text-align: center;
+    }
+    .guarantee-card h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+    }
+    .guarantee-card h2 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+    .guarantee-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      max-width: 580px;
+      margin: 0 auto 20px;
+    }
+    .guarantee-terms {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .g-term {
+      font-size: 12px;
+      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 14px;
+      background: rgba(255,255,255,0.03);
+    }
+    .g-term strong { color: var(--gold); }
+
+    /* CTA */
+    .final-cta {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+      text-align: center;
+    }
+    .cta-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 24px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .cta-primary {
+      background: var(--gold);
+      color: var(--ink);
+      border: none;
+    }
+    .cta-primary:hover { box-shadow: 0 0 30px rgba(240,192,64,0.3); transform: scale(1.02); }
+    .cta-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+    .cta-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+    @media (max-width: 760px) {
+      .exec-grid { grid-template-columns: 1fr; }
+      .shadows-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 20px; }
+      .product-frame { height: 500px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="topbar">
+    <a href="/" class="topbar-brand">Bravetto</a>
+    <div class="topbar-links">
+      <a href="/aec-one-pattern">Contract</a>
+      <a href="/aec-proposal">Proposal</a>
+      <a href="/aec-roi">ROI</a>
+      <a href="/aec-paperwork">Paperwork</a>
+      <a href="#product" class="gold">Try it Live</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <p class="hero-eyebrow">Built for Advancing Eye Care</p>
+    <h1>Your parts. Your errors.<br>Your voice. <em>Working now.</em></h1>
+    <p class="hero-sub">
+      This is not a pitch deck. This is your system running live.
+      Search any part. Ask any question. Hear the answer.
+      Built on your data. Ready for your team.
+    </p>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">6,214</div>
+        <div class="stat-label">Parts Indexed</div>
+      </div>
+      <div>
+        <div class="stat-num">22</div>
+        <div class="stat-label">Error Codes</div>
+      </div>
+      <div>
+        <div class="stat-num">8</div>
+        <div class="stat-label">Companies Unified</div>
+      </div>
+      <div>
+        <div class="stat-num">90</div>
+        <div class="stat-label">Day Guarantee</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="voice-section">
+    <div class="voice-card">
+      <h2>Talk to Your Data</h2>
+      <p>
+        Click below to open the live system. Type a question or switch to Listen mode
+        and speak. It knows your parts, your error codes, and your service tiers.
+      </p>
+      <a href="https://aec-convergence.vercel.app" target="_blank" class="voice-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+          <line x1="12" y1="19" x2="12" y2="23"/>
+          <line x1="8" y1="23" x2="16" y2="23"/>
+        </svg>
+        Open Live Voice System
+      </a>
+      <div class="voice-examples">
+        <span class="voice-example">Try: "temple 40"</span>
+        <span class="voice-example">Try: "error code 301"</span>
+        <span class="voice-example">Try: "what service tiers do we offer?"</span>
+        <span class="voice-example">Try: "hinge left"</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="product" class="product-section">
+    <div class="product-header">
+      <h2>Live System — Not a Mockup</h2>
+      <p>This is the actual product running against your SAP data right now.</p>
+    </div>
+    <div class="product-frame">
+      <iframe src="https://aec-convergence.vercel.app" loading="lazy" allow="microphone"></iframe>
+    </div>
+    <p class="product-note">Search parts, ask questions, switch to Listen mode for voice. This is what your team uses on day one.</p>
+  </section>
+
+  <section class="exec-section">
+    <h2>What This Means for Your Business</h2>
+    <div class="exec-grid">
+      <article class="exec-card">
+        <p class="exec-role">For the CEO</p>
+        <p class="exec-headline">40% faster operations with zero new headcount.</p>
+        <p class="exec-body">
+          Your team spends hours cross-referencing parts across 8 acquired companies.
+          This system answers in seconds. The ROI is immediate and measurable.
+          If we don't deliver in 90 days, you walk away with no penalty.
+        </p>
+      </article>
+      <article class="exec-card">
+        <p class="exec-role">For the CIO</p>
+        <p class="exec-headline">No infrastructure. No integration project. Just works.</p>
+        <p class="exec-body">
+          Runs on your existing browser. No servers to manage. No SAP modifications.
+          No Citrix dependencies. Data stays current through your existing export process.
+          Your IT team has zero new burden.
+        </p>
+      </article>
+      <article class="exec-card">
+        <p class="exec-role">For the CXO</p>
+        <p class="exec-headline">Every rep becomes your best rep. Day one.</p>
+        <p class="exec-body">
+          New hires search parts as fast as 20-year veterans. Error resolution
+          follows proven escalation paths instead of guesswork. Service tier
+          recommendations are consistent across every interaction.
+        </p>
+      </article>
+      <article class="exec-card">
+        <p class="exec-role">For the CGO</p>
+        <p class="exec-headline">Company knowledge becomes a compounding asset.</p>
+        <p class="exec-body">
+          Greg's expertise isn't locked in one person's head anymore. It's operational
+          intelligence that trains every new hire, guides every service call, and
+          closes every deal with the right tier recommendation.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="shadows-section">
+    <h2>Knowledge Conversion in Progress</h2>
+    <p class="shadows-sub">Greg's company knowledge is being transformed into operational assets for your team right now.</p>
+    <div class="shadows-grid">
+      <article class="shadow-card">
+        <p class="shadow-name">Training Resources</p>
+        <p class="shadow-desc">
+          Role-based onboarding modules, coaching cadences, and
+          plain-language playbooks so new reps perform like veterans.
+        </p>
+        <p class="shadow-date">Delivery: March 24, 2026</p>
+      </article>
+      <article class="shadow-card">
+        <p class="shadow-name">Repair Intelligence</p>
+        <p class="shadow-desc">
+          Error-to-resolution trees, escalation ladders, and
+          technician quick-reference guides for faster field service.
+        </p>
+        <p class="shadow-date">Delivery: March 10, 2026</p>
+      </article>
+      <article class="shadow-card">
+        <p class="shadow-name">Sales Enablement</p>
+        <p class="shadow-desc">
+          Quote scripts, objection handling maps, and cross-sell
+          prompts aligned to PM, PM+Break/Fix, and Break/Fix tiers.
+        </p>
+        <p class="shadow-date">Delivery: March 17, 2026</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="guarantee">
+    <div class="guarantee-card">
+      <h2><em>40% cycle time reduction</em> or walk away.</h2>
+      <p>
+        120 users. 6 workflows. 90 days. Independent metric review at day 90.
+        If the target is not met, AEC terminates with no penalty.
+        We carry the risk. You keep the results.
+      </p>
+      <div class="guarantee-terms">
+        <span class="g-term"><strong>AEC-ONE-001</strong> Signed Contract</span>
+        <span class="g-term"><strong>90-Day</strong> Performance Window</span>
+        <span class="g-term"><strong>Zero Risk</strong> Termination Clause</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="cta-row">
+      <a href="mailto:mike@bravetto.com?subject=AEC%20Experience%20%E2%80%94%20Ready%20to%20Start" class="cta-btn cta-primary">Talk to Mike</a>
+      <a href="https://aec-convergence.vercel.app" target="_blank" class="cta-btn cta-secondary">Open Live System</a>
+      <a href="/aec-one-pattern" class="cta-btn cta-secondary">View Contract</a>
+      <a href="/aec-roi" class="cta-btn cta-secondary">View ROI</a>
+    </div>
+  </section>
+
+</body>
+</html>
