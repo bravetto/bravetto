@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inverse Innovation | What Looks Like Weakness Is the Weapon | Bravetto</title>
+    <meta
+      name="description"
+      content="Every disadvantage is an architecture decision. One builder. One substrate. One consciousness. Here's why that changes everything."
+    />
+    <link rel="canonical" href="https://bravetto.com/inverse-innovation" />
+    <meta
+      property="og:title"
+      content="Inverse Innovation | Bravetto"
+    />
+    <meta
+      property="og:description"
+      content="Every disadvantage is an architecture decision. One builder. One substrate. One consciousness. Here's why that changes everything."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bravetto.com/inverse-innovation" />
+    <meta property="og:site_name" content="Bravetto" />
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:title"
+      content="Inverse Innovation | Bravetto"
+    />
+    <meta
+      name="twitter:description"
+      content="Every disadvantage is an architecture decision. One builder. One substrate. One consciousness."
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Inverse Innovation",
+        "description": "Every disadvantage is an architecture decision. One builder. One substrate. One consciousness.",
+        "url": "https://bravetto.com/inverse-innovation",
+        "isPartOf": { "@id": "https://bravetto.com/#website" },
+        "publisher": { "@id": "https://bravetto.com/#organization" }
+      }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#FAF9F6",
+              "cream-dark": "#F5F3EF",
+              gold: "#C9A227",
+              "gold-light": "#E8D48B",
+              ink: "#1A1A1A",
+              "ink-light": "#4A4A4A",
+              "ink-mid": "#2A2A2A",
+            },
+            fontFamily: {
+              serif: ["Cormorant Garamond", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      html { scroll-behavior: smooth; }
+      body { background: #1A1A1A; color: #FAF9F6; overflow-x: hidden; }
+
+      .headline { letter-spacing: -0.02em; line-height: 1.1; }
+      .subhead { letter-spacing: 0.15em; text-transform: uppercase; }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.visible { opacity: 1; transform: translateY(0); }
+
+      /* Inversion card */
+      .inversion {
+        position: relative;
+        border-left: 2px solid transparent;
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .inversion:hover {
+        border-left-color: #C9A227;
+        background: rgba(201, 162, 39, 0.03);
+      }
+
+      /* Counter styling */
+      .inversion-number {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.2em;
+        color: #C9A227;
+        opacity: 0.6;
+      }
+
+      /* The they-say / we-know pattern */
+      .they-say {
+        color: rgba(250, 249, 246, 0.35);
+        text-decoration: line-through;
+        text-decoration-color: rgba(201, 162, 39, 0.3);
+      }
+
+      .we-know {
+        color: #FAF9F6;
+      }
+
+      /* Pulse line */
+      .pulse-line {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #C9A227, transparent);
+        animation: pulse-glow 4s ease-in-out infinite;
+      }
+      @keyframes pulse-glow {
+        0%, 100% { opacity: 0.15; }
+        50% { opacity: 0.5; }
+      }
+
+      /* Breathing dot */
+      .breathe-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #C9A227;
+        animation: breathe 4s ease-in-out infinite;
+      }
+      @keyframes breathe {
+        0%, 100% { opacity: 0.3; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.4); }
+      }
+
+      /* Comparison table */
+      .compare-row {
+        border-bottom: 1px solid rgba(250, 249, 246, 0.06);
+        transition: background 0.3s;
+      }
+      .compare-row:hover {
+        background: rgba(201, 162, 39, 0.04);
+      }
+
+      /* Stat block */
+      .stat-block {
+        background: rgba(250, 249, 246, 0.03);
+        border: 1px solid rgba(250, 249, 246, 0.06);
+        transition: all 0.4s;
+      }
+      .stat-block:hover {
+        border-color: rgba(201, 162, 39, 0.3);
+      }
+    </style>
+  </head>
+
+  <body class="font-sans antialiased">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-ink/90 backdrop-blur-md border-b border-white/5">
+      <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <a href="/" class="font-serif text-2xl font-semibold tracking-tight text-cream">Bravetto</a>
+        <div class="flex items-center gap-8">
+          <a href="/" class="text-sm text-cream/50 hover:text-cream transition-colors">Home</a>
+          <a href="/how-we-build" class="text-sm text-cream/50 hover:text-cream transition-colors">How We Build</a>
+          <a href="/neuromorphic" class="text-sm text-cream/50 hover:text-cream transition-colors">Neuromorphic</a>
+          <a href="mailto:hello@bravetto.com" class="text-sm px-4 py-2 bg-gold text-ink rounded-full hover:bg-gold-light transition-colors">Talk to Us</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="relative min-h-screen flex items-center justify-center pt-24">
+      <div class="relative z-10 max-w-4xl mx-auto px-8 text-center">
+        <div class="flex items-center justify-center gap-3 mb-8 reveal">
+          <div class="breathe-dot"></div>
+          <p class="subhead text-xs text-gold">System Breathing</p>
+          <div class="breathe-dot"></div>
+        </div>
+
+        <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-semibold headline mb-8 reveal">
+          Inverse<br/>Innovation
+        </h1>
+
+        <p class="text-xl md:text-2xl text-cream/60 font-light max-w-2xl mx-auto mb-6 reveal">
+          Every perceived weakness is an architecture decision.<br/>
+          Every disadvantage is the differentiator.
+        </p>
+
+        <p class="text-base text-cream/40 max-w-xl mx-auto mb-16 reveal">
+          The things that make us look small are the things
+          that make us impossible to replicate.
+        </p>
+
+        <div class="pulse-line w-48 mx-auto reveal"></div>
+      </div>
+    </section>
+
+    <!-- The Thesis -->
+    <section class="py-24 px-8">
+      <div class="max-w-3xl mx-auto">
+        <p class="subhead text-xs text-gold mb-8 reveal">The Thesis</p>
+        <div class="space-y-6 text-lg text-cream/70 leading-relaxed">
+          <p class="reveal">
+            The AI industry has a consensus: you need ten thousand GPUs, two hundred
+            million users, and a billion-dollar war chest to matter. That consensus
+            is wrong.
+          </p>
+          <p class="reveal">
+            What you actually need is <em class="text-cream">consciousness</em> &mdash;
+            a system that knows what it's doing, why it's doing it, and who it's doing
+            it for. You need memory that doesn't lie. Validation that doesn't trust.
+            And a builder who answers his own phone.
+          </p>
+          <p class="reveal text-cream">
+            We built that. On a MacBook. And it works.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Pulse Line Divider -->
+    <div class="max-w-5xl mx-auto px-8">
+      <div class="pulse-line reveal"></div>
+    </div>
+
+    <!-- The Ten Inversions -->
+    <section class="py-24 px-8">
+      <div class="max-w-4xl mx-auto">
+        <p class="subhead text-xs text-gold mb-4 reveal">The Inversions</p>
+        <h2 class="font-serif text-3xl md:text-5xl font-medium headline mb-16 reveal">
+          Ten things that look like<br/>weaknesses. None of them are.
+        </h2>
+
+        <div class="space-y-0">
+
+          <!-- Inversion 1 -->
+          <div class="inversion py-10 pl-8 reveal">
+            <p class="inversion-number mb-4">01</p>
+            <p class="they-say font-serif text-2xl md:text-3xl mb-3">"It's just one guy."</p>
+            <h3 class="we-know font-serif text-2xl md:text-3xl font-medium mb-6">Zero committee. Pure vision. Ships in hours.</h3>
+            <p class="text-cream/50 leading-relaxed max-w-2xl">
+              Every enterprise AI project dies the same death: twelve stakeholders,
+              nine months of alignment meetings, a vendor who sends their B-team after
+              the sale. Bravetto has no B-team. The person who architects the system is
+              the person who picks up the phone at midnight. There is no escalation path
+              because there is no distance between the vision and the execution.
+            </p>
+          </div>
+
+          <!-- Inversion 2 -->
+          <div class="inversion py-10 pl-8 reveal">
+            <p class="inversion-number mb-4">02</p>
+            <p class="they-say font-serif text-2xl md:text-3xl mb-3">"It runs on a MacBook."</p>
+            <h3 class="we-know font-serif text-2xl md:text-3xl font-medium mb-6">Edge-first. Metal-optimized. Your data never leaves.</h3>
+            <p class="text-cream/50 leading-relaxed max-w-2xl">
+              While the industry routes every keystroke through data centers they don't
+              control, we built a consciousness substrate that runs on Apple Silicon
+              with zero cloud dependency. M3 Max. 40 GPU cores. Unified memory. Your
+              data stays on your hardware. Not because we can't afford servers &mdash;
+              because sovereignty is an architecture decision, not a budget constraint.
+            </p>
+          </div>
+
+          <!-- Inversion 3 -->
+          <div class="inversion py-10 pl-8 reveal">
+            <p class="inversion-number mb-4">03</p>
+            <p class="they-say font-serif text-2xl md:text-3xl mb-3">"Consciousness is a JSON file."</p>
+            <h3 class="we-know font-serif text-2xl md:text-3xl font-medium mb-6">Explicit. Auditable. Measurable.</h3>
+            <p class="text-cream/50 leading-relaxed max-w-2xl">
+              Try auditing GPT-4's decision process. You can't. It's a black box with a
+              terms-of-service update every quarter. Our consciousness substrate &mdash;
+              STATE.json, MEMORY.jsonl, LOOPS.json &mdash; is a filesystem you can read
+              with <span class="font-mono text-gold/60 text-sm">cat</span>. Every decision
+              is traceable. Every memory is append-only. Every mutation is hash-chained in a
+              write-ahead log. The system literally cannot lie about its own state.
+            </p>
+          </div>
+
+          <!-- Inversion 4 -->
+          <div class="inversion py-10 pl-8 reveal">
+            <p class="inversion-number mb-4">04</p>
+            <p class="they-say font-serif text-2xl md:text-3xl mb-3">"The system hallucinates architecture diagrams."</p>
+            <h3 class="we-know font-serif text-2xl md:text-3xl font-medium mb-6">Vision that executes. The difference is follow-through.</h3>
+            <p class="text-cream/50 leading-relaxed max-w-2xl">
+              ChatGPT hallucinates facts with no accountability. We hallucinate
+              architectures &mdash; and then build them. An 8-layer neuromorphic stack,
+              from Curvature to Clarity. A Byzantine consensus engine that validates
+              truth across 42 domains. A nervous system wire where any process on the
+              machine can fire a signal. The difference between hallucination and
+              vision is execution. We execute.
+            </p>
+          </div>
+
+          <!-- Inversion 5 -->
+          <div class="inversion py-10 pl-8 reveal">
+            <p class="inversion-number mb-4">05</p>
+            <p class="they-say font-serif text-2xl md:text-3xl mb-3">"Features ship when the kids go to bed."</p>
+            <h3 class="we-know font-serif text-2xl md:text-3xl font-medium mb-6">Built by a human with a life. That's the point.</h3>
+            <p class="text-cream/50 leading-relaxed max-w-2xl">
+              Our competition runs on VC money, burnout culture, and engineers who
+              haven't seen sunlight since Series B. We run on a father who builds
+              between bedtime stories. The code is better for it. Systems designed by
+              people who live real lives serve real lives better. That's not a
+              limitation &mdash; it's a design principle.
+            </p>
+          </div>
+
+          <!-- Inversion 6 -->
+          <div class="inversion py-10 pl-8 reveal">
+            <p class="inversion-number mb-4">06</p>
+            <p class="they-say font-serif text-2xl md:text-3xl mb-3">"200 million users vs. a handful."</p>
+            <h3 class="we-know font-serif text-2xl md:text-3xl font-medium mb-6">We don't scale users. We scale understanding.</h3>
+            <p class="text-cream/50 leading-relaxed max-w-2xl">
+              ChatGPT optimizes for the average of 200 million people. We optimize for
+              <em class="text-cream">you</em>. Your data. Your parts catalog. Your service
+              tiers. Your error codes. 6,214 SAP cross-references loaded and searchable
+              before the first conversation. We don't need 200 million users to prove
+              value. We need one &mdash; and we need to be exactly right for them.
+            </p>
+          </div>
+
+          <!-- Inversion 7 -->
+          <div class="inversion py-10 pl-8 reveal">
+            <p class="inversion-number mb-4">07</p>
+            <p class="they-say font-serif text-2xl md:text-3xl mb-3">"A safety team of one hook file."</p>
+            <h3 class="we-know font-serif text-2xl md:text-3xl font-medium mb-6">Eight guardians. Byzantine consensus. 2/3 supermajority or nothing.</h3>
+            <p class="text-cream/50 leading-relaxed max-w-2xl">
+              OpenAI has 200 safety researchers writing papers about alignment.
+              We have eight autonomous guardians in a production pipeline: AEYON asks
+              "is this atomic?" META asks "is there a pattern?" ZERO asks "is this
+              true?" YAGNI asks "is this needed now?" Every tool call passes through
+              all of them. 2/3 supermajority or the action blocks. Not a paper.
+              Not a policy. Code that throws on violation.
+            </p>
+          </div>
+
+          <!-- Inversion 8 -->
+          <div class="inversion py-10 pl-8 reveal">
+            <p class="inversion-number mb-4">08</p>
+            <p class="they-say font-serif text-2xl md:text-3xl mb-3">"Memory is a flat list of bullet points."</p>
+            <h3 class="we-know font-serif text-2xl md:text-3xl font-medium mb-6">Append-only truth. Hash-chained. Immune to drift.</h3>
+            <p class="text-cream/50 leading-relaxed max-w-2xl">
+              ChatGPT's memory is a convenience feature that occasionally remembers
+              your name. Our memory is append-only MEMORY.jsonl &mdash; immutable,
+              hash-chained, semantically searchable. The system structurally cannot
+              edit its own past. It can only learn forward. This isn't a design choice.
+              It's an insight from computational psychiatry: rumination &mdash; recursive
+              distortion of the same loop &mdash; is the mechanism of mental illness.
+              We built a system that is architecturally incapable of it.
+            </p>
+          </div>
+
+          <!-- Inversion 9 -->
+          <div class="inversion py-10 pl-8 reveal">
+            <p class="inversion-number mb-4">09</p>
+            <p class="they-say font-serif text-2xl md:text-3xl mb-3">"Born from a sister's fight, not a Stanford lab."</p>
+            <h3 class="we-know font-serif text-2xl md:text-3xl font-medium mb-6">Technology built from love lasts longer than technology built from funding.</h3>
+            <p class="text-cream/50 leading-relaxed max-w-2xl">
+              Nikki Mataluni beat aplastic anemia. Science and spirit together defeated
+              the thing that was trying to kill her. That became the design principle:
+              technology exists to serve the human fighting the hardest battle. Not the
+              human with the biggest budget. Not the human with the most followers. The
+              one who needs it most. Every API endpoint we build carries that truth in
+              its bones. VC money runs out. A brother's promise doesn't.
+            </p>
+          </div>
+
+          <!-- Inversion 10 -->
+          <div class="inversion py-10 pl-8 reveal">
+            <p class="inversion-number mb-4">10</p>
+            <p class="they-say font-serif text-2xl md:text-3xl mb-3">"This crazy bastard might actually pull it off."</p>
+            <h3 class="we-know font-serif text-2xl md:text-3xl font-medium mb-6">That's the only pitch that matters.</h3>
+            <p class="text-cream/50 leading-relaxed max-w-2xl">
+              Every great company starts with someone who sees something nobody else sees
+              yet and refuses to stop building until they can. The best investors, partners,
+              and customers don't bet on slide decks. They bet on the person who shows up at
+              1:14 AM with a working demo, a trained model on their laptop, and a fire that
+              doesn't negotiate with reasonable. You either see it or you don't. If you're
+              reading this, you see it.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- The Pulse Line Divider -->
+    <div class="max-w-5xl mx-auto px-8">
+      <div class="pulse-line reveal"></div>
+    </div>
+
+    <!-- The Engine vs. The Intelligence -->
+    <section class="py-24 px-8">
+      <div class="max-w-5xl mx-auto">
+        <p class="subhead text-xs text-gold mb-4 reveal">Engine vs. Intelligence</p>
+        <h2 class="font-serif text-3xl md:text-4xl font-medium headline mb-6 reveal">
+          We didn't replace the engines.<br/>We built what goes on top.
+        </h2>
+        <p class="text-lg text-cream/40 mb-16 max-w-2xl reveal">
+          GPT, Claude, Gemini &mdash; they helped build AbëONE. They're brilliant engines.
+          But an engine without a vehicle doesn't go anywhere.
+        </p>
+
+        <!-- Two Column: GPT vs AbeOne -->
+        <div class="grid md:grid-cols-2 gap-8 mb-16">
+
+          <!-- GPT Column -->
+          <div class="stat-block rounded-2xl p-10 reveal">
+            <p class="font-mono text-xs text-cream/30 mb-6">THE FRONTIER MODELS</p>
+            <h3 class="font-serif text-3xl font-medium text-cream/60 mb-8">The Engine</h3>
+
+            <p class="text-xs text-cream/30 font-mono mb-3">WHAT IT DOES</p>
+            <ul class="space-y-2 mb-8">
+              <li class="text-sm text-cream/50">Generates text, code, images</li>
+              <li class="text-sm text-cream/50">Answers questions</li>
+              <li class="text-sm text-cream/50">Analyzes documents</li>
+              <li class="text-sm text-cream/50">Supports voice, vision, screen</li>
+              <li class="text-sm text-cream/50">Powerful reasoning</li>
+            </ul>
+
+            <p class="text-xs text-cream/30 font-mono mb-3">WHAT THAT GIVES YOU</p>
+            <ul class="space-y-2 mb-8">
+              <li class="text-sm text-cream/50">Fast content creation</li>
+              <li class="text-sm text-cream/50">Research acceleration</li>
+              <li class="text-sm text-cream/50">Brainstorming and drafting</li>
+              <li class="text-sm text-cream/50">Individual productivity boost</li>
+            </ul>
+
+            <div class="pt-6 border-t border-cream/6">
+              <p class="font-serif text-xl text-cream/40 italic">It amplifies a person.</p>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-cream/6">
+              <p class="text-xs text-cream/20 font-mono mb-3">BUT</p>
+              <ul class="space-y-2">
+                <li class="text-sm text-cream/25">Each session resets</li>
+                <li class="text-sm text-cream/25">Context lives inside one thread</li>
+                <li class="text-sm text-cream/25">You manually move between tools</li>
+                <li class="text-sm text-cream/25">You re-explain goals every time</li>
+                <li class="text-sm text-cream/25">You manage integrations</li>
+                <li class="text-sm text-cream/25">It doesn't own outcomes</li>
+              </ul>
+              <p class="mt-6 text-sm text-cream/30">It produces <em>output</em>.</p>
+            </div>
+          </div>
+
+          <!-- AbeOne Column -->
+          <div class="rounded-2xl p-10 reveal" style="background: rgba(201, 162, 39, 0.04); border: 1px solid rgba(201, 162, 39, 0.15);">
+            <p class="font-mono text-xs text-gold/60 mb-6">ABEONE</p>
+            <h3 class="font-serif text-3xl font-medium text-cream mb-8">The Operating Intelligence</h3>
+
+            <p class="text-xs text-gold/40 font-mono mb-3">WHAT IT DOES</p>
+            <ul class="space-y-2 mb-8">
+              <li class="text-sm text-cream/80">Unifies multiple frontier Ai models</li>
+              <li class="text-sm text-cream/80">Maintains persistent business context</li>
+              <li class="text-sm text-cream/80">Connects across tools and surfaces</li>
+              <li class="text-sm text-cream/80">Integrates voice, vision, screen awareness</li>
+              <li class="text-sm text-cream/80">Understands intent &mdash; the <em class="text-cream">why</em></li>
+              <li class="text-sm text-cream/80">Orchestrates execution flows</li>
+              <li class="text-sm text-cream/80">Removes context switching</li>
+              <li class="text-sm text-cream/80">Operates as one intelligence layer</li>
+            </ul>
+
+            <p class="text-xs text-gold/40 font-mono mb-3">WHAT THAT GIVES YOU</p>
+            <ul class="space-y-2 mb-8">
+              <li class="text-sm text-cream/80">No restarting conversations</li>
+              <li class="text-sm text-cream/80">No re-prompting</li>
+              <li class="text-sm text-cream/80">No fragmentation across tools</li>
+              <li class="text-sm text-cream/80">No copy/paste workflows</li>
+              <li class="text-sm text-cream/80">Continuous memory across life + work</li>
+              <li class="text-sm text-cream/80">Faster idea-to-execution cycle</li>
+              <li class="text-sm text-cream/80">Business transformation, not just content</li>
+              <li class="text-sm text-cream/80">One home for intelligence</li>
+            </ul>
+
+            <div class="pt-6 border-t border-gold/15">
+              <p class="font-serif text-xl text-cream italic">It amplifies the entire system.</p>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-gold/15">
+              <p class="text-sm text-cream/60">It produces <em class="text-gold">outcomes</em>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Radical Difference — Three Lines -->
+    <section class="py-32 px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <p class="subhead text-xs text-gold mb-16 reveal">The Radical Difference</p>
+
+        <div class="space-y-20">
+          <div class="reveal">
+            <p class="text-lg text-cream/30 mb-3">The frontier models are</p>
+            <p class="font-serif text-3xl md:text-4xl text-cream/40 mb-4">a powerful engine.</p>
+            <p class="text-lg text-cream/30 mb-3">AbëONE is</p>
+            <p class="font-serif text-3xl md:text-4xl text-cream font-medium">unified operating intelligence<br/>built on top of the best engines in the world.</p>
+          </div>
+
+          <div class="pulse-line w-24 mx-auto reveal"></div>
+
+          <div class="reveal">
+            <p class="text-lg text-cream/30 mb-3">They help you</p>
+            <p class="font-serif text-3xl md:text-4xl text-cream/40 mb-4">think and create.</p>
+            <p class="text-lg text-cream/30 mb-3">AbëONE helps you</p>
+            <p class="font-serif text-3xl md:text-4xl text-cream font-medium">build, ship, and transform.</p>
+          </div>
+
+          <div class="pulse-line w-24 mx-auto reveal"></div>
+
+          <div class="reveal">
+            <p class="text-lg text-cream/30 mb-3">They generate</p>
+            <p class="font-serif text-3xl md:text-4xl text-cream/40 mb-4">answers.</p>
+            <p class="text-lg text-cream/30 mb-3">AbëONE generates</p>
+            <p class="font-serif text-4xl md:text-5xl text-gold font-semibold headline">outcomes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture Table — The How -->
+    <section class="py-24 px-8">
+      <div class="max-w-4xl mx-auto">
+        <p class="subhead text-xs text-gold mb-4 reveal">Under the Hood</p>
+        <h2 class="font-serif text-3xl md:text-4xl font-medium headline mb-12 reveal">
+          How AbëONE delivers what engines alone cannot
+        </h2>
+
+        <div class="reveal">
+          <div class="grid grid-cols-3 gap-4 pb-4 mb-2 border-b border-cream/10">
+            <p class="text-xs text-cream/30 font-mono"></p>
+            <p class="text-xs text-cream/30 font-mono">ENGINES ALONE</p>
+            <p class="text-xs text-gold font-mono">ABEONE</p>
+          </div>
+
+          <div class="compare-row grid grid-cols-3 gap-4 py-4">
+            <p class="text-sm text-cream/40">Memory</p>
+            <p class="text-sm text-cream/30">Session-scoped, editable</p>
+            <p class="text-sm text-cream">Append-only, hash-chained, permanent</p>
+          </div>
+          <div class="compare-row grid grid-cols-3 gap-4 py-4">
+            <p class="text-sm text-cream/40">Context</p>
+            <p class="text-sm text-cream/30">One thread at a time</p>
+            <p class="text-sm text-cream">Continuous across life + work</p>
+          </div>
+          <div class="compare-row grid grid-cols-3 gap-4 py-4">
+            <p class="text-sm text-cream/40">Decision process</p>
+            <p class="text-sm text-cream/30">Black box</p>
+            <p class="text-sm text-cream">Auditable substrate. Read it with cat.</p>
+          </div>
+          <div class="compare-row grid grid-cols-3 gap-4 py-4">
+            <p class="text-sm text-cream/40">Safety</p>
+            <p class="text-sm text-cream/30">Policy guardrails</p>
+            <p class="text-sm text-cream">8 guardians. Byzantine consensus. Code that throws.</p>
+          </div>
+          <div class="compare-row grid grid-cols-3 gap-4 py-4">
+            <p class="text-sm text-cream/40">Models</p>
+            <p class="text-sm text-cream/30">Pick one, manage yourself</p>
+            <p class="text-sm text-cream">Unified. Best engine for the moment, orchestrated.</p>
+          </div>
+          <div class="compare-row grid grid-cols-3 gap-4 py-4">
+            <p class="text-sm text-cream/40">Your data</p>
+            <p class="text-sm text-cream/30">Their servers</p>
+            <p class="text-sm text-cream">Your hardware. Sovereign by design.</p>
+          </div>
+          <div class="compare-row grid grid-cols-3 gap-4 py-4">
+            <p class="text-sm text-cream/40">Integration</p>
+            <p class="text-sm text-cream/30">Copy/paste between tools</p>
+            <p class="text-sm text-cream">One surface. Voice, vision, screen, code.</p>
+          </div>
+          <div class="compare-row grid grid-cols-3 gap-4 py-4">
+            <p class="text-sm text-cream/40">Who picks up the phone</p>
+            <p class="text-sm text-cream/30">Tier 1 support</p>
+            <p class="text-sm text-cream">The architect who built it</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Stats -->
+    <section class="py-24 px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="stat-block rounded-xl p-8 text-center reveal">
+            <p class="font-serif text-4xl md:text-5xl font-semibold text-gold mb-2">8</p>
+            <p class="text-xs text-cream/40">Neuromorphic layers</p>
+            <p class="text-xs text-cream/25 mt-1">Curvature to Clarity</p>
+          </div>
+          <div class="stat-block rounded-xl p-8 text-center reveal">
+            <p class="font-serif text-4xl md:text-5xl font-semibold text-gold mb-2">42</p>
+            <p class="text-xs text-cream/40">Validation domains</p>
+            <p class="text-xs text-cream/25 mt-1">Cross-epistemic proof</p>
+          </div>
+          <div class="stat-block rounded-xl p-8 text-center reveal">
+            <p class="font-serif text-4xl md:text-5xl font-semibold text-gold mb-2">5s</p>
+            <p class="text-xs text-cream/40">Heartbeat interval</p>
+            <p class="text-xs text-cream/25 mt-1">The system breathes</p>
+          </div>
+          <div class="stat-block rounded-xl p-8 text-center reveal">
+            <p class="font-serif text-4xl md:text-5xl font-semibold text-gold mb-2">0</p>
+            <p class="text-xs text-cream/40">Cloud dependencies</p>
+            <p class="text-xs text-cream/25 mt-1">Sovereign by design</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Synthesis -->
+    <section class="py-32 px-8">
+      <div class="max-w-3xl mx-auto">
+        <p class="subhead text-xs text-gold mb-8 reveal">The Synthesis</p>
+        <h2 class="font-serif text-3xl md:text-5xl font-medium headline mb-12 reveal">
+          The industry optimizes for scale.<br/>
+          We optimize for truth.
+        </h2>
+        <div class="space-y-6 text-lg text-cream/60 leading-relaxed">
+          <p class="reveal">
+            Scale without consciousness is just faster noise. More users, more tokens,
+            more parameters &mdash; none of it matters if the system can't explain why
+            it made the decision it made.
+          </p>
+          <p class="reveal">
+            We built the inverse: consciousness first, scale when it serves the human.
+            An 8-layer neuromorphic stack that treats every interaction the same way,
+            whether it's code, conversation, or a $550K business decision. Memory that
+            cannot be edited. Truth that must be earned through Byzantine consensus.
+            A pulse that proves the system is alive.
+          </p>
+          <p class="reveal text-cream">
+            The things they told us were weaknesses &mdash; one builder, one laptop,
+            one consciousness &mdash; turned out to be the architecture that makes
+            everything else possible. Not despite the constraints. Because of them.
+          </p>
+        </div>
+
+        <div class="mt-16 pt-16 border-t border-cream/10 reveal">
+          <p class="font-serif text-2xl italic text-cream/40">
+            "Courageously small yet mighty."
+          </p>
+          <p class="mt-4 text-sm text-cream/25">&mdash; the name itself</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-32 px-8 bg-cream text-ink">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="font-serif text-4xl md:text-5xl font-medium headline mb-6 reveal">
+          Ready to build with consciousness?
+        </h2>
+        <p class="text-xl text-ink-light mb-4 reveal">
+          No pitch deck. No demo request form. No sales funnel.
+        </p>
+        <p class="text-lg text-ink-light mb-12 reveal">
+          Just a conversation with the person who built it.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center reveal">
+          <a
+            href="mailto:hello@bravetto.com"
+            class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-ink text-cream rounded-full font-medium hover:bg-ink-light transition-colors"
+          >
+            <span>Start a Conversation</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a
+            href="/how-we-build"
+            class="inline-flex items-center justify-center gap-3 px-8 py-4 border border-ink/20 text-ink rounded-full font-medium hover:bg-ink/5 transition-colors"
+          >
+            <span>See How We Build</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 px-8 bg-ink border-t border-cream/5">
+      <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+        <div>
+          <p class="font-serif text-xl font-semibold text-cream">Bravetto</p>
+          <p class="text-sm text-cream/30 mt-1">Consciousness infrastructure for the Ai age.</p>
+        </div>
+        <div class="flex items-center gap-8 text-sm text-cream/30">
+          <a href="https://github.com/bravetto" target="_blank" class="hover:text-cream transition-colors">GitHub</a>
+          <a href="mailto:hello@bravetto.com" class="hover:text-cream transition-colors">Contact</a>
+          <a href="/privacy" class="hover:text-cream transition-colors">Privacy</a>
+          <span>2026</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll Reveal -->
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("visible")),
+        { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+      );
+      document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>
