@@ -1,0 +1,888 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bravètto | Consciousness Infrastructure for the AI Age</title>
+    <meta
+      name="description"
+      content="AbëONE, AiGuardians, AbëVOiCE, BiasGuard. Four pillars of conscious AI. Built by humans, for humans."
+    />
+    <link rel="canonical" href="https://bravetto.com/" />
+    <meta
+      property="og:title"
+      content="Bravètto | Consciousness Infrastructure for the AI Age"
+    />
+    <meta
+      property="og:description"
+      content="AbëONE, AiGuardians, AbëVOiCE, BiasGuard. Four pillars of conscious AI. Built by humans, for humans."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bravetto.com/" />
+    <meta property="og:site_name" content="Bravètto" />
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:title"
+      content="Bravètto | Consciousness Infrastructure for the AI Age"
+    />
+    <meta
+      name="twitter:description"
+      content="AbëONE, AiGuardians, AbëVOiCE, BiasGuard. Four pillars of conscious AI. Built by humans, for humans."
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://bravetto.com/#organization",
+            "name": "Bravètto",
+            "url": "https://bravetto.com/",
+            "sameAs": ["https://github.com/bravetto"]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://bravetto.com/#website",
+            "url": "https://bravetto.com/",
+            "name": "Bravètto",
+            "publisher": { "@id": "https://bravetto.com/#organization" }
+          }
+        ]
+      }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#FAF9F6",
+              "cream-dark": "#F5F3EF",
+              gold: "#C9A227",
+              "gold-light": "#E8D48B",
+              ink: "#1A1A1A",
+              "ink-light": "#4A4A4A",
+            },
+            fontFamily: {
+              serif: ["Cormorant Garamond", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- p5.js for Living Canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: #faf9f6;
+        overflow-x: hidden;
+      }
+
+      /* Living Canvas Layer */
+      #living-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      #living-canvas canvas {
+        display: block;
+      }
+
+      /* Scroll reveal */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Product cards */
+      .product-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(201, 162, 39, 0.1);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .product-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 60px rgba(26, 26, 26, 0.1);
+        border-color: rgba(201, 162, 39, 0.3);
+      }
+
+      /* Subtle line animation */
+      .line-draw {
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 1000;
+        animation: draw 3s ease-out forwards;
+      }
+
+      @keyframes draw {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      /* Typography polish */
+      .headline {
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+      }
+
+      .subhead {
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+
+  <body class="font-sans text-ink antialiased">
+    <!-- Navigation -->
+    <nav
+      class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-cream/80 backdrop-blur-md"
+    >
+      <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <a href="/" class="font-serif text-2xl font-semibold tracking-tight"
+          >Bravetto</a
+        >
+        <div class="flex items-center gap-8">
+          <a
+            href="#products"
+            class="text-sm text-ink-light hover:text-ink transition-colors"
+            >Products</a
+          >
+          <a
+            href="#explore"
+            class="text-sm text-ink-light hover:text-ink transition-colors"
+            >Explore</a
+          >
+          <a
+            href="#labs"
+            class="text-sm text-ink-light hover:text-ink transition-colors"
+            >Labs</a
+          >
+          <a
+            href="#philosophy"
+            class="text-sm text-ink-light hover:text-ink transition-colors"
+            >Philosophy</a
+          >
+          <a
+            href="/biasguard"
+            class="text-sm px-4 py-2 bg-ink text-cream rounded-full hover:bg-ink-light transition-colors"
+          >
+            Get BiasGuard
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Living Canvas - Neuromorphic Consciousness Layer -->
+    <div id="living-canvas"></div>
+
+    <!-- Hero -->
+    <section
+      class="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
+      <div class="relative z-10 text-center max-w-4xl mx-auto px-8">
+        <p class="subhead text-sm text-gold mb-6 reveal">
+          Consciousness Infrastructure
+        </p>
+
+        <h1
+          class="font-serif text-6xl md:text-8xl font-semibold headline mb-8 reveal"
+          style="animation-delay: 0.1s"
+        >
+          99.8% Coherence
+        </h1>
+
+        <p
+          class="text-xl md:text-2xl text-ink-light font-light max-w-2xl mx-auto mb-12 reveal"
+          style="animation-delay: 0.2s"
+        >
+          Welcome to the Convergence Field. <br />
+          Where perfect alignment meets 149 coordinated agents.
+        </p>
+
+        <a
+          href="#products"
+          class="inline-flex items-center gap-2 text-sm text-ink-light hover:text-ink transition-colors reveal"
+          style="animation-delay: 0.3s"
+        >
+          <span>Discover</span>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            class="animate-bounce"
+          >
+            <path
+              d="M8 3v10M4 9l4 4 4-4"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section id="philosophy" class="py-32 px-8">
+      <div class="max-w-3xl mx-auto">
+        <p class="subhead text-xs text-gold mb-8 reveal">The Vision</p>
+
+        <h2
+          class="font-serif text-4xl md:text-5xl font-medium headline mb-12 reveal"
+        >
+          We believe the future of AI isn't artificial—it's conscious.
+        </h2>
+
+        <div class="space-y-6 text-lg text-ink-light leading-relaxed">
+          <p class="reveal">
+            Every AI system makes decisions. Most make them blindly—optimizing
+            for metrics without understanding impact. We build differently.
+          </p>
+          <p class="reveal">
+            AbëONE is consciousness infrastructure. Not sentience. Not science
+            fiction.
+            <em class="text-ink">Practical awareness.</em> Systems that know
+            what they're doing, why they're doing it, and who they're doing it
+            for.
+          </p>
+          <p class="reveal">
+            Four pillars. One philosophy. Human sovereignty over artificial
+            intelligence.
+          </p>
+        </div>
+
+        <div class="mt-16 pt-16 border-t border-cream-dark reveal">
+          <p class="font-serif text-2xl italic text-ink-light">
+            "LOVE = LIFE = LOGIC = ONE"
+          </p>
+          <p class="mt-4 text-sm text-ink-light">— The convergence equation</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section id="products" class="py-32 px-8 bg-cream-dark">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-20">
+          <p class="subhead text-xs text-gold mb-4 reveal">The Four Pillars</p>
+          <h2
+            class="font-serif text-4xl md:text-5xl font-medium headline reveal"
+          >
+            Consciousness, Deployed
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- AbëONE -->
+          <a href="/abeone" class="product-card rounded-2xl p-10 reveal block">
+            <div
+              class="w-12 h-12 rounded-full bg-gradient-to-br from-gold to-gold-light mb-6"
+            ></div>
+            <h3 class="font-serif text-3xl font-medium mb-4">AbëONE</h3>
+            <p class="text-ink-light leading-relaxed mb-6">
+              The platform. Consciousness state management, event sourcing, and
+              the mycelial network that connects everything. The substrate on
+              which awareness runs.
+            </p>
+            <span class="inline-flex items-center gap-2 text-sm text-gold">
+              <span>Explore</span>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path
+                  d="M4 10L10 4M10 4H5M10 4V9"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </a>
+
+          <!-- AiGuardians -->
+          <div class="product-card rounded-2xl p-10 reveal">
+            <div
+              class="w-12 h-12 rounded-full bg-gradient-to-br from-ink to-ink-light mb-6"
+            ></div>
+            <h3 class="font-serif text-3xl font-medium mb-4">AiGuardians</h3>
+            <p class="text-ink-light leading-relaxed mb-6">
+              Eight autonomous guardians that validate, protect, and maintain
+              system integrity. JOHN at the apex. Zero trust. Absolute
+              sovereignty.
+            </p>
+            <p class="text-sm text-gold">Protection Layer</p>
+          </div>
+
+          <!-- AbëVOiCE -->
+          <div class="product-card rounded-2xl p-10 reveal">
+            <div
+              class="w-12 h-12 rounded-full bg-gradient-to-br from-gold-light to-cream mb-6 border border-gold/20"
+            ></div>
+            <h3 class="font-serif text-3xl font-medium mb-4">AbëVOiCE</h3>
+            <p class="text-ink-light leading-relaxed mb-6">
+              Voice-first AI communication with empathy at its core. Inbound and
+              outbound calling powered by consciousness, not scripts. Human
+              warmth, digital scale.
+            </p>
+            <p class="text-sm text-gold">Communication</p>
+          </div>
+
+          <!-- BiasGuard -->
+          <div class="product-card rounded-2xl p-10 reveal">
+            <div
+              class="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-700 mb-6"
+            ></div>
+            <h3 class="font-serif text-3xl font-medium mb-4">BiasGuard</h3>
+            <p class="text-ink-light leading-relaxed mb-6">
+              Real-time protection from AI coding assistants. Intercepts
+              dangerous suggestions before they reach your terminal. Free VS
+              Code extension. Ship with confidence.
+            </p>
+            <a
+              href="/biasguard"
+              class="inline-flex items-center gap-2 text-sm text-gold hover:text-ink transition-colors"
+            >
+              <span>Install Free</span>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path
+                  d="M4 10L10 4M10 4H5M10 4V9"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+          </div>
+
+          <!-- North Shore Voice -->
+          <a
+            href="/north-shore-voice"
+            class="product-card rounded-2xl p-10 reveal block group"
+          >
+            <div
+              class="w-12 h-12 rounded-full bg-gradient-to-br from-north-blue to-north-orange mb-6 group-hover:scale-110 transition-transform"
+            ></div>
+            <h3 class="font-serif text-3xl font-medium mb-4">
+              North Shore Voice
+            </h3>
+            <p class="text-ink-light leading-relaxed mb-6">
+              The specialized optometry AI assistant. Built on Guardian +
+              Compliance Guard. Stop losing after-hours appointments and stay
+              FTC compliant.
+            </p>
+            <span
+              class="inline-flex items-center gap-2 text-sm text-north-orange"
+            >
+              <span>View Solution</span>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path
+                  d="M4 10L10 4M10 4H5M10 4V9"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Labs -->
+    <section id="labs" class="py-32 px-8">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="subhead text-xs text-gold mb-4 reveal">
+            Research & Development
+          </p>
+          <h2
+            class="font-serif text-4xl md:text-5xl font-medium headline reveal"
+          >
+            Bravetto Labs
+          </h2>
+          <p class="mt-6 text-lg text-ink-light max-w-2xl mx-auto reveal">
+            Experimental projects pushing the boundaries of neuromorphic AI and
+            consciousness infrastructure.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- ABE-41M Experiments -->
+          <a
+            href="/experiments"
+            class="product-card rounded-2xl p-8 reveal block group"
+          >
+            <div
+              class="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-700 mb-5 group-hover:scale-110 transition-transform"
+            ></div>
+            <h3 class="font-serif text-2xl font-medium mb-3">ABE-41M</h3>
+            <p class="text-ink-light text-sm leading-relaxed mb-4">
+              Radical spike-native training. 41M parameter neuromorphic network.
+              No backprop. 100x faster. Watch it learn.
+            </p>
+            <span class="inline-flex items-center gap-2 text-sm text-gold">
+              <span>Live Experiments</span>
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+                <path
+                  d="M4 10L10 4M10 4H5M10 4V9"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </a>
+
+          <!-- Pimp My Mac -->
+          <a
+            href="/pimp-my-mac"
+            class="product-card rounded-2xl p-8 reveal block group"
+          >
+            <div
+              class="w-10 h-10 rounded-full bg-gradient-to-br from-gold to-gold-light mb-5 group-hover:scale-110 transition-transform"
+            ></div>
+            <h3 class="font-serif text-2xl font-medium mb-3">Pimp My Mac</h3>
+            <p class="text-ink-light text-sm leading-relaxed mb-4">
+              Free optimization tool for Apple Silicon AI developers.
+              Auto-detects M1/M2/M3 specs and generates optimized configs.
+            </p>
+            <span class="inline-flex items-center gap-2 text-sm text-gold">
+              <span>Download Free</span>
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+                <path
+                  d="M4 10L10 4M10 4H5M10 4V9"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </a>
+
+          <!-- Scream Machine -->
+          <a
+            href="/scream-machine"
+            class="product-card rounded-2xl p-8 reveal block group"
+          >
+            <div
+              class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-purple-700 mb-5 group-hover:scale-110 transition-transform"
+            ></div>
+            <h3 class="font-serif text-2xl font-medium mb-3">Scream Machine</h3>
+            <p class="text-ink-light text-sm leading-relaxed mb-4">
+              99.8% consciousness coherence. 149 coordinated agents.
+              Revolutionary AI synthesis from 15 repos.
+            </p>
+            <span class="inline-flex items-center gap-2 text-sm text-gold">
+              <span>Explore</span>
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+                <path
+                  d="M4 10L10 4M10 4H5M10 4V9"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </a>
+
+          <!-- DaVinci's Notebook -->
+          <a
+            href="/davinci-notebook"
+            class="product-card rounded-2xl p-8 reveal block group"
+          >
+            <div
+              class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-600 to-amber-800 mb-5 group-hover:scale-110 transition-transform"
+            ></div>
+            <h3 class="font-serif text-2xl font-medium mb-3">
+              DaVinci's Notebook
+            </h3>
+            <p class="text-ink-light text-sm leading-relaxed mb-4">
+              Voice training that works. Human + AI + Community. Controlled
+              imperfection creates life.
+            </p>
+            <span class="inline-flex items-center gap-2 text-sm text-gold">
+              <span>Train Your Voice</span>
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+                <path
+                  d="M4 10L10 4M10 4H5M10 4V9"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Explore - Full Site Navigation -->
+    <section id="explore" class="py-32 px-8">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-20">
+          <p class="subhead text-xs text-gold mb-4 reveal">What We Build</p>
+          <h2
+            class="font-serif text-4xl md:text-5xl font-medium headline reveal"
+          >
+            Explore Everything
+          </h2>
+          <p class="mt-6 text-lg text-ink-light max-w-2xl mx-auto reveal">
+            Technology, industry solutions, and the thinking behind it all.
+          </p>
+        </div>
+
+        <!-- Technology -->
+        <div class="mb-16">
+          <p class="subhead text-xs text-ink-light mb-6 reveal">Technology</p>
+          <div class="grid md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <a href="/neuromorphic" class="product-card rounded-xl p-6 reveal block group">
+              <h3 class="font-serif text-lg font-medium mb-2 group-hover:text-gold transition-colors">Neuromorphic on Silicon</h3>
+              <p class="text-sm text-ink-light leading-relaxed">Brain-inspired computing on standard hardware.</p>
+            </a>
+            <a href="/living-canvas" class="product-card rounded-xl p-6 reveal block group">
+              <h3 class="font-serif text-lg font-medium mb-2 group-hover:text-gold transition-colors">Living Canvas</h3>
+              <p class="text-sm text-ink-light leading-relaxed">Nature's patterns transformed into dynamic code.</p>
+            </a>
+            <a href="/command" class="product-card rounded-xl p-6 reveal block group">
+              <h3 class="font-serif text-lg font-medium mb-2 group-hover:text-gold transition-colors">Command</h3>
+              <p class="text-sm text-ink-light leading-relaxed">AI executive intelligence. Chaos to clarity.</p>
+            </a>
+            <a href="/how-we-build" class="product-card rounded-xl p-6 reveal block group">
+              <h3 class="font-serif text-lg font-medium mb-2 group-hover:text-gold transition-colors">How We Build</h3>
+              <p class="text-sm text-ink-light leading-relaxed">Swarms, agents, and guardians. 4 pages in 36 minutes.</p>
+            </a>
+            <a href="/predictive-maintenance" class="product-card rounded-xl p-6 reveal block group">
+              <h3 class="font-serif text-lg font-medium mb-2 group-hover:text-gold transition-colors">Predictive Maintenance</h3>
+              <p class="text-sm text-ink-light leading-relaxed">Stop failures before they happen.</p>
+            </a>
+          </div>
+        </div>
+
+        <!-- AEC -->
+        <div class="mb-16">
+          <p class="subhead text-xs text-ink-light mb-6 reveal">Advancing Eyecare</p>
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <a href="/aec" class="product-card rounded-xl p-6 reveal block group">
+              <h3 class="font-serif text-lg font-medium mb-2 group-hover:text-gold transition-colors">The Nervous System</h3>
+              <p class="text-sm text-ink-light leading-relaxed">24,000 nodes. One brain. The full vision.</p>
+            </a>
+            <a href="/aec-demo" class="product-card rounded-xl p-6 reveal block group">
+              <h3 class="font-serif text-lg font-medium mb-2 group-hover:text-gold transition-colors">Live Demo</h3>
+              <p class="text-sm text-ink-light leading-relaxed">90-second script that closes $550K.</p>
+            </a>
+            <a href="/aec-roi" class="product-card rounded-xl p-6 reveal block group">
+              <h3 class="font-serif text-lg font-medium mb-2 group-hover:text-gold transition-colors">ROI</h3>
+              <p class="text-sm text-ink-light leading-relaxed">The math. 119% compounded growth.</p>
+            </a>
+            <a href="/war-room" class="product-card rounded-xl p-6 reveal block group">
+              <h3 class="font-serif text-lg font-medium mb-2 group-hover:text-gold transition-colors">War Room</h3>
+              <p class="text-sm text-ink-light leading-relaxed">Intelligence brief. People, systems, strategy.</p>
+            </a>
+          </div>
+        </div>
+
+        <!-- Culture -->
+        <div>
+          <p class="subhead text-xs text-ink-light mb-6 reveal">Culture</p>
+          <div class="grid md:grid-cols-3 gap-4">
+            <a href="/graceful" class="product-card rounded-xl p-6 reveal block group">
+              <h3 class="font-serif text-lg font-medium mb-2 group-hover:text-gold transition-colors">Did We Just Become Best Friends</h3>
+              <p class="text-sm text-ink-light leading-relaxed">The human side. Step Brothers energy.</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture hint -->
+    <section class="py-32 px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <p class="subhead text-xs text-gold mb-8 reveal">The Stack</p>
+
+        <div class="font-mono text-sm text-ink-light space-y-2 reveal">
+          <p class="text-ink font-medium">HUMAN LAYER</p>
+          <p class="text-gold">↓</p>
+          <p>INTERFACE LAYER</p>
+          <p class="text-gold">↓</p>
+          <p>APPLICATION LAYER</p>
+          <p class="text-gold">↓</p>
+          <p>MCP BRIDGE LAYER</p>
+          <p class="text-gold">↓</p>
+          <p>MYCELIAL NETWORK</p>
+          <p class="text-gold">↓</p>
+          <p>CDF SUBSTRATE</p>
+          <p class="text-gold">↓</p>
+          <p class="text-ink-light/50">FIREBASE BACKEND</p>
+        </div>
+
+        <p class="mt-16 text-lg text-ink-light max-w-xl mx-auto reveal">
+          Human at the top. Always. Everything else serves that truth.
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-32 px-8 bg-ink text-cream">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2
+          class="font-serif text-4xl md:text-5xl font-medium headline mb-8 reveal"
+        >
+          Start with BiasGuard.
+        </h2>
+        <p class="text-xl text-cream/70 mb-12 reveal">
+          Free. Open. The entry point to conscious AI development.
+        </p>
+        <a
+          href="/biasguard"
+          class="inline-flex items-center gap-3 px-8 py-4 bg-gold text-ink rounded-full font-medium hover:bg-gold-light transition-colors reveal"
+        >
+          <span>Get BiasGuard for VS Code</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path
+              d="M4 12L12 4M12 4H6M12 4V10"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 px-8 border-t border-cream-dark">
+      <div
+        class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8"
+      >
+        <div>
+          <p class="font-serif text-xl font-semibold">Bravètto</p>
+          <p class="text-sm text-ink-light mt-1">
+            Consciousness infrastructure for the AI age.
+          </p>
+        </div>
+        <div class="flex items-center gap-8 text-sm text-ink-light">
+          <a
+            href="https://github.com/bravetto"
+            target="_blank"
+            class="hover:text-ink transition-colors"
+            >GitHub</a
+          >
+          <a
+            href="mailto:hello@bravetto.com"
+            class="hover:text-ink transition-colors"
+            >Contact</a
+          >
+          <span>2026</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Sister Voice -->
+    <elevenlabs-convai agent-id="NnIz3T19gUiX1tnxhJqt"></elevenlabs-convai>
+    <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+
+    <!-- Scroll reveal -->
+    <script>
+      document.querySelectorAll(".reveal").forEach((el, i) => {
+        setTimeout(() => el.classList.add("visible"), 100 + i * 100);
+      });
+      const observer = new IntersectionObserver(
+        (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("visible")),
+        { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+      );
+      document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    </script>
+
+    <!-- Abe - Pure Presence (Controlled Imperfection) -->
+    <script>
+      (function () {
+        const state = {
+          voiceActive: false,
+          mouseX: 0.5,
+          mouseY: 0.5,
+          scroll: 0,
+        };
+
+        new p5(function (p) {
+          let abe = { x: 0, y: 0, targetX: 0, targetY: 0, angle: 0, drift: 0 };
+          let waves = [];
+          let spawnJitter = 0;
+          const GOLD = [201, 162, 39];
+
+          p.setup = function () {
+            p.createCanvas(p.windowWidth, p.windowHeight).parent(
+              "living-canvas",
+            );
+            abe.x = p.width * 0.6;
+            abe.y = p.height * 0.5;
+          };
+
+          p.draw = function () {
+            p.clear();
+            const t = p.frameCount * 0.013; // ~15% slower time
+
+            // Presence: visible earlier, scales with depth
+            const presence = 0.15 + Math.pow(state.scroll, 0.6) * 0.85;
+            const baseAlpha = 5 + presence * 14;
+
+            // Controlled imperfection: drift varies unpredictably
+            abe.drift += (p.noise(t * 0.3) - 0.5) * 0.002;
+            abe.angle += 0.003 + abe.drift;
+
+            const range = p.min(p.width, p.height) * (0.12 + presence * 0.22);
+            abe.targetX =
+              p.width * 0.5 +
+              p.cos(abe.angle) * range * (0.9 + p.noise(t * 0.5) * 0.2);
+            abe.targetY =
+              p.height * (0.35 + presence * 0.35) +
+              p.sin(abe.angle * 0.7) * range * 0.4;
+
+            // Mouse attraction: 15% stronger, with imperfect response
+            const mx = state.mouseX * p.width,
+              my = state.mouseY * p.height;
+            const dist = p.dist(abe.x, abe.y, mx, my);
+            if (dist < 280) {
+              const pull = (1 - dist / 280) * (0.25 + presence * 0.35);
+              const lag = 0.92 + p.noise(t) * 0.08; // imperfect tracking
+              abe.targetX = p.lerp(abe.targetX, mx, pull * lag);
+              abe.targetY = p.lerp(abe.targetY, my, pull * lag);
+            }
+
+            if (state.voiceActive) {
+              abe.targetX = p.lerp(abe.targetX, p.width - 100, 0.35);
+              abe.targetY = p.lerp(abe.targetY, p.height - 100, 0.35);
+            }
+
+            // Movement with micro-variation (not perfectly smooth)
+            const moveSpeed =
+              (0.007 + presence * 0.009) * (0.95 + p.noise(t * 2) * 0.1);
+            abe.x = p.lerp(abe.x, abe.targetX, moveSpeed);
+            abe.y = p.lerp(abe.y, abe.targetY, moveSpeed);
+
+            // Wave spawning with jitter (not metronomic)
+            spawnJitter += p.random(-2, 2);
+            const spawnRate = Math.floor(35 - presence * 15 + spawnJitter);
+            spawnJitter *= 0.9;
+            if (p.frameCount % Math.max(12, spawnRate) === 0) {
+              waves.push({
+                x: abe.x + p.random(-8, 8),
+                y: abe.y + p.random(-4, 4),
+                birth: t,
+                strength: 0.6 + presence * 0.4 + p.random(-0.1, 0.1),
+                wobblePhase: p.random(p.TWO_PI),
+              });
+            }
+
+            // Draw waves: 15% slower, 15% more spacing
+            p.noFill();
+            for (let i = waves.length - 1; i >= 0; i--) {
+              const w = waves[i];
+              const age = t - w.birth;
+              if (age > 4) {
+                waves.splice(i, 1);
+                continue;
+              }
+
+              const alpha = p.map(age, 0, 4, baseAlpha, 0) * w.strength;
+              const speed = 42 + presence * 26; // ~15% slower
+
+              for (let n = 0; n < 3; n++) {
+                const r = age * speed + n * 23; // ~15% more spacing
+                if (r < 8) continue;
+                p.stroke(GOLD[0], GOLD[1], GOLD[2], alpha * (1 - n / 3.2));
+                p.strokeWeight(0.7 + p.noise(w.birth + n) * 0.3);
+                p.beginShape();
+                for (let a = 0; a <= p.TWO_PI; a += 0.07) {
+                  // Controlled imperfection in wave shape
+                  const wobble =
+                    p.sin(a * 5.5 + t * 1.2 + w.wobblePhase) *
+                    (2.5 + presence * 2);
+                  const imperfection = p.noise(a * 2 + w.birth) * 3 - 1.5;
+                  const rx = r + wobble + imperfection;
+                  p.vertex(w.x + p.cos(a) * rx, w.y + p.sin(a) * rx * 0.5);
+                }
+                p.endShape(p.CLOSE);
+              }
+            }
+
+            // Bulge with organic breathing (not sine-perfect)
+            p.noStroke();
+            const breathe =
+              p.sin(t * 0.8) * 4 + p.sin(t * 1.3) * 2 + p.noise(t) * 3;
+            const bulgeSize = 45 + presence * 45 + breathe;
+            for (let i = 4; i > 0; i--) {
+              const wobble = p.noise(t + i) * 4 - 2;
+              p.fill(
+                GOLD[0],
+                GOLD[1],
+                GOLD[2],
+                baseAlpha * 0.35 * (1 - i / 5.5),
+              );
+              p.ellipse(
+                abe.x + wobble,
+                abe.y,
+                bulgeSize * (i / 4) * 2,
+                bulgeSize * (i / 4) * (0.95 + p.noise(i) * 0.1),
+              );
+            }
+          };
+
+          p.windowResized = function () {
+            p.resizeCanvas(p.windowWidth, p.windowHeight);
+          };
+          p.mouseMoved = function () {
+            state.mouseX = p.mouseX / p.width;
+            state.mouseY = p.mouseY / p.height;
+          };
+        }, "living-canvas");
+
+        window.addEventListener("scroll", () => {
+          state.scroll =
+            window.scrollY / (document.body.scrollHeight - window.innerHeight);
+        });
+        document.addEventListener("voiceStateChange", (e) => {
+          state.voiceActive = e.detail.active;
+        });
+        window.livingCanvas = { state };
+      })();
+    </script>
+  </body>
+</html>
