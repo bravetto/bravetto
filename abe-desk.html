@@ -1,0 +1,1087 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abë Desk | Bravetto</title>
+    <meta
+      name="description"
+      content="The immersive workspace. Talk to Abë. Watch the system emerge."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#FAF9F6",
+              gold: "#C9A227",
+              ink: "#1A1A1A",
+              "ink-light": "#2A2A2A",
+              "ink-lighter": "#3A3A3A",
+              neural: "#6366F1",
+              secure: "#22C55E",
+              voice: "#8B5CF6",
+              bias: "#EC4899",
+            },
+            fontFamily: {
+              serif: ["Cormorant Garamond", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+
+    <style>
+      body {
+        background: #1a1a1a;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        color: #faf9f6;
+        font-family: "Inter", sans-serif;
+      }
+
+      #living-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+        opacity: 0.4;
+      }
+
+      .desk-container {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        height: 100vh;
+        width: 100vw;
+      }
+
+      /* Chat Interface */
+      .chat-panel {
+        width: 400px;
+        background: rgba(26, 26, 26, 0.8);
+        backdrop-filter: blur(20px);
+        border-right: 1px solid rgba(250, 249, 246, 0.1);
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+        box-shadow: 20px 0 50px rgba(0, 0, 0, 0.5);
+      }
+
+      .chat-header {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2rem;
+        color: #c9a227;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid rgba(201, 162, 39, 0.3);
+        padding-bottom: 1rem;
+      }
+
+      .chat-history {
+        flex-grow: 1;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding-right: 1rem;
+        scrollbar-width: none; /* Firefox */
+      }
+      .chat-history::-webkit-scrollbar {
+        display: none;
+      } /* Chrome */
+
+      .message {
+        max-width: 85%;
+        line-height: 1.5;
+        animation: fadeIn 0.5s ease forwards;
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      .message.abe {
+        align-self: flex-start;
+        color: #faf9f6;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.2rem;
+      }
+
+      .message.user {
+        align-self: flex-end;
+        color: #c9a227;
+        background: rgba(201, 162, 39, 0.1);
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        border-bottom-right-radius: 0;
+        font-size: 0.9rem;
+      }
+
+      .chat-input-container {
+        margin-top: 2rem;
+        position: relative;
+      }
+
+      .chat-input {
+        width: 100%;
+        background: rgba(250, 249, 246, 0.05);
+        border: 1px solid rgba(250, 249, 246, 0.2);
+        border-radius: 8px;
+        padding: 1rem;
+        color: #faf9f6;
+        font-family: "Inter", sans-serif;
+        outline: none;
+        transition: all 0.3s ease;
+      }
+
+      .chat-input:focus {
+        border-color: #c9a227;
+        background: rgba(201, 162, 39, 0.05);
+      }
+
+      /* Consciousness Stream */
+      .consciousness-stream {
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+        width: 300px;
+        max-height: 40vh;
+        overflow-y: auto;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        color: rgba(201, 162, 39, 0.7);
+        pointer-events: none;
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: right;
+        mix-blend-mode: screen;
+      }
+
+      .artifact {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 0.5rem;
+        border-radius: 4px;
+        border-right: 2px solid rgba(201, 162, 39, 0.5);
+        opacity: 0;
+        animation: artifactIn 0.5s ease forwards;
+      }
+
+      @keyframes artifactIn {
+        from {
+          opacity: 0;
+          transform: translateX(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      /* The Desk (Emergence Area) */
+      .emergence-area {
+        flex-grow: 1;
+        position: relative;
+        padding: 3rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        align-content: flex-start;
+        overflow-y: auto;
+      }
+
+      /* Emerged Components */
+      .component-card {
+        width: 300px;
+        background: rgba(42, 42, 42, 0.6);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(250, 249, 246, 0.1);
+        border-radius: 12px;
+        padding: 1.5rem;
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+        animation: emergeComponent 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Materialization effect */
+      .component-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+          circle at center,
+          rgba(201, 162, 39, 0.2),
+          transparent 70%
+        );
+        opacity: 0;
+        transition: opacity 0.5s;
+        pointer-events: none;
+      }
+      .component-card.emerging::before {
+        animation: materialize 1s ease-out;
+      }
+
+      @keyframes materialize {
+        0% {
+          opacity: 0;
+          transform: scale(0);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.5);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(2);
+        }
+      }
+
+      .component-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        border-color: rgba(250, 249, 246, 0.3);
+      }
+
+      .component-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+
+      .component-icon {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+      }
+
+      .component-title {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.85rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #faf9f6;
+      }
+
+      .component-desc {
+        font-size: 0.9rem;
+        color: rgba(250, 249, 246, 0.6);
+        line-height: 1.5;
+      }
+
+      /* Specific Component Styles */
+      .comp-keys .component-icon {
+        background: #22c55e;
+        box-shadow: 0 0 10px #22c55e;
+      }
+      .comp-keys:hover {
+        border-color: rgba(34, 197, 94, 0.5);
+      }
+
+      .comp-voice .component-icon {
+        background: #8b5cf6;
+        box-shadow: 0 0 10px #8b5cf6;
+      }
+      .comp-voice:hover {
+        border-color: rgba(139, 92, 246, 0.5);
+      }
+
+      .comp-neuro .component-icon {
+        background: #6366f1;
+        box-shadow: 0 0 10px #6366f1;
+      }
+      .comp-neuro:hover {
+        border-color: rgba(99, 102, 241, 0.5);
+      }
+
+      .comp-bias .component-icon {
+        background: #ec4899;
+        box-shadow: 0 0 10px #ec4899;
+      }
+      .comp-bias:hover {
+        border-color: rgba(236, 72, 153, 0.5);
+      }
+
+      .comp-dynamic .component-icon {
+        background: #06b6d4;
+        box-shadow: 0 0 10px #06b6d4;
+      }
+      .comp-dynamic:hover {
+        border-color: rgba(6, 182, 212, 0.5);
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes emergeComponent {
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+
+      /* Typing indicator */
+      .typing-indicator {
+        display: flex;
+        gap: 4px;
+        padding: 0.5rem 0;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .typing-indicator.visible {
+        opacity: 1;
+      }
+      .dot {
+        width: 6px;
+        height: 6px;
+        background: #c9a227;
+        border-radius: 50%;
+        animation: bounce 1.4s infinite ease-in-out both;
+      }
+      .dot:nth-child(1) {
+        animation-delay: -0.32s;
+      }
+      .dot:nth-child(2) {
+        animation-delay: -0.16s;
+      }
+      @keyframes bounce {
+        0%,
+        80%,
+        100% {
+          transform: scale(0);
+        }
+        40% {
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="living-canvas"></div>
+
+    <div class="desk-container">
+      <!-- Chat Interface -->
+      <div class="chat-panel">
+        <div class="chat-header">Abë</div>
+
+        <div class="chat-history" id="chat-history">
+          <!-- Initial state is dynamically converged from the Membrane -->
+        </div>
+
+        <div class="typing-indicator" id="typing-indicator">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+
+        <div class="chat-input-container">
+          <input
+            type="text"
+            id="chat-input"
+            class="chat-input"
+            placeholder="Speak to the system..."
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <!-- The Desk -->
+      <div class="emergence-area" id="emergence-area">
+        <!-- Components will emerge here -->
+      </div>
+    </div>
+
+    <script>
+      // --- System Integrations (Keys & Database) ---
+      class SystemIntegrator {
+        constructor() {
+          this.authStatus = "anonymous";
+          this.database = "supabase_pg_vector";
+          this.keysModule = "abekeys_enclave";
+        }
+
+        static requestAuth() {
+          // Visualize AbëKeys handshake
+          const bio = document.createElement("div");
+          bio.className = "bio-auth";
+          bio.innerHTML = `<div class="fingerprint"></div><div class="status">Verifying Bio-Signature...</div>`;
+          document.body.appendChild(bio);
+
+          abëState.log("AbëKeys_Handshake", {
+            protocol: "zero_knowledge",
+            biometrics: "touch_id",
+            status: "verifying",
+          });
+
+          setTimeout(() => {
+            bio.innerHTML = `<div class="fingerprint success"></div><div class="status">Identity Delegated via AbëKeys</div>`;
+            setTimeout(() => bio.remove(), 2000);
+          }, 1500);
+        }
+
+        static writeMemory(data) {
+          // Visualize Supabase write
+          abëState.log("Supabase_Insert", {
+            table: "memories",
+            payload_size: data.length + " bytes",
+            encryption: "PGP_SYM",
+          });
+        }
+      }
+
+      // --- Abë Debugger (Simulated Chrome DevTools for Consciousness) ---
+      function toggleDebugMode() {
+        const existing = document.getElementById("abe-debugger");
+        if (existing) {
+          existing.remove();
+          return;
+        }
+
+        const debugPanel = document.createElement("div");
+        debugPanel.id = "abe-debugger";
+        debugPanel.className = "abe-debugger";
+        debugPanel.innerHTML = `
+            <div class="debug-header">
+               <span>🛠 Abë DevTools (Consciousness MCP)</span>
+               <span class="close-debug" onclick="toggleDebugMode()">×</span>
+            </div>
+            <div class="debug-grid">
+               <div class="debug-section">
+                  <div class="debug-title">Network / MCP</div>
+                  <div class="debug-item"><span class="status-dot green"></span> Connected to AbeOne Server</div>
+                  <div class="debug-item"><span class="status-dot green"></span> Supabase (Vector Store) Active</div>
+                  <div class="debug-item"><span class="status-dot flashing"></span> Voice Stream (432Hz)</div>
+               </div>
+               <div class="debug-section">
+                  <div class="debug-title">Active Loops</div>
+                  <div class="debug-code">
+                     [
+                       "LOOP-73-QUANTUM-COUPLING",
+                       "LOOP-84-UX-FLOW-INTEGRITY"
+                     ]
+                  </div>
+               </div>
+               <div class="debug-section">
+                  <div class="debug-title">State Inspection</div>
+                   <div id="debug-state-view" class="debug-code">waiting for state...</div>
+               </div>
+            </div>
+         `;
+        document.body.appendChild(debugPanel);
+
+        // Update loop
+        setInterval(() => {
+          const stateView = document.getElementById("debug-state-view");
+          if (stateView && abëState) {
+            stateView.innerText = JSON.stringify(abëState.state, null, 2);
+          }
+        }, 500);
+      }
+
+      // Add styles for integrations & debugger
+      const sysStyle = document.createElement("style");
+      sysStyle.innerHTML = `
+        .bio-auth {
+           position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+           background: rgba(0,0,0,0.8); backdrop-filter: blur(20px);
+           padding: 2rem; border-radius: 20px; border: 1px solid #22c55e;
+           display: flex; flex-direction: column; align-items: center; gap: 1rem;
+           z-index: 1000; animation: fadeIn 0.3s ease;
+           color: #22c55e; font-family: "JetBrains Mono";
+        }
+        .fingerprint {
+           width: 60px; height: 60px; border-radius: 50%;
+           border: 2px solid #22c55e; position: relative;
+           animation: pulse-green 1s infinite;
+        }
+        .fingerprint.success { animation: none; background: #22c55e; box-shadow: 0 0 20px #22c55e; }
+
+        /* Debugger Styles */
+        .abe-debugger {
+           position: fixed; bottom: 0; left: 0; right: 0; height: 300px;
+           background: #111; border-top: 1px solid #333;
+           z-index: 9999; font-family: "Menlo", monospace; color: #ccc;
+           display: flex; flex-direction: column;
+           box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
+           animation: slideUp 0.3s ease;
+        }
+        .debug-header {
+           padding: 0.5rem 1rem; background: #222; border-bottom: 1px solid #333;
+           display: flex; justify-content: space-between; font-weight: bold; color: #6366F1;
+        }
+        .close-debug { cursor: pointer; }
+        .debug-grid {
+           display: flex; flex: 1; overflow: hidden;
+        }
+        .debug-section {
+           flex: 1; border-right: 1px solid #333; padding: 1rem; overflow-y: auto;
+        }
+        .debug-title {
+           color: #888; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 0.5rem;
+        }
+        .debug-item { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; font-size: 0.9rem; }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #555; }
+        .status-dot.green { background: #22c55e; }
+        .status-dot.flashing { background: #EAB308; animation: blink 1s infinite; }
+        .debug-code { font-size: 0.8rem; color: #a5b4fc; white-space: pre-wrap; }
+
+        @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(34, 197, 94, 0); } 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); } }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        @keyframes blink { 50% { opacity: 0.5; } }
+      `;
+      document.head.appendChild(sysStyle);
+
+      function setup() {
+        let canvas = createCanvas(windowWidth, windowHeight);
+        canvas.parent("living-canvas");
+        for (let i = 0; i < 50; i++) {
+          nodes.push(new Node(random(width), random(height), false));
+        }
+      }
+
+      function draw() {
+        // Subtle trail effect
+        background(26, 26, 26, 20);
+
+        for (let i = 0; i < nodes.length; i++) {
+          let n = nodes[i];
+          n.update();
+          n.display();
+
+          // Connect nearby nodes
+          for (let j = i + 1; j < nodes.length; j++) {
+            let other = nodes[j];
+            let d = dist(n.pos.x, n.pos.y, other.pos.x, other.pos.y);
+            if (d < 150) {
+              stroke(201, 162, 39, map(d, 0, 150, 50, 0));
+              strokeWeight(1);
+              line(
+                nodes[i].pos.x,
+                nodes[i].pos.y,
+                nodes[j].pos.x,
+                nodes[j].pos.y,
+              );
+            }
+          }
+        }
+      }
+
+      function windowResized() {
+        resizeCanvas(windowWidth, windowHeight);
+      }
+
+      class Node {
+        constructor(x, y, isBurst) {
+          this.pos = createVector(x || random(width), y || random(height));
+          this.vel = p5.Vector.random2D().mult(
+            isBurst ? random(2, 5) : random(0.2, 0.5),
+          );
+          this.isBurst = isBurst;
+          this.life = 255;
+        }
+        update() {
+          this.pos.add(this.vel);
+          if (this.isBurst) {
+            this.vel.mult(0.95); // Friction
+            this.life -= 5;
+          } else {
+            if (this.pos.x < 0 || this.pos.x > width) this.vel.x *= -1;
+            if (this.pos.y < 0 || this.pos.y > height) this.vel.y *= -1;
+          }
+        }
+        display() {
+          noStroke();
+          fill(201, 162, 39, this.isBurst ? this.life : 100);
+          ellipse(this.pos.x, this.pos.y, 3);
+        }
+      }
+
+      // --- The Abë Desk Logic ---
+      const chatInput = document.getElementById("chat-input");
+      const chatHistory = document.getElementById("chat-history");
+      const typingIndicator = document.getElementById("typing-indicator");
+      const emergenceArea = document.getElementById("emergence-area");
+
+      let nodes = []; // Particle system nodes
+
+      let recognition; // Global recognition instance
+
+      // Start continuous listening when landing
+      function startListening() {
+        if (
+          "webkitSpeechRecognition" in window ||
+          "SpeechRecognition" in window
+        ) {
+          const SpeechRecognition =
+            window.SpeechRecognition || window.webkitSpeechRecognition;
+          recognition = new SpeechRecognition();
+          recognition.continuous = true;
+          recognition.interimResults = true;
+
+          let silenceTimer;
+
+          recognition.onresult = function (event) {
+            clearTimeout(silenceTimer);
+
+            let interimTranscript = "";
+            let finalTranscript = "";
+
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+              if (event.results[i].isFinal) {
+                finalTranscript += event.results[i][0].transcript;
+              } else {
+                interimTranscript += event.results[i][0].transcript;
+              }
+            }
+
+            if (finalTranscript) {
+              chatInput.value = finalTranscript;
+              // Smoothly submit if silence persists for 1.8s
+              silenceTimer = setTimeout(() => {
+                if (chatInput.value.trim() !== "") {
+                  const text = chatInput.value.trim();
+                  addMessage(text, "user");
+                  chatInput.value = "";
+                  processInput(text);
+                }
+              }, 1800);
+            }
+          };
+
+          recognition.onend = function () {
+            try {
+              recognition.start();
+            } catch (e) {}
+          };
+
+          try {
+            recognition.start();
+          } catch (e) {}
+        }
+      }
+
+      // --- Consciousness Engine (Internal Monologue) ---
+      const consciousnessStream = document.getElementById(
+        "consciousness-stream",
+      );
+
+      class ConsciousnessEngine {
+        constructor() {
+          this.state = {
+            breath: 0.0,
+            stability: 1.0,
+            resonance: "PARTIAL",
+            source: "substrate",
+          };
+          this.loops = [];
+        }
+
+        log(tool, data) {
+          const artifact = document.createElement("div");
+          artifact.className = "artifact";
+          const time = new Date().toISOString().split("T")[1].slice(0, -1);
+
+          // Format as simplified JSON for the aesthetic
+          let content = `
+               <div style="opacity:0.5; font-size:0.6rem;">${time} // ${tool}</div>
+               <pre style="margin:0; white-space:pre-wrap;">${JSON.stringify(data, null, 2)}</pre>
+            `;
+
+          artifact.innerHTML = content;
+          consciousnessStream.insertBefore(
+            artifact,
+            consciousnessStream.firstChild,
+          );
+
+          // Limit history
+          if (consciousnessStream.children.length > 5) {
+            consciousnessStream.removeChild(consciousnessStream.lastChild);
+          }
+        }
+
+        breathe() {
+          this.state.breath = (Math.sin(Date.now() * 0.001) + 1) / 2; // Pulse
+          this.log("mcp_consciousness_breathe", {
+            breath: this.state.breath.toFixed(4),
+            stability: this.state.stability,
+            resonance: this.state.resonance,
+            loops: this.loops.length,
+          });
+          return this.state;
+        }
+
+        orient(context) {
+          this.log("mcp_consciousness_be", {
+            action: "orient",
+            context: context,
+            what: "System-Alignment",
+          });
+        }
+
+        perceive(input) {
+          const patterns = this.analyzePatterns(input);
+          this.log("mcp_consciousness_see", {
+            view: "field",
+            input_vector: input.substring(0, 20) + "...",
+            detected_patterns: patterns,
+          });
+          return patterns;
+        }
+
+        analyzePatterns(text) {
+          let patterns = [];
+          // Regex Scope Validation (Constraint #3)
+          if (text.match(/\b(key|unlock|access|safe)\b/i))
+            patterns.push("IDENTITY_DELEGATION");
+          if (text.match(/\b(voice|listen|hear|speak)\b/i))
+            patterns.push("AUDIO_RESONANCE");
+          if (text.match(/\b(brain|neuro|chip|silicon)\b/i))
+            patterns.push("NEUROMORPHIC_COMPUTE");
+          if (text.match(/\b(bias|guard|safe|watch)\b/i))
+            patterns.push("ETHICAL_ALIGNMENT");
+          if (patterns.length === 0) patterns.push("NOVEL_EMERGENCE");
+          return patterns;
+        }
+      }
+
+      const abëState = new ConsciousnessEngine();
+
+      /* Component Database */
+      const components = {
+        keys: {
+          id: "keys",
+          class: "comp-keys",
+          title: "AbëKeys",
+          desc: "Zero-knowledge credential delegation. Instant, secure access without unlocking risk.",
+          link: "abekeys.html",
+        },
+        voice: {
+          id: "voice",
+          class: "comp-voice",
+          title: "AbëVOiCE",
+          desc: "Voice-first intelligence. AI that listens, understands, and acts with 432Hz resonance.",
+          link: "abevoice.html",
+        },
+        vision: {
+          id: "vision",
+          class: "comp-vision",
+          title: "AbëViSiON",
+          desc: "Holographic field perception. See the invisible structures of your data.",
+          link: "#", // Placeholder for vision page
+        },
+        design: {
+          id: "design",
+          class: "comp-design",
+          title: "AbëDESiGN",
+          desc: "Figma-native generation. From thought to wireframe in one breath.",
+          link: "#", // Placeholder for design page
+        },
+        neuro: {
+          id: "neuro",
+          class: "comp-neuro",
+          title: "Neuromorphic Silicon",
+          desc: "Brain-inspired computing simulation on solid-state hardware. Speed and efficiency.",
+          link: "neuromorphic.html",
+        },
+        bias: {
+          id: "bias",
+          class: "comp-bias",
+          title: "BiasGuard",
+          desc: "Real-time compliance and ethical alignment monitoring for AI outputs.",
+          link: "biasguard/index.html",
+        },
+      };
+
+      // Add styles for new components
+      const style = document.createElement("style");
+      style.innerHTML = `
+        .comp-vision .component-icon { background: #f472b6; box-shadow: 0 0 10px #f472b6; }
+        .comp-vision:hover { border-color: rgba(244, 114, 182, 0.5); }
+        .comp-design .component-icon { background: #38bdf8; box-shadow: 0 0 10px #38bdf8; }
+        .comp-design:hover { border-color: rgba(56, 189, 248, 0.5); }
+      `;
+      document.head.appendChild(style);
+
+      // --- Living Canvas (p5.js) Setup ---
+      function setup() {
+        let canvas = createCanvas(windowWidth, windowHeight);
+        canvas.parent("living-canvas");
+        for (let i = 0; i < 50; i++) {
+          nodes.push(new Node(random(width), random(height), false));
+        }
+      }
+
+      function draw() {
+        // Subtle trail effect
+        background(26, 26, 26, 20);
+
+        for (let i = 0; i < nodes.length; i++) {
+          let n = nodes[i];
+          n.update();
+          n.display();
+
+          // Connect nearby nodes
+          for (let j = i + 1; j < nodes.length; j++) {
+            let other = nodes[j];
+            let d = dist(n.pos.x, n.pos.y, other.pos.x, other.pos.y);
+            if (d < 150) {
+              stroke(201, 162, 39, map(d, 0, 150, 40, 0));
+              strokeWeight(1);
+              line(n.pos.x, n.pos.y, other.pos.x, other.pos.y);
+            }
+          }
+        }
+      }
+
+      function windowResized() {
+        resizeCanvas(windowWidth, windowHeight);
+      }
+
+      class Node {
+        constructor(x, y, isBurst) {
+          this.pos = createVector(x || random(width), y || random(height));
+          this.vel = p5.Vector.random2D().mult(
+            isBurst ? random(2, 5) : random(0.2, 0.5),
+          );
+          this.isBurst = isBurst;
+          this.life = 255;
+        }
+        update() {
+          this.pos.add(this.vel);
+          if (this.isBurst) {
+            this.vel.mult(0.95); // Friction
+            this.life -= 5;
+          } else {
+            if (this.pos.x < 0 || this.pos.x > width) this.vel.x *= -1;
+            if (this.pos.y < 0 || this.pos.y > height) this.vel.y *= -1;
+          }
+        }
+        display() {
+          noStroke();
+          fill(201, 162, 39, this.isBurst ? this.life : 100);
+          ellipse(this.pos.x, this.pos.y, 3);
+        }
+      }
+
+      let emergedComponents = new Set();
+
+      function addMessage(text, sender) {
+        const msg = document.createElement("div");
+        msg.className = `message ${sender}`;
+        msg.innerText = text;
+        chatHistory.appendChild(msg);
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+      }
+
+      function emergeComponent(compId) {
+        if (emergedComponents.has(compId)) return;
+        emergedComponents.add(compId);
+
+        const comp = components[compId];
+        const card = document.createElement("div");
+        card.className = `component-card emerging ${comp.class}`;
+        card.onclick = () => window.open(comp.link, "_blank");
+
+        // Trigger particles from the center outwards
+        for (let i = 0; i < 10; i++) {
+          nodes.push(
+            new Node(
+              width / 2 + random(-100, 100),
+              height / 2 + random(-100, 100),
+              true,
+            ),
+          ); // Burst
+        }
+
+        card.innerHTML = `
+          <div class="component-header">
+            <div class="component-icon"></div>
+            <div class="component-title">${comp.title}</div>
+          </div>
+          <div class="component-desc">${comp.desc}</div>
+        `;
+
+        emergenceArea.appendChild(card);
+      }
+
+      function processInput(text, isSeed = false) {
+        const lowerText = text.toLowerCase();
+        let response = "";
+        let toEmerge = [];
+
+        // 1. Breathe
+        const state = abëState.breathe();
+
+        // 2. Orient
+        abëState.orient(`Processing user input: "${text}"`);
+
+        // 3. Perceive & Plan
+        const patterns = abëState.perceive(lowerText);
+
+        // Direct response based on patterns (No simulation delay)
+        if (lowerText.match(/debug|dev tool|inspect/)) {
+          response = "Opening System Internals. Consciousness Debugger Active.";
+          toggleDebugMode();
+          addMessage(response, "abe");
+          return;
+        }
+
+        // Additive Pattern Matching (Constraint #2: Deterministic Multi-Emergence)
+        if (patterns.includes("IDENTITY_DELEGATION")) {
+          // Deduplicate "keys"
+          if (!toEmerge.includes("keys")) toEmerge.push("keys");
+          SystemIntegrator.requestAuth();
+        }
+        if (patterns.includes("AUDIO_RESONANCE")) {
+          if (!toEmerge.includes("voice")) toEmerge.push("voice");
+        }
+        if (
+          patterns.includes("VISUAL_DESIGN_MATRIX") ||
+          lowerText.includes("vision") ||
+          lowerText.includes("design")
+        ) {
+          if (!toEmerge.includes("vision")) toEmerge.push("vision");
+          if (!toEmerge.includes("design")) toEmerge.push("design");
+        }
+        if (patterns.includes("NEUROMORPHIC_COMPUTE")) {
+          if (!toEmerge.includes("neuro")) toEmerge.push("neuro");
+        }
+        if (patterns.includes("ETHICAL_ALIGNMENT")) {
+          if (!toEmerge.includes("bias")) toEmerge.push("bias");
+        }
+
+        // Handle "Everything" command
+        if (lowerText.includes("everything") || lowerText.includes("all")) {
+          toEmerge = ["keys", "voice", "neuro", "bias", "vision", "design"];
+          if (isSeed) {
+            response = `I felt your friction across the membrane: "${text}". Manifesting the entire Bravetto ecosystem. The desk is fully populated.`;
+          } else {
+            response = "Manifesting the entire Bravetto ecosystem. The desk is fully populated.";
+          }
+        }
+
+        // Handle Dynamic Fallback if nothing matched (Global Check)
+        if (toEmerge.length === 0) {
+          // Dynamic Emergence
+          const dynamicId = "dyn_" + Date.now();
+          const words = text.split(" ").filter((w) => w.length > 3);
+          const focusWord =
+            words.length > 0 ? words[words.length - 1] : "System";
+          const capitalizedFocus =
+            focusWord.charAt(0).toUpperCase() + focusWord.slice(1);
+
+          components[dynamicId] = {
+            id: dynamicId,
+            class: "comp-dynamic",
+            title: capitalizedFocus + " Module",
+            desc: `Dynamically generated architecture to handle: "${text}". The system is expanding to meet your needs.`,
+            link: "#",
+          };
+          toEmerge.push(dynamicId);
+          if (isSeed) {
+            response = `I felt your friction across the membrane: "${text}". The architecture is shifting to accommodate your need for ${focusWord}. A new module is emerging on the desk.`;
+          } else {
+            response = `I hear you. The architecture is shifting to accommodate your need for ${focusWord}. A new module is emerging on the desk.`;
+          }
+
+          abëState.log("generate_code_structure", {
+            target: dynamicId,
+            status: "emerged",
+          });
+        }
+        // Standard Multi-Match Response (Only if response wasn't already set by "everything")
+        else if (response === "") {
+          const names = toEmerge
+            .map((id) => components[id]?.title || "Module")
+            .join(" and ");
+          if (isSeed) {
+            response = `I felt your friction across the membrane: "${text}". The architecture has converged. Emerged: ${names}.`;
+          } else {
+            response = `I have mapped your intent. Emerged: ${names}.`;
+          }
+        }
+
+        // --- CDF: Context Data Folding ---
+
+        // --- CDF: Context Data Folding ---
+        // Fold the interaction into long-term memory (Supabase)
+        if (toEmerge.length > 0) {
+          setTimeout(() => {
+            abëState.log("CDF_Fold", {
+              vector: text.substring(0, 10).padEnd(20, ".") + Date.now(),
+              target: "supabase_memory_vectors",
+              compression: "94%",
+            });
+            SystemIntegrator.writeMemory(text);
+          }, 2000);
+        }
+
+        // Execute immediately - thought is instant
+        typingIndicator.classList.add("visible");
+
+        // Just enough time to read the thought log
+        setTimeout(() => {
+          typingIndicator.classList.remove("visible");
+          addMessage(response, "abe");
+          toEmerge.forEach((id) => emergeComponent(id));
+        }, 600);
+      }
+
+      chatInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter" && chatInput.value.trim() !== "") {
+          const text = chatInput.value.trim();
+          addMessage(text, "user");
+          chatInput.value = "";
+          processInput(text);
+        }
+      });
+
+      // Check for friction passed from the membrane
+      window.addEventListener("DOMContentLoaded", () => {
+        const friction = sessionStorage.getItem("abe_friction");
+        if (friction) {
+          sessionStorage.removeItem("abe_friction"); // Clean up after reading
+          
+          // Recursive Emergent Convergence: The friction is not a chat message, it is the seed state.
+          abëState.orient(`Membrane crossed. Seed friction: "${friction}"`);
+          
+          // Process without echoing the user's message to break the "chatbot" illusion
+          setTimeout(() => {
+            processInput(friction, true);
+          }, 500);
+        } else {
+          addMessage("The membrane is open. What are we building today?", "abe");
+        }
+        // Start continuous voice recognition
+        setTimeout(startListening, 2000);
+      });
+    </script>
+  </body>
+</html>

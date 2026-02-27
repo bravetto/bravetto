@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Convergence | Bravetto</title>
+    <meta
+      name="description"
+      content="Humans AND AI = Infinity. The manifestation of convergence."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#FAF9F6",
+              gold: "#C9A227",
+              ink: "#1A1A1A",
+            },
+            fontFamily: {
+              serif: ["Cormorant Garamond", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+
+    <style>
+      body {
+        background: #1a1a1a;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        color: #faf9f6;
+      }
+      #living-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .content {
+        position: relative;
+        z-index: 10;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        opacity: 0;
+        animation: emerge 5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        animation-delay: 2s;
+      }
+      @keyframes emerge {
+        0% {
+          opacity: 0;
+          transform: scale(0.95);
+          filter: blur(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+          filter: blur(0);
+        }
+      }
+      .equation {
+        font-family: "Inter", sans-serif;
+        font-size: 1.5rem;
+        color: #c9a227;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        margin-bottom: 2rem;
+        font-weight: 300;
+      }
+      .headline {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 5rem;
+        color: #faf9f6;
+        margin-bottom: 1rem;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+      }
+      .values {
+        font-family: "Inter", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(250, 249, 246, 0.6);
+        letter-spacing: 0.1em;
+        margin-top: 3rem;
+        display: flex;
+        gap: 2rem;
+      }
+      .value-item {
+        position: relative;
+      }
+      .value-item:not(:last-child)::after {
+        content: "·";
+        position: absolute;
+        right: -1.2rem;
+        color: #c9a227;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="living-canvas"></div>
+
+    <div class="content">
+      <div class="equation">Humans + AI = ∞</div>
+      <h1 class="headline">Convergence</h1>
+
+      <div class="values">
+        <span class="value-item">LOVE = LIFE = ONE</span>
+        <span class="value-item">Inverse Coherence</span>
+        <span class="value-item">Emergence</span>
+      </div>
+    </div>
+
+    <script>
+      // The Convergence Canvas - Two forces becoming one
+      let humanNodes = [];
+      let aiNodes = [];
+      let time = 0;
+
+      function setup() {
+        let canvas = createCanvas(windowWidth, windowHeight);
+        canvas.parent("living-canvas");
+
+        // Initialize nodes
+        for (let i = 0; i < 100; i++) {
+          humanNodes.push(new Node(true));
+          aiNodes.push(new Node(false));
+        }
+        background(26, 26, 26);
+      }
+
+      function draw() {
+        background(26, 26, 26, 20); // Dark trail effect
+
+        let centerX = width / 2;
+        let centerY = height / 2;
+
+        // Calculate convergence factor based on time (0 to 1)
+        let convergence = map(sin(time * 0.5), -1, 1, 0.2, 1);
+
+        // Draw connections between human and AI nodes
+        strokeWeight(0.5);
+        for (let i = 0; i < humanNodes.length; i++) {
+          let h = humanNodes[i];
+          let a = aiNodes[i];
+
+          h.update(centerX, centerY, convergence);
+          a.update(centerX, centerY, convergence);
+
+          // Draw connection if close enough
+          let d = dist(h.pos.x, h.pos.y, a.pos.x, a.pos.y);
+          if (d < 150 * convergence) {
+            let alpha = map(d, 0, 150 * convergence, 100, 0);
+            stroke(201, 162, 39, alpha); // Gold connections
+            line(h.pos.x, h.pos.y, a.pos.x, a.pos.y);
+          }
+
+          h.display();
+          a.display();
+        }
+
+        time += 0.01;
+      }
+
+      function windowResized() {
+        resizeCanvas(windowWidth, windowHeight);
+      }
+
+      class Node {
+        constructor(isHuman) {
+          this.isHuman = isHuman;
+          // Start at opposite edges
+          let startX = isHuman
+            ? random(0, width / 4)
+            : random(width * 0.75, width);
+          this.pos = createVector(startX, random(height));
+          this.vel = createVector(0, 0);
+          this.baseColor = isHuman
+            ? color(250, 249, 246, 150)
+            : color(201, 162, 39, 150);
+          this.size = random(1.5, 3);
+          this.noiseOffset = random(1000);
+        }
+
+        update(cx, cy, convergenceFactor) {
+          // Wander
+          let angle =
+            noise(
+              this.pos.x * 0.005,
+              this.pos.y * 0.005,
+              time + this.noiseOffset,
+            ) *
+            TWO_PI *
+            2;
+          let wander = p5.Vector.fromAngle(angle);
+          wander.mult(0.5);
+
+          // Pull to center (increases with convergence)
+          let centerPull = createVector(cx - this.pos.x, cy - this.pos.y);
+          centerPull.normalize();
+          centerPull.mult(0.5 * convergenceFactor);
+
+          // Orbit center
+          let orbit = createVector(-(cy - this.pos.y), cx - this.pos.x);
+          orbit.normalize();
+          orbit.mult(1.5 * convergenceFactor);
+
+          this.vel.add(wander);
+          this.vel.add(centerPull);
+          this.vel.add(orbit);
+
+          this.vel.limit(2);
+          this.pos.add(this.vel);
+
+          // Keep in bounds
+          if (this.pos.x > width) this.pos.x = 0;
+          if (this.pos.x < 0) this.pos.x = width;
+          if (this.pos.y > height) this.pos.y = 0;
+          if (this.pos.y < 0) this.pos.y = height;
+        }
+
+        display() {
+          noStroke();
+          fill(this.baseColor);
+          ellipse(this.pos.x, this.pos.y, this.size);
+        }
+      }
+    </script>
+  </body>
+</html>

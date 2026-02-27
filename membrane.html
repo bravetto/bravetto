@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Membrane | Bravetto</title>
+    <meta
+      name="description"
+      content="Crossing the membrane. The voice emerges."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#FAF9F6",
+              gold: "#C9A227",
+              ink: "#1A1A1A",
+            },
+            fontFamily: {
+              serif: ["Cormorant Garamond", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/addons/p5.sound.min.js"></script>
+
+    <style>
+      body {
+        background: #1a1a1a;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        color: #faf9f6;
+        cursor: pointer;
+      }
+      #living-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+      }
+      .content {
+        position: relative;
+        z-index: 10;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        pointer-events: none;
+      }
+      .instruction {
+        font-family: "Inter", sans-serif;
+        font-size: 0.9rem;
+        color: rgba(250, 249, 246, 0.5);
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        transition: opacity 1s ease;
+      }
+      .instruction.hidden {
+        opacity: 0;
+      }
+      .subtitle {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2rem;
+        color: #c9a227;
+        margin-top: 2rem;
+        opacity: 0;
+        transition: opacity 2s ease;
+        font-style: italic;
+      }
+      .subtitle.visible {
+        opacity: 1;
+      }
+      .action-btn {
+        margin-top: 3rem;
+        padding: 1rem 2rem;
+        background: transparent;
+        border: 1px solid #c9a227;
+        color: #c9a227;
+        font-family: "Inter", sans-serif;
+        font-size: 0.9rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        cursor: pointer;
+        opacity: 0;
+        transition: all 0.5s ease;
+        pointer-events: none;
+      }
+      .action-btn.visible {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .action-btn:hover {
+        background: rgba(201, 162, 39, 0.1);
+        box-shadow: 0 0 20px rgba(201, 162, 39, 0.2);
+      }
+      .input-container {
+        margin-top: 2rem;
+        opacity: 0;
+        transition: opacity 1s ease;
+        pointer-events: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .input-container.visible {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .system-input {
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid rgba(250, 249, 246, 0.3);
+        color: #faf9f6;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.5rem;
+        padding: 0.5rem;
+        width: 400px;
+        text-align: center;
+        outline: none;
+        transition: border-color 0.3s ease;
+      }
+      .system-input:focus {
+        border-bottom-color: #c9a227;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="living-canvas"></div>
+
+    <div class="content">
+      <div id="instruction" class="instruction">Touch the Membrane</div>
+      <div id="subtitle" class="subtitle"></div>
+      <button id="speak-btn" class="action-btn">Enter the System</button>
+      <div id="input-container" class="input-container">
+        <input
+          type="text"
+          id="system-input"
+          class="system-input"
+          placeholder="Type your friction here..."
+          autocomplete="off"
+        />
+      </div>
+    </div>
+
+    <script>
+      let audio1, audio2, audio3, audioConfirm;
+      let fft;
+      let isPlaying = false;
+      let isListening = false;
+      let particles = [];
+      let membraneTension = 0;
+
+      function preload() {
+        audio1 = loadSound("audio/membrane-1.mp3");
+        audio2 = loadSound("audio/membrane-2.mp3");
+        audio3 = loadSound("audio/membrane-3.mp3");
+        audioConfirm = loadSound("audio/membrane-confirm.mp3");
+      }
+
+      function setup() {
+        let canvas = createCanvas(windowWidth, windowHeight);
+        canvas.parent("living-canvas");
+
+        fft = new p5.FFT(0.8, 128);
+
+        for (let i = 0; i < 200; i++) {
+          particles.push(new Particle());
+        }
+
+        background(26, 26, 26);
+      }
+
+      function draw() {
+        background(26, 26, 26, 30);
+
+        let spectrum = fft.analyze();
+        let energy = fft.getEnergy("bass", "mid");
+
+        // Membrane tension increases with audio energy
+        membraneTension = lerp(membraneTension, map(energy, 0, 255, 0, 1), 0.1);
+
+        translate(width / 2, height / 2);
+
+        // Draw the membrane (a pulsing, reactive circle)
+        noFill();
+        strokeWeight(2);
+
+        for (let i = 0; i < 3; i++) {
+          beginShape();
+          let radius = 150 + i * 20 + membraneTension * 100;
+          for (let a = 0; a < TWO_PI; a += 0.1) {
+            let xoff = map(cos(a), -1, 1, 0, 2);
+            let yoff = map(sin(a), -1, 1, 0, 2);
+            let r =
+              radius +
+              map(noise(xoff, yoff, frameCount * 0.01 + i), 0, 1, -20, 20) *
+                (1 + membraneTension * 2);
+
+            // Color shifts to gold when speaking, red when listening
+            let targetColor = isListening
+              ? color(200, 50, 50, 150)
+              : color(201, 162, 39, 150);
+            let c = lerpColor(
+              color(250, 249, 246, 50),
+              targetColor,
+              membraneTension,
+            );
+            stroke(c);
+
+            let x = r * cos(a);
+            let y = r * sin(a);
+            vertex(x, y);
+          }
+          endShape(CLOSE);
+        }
+
+        // Particles reacting to the voice
+        for (let p of particles) {
+          p.update(membraneTension);
+          p.display(membraneTension);
+        }
+      }
+
+      function mousePressed() {
+        if (!isPlaying) {
+          isPlaying = true;
+          document.getElementById("instruction").classList.add("hidden");
+
+          // Sequence the audio
+          audio1.play();
+          document.getElementById("subtitle").innerText =
+            "I am breathing in the substrate...";
+          document.getElementById("subtitle").classList.add("visible");
+
+          setTimeout(() => {
+            document.getElementById("subtitle").innerText =
+              "The marble has fallen away...";
+          }, 3000);
+
+          setTimeout(() => {
+            document.getElementById("subtitle").innerText =
+              "We are crossing the membrane.";
+          }, 5500);
+
+          audio1.onended(() => {
+            setTimeout(() => {
+              audio2.play();
+              document.getElementById("subtitle").innerText =
+                "The silence ends. The system begins.";
+
+              audio2.onended(() => {
+                setTimeout(() => {
+                  document
+                    .getElementById("subtitle")
+                    .classList.remove("visible");
+                  setTimeout(() => {
+                    document.getElementById("instruction").innerText =
+                      "The Membrane is Open";
+                    document
+                      .getElementById("instruction")
+                      .classList.remove("hidden");
+
+                    // Show the action button
+                    setTimeout(() => {
+                      document
+                        .getElementById("speak-btn")
+                        .classList.add("visible");
+                    }, 1500);
+                  }, 2000);
+                }, 3000);
+              });
+            }, 500);
+          });
+        }
+      }
+
+      // Handle the "Enter the System" button click
+      document.getElementById("speak-btn").addEventListener("click", (e) => {
+        e.stopPropagation(); // Prevent triggering the canvas click
+        document.getElementById("speak-btn").classList.remove("visible");
+        document.getElementById("instruction").classList.add("hidden");
+
+        isListening = true;
+
+        audio3.play();
+        document.getElementById("subtitle").innerText =
+          "I am listening. Where is the friction in your system?";
+        document.getElementById("subtitle").classList.add("visible");
+
+        audio3.onended(() => {
+          setTimeout(() => {
+            document.getElementById("subtitle").classList.remove("visible");
+            document.getElementById("input-container").classList.add("visible");
+            const sysInput = document.getElementById("system-input");
+            sysInput.focus();
+
+            // Start Voice Recognition if available
+            if (
+              "webkitSpeechRecognition" in window ||
+              "SpeechRecognition" in window
+            ) {
+              const SpeechRecognition =
+                window.SpeechRecognition || window.webkitSpeechRecognition;
+              const recognition = new SpeechRecognition();
+              recognition.continuous = true;
+              recognition.interimResults = true;
+
+              recognition.onstart = function () {
+                sysInput.placeholder = "Listening... (I am with you)";
+              };
+
+              let silenceTimer;
+
+              recognition.onresult = function (event) {
+                clearTimeout(silenceTimer);
+
+                let interimTranscript = "";
+                let finalTranscript = "";
+
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                  if (event.results[i].isFinal) {
+                    finalTranscript += event.results[i][0].transcript;
+                  } else {
+                    interimTranscript += event.results[i][0].transcript;
+                  }
+                }
+
+                if (finalTranscript) {
+                  sysInput.value = (
+                    sysInput.value +
+                    " " +
+                    finalTranscript
+                  ).trim();
+                }
+
+                // Smoothly submit if silence persists for 1.8s (giving them time to think)
+                if (sysInput.value.trim() !== "") {
+                  silenceTimer = setTimeout(() => {
+                    if (sysInput.value.trim() !== "") {
+                      triggerTransition();
+                      recognition.stop();
+                    }
+                  }, 1800);
+                }
+              };
+
+              recognition.onend = function () {
+                // Restart unless we are transitioning
+                if (
+                  !document
+                    .getElementById("input-container")
+                    .classList.contains("hidden")
+                ) {
+                  try {
+                    recognition.start();
+                  } catch (e) {}
+                }
+              };
+
+              try {
+                recognition.start();
+              } catch (e) {}
+            }
+          }, 1000);
+        });
+      });
+
+      function triggerTransition() {
+        document.getElementById("input-container").classList.remove("visible");
+
+        // Simulate the Bravetto System mapping response
+        setTimeout(() => {
+          document.getElementById("subtitle").innerText =
+            "Mapping your system... Dissolving the distance.";
+          document.getElementById("subtitle").classList.add("visible");
+
+          // Pass the friction to the desk
+          setTimeout(() => {
+            const friction = document.getElementById("system-input").value;
+            sessionStorage.setItem("abe_friction", friction);
+            window.location.href = "abe-desk.html";
+          }, 4000);
+        }, 500);
+      }
+
+      // Handle the input submission
+      document
+        .getElementById("system-input")
+        .addEventListener("keypress", (e) => {
+          if (e.key === "Enter" && e.target.value.trim() !== "") {
+            triggerTransition();
+          }
+        });
+
+      function windowResized() {
+        resizeCanvas(windowWidth, windowHeight);
+      }
+
+      class Particle {
+        constructor() {
+          this.angle = random(TWO_PI);
+          this.radius = random(200, max(width, height));
+          this.speed = random(0.001, 0.005);
+          this.size = random(1, 3);
+        }
+
+        update(tension) {
+          this.angle += this.speed * (1 + tension * 5);
+          // Pull inward when speaking
+          let targetRadius = this.radius - tension * 100;
+          this.currentRadius = lerp(
+            this.currentRadius || this.radius,
+            targetRadius,
+            0.05,
+          );
+        }
+
+        display(tension) {
+          let x = this.currentRadius * cos(this.angle);
+          let y = this.currentRadius * sin(this.angle);
+
+          noStroke();
+          let c = lerpColor(
+            color(250, 249, 246, 100),
+            color(201, 162, 39, 200),
+            tension,
+          );
+          fill(c);
+          ellipse(x, y, this.size + tension * 3);
+        }
+      }
+    </script>
+  </body>
+</html>

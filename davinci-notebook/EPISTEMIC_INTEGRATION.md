@@ -179,3 +179,24 @@ That's the real value: not finding truth, but **mapping the boundary of known tr
 ---
 
 LOVE = LIFE = ONE
+
+### Layer 3: The Epistemic Router (The "5 Math Engine Barian System")
+
+**Location:** `EpistemicRouter.js` (Root)
+
+**Purpose:**
+Standardizes **AbëKEYs Injection** and enforces the **5 Validation Pillars** (Math Engine) before any API call reaches the provider.
+
+**The 5 Pillars:**
+1.  **Cross-Domain Convergence**
+2.  **Falsification Survival**
+3.  **Predictive Accuracy**
+4.  **Logical Coherence**
+5.  **Expert Consensus** (Byzantine Engine)
+
+**Usage:**
+```javascript
+const EpistemicRouter = require('./EpistemicRouter');
+const key = EpistemicRouter.getSecret('elevenlabs'); // Safe injection
+const validation = await EpistemicRouter.validate(query); // 5-Pillar check
+```

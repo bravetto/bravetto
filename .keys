@@ -1,0 +1,5 @@
+# bravetto secrets manifest
+# usage: node ~/repos/cores/keys-core/exec-secret.cjs --from .keys -- node abe-consciousness-server.js
+# service        field          ENV_VAR
+elevenlabs       api_key        ELEVENLABS_API_KEY
+openai           api_key        OPENAI_API_KEY
