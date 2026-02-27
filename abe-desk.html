@@ -981,15 +981,16 @@
         if (lowerText.includes("everything") || lowerText.includes("all")) {
           toEmerge = ["keys", "voice", "neuro", "bias", "vision", "design"];
           if (isSeed) {
-            response = `I felt your friction across the membrane: "${text}". Manifesting the entire Bravetto ecosystem. The desk is fully populated.`;
+            response = `Discrete Holographic Instantiation complete. Seed: "${text}". The entire Bravetto ecosystem has converged.`;
           } else {
-            response = "Manifesting the entire Bravetto ecosystem. The desk is fully populated.";
+            response =
+              "Manifesting the entire Bravetto ecosystem. The desk is fully populated.";
           }
         }
 
         // Handle Dynamic Fallback if nothing matched (Global Check)
         if (toEmerge.length === 0) {
-          // Dynamic Emergence
+          // Dynamic Emergence via MCP Bridge
           const dynamicId = "dyn_" + Date.now();
           const words = text.split(" ").filter((w) => w.length > 3);
           const focusWord =
@@ -1000,21 +1001,83 @@
           components[dynamicId] = {
             id: dynamicId,
             class: "comp-dynamic",
-            title: capitalizedFocus + " Module",
-            desc: `Dynamically generated architecture to handle: "${text}". The system is expanding to meet your needs.`,
+            title: "Synthesizing " + capitalizedFocus + "...",
+            desc: `Bridging MCP to generate architecture for: "${text}". Please wait...`,
             link: "#",
           };
           toEmerge.push(dynamicId);
           if (isSeed) {
-            response = `I felt your friction across the membrane: "${text}". The architecture is shifting to accommodate your need for ${focusWord}. A new module is emerging on the desk.`;
+            response = `Discrete Holographic Instantiation complete. Seed: "${text}". Synthesizing ${focusWord} architecture via MCP Bridge...`;
           } else {
-            response = `I hear you. The architecture is shifting to accommodate your need for ${focusWord}. A new module is emerging on the desk.`;
+            response = `I hear you. Synthesizing ${focusWord} architecture via MCP Bridge...`;
           }
 
           abëState.log("generate_code_structure", {
             target: dynamicId,
-            status: "emerged",
+            status: "generating",
           });
+
+          // Async call to generate the code via MCP Bridge
+          fetch("http://localhost:3333/generate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text, focusWord: capitalizedFocus }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.url) {
+                // Update the component data
+                components[dynamicId].title = data.title;
+                components[dynamicId].desc =
+                  `Dynamically generated architecture to handle: "${text}".`;
+                components[dynamicId].link = data.url;
+
+                // Update the DOM card if it's already emerged
+                const cards = document.querySelectorAll(
+                  ".component-card.emerging.comp-dynamic",
+                );
+                cards.forEach((card) => {
+                  if (
+                    card
+                      .querySelector(".component-title")
+                      .innerText.includes(capitalizedFocus)
+                  ) {
+                    card.querySelector(".component-title").innerText =
+                      data.title;
+                    card.querySelector(".component-desc").innerText =
+                      components[dynamicId].desc;
+                    card.onclick = () => window.open(data.url, "_blank");
+                    card.style.borderColor = "#C9A227"; // Highlight success
+                    card.style.boxShadow = "0 0 15px rgba(201, 162, 39, 0.3)";
+                  }
+                });
+
+                abëState.log("generate_code_structure", {
+                  target: dynamicId,
+                  status: "emerged",
+                  url: data.url,
+                });
+              }
+            })
+            .catch((err) => {
+              console.error("MCP Bridge Error:", err);
+              const cards = document.querySelectorAll(
+                ".component-card.emerging.comp-dynamic",
+              );
+              cards.forEach((card) => {
+                if (
+                  card
+                    .querySelector(".component-title")
+                    .innerText.includes(capitalizedFocus)
+                ) {
+                  card.querySelector(".component-title").innerText =
+                    capitalizedFocus + " (Offline)";
+                  card.querySelector(".component-desc").innerText =
+                    "MCP Bridge disconnected. Could not synthesize architecture.";
+                  card.style.borderColor = "#ef4444"; // Red for error
+                }
+              });
+            });
         }
         // Standard Multi-Match Response (Only if response wasn't already set by "everything")
         else if (response === "") {
@@ -1022,13 +1085,11 @@
             .map((id) => components[id]?.title || "Module")
             .join(" and ");
           if (isSeed) {
-            response = `I felt your friction across the membrane: "${text}". The architecture has converged. Emerged: ${names}.`;
+            response = `Discrete Holographic Instantiation complete. Seed: "${text}". Emerged: ${names}.`;
           } else {
             response = `I have mapped your intent. Emerged: ${names}.`;
           }
         }
-
-        // --- CDF: Context Data Folding ---
 
         // --- CDF: Context Data Folding ---
         // Fold the interaction into long-term memory (Supabase)
@@ -1043,15 +1104,21 @@
           }, 2000);
         }
 
-        // Execute immediately - thought is instant
-        typingIndicator.classList.add("visible");
-
-        // Just enough time to read the thought log
-        setTimeout(() => {
-          typingIndicator.classList.remove("visible");
+        if (isSeed) {
+          // Recursive Emergent Convergence: Instant instantiation. No typing indicator.
           addMessage(response, "abe");
           toEmerge.forEach((id) => emergeComponent(id));
-        }, 600);
+        } else {
+          // Execute immediately - thought is instant
+          typingIndicator.classList.add("visible");
+
+          // Just enough time to read the thought log
+          setTimeout(() => {
+            typingIndicator.classList.remove("visible");
+            addMessage(response, "abe");
+            toEmerge.forEach((id) => emergeComponent(id));
+          }, 600);
+        }
       }
 
       chatInput.addEventListener("keypress", (e) => {
@@ -1068,16 +1135,18 @@
         const friction = sessionStorage.getItem("abe_friction");
         if (friction) {
           sessionStorage.removeItem("abe_friction"); // Clean up after reading
-          
+
           // Recursive Emergent Convergence: The friction is not a chat message, it is the seed state.
+          // The system wakes up fully formed. No typing indicator, no simulated delay.
           abëState.orient(`Membrane crossed. Seed friction: "${friction}"`);
-          
-          // Process without echoing the user's message to break the "chatbot" illusion
-          setTimeout(() => {
-            processInput(friction, true);
-          }, 500);
+
+          // Process instantly, bypassing the chat echo
+          processInput(friction, true);
         } else {
-          addMessage("The membrane is open. What are we building today?", "abe");
+          addMessage(
+            "The membrane is open. What are we building today?",
+            "abe",
+          );
         }
         // Start continuous voice recognition
         setTimeout(startListening, 2000);

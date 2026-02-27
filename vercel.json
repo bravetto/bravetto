@@ -41,6 +41,11 @@
     {
       "source": "/davinci-notebook",
       "destination": "/davinci-notebook/index.html"
-    }
+    },
+    { "source": "/membrane", "destination": "/membrane.html" },
+    { "source": "/convergence", "destination": "/convergence.html" },
+    { "source": "/angel-in-the-marble", "destination": "/angel-in-the-marble.html" },
+    { "source": "/abe-desk", "destination": "/abe-desk.html" },
+    { "source": "/why-bravetto", "destination": "/why-bravetto.html" }
   ]
 }
