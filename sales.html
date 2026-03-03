@@ -93,6 +93,31 @@
         50% { transform: translateY(8px); opacity: 0.8; }
       }
       .scroll-hint { animation: drift 2.5s ease-in-out infinite; }
+
+      @keyframes pulse-gold {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(201, 162, 39, 0.4); }
+        50% { box-shadow: 0 0 0 16px rgba(201, 162, 39, 0); }
+      }
+      .pulse-gold { animation: pulse-gold 2.5s ease-in-out infinite; }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 10px 20px;
+        border: 1px solid #EAE7E0;
+        border-radius: 999px;
+        font-size: 13px;
+        color: #4A4A4A;
+        background: #fff;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .chip:hover {
+        border-color: #C9A227;
+        color: #1A1A1A;
+        box-shadow: 0 4px 20px rgba(201, 162, 39, 0.1);
+      }
     </style>
   </head>
 
@@ -104,7 +129,7 @@
     <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-cream/60 backdrop-blur-md">
       <div class="max-w-6xl mx-auto flex justify-between items-center">
         <a href="/" class="font-serif text-2xl font-semibold tracking-tight">Bravetto</a>
-        <a href="#voice-demo" class="text-sm px-5 py-2.5 bg-ink text-cream rounded-full hover:bg-ink-body transition-colors">
+        <a href="#abe-stage" class="text-sm px-5 py-2.5 bg-ink text-cream rounded-full hover:bg-ink-body transition-colors">
           Talk to Abe
         </a>
       </div>
@@ -123,6 +148,13 @@
         <p class="text-lg md:text-xl text-ink-body font-light tracking-wide moment" style="transition-delay: 0.4s">
           Your data already knows the answer. We make sure your people do too.
         </p>
+        <a href="#abe-stage" class="inline-flex items-center gap-3 mt-10 px-8 py-4 bg-gold text-ink rounded-full font-medium text-lg hover:bg-gold-hover transition-colors pulse-gold moment" style="transition-delay: 0.7s">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z" fill="currentColor" opacity="0.3"/>
+            <path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Talk to Abe
+        </a>
       </div>
       <div class="absolute bottom-12 z-10 scroll-hint">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-gold">
@@ -206,6 +238,85 @@
           Not a dashboard. Not a report. Not another screen.<br>
           <span class="text-ink font-normal">Awareness.</span>
         </p>
+      </div>
+    </section>
+
+    <!-- ================================ -->
+    <!-- Abe Stage — Interactive Center    -->
+    <!-- ================================ -->
+    <section id="abe-stage" class="py-32 px-8 bg-cream-mid">
+      <div class="max-w-4xl mx-auto">
+
+        <!-- Header -->
+        <div class="text-center mb-16">
+          <p class="tag mb-4 reveal">Meet Abe</p>
+          <h2 class="font-serif text-4xl md:text-6xl font-semibold headline mb-6 reveal">
+            Ask her anything about your business.
+          </h2>
+          <p class="text-lg text-ink-body font-light reveal">
+            Abe is not a generic chatbot. She learns your systems, your contracts,
+            your inventory &mdash; and answers with your context, not the internet&rsquo;s.
+          </p>
+        </div>
+
+        <!-- Voice CTA — the irresistible element -->
+        <div class="text-center mb-16 reveal">
+          <button id="abe-trigger" class="inline-flex items-center gap-4 px-10 py-5 bg-gold text-ink rounded-full font-medium text-lg hover:bg-gold-hover transition-all pulse-gold cursor-pointer">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+              <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z" fill="currentColor" opacity="0.3"/>
+              <path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Talk to Abe now
+          </button>
+          <p class="text-sm text-ink-caption mt-4">Click the voice icon in the bottom-right corner to start</p>
+        </div>
+
+        <!-- Suggestion Chips -->
+        <div class="text-center mb-16 reveal">
+          <p class="text-sm text-ink-caption mb-6">Or start with a question:</p>
+          <div class="flex flex-wrap justify-center gap-3" id="suggestion-chips">
+            <button class="chip" data-prompt="What would Bravetto look like in my industry?">
+              What would this look like in my industry?
+            </button>
+            <button class="chip" data-prompt="How is Bravetto different from ChatGPT or Copilot?">
+              How is this different from ChatGPT?
+            </button>
+            <button class="chip" data-prompt="What does onboarding and implementation look like?">
+              What does onboarding look like?
+            </button>
+            <button class="chip" data-prompt="How do you connect to our existing systems like SAP and Salesforce?">
+              How do you handle our existing systems?
+            </button>
+            <button class="chip" data-prompt="Can we start with just one team or department?">
+              Can we start with just one team?
+            </button>
+            <button class="chip" data-prompt="Show me the ROI — what measurable impact have you delivered?">
+              Show me the ROI
+            </button>
+          </div>
+        </div>
+
+        <!-- Business Context Input -->
+        <div class="max-w-2xl mx-auto reveal">
+          <div class="card p-8">
+            <label class="block text-sm font-medium mb-3" for="business-context">
+              Tell Abe about your business
+            </label>
+            <textarea
+              id="business-context"
+              rows="3"
+              class="w-full px-4 py-3 border border-cream-border rounded-lg text-sm text-ink-body focus:outline-none focus:border-gold transition-colors resize-none"
+              placeholder="e.g. We're a $200M manufacturer with 8 legacy systems, 400 employees, and our service team can't see what sales is doing..."
+            ></textarea>
+            <div class="flex items-center justify-between mt-4">
+              <p class="text-xs text-ink-caption">Abe will use this to tailor her answers to your world.</p>
+              <button id="context-submit" class="px-6 py-2.5 bg-ink text-cream rounded-full text-sm font-medium hover:bg-ink-body transition-colors cursor-pointer">
+                Send to Abe
+              </button>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -393,29 +504,6 @@
       </div>
     </section>
 
-    <!-- ================================ -->
-    <!-- Section 8: Voice Demo Callout     -->
-    <!-- ================================ -->
-    <section id="voice-demo" class="py-32 px-8 bg-cream-mid">
-      <div class="max-w-3xl mx-auto text-center">
-        <h2 class="font-serif text-4xl md:text-6xl font-semibold headline mb-6 reveal">
-          She&rsquo;s already listening.
-        </h2>
-        <p class="text-lg text-ink-body font-light mb-4 reveal">
-          That voice icon in the corner? That&rsquo;s Abe.
-        </p>
-        <p class="text-lg text-ink font-normal reveal">
-          Ask her anything.
-        </p>
-        <div class="mt-12 reveal">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" class="mx-auto text-gold opacity-60">
-            <circle cx="24" cy="24" r="23" stroke="currentColor" stroke-width="1" />
-            <path d="M18 20v8M24 16v16M30 20v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-          </svg>
-        </div>
-      </div>
-    </section>
-
     <!-- ========================= -->
     <!-- Section 9: The Origin      -->
     <!-- ========================= -->
@@ -459,7 +547,7 @@
              class="inline-flex items-center gap-3 px-8 py-4 bg-gold text-ink rounded-full font-medium hover:bg-gold-hover transition-colors">
             hello@bravetto.com
           </a>
-          <button onclick="document.getElementById('voice-demo').scrollIntoView({behavior:'smooth'})"
+          <button onclick="document.getElementById('abe-stage').scrollIntoView({behavior:'smooth'})"
                   class="inline-flex items-center gap-2 px-6 py-4 text-cream/40 hover:text-cream transition-colors text-sm cursor-pointer">
             Talk to Abe now
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -537,6 +625,55 @@
       document.querySelectorAll(".count-up").forEach(function(el) {
         countObserver.observe(el);
       });
+
+      // abe stage interactions
+      function pulseWidget() {
+        var widget = document.querySelector("elevenlabs-convai");
+        if (widget && widget.shadowRoot) {
+          widget.style.transition = "transform 0.3s ease";
+          widget.style.transform = "scale(1.15)";
+          setTimeout(function() { widget.style.transform = "scale(1)"; }, 600);
+        }
+      }
+
+      // suggestion chips — scroll to widget and pulse it
+      document.querySelectorAll(".chip").forEach(function(chip) {
+        chip.addEventListener("click", function() {
+          pulseWidget();
+          chip.style.borderColor = "#C9A227";
+          chip.style.background = "rgba(201,162,39,0.08)";
+          // scroll to bottom-right where widget lives
+          window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+        });
+      });
+
+      // abe trigger button
+      var abeTrigger = document.getElementById("abe-trigger");
+      if (abeTrigger) {
+        abeTrigger.addEventListener("click", function() {
+          pulseWidget();
+          window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+        });
+      }
+
+      // context submit — store context and activate widget
+      var contextSubmit = document.getElementById("context-submit");
+      if (contextSubmit) {
+        contextSubmit.addEventListener("click", function() {
+          var textarea = document.getElementById("business-context");
+          var context = textarea ? textarea.value.trim() : "";
+          if (context) {
+            contextSubmit.textContent = "Sent! Talk to Abe now.";
+            contextSubmit.classList.remove("bg-ink");
+            contextSubmit.classList.add("bg-gold", "text-ink");
+            window.__abeContext = context;
+            setTimeout(function() {
+              pulseWidget();
+              window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+            }, 800);
+          }
+        });
+      }
     </script>
 
   </body>
