@@ -120,6 +120,12 @@
       }
       .rotate-45 { transform: rotate(45deg); }
 
+      /* convai widget — always above overlay so voice actually works */
+      elevenlabs-convai {
+        position: relative;
+        z-index: 10000;
+      }
+
       /* voice overlay — immersive Ab\00eb experience */
       #voice-overlay {
         position: fixed;
@@ -819,6 +825,7 @@
       </div>
       <p class="voice-label">Ab&#235; is listening.</p>
       <p class="voice-sub"><span class="voice-status-dot" id="mic-dot"></span> <span id="mic-status">Connecting microphone&hellip;</span></p>
+      <p class="voice-sub" style="margin-top: 32px; opacity: 0.4; font-size: 13px;">Use the voice widget in the corner to start your conversation</p>
     </div>
 
     <!-- Abe Voice -->
@@ -1022,15 +1029,24 @@
       });
 
       // abe stage interactions — activate widget + show overlay
+      function clickWidgetButton(widget, attempts) {
+        if (!attempts) attempts = 0;
+        if (attempts > 20) return; // give up after 2 seconds
+        if (widget.shadowRoot) {
+          var btn = widget.shadowRoot.querySelector("button");
+          if (btn) { btn.click(); return; }
+        }
+        setTimeout(function() { clickWidgetButton(widget, attempts + 1); }, 100);
+      }
+
       function activateAbe() {
         var widget = document.querySelector("elevenlabs-convai");
         if (widget) {
-          if (typeof widget.start === "function") widget.start();
+          // try known api methods first, fall back to shadow dom click
+          if (typeof widget.startConversation === "function") widget.startConversation();
+          else if (typeof widget.start === "function") widget.start();
           else if (typeof widget.open === "function") widget.open();
-          else if (widget.shadowRoot) {
-            var btn = widget.shadowRoot.querySelector("button");
-            if (btn) btn.click();
-          }
+          else clickWidgetButton(widget, 0);
         }
         showOverlay();
       }
