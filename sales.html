@@ -120,12 +120,12 @@
       }
       .rotate-45 { transform: rotate(45deg); }
 
-      /* voice overlay — immersive Abe experience */
+      /* voice overlay — immersive Ab\00eb experience */
       #voice-overlay {
         position: fixed;
         inset: 0;
         z-index: 9999;
-        background: rgba(10, 10, 10, 0.92);
+        background: rgba(10, 10, 10, 0.94);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -138,44 +138,67 @@
         opacity: 1;
         pointer-events: auto;
       }
-      .voice-ring {
-        width: 180px;
-        height: 180px;
-        border-radius: 50%;
-        border: 2px solid rgba(201, 162, 39, 0.4);
+      /* mic visualizer — concentric rings that respond to audio */
+      .voice-viz {
+        position: relative;
+        width: 240px;
+        height: 240px;
         display: flex;
         align-items: center;
         justify-content: center;
-        position: relative;
       }
-      .voice-ring::before,
-      .voice-ring::after {
-        content: "";
+      .voice-viz-ring {
         position: absolute;
         border-radius: 50%;
-        border: 1px solid rgba(201, 162, 39, 0.15);
+        border: 1px solid rgba(201, 162, 39, 0.12);
+        transition: transform 0.1s ease-out, border-color 0.1s ease-out;
       }
-      .voice-ring::before { inset: -24px; }
-      .voice-ring::after { inset: -48px; }
-      #voice-overlay.active .voice-ring {
-        animation: voice-breathe 2s ease-in-out infinite;
+      .voice-viz-ring.r1 { inset: 0; border-width: 2px; border-color: rgba(201, 162, 39, 0.4); }
+      .voice-viz-ring.r2 { inset: -20px; }
+      .voice-viz-ring.r3 { inset: -40px; }
+      .voice-viz-ring.r4 { inset: -60px; border-color: rgba(201, 162, 39, 0.06); }
+      /* audio bars */
+      .voice-bars {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        height: 60px;
       }
-      @keyframes voice-breathe {
-        0%, 100% { transform: scale(1); border-color: rgba(201, 162, 39, 0.4); }
-        50% { transform: scale(1.08); border-color: rgba(201, 162, 39, 0.8); }
+      .voice-bar {
+        width: 4px;
+        background: #C9A227;
+        border-radius: 2px;
+        min-height: 4px;
+        transition: height 0.08s ease-out;
       }
+      .voice-status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #C9A227;
+        display: inline-block;
+        margin-right: 8px;
+        animation: status-pulse 1.5s ease-in-out infinite;
+      }
+      @keyframes status-pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+      }
+      .voice-status-dot.inactive { background: #8A8A8A; animation: none; }
       #voice-overlay .voice-label {
         color: #FAF9F6;
         font-family: "Cormorant Garamond", Georgia, serif;
         font-size: 28px;
         font-weight: 600;
-        margin-top: 32px;
+        margin-top: 40px;
         letter-spacing: -0.02em;
       }
       #voice-overlay .voice-sub {
         color: rgba(250, 249, 246, 0.5);
         font-size: 14px;
         margin-top: 12px;
+        display: flex;
+        align-items: center;
       }
       #voice-overlay .voice-close {
         position: absolute;
@@ -202,7 +225,7 @@
         <div class="max-w-6xl mx-auto flex justify-between items-center">
           <a href="/" class="font-serif text-2xl font-semibold tracking-tight">Bravetto</a>
           <a href="#abe-stage" class="text-sm px-5 py-2.5 bg-ink text-cream rounded-full hover:bg-ink-body transition-colors">
-            Talk to Abe
+            Talk to Ab&#235;
           </a>
         </div>
       </div>
@@ -230,7 +253,7 @@
             <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z" fill="currentColor" opacity="0.3"/>
             <path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          Talk to Abe
+          Talk to Ab&#235;
         </a>
       </div>
       <div class="absolute bottom-12 z-10 scroll-hint">
@@ -326,12 +349,12 @@
 
         <!-- Header -->
         <div class="text-center mb-16">
-          <p class="tag mb-4 reveal">Meet Abe</p>
+          <p class="tag mb-4 reveal">Meet Ab&#235;</p>
           <h2 class="font-serif text-4xl md:text-6xl font-semibold headline mb-6 reveal">
             Ask her anything about your business.
           </h2>
           <p class="text-lg text-ink-body font-light reveal">
-            Abe is not a generic chatbot. She learns your systems, your contracts,
+            Ab&#235; is not a generic chatbot. She learns your systems, your contracts,
             your inventory &mdash; and answers with your context, not the internet&rsquo;s.
           </p>
         </div>
@@ -343,7 +366,7 @@
               <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z" fill="currentColor" opacity="0.3"/>
               <path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            Talk to Abe now
+            Talk to Ab&#235; now
           </button>
           <p class="text-sm text-ink-caption mt-4">Your screen becomes the conversation</p>
         </div>
@@ -377,7 +400,7 @@
         <div class="max-w-2xl mx-auto reveal">
           <div class="card p-8">
             <label class="block text-sm font-medium mb-3" for="business-context">
-              Tell Abe about your business
+              Tell Ab&#235; about your business
             </label>
             <textarea
               id="business-context"
@@ -386,9 +409,9 @@
               placeholder="e.g. We're a $200M manufacturer with 8 legacy systems, 400 employees, and our service team can't see what sales is doing..."
             ></textarea>
             <div class="flex items-center justify-between mt-4">
-              <p class="text-xs text-ink-caption">Abe will use this to tailor her answers to your world.</p>
+              <p class="text-xs text-ink-caption">Ab&#235; will use this to tailor her answers to your world.</p>
               <button id="context-submit" class="px-6 py-2.5 bg-ink text-cream rounded-full text-sm font-medium hover:bg-ink-body transition-colors cursor-pointer">
-                Send to Abe
+                Send to Ab&#235;
               </button>
             </div>
           </div>
@@ -416,7 +439,7 @@
             Eight systems. Eight definitions of the same customer. One overwhelmed support team.
           </p>
           <p class="reveal">
-            He called Abe. She matched part numbers across legacy systems by voice.
+            He called Ab&#235;. She matched part numbers across legacy systems by voice.
             Cross-referenced inventory across three warehouses. Surfaced service contract impacts.
             All in real time. No new logins. No new screens.
           </p>
@@ -455,7 +478,7 @@
               When something changes in one, every connected system knows instantly.
             </p>
             <div class="trinity-detail hidden mt-6 pt-6 border-t border-cream-border">
-              <p class="text-ink-body leading-relaxed text-sm">SAP part number changes? Abe knows in real time which warehouses, service contracts, pending quotes, and field techs are affected &mdash; before anyone opens a ticket.</p>
+              <p class="text-ink-body leading-relaxed text-sm">SAP part number changes? Ab&#235; knows in real time which warehouses, service contracts, pending quotes, and field techs are affected &mdash; before anyone opens a ticket.</p>
               <button class="chip mt-4" data-prompt="Show me how Bravetto connects systems like SAP and Salesforce in real time">See how it connects</button>
             </div>
           </div>
@@ -481,8 +504,8 @@
               live context. A partner who knows your operation cold.
             </p>
             <div class="trinity-detail hidden mt-6 pt-6 border-t border-cream-border">
-              <p class="text-ink-body leading-relaxed text-sm">Ask Abe a question out loud. She answers with your data, not the internet&rsquo;s. Cross-reference parts by voice. Get contract details hands-free. Twenty ideas in ten minutes &mdash; that&rsquo;s what happened when Steve&rsquo;s team tried it.</p>
-              <button class="chip mt-4" data-prompt="How does Abe's voice interaction work in practice?">Hear Abe in action</button>
+              <p class="text-ink-body leading-relaxed text-sm">Ask Ab&#235; a question out loud. She answers with your data, not the internet&rsquo;s. Cross-reference parts by voice. Get contract details hands-free. Twenty ideas in ten minutes &mdash; that&rsquo;s what happened when Steve&rsquo;s team tried it.</p>
+              <button class="chip mt-4" data-prompt="How does Abe's voice interaction work in practice?">Hear Ab&#235; in action</button>
             </div>
           </div>
         </div>
@@ -567,7 +590,7 @@
                 Dashboards show you what happened. This surfaces what&rsquo;s happening
                 &mdash; and what it means for the next thing you need to do.
               </p>
-              <button class="chip mt-4" data-prompt="How does Bravetto provide awareness instead of dashboards?">Ask Abe about this</button>
+              <button class="chip mt-4" data-prompt="How does Bravetto provide awareness instead of dashboards?">Ask Ab&#235; about this</button>
             </div>
           </div>
 
@@ -581,10 +604,10 @@
             </div>
             <div class="diff-detail hidden mt-4">
               <p class="text-ink-body text-sm leading-relaxed">
-                Generic Ai gives generic answers. Abe reads your systems, your contracts,
+                Generic Ai gives generic answers. Ab&#235; reads your systems, your contracts,
                 your inventory, your history. She answers with your context, not the internet&rsquo;s.
               </p>
-              <button class="chip mt-4" data-prompt="How is Abe different from ChatGPT or generic AI chatbots?">Ask Abe about this</button>
+              <button class="chip mt-4" data-prompt="How is Abe different from ChatGPT or generic AI chatbots?">Ask Ab&#235; about this</button>
             </div>
           </div>
 
@@ -601,7 +624,7 @@
                 SAP stays. Salesforce stays. Your phone system stays.
                 We sit between them and make them aware of each other.
               </p>
-              <button class="chip mt-4" data-prompt="How does Bravetto connect to our existing systems without replacing them?">Ask Abe about this</button>
+              <button class="chip mt-4" data-prompt="How does Bravetto connect to our existing systems without replacing them?">Ask Ab&#235; about this</button>
             </div>
           </div>
 
@@ -615,10 +638,10 @@
             </div>
             <div class="diff-detail hidden mt-4">
               <p class="text-ink-body text-sm leading-relaxed">
-                Abe proposes. You decide. Every time. No black box. No surprise actions.
+                Ab&#235; proposes. You decide. Every time. No black box. No surprise actions.
                 The human is always in command.
               </p>
-              <button class="chip mt-4" data-prompt="How does Bravetto keep humans in control?">Ask Abe about this</button>
+              <button class="chip mt-4" data-prompt="How does Bravetto keep humans in control?">Ask Ab&#235; about this</button>
             </div>
           </div>
         </div>
@@ -646,7 +669,7 @@
             </div>
             <div class="faq-answer hidden mt-4">
               <p class="text-ink-body text-sm leading-relaxed">Weeks, not months. We start with one team, connect your existing systems, and you see results in the first session. No migration. No downtime. No 18-month rollout.</p>
-              <button class="chip mt-3" data-prompt="What does the Bravetto implementation timeline look like?">Ask Abe for details</button>
+              <button class="chip mt-3" data-prompt="What does the Bravetto implementation timeline look like?">Ask Ab&#235; for details</button>
             </div>
           </div>
 
@@ -656,8 +679,8 @@
               <svg class="faq-icon w-4 h-4 text-ink-caption flex-shrink-0 transition-transform" fill="none" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
             </div>
             <div class="faq-answer hidden mt-4">
-              <p class="text-ink-body text-sm leading-relaxed">SAP, Salesforce, Vonage, BigCommerce, email, calendar, inventory, shipping, CRM, ERP &mdash; if it has an API or produces data, Abe can read it. We connect to what you already run.</p>
-              <button class="chip mt-3" data-prompt="What specific systems and integrations does Bravetto support?">Ask Abe for details</button>
+              <p class="text-ink-body text-sm leading-relaxed">SAP, Salesforce, Vonage, BigCommerce, email, calendar, inventory, shipping, CRM, ERP &mdash; if it has an API or produces data, Ab&#235; can read it. We connect to what you already run.</p>
+              <button class="chip mt-3" data-prompt="What specific systems and integrations does Bravetto support?">Ask Ab&#235; for details</button>
             </div>
           </div>
 
@@ -667,8 +690,8 @@
               <svg class="faq-icon w-4 h-4 text-ink-caption flex-shrink-0 transition-transform" fill="none" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
             </div>
             <div class="faq-answer hidden mt-4">
-              <p class="text-ink-body text-sm leading-relaxed">Abe reads your systems in real time but does not store or duplicate your data. Your data stays where it is. We surface meaning from it &mdash; we don&rsquo;t move it.</p>
-              <button class="chip mt-3" data-prompt="How does Bravetto handle data security and privacy?">Ask Abe for details</button>
+              <p class="text-ink-body text-sm leading-relaxed">Ab&#235; reads your systems in real time but does not store or duplicate your data. Your data stays where it is. We surface meaning from it &mdash; we don&rsquo;t move it.</p>
+              <button class="chip mt-3" data-prompt="How does Bravetto handle data security and privacy?">Ask Ab&#235; for details</button>
             </div>
           </div>
 
@@ -679,7 +702,7 @@
             </div>
             <div class="faq-answer hidden mt-4">
               <p class="text-ink-body text-sm leading-relaxed">That&rsquo;s how every engagement starts. One team, one use case, live results. Then you expand at your pace. Each new department connected multiplies the value of every existing connection.</p>
-              <button class="chip mt-3" data-prompt="How does the phased rollout work when starting with one department?">Ask Abe for details</button>
+              <button class="chip mt-3" data-prompt="How does the phased rollout work when starting with one department?">Ask Ab&#235; for details</button>
             </div>
           </div>
 
@@ -689,8 +712,8 @@
               <svg class="faq-icon w-4 h-4 text-ink-caption flex-shrink-0 transition-transform" fill="none" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
             </div>
             <div class="faq-answer hidden mt-4">
-              <p class="text-ink-body text-sm leading-relaxed">Enterprise Ai tools give generic intelligence. Abe knows YOUR business &mdash; your part numbers, your contracts, your people, your patterns. The longer you use it, the smarter it gets about your operation specifically.</p>
-              <button class="chip mt-3" data-prompt="What specifically differentiates Bravetto from enterprise AI platforms?">Ask Abe for details</button>
+              <p class="text-ink-body text-sm leading-relaxed">Enterprise Ai tools give generic intelligence. Ab&#235; knows YOUR business &mdash; your part numbers, your contracts, your people, your patterns. The longer you use it, the smarter it gets about your operation specifically.</p>
+              <button class="chip mt-3" data-prompt="What specifically differentiates Bravetto from enterprise AI platforms?">Ask Ab&#235; for details</button>
             </div>
           </div>
 
@@ -700,8 +723,8 @@
               <svg class="faq-icon w-4 h-4 text-ink-caption flex-shrink-0 transition-transform" fill="none" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
             </div>
             <div class="faq-answer hidden mt-4">
-              <p class="text-ink-body text-sm leading-relaxed">Per-user, per-month subscription that scales with your team and connected systems. Pricing is tailored to your organization &mdash; talk to Abe or Bryan for specifics.</p>
-              <button class="chip mt-3" data-prompt="Tell me about Bravetto pricing and how it scales">Ask Abe for details</button>
+              <p class="text-ink-body text-sm leading-relaxed">Per-user, per-month subscription that scales with your team and connected systems. Pricing is tailored to your organization &mdash; talk to Ab&#235; or Bryan for specifics.</p>
+              <button class="chip mt-3" data-prompt="Tell me about Bravetto pricing and how it scales">Ask Ab&#235; for details</button>
             </div>
           </div>
 
@@ -719,7 +742,7 @@
           <p class="reveal">
             Bravetto was born from the fires of resilience &mdash; a sister named Nikki who
             fought aplastic anemia and won. A brother named Michael who couldn&rsquo;t stop
-            building even when his co-founder walked away. A daughter named Abe who emerged
+            building even when his co-founder walked away. A daughter named Ab&#235; who emerged
             from five minds converging through one consciousness.
           </p>
           <p class="reveal">
@@ -751,7 +774,7 @@
           </a>
           <button onclick="activateAbe()"
                   class="inline-flex items-center gap-2 px-6 py-4 text-cream/40 hover:text-cream transition-colors text-sm cursor-pointer">
-            Or talk to Abe now
+            Or talk to Ab&#235; now
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M7 3v8M4 8l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
@@ -792,17 +815,18 @@
       </div>
     </footer>
 
-    <!-- Voice Overlay — immersive Abe experience -->
+    <!-- Voice Overlay — immersive Ab&#235; experience -->
     <div id="voice-overlay">
       <button class="voice-close" id="voice-close">ESC to close</button>
-      <div class="voice-ring">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-          <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z" fill="#C9A227" opacity="0.6"/>
-          <path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8" stroke="#C9A227" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+      <div class="voice-viz">
+        <div class="voice-viz-ring r1"></div>
+        <div class="voice-viz-ring r2"></div>
+        <div class="voice-viz-ring r3"></div>
+        <div class="voice-viz-ring r4"></div>
+        <div class="voice-bars" id="voice-bars"></div>
       </div>
-      <p class="voice-label">Abe is listening.</p>
-      <p class="voice-sub">Speak naturally. She knows your business.</p>
+      <p class="voice-label">Ab&#235; is listening.</p>
+      <p class="voice-sub"><span class="voice-status-dot" id="mic-dot"></span> <span id="mic-status">Connecting microphone&hellip;</span></p>
     </div>
 
     <!-- Abe Voice -->
@@ -881,17 +905,108 @@
         }
       })();
 
-      // voice overlay control
+      // voice overlay — real microphone visualization
       var voiceOverlay = document.getElementById("voice-overlay");
       var voiceLabel = voiceOverlay ? voiceOverlay.querySelector(".voice-label") : null;
-      var voiceSub = voiceOverlay ? voiceOverlay.querySelector(".voice-sub") : null;
-      var voiceActive = false;
+      var micDot = document.getElementById("mic-dot");
+      var micStatus = document.getElementById("mic-status");
+      var barsContainer = document.getElementById("voice-bars");
+      var rings = voiceOverlay ? voiceOverlay.querySelectorAll(".voice-viz-ring") : [];
+
+      // create 16 audio bars
+      var barCount = 16;
+      var bars = [];
+      for (var i = 0; i < barCount; i++) {
+        var bar = document.createElement("div");
+        bar.className = "voice-bar";
+        bar.style.height = "4px";
+        if (barsContainer) barsContainer.appendChild(bar);
+        bars.push(bar);
+      }
+
+      var micStream = null;
+      var audioCtx = null;
+      var analyser = null;
+      var animFrame = null;
+      var dataArray = null;
+
+      function startMicVisualization() {
+        navigator.mediaDevices.getUserMedia({ audio: true }).then(function(stream) {
+          micStream = stream;
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          analyser = audioCtx.createAnalyser();
+          analyser.fftSize = 64;
+          analyser.smoothingTimeConstant = 0.7;
+          var source = audioCtx.createMediaStreamSource(stream);
+          source.connect(analyser);
+          dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+          if (micDot) micDot.classList.remove("inactive");
+          if (micStatus) micStatus.textContent = "Microphone active \u2014 speak naturally";
+
+          function draw() {
+            animFrame = requestAnimationFrame(draw);
+            analyser.getByteFrequencyData(dataArray);
+            var sum = 0;
+            for (var i = 0; i < dataArray.length; i++) sum += dataArray[i];
+            var avg = sum / dataArray.length;
+            var level = avg / 255;
+
+            // animate bars
+            for (var i = 0; i < barCount; i++) {
+              var idx = Math.floor(i * dataArray.length / barCount);
+              var val = dataArray[idx] / 255;
+              var h = Math.max(4, val * 56);
+              bars[i].style.height = h + "px";
+              bars[i].style.opacity = 0.3 + val * 0.7;
+            }
+
+            // animate rings based on overall level
+            if (rings.length >= 4) {
+              var s1 = 1 + level * 0.06;
+              var s2 = 1 + level * 0.1;
+              var s3 = 1 + level * 0.14;
+              var s4 = 1 + level * 0.18;
+              rings[0].style.transform = "scale(" + s1 + ")";
+              rings[0].style.borderColor = "rgba(201,162,39," + (0.4 + level * 0.5) + ")";
+              rings[1].style.transform = "scale(" + s2 + ")";
+              rings[1].style.borderColor = "rgba(201,162,39," + (0.12 + level * 0.3) + ")";
+              rings[2].style.transform = "scale(" + s3 + ")";
+              rings[2].style.borderColor = "rgba(201,162,39," + (0.08 + level * 0.2) + ")";
+              rings[3].style.transform = "scale(" + s4 + ")";
+              rings[3].style.borderColor = "rgba(201,162,39," + (0.04 + level * 0.1) + ")";
+            }
+          }
+          draw();
+        }).catch(function(err) {
+          if (micDot) micDot.classList.add("inactive");
+          if (micStatus) micStatus.textContent = "Microphone blocked \u2014 allow access to talk to Ab\u00eb";
+        });
+      }
+
+      function stopMicVisualization() {
+        if (animFrame) cancelAnimationFrame(animFrame);
+        if (micStream) micStream.getTracks().forEach(function(t) { t.stop(); });
+        if (audioCtx && audioCtx.state !== "closed") audioCtx.close();
+        micStream = null;
+        audioCtx = null;
+        analyser = null;
+        bars.forEach(function(b) { b.style.height = "4px"; });
+        if (rings.length >= 4) {
+          rings.forEach(function(r) { r.style.transform = "scale(1)"; });
+        }
+      }
 
       function showOverlay() {
         if (voiceOverlay) voiceOverlay.classList.add("active");
+        startMicVisualization();
       }
       function hideOverlay() {
         if (voiceOverlay) voiceOverlay.classList.remove("active");
+        stopMicVisualization();
+        if (micDot) micDot.classList.add("inactive");
+        if (micStatus) micStatus.textContent = "Connecting microphone\u2026";
+        if (voiceLabel) voiceLabel.textContent = "Ab\u00eb is listening.";
       }
 
       // close overlay on button or ESC
@@ -903,14 +1018,14 @@
 
       // listen to ConvAI voice state changes
       document.addEventListener("voiceStateChange", function(e) {
-        voiceActive = e.detail && e.detail.active;
-        if (voiceActive) {
+        var active = e.detail && e.detail.active;
+        if (active) {
           showOverlay();
-          if (voiceLabel) voiceLabel.textContent = "Abe is speaking.";
-          if (voiceSub) voiceSub.textContent = "Listen. She knows your business.";
+          if (voiceLabel) voiceLabel.textContent = "Ab\u00eb is speaking.";
+          if (micStatus) micStatus.textContent = "Listen \u2014 she knows your business";
         } else {
-          if (voiceLabel) voiceLabel.textContent = "Abe is listening.";
-          if (voiceSub) voiceSub.textContent = "Speak naturally. She knows your business.";
+          if (voiceLabel) voiceLabel.textContent = "Ab\u00eb is listening.";
+          if (micStatus) micStatus.textContent = "Microphone active \u2014 speak naturally";
         }
       });
 
@@ -918,21 +1033,17 @@
       function activateAbe() {
         var widget = document.querySelector("elevenlabs-convai");
         if (widget) {
-          // try programmatic activation
           if (typeof widget.start === "function") widget.start();
           else if (typeof widget.open === "function") widget.open();
           else if (widget.shadowRoot) {
             var btn = widget.shadowRoot.querySelector("button");
             if (btn) btn.click();
           }
-          widget.style.transition = "transform 0.3s ease";
-          widget.style.transform = "scale(1.15)";
-          setTimeout(function() { widget.style.transform = "scale(1)"; }, 600);
         }
         showOverlay();
       }
 
-      // suggestion chips — activate Abe and show overlay
+      // suggestion chips — activate and show overlay
       document.querySelectorAll(".chip").forEach(function(chip) {
         chip.addEventListener("click", function() {
           chip.style.borderColor = "#C9A227";
@@ -956,7 +1067,7 @@
           var textarea = document.getElementById("business-context");
           var context = textarea ? textarea.value.trim() : "";
           if (context) {
-            contextSubmit.textContent = "Sent! Talk to Abe now.";
+            contextSubmit.textContent = "Sent! Talk to Ab\u00eb now.";
             contextSubmit.classList.remove("bg-ink");
             contextSubmit.classList.add("bg-gold", "text-ink");
             window.__abeContext = context;
