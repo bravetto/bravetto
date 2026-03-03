@@ -1,0 +1,2 @@
+#!/bin/bash
+exec ~/.abeone/bin/be keys exec --from .keys -- npx serve -l 3080
