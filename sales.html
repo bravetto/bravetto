@@ -954,7 +954,7 @@
 
             // animate bars
             for (var i = 0; i < barCount; i++) {
-              var idx = Math.floor(i * dataArray.length / barCount);
+              var idx = Math.floor(1 + i * (dataArray.length - 1) / barCount);
               var val = dataArray[idx] / 255;
               var h = Math.max(4, val * 56);
               bars[i].style.height = h + "px";
