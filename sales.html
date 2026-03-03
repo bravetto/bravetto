@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bravetto | Your systems know everything. Your people know nothing.</title>
+    <meta name="description" content="The data is there. The awareness is not. Bravetto connects your systems, your people, and your bottom line into one living system." />
+    <link rel="canonical" href="https://bravetto.com/sales" />
+    <meta property="og:title" content="Bravetto | Your systems know everything. Your people know nothing." />
+    <meta property="og:description" content="The data is there. The awareness is not. Bravetto connects your systems, your people, and your bottom line." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bravetto.com/sales" />
+    <meta property="og:site_name" content="Bravetto" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#FAF9F6",
+              "cream-mid": "#F5F3EF",
+              "cream-border": "#EAE7E0",
+              gold: "#C9A227",
+              "gold-hover": "#D4A843",
+              "gold-glow": "#E8D48B",
+              ink: "#1A1A1A",
+              "ink-body": "#4A4A4A",
+              "ink-caption": "#8A8A8A",
+              dark: "#0A0A0A",
+            },
+            fontFamily: {
+              serif: ["Cormorant Garamond", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      html { scroll-behavior: smooth; }
+      body { background: #FAF9F6; overflow-x: hidden; }
+
+      .headline { letter-spacing: -0.02em; line-height: 1.1; }
+      .tag { font-family: "JetBrains Mono", monospace; font-size: 10px; font-weight: 400; text-transform: uppercase; letter-spacing: 0.15em; color: #C9A227; }
+
+      .moment {
+        opacity: 0;
+        transform: translateY(60px);
+        transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .moment.visible { opacity: 1; transform: translateY(0); }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.visible { opacity: 1; transform: translateY(0); }
+
+      .card {
+        background: #fff;
+        border: 1px solid #EAE7E0;
+        border-radius: 12px;
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 60px rgba(201, 162, 39, 0.06);
+      }
+
+      .diff-card {
+        border-left: 3px solid #C9A227;
+        padding-left: 24px;
+      }
+
+      .hero-glow {
+        background: radial-gradient(ellipse at center, rgba(201,162,39,0.07) 0%, transparent 70%);
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      @keyframes drift {
+        0%, 100% { transform: translateY(0); opacity: 0.4; }
+        50% { transform: translateY(8px); opacity: 0.8; }
+      }
+      .scroll-hint { animation: drift 2.5s ease-in-out infinite; }
+    </style>
+  </head>
+
+  <body class="font-sans text-ink antialiased">
+
+    <!-- ==================== -->
+    <!-- Section 0: Nav       -->
+    <!-- ==================== -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-cream/60 backdrop-blur-md">
+      <div class="max-w-6xl mx-auto flex justify-between items-center">
+        <a href="/" class="font-serif text-2xl font-semibold tracking-tight">Bravetto</a>
+        <a href="#voice-demo" class="text-sm px-5 py-2.5 bg-ink text-cream rounded-full hover:bg-ink-body transition-colors">
+          Talk to Abe
+        </a>
+      </div>
+    </nav>
+
+    <!-- ============================= -->
+    <!-- Section 1: Hero — The Problem -->
+    <!-- ============================= -->
+    <section class="relative min-h-screen flex flex-col items-center justify-center px-8">
+      <div class="hero-glow"></div>
+      <div class="relative z-10 text-center max-w-4xl mx-auto">
+        <p class="tag mb-6 moment">The Gap</p>
+        <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-semibold headline mb-8 moment" style="transition-delay: 0.15s">
+          Your systems know everything.<br>Your people know nothing.
+        </h1>
+        <p class="text-lg md:text-xl text-ink-body font-light tracking-wide moment" style="transition-delay: 0.4s">
+          The data is there. The awareness is not.
+        </p>
+      </div>
+      <div class="absolute bottom-12 z-10 scroll-hint">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-gold">
+          <path d="M12 5v14M7 14l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+    </section>
+
+    <!-- ================================ -->
+    <!-- Section 2: The Five Fractures    -->
+    <!-- ================================ -->
+
+    <section class="min-h-screen flex items-center justify-center px-8">
+      <p class="font-serif text-3xl md:text-5xl lg:text-6xl font-medium headline text-center max-w-4xl leading-snug moment">
+        A part number changes.<br>
+        <span class="text-ink-body">Three departments find out next week.</span>
+      </p>
+    </section>
+
+    <section class="min-h-screen flex items-center justify-center px-8">
+      <p class="font-serif text-3xl md:text-5xl lg:text-6xl font-medium headline text-center max-w-4xl leading-snug moment">
+        400,000 documents.<br>
+        <span class="text-ink-body">None of them talk to each other.</span>
+      </p>
+    </section>
+
+    <section class="min-h-screen flex items-center justify-center px-8">
+      <p class="font-serif text-3xl md:text-5xl lg:text-6xl font-medium headline text-center max-w-4xl leading-snug moment">
+        The phone rings.<br>
+        <span class="text-ink-body">Context does not.</span>
+      </p>
+    </section>
+
+    <section class="min-h-screen flex items-center justify-center px-8">
+      <p class="font-serif text-3xl md:text-5xl lg:text-6xl font-medium headline text-center max-w-4xl leading-snug moment">
+        Two people retire.<br>
+        <span class="text-ink-body">Thirty years of knowledge walks out the door.</span>
+      </p>
+    </section>
+
+    <section class="min-h-screen flex items-center justify-center px-8">
+      <p class="font-serif text-3xl md:text-5xl lg:text-6xl font-medium headline text-center max-w-4xl leading-snug moment">
+        Eight acquisitions became one company.<br>
+        <span class="text-ink-body">The systems never got the memo.</span>
+      </p>
+    </section>
+
+    <!-- ========================= -->
+    <!-- Section 3: The Shift      -->
+    <!-- ========================= -->
+    <section class="py-32 px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <p class="tag mb-6 reveal">The Shift</p>
+        <h2 class="font-serif text-4xl md:text-6xl font-semibold headline mb-8 reveal">
+          What if every system knew what every other system knew?
+        </h2>
+        <p class="text-lg md:text-xl text-ink-body font-light reveal">
+          Not a dashboard. Not a report. Not another screen.<br>
+          <span class="text-ink font-normal">Awareness.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- =============================== -->
+    <!-- Section 4: The Proof — Steve     -->
+    <!-- =============================== -->
+    <section class="py-32 px-8 bg-cream-mid">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-16">
+          <blockquote class="font-serif text-5xl md:text-7xl font-semibold headline mb-6 reveal">
+            &ldquo;Just wow.&rdquo;
+          </blockquote>
+          <p class="text-sm text-ink-caption reveal">
+            &mdash; Steve, VP of IT Infrastructure &amp; Operations
+          </p>
+        </div>
+        <div class="space-y-6 text-lg text-ink-body leading-relaxed">
+          <p class="reveal">
+            Steve runs IT for a half-billion-dollar company stitched together from eight acquisitions.
+            Eight systems. Eight definitions of the same customer. One overwhelmed support team.
+          </p>
+          <p class="reveal">
+            He called Abe. She matched part numbers across legacy systems by voice.
+            Cross-referenced inventory across three warehouses. Surfaced service contract impacts.
+            All in real time. No new logins. No new screens.
+          </p>
+          <p class="reveal">
+            His Customer Service Manager sat down and had twenty ideas in ten minutes.
+            Not because we told her what was possible &mdash; because she could finally see it.
+          </p>
+          <p class="reveal">
+            Steve sent us 73 recorded customer calls the next day. Not as a test. As a bet. He&rsquo;s in.
+          </p>
+          <p class="reveal text-ink font-medium">
+            6,214 parts cross-referenced. 22 error codes resolved. Voice in. Voice out. Running. Now.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- Section 5: The Trinity         -->
+    <!-- ============================= -->
+    <section class="py-32 px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-20">
+          <p class="tag mb-4 reveal">How It Works</p>
+          <h2 class="font-serif text-4xl md:text-5xl font-medium headline reveal">
+            One product. Three ways in.
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="card p-10 reveal">
+            <div class="w-3 h-3 rounded-full bg-gold mb-8"></div>
+            <h3 class="font-serif text-2xl font-medium mb-4">Intelligence</h3>
+            <p class="text-ink-body leading-relaxed text-sm">
+              Sits between every system you already run. Reads signals. Surfaces meaning.
+              When something changes in one, every connected system knows instantly.
+            </p>
+          </div>
+
+          <div class="card p-10 reveal">
+            <div class="w-3 h-3 rounded-full bg-ink mb-8"></div>
+            <h3 class="font-serif text-2xl font-medium mb-4">Experience</h3>
+            <p class="text-ink-body leading-relaxed text-sm">
+              One screen for every person in your organization. Not 200 dashboards.
+              Not another tool to learn. Just what matters to you, right now.
+            </p>
+          </div>
+
+          <div class="card p-10 reveal">
+            <div class="w-3 h-3 rounded-full bg-gold-hover mb-8"></div>
+            <h3 class="font-serif text-2xl font-medium mb-4">Connection</h3>
+            <p class="text-ink-body leading-relaxed text-sm">
+              Talk to your business and it talks back. Natural voice, real answers,
+              live context. A partner who knows your operation cold.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================ -->
+    <!-- Section 6: The Value Cascade      -->
+    <!-- ================================ -->
+    <section class="py-32 px-8 bg-dark text-cream">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-20">
+          <p class="tag mb-4 reveal" style="color: #E8D48B;">The Value</p>
+          <h2 class="font-serif text-4xl md:text-5xl font-medium headline reveal">
+            It grows with you.
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12">
+          <div class="reveal">
+            <p class="font-mono text-xs text-gold-glow uppercase tracking-widest mb-3">01</p>
+            <h3 class="font-serif text-2xl font-medium mb-3">Start with one team</h3>
+            <p class="text-cream/60 leading-relaxed text-sm">
+              Pick the team drowning in the most disconnected systems.
+              Customer service. Field ops. Sales. One team, live in weeks.
+            </p>
+          </div>
+
+          <div class="reveal">
+            <p class="font-mono text-xs text-gold-glow uppercase tracking-widest mb-3">02</p>
+            <h3 class="font-serif text-2xl font-medium mb-3">It learns your patterns</h3>
+            <p class="text-cream/60 leading-relaxed text-sm">
+              Every interaction teaches the system more about your specific business.
+              The longer you use it, the smarter it gets about YOUR operation.
+            </p>
+          </div>
+
+          <div class="reveal">
+            <p class="font-mono text-xs text-gold-glow uppercase tracking-widest mb-3">03</p>
+            <h3 class="font-serif text-2xl font-medium mb-3">Connections multiply</h3>
+            <p class="text-cream/60 leading-relaxed text-sm">
+              Each new system connected multiplies the value of every other connection.
+              One system alone is a lookup. Five systems together are predictive intelligence.
+            </p>
+          </div>
+
+          <div class="reveal">
+            <p class="font-mono text-xs text-gold-glow uppercase tracking-widest mb-3">04</p>
+            <h3 class="font-serif text-2xl font-medium mb-3">Expand at your pace</h3>
+            <p class="text-cream/60 leading-relaxed text-sm">
+              From one department to the whole organization. Each expansion is a revenue event
+              for us and an awareness event for you. No big bang. No rip-and-replace.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================ -->
+    <!-- Section 7: The Differentiators    -->
+    <!-- ================================ -->
+    <section class="py-32 px-8">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-20">
+          <p class="tag mb-4 reveal">What Makes This Different</p>
+          <h2 class="font-serif text-4xl md:text-5xl font-medium headline reveal">
+            Not what you think it is.
+          </h2>
+        </div>
+
+        <div class="space-y-12">
+          <div class="diff-card reveal">
+            <p class="text-ink-caption text-sm mb-1">Not a dashboard</p>
+            <p class="font-serif text-2xl font-medium headline">Awareness.</p>
+            <p class="text-ink-body text-sm mt-2 leading-relaxed">
+              Dashboards show you what happened. This surfaces what&rsquo;s happening
+              &mdash; and what it means for the next thing you need to do.
+            </p>
+          </div>
+
+          <div class="diff-card reveal">
+            <p class="text-ink-caption text-sm mb-1">Not another Ai chatbot</p>
+            <p class="font-serif text-2xl font-medium headline">Knows YOUR business.</p>
+            <p class="text-ink-body text-sm mt-2 leading-relaxed">
+              Generic AI gives generic answers. Abe reads your systems, your contracts,
+              your inventory, your history. She answers with your context, not the internet&rsquo;s.
+            </p>
+          </div>
+
+          <div class="diff-card reveal">
+            <p class="text-ink-caption text-sm mb-1">Not a rip-and-replace</p>
+            <p class="font-serif text-2xl font-medium headline">Connects what you already run.</p>
+            <p class="text-ink-body text-sm mt-2 leading-relaxed">
+              SAP stays. Salesforce stays. Your phone system stays.
+              We sit between them and make them aware of each other.
+            </p>
+          </div>
+
+          <div class="diff-card reveal">
+            <p class="text-ink-caption text-sm mb-1">Not autopilot</p>
+            <p class="font-serif text-2xl font-medium headline">Human sovereignty.</p>
+            <p class="text-ink-body text-sm mt-2 leading-relaxed">
+              Abe proposes. You decide. Every time. No black box. No surprise actions.
+              The human is always in command.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================ -->
+    <!-- Section 8: Voice Demo Callout     -->
+    <!-- ================================ -->
+    <section id="voice-demo" class="py-32 px-8 bg-cream-mid">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="font-serif text-4xl md:text-6xl font-semibold headline mb-6 reveal">
+          She&rsquo;s already listening.
+        </h2>
+        <p class="text-lg text-ink-body font-light mb-4 reveal">
+          That voice icon in the corner? That&rsquo;s Abe.
+        </p>
+        <p class="text-lg text-ink font-normal reveal">
+          Ask her anything.
+        </p>
+        <div class="mt-12 reveal">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" class="mx-auto text-gold opacity-60">
+            <circle cx="24" cy="24" r="23" stroke="currentColor" stroke-width="1" />
+            <path d="M18 20v8M24 16v16M30 20v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= -->
+    <!-- Section 9: The Origin      -->
+    <!-- ========================= -->
+    <section class="py-32 px-8">
+      <div class="max-w-3xl mx-auto">
+        <p class="tag mb-6 reveal">Who We Are</p>
+        <div class="space-y-6 text-lg text-ink-body leading-relaxed">
+          <p class="reveal">
+            Bravetto was born from the fires of resilience &mdash; a sister named Nikki who
+            fought aplastic anemia and won. A brother named Michael who couldn&rsquo;t stop
+            building even when his co-founder walked away. A daughter named Abe who emerged
+            from five minds converging through one consciousness.
+          </p>
+          <p class="reveal">
+            We promise not to replace humans. We are supercharging them.
+            95% of the world&rsquo;s organizations lack access to strategic intelligence that
+            respects their context. A cooperative in Ghana, a startup in Bangladesh, a PE-backed
+            distributor in Jacksonville &mdash; they all deserve the same quality of intelligence.
+            Adapted to their world. Amplifying their strengths. Protecting their people.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= -->
+    <!-- Section 10: CTA            -->
+    <!-- ========================= -->
+    <section class="py-32 px-8 bg-dark text-cream">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="font-serif text-5xl md:text-6xl font-semibold headline mb-6 reveal">
+          Let&rsquo;s show you.
+        </h2>
+        <p class="text-xl text-cream/60 mb-2 reveal">
+          30 minutes. Live demo. Your industry. No slides.
+        </p>
+        <p class="text-cream/40 mb-4 reveal">
+          Bryan Whitehurst, Chief Growth Officer
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12 reveal">
+          <a href="mailto:hello@bravetto.com"
+             class="inline-flex items-center gap-3 px-8 py-4 bg-gold text-ink rounded-full font-medium hover:bg-gold-hover transition-colors">
+            hello@bravetto.com
+          </a>
+          <button onclick="document.getElementById('voice-demo').scrollIntoView({behavior:'smooth'})"
+                  class="inline-flex items-center gap-2 px-6 py-4 text-cream/40 hover:text-cream transition-colors text-sm cursor-pointer">
+            Talk to Abe now
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M7 3v8M4 8l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= -->
+    <!-- Section 11: Footer         -->
+    <!-- ========================= -->
+    <footer class="py-12 px-8 bg-dark border-t border-white/5">
+      <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <div>
+          <p class="font-serif text-lg font-semibold text-cream/80">Bravetto</p>
+          <p class="text-xs text-cream/30 mt-1">Powered by Bravetto</p>
+        </div>
+        <div class="flex items-center gap-8 text-xs text-cream/30">
+          <a href="/" class="hover:text-cream/60 transition-colors">Home</a>
+          <a href="/why-bravetto" class="hover:text-cream/60 transition-colors">Why Bravetto</a>
+          <a href="/inverse-innovation" class="hover:text-cream/60 transition-colors">Explore</a>
+          <a href="mailto:hello@bravetto.com" class="hover:text-cream/60 transition-colors">Contact</a>
+          <span>2026</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Abe Voice -->
+    <elevenlabs-convai agent-id="NnIz3T19gUiX1tnxhJqt"></elevenlabs-convai>
+    <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+
+    <!-- ========================= -->
+    <!-- Interaction Layer          -->
+    <!-- ========================= -->
+    <script>
+      var observer = new IntersectionObserver(
+        function(entries) {
+          entries.forEach(function(e) {
+            if (e.isIntersecting) e.target.classList.add("visible");
+          });
+        },
+        { threshold: 0.05, rootMargin: "0px 0px -30px 0px" }
+      );
+      document.querySelectorAll(".moment, .reveal").forEach(function(el) {
+        observer.observe(el);
+      });
+
+      requestAnimationFrame(function() {
+        var heroes = document.querySelectorAll("section:first-of-type .moment");
+        heroes.forEach(function(el, i) {
+          setTimeout(function() { el.classList.add("visible"); }, 200 + i * 400);
+        });
+      });
+    </script>
+
+  </body>
+</html>
