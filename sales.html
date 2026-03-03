@@ -119,6 +119,76 @@
         box-shadow: 0 4px 20px rgba(201, 162, 39, 0.1);
       }
       .rotate-45 { transform: rotate(45deg); }
+
+      /* voice overlay — immersive Abe experience */
+      #voice-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: rgba(10, 10, 10, 0.92);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      #voice-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .voice-ring {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        border: 2px solid rgba(201, 162, 39, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      .voice-ring::before,
+      .voice-ring::after {
+        content: "";
+        position: absolute;
+        border-radius: 50%;
+        border: 1px solid rgba(201, 162, 39, 0.15);
+      }
+      .voice-ring::before { inset: -24px; }
+      .voice-ring::after { inset: -48px; }
+      #voice-overlay.active .voice-ring {
+        animation: voice-breathe 2s ease-in-out infinite;
+      }
+      @keyframes voice-breathe {
+        0%, 100% { transform: scale(1); border-color: rgba(201, 162, 39, 0.4); }
+        50% { transform: scale(1.08); border-color: rgba(201, 162, 39, 0.8); }
+      }
+      #voice-overlay .voice-label {
+        color: #FAF9F6;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 28px;
+        font-weight: 600;
+        margin-top: 32px;
+        letter-spacing: -0.02em;
+      }
+      #voice-overlay .voice-sub {
+        color: rgba(250, 249, 246, 0.5);
+        font-size: 14px;
+        margin-top: 12px;
+      }
+      #voice-overlay .voice-close {
+        position: absolute;
+        top: 32px;
+        right: 32px;
+        color: rgba(250, 249, 246, 0.4);
+        font-size: 14px;
+        cursor: pointer;
+        transition: color 0.2s;
+        background: none;
+        border: none;
+      }
+      #voice-overlay .voice-close:hover { color: #FAF9F6; }
     </style>
   </head>
 
@@ -275,7 +345,7 @@
             </svg>
             Talk to Abe now
           </button>
-          <p class="text-sm text-ink-caption mt-4">Click the voice icon in the bottom-right corner to start</p>
+          <p class="text-sm text-ink-caption mt-4">Your screen becomes the conversation</p>
         </div>
 
         <!-- Suggestion Chips -->
@@ -675,11 +745,11 @@
           30 minutes. Live demo. Your industry. No slides.
         </p>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 reveal">
-          <a href="mailto:hello@bravetto.com"
+          <a href="mailto:ryan@bravetto.com"
              class="inline-flex items-center gap-3 px-10 py-5 bg-gold text-ink rounded-full font-medium text-lg hover:bg-gold-hover transition-colors">
-            hello@bravetto.com
+            ryan@bravetto.com
           </a>
-          <button onclick="document.getElementById('abe-stage').scrollIntoView({behavior:'smooth'})"
+          <button onclick="activateAbe()"
                   class="inline-flex items-center gap-2 px-6 py-4 text-cream/40 hover:text-cream transition-colors text-sm cursor-pointer">
             Or talk to Abe now
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -687,15 +757,17 @@
             </svg>
           </button>
         </div>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-8 reveal">
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-12 reveal">
           <div class="text-center">
             <p class="text-cream/80 text-sm font-medium">Bryan Whitehurst</p>
             <p class="text-cream/40 text-xs">Chief Growth Officer</p>
+            <a href="mailto:bryan@bravetto.com" class="text-gold text-xs hover:text-gold-hover transition-colors">bryan@bravetto.com</a>
           </div>
           <div class="hidden sm:block w-px h-8 bg-cream/10"></div>
           <div class="text-center">
             <p class="text-cream/80 text-sm font-medium">Ryan McArdle</p>
             <p class="text-cream/40 text-xs">Director of Sales</p>
+            <a href="mailto:ryan@bravetto.com" class="text-gold text-xs hover:text-gold-hover transition-colors">ryan@bravetto.com</a>
           </div>
         </div>
       </div>
@@ -714,11 +786,24 @@
           <a href="/" class="hover:text-cream/60 transition-colors">Home</a>
           <a href="/why-bravetto" class="hover:text-cream/60 transition-colors">Why Bravetto</a>
           <a href="/inverse-innovation" class="hover:text-cream/60 transition-colors">Explore</a>
-          <a href="mailto:hello@bravetto.com" class="hover:text-cream/60 transition-colors">Contact</a>
+          <a href="mailto:ryan@bravetto.com" class="hover:text-cream/60 transition-colors">Contact</a>
           <span>2026</span>
         </div>
       </div>
     </footer>
+
+    <!-- Voice Overlay — immersive Abe experience -->
+    <div id="voice-overlay">
+      <button class="voice-close" id="voice-close">ESC to close</button>
+      <div class="voice-ring">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+          <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z" fill="#C9A227" opacity="0.6"/>
+          <path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8" stroke="#C9A227" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <p class="voice-label">Abe is listening.</p>
+      <p class="voice-sub">Speak naturally. She knows your business.</p>
+    </div>
 
     <!-- Abe Voice -->
     <elevenlabs-convai agent-id="NnIz3T19gUiX1tnxhJqt"></elevenlabs-convai>
@@ -796,24 +881,63 @@
         }
       })();
 
-      // abe stage interactions
-      function pulseWidget() {
+      // voice overlay control
+      var voiceOverlay = document.getElementById("voice-overlay");
+      var voiceLabel = voiceOverlay ? voiceOverlay.querySelector(".voice-label") : null;
+      var voiceSub = voiceOverlay ? voiceOverlay.querySelector(".voice-sub") : null;
+      var voiceActive = false;
+
+      function showOverlay() {
+        if (voiceOverlay) voiceOverlay.classList.add("active");
+      }
+      function hideOverlay() {
+        if (voiceOverlay) voiceOverlay.classList.remove("active");
+      }
+
+      // close overlay on button or ESC
+      var voiceClose = document.getElementById("voice-close");
+      if (voiceClose) voiceClose.addEventListener("click", hideOverlay);
+      document.addEventListener("keydown", function(e) {
+        if (e.key === "Escape") hideOverlay();
+      });
+
+      // listen to ConvAI voice state changes
+      document.addEventListener("voiceStateChange", function(e) {
+        voiceActive = e.detail && e.detail.active;
+        if (voiceActive) {
+          showOverlay();
+          if (voiceLabel) voiceLabel.textContent = "Abe is speaking.";
+          if (voiceSub) voiceSub.textContent = "Listen. She knows your business.";
+        } else {
+          if (voiceLabel) voiceLabel.textContent = "Abe is listening.";
+          if (voiceSub) voiceSub.textContent = "Speak naturally. She knows your business.";
+        }
+      });
+
+      // abe stage interactions — activate widget + show overlay
+      function activateAbe() {
         var widget = document.querySelector("elevenlabs-convai");
-        if (widget && widget.shadowRoot) {
+        if (widget) {
+          // try programmatic activation
+          if (typeof widget.start === "function") widget.start();
+          else if (typeof widget.open === "function") widget.open();
+          else if (widget.shadowRoot) {
+            var btn = widget.shadowRoot.querySelector("button");
+            if (btn) btn.click();
+          }
           widget.style.transition = "transform 0.3s ease";
           widget.style.transform = "scale(1.15)";
           setTimeout(function() { widget.style.transform = "scale(1)"; }, 600);
         }
+        showOverlay();
       }
 
-      // suggestion chips — scroll to widget and pulse it
+      // suggestion chips — activate Abe and show overlay
       document.querySelectorAll(".chip").forEach(function(chip) {
         chip.addEventListener("click", function() {
-          pulseWidget();
           chip.style.borderColor = "#C9A227";
           chip.style.background = "rgba(201,162,39,0.08)";
-          // scroll to bottom-right where widget lives
-          window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+          activateAbe();
         });
       });
 
@@ -821,12 +945,11 @@
       var abeTrigger = document.getElementById("abe-trigger");
       if (abeTrigger) {
         abeTrigger.addEventListener("click", function() {
-          pulseWidget();
-          window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+          activateAbe();
         });
       }
 
-      // context submit — store context and activate widget
+      // context submit — store context and activate
       var contextSubmit = document.getElementById("context-submit");
       if (contextSubmit) {
         contextSubmit.addEventListener("click", function() {
@@ -837,10 +960,7 @@
             contextSubmit.classList.remove("bg-ink");
             contextSubmit.classList.add("bg-gold", "text-ink");
             window.__abeContext = context;
-            setTimeout(function() {
-              pulseWidget();
-              window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-            }, 800);
+            setTimeout(function() { activateAbe(); }, 800);
           }
         });
       }
