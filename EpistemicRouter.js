@@ -1,6 +1,6 @@
 // EpistemicRouter.js
 // Central nervous system for truth validation and key injection.
-// Implements the "5 Math Engine" (Validation Pillars) and standardizes AbëKEYs.
+// Implements the "5 Math Engine" (Validation Pillars) and standardizes AbeKEYs.
 
 const path = require("path");
 const { execSync } = require("child_process");
@@ -49,10 +49,10 @@ class EpistemicRouter {
    * Validates a query against the 5 Pillars using the available provider.
    */
   async validate(query, context = {}) {
-    const apiKey = this.getSecret("perplexity") || this.getSecret("openai");
+    const apiKey = this.getSecret("openai");
     if (!apiKey) {
       throw new Error(
-        "No Identity Injection found (AbëKEYs missing for Perplexity/OpenAI).",
+        "No Identity Injection found (AbëKEYs missing for OpenAI).",
       );
     }
 
