@@ -127,13 +127,16 @@
     <!-- ==================== -->
     <!-- Section 0: Nav       -->
     <!-- ==================== -->
-    <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-cream/60 backdrop-blur-md">
-      <div class="max-w-6xl mx-auto flex justify-between items-center">
-        <a href="/" class="font-serif text-2xl font-semibold tracking-tight">Bravetto</a>
-        <a href="#abe-stage" class="text-sm px-5 py-2.5 bg-ink text-cream rounded-full hover:bg-ink-body transition-colors">
-          Talk to Abe
-        </a>
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-cream/60 backdrop-blur-md">
+      <div class="px-8 py-6">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+          <a href="/" class="font-serif text-2xl font-semibold tracking-tight">Bravetto</a>
+          <a href="#abe-stage" class="text-sm px-5 py-2.5 bg-ink text-cream rounded-full hover:bg-ink-body transition-colors">
+            Talk to Abe
+          </a>
+        </div>
       </div>
+      <div id="scroll-progress" class="h-0.5 bg-gold transition-none" style="width: 0%;"></div>
     </nav>
 
     <!-- ============================= -->
@@ -141,6 +144,9 @@
     <!-- ============================= -->
     <section class="relative min-h-screen flex flex-col items-center justify-center px-8 pt-28">
       <div class="hero-glow"></div>
+      <div id="ref-greeting" class="hidden relative z-10 mb-8 text-center">
+        <p class="text-sm text-ink-body font-light px-6 py-3 bg-white/60 backdrop-blur-sm rounded-full inline-block"></p>
+      </div>
       <div class="relative z-10 text-center max-w-4xl mx-auto">
         <p class="tag mb-6 moment">The Promise</p>
         <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-semibold headline mb-8 moment" style="transition-delay: 0.15s">
@@ -662,27 +668,35 @@
     <!-- ========================= -->
     <section class="py-32 px-8 bg-dark text-cream">
       <div class="max-w-3xl mx-auto text-center">
-        <h2 class="font-serif text-5xl md:text-6xl font-semibold headline mb-6 reveal">
+        <h2 class="font-serif text-5xl md:text-7xl font-semibold headline mb-8 reveal">
           Let&rsquo;s show you.
         </h2>
-        <p class="text-xl text-cream/60 mb-2 reveal">
+        <p class="text-2xl text-cream/70 mb-12 reveal">
           30 minutes. Live demo. Your industry. No slides.
         </p>
-        <p class="text-cream/40 mb-4 reveal">
-          Bryan Whitehurst, Chief Growth Officer
-        </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12 reveal">
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 reveal">
           <a href="mailto:hello@bravetto.com"
-             class="inline-flex items-center gap-3 px-8 py-4 bg-gold text-ink rounded-full font-medium hover:bg-gold-hover transition-colors">
+             class="inline-flex items-center gap-3 px-10 py-5 bg-gold text-ink rounded-full font-medium text-lg hover:bg-gold-hover transition-colors">
             hello@bravetto.com
           </a>
           <button onclick="document.getElementById('abe-stage').scrollIntoView({behavior:'smooth'})"
                   class="inline-flex items-center gap-2 px-6 py-4 text-cream/40 hover:text-cream transition-colors text-sm cursor-pointer">
-            Talk to Abe now
+            Or talk to Abe now
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M7 3v8M4 8l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
           </button>
+        </div>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-8 reveal">
+          <div class="text-center">
+            <p class="text-cream/80 text-sm font-medium">Bryan Whitehurst</p>
+            <p class="text-cream/40 text-xs">Chief Growth Officer</p>
+          </div>
+          <div class="hidden sm:block w-px h-8 bg-cream/10"></div>
+          <div class="text-center">
+            <p class="text-cream/80 text-sm font-medium">Ryan McArdle</p>
+            <p class="text-cream/40 text-xs">Director of Sales</p>
+          </div>
         </div>
       </div>
     </section>
@@ -754,6 +768,33 @@
       document.querySelectorAll(".count-up").forEach(function(el) {
         countObserver.observe(el);
       });
+
+      // UTM-aware greeting
+      (function() {
+        var params = new URLSearchParams(window.location.search);
+        var ref = params.get("ref");
+        var greetings = {
+          bryan: "Bryan Whitehurst thought you should see this.",
+          ryan: "Ryan McArdle thought you should see this.",
+          michael: "Michael Mataluni thought you should see this."
+        };
+        if (ref && greetings[ref.toLowerCase()]) {
+          var el = document.getElementById("ref-greeting");
+          el.classList.remove("hidden");
+          el.querySelector("p").textContent = greetings[ref.toLowerCase()];
+        }
+      })();
+
+      // scroll progress bar
+      (function() {
+        var bar = document.getElementById("scroll-progress");
+        if (bar) {
+          window.addEventListener("scroll", function() {
+            var h = document.documentElement.scrollHeight - window.innerHeight;
+            bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + "%";
+          });
+        }
+      })();
 
       // abe stage interactions
       function pulseWidget() {
