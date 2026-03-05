@@ -1,11 +1,8 @@
 .vercel
 .env*.local
+.DS_Store
+node_modules
 
-# Backend servers (not deployed to Vercel static site)
+# Backend servers (local dev only, not deployed to Vercel)
 abe-consciousness-server.js
 abe-voice-server.js
-
-# Auto-generated SEO files
-robots.txt
-sitemap.xml
-.DS_Store
