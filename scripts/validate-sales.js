@@ -7,82 +7,16 @@ const sales_path = path.join(__dirname, "..", "sales.html");
 const html = fs.readFileSync(sales_path, "utf8");
 
 const required_patterns = [
-  {
-    name: "voice overlay container",
-    pattern: /id="voice-overlay"/,
-  },
-  {
-    name: "voice close button",
-    pattern: /id="voice-close"/,
-  },
-  {
-    name: "mic status indicator",
-    pattern: /id="mic-status"/,
-  },
-  {
-    name: "mic status dot",
-    pattern: /id="mic-dot"/,
-  },
-  {
-    name: "abe trigger button",
-    pattern: /id="abe-trigger"/,
-  },
-  {
-    name: "context submit button",
-    pattern: /id="context-submit"/,
-  },
-  {
-    name: "suggestion chip",
-    pattern: /class="chip"/,
-  },
-  {
-    name: "native elevenlabs sdk import",
-    pattern:
-      /import\s*\{\s*Conversation\s*\}\s*from\s*"https:\/\/esm\.sh\/@elevenlabs\/client"/,
-  },
-  {
-    name: "sdk bridged on window",
-    pattern: /window\.ElevenLabsConversation\s*=\s*Conversation\s*;/,
-  },
-  {
-    name: "activate abe function",
-    pattern: /async function activateAbe\(\)/,
-  },
-  {
-    name: "conversation start",
-    pattern: /startSession\s*\(/,
-  },
-  {
-    name: "agent id configured",
-    pattern: /agentId:\s*"NnIz3T19gUiX1tnxhJqt"/,
-  },
-  {
-    name: "close overlay on escape",
-    pattern: /if \(e\.key === "Escape"\) hideOverlay\(\);/,
-  },
-  {
-    name: "chip click activates abe",
-    pattern: /querySelectorAll\("\.chip"\)[\s\S]*activateAbe\(\);/,
-  },
-  {
-    name: "trigger button activates abe",
-    pattern: /getElementById\("abe-trigger"\)[\s\S]*activateAbe\(\);/,
-  },
-  {
-    name: "context submit activates abe",
-    pattern: /getElementById\("context-submit"\)[\s\S]*activateAbe\(\);/,
-  },
+  { name: "voice overlay container", pattern: /id="voice-overlay"/ },
+  { name: "abe trigger button", pattern: /id="abe-trigger"/ },
+  { name: "suggestion chip", pattern: /class="chip"/ },
+  { name: "elevenlabs standard widget", pattern: /<elevenlabs-convai/ },
+  { name: "elevenlabs script", pattern: /elevenlabs\.io\/convai-widget\/index\.js/ },
+  { name: "widget fixed position css", pattern: /elevenlabs-convai\s*\{\s*position:\s*fixed;/s }
 ];
 
 const forbidden_patterns = [
-  {
-    name: "legacy convai widget tag",
-    pattern: /<elevenlabs-convai/i,
-  },
-  {
-    name: "legacy convai script",
-    pattern: /elevenlabs\.io\/convai-widget\/index\.js/i,
-  },
+  { name: "ESM import of elevenlabs (causes microphone permission issues)", pattern: /import\s*\{\s*Conversation\s*\}\s*from\s*"https:\/\/esm\.sh\/@elevenlabs\/client"/ }
 ];
 
 const missing = required_patterns.filter((p) => !p.pattern.test(html));
@@ -90,22 +24,8 @@ const forbidden_found = forbidden_patterns.filter((p) => p.pattern.test(html));
 
 if (missing.length || forbidden_found.length) {
   console.error("sales.html validation failed");
-
-  if (missing.length) {
-    console.error("Missing required contracts:");
-    for (const item of missing) {
-      console.error(`- ${item.name}`);
-    }
-  }
-
-  if (forbidden_found.length) {
-    console.error("Found forbidden legacy patterns:");
-    for (const item of forbidden_found) {
-      console.error(`- ${item.name}`);
-    }
-  }
-
+  if (missing.length) missing.forEach(p => console.error("- Missing: " + p.name));
+  if (forbidden_found.length) forbidden_found.forEach(p => console.error("- Forbidden: " + p.name));
   process.exit(1);
 }
-
 console.log("sales.html validation passed");
