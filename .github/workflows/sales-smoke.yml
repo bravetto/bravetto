@@ -1,0 +1,45 @@
+name: Sales Smoke
+
+on:
+  pull_request:
+    paths:
+      - "sales.html"
+      - "scripts/validate-sales.js"
+      - "tests/sales.spec.js"
+      - "playwright.sales.config.js"
+      - "package.json"
+      - ".github/workflows/sales-smoke.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "sales.html"
+      - "scripts/validate-sales.js"
+      - "tests/sales.spec.js"
+      - "playwright.sales.config.js"
+      - "package.json"
+      - ".github/workflows/sales-smoke.yml"
+
+jobs:
+  sales-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Validate sales page static voice contract
+        run: npm run test:sales
+
+      - name: Validate sales page runtime behavior
+        run: npm run test:sales:e2e

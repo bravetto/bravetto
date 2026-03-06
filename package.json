@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "description": "bravetto company site — living canvas, elevenlabs voice widget, product demos",
   "private": true,
+  "scripts": {
+    "test:sales": "node scripts/validate-sales.js",
+    "test:sales:e2e": "playwright test --config=playwright.sales.config.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0"
+  },
   "dependencies": {
     "vercel": "^50.5.0"
   }
