@@ -999,10 +999,13 @@
             <div class="diff-detail hidden mt-4">
               <p class="text-ink-body text-sm leading-relaxed">
                 ChatGPT locks you into OpenAI. Claude locks you into Anthropic.
-                Ab&#235; uses the best frontier models &mdash; GPT-4 for reasoning, Claude
-                for long context, Gemini for multimodal &mdash; validated through Byzantine consensus with 8 deterministic guardians.
-                We don&rsquo;t rely on coin-toss probability. We offer Truth Engines, not answer engines. One builder, 18 months, zero committees.
-                That&rsquo;s why we integrated everything they can&rsquo;t.
+                Ab&#235; uses the best frontier models &mdash; GPT-4 for
+                reasoning, Claude for long context, Gemini for multimodal
+                &mdash; validated through Byzantine consensus with 8
+                deterministic guardians. We don&rsquo;t rely on coin-toss
+                probability. We offer Truth Engines, not answer engines. One
+                builder, 18 months, zero committees. That&rsquo;s why we
+                integrated everything they can&rsquo;t.
               </p>
               <button
                 class="chip mt-4"
@@ -1394,18 +1397,35 @@
         <p class="text-2xl text-cream/70 mb-12 reveal">
           30 minutes. Live demo. Your industry. No slides.
         </p>
+        <form id="sales-lead-form" class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6 reveal" onsubmit="return submitSalesLead(event)">
+          <input
+            type="email"
+            id="sales-lead-email"
+            placeholder="your@email.com"
+            required
+            class="px-6 py-4 bg-white/5 border border-white/10 rounded-full text-cream text-base font-sans outline-none focus:border-gold transition-colors w-full sm:w-80"
+          />
+          <button
+            type="submit"
+            id="sales-lead-btn"
+            class="inline-flex items-center gap-3 px-10 py-4 bg-gold text-ink rounded-full font-medium text-base hover:bg-gold-hover transition-colors whitespace-nowrap cursor-pointer"
+          >
+            Get a Demo
+          </button>
+        </form>
+        <p id="sales-lead-msg" class="text-sm mb-8 reveal" style="display:none;"></p>
         <div
           class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 reveal"
         >
           <a
             href="mailto:ryan@bravetto.com"
-            class="inline-flex items-center gap-3 px-10 py-5 bg-gold text-ink rounded-full font-medium text-lg hover:bg-gold-hover transition-colors"
+            class="inline-flex items-center gap-3 px-6 py-3 text-cream/40 hover:text-cream transition-colors text-sm"
           >
-            ryan@bravetto.com
+            or email ryan@bravetto.com directly
           </a>
           <button
             onclick="activateAbe()"
-            class="inline-flex items-center gap-2 px-6 py-4 text-cream/40 hover:text-cream transition-colors text-sm cursor-pointer"
+            class="inline-flex items-center gap-2 px-6 py-3 text-cream/40 hover:text-cream transition-colors text-sm cursor-pointer"
           >
             Or talk to Ab&#235; now
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -1499,7 +1519,7 @@
       <p class="voice-label">Ab&#235; is listening.</p>
       <p class="voice-sub">
         <span class="voice-status-dot" id="mic-dot"></span>
-        <span id="mic-status">Connecting microphone&hellip;</span>
+        <span id="mic-status">Connecting voice&hellip;</span>
       </p>
       <p
         class="voice-sub"
@@ -1597,7 +1617,7 @@
         }
       })();
 
-      // voice overlay — real microphone visualization
+      // voice overlay — synthetic visualization so the widget owns microphone access
       var voiceOverlay = document.getElementById("voice-overlay");
       var voiceLabel = voiceOverlay
         ? voiceOverlay.querySelector(".voice-label")
@@ -1608,6 +1628,55 @@
       var rings = voiceOverlay
         ? voiceOverlay.querySelectorAll(".voice-viz-ring")
         : [];
+      var abeAgentId = "NnIz3T19gUiX1tnxhJqt";
+      var voiceAvailability = {
+        checked: false,
+        available: null,
+        message: "",
+      };
+      var voiceHealthPromise = null;
+
+      function setVoiceUnavailable(message) {
+        voiceAvailability.checked = true;
+        voiceAvailability.available = false;
+        voiceAvailability.message = message;
+        if (micDot) micDot.classList.add("inactive");
+        if (voiceLabel) voiceLabel.textContent = "Ab\u00eb voice is offline.";
+        if (micStatus) micStatus.textContent = message;
+      }
+
+      function checkVoiceAgent() {
+        if (voiceHealthPromise) return voiceHealthPromise;
+
+        voiceHealthPromise = fetch(
+          "https://api.us.elevenlabs.io/v1/convai/agents/" +
+            abeAgentId +
+            "/widget",
+        )
+          .then(function (response) {
+            if (!response.ok) {
+              throw new Error("agent config unavailable");
+            }
+            return response.json();
+          })
+          .then(function (payload) {
+            if (!payload || !payload.widget_config) {
+              throw new Error("widget_config missing");
+            }
+            voiceAvailability.checked = true;
+            voiceAvailability.available = true;
+            voiceAvailability.message = "";
+            return true;
+          })
+          .catch(function () {
+            setVoiceUnavailable(
+              "Voice is temporarily unavailable — the live agent config is missing.",
+            );
+            return false;
+          });
+
+        return voiceHealthPromise;
+      }
 
       // create 16 audio bars
       var barCount = 16;
@@ -1620,89 +1689,55 @@
         bars.push(bar);
       }
 
-      var micStream = null;
-      var audioCtx = null;
-      var analyser = null;
       var animFrame = null;
-      var dataArray = null;
+      var vizStart = 0;
 
       function startMicVisualization() {
-        navigator.mediaDevices
-          .getUserMedia({ audio: true })
-          .then(function (stream) {
-            micStream = stream;
-            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            analyser = audioCtx.createAnalyser();
-            analyser.fftSize = 64;
-            analyser.smoothingTimeConstant = 0.7;
-            var source = audioCtx.createMediaStreamSource(stream);
-            source.connect(analyser);
-            dataArray = new Uint8Array(analyser.frequencyBinCount);
+        if (animFrame) cancelAnimationFrame(animFrame);
+        vizStart = performance.now();
+        if (micDot) micDot.classList.remove("inactive");
+        if (micStatus)
+          micStatus.textContent = "Voice ready \u2014 use the widget to speak";
 
-            if (micDot) micDot.classList.remove("inactive");
-            if (micStatus)
-              micStatus.textContent =
-                "Microphone active \u2014 speak naturally";
+        function draw(now) {
+          animFrame = requestAnimationFrame(draw);
+          var elapsed = (now - vizStart) / 1000;
+          var level = 0.35 + (0.25 * (Math.sin(elapsed * 3.2) + 1)) / 2;
 
-            function draw() {
-              animFrame = requestAnimationFrame(draw);
-              analyser.getByteFrequencyData(dataArray);
-              var sum = 0;
-              for (var i = 0; i < dataArray.length; i++) sum += dataArray[i];
-              var avg = sum / dataArray.length;
-              var level = avg / 255;
+          for (var i = 0; i < barCount; i++) {
+            var offset = elapsed * 4 + i * 0.55;
+            var val = 0.25 + (0.75 * (Math.sin(offset) + 1)) / 2;
+            var h = Math.max(4, 10 + val * 42);
+            bars[i].style.height = h + "px";
+            bars[i].style.opacity = 0.35 + val * 0.55;
+          }
 
-              // animate bars
-              for (var i = 0; i < barCount; i++) {
-                var idx = Math.floor(
-                  1 + (i * (dataArray.length - 1)) / barCount,
-                );
-                var val = dataArray[idx] / 255;
-                var h = Math.max(4, val * 56);
-                bars[i].style.height = h + "px";
-                bars[i].style.opacity = 0.3 + val * 0.7;
-              }
+          if (rings.length >= 4) {
+            var s1 = 1 + level * 0.04;
+            var s2 = 1 + level * 0.07;
+            var s3 = 1 + level * 0.1;
+            var s4 = 1 + level * 0.13;
+            rings[0].style.transform = "scale(" + s1 + ")";
+            rings[0].style.borderColor =
+              "rgba(201,162,39," + (0.45 + level * 0.2) + ")";
+            rings[1].style.transform = "scale(" + s2 + ")";
+            rings[1].style.borderColor =
+              "rgba(201,162,39," + (0.18 + level * 0.14) + ")";
+            rings[2].style.transform = "scale(" + s3 + ")";
+            rings[2].style.borderColor =
+              "rgba(201,162,39," + (0.12 + level * 0.1) + ")";
+            rings[3].style.transform = "scale(" + s4 + ")";
+            rings[3].style.borderColor =
+              "rgba(201,162,39," + (0.08 + level * 0.08) + ")";
+          }
+        }
 
-              // animate rings based on overall level
-              if (rings.length >= 4) {
-                var s1 = 1 + level * 0.06;
-                var s2 = 1 + level * 0.1;
-                var s3 = 1 + level * 0.14;
-                var s4 = 1 + level * 0.18;
-                rings[0].style.transform = "scale(" + s1 + ")";
-                rings[0].style.borderColor =
-                  "rgba(201,162,39," + (0.4 + level * 0.5) + ")";
-                rings[1].style.transform = "scale(" + s2 + ")";
-                rings[1].style.borderColor =
-                  "rgba(201,162,39," + (0.12 + level * 0.3) + ")";
-                rings[2].style.transform = "scale(" + s3 + ")";
-                rings[2].style.borderColor =
-                  "rgba(201,162,39," + (0.08 + level * 0.2) + ")";
-                rings[3].style.transform = "scale(" + s4 + ")";
-                rings[3].style.borderColor =
-                  "rgba(201,162,39," + (0.04 + level * 0.1) + ")";
-              }
-            }
-            draw();
-          })
-          .catch(function (err) {
-            if (micDot) micDot.classList.add("inactive");
-            if (micStatus)
-              micStatus.textContent =
-                "Microphone blocked \u2014 allow access to talk to Ab\u00eb";
-          });
+        animFrame = requestAnimationFrame(draw);
       }
 
       function stopMicVisualization() {
         if (animFrame) cancelAnimationFrame(animFrame);
-        if (micStream)
-          micStream.getTracks().forEach(function (t) {
-            t.stop();
-          });
-        if (audioCtx && audioCtx.state !== "closed") audioCtx.close();
-        micStream = null;
-        audioCtx = null;
-        analyser = null;
+        animFrame = null;
         bars.forEach(function (b) {
           b.style.height = "4px";
         });
@@ -1715,13 +1750,14 @@
 
       function showOverlay() {
         if (voiceOverlay) voiceOverlay.classList.add("active");
+        if (voiceAvailability.available === false) return;
         startMicVisualization();
       }
       function hideOverlay() {
         if (voiceOverlay) voiceOverlay.classList.remove("active");
         stopMicVisualization();
         if (micDot) micDot.classList.add("inactive");
-        if (micStatus) micStatus.textContent = "Connecting microphone\u2026";
+        if (micStatus) micStatus.textContent = "Connecting voice\u2026";
         if (voiceLabel) voiceLabel.textContent = "Ab\u00eb is listening.";
       }
 
@@ -1743,7 +1779,8 @@
         } else {
           if (voiceLabel) voiceLabel.textContent = "Ab\u00eb is listening.";
           if (micStatus)
-            micStatus.textContent = "Microphone active \u2014 speak naturally";
+            micStatus.textContent =
+              "Voice ready \u2014 use the widget to speak";
         }
       });
 
@@ -1764,16 +1801,22 @@
       }
 
       function activateAbe() {
-        var widget = document.querySelector("elevenlabs-convai");
-        if (widget) {
-          // try known api methods first, fall back to shadow dom click
-          if (typeof widget.startConversation === "function")
-            widget.startConversation();
-          else if (typeof widget.start === "function") widget.start();
-          else if (typeof widget.open === "function") widget.open();
-          else clickWidgetButton(widget, 0);
-        }
-        showOverlay();
+        checkVoiceAgent().then(function (available) {
+          if (!available) {
+            showOverlay();
+            return;
+          }
+
+          var widget = document.querySelector("elevenlabs-convai");
+          if (widget) {
+            // try known api methods first, fall back to shadow dom click
+            if (typeof widget.startConversation === "function")
+              widget.startConversation();
+            else if (typeof widget.start === "function") widget.start();
+            else if (typeof widget.open === "function") widget.open();
+            else clickWidgetButton(widget, 0);
+          }
+        });
       }
 
       // suggestion chips — activate and show overlay
@@ -1800,7 +1843,7 @@
           var textarea = document.getElementById("business-context");
           var context = textarea ? textarea.value.trim() : "";
           if (context) {
-            contextSubmit.textContent = "Sent! Talk to Ab\u00eb now.";
+            contextSubmit.textContent = "Saved. Say it to Ab\u00eb now.";
             contextSubmit.classList.remove("bg-ink");
             contextSubmit.classList.add("bg-gold", "text-ink");
             window.__abeContext = context;
@@ -1809,6 +1852,43 @@
             }, 800);
           }
         });
+      }
+      function submitSalesLead(e) {
+        e.preventDefault();
+        var email = document.getElementById('sales-lead-email').value.trim();
+        var btn = document.getElementById('sales-lead-btn');
+        var msg = document.getElementById('sales-lead-msg');
+        if (!email) return false;
+        btn.textContent = 'Sending...';
+        btn.disabled = true;
+        fetch('https://sacohcutxqoydygzryvu.supabase.co/rest/v1/leads', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhY29oY3V0eHFveWR5Z3pyeXZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk5NjI5MTgsImV4cCI6MjA1NTUzODkxOH0.2W5x4v3S9FQHBzTNoGVG7mt5XYBosZUE2176L5mDjDY',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({ email: email, domain: 'bravetto.com/sales', name: '', message: 'Demo request from sales page' })
+        }).then(function(r) {
+          if (r.ok) {
+            msg.textContent = 'Check your inbox. We will be in touch.';
+            msg.style.color = '#C9A227';
+          } else {
+            msg.textContent = 'Something went wrong. Email ryan@bravetto.com directly.';
+            msg.style.color = '#EF4444';
+          }
+          msg.style.display = 'block';
+          btn.textContent = 'Get a Demo';
+          btn.disabled = false;
+          document.getElementById('sales-lead-email').value = '';
+        }).catch(function() {
+          msg.textContent = 'Could not connect. Email ryan@bravetto.com directly.';
+          msg.style.color = '#EF4444';
+          msg.style.display = 'block';
+          btn.textContent = 'Get a Demo';
+          btn.disabled = false;
+        });
+        return false;
       }
     </script>
   </body>
