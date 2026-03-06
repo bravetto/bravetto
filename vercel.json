@@ -49,6 +49,8 @@
     { "source": "/why-bravetto", "destination": "/why-bravetto.html" },
     { "source": "/explore", "destination": "/inverse-innovation.html" },
     { "source": "/sales", "destination": "/sales.html" },
-    { "source": "/brand-kit", "destination": "/bravetto-brand-kit.html" }
+    { "source": "/brand-kit", "destination": "/bravetto-brand-kit.html" },
+    { "source": "/vault", "destination": "/vault.html" },
+    { "source": "/domains", "destination": "/vault.html" }
   ]
 }
