@@ -1,0 +1,9266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bravetto.ai Domain Vault — 900+ Premium .ai Domains</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #080808;
+    --white: #f5f3ef;
+    --gold: #c9a84c;
+    --gold-dim: #8a6f2e;
+    --red: #e63a2e;
+    --dim: #2a2824;
+    --mid: #4a4640;
+    --text-dim: #888078;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 16px; scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.6;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 80% 60% at 20% 50%, rgba(201,168,76,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 80% 20%, rgba(230,58,46,0.04) 0%, transparent 50%),
+      linear-gradient(180deg, #0d0c0a 0%, #080808 100%);
+  }
+
+  .hero-grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 48px;
+    position: relative;
+    z-index: 10;
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.15em;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--black);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover {
+    background: var(--white);
+    transform: translateY(-1px);
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 48px;
+    position: relative;
+    z-index: 10;
+    max-width: 900px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 10vw, 9rem);
+    line-height: 0.9;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    margin-bottom: 32px;
+  }
+
+  .hero-title .gold { color: var(--gold); }
+  .hero-title .stroke {
+    -webkit-text-stroke: 1px rgba(245,243,239,0.3);
+    color: transparent;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--text-dim);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .hero-sub strong { color: var(--white); font-weight: 500; }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .btn-ghost {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .btn-ghost:hover { color: var(--white); }
+
+  .hero-ticker {
+    padding: 16px 48px;
+    border-top: 1px solid rgba(201,168,76,0.12);
+    position: relative;
+    z-index: 10;
+    overflow: hidden;
+  }
+
+  .ticker-track {
+    display: flex;
+    gap: 48px;
+    animation: ticker 40s linear infinite;
+    white-space: nowrap;
+  }
+
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .ticker-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--gold-dim);
+    flex-shrink: 0;
+  }
+
+  .ticker-item span { color: var(--gold); }
+
+  /* FILTERS */
+  .section {
+    padding: 80px 48px;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--dim);
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem;
+    letter-spacing: 0.05em;
+  }
+
+  .section-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+
+  .filter-bar {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    align-items: center;
+  }
+
+  .filter-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-right: 4px;
+  }
+
+  .filter-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    background: none;
+    border: 1px solid var(--dim);
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(201,168,76,0.05);
+  }
+
+  .search-box {
+    margin-left: auto;
+    position: relative;
+  }
+
+  .search-box input {
+    background: var(--dim);
+    border: 1px solid transparent;
+    color: var(--white);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    padding: 8px 16px;
+    width: 220px;
+    outline: none;
+    letter-spacing: 0.05em;
+    transition: border-color 0.2s;
+  }
+
+  .search-box input:focus {
+    border-color: var(--gold);
+  }
+
+  .search-box input::placeholder { color: var(--mid); }
+
+  /* DOMAIN GRID */
+  .domain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2px;
+  }
+
+  .domain-card {
+    background: var(--dim);
+    padding: 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+
+  .domain-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.2s;
+    transform-origin: left;
+  }
+
+  .domain-card:hover {
+    background: #1e1c18;
+    border-color: rgba(201,168,76,0.2);
+    transform: translateY(-2px);
+  }
+
+  .domain-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .domain-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--white);
+    letter-spacing: 0.02em;
+  }
+
+  .domain-name .tld { color: var(--gold); }
+
+  .domain-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .domain-category {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mid);
+    background: rgba(255,255,255,0.04);
+    padding: 3px 8px;
+  }
+
+  .domain-price {
+    text-align: right;
+  }
+
+  .price-ask {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .price-appraised {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+  }
+
+  .domain-card-cta {
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .domain-card:hover .domain-card-cta { opacity: 1; }
+
+  /* MODAL */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(8,8,8,0.92);
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal {
+    background: #111009;
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 48px;
+    max-width: 520px;
+    width: 90%;
+    position: relative;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  .modal-domain {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .modal-domain .tld { color: var(--gold); }
+
+  .modal-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--dim);
+  }
+
+  .modal-ask-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .modal-ask-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .modal-appraisal {
+    text-align: right;
+  }
+
+  .modal-appraisal-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 1rem;
+    color: var(--text-dim);
+    text-decoration: line-through;
+  }
+
+  .modal-appraisal-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    color: var(--mid);
+    letter-spacing: 0.08em;
+  }
+
+  .modal-form { display: flex; flex-direction: column; gap: 16px; }
+
+  .modal-form input, .modal-form textarea {
+    background: var(--dim);
+    border: 1px solid transparent;
+    color: var(--white);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    padding: 12px 16px;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+
+  .modal-form input:focus, .modal-form textarea:focus {
+    border-color: var(--gold);
+  }
+
+  .modal-form textarea { height: 80px; resize: none; }
+
+  .modal-form input::placeholder,
+  .modal-form textarea::placeholder { color: var(--mid); }
+
+  .modal-submit {
+    background: var(--gold);
+    color: var(--black);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 14px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+  }
+
+  .modal-submit:hover { background: var(--white); }
+
+  .modal-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--text-dim);
+    text-align: center;
+    margin-top: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  /* CTA SECTION */
+  .cta-section {
+    padding: 100px 48px;
+    text-align: center;
+    position: relative;
+    border-top: 1px solid var(--dim);
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 0%, rgba(201,168,76,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+
+  .cta-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    line-height: 0.95;
+    margin-bottom: 24px;
+  }
+
+  .cta-sub {
+    font-size: 1rem;
+    color: var(--text-dim);
+    max-width: 480px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 48px;
+    border-top: 1px solid var(--dim);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+  }
+
+  .footer-logo span { color: var(--gold); }
+
+  .footer-links {
+    display: flex;
+    gap: 32px;
+  }
+
+  .footer-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+  }
+
+  .footer-links a:hover { color: var(--gold); }
+
+  .footer-copy {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--mid);
+    letter-spacing: 0.08em;
+  }
+
+  /* HIDDEN */
+  .hidden { display: none; }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    background: var(--gold);
+    color: var(--black);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    padding: 14px 20px;
+    z-index: 999;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s;
+  }
+
+  .toast.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav, .section, .cta-section, footer { padding-left: 24px; padding-right: 24px; }
+    .hero-content { padding: 0 24px; }
+    .hero-ticker { padding-left: 24px; }
+    .hero-stats { gap: 28px; }
+    .nav-links { display: none; }
+    .domain-grid { grid-template-columns: 1fr; }
+    .search-box { margin-left: 0; margin-top: 12px; }
+    .search-box input { width: 100%; }
+    footer { flex-direction: column; gap: 16px; text-align: center; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-content > * {
+    animation: fadeUp 0.6s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-content > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-content > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-content > *:nth-child(4) { animation-delay: 0.4s; }
+  .hero-content > *:nth-child(5) { animation-delay: 0.5s; }
+</style>
+</head>
+<body>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-domain" id="modal-domain-name">domain<span class="tld">.ai</span></div>
+    <div class="modal-price-row">
+      <div>
+        <div class="modal-ask-label">Ask Price</div>
+        <div class="modal-ask-price" id="modal-ask-price">$0</div>
+      </div>
+      <div class="modal-appraisal">
+        <div class="modal-appraisal-num" id="modal-appraised">$0</div>
+        <div class="modal-appraisal-label">Appraised Value</div>
+      </div>
+    </div>
+    <div class="modal-form">
+      <input type="text" placeholder="Your name" id="contact-name">
+      <input type="email" placeholder="Email address" id="contact-email">
+      <input type="tel" placeholder="Phone (optional)" id="contact-phone">
+      <textarea placeholder="Tell us about your intended use (optional)"></textarea>
+      <button class="modal-submit" onclick="submitInquiry()">Send Inquiry → Bravetto.ai Team</button>
+    </div>
+    <div class="modal-note">We respond within 24 hours. Escrow.com transfers available.</div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✓ Inquiry sent — expect a reply within 24h</div>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+
+  <nav>
+    <a href="https://bravetto.ai" class="nav-logo">BRAVETTO<span>.AI</span></a>
+    <ul class="nav-links">
+      <li><a href="#vault">Domain Vault</a></li>
+      <li><a href="https://bravetto.com">Studio</a></li>
+      <li><a href="mailto:domains@bravetto.ai">Contact</a></li>
+    </ul>
+    <a href="mailto:domains@bravetto.ai" class="btn-primary">Make an Offer</a>
+  </nav>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Bravetto.ai Domain Vault · Est. 2024</div>
+    <h1 class="hero-title">
+      900+<br>
+      <span class="gold">Premium</span><br>
+      <span class="stroke">.ai Domains</span>
+    </h1>
+    <p class="hero-sub">
+      The <strong>largest curated .ai portfolio</strong> on the market. Category-defining names for the brands building the future. One domain changes everything.
+    </p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">903</div>
+        <div class="stat-label">.ai domains</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">$3.7M</div>
+        <div class="stat-label">Portfolio value</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">126</div>
+        <div class="stat-label">Premium ($10K+)</div>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a href="#vault" class="btn-primary">Browse the Vault</a>
+      <button class="btn-ghost" onclick="document.getElementById('modal').classList.add('open')">
+        → Bulk inquiry (5+ domains)
+      </button>
+    </div>
+  </div>
+
+  <div class="hero-ticker">
+    <div class="ticker-track" id="ticker">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- VAULT SECTION -->
+<section class="section" id="vault">
+  <div class="section-header">
+    <h2 class="section-title">The Vault</h2>
+    <div class="section-count" id="domain-count">Showing 50 premium domains</div>
+  </div>
+
+  <div class="filter-bar">
+    <span class="filter-label">Filter:</span>
+    <button class="filter-btn active" data-cat="all" onclick="filterDomains('all', this)">All</button>
+    <button class="filter-btn" data-cat="Education" onclick="filterDomains('Education', this)">Education</button>
+    <button class="filter-btn" data-cat="Finance" onclick="filterDomains('Finance', this)">Finance</button>
+    <button class="filter-btn" data-cat="Shopping" onclick="filterDomains('Shopping', this)">Shopping</button>
+    <button class="filter-btn" data-cat="Employment" onclick="filterDomains('Employment', this)">Employment</button>
+    <button class="filter-btn" data-cat="Technology" onclick="filterDomains('Technology', this)">Technology</button>
+    <button class="filter-btn" data-cat="Health" onclick="filterDomains('Health', this)">Health</button>
+    <button class="filter-btn" data-cat="Travel" onclick="filterDomains('Travel', this)">Travel</button>
+    <div class="search-box">
+      <input type="text" placeholder="Search domains..." oninput="searchDomains(this.value)">
+    </div>
+  </div>
+
+  <div class="domain-grid" id="domain-grid">
+    <!-- filled by JS -->
+  </div>
+</section>
+
+<!-- BOTTOM CTA -->
+<section class="cta-section">
+  <div class="cta-eyebrow">1,030 domains. One owner. Ready to deal.</div>
+  <h2 class="cta-title">Your AI Brand<br>Starts Here</h2>
+  <p class="cta-sub">Looking for something specific? We have 900+ .ai domains across every category. Send us your industry and we'll match you with the perfect name.</p>
+  <a href="mailto:domains@bravetto.ai?subject=Domain%20Inquiry&body=Hi%20Bravetto.ai%20team%2C%20I'm%20looking%20for%20a%20.ai%20domain%20in%20the%20[CATEGORY]%20space." class="btn-primary" style="font-size: 0.85rem; padding: 16px 36px;">
+    Email domains@bravetto.ai →
+  </a>
+</section>
+
+<footer>
+  <div class="footer-logo">BRAVETTO<span>.AI</span></div>
+  <div class="footer-links">
+    <a href="https://bravetto.com">Studio</a>
+    <a href="mailto:domains@bravetto.ai">Contact</a>
+    <a href="#">Escrow Info</a>
+  </div>
+  <div class="footer-copy">© 2025 Bravetto.ai · Mataluni Enterprises</div>
+</footer>
+
+<script>
+const DOMAINS = [
+  {
+    "domain": "1social",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Marketing",
+    "words": "1social"
+  },
+  {
+    "domain": "abevoices",
+    "tld": "me",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Music",
+    "words": "abevoices"
+  },
+  {
+    "domain": "abundanceagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "abundanceagent"
+  },
+  {
+    "domain": "abundanceagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "abundanceagents"
+  },
+  {
+    "domain": "academicpaper",
+    "tld": "ai",
+    "ask": "$525",
+    "appraised": "$1,500",
+    "cat": "Education",
+    "words": "academicpaper"
+  },
+  {
+    "domain": "academicpapers",
+    "tld": "ai",
+    "ask": "$630",
+    "appraised": "$1,800",
+    "cat": "Education",
+    "words": "academicpapers"
+  },
+  {
+    "domain": "academicresearch",
+    "tld": "ai",
+    "ask": "$700",
+    "appraised": "$2,000",
+    "cat": "Education",
+    "words": "academicresearch"
+  },
+  {
+    "domain": "acceleratoragency",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Marketing",
+    "words": "acceleratoragency"
+  },
+  {
+    "domain": "acceleratoragent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "acceleratoragent"
+  },
+  {
+    "domain": "acceleratoragents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "acceleratoragents"
+  },
+  {
+    "domain": "acidtrip",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Creation",
+    "words": "acidtrip"
+  },
+  {
+    "domain": "actingschool",
+    "tld": "ai",
+    "ask": "$10,500",
+    "appraised": "$30,000",
+    "cat": "Education",
+    "words": "actingschool"
+  },
+  {
+    "domain": "actingschools",
+    "tld": "ai",
+    "ask": "$5,250",
+    "appraised": "$15,000",
+    "cat": "Education",
+    "words": "actingschools"
+  },
+  {
+    "domain": "adobeagent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "adobeagent"
+  },
+  {
+    "domain": "adobeagenthub",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "adobeagenthub"
+  },
+  {
+    "domain": "adobeagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "adobeagents"
+  },
+  {
+    "domain": "adobeenterpriseagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "adobeenterpriseagent"
+  },
+  {
+    "domain": "adobeenterpriseagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "adobeenterpriseagents"
+  },
+  {
+    "domain": "adventurequest",
+    "tld": "ai",
+    "ask": "$4,550",
+    "appraised": "$13,000",
+    "cat": "Travel",
+    "words": "adventurequest"
+  },
+  {
+    "domain": "adventurequests",
+    "tld": "ai",
+    "ask": "$210",
+    "appraised": "$600",
+    "cat": "Travel",
+    "words": "adventurequests"
+  },
+  {
+    "domain": "advertisingagent",
+    "tld": "ai",
+    "ask": "$280",
+    "appraised": "$800",
+    "cat": "Agents",
+    "words": "advertisingagent"
+  },
+  {
+    "domain": "advertisingagents",
+    "tld": "ai",
+    "ask": "$126",
+    "appraised": "$360",
+    "cat": "Agents",
+    "words": "advertisingagents"
+  },
+  {
+    "domain": "adviced",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Coaching",
+    "words": "adviced"
+  },
+  {
+    "domain": "aemagent",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Agents",
+    "words": "aemagent"
+  },
+  {
+    "domain": "aemagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "aemagents"
+  },
+  {
+    "domain": "agencyagents",
+    "tld": "ai",
+    "ask": "$25",
+    "appraised": "$70",
+    "cat": "Agents",
+    "words": "agencyagents"
+  },
+  {
+    "domain": "agentarchitecture",
+    "tld": "ai",
+    "ask": "$53",
+    "appraised": "$150",
+    "cat": "Aec",
+    "words": "agentarchitecture"
+  },
+  {
+    "domain": "agentlaborsaver",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "agentlaborsaver"
+  },
+  {
+    "domain": "agentmakers",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "agentmakers"
+  },
+  {
+    "domain": "agentmasters",
+    "tld": "ai",
+    "ask": "$11",
+    "appraised": "$30",
+    "cat": "Agents",
+    "words": "agentmasters"
+  },
+  {
+    "domain": "agentpower",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Energy",
+    "words": "agentpower"
+  },
+  {
+    "domain": "agentsagency",
+    "tld": "ai",
+    "ask": "$21",
+    "appraised": "$60",
+    "cat": "Agents",
+    "words": "agentsagency"
+  },
+  {
+    "domain": "agentsupremacy",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "agentsupremacy"
+  },
+  {
+    "domain": "agenttemplates",
+    "tld": "ai",
+    "ask": "$175",
+    "appraised": "$500",
+    "cat": "Agents",
+    "words": "agenttemplates"
+  },
+  {
+    "domain": "agileaf",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Agriculture",
+    "words": "agileaf"
+  },
+  {
+    "domain": "agriagent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agriculture",
+    "words": "agriagent"
+  },
+  {
+    "domain": "agriagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agriculture",
+    "words": "agriagents"
+  },
+  {
+    "domain": "agroagent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "agroagent"
+  },
+  {
+    "domain": "agroagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "agroagents"
+  },
+  {
+    "domain": "aibe",
+    "tld": "live",
+    "ask": "$29,750",
+    "appraised": "$85,000",
+    "cat": "Ai-portfolio",
+    "words": "aibe"
+  },
+  {
+    "domain": "aicloudagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Cloud",
+    "words": "aicloudagent"
+  },
+  {
+    "domain": "aicloudagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Cloud",
+    "words": "aicloudagents"
+  },
+  {
+    "domain": "aiguardian",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Security",
+    "words": "aiguardian"
+  },
+  {
+    "domain": "aiguardians",
+    "tld": "dev",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Security",
+    "words": "aiguardians"
+  },
+  {
+    "domain": "aihelperagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "aihelperagent"
+  },
+  {
+    "domain": "aihelperagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "aihelperagents"
+  },
+  {
+    "domain": "aitransformationagent",
+    "tld": "io",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "aitransformationagent"
+  },
+  {
+    "domain": "aitransformationagents",
+    "tld": "io",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "aitransformationagents"
+  },
+  {
+    "domain": "aitransformer",
+    "tld": "shop",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Forms",
+    "words": "aitransformer"
+  },
+  {
+    "domain": "aitransformers",
+    "tld": "shop",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Forms",
+    "words": "aitransformers"
+  },
+  {
+    "domain": "allergytest",
+    "tld": "ai",
+    "ask": "$3,500",
+    "appraised": "$10,000",
+    "cat": "Testing",
+    "words": "allergytest"
+  },
+  {
+    "domain": "alternativeapparel",
+    "tld": "ai",
+    "ask": "$945",
+    "appraised": "$2,700",
+    "cat": "Retail",
+    "words": "alternativeapparel"
+  },
+  {
+    "domain": "amazonagent",
+    "tld": "ai",
+    "ask": "$196",
+    "appraised": "$560",
+    "cat": "Agents",
+    "words": "amazonagent"
+  },
+  {
+    "domain": "amazonagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "amazonagents"
+  },
+  {
+    "domain": "aminoacid",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Pharma",
+    "words": "aminoacid"
+  },
+  {
+    "domain": "analysisagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Analytics",
+    "words": "analysisagent"
+  },
+  {
+    "domain": "analystjob",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Hr",
+    "words": "analystjob"
+  },
+  {
+    "domain": "analystjobs",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Hr",
+    "words": "analystjobs"
+  },
+  {
+    "domain": "analyticsagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Analytics",
+    "words": "analyticsagent"
+  },
+  {
+    "domain": "analyticsagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Analytics",
+    "words": "analyticsagents"
+  },
+  {
+    "domain": "angelsoft",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Finance",
+    "words": "angelsoft"
+  },
+  {
+    "domain": "antifascism",
+    "tld": "store",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Governance",
+    "words": "antifascism"
+  },
+  {
+    "domain": "antifascist",
+    "tld": "art",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Governance",
+    "words": "antifascist"
+  },
+  {
+    "domain": "antifascist",
+    "tld": "info",
+    "ask": "$11",
+    "appraised": "$30",
+    "cat": "Governance",
+    "words": "antifascist"
+  },
+  {
+    "domain": "antifascist",
+    "tld": "shop",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Governance",
+    "words": "antifascist"
+  },
+  {
+    "domain": "antifascist",
+    "tld": "store",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Governance",
+    "words": "antifascist"
+  },
+  {
+    "domain": "antifascists",
+    "tld": "info",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Governance",
+    "words": "antifascists"
+  },
+  {
+    "domain": "apiagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "apiagents"
+  },
+  {
+    "domain": "apiconnectoragent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "apiconnectoragent"
+  },
+  {
+    "domain": "apiconnectoragents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "apiconnectoragents"
+  },
+  {
+    "domain": "apiconnectoragents",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "apiconnectoragents"
+  },
+  {
+    "domain": "aplastic",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Healthcare",
+    "words": "aplastic"
+  },
+  {
+    "domain": "applicationagent",
+    "tld": "ai",
+    "ask": "$35",
+    "appraised": "$100",
+    "cat": "Agents",
+    "words": "applicationagent"
+  },
+  {
+    "domain": "applicationagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "applicationagents"
+  },
+  {
+    "domain": "applicationsagent",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "applicationsagent"
+  },
+  {
+    "domain": "aragent",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Agents",
+    "words": "aragent"
+  },
+  {
+    "domain": "aragents",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Agents",
+    "words": "aragents"
+  },
+  {
+    "domain": "arcitectureagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "arcitectureagent"
+  },
+  {
+    "domain": "arcitectureagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "arcitectureagents"
+  },
+  {
+    "domain": "armchairs",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Retail",
+    "words": "armchairs"
+  },
+  {
+    "domain": "artschools",
+    "tld": "ai",
+    "ask": "$10,500",
+    "appraised": "$30,000",
+    "cat": "Education",
+    "words": "artschools"
+  },
+  {
+    "domain": "asexuals",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Personalization",
+    "words": "asexuals"
+  },
+  {
+    "domain": "assistagent",
+    "tld": "ai",
+    "ask": "$18",
+    "appraised": "$50",
+    "cat": "Agents",
+    "words": "assistagent"
+  },
+  {
+    "domain": "assistagents",
+    "tld": "ai",
+    "ask": "$18",
+    "appraised": "$50",
+    "cat": "Agents",
+    "words": "assistagents"
+  },
+  {
+    "domain": "assistantagent",
+    "tld": "ai",
+    "ask": "$35",
+    "appraised": "$100",
+    "cat": "Agents",
+    "words": "assistantagent"
+  },
+  {
+    "domain": "attorneyagent",
+    "tld": "ai",
+    "ask": "$665",
+    "appraised": "$1,900",
+    "cat": "Agents",
+    "words": "attorneyagent"
+  },
+  {
+    "domain": "attorneyagents",
+    "tld": "ai",
+    "ask": "$11",
+    "appraised": "$30",
+    "cat": "Agents",
+    "words": "attorneyagents"
+  },
+  {
+    "domain": "auditagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Compliance",
+    "words": "auditagents"
+  },
+  {
+    "domain": "autismspeaks",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Healthcare",
+    "words": "autismspeaks"
+  },
+  {
+    "domain": "automationagent",
+    "tld": "ai",
+    "ask": "$14",
+    "appraised": "$40",
+    "cat": "Automotive",
+    "words": "automationagent"
+  },
+  {
+    "domain": "automationagents",
+    "tld": "ai",
+    "ask": "$35",
+    "appraised": "$100",
+    "cat": "Automotive",
+    "words": "automationagents"
+  },
+  {
+    "domain": "aviationagent",
+    "tld": "ai",
+    "ask": "$11",
+    "appraised": "$30",
+    "cat": "Agents",
+    "words": "aviationagent"
+  },
+  {
+    "domain": "aviationagents",
+    "tld": "ai",
+    "ask": "$7",
+    "appraised": "$20",
+    "cat": "Agents",
+    "words": "aviationagents"
+  },
+  {
+    "domain": "babybear",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Personalization",
+    "words": "babybear"
+  },
+  {
+    "domain": "babyclothes",
+    "tld": "ai",
+    "ask": "$19,600",
+    "appraised": "$56,000",
+    "cat": "Retail",
+    "words": "babyclothes"
+  },
+  {
+    "domain": "balletschool",
+    "tld": "ai",
+    "ask": "$2,485",
+    "appraised": "$7,100",
+    "cat": "Education",
+    "words": "balletschool"
+  },
+  {
+    "domain": "balletschools",
+    "tld": "ai",
+    "ask": "$385",
+    "appraised": "$1,100",
+    "cat": "Education",
+    "words": "balletschools"
+  },
+  {
+    "domain": "banjos",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Music",
+    "words": "banjos"
+  },
+  {
+    "domain": "bankagent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Finance",
+    "words": "bankagent"
+  },
+  {
+    "domain": "bankagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Finance",
+    "words": "bankagents"
+  },
+  {
+    "domain": "bankingagents",
+    "tld": "ai",
+    "ask": "$31",
+    "appraised": "$90",
+    "cat": "Finance",
+    "words": "bankingagents"
+  },
+  {
+    "domain": "barschool",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Education",
+    "words": "barschool"
+  },
+  {
+    "domain": "baseballcap",
+    "tld": "ai",
+    "ask": "$9,100",
+    "appraised": "$26,000",
+    "cat": "Retail",
+    "words": "baseballcap"
+  },
+  {
+    "domain": "baseballcaps",
+    "tld": "ai",
+    "ask": "$9,100",
+    "appraised": "$26,000",
+    "cat": "Retail",
+    "words": "baseballcaps"
+  },
+  {
+    "domain": "bathing",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Retail",
+    "words": "bathing"
+  },
+  {
+    "domain": "beachside",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Travel",
+    "words": "beachside"
+  },
+  {
+    "domain": "beautyschool",
+    "tld": "ai",
+    "ask": "$11,550",
+    "appraised": "$33,000",
+    "cat": "Education",
+    "words": "beautyschool"
+  },
+  {
+    "domain": "beautyschools",
+    "tld": "ai",
+    "ask": "$11,900",
+    "appraised": "$34,000",
+    "cat": "Education",
+    "words": "beautyschools"
+  },
+  {
+    "domain": "beeffective",
+    "tld": "ai",
+    "ask": "$805",
+    "appraised": "$2,300",
+    "cat": "Marketing",
+    "words": "beeffective"
+  },
+  {
+    "domain": "bemyself",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Coaching",
+    "words": "bemyself"
+  },
+  {
+    "domain": "bestinternet",
+    "tld": "ai",
+    "ask": "$3,500",
+    "appraised": "$10,000",
+    "cat": "Cloud",
+    "words": "bestinternet"
+  },
+  {
+    "domain": "bestlaptops",
+    "tld": "ai",
+    "ask": "$10,150",
+    "appraised": "$29,000",
+    "cat": "Retail",
+    "words": "bestlaptops"
+  },
+  {
+    "domain": "bestquotes",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Quoting",
+    "words": "bestquotes"
+  },
+  {
+    "domain": "bestrestaurant",
+    "tld": "ai",
+    "ask": "$4,550",
+    "appraised": "$13,000",
+    "cat": "Food",
+    "words": "bestrestaurant"
+  },
+  {
+    "domain": "bestschool",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Education",
+    "words": "bestschool"
+  },
+  {
+    "domain": "bestsushi",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Food",
+    "words": "bestsushi"
+  },
+  {
+    "domain": "betagent",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Agents",
+    "words": "betagent"
+  },
+  {
+    "domain": "betagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "betagents"
+  },
+  {
+    "domain": "biasagent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "biasagent"
+  },
+  {
+    "domain": "biasagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "biasagents"
+  },
+  {
+    "domain": "biasguards",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Security",
+    "words": "biasguards"
+  },
+  {
+    "domain": "biasguards",
+    "tld": "com",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Security",
+    "words": "biasguards"
+  },
+  {
+    "domain": "bigball",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Ai-portfolio",
+    "words": "bigball"
+  },
+  {
+    "domain": "bigballs",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Ai-portfolio",
+    "words": "bigballs"
+  },
+  {
+    "domain": "bioremediation",
+    "tld": "ai",
+    "ask": "$5,950",
+    "appraised": "$17,000",
+    "cat": "Agriculture",
+    "words": "bioremediation"
+  },
+  {
+    "domain": "bioresearchagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "bioresearchagent"
+  },
+  {
+    "domain": "bioresearchagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "bioresearchagents"
+  },
+  {
+    "domain": "biotechagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "biotechagent"
+  },
+  {
+    "domain": "biotechagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "biotechagents"
+  },
+  {
+    "domain": "bisexuality",
+    "tld": "ai",
+    "ask": "$2,065",
+    "appraised": "$5,900",
+    "cat": "Personalization",
+    "words": "bisexuality"
+  },
+  {
+    "domain": "blackhats",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Retail",
+    "words": "blackhats"
+  },
+  {
+    "domain": "blackholes",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Creation",
+    "words": "blackholes"
+  },
+  {
+    "domain": "blockchainagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Crypto",
+    "words": "blockchainagent"
+  },
+  {
+    "domain": "blockchainagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Crypto",
+    "words": "blockchainagents"
+  },
+  {
+    "domain": "blueoceanagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "blueoceanagent"
+  },
+  {
+    "domain": "blueoceanagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "blueoceanagents"
+  },
+  {
+    "domain": "boatshow",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Retail",
+    "words": "boatshow"
+  },
+  {
+    "domain": "bookadventure",
+    "tld": "ai",
+    "ask": "$700",
+    "appraised": "$2,000",
+    "cat": "Booking",
+    "words": "bookadventure"
+  },
+  {
+    "domain": "bookgame",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Booking",
+    "words": "bookgame"
+  },
+  {
+    "domain": "bookgames",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Booking",
+    "words": "bookgames"
+  },
+  {
+    "domain": "bookingagents",
+    "tld": "ai",
+    "ask": "$2,730",
+    "appraised": "$7,800",
+    "cat": "Agents",
+    "words": "bookingagents"
+  },
+  {
+    "domain": "botagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "botagents"
+  },
+  {
+    "domain": "boyclothes",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Retail",
+    "words": "boyclothes"
+  },
+  {
+    "domain": "boysclothes",
+    "tld": "ai",
+    "ask": "$9,450",
+    "appraised": "$27,000",
+    "cat": "Retail",
+    "words": "boysclothes"
+  },
+  {
+    "domain": "bradbury",
+    "tld": "academy",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Education",
+    "words": "bradbury"
+  },
+  {
+    "domain": "bradbury",
+    "tld": "college",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Education",
+    "words": "bradbury"
+  },
+  {
+    "domain": "bradbury",
+    "tld": "id",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Ai-portfolio",
+    "words": "bradbury"
+  },
+  {
+    "domain": "bradbury",
+    "tld": "im",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Ai-portfolio",
+    "words": "bradbury"
+  },
+  {
+    "domain": "bradbury",
+    "tld": "institute",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Education",
+    "words": "bradbury"
+  },
+  {
+    "domain": "bradbury",
+    "tld": "observer",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Writing",
+    "words": "bradbury"
+  },
+  {
+    "domain": "bradbury",
+    "tld": "report",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Writing",
+    "words": "bradbury"
+  },
+  {
+    "domain": "bradbury",
+    "tld": "support",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Ai-portfolio",
+    "words": "bradbury"
+  },
+  {
+    "domain": "bradbury",
+    "tld": "training",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Education",
+    "words": "bradbury"
+  },
+  {
+    "domain": "bradbury",
+    "tld": "university",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Education",
+    "words": "bradbury"
+  },
+  {
+    "domain": "bradbury",
+    "tld": "world",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Ai-portfolio",
+    "words": "bradbury"
+  },
+  {
+    "domain": "bradburyai",
+    "tld": "com",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Ai-portfolio",
+    "words": "bradburyai"
+  },
+  {
+    "domain": "brainresearch",
+    "tld": "ai",
+    "ask": "$1,260",
+    "appraised": "$3,600",
+    "cat": "Education",
+    "words": "brainresearch"
+  },
+  {
+    "domain": "brandagents",
+    "tld": "ai",
+    "ask": "$214",
+    "appraised": "$610",
+    "cat": "Marketing",
+    "words": "brandagents"
+  },
+  {
+    "domain": "brandingagent",
+    "tld": "ai",
+    "ask": "$88",
+    "appraised": "$250",
+    "cat": "Marketing",
+    "words": "brandingagent"
+  },
+  {
+    "domain": "brandingagents",
+    "tld": "ai",
+    "ask": "$11",
+    "appraised": "$30",
+    "cat": "Marketing",
+    "words": "brandingagents"
+  },
+  {
+    "domain": "bravetto",
+    "tld": "art",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Design",
+    "words": "bravetto"
+  },
+  {
+    "domain": "bravetto",
+    "tld": "club",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Ai-portfolio",
+    "words": "bravetto"
+  },
+  {
+    "domain": "bravetto",
+    "tld": "live",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Ai-portfolio",
+    "words": "bravetto"
+  },
+  {
+    "domain": "bravetto",
+    "tld": "org",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Ai-portfolio",
+    "words": "bravetto"
+  },
+  {
+    "domain": "bravetto",
+    "tld": "store",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Retail",
+    "words": "bravetto"
+  },
+  {
+    "domain": "bravetto",
+    "tld": "tv",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Video",
+    "words": "bravetto"
+  },
+  {
+    "domain": "bravetto",
+    "tld": "vip",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Ai-portfolio",
+    "words": "bravetto"
+  },
+  {
+    "domain": "browseragents",
+    "tld": "ai",
+    "ask": "$21",
+    "appraised": "$60",
+    "cat": "Agents",
+    "words": "browseragents"
+  },
+  {
+    "domain": "bubbletrouble",
+    "tld": "ai",
+    "ask": "$16,450",
+    "appraised": "$47,000",
+    "cat": "Creation",
+    "words": "bubbletrouble"
+  },
+  {
+    "domain": "bucketlists",
+    "tld": "ai",
+    "ask": "$910",
+    "appraised": "$2,600",
+    "cat": "Travel",
+    "words": "bucketlists"
+  },
+  {
+    "domain": "businessagent",
+    "tld": "ai",
+    "ask": "$980",
+    "appraised": "$2,800",
+    "cat": "Agents",
+    "words": "businessagent"
+  },
+  {
+    "domain": "businessbots",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "businessbots"
+  },
+  {
+    "domain": "businessschools",
+    "tld": "ai",
+    "ask": "$1,330",
+    "appraised": "$3,800",
+    "cat": "Education",
+    "words": "businessschools"
+  },
+  {
+    "domain": "buymusic",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Music",
+    "words": "buymusic"
+  },
+  {
+    "domain": "callcenteragents",
+    "tld": "ai",
+    "ask": "$214",
+    "appraised": "$610",
+    "cat": "Agents",
+    "words": "callcenteragents"
+  },
+  {
+    "domain": "candystore",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Retail",
+    "words": "candystore"
+  },
+  {
+    "domain": "cargps",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Automotive",
+    "words": "cargps"
+  },
+  {
+    "domain": "cashcows",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Finance",
+    "words": "cashcows"
+  },
+  {
+    "domain": "catsitter",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Coaching",
+    "words": "catsitter"
+  },
+  {
+    "domain": "charterschools",
+    "tld": "ai",
+    "ask": "$5,950",
+    "appraised": "$17,000",
+    "cat": "Education",
+    "words": "charterschools"
+  },
+  {
+    "domain": "chatbotagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "chatbotagent"
+  },
+  {
+    "domain": "chatbotagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "chatbotagents"
+  },
+  {
+    "domain": "cheapclothes",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Retail",
+    "words": "cheapclothes"
+  },
+  {
+    "domain": "cheaploan",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Finance",
+    "words": "cheaploan"
+  },
+  {
+    "domain": "cheaploans",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Finance",
+    "words": "cheaploans"
+  },
+  {
+    "domain": "cheapshoes",
+    "tld": "ai",
+    "ask": "$9,100",
+    "appraised": "$26,000",
+    "cat": "Retail",
+    "words": "cheapshoes"
+  },
+  {
+    "domain": "cheaptees",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Retail",
+    "words": "cheaptees"
+  },
+  {
+    "domain": "cheaptshirts",
+    "tld": "ai",
+    "ask": "$595",
+    "appraised": "$1,700",
+    "cat": "Retail",
+    "words": "cheaptshirts"
+  },
+  {
+    "domain": "chefschools",
+    "tld": "ai",
+    "ask": "$1,855",
+    "appraised": "$5,300",
+    "cat": "Education",
+    "words": "chefschools"
+  },
+  {
+    "domain": "chemistryagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "chemistryagent"
+  },
+  {
+    "domain": "chemistryagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "chemistryagents"
+  },
+  {
+    "domain": "chemlab",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Education",
+    "words": "chemlab"
+  },
+  {
+    "domain": "chiefexecutiveagent",
+    "tld": "ai",
+    "ask": "$7",
+    "appraised": "$20",
+    "cat": "Agents",
+    "words": "chiefexecutiveagent"
+  },
+  {
+    "domain": "chiefexecutiveagent",
+    "tld": "com",
+    "ask": "$25",
+    "appraised": "$70",
+    "cat": "Agents",
+    "words": "chiefexecutiveagent"
+  },
+  {
+    "domain": "chiefexecutiveagents",
+    "tld": "ai",
+    "ask": "$7",
+    "appraised": "$20",
+    "cat": "Agents",
+    "words": "chiefexecutiveagents"
+  },
+  {
+    "domain": "chieffinancialagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Finance",
+    "words": "chieffinancialagent"
+  },
+  {
+    "domain": "chieffinancialagent",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Finance",
+    "words": "chieffinancialagent"
+  },
+  {
+    "domain": "chieffinancialagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Finance",
+    "words": "chieffinancialagents"
+  },
+  {
+    "domain": "chiefmarketingagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Marketing",
+    "words": "chiefmarketingagent"
+  },
+  {
+    "domain": "chiefmarketingagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Marketing",
+    "words": "chiefmarketingagents"
+  },
+  {
+    "domain": "chiefoperationsagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "chiefoperationsagent"
+  },
+  {
+    "domain": "chiefoperationsagent",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "chiefoperationsagent"
+  },
+  {
+    "domain": "chiefoperationsagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "chiefoperationsagents"
+  },
+  {
+    "domain": "chiefoperationsagents",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "chiefoperationsagents"
+  },
+  {
+    "domain": "chieftechnologyagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "chieftechnologyagent"
+  },
+  {
+    "domain": "chieftechnologyagent",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "chieftechnologyagent"
+  },
+  {
+    "domain": "chieftechnologyagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "chieftechnologyagents"
+  },
+  {
+    "domain": "cleanhouse",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Real-estate",
+    "words": "cleanhouse"
+  },
+  {
+    "domain": "cleantechagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "cleantechagent"
+  },
+  {
+    "domain": "cleantechagent",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "cleantechagent"
+  },
+  {
+    "domain": "cleantechagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "cleantechagents"
+  },
+  {
+    "domain": "cleantechagents",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "cleantechagents"
+  },
+  {
+    "domain": "climateagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "climateagent"
+  },
+  {
+    "domain": "climateagents",
+    "tld": "ai",
+    "ask": "$4",
+    "appraised": "$10",
+    "cat": "Agents",
+    "words": "climateagents"
+  },
+  {
+    "domain": "clothesstore",
+    "tld": "ai",
+    "ask": "$1,960",
+    "appraised": "$5,600",
+    "cat": "Retail",
+    "words": "clothesstore"
+  },
+  {
+    "domain": "clothesstores",
+    "tld": "ai",
+    "ask": "$1,680",
+    "appraised": "$4,800",
+    "cat": "Retail",
+    "words": "clothesstores"
+  },
+  {
+    "domain": "cloudagency",
+    "tld": "ai",
+    "ask": "$875",
+    "appraised": "$2,500",
+    "cat": "Cloud",
+    "words": "cloudagency"
+  },
+  {
+    "domain": "cloudautomationagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Automotive",
+    "words": "cloudautomationagent"
+  },
+  {
+    "domain": "cloudautomationagent",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Automotive",
+    "words": "cloudautomationagent"
+  },
+  {
+    "domain": "cloudautomationagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Automotive",
+    "words": "cloudautomationagents"
+  },
+  {
+    "domain": "cloudtrends",
+    "tld": "ai",
+    "ask": "$5,600",
+    "appraised": "$16,000",
+    "cat": "Cloud",
+    "words": "cloudtrends"
+  },
+  {
+    "domain": "cmsagent",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Agents",
+    "words": "cmsagent"
+  },
+  {
+    "domain": "cmsagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "cmsagents"
+  },
+  {
+    "domain": "cmsagents",
+    "tld": "com",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "cmsagents"
+  },
+  {
+    "domain": "coachagent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Coaching",
+    "words": "coachagent"
+  },
+  {
+    "domain": "codeagenthub",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "codeagenthub"
+  },
+  {
+    "domain": "codebreakeragent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "codebreakeragent"
+  },
+  {
+    "domain": "codebreakeragents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "codebreakeragents"
+  },
+  {
+    "domain": "commercialagent",
+    "tld": "ai",
+    "ask": "$630",
+    "appraised": "$1,800",
+    "cat": "Agents",
+    "words": "commercialagent"
+  },
+  {
+    "domain": "commercialagents",
+    "tld": "ai",
+    "ask": "$455",
+    "appraised": "$1,300",
+    "cat": "Agents",
+    "words": "commercialagents"
+  },
+  {
+    "domain": "complianceagent",
+    "tld": "ai",
+    "ask": "$25",
+    "appraised": "$70",
+    "cat": "Compliance",
+    "words": "complianceagent"
+  },
+  {
+    "domain": "computerhelp",
+    "tld": "ai",
+    "ask": "$10,850",
+    "appraised": "$31,000",
+    "cat": "Engineering",
+    "words": "computerhelp"
+  },
+  {
+    "domain": "computerschool",
+    "tld": "ai",
+    "ask": "$5,950",
+    "appraised": "$17,000",
+    "cat": "Education",
+    "words": "computerschool"
+  },
+  {
+    "domain": "computerschools",
+    "tld": "ai",
+    "ask": "$490",
+    "appraised": "$1,400",
+    "cat": "Education",
+    "words": "computerschools"
+  },
+  {
+    "domain": "computerstore",
+    "tld": "ai",
+    "ask": "$7,700",
+    "appraised": "$22,000",
+    "cat": "Retail",
+    "words": "computerstore"
+  },
+  {
+    "domain": "computertech",
+    "tld": "ai",
+    "ask": "$4,200",
+    "appraised": "$12,000",
+    "cat": "Engineering",
+    "words": "computertech"
+  },
+  {
+    "domain": "conceptagent",
+    "tld": "ai",
+    "ask": "$11",
+    "appraised": "$30",
+    "cat": "Agents",
+    "words": "conceptagent"
+  },
+  {
+    "domain": "conceptagents",
+    "tld": "ai",
+    "ask": "$11",
+    "appraised": "$30",
+    "cat": "Agents",
+    "words": "conceptagents"
+  },
+  {
+    "domain": "cookingschool",
+    "tld": "ai",
+    "ask": "$14,700",
+    "appraised": "$42,000",
+    "cat": "Education",
+    "words": "cookingschool"
+  },
+  {
+    "domain": "cookingschools",
+    "tld": "ai",
+    "ask": "$8,050",
+    "appraised": "$23,000",
+    "cat": "Education",
+    "words": "cookingschools"
+  },
+  {
+    "domain": "copwatch",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Governance",
+    "words": "copwatch"
+  },
+  {
+    "domain": "corporateagents",
+    "tld": "ai",
+    "ask": "$105",
+    "appraised": "$300",
+    "cat": "Agents",
+    "words": "corporateagents"
+  },
+  {
+    "domain": "correlators",
+    "tld": "ai",
+    "ask": "$1,190",
+    "appraised": "$3,400",
+    "cat": "Analytics",
+    "words": "correlators"
+  },
+  {
+    "domain": "cosmetologyschool",
+    "tld": "ai",
+    "ask": "$1,330",
+    "appraised": "$3,800",
+    "cat": "Education",
+    "words": "cosmetologyschool"
+  },
+  {
+    "domain": "cosmetologyschools",
+    "tld": "ai",
+    "ask": "$1,015",
+    "appraised": "$2,900",
+    "cat": "Education",
+    "words": "cosmetologyschools"
+  },
+  {
+    "domain": "couplescostume",
+    "tld": "ai",
+    "ask": "$1,330",
+    "appraised": "$3,800",
+    "cat": "Retail",
+    "words": "couplescostume"
+  },
+  {
+    "domain": "couplescostumes",
+    "tld": "ai",
+    "ask": "$420",
+    "appraised": "$1,200",
+    "cat": "Retail",
+    "words": "couplescostumes"
+  },
+  {
+    "domain": "creativelife",
+    "tld": "ai",
+    "ask": "$490",
+    "appraised": "$1,400",
+    "cat": "Creation",
+    "words": "creativelife"
+  },
+  {
+    "domain": "creatoragents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "creatoragents"
+  },
+  {
+    "domain": "creditinfo",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Finance",
+    "words": "creditinfo"
+  },
+  {
+    "domain": "creditors",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Finance",
+    "words": "creditors"
+  },
+  {
+    "domain": "cruisedeals",
+    "tld": "ai",
+    "ask": "$19,600",
+    "appraised": "$56,000",
+    "cat": "Retail",
+    "words": "cruisedeals"
+  },
+  {
+    "domain": "culturally",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Creation",
+    "words": "culturally"
+  },
+  {
+    "domain": "custombrands",
+    "tld": "ai",
+    "ask": "$420",
+    "appraised": "$1,200",
+    "cat": "Marketing",
+    "words": "custombrands"
+  },
+  {
+    "domain": "customerbotagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "customerbotagent"
+  },
+  {
+    "domain": "customerbotagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "customerbotagents"
+  },
+  {
+    "domain": "customeryjourney",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Customer",
+    "words": "customeryjourney"
+  },
+  {
+    "domain": "customwardrobe",
+    "tld": "ai",
+    "ask": "$525",
+    "appraised": "$1,500",
+    "cat": "Retail",
+    "words": "customwardrobe"
+  },
+  {
+    "domain": "cuticle",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Ai-portfolio",
+    "words": "cuticle"
+  },
+  {
+    "domain": "cxmagent",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Agents",
+    "words": "cxmagent"
+  },
+  {
+    "domain": "cybersecurityagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Security",
+    "words": "cybersecurityagents"
+  },
+  {
+    "domain": "daddybear",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Personalization",
+    "words": "daddybear"
+  },
+  {
+    "domain": "dataagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Data",
+    "words": "dataagents"
+  },
+  {
+    "domain": "datingapps",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Engineering",
+    "words": "datingapps"
+  },
+  {
+    "domain": "deathangel",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Creation",
+    "words": "deathangel"
+  },
+  {
+    "domain": "debugagent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "debugagent"
+  },
+  {
+    "domain": "debugagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "debugagents"
+  },
+  {
+    "domain": "delusions",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Creation",
+    "words": "delusions"
+  },
+  {
+    "domain": "designagents",
+    "tld": "ai",
+    "ask": "$63",
+    "appraised": "$180",
+    "cat": "Design",
+    "words": "designagents"
+  },
+  {
+    "domain": "developeragents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "developeragents"
+  },
+  {
+    "domain": "developmentagent",
+    "tld": "ai",
+    "ask": "$49",
+    "appraised": "$140",
+    "cat": "Agents",
+    "words": "developmentagent"
+  },
+  {
+    "domain": "developmentagents",
+    "tld": "ai",
+    "ask": "$39",
+    "appraised": "$110",
+    "cat": "Agents",
+    "words": "developmentagents"
+  },
+  {
+    "domain": "diagnosticsagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "diagnosticsagent"
+  },
+  {
+    "domain": "diagnosticsagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "diagnosticsagents"
+  },
+  {
+    "domain": "diamondjewelry",
+    "tld": "ai",
+    "ask": "$5,250",
+    "appraised": "$15,000",
+    "cat": "Retail",
+    "words": "diamondjewelry"
+  },
+  {
+    "domain": "digitalagencies",
+    "tld": "ai",
+    "ask": "$322",
+    "appraised": "$920",
+    "cat": "Marketing",
+    "words": "digitalagencies"
+  },
+  {
+    "domain": "digitalexperienceagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "digitalexperienceagent"
+  },
+  {
+    "domain": "digitalexperienceagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "digitalexperienceagents"
+  },
+  {
+    "domain": "digitalinnovatoragent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "digitalinnovatoragent"
+  },
+  {
+    "domain": "digitalinnovatoragents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "digitalinnovatoragents"
+  },
+  {
+    "domain": "digitaltransformationagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "digitaltransformationagent"
+  },
+  {
+    "domain": "digitaltransformationagent",
+    "tld": "io",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "digitaltransformationagent"
+  },
+  {
+    "domain": "digitaltransformationagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "digitaltransformationagents"
+  },
+  {
+    "domain": "digitaltransformationagents",
+    "tld": "io",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "digitaltransformationagents"
+  },
+  {
+    "domain": "digitizers",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Engineering",
+    "words": "digitizers"
+  },
+  {
+    "domain": "digizers",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Engineering",
+    "words": "digizers"
+  },
+  {
+    "domain": "disneyagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "disneyagent"
+  },
+  {
+    "domain": "disneytrip",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Travel",
+    "words": "disneytrip"
+  },
+  {
+    "domain": "diyagent",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Agents",
+    "words": "diyagent"
+  },
+  {
+    "domain": "diyagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "diyagents"
+  },
+  {
+    "domain": "dogsit",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Coaching",
+    "words": "dogsit"
+  },
+  {
+    "domain": "dogsitters",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Coaching",
+    "words": "dogsitters"
+  },
+  {
+    "domain": "dogwalk",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Coaching",
+    "words": "dogwalk"
+  },
+  {
+    "domain": "dogwalkers",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Coaching",
+    "words": "dogwalkers"
+  },
+  {
+    "domain": "domainagent",
+    "tld": "ai",
+    "ask": "$420",
+    "appraised": "$1,200",
+    "cat": "Agents",
+    "words": "domainagent"
+  },
+  {
+    "domain": "domainagents",
+    "tld": "ai",
+    "ask": "$151",
+    "appraised": "$430",
+    "cat": "Agents",
+    "words": "domainagents"
+  },
+  {
+    "domain": "domainflip",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Finance",
+    "words": "domainflip"
+  },
+  {
+    "domain": "domainhelp",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Engineering",
+    "words": "domainhelp"
+  },
+  {
+    "domain": "domaintracker",
+    "tld": "ai",
+    "ask": "$217",
+    "appraised": "$620",
+    "cat": "Analytics",
+    "words": "domaintracker"
+  },
+  {
+    "domain": "domainvaluecheck",
+    "tld": "ai",
+    "ask": "$385",
+    "appraised": "$1,100",
+    "cat": "Analytics",
+    "words": "domainvaluecheck"
+  },
+  {
+    "domain": "domyjobagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Hr",
+    "words": "domyjobagent"
+  },
+  {
+    "domain": "domyjobagent",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Hr",
+    "words": "domyjobagent"
+  },
+  {
+    "domain": "domyjobagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Hr",
+    "words": "domyjobagents"
+  },
+  {
+    "domain": "domyjobagents",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Hr",
+    "words": "domyjobagents"
+  },
+  {
+    "domain": "dragqueens",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Personalization",
+    "words": "dragqueens"
+  },
+  {
+    "domain": "drifters",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Travel",
+    "words": "drifters"
+  },
+  {
+    "domain": "earing",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Healthcare",
+    "words": "earing"
+  },
+  {
+    "domain": "earworms",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Music",
+    "words": "earworms"
+  },
+  {
+    "domain": "ecomagent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "ecomagent"
+  },
+  {
+    "domain": "ecomagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "ecomagents"
+  },
+  {
+    "domain": "ecomdom",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Retail",
+    "words": "ecomdom"
+  },
+  {
+    "domain": "ecommercagency",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Retail",
+    "words": "ecommercagency"
+  },
+  {
+    "domain": "ecommerceagencies",
+    "tld": "ai",
+    "ask": "$4",
+    "appraised": "$10",
+    "cat": "Retail",
+    "words": "ecommerceagencies"
+  },
+  {
+    "domain": "ecommerceagency",
+    "tld": "ai",
+    "ask": "$234",
+    "appraised": "$670",
+    "cat": "Retail",
+    "words": "ecommerceagency"
+  },
+  {
+    "domain": "ecommerceagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Retail",
+    "words": "ecommerceagents"
+  },
+  {
+    "domain": "economicsagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "economicsagent"
+  },
+  {
+    "domain": "economicsagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "economicsagents"
+  },
+  {
+    "domain": "economyagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "economyagent"
+  },
+  {
+    "domain": "economyagent",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "economyagent"
+  },
+  {
+    "domain": "economyagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "economyagents"
+  },
+  {
+    "domain": "educationagent",
+    "tld": "ai",
+    "ask": "$95",
+    "appraised": "$270",
+    "cat": "Education",
+    "words": "educationagent"
+  },
+  {
+    "domain": "educationagents",
+    "tld": "ai",
+    "ask": "$221",
+    "appraised": "$630",
+    "cat": "Education",
+    "words": "educationagents"
+  },
+  {
+    "domain": "efficiencyagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "efficiencyagent"
+  },
+  {
+    "domain": "elderlycareagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "elderlycareagent"
+  },
+  {
+    "domain": "emergingmarketagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Marketing",
+    "words": "emergingmarketagents"
+  },
+  {
+    "domain": "energyagent",
+    "tld": "ai",
+    "ask": "$420",
+    "appraised": "$1,200",
+    "cat": "Energy",
+    "words": "energyagent"
+  },
+  {
+    "domain": "energyagents",
+    "tld": "ai",
+    "ask": "$91",
+    "appraised": "$260",
+    "cat": "Energy",
+    "words": "energyagents"
+  },
+  {
+    "domain": "engagementagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "engagementagents"
+  },
+  {
+    "domain": "engineeragent",
+    "tld": "ai",
+    "ask": "$98",
+    "appraised": "$280",
+    "cat": "Engineering",
+    "words": "engineeragent"
+  },
+  {
+    "domain": "engineeragents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Engineering",
+    "words": "engineeragents"
+  },
+  {
+    "domain": "engineeringjob",
+    "tld": "ai",
+    "ask": "$3,290",
+    "appraised": "$9,400",
+    "cat": "Hr",
+    "words": "engineeringjob"
+  },
+  {
+    "domain": "engineeringjobs",
+    "tld": "ai",
+    "ask": "$1,295",
+    "appraised": "$3,700",
+    "cat": "Hr",
+    "words": "engineeringjobs"
+  },
+  {
+    "domain": "enterpriseagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "enterpriseagents"
+  },
+  {
+    "domain": "erectors",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Engineering",
+    "words": "erectors"
+  },
+  {
+    "domain": "escortagent",
+    "tld": "ai",
+    "ask": "$193",
+    "appraised": "$550",
+    "cat": "Agents",
+    "words": "escortagent"
+  },
+  {
+    "domain": "escortagents",
+    "tld": "ai",
+    "ask": "$105",
+    "appraised": "$300",
+    "cat": "Agents",
+    "words": "escortagents"
+  },
+  {
+    "domain": "eventagents",
+    "tld": "ai",
+    "ask": "$630",
+    "appraised": "$1,800",
+    "cat": "Agents",
+    "words": "eventagents"
+  },
+  {
+    "domain": "evolutionagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "evolutionagent"
+  },
+  {
+    "domain": "executiveagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "executiveagent"
+  },
+  {
+    "domain": "executiveagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "executiveagents"
+  },
+  {
+    "domain": "executivedecisionagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "executivedecisionagent"
+  },
+  {
+    "domain": "executivedecisionagent",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "executivedecisionagent"
+  },
+  {
+    "domain": "executivedecisionagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "executivedecisionagents"
+  },
+  {
+    "domain": "expatriot",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Travel",
+    "words": "expatriot"
+  },
+  {
+    "domain": "experienceagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "experienceagent"
+  },
+  {
+    "domain": "experienceagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "experienceagents"
+  },
+  {
+    "domain": "experimentagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "experimentagent"
+  },
+  {
+    "domain": "experimentagent",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "experimentagent"
+  },
+  {
+    "domain": "experimentagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "experimentagents"
+  },
+  {
+    "domain": "factagent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "factagent"
+  },
+  {
+    "domain": "factagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "factagents"
+  },
+  {
+    "domain": "factcheckagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "factcheckagent"
+  },
+  {
+    "domain": "factcheckagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "factcheckagents"
+  },
+  {
+    "domain": "factoryagent",
+    "tld": "ai",
+    "ask": "$21",
+    "appraised": "$60",
+    "cat": "Agents",
+    "words": "factoryagent"
+  },
+  {
+    "domain": "factoryagents",
+    "tld": "ai",
+    "ask": "$11",
+    "appraised": "$30",
+    "cat": "Agents",
+    "words": "factoryagents"
+  },
+  {
+    "domain": "fantasygame",
+    "tld": "ai",
+    "ask": "$560",
+    "appraised": "$1,600",
+    "cat": "Creation",
+    "words": "fantasygame"
+  },
+  {
+    "domain": "farmingagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agriculture",
+    "words": "farmingagent"
+  },
+  {
+    "domain": "farmingagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agriculture",
+    "words": "farmingagents"
+  },
+  {
+    "domain": "fashionagent",
+    "tld": "ai",
+    "ask": "$221",
+    "appraised": "$630",
+    "cat": "Agents",
+    "words": "fashionagent"
+  },
+  {
+    "domain": "fashionschool",
+    "tld": "ai",
+    "ask": "$2,940",
+    "appraised": "$8,400",
+    "cat": "Education",
+    "words": "fashionschool"
+  },
+  {
+    "domain": "fashionwatch",
+    "tld": "ai",
+    "ask": "$2,520",
+    "appraised": "$7,200",
+    "cat": "Retail",
+    "words": "fashionwatch"
+  },
+  {
+    "domain": "femaleagents",
+    "tld": "ai",
+    "ask": "$210",
+    "appraised": "$600",
+    "cat": "Agents",
+    "words": "femaleagents"
+  },
+  {
+    "domain": "feministtees",
+    "tld": "ai",
+    "ask": "$7",
+    "appraised": "$20",
+    "cat": "Retail",
+    "words": "feministtees"
+  },
+  {
+    "domain": "filmschools",
+    "tld": "ai",
+    "ask": "$7,350",
+    "appraised": "$21,000",
+    "cat": "Education",
+    "words": "filmschools"
+  },
+  {
+    "domain": "financeagent",
+    "tld": "ai",
+    "ask": "$63",
+    "appraised": "$180",
+    "cat": "Finance",
+    "words": "financeagent"
+  },
+  {
+    "domain": "financeagenthub",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Finance",
+    "words": "financeagenthub"
+  },
+  {
+    "domain": "financialagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Finance",
+    "words": "financialagents"
+  },
+  {
+    "domain": "findfriend",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Personalization",
+    "words": "findfriend"
+  },
+  {
+    "domain": "findfriends",
+    "tld": "ai",
+    "ask": "$9,800",
+    "appraised": "$28,000",
+    "cat": "Personalization",
+    "words": "findfriends"
+  },
+  {
+    "domain": "finishers",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Engineering",
+    "words": "finishers"
+  },
+  {
+    "domain": "finopsagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "finopsagent"
+  },
+  {
+    "domain": "finopsagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "finopsagents"
+  },
+  {
+    "domain": "finopsagents",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "finopsagents"
+  },
+  {
+    "domain": "fintechagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "fintechagent"
+  },
+  {
+    "domain": "fintechagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "fintechagents"
+  },
+  {
+    "domain": "fishfinders",
+    "tld": "ai",
+    "ask": "$4,900",
+    "appraised": "$14,000",
+    "cat": "Analytics",
+    "words": "fishfinders"
+  },
+  {
+    "domain": "fixagent",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Agents",
+    "words": "fixagent"
+  },
+  {
+    "domain": "fixagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "fixagents"
+  },
+  {
+    "domain": "flightschools",
+    "tld": "ai",
+    "ask": "$3,430",
+    "appraised": "$9,800",
+    "cat": "Education",
+    "words": "flightschools"
+  },
+  {
+    "domain": "flighttrackers",
+    "tld": "ai",
+    "ask": "$1,120",
+    "appraised": "$3,200",
+    "cat": "Analytics",
+    "words": "flighttrackers"
+  },
+  {
+    "domain": "floweragent",
+    "tld": "ai",
+    "ask": "$193",
+    "appraised": "$550",
+    "cat": "Agents",
+    "words": "floweragent"
+  },
+  {
+    "domain": "flowerid",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Agriculture",
+    "words": "flowerid"
+  },
+  {
+    "domain": "flowerschool",
+    "tld": "ai",
+    "ask": "$385",
+    "appraised": "$1,100",
+    "cat": "Education",
+    "words": "flowerschool"
+  },
+  {
+    "domain": "folkart",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Design",
+    "words": "folkart"
+  },
+  {
+    "domain": "foodmarkets",
+    "tld": "ai",
+    "ask": "$3,430",
+    "appraised": "$9,800",
+    "cat": "Marketing",
+    "words": "foodmarkets"
+  },
+  {
+    "domain": "foodtruckflashmob",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Food",
+    "words": "foodtruckflashmob"
+  },
+  {
+    "domain": "founderagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "founderagents"
+  },
+  {
+    "domain": "freeaccess",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Cloud",
+    "words": "freeaccess"
+  },
+  {
+    "domain": "freeagentsea",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "freeagentsea"
+  },
+  {
+    "domain": "freecar",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Automotive",
+    "words": "freecar"
+  },
+  {
+    "domain": "freecars",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Automotive",
+    "words": "freecars"
+  },
+  {
+    "domain": "freecloudstorage",
+    "tld": "ai",
+    "ask": "$945",
+    "appraised": "$2,700",
+    "cat": "Cloud",
+    "words": "freecloudstorage"
+  },
+  {
+    "domain": "freedomagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "freedomagents"
+  },
+  {
+    "domain": "freefarm",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Agriculture",
+    "words": "freefarm"
+  },
+  {
+    "domain": "freefilm",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Video",
+    "words": "freefilm"
+  },
+  {
+    "domain": "freehouse",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Real-estate",
+    "words": "freehouse"
+  },
+  {
+    "domain": "freehouses",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Real-estate",
+    "words": "freehouses"
+  },
+  {
+    "domain": "freeloan",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Finance",
+    "words": "freeloan"
+  },
+  {
+    "domain": "freemagazines",
+    "tld": "ai",
+    "ask": "$4,200",
+    "appraised": "$12,000",
+    "cat": "Writing",
+    "words": "freemagazines"
+  },
+  {
+    "domain": "freerecipe",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Food",
+    "words": "freerecipe"
+  },
+  {
+    "domain": "freeschool",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Education",
+    "words": "freeschool"
+  },
+  {
+    "domain": "freightagents",
+    "tld": "ai",
+    "ask": "$2,730",
+    "appraised": "$7,800",
+    "cat": "Agents",
+    "words": "freightagents"
+  },
+  {
+    "domain": "freshfish",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Food",
+    "words": "freshfish"
+  },
+  {
+    "domain": "friendagent",
+    "tld": "ai",
+    "ask": "$70",
+    "appraised": "$200",
+    "cat": "Agents",
+    "words": "friendagent"
+  },
+  {
+    "domain": "friendagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "friendagents"
+  },
+  {
+    "domain": "friendshipagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "friendshipagent"
+  },
+  {
+    "domain": "fungamer",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Creation",
+    "words": "fungamer"
+  },
+  {
+    "domain": "fungamers",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Creation",
+    "words": "fungamers"
+  },
+  {
+    "domain": "funnelagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "funnelagent"
+  },
+  {
+    "domain": "funnelagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "funnelagents"
+  },
+  {
+    "domain": "funnygames",
+    "tld": "ai",
+    "ask": "$21,350",
+    "appraised": "$61,000",
+    "cat": "Creation",
+    "words": "funnygames"
+  },
+  {
+    "domain": "funnyshirts",
+    "tld": "ai",
+    "ask": "$9,450",
+    "appraised": "$27,000",
+    "cat": "Retail",
+    "words": "funnyshirts"
+  },
+  {
+    "domain": "funnytees",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Retail",
+    "words": "funnytees"
+  },
+  {
+    "domain": "funnytshirt",
+    "tld": "ai",
+    "ask": "$1,330",
+    "appraised": "$3,800",
+    "cat": "Retail",
+    "words": "funnytshirt"
+  },
+  {
+    "domain": "funnytshirts",
+    "tld": "ai",
+    "ask": "$4,550",
+    "appraised": "$13,000",
+    "cat": "Retail",
+    "words": "funnytshirts"
+  },
+  {
+    "domain": "funtimes",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Creation",
+    "words": "funtimes"
+  },
+  {
+    "domain": "furniturestore",
+    "tld": "ai",
+    "ask": "$7,700",
+    "appraised": "$22,000",
+    "cat": "Retail",
+    "words": "furniturestore"
+  },
+  {
+    "domain": "futurepeople",
+    "tld": "ai",
+    "ask": "$630",
+    "appraised": "$1,800",
+    "cat": "Hr",
+    "words": "futurepeople"
+  },
+  {
+    "domain": "gamedesigners",
+    "tld": "ai",
+    "ask": "$840",
+    "appraised": "$2,400",
+    "cat": "Design",
+    "words": "gamedesigners"
+  },
+  {
+    "domain": "gamedesigns",
+    "tld": "ai",
+    "ask": "$560",
+    "appraised": "$1,600",
+    "cat": "Design",
+    "words": "gamedesigns"
+  },
+  {
+    "domain": "gamenightagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "gamenightagent"
+  },
+  {
+    "domain": "gamewatch",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Creation",
+    "words": "gamewatch"
+  },
+  {
+    "domain": "gaylove",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Personalization",
+    "words": "gaylove"
+  },
+  {
+    "domain": "genaiagent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "genaiagent"
+  },
+  {
+    "domain": "genaiagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "genaiagents"
+  },
+  {
+    "domain": "genderidentity",
+    "tld": "ai",
+    "ask": "$1,505",
+    "appraised": "$4,300",
+    "cat": "Personalization",
+    "words": "genderidentity"
+  },
+  {
+    "domain": "generationagent",
+    "tld": "ai",
+    "ask": "$18",
+    "appraised": "$50",
+    "cat": "Agents",
+    "words": "generationagent"
+  },
+  {
+    "domain": "generationagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "generationagents"
+  },
+  {
+    "domain": "genericdrug",
+    "tld": "ai",
+    "ask": "$700",
+    "appraised": "$2,000",
+    "cat": "Pharma",
+    "words": "genericdrug"
+  },
+  {
+    "domain": "genericdrugs",
+    "tld": "ai",
+    "ask": "$3,045",
+    "appraised": "$8,700",
+    "cat": "Pharma",
+    "words": "genericdrugs"
+  },
+  {
+    "domain": "genomicsagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "genomicsagent"
+  },
+  {
+    "domain": "genomicsagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "genomicsagents"
+  },
+  {
+    "domain": "geocachers",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Travel",
+    "words": "geocachers"
+  },
+  {
+    "domain": "getheard",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Marketing",
+    "words": "getheard"
+  },
+  {
+    "domain": "girlclothes",
+    "tld": "ai",
+    "ask": "$3,850",
+    "appraised": "$11,000",
+    "cat": "Retail",
+    "words": "girlclothes"
+  },
+  {
+    "domain": "girlsclothes",
+    "tld": "ai",
+    "ask": "$1,470",
+    "appraised": "$4,200",
+    "cat": "Retail",
+    "words": "girlsclothes"
+  },
+  {
+    "domain": "gitagent",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Agents",
+    "words": "gitagent"
+  },
+  {
+    "domain": "gitagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "gitagents"
+  },
+  {
+    "domain": "globalagent",
+    "tld": "ai",
+    "ask": "$168",
+    "appraised": "$480",
+    "cat": "Agents",
+    "words": "globalagent"
+  },
+  {
+    "domain": "globalagents",
+    "tld": "ai",
+    "ask": "$343",
+    "appraised": "$980",
+    "cat": "Agents",
+    "words": "globalagents"
+  },
+  {
+    "domain": "goldwatch",
+    "tld": "ai",
+    "ask": "$11,550",
+    "appraised": "$33,000",
+    "cat": "Retail",
+    "words": "goldwatch"
+  },
+  {
+    "domain": "goldwatches",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Retail",
+    "words": "goldwatches"
+  },
+  {
+    "domain": "golfagent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "golfagent"
+  },
+  {
+    "domain": "golfagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "golfagents"
+  },
+  {
+    "domain": "golfhat",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Retail",
+    "words": "golfhat"
+  },
+  {
+    "domain": "golfhats",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Retail",
+    "words": "golfhats"
+  },
+  {
+    "domain": "goodsex",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Personalization",
+    "words": "goodsex"
+  },
+  {
+    "domain": "governmentagent",
+    "tld": "ai",
+    "ask": "$67",
+    "appraised": "$190",
+    "cat": "Governance",
+    "words": "governmentagent"
+  },
+  {
+    "domain": "governmentagents",
+    "tld": "ai",
+    "ask": "$70",
+    "appraised": "$200",
+    "cat": "Governance",
+    "words": "governmentagents"
+  },
+  {
+    "domain": "greenenergyagent",
+    "tld": "ai",
+    "ask": "$7",
+    "appraised": "$20",
+    "cat": "Energy",
+    "words": "greenenergyagent"
+  },
+  {
+    "domain": "greenenergyagents",
+    "tld": "ai",
+    "ask": "$35",
+    "appraised": "$100",
+    "cat": "Energy",
+    "words": "greenenergyagents"
+  },
+  {
+    "domain": "guitarsong",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Music",
+    "words": "guitarsong"
+  },
+  {
+    "domain": "guitarsongs",
+    "tld": "ai",
+    "ask": "$2,170",
+    "appraised": "$6,200",
+    "cat": "Music",
+    "words": "guitarsongs"
+  },
+  {
+    "domain": "harbors",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Logistics",
+    "words": "harbors"
+  },
+  {
+    "domain": "healpain",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Healthcare",
+    "words": "healpain"
+  },
+  {
+    "domain": "healthfacts",
+    "tld": "ai",
+    "ask": "$875",
+    "appraised": "$2,500",
+    "cat": "Healthcare",
+    "words": "healthfacts"
+  },
+  {
+    "domain": "healthfoods",
+    "tld": "ai",
+    "ask": "$3,255",
+    "appraised": "$9,300",
+    "cat": "Healthcare",
+    "words": "healthfoods"
+  },
+  {
+    "domain": "healthnut",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Healthcare",
+    "words": "healthnut"
+  },
+  {
+    "domain": "healthnuts",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Healthcare",
+    "words": "healthnuts"
+  },
+  {
+    "domain": "heartmatch",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Matching",
+    "words": "heartmatch"
+  },
+  {
+    "domain": "heirloomseeds",
+    "tld": "ai",
+    "ask": "$4,550",
+    "appraised": "$13,000",
+    "cat": "Agriculture",
+    "words": "heirloomseeds"
+  },
+  {
+    "domain": "helpagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "helpagents"
+  },
+  {
+    "domain": "helpdad",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Coaching",
+    "words": "helpdad"
+  },
+  {
+    "domain": "helperagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "helperagent"
+  },
+  {
+    "domain": "helperagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "helperagents"
+  },
+  {
+    "domain": "helpmom",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Coaching",
+    "words": "helpmom"
+  },
+  {
+    "domain": "helpmydad",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Coaching",
+    "words": "helpmydad"
+  },
+  {
+    "domain": "helpmymom",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Coaching",
+    "words": "helpmymom"
+  },
+  {
+    "domain": "herbavores",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Food",
+    "words": "herbavores"
+  },
+  {
+    "domain": "herlbalists",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Healthcare",
+    "words": "herlbalists"
+  },
+  {
+    "domain": "hisagent",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Agents",
+    "words": "hisagent"
+  },
+  {
+    "domain": "hollywoodagent",
+    "tld": "ai",
+    "ask": "$312",
+    "appraised": "$890",
+    "cat": "Agents",
+    "words": "hollywoodagent"
+  },
+  {
+    "domain": "hollywoodagents",
+    "tld": "ai",
+    "ask": "$221",
+    "appraised": "$630",
+    "cat": "Agents",
+    "words": "hollywoodagents"
+  },
+  {
+    "domain": "homeautomationagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Automotive",
+    "words": "homeautomationagent"
+  },
+  {
+    "domain": "homeautomationagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Automotive",
+    "words": "homeautomationagents"
+  },
+  {
+    "domain": "homequote",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Quoting",
+    "words": "homequote"
+  },
+  {
+    "domain": "homesitter",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Real-estate",
+    "words": "homesitter"
+  },
+  {
+    "domain": "homesitters",
+    "tld": "ai",
+    "ask": "$910",
+    "appraised": "$2,600",
+    "cat": "Real-estate",
+    "words": "homesitters"
+  },
+  {
+    "domain": "hookercityufocon",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Ai-portfolio",
+    "words": "hookercityufocon"
+  },
+  {
+    "domain": "horrific",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Creation",
+    "words": "horrific"
+  },
+  {
+    "domain": "hospitalityagent",
+    "tld": "ai",
+    "ask": "$11",
+    "appraised": "$30",
+    "cat": "Agents",
+    "words": "hospitalityagent"
+  },
+  {
+    "domain": "hospitalityagents",
+    "tld": "ai",
+    "ask": "$18",
+    "appraised": "$50",
+    "cat": "Agents",
+    "words": "hospitalityagents"
+  },
+  {
+    "domain": "hotelsdeals",
+    "tld": "ai",
+    "ask": "$3,850",
+    "appraised": "$11,000",
+    "cat": "Hospitality",
+    "words": "hotelsdeals"
+  },
+  {
+    "domain": "hotman",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Personalization",
+    "words": "hotman"
+  },
+  {
+    "domain": "hotwoman",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Personalization",
+    "words": "hotwoman"
+  },
+  {
+    "domain": "hotwomen",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Personalization",
+    "words": "hotwomen"
+  },
+  {
+    "domain": "houseclean",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Real-estate",
+    "words": "houseclean"
+  },
+  {
+    "domain": "houseflipper",
+    "tld": "ai",
+    "ask": "$490",
+    "appraised": "$1,400",
+    "cat": "Real-estate",
+    "words": "houseflipper"
+  },
+  {
+    "domain": "houseflipping",
+    "tld": "ai",
+    "ask": "$2,170",
+    "appraised": "$6,200",
+    "cat": "Real-estate",
+    "words": "houseflipping"
+  },
+  {
+    "domain": "housepainter",
+    "tld": "ai",
+    "ask": "$1,960",
+    "appraised": "$5,600",
+    "cat": "Real-estate",
+    "words": "housepainter"
+  },
+  {
+    "domain": "housesit",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Real-estate",
+    "words": "housesit"
+  },
+  {
+    "domain": "housesitters",
+    "tld": "ai",
+    "ask": "$3,500",
+    "appraised": "$10,000",
+    "cat": "Real-estate",
+    "words": "housesitters"
+  },
+  {
+    "domain": "housesitting",
+    "tld": "ai",
+    "ask": "$2,485",
+    "appraised": "$7,100",
+    "cat": "Real-estate",
+    "words": "housesitting"
+  },
+  {
+    "domain": "hragents",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Agents",
+    "words": "hragents"
+  },
+  {
+    "domain": "huntingagent",
+    "tld": "ai",
+    "ask": "$4",
+    "appraised": "$10",
+    "cat": "Agents",
+    "words": "huntingagent"
+  },
+  {
+    "domain": "huntsmanspider",
+    "tld": "ai",
+    "ask": "$665",
+    "appraised": "$1,900",
+    "cat": "Creation",
+    "words": "huntsmanspider"
+  },
+  {
+    "domain": "hurricanewatch",
+    "tld": "ai",
+    "ask": "$1,575",
+    "appraised": "$4,500",
+    "cat": "Analytics",
+    "words": "hurricanewatch"
+  },
+  {
+    "domain": "hypothesisagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "hypothesisagent"
+  },
+  {
+    "domain": "hypothesisagent",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "hypothesisagent"
+  },
+  {
+    "domain": "hypothesisagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "hypothesisagents"
+  },
+  {
+    "domain": "ideaagent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "ideaagent"
+  },
+  {
+    "domain": "ideaagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "ideaagents"
+  },
+  {
+    "domain": "idiopathic",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Healthcare",
+    "words": "idiopathic"
+  },
+  {
+    "domain": "iinsurance",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Insurance",
+    "words": "iinsurance"
+  },
+  {
+    "domain": "illuminations",
+    "tld": "ai",
+    "ask": "$1,155",
+    "appraised": "$3,300",
+    "cat": "Creation",
+    "words": "illuminations"
+  },
+  {
+    "domain": "incomeagency",
+    "tld": "ai",
+    "ask": "$14",
+    "appraised": "$40",
+    "cat": "Finance",
+    "words": "incomeagency"
+  },
+  {
+    "domain": "incomeagent",
+    "tld": "ai",
+    "ask": "$7",
+    "appraised": "$20",
+    "cat": "Agents",
+    "words": "incomeagent"
+  },
+  {
+    "domain": "incomeagents",
+    "tld": "ai",
+    "ask": "$18",
+    "appraised": "$50",
+    "cat": "Agents",
+    "words": "incomeagents"
+  },
+  {
+    "domain": "incubatoragent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "incubatoragent"
+  },
+  {
+    "domain": "incubatoragents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "incubatoragents"
+  },
+  {
+    "domain": "indiefilms",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Video",
+    "words": "indiefilms"
+  },
+  {
+    "domain": "industrialagent",
+    "tld": "ai",
+    "ask": "$42",
+    "appraised": "$120",
+    "cat": "Agents",
+    "words": "industrialagent"
+  },
+  {
+    "domain": "industrialagents",
+    "tld": "ai",
+    "ask": "$98",
+    "appraised": "$280",
+    "cat": "Agents",
+    "words": "industrialagents"
+  },
+  {
+    "domain": "influenceagent",
+    "tld": "ai",
+    "ask": "$21",
+    "appraised": "$60",
+    "cat": "Agents",
+    "words": "influenceagent"
+  },
+  {
+    "domain": "influenceagents",
+    "tld": "ai",
+    "ask": "$14",
+    "appraised": "$40",
+    "cat": "Agents",
+    "words": "influenceagents"
+  },
+  {
+    "domain": "influenceragent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "influenceragent"
+  },
+  {
+    "domain": "influenceragents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "influenceragents"
+  },
+  {
+    "domain": "informationagents",
+    "tld": "ai",
+    "ask": "$67",
+    "appraised": "$190",
+    "cat": "Agents",
+    "words": "informationagents"
+  },
+  {
+    "domain": "infrastructureagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "infrastructureagent"
+  },
+  {
+    "domain": "infrastructureagents",
+    "tld": "ai",
+    "ask": "$11",
+    "appraised": "$30",
+    "cat": "Agents",
+    "words": "infrastructureagents"
+  },
+  {
+    "domain": "innovationagent",
+    "tld": "ai",
+    "ask": "$21",
+    "appraised": "$60",
+    "cat": "Agents",
+    "words": "innovationagent"
+  },
+  {
+    "domain": "innovationagents",
+    "tld": "ai",
+    "ask": "$203",
+    "appraised": "$580",
+    "cat": "Agents",
+    "words": "innovationagents"
+  },
+  {
+    "domain": "innovativeagents",
+    "tld": "ai",
+    "ask": "$11",
+    "appraised": "$30",
+    "cat": "Agents",
+    "words": "innovativeagents"
+  },
+  {
+    "domain": "innovatoragent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "innovatoragent"
+  },
+  {
+    "domain": "innovatoragents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "innovatoragents"
+  },
+  {
+    "domain": "insightagent",
+    "tld": "ai",
+    "ask": "$11",
+    "appraised": "$30",
+    "cat": "Agents",
+    "words": "insightagent"
+  },
+  {
+    "domain": "insightagents",
+    "tld": "ai",
+    "ask": "$84",
+    "appraised": "$240",
+    "cat": "Agents",
+    "words": "insightagents"
+  },
+  {
+    "domain": "insulated",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Engineering",
+    "words": "insulated"
+  },
+  {
+    "domain": "insulations",
+    "tld": "ai",
+    "ask": "$1,785",
+    "appraised": "$5,100",
+    "cat": "Engineering",
+    "words": "insulations"
+  },
+  {
+    "domain": "insurancegroup",
+    "tld": "ai",
+    "ask": "$10,850",
+    "appraised": "$31,000",
+    "cat": "Insurance",
+    "words": "insurancegroup"
+  },
+  {
+    "domain": "insurancelife",
+    "tld": "ai",
+    "ask": "$10,500",
+    "appraised": "$30,000",
+    "cat": "Insurance",
+    "words": "insurancelife"
+  },
+  {
+    "domain": "integrationagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "integrationagent"
+  },
+  {
+    "domain": "integrationagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "integrationagents"
+  },
+  {
+    "domain": "intelliagents",
+    "tld": "ai",
+    "ask": "$31",
+    "appraised": "$90",
+    "cat": "Agents",
+    "words": "intelliagents"
+  },
+  {
+    "domain": "internation",
+    "tld": "ai",
+    "ask": "$2,345",
+    "appraised": "$6,700",
+    "cat": "Marketing",
+    "words": "internation"
+  },
+  {
+    "domain": "inventionagent",
+    "tld": "ai",
+    "ask": "$105",
+    "appraised": "$300",
+    "cat": "Agents",
+    "words": "inventionagent"
+  },
+  {
+    "domain": "inventionagents",
+    "tld": "ai",
+    "ask": "$25",
+    "appraised": "$70",
+    "cat": "Agents",
+    "words": "inventionagents"
+  },
+  {
+    "domain": "inventoragent",
+    "tld": "ai",
+    "ask": "$133",
+    "appraised": "$380",
+    "cat": "Agents",
+    "words": "inventoragent"
+  },
+  {
+    "domain": "inventoragents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "inventoragents"
+  },
+  {
+    "domain": "investmenttips",
+    "tld": "ai",
+    "ask": "$3,850",
+    "appraised": "$11,000",
+    "cat": "Finance",
+    "words": "investmenttips"
+  },
+  {
+    "domain": "iotagent",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Agents",
+    "words": "iotagent"
+  },
+  {
+    "domain": "iotagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "iotagents"
+  },
+  {
+    "domain": "itagent",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Agents",
+    "words": "itagent"
+  },
+  {
+    "domain": "itagents",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Agents",
+    "words": "itagents"
+  },
+  {
+    "domain": "itwork",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Engineering",
+    "words": "itwork"
+  },
+  {
+    "domain": "jahmerewebb",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Ai-portfolio",
+    "words": "jahmerewebb"
+  },
+  {
+    "domain": "jobautomationagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Hr",
+    "words": "jobautomationagent"
+  },
+  {
+    "domain": "jobautomationagent",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Hr",
+    "words": "jobautomationagent"
+  },
+  {
+    "domain": "jobautomationagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Hr",
+    "words": "jobautomationagents"
+  },
+  {
+    "domain": "jobautomationhub",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Hr",
+    "words": "jobautomationhub"
+  },
+  {
+    "domain": "jobautomations",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Hr",
+    "words": "jobautomations"
+  },
+  {
+    "domain": "jobbotagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Hr",
+    "words": "jobbotagent"
+  },
+  {
+    "domain": "jobbotagent",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Hr",
+    "words": "jobbotagent"
+  },
+  {
+    "domain": "jobbotagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Hr",
+    "words": "jobbotagents"
+  },
+  {
+    "domain": "jobcreationagent",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Hr",
+    "words": "jobcreationagent"
+  },
+  {
+    "domain": "jobmob",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Hr",
+    "words": "jobmob"
+  },
+  {
+    "domain": "jobsautomationagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Hr",
+    "words": "jobsautomationagent"
+  },
+  {
+    "domain": "jobsautomationagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Hr",
+    "words": "jobsautomationagents"
+  },
+  {
+    "domain": "kidgames",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Creation",
+    "words": "kidgames"
+  },
+  {
+    "domain": "labagent",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Agents",
+    "words": "labagent"
+  },
+  {
+    "domain": "labagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "labagents"
+  },
+  {
+    "domain": "laboragent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "laboragent"
+  },
+  {
+    "domain": "laboragents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "laboragents"
+  },
+  {
+    "domain": "lagatina",
+    "tld": "com",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Ai-portfolio",
+    "words": "lagatina"
+  },
+  {
+    "domain": "lagatinna",
+    "tld": "com",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Ai-portfolio",
+    "words": "lagatinna"
+  },
+  {
+    "domain": "langchainagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "langchainagent"
+  },
+  {
+    "domain": "langchainagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "langchainagents"
+  },
+  {
+    "domain": "lastone",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Ai-portfolio",
+    "words": "lastone"
+  },
+  {
+    "domain": "launchagent",
+    "tld": "ai",
+    "ask": "$11",
+    "appraised": "$30",
+    "cat": "Agents",
+    "words": "launchagent"
+  },
+  {
+    "domain": "lawagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Legal",
+    "words": "lawagents"
+  },
+  {
+    "domain": "lawnjockey",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Legal",
+    "words": "lawnjockey"
+  },
+  {
+    "domain": "leadbotagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "leadbotagent"
+  },
+  {
+    "domain": "leadbotagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "leadbotagents"
+  },
+  {
+    "domain": "leadgenagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "leadgenagents"
+  },
+  {
+    "domain": "learningagent",
+    "tld": "ai",
+    "ask": "$53",
+    "appraised": "$150",
+    "cat": "Agents",
+    "words": "learningagent"
+  },
+  {
+    "domain": "learningagents",
+    "tld": "ai",
+    "ask": "$39",
+    "appraised": "$110",
+    "cat": "Agents",
+    "words": "learningagents"
+  },
+  {
+    "domain": "lefties",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Retail",
+    "words": "lefties"
+  },
+  {
+    "domain": "legalagenthub",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Legal",
+    "words": "legalagenthub"
+  },
+  {
+    "domain": "legaltechagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Legal",
+    "words": "legaltechagent"
+  },
+  {
+    "domain": "legaltechagent",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Legal",
+    "words": "legaltechagent"
+  },
+  {
+    "domain": "legaltechagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Legal",
+    "words": "legaltechagents"
+  },
+  {
+    "domain": "legaltechagents",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Legal",
+    "words": "legaltechagents"
+  },
+  {
+    "domain": "legalworkflow",
+    "tld": "ai",
+    "ask": "$4",
+    "appraised": "$10",
+    "cat": "Legal",
+    "words": "legalworkflow"
+  },
+  {
+    "domain": "lesbianlove",
+    "tld": "ai",
+    "ask": "$1,715",
+    "appraised": "$4,900",
+    "cat": "Personalization",
+    "words": "lesbianlove"
+  },
+  {
+    "domain": "lifenavigator",
+    "tld": "ai",
+    "ask": "$189",
+    "appraised": "$540",
+    "cat": "Coaching",
+    "words": "lifenavigator"
+  },
+  {
+    "domain": "lifequotes",
+    "tld": "ai",
+    "ask": "$19,950",
+    "appraised": "$57,000",
+    "cat": "Quoting",
+    "words": "lifequotes"
+  },
+  {
+    "domain": "lightworkers",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Coaching",
+    "words": "lightworkers"
+  },
+  {
+    "domain": "listingagents",
+    "tld": "ai",
+    "ask": "$1,225",
+    "appraised": "$3,500",
+    "cat": "Agents",
+    "words": "listingagents"
+  },
+  {
+    "domain": "literaryagent",
+    "tld": "ai",
+    "ask": "$2,520",
+    "appraised": "$7,200",
+    "cat": "Agents",
+    "words": "literaryagent"
+  },
+  {
+    "domain": "literaryagents",
+    "tld": "ai",
+    "ask": "$6,300",
+    "appraised": "$18,000",
+    "cat": "Agents",
+    "words": "literaryagents"
+  },
+  {
+    "domain": "liveyourbest",
+    "tld": "ai",
+    "ask": "$525",
+    "appraised": "$1,500",
+    "cat": "Coaching",
+    "words": "liveyourbest"
+  },
+  {
+    "domain": "loaders",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Engineering",
+    "words": "loaders"
+  },
+  {
+    "domain": "loanadvice",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Finance",
+    "words": "loanadvice"
+  },
+  {
+    "domain": "loanagency",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Finance",
+    "words": "loanagency"
+  },
+  {
+    "domain": "loanagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Finance",
+    "words": "loanagents"
+  },
+  {
+    "domain": "logisticsagents",
+    "tld": "ai",
+    "ask": "$49",
+    "appraised": "$140",
+    "cat": "Logistics",
+    "words": "logisticsagents"
+  },
+  {
+    "domain": "lotions",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Retail",
+    "words": "lotions"
+  },
+  {
+    "domain": "loveadvice",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Personalization",
+    "words": "loveadvice"
+  },
+  {
+    "domain": "lovequotes",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Quoting",
+    "words": "lovequotes"
+  },
+  {
+    "domain": "loveshow",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Personalization",
+    "words": "loveshow"
+  },
+  {
+    "domain": "lovesick",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Personalization",
+    "words": "lovesick"
+  },
+  {
+    "domain": "lovetips",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Personalization",
+    "words": "lovetips"
+  },
+  {
+    "domain": "lovetriangle",
+    "tld": "ai",
+    "ask": "$665",
+    "appraised": "$1,900",
+    "cat": "Personalization",
+    "words": "lovetriangle"
+  },
+  {
+    "domain": "luciddream",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Coaching",
+    "words": "luciddream"
+  },
+  {
+    "domain": "madampresident",
+    "tld": "ai",
+    "ask": "$347",
+    "appraised": "$990",
+    "cat": "Governance",
+    "words": "madampresident"
+  },
+  {
+    "domain": "manscape",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Retail",
+    "words": "manscape"
+  },
+  {
+    "domain": "manscaping",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Retail",
+    "words": "manscaping"
+  },
+  {
+    "domain": "manufacturingagent",
+    "tld": "ai",
+    "ask": "$4",
+    "appraised": "$10",
+    "cat": "Agents",
+    "words": "manufacturingagent"
+  },
+  {
+    "domain": "manufacturingagents",
+    "tld": "ai",
+    "ask": "$42",
+    "appraised": "$120",
+    "cat": "Agents",
+    "words": "manufacturingagents"
+  },
+  {
+    "domain": "marketagent",
+    "tld": "ai",
+    "ask": "$305",
+    "appraised": "$870",
+    "cat": "Marketing",
+    "words": "marketagent"
+  },
+  {
+    "domain": "marketagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Marketing",
+    "words": "marketagents"
+  },
+  {
+    "domain": "marketanalysisagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Marketing",
+    "words": "marketanalysisagents"
+  },
+  {
+    "domain": "marketcreationagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Marketing",
+    "words": "marketcreationagent"
+  },
+  {
+    "domain": "marketcreationagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Marketing",
+    "words": "marketcreationagents"
+  },
+  {
+    "domain": "marketingagencies",
+    "tld": "ai",
+    "ask": "$875",
+    "appraised": "$2,500",
+    "cat": "Marketing",
+    "words": "marketingagencies"
+  },
+  {
+    "domain": "marketingagenthub",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Marketing",
+    "words": "marketingagenthub"
+  },
+  {
+    "domain": "markitech",
+    "tld": "cloud",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Engineering",
+    "words": "markitech"
+  },
+  {
+    "domain": "markitechai",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Engineering",
+    "words": "markitechai"
+  },
+  {
+    "domain": "marriagehelper",
+    "tld": "ai",
+    "ask": "$455",
+    "appraised": "$1,300",
+    "cat": "Coaching",
+    "words": "marriagehelper"
+  },
+  {
+    "domain": "matchagent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "matchagent"
+  },
+  {
+    "domain": "mathman",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Education",
+    "words": "mathman"
+  },
+  {
+    "domain": "meatagent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "meatagent"
+  },
+  {
+    "domain": "meatagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "meatagents"
+  },
+  {
+    "domain": "mediaagent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "mediaagent"
+  },
+  {
+    "domain": "mediaagents",
+    "tld": "ai",
+    "ask": "$165",
+    "appraised": "$470",
+    "cat": "Agents",
+    "words": "mediaagents"
+  },
+  {
+    "domain": "medicalagent",
+    "tld": "ai",
+    "ask": "$88",
+    "appraised": "$250",
+    "cat": "Healthcare",
+    "words": "medicalagent"
+  },
+  {
+    "domain": "medicalagenthub",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Healthcare",
+    "words": "medicalagenthub"
+  },
+  {
+    "domain": "medlabs",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Healthcare",
+    "words": "medlabs"
+  },
+  {
+    "domain": "medtechagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "medtechagent"
+  },
+  {
+    "domain": "medtechagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "medtechagents"
+  },
+  {
+    "domain": "mentalhealthagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Healthcare",
+    "words": "mentalhealthagent"
+  },
+  {
+    "domain": "mentalhealthagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Healthcare",
+    "words": "mentalhealthagents"
+  },
+  {
+    "domain": "mentoragent",
+    "tld": "ai",
+    "ask": "$25",
+    "appraised": "$70",
+    "cat": "Agents",
+    "words": "mentoragent"
+  },
+  {
+    "domain": "mentoragenthub",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "mentoragenthub"
+  },
+  {
+    "domain": "mentoragents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "mentoragents"
+  },
+  {
+    "domain": "mergeragent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "mergeragent"
+  },
+  {
+    "domain": "mergeragents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "mergeragents"
+  },
+  {
+    "domain": "metaverseagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "metaverseagent"
+  },
+  {
+    "domain": "metaverseagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "metaverseagents"
+  },
+  {
+    "domain": "metronomes",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Music",
+    "words": "metronomes"
+  },
+  {
+    "domain": "michaelmataluni",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Ai-portfolio",
+    "words": "michaelmataluni"
+  },
+  {
+    "domain": "migrationagent",
+    "tld": "ai",
+    "ask": "$385",
+    "appraised": "$1,100",
+    "cat": "Agents",
+    "words": "migrationagent"
+  },
+  {
+    "domain": "migrationagents",
+    "tld": "ai",
+    "ask": "$122",
+    "appraised": "$350",
+    "cat": "Agents",
+    "words": "migrationagents"
+  },
+  {
+    "domain": "mmanews",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Analytics",
+    "words": "mmanews"
+  },
+  {
+    "domain": "momgift",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Retail",
+    "words": "momgift"
+  },
+  {
+    "domain": "momquotes",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Quoting",
+    "words": "momquotes"
+  },
+  {
+    "domain": "moodmusic",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Music",
+    "words": "moodmusic"
+  },
+  {
+    "domain": "mortgageagent",
+    "tld": "ai",
+    "ask": "$700",
+    "appraised": "$2,000",
+    "cat": "Real-estate",
+    "words": "mortgageagent"
+  },
+  {
+    "domain": "mothersdaygift",
+    "tld": "ai",
+    "ask": "$420",
+    "appraised": "$1,200",
+    "cat": "Retail",
+    "words": "mothersdaygift"
+  },
+  {
+    "domain": "movieagent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "movieagent"
+  },
+  {
+    "domain": "movieagents",
+    "tld": "ai",
+    "ask": "$49",
+    "appraised": "$140",
+    "cat": "Agents",
+    "words": "movieagents"
+  },
+  {
+    "domain": "moviesnearme",
+    "tld": "ai",
+    "ask": "$595",
+    "appraised": "$1,700",
+    "cat": "Video",
+    "words": "moviesnearme"
+  },
+  {
+    "domain": "movingvan",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Logistics",
+    "words": "movingvan"
+  },
+  {
+    "domain": "musicmen",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Music",
+    "words": "musicmen"
+  },
+  {
+    "domain": "musicplay",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Music",
+    "words": "musicplay"
+  },
+  {
+    "domain": "musicquotes",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Music",
+    "words": "musicquotes"
+  },
+  {
+    "domain": "musicschools",
+    "tld": "ai",
+    "ask": "$4,900",
+    "appraised": "$14,000",
+    "cat": "Education",
+    "words": "musicschools"
+  },
+  {
+    "domain": "mycareeragent",
+    "tld": "ai",
+    "ask": "$11",
+    "appraised": "$30",
+    "cat": "Hr",
+    "words": "mycareeragent"
+  },
+  {
+    "domain": "myphilosopher",
+    "tld": "ai",
+    "ask": "$14",
+    "appraised": "$40",
+    "cat": "Coaching",
+    "words": "myphilosopher"
+  },
+  {
+    "domain": "myphilosophycoach",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Coaching",
+    "words": "myphilosophycoach"
+  },
+  {
+    "domain": "mytoys",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Retail",
+    "words": "mytoys"
+  },
+  {
+    "domain": "nanoagent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "nanoagent"
+  },
+  {
+    "domain": "nanobotagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "nanobotagent"
+  },
+  {
+    "domain": "nanobotagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "nanobotagents"
+  },
+  {
+    "domain": "naturalfoods",
+    "tld": "ai",
+    "ask": "$5,600",
+    "appraised": "$16,000",
+    "cat": "Food",
+    "words": "naturalfoods"
+  },
+  {
+    "domain": "naturists",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Personalization",
+    "words": "naturists"
+  },
+  {
+    "domain": "netbusiness",
+    "tld": "ai",
+    "ask": "$3,500",
+    "appraised": "$10,000",
+    "cat": "Marketing",
+    "words": "netbusiness"
+  },
+  {
+    "domain": "networkagent",
+    "tld": "ai",
+    "ask": "$42",
+    "appraised": "$120",
+    "cat": "Agents",
+    "words": "networkagent"
+  },
+  {
+    "domain": "networkagents",
+    "tld": "ai",
+    "ask": "$67",
+    "appraised": "$190",
+    "cat": "Agents",
+    "words": "networkagents"
+  },
+  {
+    "domain": "newhotels",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Hospitality",
+    "words": "newhotels"
+  },
+  {
+    "domain": "newsagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "newsagents"
+  },
+  {
+    "domain": "newsupdate",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Analytics",
+    "words": "newsupdate"
+  },
+  {
+    "domain": "newsvalidationagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "newsvalidationagent"
+  },
+  {
+    "domain": "newsvalidationagent",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "newsvalidationagent"
+  },
+  {
+    "domain": "newsvalidationagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "newsvalidationagents"
+  },
+  {
+    "domain": "nonprofitagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "nonprofitagent"
+  },
+  {
+    "domain": "nonprofitagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "nonprofitagents"
+  },
+  {
+    "domain": "officejob",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Hr",
+    "words": "officejob"
+  },
+  {
+    "domain": "officejobs",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Hr",
+    "words": "officejobs"
+  },
+  {
+    "domain": "onlineshoppingagent",
+    "tld": "ai",
+    "ask": "$35",
+    "appraised": "$100",
+    "cat": "Retail",
+    "words": "onlineshoppingagent"
+  },
+  {
+    "domain": "onlineshoppingagent",
+    "tld": "com",
+    "ask": "$109",
+    "appraised": "$310",
+    "cat": "Retail",
+    "words": "onlineshoppingagent"
+  },
+  {
+    "domain": "onlineshoppingagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Retail",
+    "words": "onlineshoppingagents"
+  },
+  {
+    "domain": "onlyplants",
+    "tld": "garden",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Planning",
+    "words": "onlyplants"
+  },
+  {
+    "domain": "operationsagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "operationsagent"
+  },
+  {
+    "domain": "operationsagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "operationsagents"
+  },
+  {
+    "domain": "optimizationagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "optimizationagent"
+  },
+  {
+    "domain": "optimizationagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "optimizationagents"
+  },
+  {
+    "domain": "oracleagent",
+    "tld": "ai",
+    "ask": "$245",
+    "appraised": "$700",
+    "cat": "Agents",
+    "words": "oracleagent"
+  },
+  {
+    "domain": "oversightagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "oversightagent"
+  },
+  {
+    "domain": "oversightagent",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "oversightagent"
+  },
+  {
+    "domain": "oversightagents",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "oversightagents"
+  },
+  {
+    "domain": "pansexual",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Personalization",
+    "words": "pansexual"
+  },
+  {
+    "domain": "parentingcoach",
+    "tld": "ai",
+    "ask": "$259",
+    "appraised": "$740",
+    "cat": "Coaching",
+    "words": "parentingcoach"
+  },
+  {
+    "domain": "parkdomain",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Ai-portfolio",
+    "words": "parkdomain"
+  },
+  {
+    "domain": "parkingagent",
+    "tld": "ai",
+    "ask": "$25",
+    "appraised": "$70",
+    "cat": "Agents",
+    "words": "parkingagent"
+  },
+  {
+    "domain": "parkingagents",
+    "tld": "ai",
+    "ask": "$11",
+    "appraised": "$30",
+    "cat": "Agents",
+    "words": "parkingagents"
+  },
+  {
+    "domain": "partyplace",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Booking",
+    "words": "partyplace"
+  },
+  {
+    "domain": "payrollagent",
+    "tld": "ai",
+    "ask": "$95",
+    "appraised": "$270",
+    "cat": "Agents",
+    "words": "payrollagent"
+  },
+  {
+    "domain": "payrollagents",
+    "tld": "ai",
+    "ask": "$102",
+    "appraised": "$290",
+    "cat": "Agents",
+    "words": "payrollagents"
+  },
+  {
+    "domain": "peerreviewagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "peerreviewagent"
+  },
+  {
+    "domain": "peerreviewagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "peerreviewagents"
+  },
+  {
+    "domain": "peopleagent",
+    "tld": "ai",
+    "ask": "$31",
+    "appraised": "$90",
+    "cat": "Agents",
+    "words": "peopleagent"
+  },
+  {
+    "domain": "peopleagents",
+    "tld": "ai",
+    "ask": "$21",
+    "appraised": "$60",
+    "cat": "Agents",
+    "words": "peopleagents"
+  },
+  {
+    "domain": "perfectpresent",
+    "tld": "ai",
+    "ask": "$525",
+    "appraised": "$1,500",
+    "cat": "Retail",
+    "words": "perfectpresent"
+  },
+  {
+    "domain": "perfectpresents",
+    "tld": "ai",
+    "ask": "$214",
+    "appraised": "$610",
+    "cat": "Retail",
+    "words": "perfectpresents"
+  },
+  {
+    "domain": "performanceagent",
+    "tld": "ai",
+    "ask": "$59",
+    "appraised": "$170",
+    "cat": "Agents",
+    "words": "performanceagent"
+  },
+  {
+    "domain": "performanceagents",
+    "tld": "ai",
+    "ask": "$25",
+    "appraised": "$70",
+    "cat": "Agents",
+    "words": "performanceagents"
+  },
+  {
+    "domain": "permacultureagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "permacultureagent"
+  },
+  {
+    "domain": "permacultureagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "permacultureagents"
+  },
+  {
+    "domain": "personalizedgift",
+    "tld": "ai",
+    "ask": "$770",
+    "appraised": "$2,200",
+    "cat": "Personalization",
+    "words": "personalizedgift"
+  },
+  {
+    "domain": "personfinder",
+    "tld": "ai",
+    "ask": "$2,765",
+    "appraised": "$7,900",
+    "cat": "Analytics",
+    "words": "personfinder"
+  },
+  {
+    "domain": "pharmaagent",
+    "tld": "ai",
+    "ask": "$35",
+    "appraised": "$100",
+    "cat": "Pharma",
+    "words": "pharmaagent"
+  },
+  {
+    "domain": "pharmaagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Pharma",
+    "words": "pharmaagents"
+  },
+  {
+    "domain": "philosopheragent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "philosopheragent"
+  },
+  {
+    "domain": "philosophycoach",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Coaching",
+    "words": "philosophycoach"
+  },
+  {
+    "domain": "phonesalesagent",
+    "tld": "ai",
+    "ask": "$11",
+    "appraised": "$30",
+    "cat": "Agents",
+    "words": "phonesalesagent"
+  },
+  {
+    "domain": "phonesalesagents",
+    "tld": "ai",
+    "ask": "$14",
+    "appraised": "$40",
+    "cat": "Agents",
+    "words": "phonesalesagents"
+  },
+  {
+    "domain": "photographyacademy",
+    "tld": "ai",
+    "ask": "$350",
+    "appraised": "$1,000",
+    "cat": "Education",
+    "words": "photographyacademy"
+  },
+  {
+    "domain": "photoschool",
+    "tld": "ai",
+    "ask": "$3,150",
+    "appraised": "$9,000",
+    "cat": "Education",
+    "words": "photoschool"
+  },
+  {
+    "domain": "photoschools",
+    "tld": "ai",
+    "ask": "$263",
+    "appraised": "$750",
+    "cat": "Education",
+    "words": "photoschools"
+  },
+  {
+    "domain": "pianosongs",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Music",
+    "words": "pianosongs"
+  },
+  {
+    "domain": "pilotschool",
+    "tld": "ai",
+    "ask": "$1,575",
+    "appraised": "$4,500",
+    "cat": "Education",
+    "words": "pilotschool"
+  },
+  {
+    "domain": "pilotschools",
+    "tld": "ai",
+    "ask": "$1,260",
+    "appraised": "$3,600",
+    "cat": "Education",
+    "words": "pilotschools"
+  },
+  {
+    "domain": "pimpmyride",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Automotive",
+    "words": "pimpmyride"
+  },
+  {
+    "domain": "pingpongdong",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Creation",
+    "words": "pingpongdong"
+  },
+  {
+    "domain": "pinko",
+    "tld": "ai",
+    "ask": "$29,750",
+    "appraised": "$85,000",
+    "cat": "Ai-portfolio",
+    "words": "pinko"
+  },
+  {
+    "domain": "pizzarias",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Food",
+    "words": "pizzarias"
+  },
+  {
+    "domain": "playmyway",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Creation",
+    "words": "playmyway"
+  },
+  {
+    "domain": "pokeragent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "pokeragent"
+  },
+  {
+    "domain": "pokeragents",
+    "tld": "ai",
+    "ask": "$193",
+    "appraised": "$550",
+    "cat": "Agents",
+    "words": "pokeragents"
+  },
+  {
+    "domain": "policywatchagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "policywatchagent"
+  },
+  {
+    "domain": "policywatchagent",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "policywatchagent"
+  },
+  {
+    "domain": "policywatchagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "policywatchagents"
+  },
+  {
+    "domain": "pollinators",
+    "tld": "ai",
+    "ask": "$665",
+    "appraised": "$1,900",
+    "cat": "Agriculture",
+    "words": "pollinators"
+  },
+  {
+    "domain": "polyamorous",
+    "tld": "ai",
+    "ask": "$6,650",
+    "appraised": "$19,000",
+    "cat": "Personalization",
+    "words": "polyamorous"
+  },
+  {
+    "domain": "polywise",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Personalization",
+    "words": "polywise"
+  },
+  {
+    "domain": "pornovideos",
+    "tld": "ai",
+    "ask": "$8,050",
+    "appraised": "$23,000",
+    "cat": "Video",
+    "words": "pornovideos"
+  },
+  {
+    "domain": "portfolioagent",
+    "tld": "ai",
+    "ask": "$11",
+    "appraised": "$30",
+    "cat": "Agents",
+    "words": "portfolioagent"
+  },
+  {
+    "domain": "portfolioagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "portfolioagents"
+  },
+  {
+    "domain": "prepschool",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Education",
+    "words": "prepschool"
+  },
+  {
+    "domain": "prepschools",
+    "tld": "ai",
+    "ask": "$2,240",
+    "appraised": "$6,400",
+    "cat": "Education",
+    "words": "prepschools"
+  },
+  {
+    "domain": "pricedropagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "pricedropagent"
+  },
+  {
+    "domain": "pricedropagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "pricedropagents"
+  },
+  {
+    "domain": "prisontime",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Legal",
+    "words": "prisontime"
+  },
+  {
+    "domain": "probusiness",
+    "tld": "ai",
+    "ask": "$3,850",
+    "appraised": "$11,000",
+    "cat": "Marketing",
+    "words": "probusiness"
+  },
+  {
+    "domain": "productagent",
+    "tld": "ai",
+    "ask": "$193",
+    "appraised": "$550",
+    "cat": "Agents",
+    "words": "productagent"
+  },
+  {
+    "domain": "productagents",
+    "tld": "ai",
+    "ask": "$595",
+    "appraised": "$1,700",
+    "cat": "Agents",
+    "words": "productagents"
+  },
+  {
+    "domain": "productionagent",
+    "tld": "ai",
+    "ask": "$46",
+    "appraised": "$130",
+    "cat": "Agents",
+    "words": "productionagent"
+  },
+  {
+    "domain": "productionagents",
+    "tld": "ai",
+    "ask": "$56",
+    "appraised": "$160",
+    "cat": "Agents",
+    "words": "productionagents"
+  },
+  {
+    "domain": "productivityagent",
+    "tld": "ai",
+    "ask": "$74",
+    "appraised": "$210",
+    "cat": "Agents",
+    "words": "productivityagent"
+  },
+  {
+    "domain": "productivityagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "productivityagents"
+  },
+  {
+    "domain": "profund",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Finance",
+    "words": "profund"
+  },
+  {
+    "domain": "progolfagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "progolfagent"
+  },
+  {
+    "domain": "progolfagent",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "progolfagent"
+  },
+  {
+    "domain": "propertyagents",
+    "tld": "ai",
+    "ask": "$2,030",
+    "appraised": "$5,800",
+    "cat": "Agents",
+    "words": "propertyagents"
+  },
+  {
+    "domain": "proteinpowders",
+    "tld": "ai",
+    "ask": "$1,820",
+    "appraised": "$5,200",
+    "cat": "Retail",
+    "words": "proteinpowders"
+  },
+  {
+    "domain": "protoagent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "protoagent"
+  },
+  {
+    "domain": "protoagent",
+    "tld": "com",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "protoagent"
+  },
+  {
+    "domain": "protoagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "protoagents"
+  },
+  {
+    "domain": "prototypeagent",
+    "tld": "ai",
+    "ask": "$115",
+    "appraised": "$330",
+    "cat": "Agents",
+    "words": "prototypeagent"
+  },
+  {
+    "domain": "prototypeagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "prototypeagents"
+  },
+  {
+    "domain": "psychologyagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "psychologyagent"
+  },
+  {
+    "domain": "psychologyagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "psychologyagents"
+  },
+  {
+    "domain": "psychosomatic",
+    "tld": "ai",
+    "ask": "$1,540",
+    "appraised": "$4,400",
+    "cat": "Healthcare",
+    "words": "psychosomatic"
+  },
+  {
+    "domain": "publiclibraries",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Education",
+    "words": "publiclibraries"
+  },
+  {
+    "domain": "publicschools",
+    "tld": "ai",
+    "ask": "$11,550",
+    "appraised": "$33,000",
+    "cat": "Education",
+    "words": "publicschools"
+  },
+  {
+    "domain": "punkfashion",
+    "tld": "ai",
+    "ask": "$1,995",
+    "appraised": "$5,700",
+    "cat": "Retail",
+    "words": "punkfashion"
+  },
+  {
+    "domain": "punkstyle",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Design",
+    "words": "punkstyle"
+  },
+  {
+    "domain": "quantumagents",
+    "tld": "ai",
+    "ask": "$7",
+    "appraised": "$20",
+    "cat": "Agents",
+    "words": "quantumagents"
+  },
+  {
+    "domain": "questar",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Creation",
+    "words": "questar"
+  },
+  {
+    "domain": "quoteinsurance",
+    "tld": "ai",
+    "ask": "$3,850",
+    "appraised": "$11,000",
+    "cat": "Insurance",
+    "words": "quoteinsurance"
+  },
+  {
+    "domain": "rainbowcollection",
+    "tld": "ai",
+    "ask": "$70",
+    "appraised": "$200",
+    "cat": "Retail",
+    "words": "rainbowcollection"
+  },
+  {
+    "domain": "rainbowcollection",
+    "tld": "art",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Retail",
+    "words": "rainbowcollection"
+  },
+  {
+    "domain": "rainbowcollection",
+    "tld": "shop",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Retail",
+    "words": "rainbowcollection"
+  },
+  {
+    "domain": "rainbowcollections",
+    "tld": "shop",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Retail",
+    "words": "rainbowcollections"
+  },
+  {
+    "domain": "rainbowcollections",
+    "tld": "store",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Retail",
+    "words": "rainbowcollections"
+  },
+  {
+    "domain": "rainbowconnection",
+    "tld": "store",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Retail",
+    "words": "rainbowconnection"
+  },
+  {
+    "domain": "rapstar",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Music",
+    "words": "rapstar"
+  },
+  {
+    "domain": "ratart",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Design",
+    "words": "ratart"
+  },
+  {
+    "domain": "rawfood",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Food",
+    "words": "rawfood"
+  },
+  {
+    "domain": "rawfoods",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Food",
+    "words": "rawfoods"
+  },
+  {
+    "domain": "realtoragent",
+    "tld": "ai",
+    "ask": "$175",
+    "appraised": "$500",
+    "cat": "Agents",
+    "words": "realtoragent"
+  },
+  {
+    "domain": "realtoragents",
+    "tld": "ai",
+    "ask": "$1,470",
+    "appraised": "$4,200",
+    "cat": "Agents",
+    "words": "realtoragents"
+  },
+  {
+    "domain": "recordplayers",
+    "tld": "ai",
+    "ask": "$3,045",
+    "appraised": "$8,700",
+    "cat": "Music",
+    "words": "recordplayers"
+  },
+  {
+    "domain": "recruiteragents",
+    "tld": "ai",
+    "ask": "$7",
+    "appraised": "$20",
+    "cat": "Hr",
+    "words": "recruiteragents"
+  },
+  {
+    "domain": "recruitmentagents",
+    "tld": "ai",
+    "ask": "$98",
+    "appraised": "$280",
+    "cat": "Hr",
+    "words": "recruitmentagents"
+  },
+  {
+    "domain": "redhats",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Retail",
+    "words": "redhats"
+  },
+  {
+    "domain": "redlining",
+    "tld": "ai",
+    "ask": "$9,800",
+    "appraised": "$28,000",
+    "cat": "Finance",
+    "words": "redlining"
+  },
+  {
+    "domain": "relationshipagent",
+    "tld": "ai",
+    "ask": "$28",
+    "appraised": "$80",
+    "cat": "Agents",
+    "words": "relationshipagent"
+  },
+  {
+    "domain": "repairagent",
+    "tld": "ai",
+    "ask": "$56",
+    "appraised": "$160",
+    "cat": "Agents",
+    "words": "repairagent"
+  },
+  {
+    "domain": "repairagents",
+    "tld": "ai",
+    "ask": "$21",
+    "appraised": "$60",
+    "cat": "Agents",
+    "words": "repairagents"
+  },
+  {
+    "domain": "reputationagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "reputationagents"
+  },
+  {
+    "domain": "researchdesign",
+    "tld": "ai",
+    "ask": "$910",
+    "appraised": "$2,600",
+    "cat": "Design",
+    "words": "researchdesign"
+  },
+  {
+    "domain": "researchhelp",
+    "tld": "ai",
+    "ask": "$455",
+    "appraised": "$1,300",
+    "cat": "Education",
+    "words": "researchhelp"
+  },
+  {
+    "domain": "researchinstituteai",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Education",
+    "words": "researchinstituteai"
+  },
+  {
+    "domain": "researchjobs",
+    "tld": "ai",
+    "ask": "$4,900",
+    "appraised": "$14,000",
+    "cat": "Hr",
+    "words": "researchjobs"
+  },
+  {
+    "domain": "researchlaboratory",
+    "tld": "ai",
+    "ask": "$455",
+    "appraised": "$1,300",
+    "cat": "Education",
+    "words": "researchlaboratory"
+  },
+  {
+    "domain": "researchmethod",
+    "tld": "ai",
+    "ask": "$735",
+    "appraised": "$2,100",
+    "cat": "Education",
+    "words": "researchmethod"
+  },
+  {
+    "domain": "researchmethodology",
+    "tld": "ai",
+    "ask": "$665",
+    "appraised": "$1,900",
+    "cat": "Education",
+    "words": "researchmethodology"
+  },
+  {
+    "domain": "researchmethods",
+    "tld": "ai",
+    "ask": "$595",
+    "appraised": "$1,700",
+    "cat": "Education",
+    "words": "researchmethods"
+  },
+  {
+    "domain": "researchtech",
+    "tld": "ai",
+    "ask": "$343",
+    "appraised": "$980",
+    "cat": "Education",
+    "words": "researchtech"
+  },
+  {
+    "domain": "researchtechnology",
+    "tld": "ai",
+    "ask": "$805",
+    "appraised": "$2,300",
+    "cat": "Education",
+    "words": "researchtechnology"
+  },
+  {
+    "domain": "reservationagent",
+    "tld": "ai",
+    "ask": "$112",
+    "appraised": "$320",
+    "cat": "Agents",
+    "words": "reservationagent"
+  },
+  {
+    "domain": "reservationagents",
+    "tld": "ai",
+    "ask": "$63",
+    "appraised": "$180",
+    "cat": "Agents",
+    "words": "reservationagents"
+  },
+  {
+    "domain": "restaurantagent",
+    "tld": "ai",
+    "ask": "$42",
+    "appraised": "$120",
+    "cat": "Food",
+    "words": "restaurantagent"
+  },
+  {
+    "domain": "restaurantagents",
+    "tld": "ai",
+    "ask": "$11",
+    "appraised": "$30",
+    "cat": "Food",
+    "words": "restaurantagents"
+  },
+  {
+    "domain": "restauranteur",
+    "tld": "ai",
+    "ask": "$1,750",
+    "appraised": "$5,000",
+    "cat": "Food",
+    "words": "restauranteur"
+  },
+  {
+    "domain": "retailagent",
+    "tld": "ai",
+    "ask": "$102",
+    "appraised": "$290",
+    "cat": "Retail",
+    "words": "retailagent"
+  },
+  {
+    "domain": "retailagents",
+    "tld": "ai",
+    "ask": "$95",
+    "appraised": "$270",
+    "cat": "Retail",
+    "words": "retailagents"
+  },
+  {
+    "domain": "retentionagent",
+    "tld": "ai",
+    "ask": "$49",
+    "appraised": "$140",
+    "cat": "Agents",
+    "words": "retentionagent"
+  },
+  {
+    "domain": "retirementhelp",
+    "tld": "ai",
+    "ask": "$2,240",
+    "appraised": "$6,400",
+    "cat": "Finance",
+    "words": "retirementhelp"
+  },
+  {
+    "domain": "reviewagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "reviewagents"
+  },
+  {
+    "domain": "riskagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "riskagents"
+  },
+  {
+    "domain": "roboagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "roboagents"
+  },
+  {
+    "domain": "robotagents",
+    "tld": "ai",
+    "ask": "$28",
+    "appraised": "$80",
+    "cat": "Agents",
+    "words": "robotagents"
+  },
+  {
+    "domain": "rolepages",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Hr",
+    "words": "rolepages"
+  },
+  {
+    "domain": "rollhigher",
+    "tld": "com",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Creation",
+    "words": "rollhigher"
+  },
+  {
+    "domain": "rpggame",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Creation",
+    "words": "rpggame"
+  },
+  {
+    "domain": "rpgworld",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Creation",
+    "words": "rpgworld"
+  },
+  {
+    "domain": "rpgworlds",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Creation",
+    "words": "rpgworlds"
+  },
+  {
+    "domain": "sacrilege",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Creation",
+    "words": "sacrilege"
+  },
+  {
+    "domain": "sacrilegious",
+    "tld": "ai",
+    "ask": "$1,120",
+    "appraised": "$3,200",
+    "cat": "Creation",
+    "words": "sacrilegious"
+  },
+  {
+    "domain": "sacrosanct",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Creation",
+    "words": "sacrosanct"
+  },
+  {
+    "domain": "salesagenthub",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "salesagenthub"
+  },
+  {
+    "domain": "salesbotagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "salesbotagent"
+  },
+  {
+    "domain": "salesbotagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "salesbotagents"
+  },
+  {
+    "domain": "saltlife",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Travel",
+    "words": "saltlife"
+  },
+  {
+    "domain": "santatracker",
+    "tld": "ai",
+    "ask": "$4,200",
+    "appraised": "$12,000",
+    "cat": "Analytics",
+    "words": "santatracker"
+  },
+  {
+    "domain": "sarcasticquotes",
+    "tld": "ai",
+    "ask": "$805",
+    "appraised": "$2,300",
+    "cat": "Quoting",
+    "words": "sarcasticquotes"
+  },
+  {
+    "domain": "sardonic",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Writing",
+    "words": "sardonic"
+  },
+  {
+    "domain": "satiretees",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Retail",
+    "words": "satiretees"
+  },
+  {
+    "domain": "schedulers",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Scheduling",
+    "words": "schedulers"
+  },
+  {
+    "domain": "sciencemethodagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "sciencemethodagent"
+  },
+  {
+    "domain": "sciencemethodagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "sciencemethodagents"
+  },
+  {
+    "domain": "scientificmethod",
+    "tld": "ai",
+    "ask": "$1,085",
+    "appraised": "$3,100",
+    "cat": "Education",
+    "words": "scientificmethod"
+  },
+  {
+    "domain": "scriptagent",
+    "tld": "ai",
+    "ask": "$350",
+    "appraised": "$1,000",
+    "cat": "Agents",
+    "words": "scriptagent"
+  },
+  {
+    "domain": "scriptdeveloper",
+    "tld": "ai",
+    "ask": "$179",
+    "appraised": "$510",
+    "cat": "Writing",
+    "words": "scriptdeveloper"
+  },
+  {
+    "domain": "scriptforge",
+    "tld": "pro",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Engineering",
+    "words": "scriptforge"
+  },
+  {
+    "domain": "securestorage",
+    "tld": "ai",
+    "ask": "$3,325",
+    "appraised": "$9,500",
+    "cat": "Cloud",
+    "words": "securestorage"
+  },
+  {
+    "domain": "securityagenthub",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Security",
+    "words": "securityagenthub"
+  },
+  {
+    "domain": "sellersagent",
+    "tld": "ai",
+    "ask": "$700",
+    "appraised": "$2,000",
+    "cat": "Agents",
+    "words": "sellersagent"
+  },
+  {
+    "domain": "sellersagents",
+    "tld": "ai",
+    "ask": "$420",
+    "appraised": "$1,200",
+    "cat": "Agents",
+    "words": "sellersagents"
+  },
+  {
+    "domain": "serviceagents",
+    "tld": "ai",
+    "ask": "$1,260",
+    "appraised": "$3,600",
+    "cat": "Agents",
+    "words": "serviceagents"
+  },
+  {
+    "domain": "setar",
+    "tld": "ai",
+    "ask": "$29,750",
+    "appraised": "$85,000",
+    "cat": "Ai-portfolio",
+    "words": "setar"
+  },
+  {
+    "domain": "sexaddiction",
+    "tld": "ai",
+    "ask": "$2,590",
+    "appraised": "$7,400",
+    "cat": "Personalization",
+    "words": "sexaddiction"
+  },
+  {
+    "domain": "sexagent",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Agents",
+    "words": "sexagent"
+  },
+  {
+    "domain": "sexchange",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Personalization",
+    "words": "sexchange"
+  },
+  {
+    "domain": "sexcounselor",
+    "tld": "ai",
+    "ask": "$350",
+    "appraised": "$1,000",
+    "cat": "Healthcare",
+    "words": "sexcounselor"
+  },
+  {
+    "domain": "sexfree",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Personalization",
+    "words": "sexfree"
+  },
+  {
+    "domain": "sexmaster",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Personalization",
+    "words": "sexmaster"
+  },
+  {
+    "domain": "sexoffenders",
+    "tld": "ai",
+    "ask": "$9,100",
+    "appraised": "$26,000",
+    "cat": "Personalization",
+    "words": "sexoffenders"
+  },
+  {
+    "domain": "sexpot",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Personalization",
+    "words": "sexpot"
+  },
+  {
+    "domain": "sexualpreference",
+    "tld": "ai",
+    "ask": "$385",
+    "appraised": "$1,100",
+    "cat": "Personalization",
+    "words": "sexualpreference"
+  },
+  {
+    "domain": "sexyman",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Personalization",
+    "words": "sexyman"
+  },
+  {
+    "domain": "shippingagents",
+    "tld": "ai",
+    "ask": "$4,200",
+    "appraised": "$12,000",
+    "cat": "Agents",
+    "words": "shippingagents"
+  },
+  {
+    "domain": "shopperagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Retail",
+    "words": "shopperagent"
+  },
+  {
+    "domain": "shopperagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Retail",
+    "words": "shopperagents"
+  },
+  {
+    "domain": "shopperagents",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Retail",
+    "words": "shopperagents"
+  },
+  {
+    "domain": "silicones",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Engineering",
+    "words": "silicones"
+  },
+  {
+    "domain": "singlesex",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Personalization",
+    "words": "singlesex"
+  },
+  {
+    "domain": "singlessex",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Personalization",
+    "words": "singlessex"
+  },
+  {
+    "domain": "singularityaccelerator",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Engineering",
+    "words": "singularityaccelerator"
+  },
+  {
+    "domain": "singularityagency",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Engineering",
+    "words": "singularityagency"
+  },
+  {
+    "domain": "singularityagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "singularityagent"
+  },
+  {
+    "domain": "singularityagent",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "singularityagent"
+  },
+  {
+    "domain": "singularityagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "singularityagents"
+  },
+  {
+    "domain": "singularityincubator",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Engineering",
+    "words": "singularityincubator"
+  },
+  {
+    "domain": "slotsmachines",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Creation",
+    "words": "slotsmachines"
+  },
+  {
+    "domain": "smartcityagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "smartcityagent"
+  },
+  {
+    "domain": "smartcityagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "smartcityagents"
+  },
+  {
+    "domain": "smartinsurance",
+    "tld": "ai",
+    "ask": "$2,905",
+    "appraised": "$8,300",
+    "cat": "Insurance",
+    "words": "smartinsurance"
+  },
+  {
+    "domain": "socialmediaagent",
+    "tld": "ai",
+    "ask": "$4",
+    "appraised": "$10",
+    "cat": "Agents",
+    "words": "socialmediaagent"
+  },
+  {
+    "domain": "socialmediaagents",
+    "tld": "ai",
+    "ask": "$84",
+    "appraised": "$240",
+    "cat": "Agents",
+    "words": "socialmediaagents"
+  },
+  {
+    "domain": "socialsciences",
+    "tld": "ai",
+    "ask": "$5,250",
+    "appraised": "$15,000",
+    "cat": "Education",
+    "words": "socialsciences"
+  },
+  {
+    "domain": "softwareengineerjobs",
+    "tld": "ai",
+    "ask": "$1,085",
+    "appraised": "$3,100",
+    "cat": "Hr",
+    "words": "softwareengineerjobs"
+  },
+  {
+    "domain": "soupwithoutasermon",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Food",
+    "words": "soupwithoutasermon"
+  },
+  {
+    "domain": "spaceagent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "spaceagent"
+  },
+  {
+    "domain": "spaceagents",
+    "tld": "ai",
+    "ask": "$109",
+    "appraised": "$310",
+    "cat": "Agents",
+    "words": "spaceagents"
+  },
+  {
+    "domain": "spiritualist",
+    "tld": "ai",
+    "ask": "$805",
+    "appraised": "$2,300",
+    "cat": "Coaching",
+    "words": "spiritualist"
+  },
+  {
+    "domain": "sportsagents",
+    "tld": "ai",
+    "ask": "$1,435",
+    "appraised": "$4,100",
+    "cat": "Agents",
+    "words": "sportsagents"
+  },
+  {
+    "domain": "sportsjob",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Hr",
+    "words": "sportsjob"
+  },
+  {
+    "domain": "sportsjobs",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Hr",
+    "words": "sportsjobs"
+  },
+  {
+    "domain": "sportswatch",
+    "tld": "ai",
+    "ask": "$6,300",
+    "appraised": "$18,000",
+    "cat": "Retail",
+    "words": "sportswatch"
+  },
+  {
+    "domain": "spyagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "spyagents"
+  },
+  {
+    "domain": "startupagent",
+    "tld": "ai",
+    "ask": "$21",
+    "appraised": "$60",
+    "cat": "Agents",
+    "words": "startupagent"
+  },
+  {
+    "domain": "startupagents",
+    "tld": "ai",
+    "ask": "$42",
+    "appraised": "$120",
+    "cat": "Agents",
+    "words": "startupagents"
+  },
+  {
+    "domain": "startupincubator",
+    "tld": "ai",
+    "ask": "$455",
+    "appraised": "$1,300",
+    "cat": "Finance",
+    "words": "startupincubator"
+  },
+  {
+    "domain": "stockagent",
+    "tld": "agency",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Trading",
+    "words": "stockagent"
+  },
+  {
+    "domain": "stockagents",
+    "tld": "ai",
+    "ask": "$234",
+    "appraised": "$670",
+    "cat": "Trading",
+    "words": "stockagents"
+  },
+  {
+    "domain": "stockquote",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Trading",
+    "words": "stockquote"
+  },
+  {
+    "domain": "stopaging",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Healthcare",
+    "words": "stopaging"
+  },
+  {
+    "domain": "stopworking",
+    "tld": "ai",
+    "ask": "$665",
+    "appraised": "$1,900",
+    "cat": "Hr",
+    "words": "stopworking"
+  },
+  {
+    "domain": "stormwatch",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Analytics",
+    "words": "stormwatch"
+  },
+  {
+    "domain": "strategyagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "strategyagents"
+  },
+  {
+    "domain": "streamingagent",
+    "tld": "ai",
+    "ask": "$11",
+    "appraised": "$30",
+    "cat": "Agents",
+    "words": "streamingagent"
+  },
+  {
+    "domain": "subscriptionagent",
+    "tld": "ai",
+    "ask": "$109",
+    "appraised": "$310",
+    "cat": "Agents",
+    "words": "subscriptionagent"
+  },
+  {
+    "domain": "subscriptionagents",
+    "tld": "ai",
+    "ask": "$161",
+    "appraised": "$460",
+    "cat": "Agents",
+    "words": "subscriptionagents"
+  },
+  {
+    "domain": "suicidehelpagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "suicidehelpagent"
+  },
+  {
+    "domain": "supplychainagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Logistics",
+    "words": "supplychainagent"
+  },
+  {
+    "domain": "supplychainagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Logistics",
+    "words": "supplychainagents"
+  },
+  {
+    "domain": "supremeagent",
+    "tld": "ai",
+    "ask": "$11",
+    "appraised": "$30",
+    "cat": "Agents",
+    "words": "supremeagent"
+  },
+  {
+    "domain": "supremeagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "supremeagents"
+  },
+  {
+    "domain": "supremeagentsea",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "supremeagentsea"
+  },
+  {
+    "domain": "sustainabilityagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "sustainabilityagent"
+  },
+  {
+    "domain": "sustainabilityagents",
+    "tld": "ai",
+    "ask": "$14",
+    "appraised": "$40",
+    "cat": "Agents",
+    "words": "sustainabilityagents"
+  },
+  {
+    "domain": "swagbag",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Retail",
+    "words": "swagbag"
+  },
+  {
+    "domain": "swimgear",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Coaching",
+    "words": "swimgear"
+  },
+  {
+    "domain": "swimmersear",
+    "tld": "ai",
+    "ask": "$2,380",
+    "appraised": "$6,800",
+    "cat": "Coaching",
+    "words": "swimmersear"
+  },
+  {
+    "domain": "swingerclub",
+    "tld": "ai",
+    "ask": "$4,550",
+    "appraised": "$13,000",
+    "cat": "Personalization",
+    "words": "swingerclub"
+  },
+  {
+    "domain": "swingercouples",
+    "tld": "ai",
+    "ask": "$1,050",
+    "appraised": "$3,000",
+    "cat": "Personalization",
+    "words": "swingercouples"
+  },
+  {
+    "domain": "swingerlifestyle",
+    "tld": "ai",
+    "ask": "$2,450",
+    "appraised": "$7,000",
+    "cat": "Personalization",
+    "words": "swingerlifestyle"
+  },
+  {
+    "domain": "swingerparties",
+    "tld": "ai",
+    "ask": "$1,120",
+    "appraised": "$3,200",
+    "cat": "Personalization",
+    "words": "swingerparties"
+  },
+  {
+    "domain": "swingersclub",
+    "tld": "ai",
+    "ask": "$3,220",
+    "appraised": "$9,200",
+    "cat": "Personalization",
+    "words": "swingersclub"
+  },
+  {
+    "domain": "swingersclubs",
+    "tld": "ai",
+    "ask": "$3,325",
+    "appraised": "$9,500",
+    "cat": "Personalization",
+    "words": "swingersclubs"
+  },
+  {
+    "domain": "swingerslifestyle",
+    "tld": "ai",
+    "ask": "$248",
+    "appraised": "$710",
+    "cat": "Personalization",
+    "words": "swingerslifestyle"
+  },
+  {
+    "domain": "swingersparty",
+    "tld": "ai",
+    "ask": "$3,150",
+    "appraised": "$9,000",
+    "cat": "Personalization",
+    "words": "swingersparty"
+  },
+  {
+    "domain": "talentagents",
+    "tld": "ai",
+    "ask": "$700",
+    "appraised": "$2,000",
+    "cat": "Hr",
+    "words": "talentagents"
+  },
+  {
+    "domain": "taskautomationagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Automotive",
+    "words": "taskautomationagent"
+  },
+  {
+    "domain": "taskautomationagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Automotive",
+    "words": "taskautomationagents"
+  },
+  {
+    "domain": "taskautomationhub",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Automotive",
+    "words": "taskautomationhub"
+  },
+  {
+    "domain": "taskautomationhub",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Automotive",
+    "words": "taskautomationhub"
+  },
+  {
+    "domain": "taskmasteragents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "taskmasteragents"
+  },
+  {
+    "domain": "techagent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "techagent"
+  },
+  {
+    "domain": "techagenthub",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "techagenthub"
+  },
+  {
+    "domain": "techagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "techagents"
+  },
+  {
+    "domain": "technobabble",
+    "tld": "ai",
+    "ask": "$665",
+    "appraised": "$1,900",
+    "cat": "Engineering",
+    "words": "technobabble"
+  },
+  {
+    "domain": "technologyjobs",
+    "tld": "ai",
+    "ask": "$11,550",
+    "appraised": "$33,000",
+    "cat": "Hr",
+    "words": "technologyjobs"
+  },
+  {
+    "domain": "techresearch",
+    "tld": "ai",
+    "ask": "$350",
+    "appraised": "$1,000",
+    "cat": "Education",
+    "words": "techresearch"
+  },
+  {
+    "domain": "techservice",
+    "tld": "ai",
+    "ask": "$2,170",
+    "appraised": "$6,200",
+    "cat": "Engineering",
+    "words": "techservice"
+  },
+  {
+    "domain": "techsupportagents",
+    "tld": "ai",
+    "ask": "$35",
+    "appraised": "$100",
+    "cat": "Agents",
+    "words": "techsupportagents"
+  },
+  {
+    "domain": "telecaster",
+    "tld": "tv",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Music",
+    "words": "telecaster"
+  },
+  {
+    "domain": "telecomagent",
+    "tld": "ai",
+    "ask": "$273",
+    "appraised": "$780",
+    "cat": "Agents",
+    "words": "telecomagent"
+  },
+  {
+    "domain": "telecomagents",
+    "tld": "ai",
+    "ask": "$189",
+    "appraised": "$540",
+    "cat": "Agents",
+    "words": "telecomagents"
+  },
+  {
+    "domain": "telehealthagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Healthcare",
+    "words": "telehealthagent"
+  },
+  {
+    "domain": "telehealthagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Healthcare",
+    "words": "telehealthagents"
+  },
+  {
+    "domain": "telemedagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "telemedagents"
+  },
+  {
+    "domain": "teleprompters",
+    "tld": "ai",
+    "ask": "$1,330",
+    "appraised": "$3,800",
+    "cat": "Video",
+    "words": "teleprompters"
+  },
+  {
+    "domain": "telestream",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Video",
+    "words": "telestream"
+  },
+  {
+    "domain": "terriers",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Ai-portfolio",
+    "words": "terriers"
+  },
+  {
+    "domain": "thebelievers",
+    "tld": "ai",
+    "ask": "$665",
+    "appraised": "$1,900",
+    "cat": "Creation",
+    "words": "thebelievers"
+  },
+  {
+    "domain": "thelastgame",
+    "tld": "ai",
+    "ask": "$875",
+    "appraised": "$2,500",
+    "cat": "Creation",
+    "words": "thelastgame"
+  },
+  {
+    "domain": "therainbowcollection",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Retail",
+    "words": "therainbowcollection"
+  },
+  {
+    "domain": "therainbowcollection",
+    "tld": "store",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Retail",
+    "words": "therainbowcollection"
+  },
+  {
+    "domain": "therainbowcollections",
+    "tld": "shop",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Retail",
+    "words": "therainbowcollections"
+  },
+  {
+    "domain": "therainbowcollections",
+    "tld": "store",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Retail",
+    "words": "therainbowcollections"
+  },
+  {
+    "domain": "therapyagent",
+    "tld": "ai",
+    "ask": "$14",
+    "appraised": "$40",
+    "cat": "Agents",
+    "words": "therapyagent"
+  },
+  {
+    "domain": "therapyagents",
+    "tld": "ai",
+    "ask": "$14",
+    "appraised": "$40",
+    "cat": "Agents",
+    "words": "therapyagents"
+  },
+  {
+    "domain": "thesingularitylab",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Education",
+    "words": "thesingularitylab"
+  },
+  {
+    "domain": "threepoint",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Analytics",
+    "words": "threepoint"
+  },
+  {
+    "domain": "threepoints",
+    "tld": "ai",
+    "ask": "$665",
+    "appraised": "$1,900",
+    "cat": "Analytics",
+    "words": "threepoints"
+  },
+  {
+    "domain": "ticketagent",
+    "tld": "ai",
+    "ask": "$259",
+    "appraised": "$740",
+    "cat": "Agents",
+    "words": "ticketagent"
+  },
+  {
+    "domain": "ticketagents",
+    "tld": "ai",
+    "ask": "$147",
+    "appraised": "$420",
+    "cat": "Agents",
+    "words": "ticketagents"
+  },
+  {
+    "domain": "timesaveragent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "timesaveragent"
+  },
+  {
+    "domain": "timesaveragents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "timesaveragents"
+  },
+  {
+    "domain": "tourismagent",
+    "tld": "ai",
+    "ask": "$67",
+    "appraised": "$190",
+    "cat": "Agents",
+    "words": "tourismagent"
+  },
+  {
+    "domain": "tourismagents",
+    "tld": "ai",
+    "ask": "$39",
+    "appraised": "$110",
+    "cat": "Agents",
+    "words": "tourismagents"
+  },
+  {
+    "domain": "toyshops",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Retail",
+    "words": "toyshops"
+  },
+  {
+    "domain": "tradejobs",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Hr",
+    "words": "tradejobs"
+  },
+  {
+    "domain": "tradeschools",
+    "tld": "ai",
+    "ask": "$9,100",
+    "appraised": "$26,000",
+    "cat": "Education",
+    "words": "tradeschools"
+  },
+  {
+    "domain": "trafficschools",
+    "tld": "ai",
+    "ask": "$2,170",
+    "appraised": "$6,200",
+    "cat": "Education",
+    "words": "trafficschools"
+  },
+  {
+    "domain": "transformationagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "transformationagent"
+  },
+  {
+    "domain": "transformationagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "transformationagents"
+  },
+  {
+    "domain": "transportagents",
+    "tld": "ai",
+    "ask": "$140",
+    "appraised": "$400",
+    "cat": "Agents",
+    "words": "transportagents"
+  },
+  {
+    "domain": "travelagenthub",
+    "tld": "ai",
+    "ask": "$7",
+    "appraised": "$20",
+    "cat": "Travel",
+    "words": "travelagenthub"
+  },
+  {
+    "domain": "traveljob",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Hr",
+    "words": "traveljob"
+  },
+  {
+    "domain": "traveljobs",
+    "tld": "ai",
+    "ask": "$9,450",
+    "appraised": "$27,000",
+    "cat": "Hr",
+    "words": "traveljobs"
+  },
+  {
+    "domain": "trekkies",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Creation",
+    "words": "trekkies"
+  },
+  {
+    "domain": "tremors",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Creation",
+    "words": "tremors"
+  },
+  {
+    "domain": "trendagent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "trendagent"
+  },
+  {
+    "domain": "trendagents",
+    "tld": "ai",
+    "ask": "$7",
+    "appraised": "$20",
+    "cat": "Agents",
+    "words": "trendagents"
+  },
+  {
+    "domain": "trendanalyzerhub",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Analytics",
+    "words": "trendanalyzerhub"
+  },
+  {
+    "domain": "trendanalyzerhub",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Analytics",
+    "words": "trendanalyzerhub"
+  },
+  {
+    "domain": "trendingagent",
+    "tld": "ai",
+    "ask": "$14",
+    "appraised": "$40",
+    "cat": "Agents",
+    "words": "trendingagent"
+  },
+  {
+    "domain": "trendingagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "trendingagents"
+  },
+  {
+    "domain": "tripagents",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "tripagents"
+  },
+  {
+    "domain": "truckerhats",
+    "tld": "ai",
+    "ask": "$3,850",
+    "appraised": "$11,000",
+    "cat": "Automotive",
+    "words": "truckerhats"
+  },
+  {
+    "domain": "turntables",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Music",
+    "words": "turntables"
+  },
+  {
+    "domain": "tutoragent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Education",
+    "words": "tutoragent"
+  },
+  {
+    "domain": "tutoragents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Education",
+    "words": "tutoragents"
+  },
+  {
+    "domain": "ufoarchivist",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Ai-portfolio",
+    "words": "ufoarchivist"
+  },
+  {
+    "domain": "ufojesus",
+    "tld": "org",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Ai-portfolio",
+    "words": "ufojesus"
+  },
+  {
+    "domain": "unifiedagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "unifiedagents"
+  },
+  {
+    "domain": "uxdesignagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Design",
+    "words": "uxdesignagent"
+  },
+  {
+    "domain": "uxdesignagent",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Design",
+    "words": "uxdesignagent"
+  },
+  {
+    "domain": "uxdesignagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Design",
+    "words": "uxdesignagents"
+  },
+  {
+    "domain": "vacationagent",
+    "tld": "ai",
+    "ask": "$161",
+    "appraised": "$460",
+    "cat": "Agents",
+    "words": "vacationagent"
+  },
+  {
+    "domain": "vacationagents",
+    "tld": "ai",
+    "ask": "$98",
+    "appraised": "$280",
+    "cat": "Agents",
+    "words": "vacationagents"
+  },
+  {
+    "domain": "ventureagents",
+    "tld": "ai",
+    "ask": "$11",
+    "appraised": "$30",
+    "cat": "Agents",
+    "words": "ventureagents"
+  },
+  {
+    "domain": "vibecodeher",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Engineering",
+    "words": "vibecodeher"
+  },
+  {
+    "domain": "videocreationagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "videocreationagent"
+  },
+  {
+    "domain": "videocreationagent",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "videocreationagent"
+  },
+  {
+    "domain": "videocreatoragent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "videocreatoragent"
+  },
+  {
+    "domain": "vintageclothes",
+    "tld": "ai",
+    "ask": "$3,010",
+    "appraised": "$8,600",
+    "cat": "Retail",
+    "words": "vintageclothes"
+  },
+  {
+    "domain": "viralagents",
+    "tld": "ai",
+    "ask": "$59",
+    "appraised": "$170",
+    "cat": "Agents",
+    "words": "viralagents"
+  },
+  {
+    "domain": "virtualagenthub",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "virtualagenthub"
+  },
+  {
+    "domain": "virtualbox",
+    "tld": "ai",
+    "ask": "$9,100",
+    "appraised": "$26,000",
+    "cat": "Cloud",
+    "words": "virtualbox"
+  },
+  {
+    "domain": "virtualfarm",
+    "tld": "ai",
+    "ask": "$490",
+    "appraised": "$1,400",
+    "cat": "Agriculture",
+    "words": "virtualfarm"
+  },
+  {
+    "domain": "virtualrealityagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "virtualrealityagents"
+  },
+  {
+    "domain": "virtualworkagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "virtualworkagent"
+  },
+  {
+    "domain": "virtualworkagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "virtualworkagents"
+  },
+  {
+    "domain": "vocations",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Hr",
+    "words": "vocations"
+  },
+  {
+    "domain": "vragents",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Agents",
+    "words": "vragents"
+  },
+  {
+    "domain": "wageragent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "wageragent"
+  },
+  {
+    "domain": "wageragents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "wageragents"
+  },
+  {
+    "domain": "wasteagent",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Agents",
+    "words": "wasteagent"
+  },
+  {
+    "domain": "wasteagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "wasteagents"
+  },
+  {
+    "domain": "wealthagent",
+    "tld": "ai",
+    "ask": "$210",
+    "appraised": "$600",
+    "cat": "Agents",
+    "words": "wealthagent"
+  },
+  {
+    "domain": "wealthagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "wealthagents"
+  },
+  {
+    "domain": "weatheragent",
+    "tld": "ai",
+    "ask": "$7",
+    "appraised": "$20",
+    "cat": "Agents",
+    "words": "weatheragent"
+  },
+  {
+    "domain": "weatheragents",
+    "tld": "ai",
+    "ask": "$4",
+    "appraised": "$10",
+    "cat": "Agents",
+    "words": "weatheragents"
+  },
+  {
+    "domain": "weathernow",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Analytics",
+    "words": "weathernow"
+  },
+  {
+    "domain": "webapplication",
+    "tld": "ai",
+    "ask": "$5,950",
+    "appraised": "$17,000",
+    "cat": "Engineering",
+    "words": "webapplication"
+  },
+  {
+    "domain": "webapplications",
+    "tld": "ai",
+    "ask": "$560",
+    "appraised": "$1,600",
+    "cat": "Engineering",
+    "words": "webapplications"
+  },
+  {
+    "domain": "webinaragency",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Marketing",
+    "words": "webinaragency"
+  },
+  {
+    "domain": "webinaragent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "webinaragent"
+  },
+  {
+    "domain": "webinaragents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "webinaragents"
+  },
+  {
+    "domain": "weldingschool",
+    "tld": "ai",
+    "ask": "$980",
+    "appraised": "$2,800",
+    "cat": "Education",
+    "words": "weldingschool"
+  },
+  {
+    "domain": "weldingschools",
+    "tld": "ai",
+    "ask": "$840",
+    "appraised": "$2,400",
+    "cat": "Education",
+    "words": "weldingschools"
+  },
+  {
+    "domain": "wellnessagent",
+    "tld": "ai",
+    "ask": "$70",
+    "appraised": "$200",
+    "cat": "Agents",
+    "words": "wellnessagent"
+  },
+  {
+    "domain": "wellnessagenthub",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "wellnessagenthub"
+  },
+  {
+    "domain": "wellnessagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Agents",
+    "words": "wellnessagents"
+  },
+  {
+    "domain": "wincash",
+    "tld": "ai",
+    "ask": "$15,750",
+    "appraised": "$45,000",
+    "cat": "Finance",
+    "words": "wincash"
+  },
+  {
+    "domain": "wiseguidance",
+    "tld": "ai",
+    "ask": "$105",
+    "appraised": "$300",
+    "cat": "Coaching",
+    "words": "wiseguidance"
+  },
+  {
+    "domain": "womenhats",
+    "tld": "ai",
+    "ask": "$8,750",
+    "appraised": "$25,000",
+    "cat": "Retail",
+    "words": "womenhats"
+  },
+  {
+    "domain": "workautomationagent",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Automotive",
+    "words": "workautomationagent"
+  },
+  {
+    "domain": "workautomationagent",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Automotive",
+    "words": "workautomationagent"
+  },
+  {
+    "domain": "workautomationagents",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Automotive",
+    "words": "workautomationagents"
+  },
+  {
+    "domain": "workautomations",
+    "tld": "ai",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Automotive",
+    "words": "workautomations"
+  },
+  {
+    "domain": "workclothes",
+    "tld": "ai",
+    "ask": "$3,850",
+    "appraised": "$11,000",
+    "cat": "Retail",
+    "words": "workclothes"
+  },
+  {
+    "domain": "worlddesign",
+    "tld": "ai",
+    "ask": "$630",
+    "appraised": "$1,800",
+    "cat": "Design",
+    "words": "worlddesign"
+  },
+  {
+    "domain": "writescript",
+    "tld": "ai",
+    "ask": "$525",
+    "appraised": "$1,500",
+    "cat": "Writing",
+    "words": "writescript"
+  },
+  {
+    "domain": "yogastudios",
+    "tld": "ai",
+    "ask": "$3,850",
+    "appraised": "$11,000",
+    "cat": "Coaching",
+    "words": "yogastudios"
+  },
+  {
+    "domain": "zerobillions",
+    "tld": "com",
+    "ask": "$7,000",
+    "appraised": "$20,000",
+    "cat": "Finance",
+    "words": "zerobillions"
+  }
+];
+
+let activeFilter = 'all';
+let searchQuery = '';
+
+function renderGrid(data) {
+  const grid = document.getElementById('domain-grid');
+  const count = document.getElementById('domain-count');
+  
+  if (data.length === 0) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 0;font-family:\'DM Mono\',monospace;font-size:0.8rem;color:var(--mid);">No domains found. Try another search or filter.</div>';
+    count.textContent = '0 domains';
+    return;
+  }
+
+  count.textContent = `Showing ${data.length} premium domain${data.length !== 1 ? 's' : ''}`;
+
+  grid.innerHTML = data.map(d => `
+    <div class="domain-card" onclick="openModal('${d.domain}.${d.tld}', '${d.ask}', '${d.appraised}')">
+      <div class="domain-name">${d.domain}<span class="tld">.${d.tld}</span></div>
+      <div class="domain-meta">
+        <div class="domain-category">${d.cat}</div>
+        <div class="domain-price">
+          <div class="price-ask">${d.ask}</div>
+          <div class="price-appraised">Appraised ${d.appraised}</div>
+        </div>
+      </div>
+      <div class="domain-card-cta">→ Make an offer</div>
+    </div>
+  `).join('');
+}
+
+function getFiltered() {
+  return DOMAINS.filter(d => {
+    const catMatch = activeFilter === 'all' || d.cat.toLowerCase().includes(activeFilter.toLowerCase());
+    const searchMatch = !searchQuery || 
+      d.domain.includes(searchQuery.toLowerCase()) || 
+      d.words.includes(searchQuery.toLowerCase()) ||
+      d.cat.toLowerCase().includes(searchQuery.toLowerCase());
+    return catMatch && searchMatch;
+  });
+}
+
+function filterDomains(cat, btn) {
+  activeFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid(getFiltered());
+}
+
+function searchDomains(query) {
+  searchQuery = query.toLowerCase();
+  renderGrid(getFiltered());
+}
+
+function openModal(fullDomain, ask, appraised) {
+  const parts = fullDomain.split('.');
+  const tld = parts.pop();
+  const sld = parts.join('.');
+  
+  document.getElementById('modal-domain-name').innerHTML = `${sld}<span class="tld">.${tld}</span>`;
+  document.getElementById('modal-ask-price').textContent = ask;
+  document.getElementById('modal-appraised').textContent = appraised;
+  document.getElementById('modal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+}
+
+async async async function submitInquiry() {
+  const name = document.getElementById('contact-name').value;
+  const email = document.getElementById('contact-email').value;
+  const domainName = document.getElementById('modal-domain-name').textContent;
+  const ask = document.getElementById('modal-ask-price').textContent;
+  
+  if (!email) { alert('Please enter your email address.'); return; }
+  
+  const btn = document.querySelector('.modal-submit');
+  const orgText = btn.textContent;
+  btn.textContent = "Sending...";
+  
+  try {
+    const res = await fetch('/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email,
+        name,
+        source: 'domain_vault_inquiry',
+        industry: domainName,
+        message: `Inquiry for ${domainName} (Ask: ${ask})`
+      })
+    });
+    
+    if (!res.ok) throw new Error('Submission failed');
+    
+    closeModal();
+    const toast = document.getElementById('toast');
+    toast.textContent = "✓ Inquiry sent to Supabase — Bravetto.ai team will contact you.";
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 4000);
+  } catch (err) {
+    console.error(err);
+    alert('Failed to send lead. Please e-mail domains@bravetto.ai.');
+  } finally {
+    btn.textContent = orgText;
+  }
+}
+
+// Close modal on overlay click
+document.getElementById('modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// Ticker
+const tickerDomains = DOMAINS.slice(0, 20);
+const track = document.getElementById('ticker');
+const items = [...tickerDomains, ...tickerDomains].map(d => 
+  `<span class="ticker-item"><span>${d.domain}.${d.tld}</span> · ${d.ask}</span>`
+).join('');
+track.innerHTML = items;
+
+// Initial render
+renderGrid(DOMAINS);
+
+// Keyboard escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
+</body>
+</html>

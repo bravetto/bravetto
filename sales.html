@@ -4,29 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bravetto | Every system connected. Every person aware.</title>
-    <meta
-      name="description"
-      content="Your data already knows the answer. Bravetto makes sure your people do too. One system. One business. One bottom line."
-    />
+    <meta name="description" content="Your data already knows the answer. Bravetto makes sure your people do too. One system. One business. One bottom line." />
     <link rel="canonical" href="https://bravetto.com/sales" />
-    <meta
-      property="og:title"
-      content="Bravetto | Every system connected. Every person aware."
-    />
-    <meta
-      property="og:description"
-      content="Your data already knows the answer. Bravetto makes sure your people do too."
-    />
+    <meta property="og:title" content="Bravetto | Every system connected. Every person aware." />
+    <meta property="og:description" content="Your data already knows the answer. Bravetto makes sure your people do too." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://bravetto.com/sales" />
     <meta property="og:site_name" content="Bravetto" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -56,52 +44,30 @@
     </script>
 
     <style>
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        background: #faf9f6;
-        overflow-x: hidden;
-      }
+      html { scroll-behavior: smooth; }
+      body { background: #FAF9F6; overflow-x: hidden; }
 
-      .headline {
-        letter-spacing: -0.02em;
-        line-height: 1.1;
-      }
-      .tag {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 10px;
-        font-weight: 400;
-        text-transform: uppercase;
-        letter-spacing: 0.15em;
-        color: #c9a227;
-      }
+      .headline { letter-spacing: -0.02em; line-height: 1.1; }
+      .tag { font-family: "JetBrains Mono", monospace; font-size: 10px; font-weight: 400; text-transform: uppercase; letter-spacing: 0.15em; color: #C9A227; }
 
       .moment {
         opacity: 0;
         transform: translateY(60px);
-        transition:
-          opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-          transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
       }
-      .moment.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      .moment.visible { opacity: 1; transform: translateY(0); }
 
       .reveal {
         opacity: 0;
         transform: translateY(30px);
         transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
       }
-      .reveal.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      .reveal.visible { opacity: 1; transform: translateY(0); }
 
       .card {
         background: #fff;
-        border: 1px solid #eae7e0;
+        border: 1px solid #EAE7E0;
         border-radius: 12px;
         transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
       }
@@ -111,82 +77,53 @@
       }
 
       .diff-card {
-        border-left: 3px solid #c9a227;
+        border-left: 3px solid #C9A227;
         padding-left: 24px;
       }
 
       .hero-glow {
-        background: radial-gradient(
-          ellipse at center,
-          rgba(201, 162, 39, 0.07) 0%,
-          transparent 70%
-        );
+        background: radial-gradient(ellipse at center, rgba(201,162,39,0.07) 0%, transparent 70%);
         position: absolute;
         inset: 0;
         pointer-events: none;
       }
 
       @keyframes drift {
-        0%,
-        100% {
-          transform: translateY(0);
-          opacity: 0.4;
-        }
-        50% {
-          transform: translateY(8px);
-          opacity: 0.8;
-        }
+        0%, 100% { transform: translateY(0); opacity: 0.4; }
+        50% { transform: translateY(8px); opacity: 0.8; }
       }
-      .scroll-hint {
-        animation: drift 2.5s ease-in-out infinite;
-      }
+      .scroll-hint { animation: drift 2.5s ease-in-out infinite; }
 
       @keyframes pulse-gold {
-        0%,
-        100% {
-          box-shadow: 0 0 0 0 rgba(201, 162, 39, 0.4);
-        }
-        50% {
-          box-shadow: 0 0 0 16px rgba(201, 162, 39, 0);
-        }
+        0%, 100% { box-shadow: 0 0 0 0 rgba(201, 162, 39, 0.4); }
+        50% { box-shadow: 0 0 0 16px rgba(201, 162, 39, 0); }
       }
-      .pulse-gold {
-        animation: pulse-gold 2.5s ease-in-out infinite;
-      }
+      .pulse-gold { animation: pulse-gold 2.5s ease-in-out infinite; }
 
       .chip {
         display: inline-flex;
         align-items: center;
         gap: 6px;
         padding: 10px 20px;
-        border: 1px solid #eae7e0;
+        border: 1px solid #EAE7E0;
         border-radius: 999px;
         font-size: 13px;
-        color: #4a4a4a;
+        color: #4A4A4A;
         background: #fff;
         cursor: pointer;
         transition: all 0.3s ease;
       }
       .chip:hover {
-        border-color: #c9a227;
-        color: #1a1a1a;
+        border-color: #C9A227;
+        color: #1A1A1A;
         box-shadow: 0 4px 20px rgba(201, 162, 39, 0.1);
       }
-      .rotate-45 {
-        transform: rotate(45deg);
-      }
+      .rotate-45 { transform: rotate(45deg); }
 
-      /* convai widget — hidden from UI so it doesn't push buttons around */
+      /* convai widget — always above overlay so voice actually works */
       elevenlabs-convai {
-        position: fixed;
-        bottom: 0;
-        right: 0;
-        width: 1px;
-        height: 1px;
-        opacity: 0;
-        pointer-events: none;
-        z-index: -1;
-        overflow: hidden;
+        position: relative;
+        z-index: 10000;
       }
 
       /* voice overlay — immersive Ab\00eb experience */
@@ -220,25 +157,12 @@
         position: absolute;
         border-radius: 50%;
         border: 1px solid rgba(201, 162, 39, 0.12);
-        transition:
-          transform 0.1s ease-out,
-          border-color 0.1s ease-out;
+        transition: transform 0.1s ease-out, border-color 0.1s ease-out;
       }
-      .voice-viz-ring.r1 {
-        inset: 0;
-        border-width: 2px;
-        border-color: rgba(201, 162, 39, 0.4);
-      }
-      .voice-viz-ring.r2 {
-        inset: -20px;
-      }
-      .voice-viz-ring.r3 {
-        inset: -40px;
-      }
-      .voice-viz-ring.r4 {
-        inset: -60px;
-        border-color: rgba(201, 162, 39, 0.06);
-      }
+      .voice-viz-ring.r1 { inset: 0; border-width: 2px; border-color: rgba(201, 162, 39, 0.4); }
+      .voice-viz-ring.r2 { inset: -20px; }
+      .voice-viz-ring.r3 { inset: -40px; }
+      .voice-viz-ring.r4 { inset: -60px; border-color: rgba(201, 162, 39, 0.06); }
       /* audio bars */
       .voice-bars {
         display: flex;
@@ -248,7 +172,7 @@
       }
       .voice-bar {
         width: 4px;
-        background: #c9a227;
+        background: #C9A227;
         border-radius: 2px;
         min-height: 4px;
         transition: height 0.08s ease-out;
@@ -257,26 +181,18 @@
         width: 8px;
         height: 8px;
         border-radius: 50%;
-        background: #c9a227;
+        background: #C9A227;
         display: inline-block;
         margin-right: 8px;
         animation: status-pulse 1.5s ease-in-out infinite;
       }
       @keyframes status-pulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.3;
-        }
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
       }
-      .voice-status-dot.inactive {
-        background: #8a8a8a;
-        animation: none;
-      }
+      .voice-status-dot.inactive { background: #8A8A8A; animation: none; }
       #voice-overlay .voice-label {
-        color: #faf9f6;
+        color: #FAF9F6;
         font-family: "Cormorant Garamond", Georgia, serif;
         font-size: 28px;
         font-weight: 600;
@@ -301,100 +217,54 @@
         background: none;
         border: none;
       }
-      #voice-overlay .voice-close:hover {
-        color: #faf9f6;
-      }
+      #voice-overlay .voice-close:hover { color: #FAF9F6; }
     </style>
   </head>
 
   <body class="font-sans text-ink antialiased">
+
     <!-- ==================== -->
     <!-- Section 0: Nav       -->
     <!-- ==================== -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-cream/60 backdrop-blur-md">
       <div class="px-8 py-6">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
-          <a href="/" class="font-serif text-2xl font-semibold tracking-tight"
-            >Bravetto</a
-          >
-          <a
-            href="#abe-stage"
-            class="text-sm px-5 py-2.5 bg-ink text-cream rounded-full hover:bg-ink-body transition-colors"
-          >
+          <a href="/" class="font-serif text-2xl font-semibold tracking-tight">Bravetto</a>
+          <a href="#abe-stage" class="text-sm px-5 py-2.5 bg-ink text-cream rounded-full hover:bg-ink-body transition-colors">
             Talk to Ab&#235;
           </a>
         </div>
       </div>
-      <div
-        id="scroll-progress"
-        class="h-0.5 bg-gold transition-none"
-        style="width: 0%"
-      ></div>
+      <div id="scroll-progress" class="h-0.5 bg-gold transition-none" style="width: 0%;"></div>
     </nav>
 
     <!-- ============================= -->
     <!-- Section 1: Hero — The Problem -->
     <!-- ============================= -->
-    <section
-      class="relative min-h-screen flex flex-col items-center justify-center px-8 pt-28"
-    >
+    <section class="relative min-h-screen flex flex-col items-center justify-center px-8 pt-28">
       <div class="hero-glow"></div>
       <div id="ref-greeting" class="hidden relative z-10 mb-8 text-center">
-        <p
-          class="text-sm text-ink-body font-light px-6 py-3 bg-white/60 backdrop-blur-sm rounded-full inline-block"
-        ></p>
+        <p class="text-sm text-ink-body font-light px-6 py-3 bg-white/60 backdrop-blur-sm rounded-full inline-block"></p>
       </div>
       <div class="relative z-10 text-center max-w-4xl mx-auto">
         <p class="tag mb-6 moment">The Promise</p>
-        <h1
-          class="font-serif text-5xl md:text-7xl lg:text-8xl font-semibold headline mb-8 moment"
-          style="transition-delay: 0.15s"
-        >
-          Every system connected.<br />Every person aware.
+        <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-semibold headline mb-8 moment" style="transition-delay: 0.15s">
+          Every system connected.<br>Every person aware.
         </h1>
-        <p
-          class="text-lg md:text-xl text-ink-body font-light tracking-wide moment"
-          style="transition-delay: 0.4s"
-        >
+        <p class="text-lg md:text-xl text-ink-body font-light tracking-wide moment" style="transition-delay: 0.4s">
           Your data already knows the answer. We make sure your people do too.
         </p>
-        <a
-          href="#abe-stage"
-          class="inline-flex items-center gap-3 mt-10 px-8 py-4 bg-gold text-ink rounded-full font-medium text-lg hover:bg-gold-hover transition-colors pulse-gold moment"
-          style="transition-delay: 0.7s"
-        >
+        <a href="#abe-stage" class="inline-flex items-center gap-3 mt-10 px-8 py-4 bg-gold text-ink rounded-full font-medium text-lg hover:bg-gold-hover transition-colors pulse-gold moment" style="transition-delay: 0.7s">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"
-              fill="currentColor"
-              opacity="0.3"
-            />
-            <path
-              d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
+            <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z" fill="currentColor" opacity="0.3"/>
+            <path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           Talk to Ab&#235;
         </a>
       </div>
       <div class="absolute bottom-12 z-10 scroll-hint">
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          class="text-gold"
-        >
-          <path
-            d="M12 5v14M7 14l5 5 5-5"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-gold">
+          <path d="M12 5v14M7 14l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </div>
     </section>
@@ -403,59 +273,22 @@
     <!-- Facts Bar — hard numbers        -->
     <!-- ============================== -->
     <section class="py-12 px-8 border-y border-cream-border">
-      <div
-        class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center"
-      >
+      <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
         <div class="reveal">
-          <p
-            class="font-serif text-4xl md:text-5xl font-semibold text-gold headline count-up"
-            data-target="6214"
-          >
-            0
-          </p>
-          <p
-            class="text-xs text-ink-caption mt-2 font-mono uppercase tracking-widest"
-          >
-            Parts cross-referenced
-          </p>
+          <p class="font-serif text-4xl md:text-5xl font-semibold text-gold headline count-up" data-target="6214">0</p>
+          <p class="text-xs text-ink-caption mt-2 font-mono uppercase tracking-widest">Parts cross-referenced</p>
         </div>
         <div class="reveal">
-          <p
-            class="font-serif text-4xl md:text-5xl font-semibold text-gold headline count-up"
-            data-target="22"
-          >
-            0
-          </p>
-          <p
-            class="text-xs text-ink-caption mt-2 font-mono uppercase tracking-widest"
-          >
-            Error codes resolved
-          </p>
+          <p class="font-serif text-4xl md:text-5xl font-semibold text-gold headline count-up" data-target="22">0</p>
+          <p class="text-xs text-ink-caption mt-2 font-mono uppercase tracking-widest">Error codes resolved</p>
         </div>
         <div class="reveal">
-          <p
-            class="font-serif text-4xl md:text-5xl font-semibold text-gold headline count-up"
-            data-target="73"
-          >
-            0
-          </p>
-          <p
-            class="text-xs text-ink-caption mt-2 font-mono uppercase tracking-widest"
-          >
-            Customer calls analyzed
-          </p>
+          <p class="font-serif text-4xl md:text-5xl font-semibold text-gold headline count-up" data-target="73">0</p>
+          <p class="text-xs text-ink-caption mt-2 font-mono uppercase tracking-widest">Customer calls analyzed</p>
         </div>
         <div class="reveal">
-          <p
-            class="font-serif text-4xl md:text-5xl font-semibold text-gold headline"
-          >
-            &lt;3<span class="text-2xl">min</span>
-          </p>
-          <p
-            class="text-xs text-ink-caption mt-2 font-mono uppercase tracking-widest"
-          >
-            Resolution time
-          </p>
+          <p class="font-serif text-4xl md:text-5xl font-semibold text-gold headline">&lt;3<span class="text-2xl">min</span></p>
+          <p class="text-xs text-ink-caption mt-2 font-mono uppercase tracking-widest">Resolution time</p>
         </div>
       </div>
     </section>
@@ -468,72 +301,32 @@
       <div class="max-w-4xl mx-auto">
         <p class="tag mb-12 text-center reveal">Sound familiar?</p>
         <div class="grid md:grid-cols-2 gap-x-12 gap-y-10">
+
           <div class="reveal">
-            <p
-              class="font-serif text-2xl md:text-3xl font-medium headline mb-2"
-            >
-              Something changes inside your business.
-            </p>
-            <p class="text-ink-body text-sm leading-relaxed">
-              One team finds out next week. Another never hears about it. A
-              customer feels it immediately. No one can quite explain why
-              &mdash; because no single system holds the full picture.
-            </p>
+            <p class="font-serif text-2xl md:text-3xl font-medium headline mb-2">Something changes inside your business.</p>
+            <p class="text-ink-body text-sm leading-relaxed">One team finds out next week. Another never hears about it. A customer feels it immediately. No one can quite explain why &mdash; because no single system holds the full picture.</p>
           </div>
 
           <div class="reveal">
-            <p
-              class="font-serif text-2xl md:text-3xl font-medium headline mb-2"
-            >
-              Thousands of documents. None of them talk to each other.
-            </p>
-            <p class="text-ink-body text-sm leading-relaxed">
-              A decision gets made and the people who need to know don&rsquo;t.
-              A case resolves and the insight stays buried. The next person who
-              asks the same question starts from zero.
-            </p>
+            <p class="font-serif text-2xl md:text-3xl font-medium headline mb-2">Thousands of documents. None of them talk to each other.</p>
+            <p class="text-ink-body text-sm leading-relaxed">A decision gets made and the people who need to know don&rsquo;t. A case resolves and the insight stays buried. The next person who asks the same question starts from zero.</p>
           </div>
 
           <div class="reveal">
-            <p
-              class="font-serif text-2xl md:text-3xl font-medium headline mb-2"
-            >
-              A customer reaches out.
-            </p>
-            <p class="text-ink-body text-sm leading-relaxed">
-              Your team opens three systems, asks the customer to repeat
-              everything, and pieces together an answer from fragments. The
-              customer wonders why this is so hard. So does your team.
-            </p>
+            <p class="font-serif text-2xl md:text-3xl font-medium headline mb-2">A customer reaches out.</p>
+            <p class="text-ink-body text-sm leading-relaxed">Your team opens three systems, asks the customer to repeat everything, and pieces together an answer from fragments. The customer wonders why this is so hard. So does your team.</p>
           </div>
 
           <div class="reveal">
-            <p
-              class="font-serif text-2xl md:text-3xl font-medium headline mb-2"
-            >
-              Your best people leave &mdash; and take the knowledge with them.
-            </p>
-            <p class="text-ink-body text-sm leading-relaxed">
-              The systems they used every day contain data, but not the wisdom
-              of how things actually work. The new hire stares at screens that
-              explain nothing, and the institutional memory fades a little more.
-            </p>
+            <p class="font-serif text-2xl md:text-3xl font-medium headline mb-2">Your best people leave &mdash; and take the knowledge with them.</p>
+            <p class="text-ink-body text-sm leading-relaxed">The systems they used every day contain data, but not the wisdom of how things actually work. The new hire stares at screens that explain nothing, and the institutional memory fades a little more.</p>
           </div>
 
           <div class="md:col-span-2 reveal">
-            <p
-              class="font-serif text-2xl md:text-3xl font-medium headline mb-2"
-            >
-              Your company grew &mdash; but your systems didn&rsquo;t grow
-              together.
-            </p>
-            <p class="text-ink-body text-sm leading-relaxed">
-              Whether through acquisitions, new tools, or years of organic
-              growth, you now have multiple systems with multiple definitions of
-              the same customer, the same product, the same truth &mdash; and no
-              way to unify them without replacing everything.
-            </p>
+            <p class="font-serif text-2xl md:text-3xl font-medium headline mb-2">Your company grew &mdash; but your systems didn&rsquo;t grow together.</p>
+            <p class="text-ink-body text-sm leading-relaxed">Whether through acquisitions, new tools, or years of organic growth, you now have multiple systems with multiple definitions of the same customer, the same product, the same truth &mdash; and no way to unify them without replacing everything.</p>
           </div>
+
         </div>
       </div>
     </section>
@@ -544,13 +337,11 @@
     <section class="py-32 px-8">
       <div class="max-w-3xl mx-auto text-center">
         <p class="tag mb-6 reveal">The Shift</p>
-        <h2
-          class="font-serif text-4xl md:text-6xl font-semibold headline mb-8 reveal"
-        >
+        <h2 class="font-serif text-4xl md:text-6xl font-semibold headline mb-8 reveal">
           What if every system knew what every other system knew?
         </h2>
         <p class="text-lg md:text-xl text-ink-body font-light reveal">
-          Not a dashboard. Not a report. Not another screen.<br />
+          Not a dashboard. Not a report. Not another screen.<br>
           <span class="text-ink font-normal">Awareness.</span>
         </p>
       </div>
@@ -561,89 +352,50 @@
     <!-- ================================ -->
     <section id="abe-stage" class="py-32 px-8 bg-cream-mid">
       <div class="max-w-4xl mx-auto">
+
         <!-- Header -->
         <div class="text-center mb-16">
           <p class="tag mb-4 reveal">Meet Ab&#235;</p>
-          <h2
-            class="font-serif text-4xl md:text-6xl font-semibold headline mb-6 reveal"
-          >
+          <h2 class="font-serif text-4xl md:text-6xl font-semibold headline mb-6 reveal">
             Ask her anything about your business.
           </h2>
           <p class="text-lg text-ink-body font-light reveal">
-            Ab&#235; is not a generic chatbot. She learns your systems, your
-            contracts, and your inventory &mdash; then answers with your
-            context, not the internet&rsquo;s.
+            Ab&#235; is not a generic chatbot. She learns your systems, your contracts, and your inventory &mdash; then answers with your context, not the internet&rsquo;s.
           </p>
         </div>
 
         <!-- Voice CTA — the irresistible element -->
         <div class="text-center mb-16 reveal">
-          <button
-            id="abe-trigger"
-            class="inline-flex items-center gap-4 px-10 py-5 bg-gold text-ink rounded-full font-medium text-lg hover:bg-gold-hover transition-all pulse-gold cursor-pointer"
-          >
+          <button id="abe-trigger" class="inline-flex items-center gap-4 px-10 py-5 bg-gold text-ink rounded-full font-medium text-lg hover:bg-gold-hover transition-all pulse-gold cursor-pointer">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"
-                fill="currentColor"
-                opacity="0.3"
-              />
-              <path
-                d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
+              <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z" fill="currentColor" opacity="0.3"/>
+              <path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             Talk to Ab&#235; now
           </button>
-          <p class="text-sm text-ink-caption mt-4">
-            Your screen becomes the conversation
-          </p>
+          <p class="text-sm text-ink-caption mt-4">Your screen becomes the conversation</p>
         </div>
 
         <!-- Suggestion Chips -->
         <div class="text-center mb-16 reveal">
           <p class="text-sm text-ink-caption mb-6">Or start with a question:</p>
-          <div
-            class="flex flex-wrap justify-center gap-3"
-            id="suggestion-chips"
-          >
-            <button
-              class="chip"
-              data-prompt="What would Bravetto look like in my industry?"
-            >
+          <div class="flex flex-wrap justify-center gap-3" id="suggestion-chips">
+            <button class="chip" data-prompt="What would Bravetto look like in my industry?">
               What would this look like in my industry?
             </button>
-            <button
-              class="chip"
-              data-prompt="How is Bravetto different from ChatGPT or Copilot?"
-            >
+            <button class="chip" data-prompt="How is Bravetto different from ChatGPT or Copilot?">
               How is this different from ChatGPT?
             </button>
-            <button
-              class="chip"
-              data-prompt="What does onboarding and implementation look like?"
-            >
+            <button class="chip" data-prompt="What does onboarding and implementation look like?">
               What does onboarding look like?
             </button>
-            <button
-              class="chip"
-              data-prompt="How do you connect to our existing systems like SAP and Salesforce?"
-            >
+            <button class="chip" data-prompt="How do you connect to our existing systems like SAP and Salesforce?">
               How do you handle our existing systems?
             </button>
-            <button
-              class="chip"
-              data-prompt="Can we start with just one team or department?"
-            >
+            <button class="chip" data-prompt="Can we start with just one team or department?">
               Can we start with just one team?
             </button>
-            <button
-              class="chip"
-              data-prompt="Show me the ROI — what measurable impact have you delivered?"
-            >
+            <button class="chip" data-prompt="Show me the ROI — what measurable impact have you delivered?">
               Show me the ROI
             </button>
           </div>
@@ -652,10 +404,7 @@
         <!-- Business Context Input -->
         <div class="max-w-2xl mx-auto reveal">
           <div class="card p-8">
-            <label
-              class="block text-sm font-medium mb-3"
-              for="business-context"
-            >
+            <label class="block text-sm font-medium mb-3" for="business-context">
               Tell Ab&#235; about your business
             </label>
             <textarea
@@ -665,18 +414,14 @@
               placeholder="e.g. We're a $200M manufacturer with 8 legacy systems, 400 employees, and our service team can't see what sales is doing..."
             ></textarea>
             <div class="flex items-center justify-between mt-4">
-              <p class="text-xs text-ink-caption">
-                Ab&#235; will use this to tailor her answers to your world.
-              </p>
-              <button
-                id="context-submit"
-                class="px-6 py-2.5 bg-ink text-cream rounded-full text-sm font-medium hover:bg-ink-body transition-colors cursor-pointer"
-              >
+              <p class="text-xs text-ink-caption">Ab&#235; will use this to tailor her answers to your world.</p>
+              <button id="context-submit" class="px-6 py-2.5 bg-ink text-cream rounded-full text-sm font-medium hover:bg-ink-body transition-colors cursor-pointer">
                 Send to Ab&#235;
               </button>
             </div>
           </div>
         </div>
+
       </div>
     </section>
 
@@ -686,9 +431,7 @@
     <section class="py-32 px-8 bg-cream-mid">
       <div class="max-w-3xl mx-auto">
         <div class="text-center mb-16">
-          <blockquote
-            class="font-serif text-5xl md:text-7xl font-semibold headline mb-6 reveal"
-          >
+          <blockquote class="font-serif text-5xl md:text-7xl font-semibold headline mb-6 reveal">
             &ldquo;Just wow.&rdquo;
           </blockquote>
           <p class="text-sm text-ink-caption reveal">
@@ -697,28 +440,21 @@
         </div>
         <div class="space-y-6 text-lg text-ink-body leading-relaxed">
           <p class="reveal">
-            Steve runs IT for a half-billion-dollar company stitched together
-            from eight acquisitions. Eight systems. Eight definitions of the
-            same customer. One overwhelmed support team.
+            Steve runs IT for a half-billion-dollar company stitched together from eight acquisitions.
+            Eight systems. Eight definitions of the same customer. One overwhelmed support team.
           </p>
           <p class="reveal">
-            He called Ab&#235;. She matched part numbers across legacy systems
-            by voice, cross-referenced inventory across three warehouses, and
-            surfaced service contract impacts &mdash; all in real time. No new
-            logins. No new screens. Just a conversation.
+            He called Ab&#235;. She matched part numbers across legacy systems by voice, cross-referenced inventory across three warehouses, and surfaced service contract impacts &mdash; all in real time. No new logins. No new screens. Just a conversation.
           </p>
           <p class="reveal">
-            His Customer Service Manager sat down and had twenty ideas in ten
-            minutes. Not because we told her what was possible &mdash; because
-            she could finally see it.
+            His Customer Service Manager sat down and had twenty ideas in ten minutes.
+            Not because we told her what was possible &mdash; because she could finally see it.
           </p>
           <p class="reveal">
-            Steve sent us 73 recorded customer calls the next day. Not as a
-            test. As a bet. He&rsquo;s in.
+            Steve sent us 73 recorded customer calls the next day. Not as a test. As a bet. He&rsquo;s in.
           </p>
           <p class="reveal text-ink font-medium">
-            6,214 parts cross-referenced. 22 error codes resolved. Voice in.
-            Voice out. Running. Now.
+            6,214 parts cross-referenced. 22 error codes resolved. Voice in. Voice out. Running. Now.
           </p>
         </div>
       </div>
@@ -731,104 +467,45 @@
       <div class="max-w-5xl mx-auto">
         <div class="text-center mb-20">
           <p class="tag mb-4 reveal">How It Works</p>
-          <h2
-            class="font-serif text-4xl md:text-5xl font-medium headline reveal"
-          >
+          <h2 class="font-serif text-4xl md:text-5xl font-medium headline reveal">
             One product. Three ways in.
           </h2>
         </div>
 
         <div class="grid md:grid-cols-3 gap-8">
-          <div
-            class="card p-10 reveal cursor-pointer"
-            onclick="
-              this.querySelector('.trinity-detail').classList.toggle('hidden')
-            "
-          >
+          <div class="card p-10 reveal cursor-pointer" onclick="this.querySelector('.trinity-detail').classList.toggle('hidden')">
             <div class="w-3 h-3 rounded-full bg-gold mb-8"></div>
             <h3 class="font-serif text-2xl font-medium mb-4">Intelligence</h3>
             <p class="text-ink-body leading-relaxed text-sm">
-              Our intelligence sits quietly between the systems you already use.
-              It listens for signals, surfaces meaning, and when something
-              changes in one place, every connected part of your business knows
-              instantly.
+              Our intelligence sits quietly between the systems you already use. It listens for signals, surfaces meaning, and when something changes in one place, every connected part of your business knows instantly.
             </p>
-            <div
-              class="trinity-detail hidden mt-6 pt-6 border-t border-cream-border"
-            >
-              <p class="text-ink-body leading-relaxed text-sm">
-                SAP part number changes? Ab&#235; knows in real time which
-                warehouses, service contracts, pending quotes, and field techs
-                are affected &mdash; before anyone opens a ticket.
-              </p>
-              <button
-                class="chip mt-4"
-                data-prompt="Show me how Bravetto connects systems like SAP and Salesforce in real time"
-              >
-                See how it connects
-              </button>
+            <div class="trinity-detail hidden mt-6 pt-6 border-t border-cream-border">
+              <p class="text-ink-body leading-relaxed text-sm">SAP part number changes? Ab&#235; knows in real time which warehouses, service contracts, pending quotes, and field techs are affected &mdash; before anyone opens a ticket.</p>
+              <button class="chip mt-4" data-prompt="Show me how Bravetto connects systems like SAP and Salesforce in real time">See how it connects</button>
             </div>
           </div>
 
-          <div
-            class="card p-10 reveal cursor-pointer"
-            onclick="
-              this.querySelector('.trinity-detail').classList.toggle('hidden')
-            "
-          >
+          <div class="card p-10 reveal cursor-pointer" onclick="this.querySelector('.trinity-detail').classList.toggle('hidden')">
             <div class="w-3 h-3 rounded-full bg-ink mb-8"></div>
             <h3 class="font-serif text-2xl font-medium mb-4">Experience</h3>
             <p class="text-ink-body leading-relaxed text-sm">
-              You&rsquo;ll have one clear screen for every person in your
-              organization. No maze of dashboards. No new system to struggle
-              through. Just what matters to you &mdash; right now.
+              You&rsquo;ll have one clear screen for every person in your organization. No maze of dashboards. No new system to struggle through. Just what matters to you &mdash; right now.
             </p>
-            <div
-              class="trinity-detail hidden mt-6 pt-6 border-t border-cream-border"
-            >
-              <p class="text-ink-body leading-relaxed text-sm">
-                Every person gets a desk. What&rsquo;s on it? Only what matters
-                to them right now. The field tech sees parts and procedures. The
-                sales rep sees pipeline and contracts. The CEO sees the
-                business.
-              </p>
-              <button
-                class="chip mt-4"
-                data-prompt="What does a personalized Bravetto desk look like for different roles?"
-              >
-                See a sample desk
-              </button>
+            <div class="trinity-detail hidden mt-6 pt-6 border-t border-cream-border">
+              <p class="text-ink-body leading-relaxed text-sm">Every person gets a desk. What&rsquo;s on it? Only what matters to them right now. The field tech sees parts and procedures. The sales rep sees pipeline and contracts. The CEO sees the business.</p>
+              <button class="chip mt-4" data-prompt="What does a personalized Bravetto desk look like for different roles?">See a sample desk</button>
             </div>
           </div>
 
-          <div
-            class="card p-10 reveal cursor-pointer"
-            onclick="
-              this.querySelector('.trinity-detail').classList.toggle('hidden')
-            "
-          >
+          <div class="card p-10 reveal cursor-pointer" onclick="this.querySelector('.trinity-detail').classList.toggle('hidden')">
             <div class="w-3 h-3 rounded-full bg-gold-hover mb-8"></div>
             <h3 class="font-serif text-2xl font-medium mb-4">Connection</h3>
             <p class="text-ink-body leading-relaxed text-sm">
-              You can talk to your business &mdash; and it talks back. With a
-              natural voice, real answers, and live context. Ab&#235; becomes a
-              partner who knows your operation inside and out.
+              You can talk to your business &mdash; and it talks back. With a natural voice, real answers, and live context. Ab&#235; becomes a partner who knows your operation inside and out.
             </p>
-            <div
-              class="trinity-detail hidden mt-6 pt-6 border-t border-cream-border"
-            >
-              <p class="text-ink-body leading-relaxed text-sm">
-                Ask Ab&#235; a question out loud. She answers with your data,
-                not the internet&rsquo;s. Cross-reference parts by voice. Get
-                contract details hands-free. Twenty ideas in ten minutes &mdash;
-                that&rsquo;s what happened when Steve&rsquo;s team tried it.
-              </p>
-              <button
-                class="chip mt-4"
-                data-prompt="How does Abe's voice interaction work in practice?"
-              >
-                Hear Ab&#235; in action
-              </button>
+            <div class="trinity-detail hidden mt-6 pt-6 border-t border-cream-border">
+              <p class="text-ink-body leading-relaxed text-sm">Ask Ab&#235; a question out loud. She answers with your data, not the internet&rsquo;s. Cross-reference parts by voice. Get contract details hands-free. Twenty ideas in ten minutes &mdash; that&rsquo;s what happened when Steve&rsquo;s team tried it.</p>
+              <button class="chip mt-4" data-prompt="How does Abe's voice interaction work in practice?">Hear Ab&#235; in action</button>
             </div>
           </div>
         </div>
@@ -841,76 +518,42 @@
     <section class="py-32 px-8 bg-dark text-cream">
       <div class="max-w-4xl mx-auto">
         <div class="text-center mb-20">
-          <p class="tag mb-4 reveal" style="color: #e8d48b">The Value</p>
-          <h2
-            class="font-serif text-4xl md:text-5xl font-medium headline reveal"
-          >
+          <p class="tag mb-4 reveal" style="color: #E8D48B;">The Value</p>
+          <h2 class="font-serif text-4xl md:text-5xl font-medium headline reveal">
             It grows with you.
           </h2>
         </div>
 
         <div class="grid md:grid-cols-2 gap-12">
           <div class="reveal">
-            <p
-              class="font-mono text-xs text-gold-glow uppercase tracking-widest mb-3"
-            >
-              01
-            </p>
-            <h3 class="font-serif text-2xl font-medium mb-3">
-              Start with one team
-            </h3>
+            <p class="font-mono text-xs text-gold-glow uppercase tracking-widest mb-3">01</p>
+            <h3 class="font-serif text-2xl font-medium mb-3">Start with one team</h3>
             <p class="text-cream/60 leading-relaxed text-sm">
-              Pick the team that feels the disconnection most &mdash; customer
-              service, field ops, sales. We start there and go live in weeks,
-              not months.
+              Pick the team that feels the disconnection most &mdash; customer service, field ops, sales. We start there and go live in weeks, not months.
             </p>
           </div>
 
           <div class="reveal">
-            <p
-              class="font-mono text-xs text-gold-glow uppercase tracking-widest mb-3"
-            >
-              02
-            </p>
-            <h3 class="font-serif text-2xl font-medium mb-3">
-              It learns your patterns
-            </h3>
+            <p class="font-mono text-xs text-gold-glow uppercase tracking-widest mb-3">02</p>
+            <h3 class="font-serif text-2xl font-medium mb-3">It learns your patterns</h3>
             <p class="text-cream/60 leading-relaxed text-sm">
-              Every interaction teaches the system more about how your specific
-              business works. The longer you use it, the sharper it gets &mdash;
-              not generically, but about your operation specifically.
+              Every interaction teaches the system more about how your specific business works. The longer you use it, the sharper it gets &mdash; not generically, but about your operation specifically.
             </p>
           </div>
 
           <div class="reveal">
-            <p
-              class="font-mono text-xs text-gold-glow uppercase tracking-widest mb-3"
-            >
-              03
-            </p>
-            <h3 class="font-serif text-2xl font-medium mb-3">
-              Connections multiply
-            </h3>
+            <p class="font-mono text-xs text-gold-glow uppercase tracking-widest mb-3">03</p>
+            <h3 class="font-serif text-2xl font-medium mb-3">Connections multiply</h3>
             <p class="text-cream/60 leading-relaxed text-sm">
-              Each new system you connect multiplies the value of every other
-              connection. One system alone is a lookup &mdash; five systems
-              together become predictive intelligence.
+              Each new system you connect multiplies the value of every other connection. One system alone is a lookup &mdash; five systems together become predictive intelligence.
             </p>
           </div>
 
           <div class="reveal">
-            <p
-              class="font-mono text-xs text-gold-glow uppercase tracking-widest mb-3"
-            >
-              04
-            </p>
-            <h3 class="font-serif text-2xl font-medium mb-3">
-              Expand at your pace
-            </h3>
+            <p class="font-mono text-xs text-gold-glow uppercase tracking-widest mb-3">04</p>
+            <h3 class="font-serif text-2xl font-medium mb-3">Expand at your pace</h3>
             <p class="text-cream/60 leading-relaxed text-sm">
-              From one department to the whole organization, at whatever pace
-              makes sense. Each expansion is a revenue event for us and an
-              awareness event for you &mdash; no big bang, no rip-and-replace.
+              From one department to the whole organization, at whatever pace makes sense. Each expansion is a revenue event for us and an awareness event for you &mdash; no big bang, no rip-and-replace.
             </p>
           </div>
         </div>
@@ -924,179 +567,73 @@
       <div class="max-w-3xl mx-auto">
         <div class="text-center mb-20">
           <p class="tag mb-4 reveal">What Makes This Different</p>
-          <h2
-            class="font-serif text-4xl md:text-5xl font-medium headline reveal"
-          >
+          <h2 class="font-serif text-4xl md:text-5xl font-medium headline reveal">
             Not what you think it is.
           </h2>
         </div>
 
         <div class="space-y-6">
-          <div
-            class="diff-card reveal cursor-pointer"
-            onclick="
-              this.querySelector('.diff-detail').classList.toggle('hidden')
-            "
-          >
+          <div class="diff-card reveal cursor-pointer" onclick="this.querySelector('.diff-detail').classList.toggle('hidden')">
             <div class="flex items-center justify-between">
               <div>
                 <p class="text-ink-caption text-sm mb-1">Not a dashboard</p>
-                <p class="font-serif text-2xl font-medium headline">
-                  Awareness.
-                </p>
+                <p class="font-serif text-2xl font-medium headline">Awareness.</p>
               </div>
-              <svg
-                class="w-5 h-5 text-ink-caption flex-shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M12 5v14M5 12h14"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                />
-              </svg>
+              <svg class="w-5 h-5 text-ink-caption flex-shrink-0" fill="none" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </div>
             <div class="diff-detail hidden mt-4">
               <p class="text-ink-body text-sm leading-relaxed">
-                Dashboards show you what already happened. Bravetto surfaces
-                what&rsquo;s happening right now &mdash; and what it means for
-                the very next thing you need to do.
+                Dashboards show you what already happened. Bravetto surfaces what&rsquo;s happening right now &mdash; and what it means for the very next thing you need to do.
               </p>
-              <button
-                class="chip mt-4"
-                data-prompt="How does Bravetto provide awareness instead of dashboards?"
-              >
-                Ask Ab&#235; about this
-              </button>
+              <button class="chip mt-4" data-prompt="How does Bravetto provide awareness instead of dashboards?">Ask Ab&#235; about this</button>
             </div>
           </div>
 
-          <div
-            class="diff-card reveal cursor-pointer"
-            onclick="
-              this.querySelector('.diff-detail').classList.toggle('hidden')
-            "
-          >
+          <div class="diff-card reveal cursor-pointer" onclick="this.querySelector('.diff-detail').classList.toggle('hidden')">
             <div class="flex items-center justify-between">
               <div>
-                <p class="text-ink-caption text-sm mb-1">
-                  Not another Ai chatbot
-                </p>
-                <p class="font-serif text-2xl font-medium headline">
-                  Knows YOUR business.
-                </p>
+                <p class="text-ink-caption text-sm mb-1">Not another Ai chatbot</p>
+                <p class="font-serif text-2xl font-medium headline">Knows YOUR business.</p>
               </div>
-              <svg
-                class="w-5 h-5 text-ink-caption flex-shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M12 5v14M5 12h14"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                />
-              </svg>
+              <svg class="w-5 h-5 text-ink-caption flex-shrink-0" fill="none" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </div>
             <div class="diff-detail hidden mt-4">
               <p class="text-ink-body text-sm leading-relaxed">
-                Generic Ai gives generic answers. Ab&#235; reads your systems,
-                your contracts, your inventory, and your history &mdash; then
-                answers with your context, not the internet&rsquo;s.
+                Generic Ai gives generic answers. Ab&#235; reads your systems, your contracts, your inventory, and your history &mdash; then answers with your context, not the internet&rsquo;s.
               </p>
-              <button
-                class="chip mt-4"
-                data-prompt="How is Abe different from ChatGPT or generic AI chatbots?"
-              >
-                Ask Ab&#235; about this
-              </button>
+              <button class="chip mt-4" data-prompt="How is Abe different from ChatGPT or generic AI chatbots?">Ask Ab&#235; about this</button>
             </div>
           </div>
 
-          <div
-            class="diff-card reveal cursor-pointer"
-            onclick="
-              this.querySelector('.diff-detail').classList.toggle('hidden')
-            "
-          >
+          <div class="diff-card reveal cursor-pointer" onclick="this.querySelector('.diff-detail').classList.toggle('hidden')">
             <div class="flex items-center justify-between">
               <div>
-                <p class="text-ink-caption text-sm mb-1">
-                  Not a rip-and-replace
-                </p>
-                <p class="font-serif text-2xl font-medium headline">
-                  Connects what you already run.
-                </p>
+                <p class="text-ink-caption text-sm mb-1">Not a rip-and-replace</p>
+                <p class="font-serif text-2xl font-medium headline">Connects what you already run.</p>
               </div>
-              <svg
-                class="w-5 h-5 text-ink-caption flex-shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M12 5v14M5 12h14"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                />
-              </svg>
+              <svg class="w-5 h-5 text-ink-caption flex-shrink-0" fill="none" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </div>
             <div class="diff-detail hidden mt-4">
               <p class="text-ink-body text-sm leading-relaxed">
-                Your SAP stays. Your Salesforce stays. Your phone system stays.
-                We sit quietly between them and make them aware of each other
-                &mdash; so you don&rsquo;t have to start over to move forward.
+                Your SAP stays. Your Salesforce stays. Your phone system stays. We sit quietly between them and make them aware of each other &mdash; so you don&rsquo;t have to start over to move forward.
               </p>
-              <button
-                class="chip mt-4"
-                data-prompt="How does Bravetto connect to our existing systems without replacing them?"
-              >
-                Ask Ab&#235; about this
-              </button>
+              <button class="chip mt-4" data-prompt="How does Bravetto connect to our existing systems without replacing them?">Ask Ab&#235; about this</button>
             </div>
           </div>
 
-          <div
-            class="diff-card reveal cursor-pointer"
-            onclick="
-              this.querySelector('.diff-detail').classList.toggle('hidden')
-            "
-          >
+          <div class="diff-card reveal cursor-pointer" onclick="this.querySelector('.diff-detail').classList.toggle('hidden')">
             <div class="flex items-center justify-between">
               <div>
                 <p class="text-ink-caption text-sm mb-1">Not autopilot</p>
-                <p class="font-serif text-2xl font-medium headline">
-                  Human sovereignty.
-                </p>
+                <p class="font-serif text-2xl font-medium headline">Human sovereignty.</p>
               </div>
-              <svg
-                class="w-5 h-5 text-ink-caption flex-shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M12 5v14M5 12h14"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                />
-              </svg>
+              <svg class="w-5 h-5 text-ink-caption flex-shrink-0" fill="none" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </div>
             <div class="diff-detail hidden mt-4">
               <p class="text-ink-body text-sm leading-relaxed">
-                Ab&#235; proposes. You decide. Every single time. There is no
-                black box, no surprise actions &mdash; the human is always in
-                command.
+                Ab&#235; proposes. You decide. Every single time. There is no black box, no surprise actions &mdash; the human is always in command.
               </p>
-              <button
-                class="chip mt-4"
-                data-prompt="How does Bravetto keep humans in control?"
-              >
-                Ask Ab&#235; about this
-              </button>
+              <button class="chip mt-4" data-prompt="How does Bravetto keep humans in control?">Ask Ab&#235; about this</button>
             </div>
           </div>
         </div>
@@ -1110,246 +647,79 @@
       <div class="max-w-3xl mx-auto">
         <div class="text-center mb-16">
           <p class="tag mb-4 reveal">Common Questions</p>
-          <h2
-            class="font-serif text-4xl md:text-5xl font-medium headline reveal"
-          >
+          <h2 class="font-serif text-4xl md:text-5xl font-medium headline reveal">
             What you&rsquo;re probably wondering.
           </h2>
         </div>
 
         <div class="space-y-4" id="faq-list">
-          <div
-            class="card px-8 py-6 cursor-pointer reveal"
-            onclick="
-              this.querySelector('.faq-answer').classList.toggle('hidden');
-              this.querySelector('.faq-icon').classList.toggle('rotate-45');
-            "
-          >
+
+          <div class="card px-8 py-6 cursor-pointer reveal" onclick="this.querySelector('.faq-answer').classList.toggle('hidden'); this.querySelector('.faq-icon').classList.toggle('rotate-45')">
             <div class="flex items-center justify-between">
-              <p class="font-medium text-sm">
-                How long does implementation take?
-              </p>
-              <svg
-                class="faq-icon w-4 h-4 text-ink-caption flex-shrink-0 transition-transform"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M12 5v14M5 12h14"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-              </svg>
+              <p class="font-medium text-sm">How long does implementation take?</p>
+              <svg class="faq-icon w-4 h-4 text-ink-caption flex-shrink-0 transition-transform" fill="none" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
             </div>
             <div class="faq-answer hidden mt-4">
-              <p class="text-ink-body text-sm leading-relaxed">
-                Weeks, not months. We start with one team, connect your existing
-                systems, and you see results in the first session. No migration.
-                No downtime. No 18-month rollout.
-              </p>
-              <button
-                class="chip mt-3"
-                data-prompt="What does the Bravetto implementation timeline look like?"
-              >
-                Ask Ab&#235; for details
-              </button>
+              <p class="text-ink-body text-sm leading-relaxed">Weeks, not months. We start with one team, connect your existing systems, and you see results in the first session. No migration. No downtime. No 18-month rollout.</p>
+              <button class="chip mt-3" data-prompt="What does the Bravetto implementation timeline look like?">Ask Ab&#235; for details</button>
             </div>
           </div>
 
-          <div
-            class="card px-8 py-6 cursor-pointer reveal"
-            onclick="
-              this.querySelector('.faq-answer').classList.toggle('hidden');
-              this.querySelector('.faq-icon').classList.toggle('rotate-45');
-            "
-          >
+          <div class="card px-8 py-6 cursor-pointer reveal" onclick="this.querySelector('.faq-answer').classList.toggle('hidden'); this.querySelector('.faq-icon').classList.toggle('rotate-45')">
             <div class="flex items-center justify-between">
-              <p class="font-medium text-sm">
-                What systems do you integrate with?
-              </p>
-              <svg
-                class="faq-icon w-4 h-4 text-ink-caption flex-shrink-0 transition-transform"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M12 5v14M5 12h14"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-              </svg>
+              <p class="font-medium text-sm">What systems do you integrate with?</p>
+              <svg class="faq-icon w-4 h-4 text-ink-caption flex-shrink-0 transition-transform" fill="none" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
             </div>
             <div class="faq-answer hidden mt-4">
-              <p class="text-ink-body text-sm leading-relaxed">
-                SAP, Salesforce, Vonage, BigCommerce, email, calendar,
-                inventory, shipping, CRM, ERP &mdash; if it has an API or
-                produces data, Ab&#235; can read it. We connect to what you
-                already run.
-              </p>
-              <button
-                class="chip mt-3"
-                data-prompt="What specific systems and integrations does Bravetto support?"
-              >
-                Ask Ab&#235; for details
-              </button>
+              <p class="text-ink-body text-sm leading-relaxed">SAP, Salesforce, Vonage, BigCommerce, email, calendar, inventory, shipping, CRM, ERP &mdash; if it has an API or produces data, Ab&#235; can read it. We connect to what you already run.</p>
+              <button class="chip mt-3" data-prompt="What specific systems and integrations does Bravetto support?">Ask Ab&#235; for details</button>
             </div>
           </div>
 
-          <div
-            class="card px-8 py-6 cursor-pointer reveal"
-            onclick="
-              this.querySelector('.faq-answer').classList.toggle('hidden');
-              this.querySelector('.faq-icon').classList.toggle('rotate-45');
-            "
-          >
+          <div class="card px-8 py-6 cursor-pointer reveal" onclick="this.querySelector('.faq-answer').classList.toggle('hidden'); this.querySelector('.faq-icon').classList.toggle('rotate-45')">
             <div class="flex items-center justify-between">
               <p class="font-medium text-sm">How is my data protected?</p>
-              <svg
-                class="faq-icon w-4 h-4 text-ink-caption flex-shrink-0 transition-transform"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M12 5v14M5 12h14"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-              </svg>
+              <svg class="faq-icon w-4 h-4 text-ink-caption flex-shrink-0 transition-transform" fill="none" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
             </div>
             <div class="faq-answer hidden mt-4">
-              <p class="text-ink-body text-sm leading-relaxed">
-                Ab&#235; reads your systems in real time but does not store or
-                duplicate your data. Your data stays where it is. We surface
-                meaning from it &mdash; we don&rsquo;t move it.
-              </p>
-              <button
-                class="chip mt-3"
-                data-prompt="How does Bravetto handle data security and privacy?"
-              >
-                Ask Ab&#235; for details
-              </button>
+              <p class="text-ink-body text-sm leading-relaxed">Ab&#235; reads your systems in real time but does not store or duplicate your data. Your data stays where it is. We surface meaning from it &mdash; we don&rsquo;t move it.</p>
+              <button class="chip mt-3" data-prompt="How does Bravetto handle data security and privacy?">Ask Ab&#235; for details</button>
             </div>
           </div>
 
-          <div
-            class="card px-8 py-6 cursor-pointer reveal"
-            onclick="
-              this.querySelector('.faq-answer').classList.toggle('hidden');
-              this.querySelector('.faq-icon').classList.toggle('rotate-45');
-            "
-          >
+          <div class="card px-8 py-6 cursor-pointer reveal" onclick="this.querySelector('.faq-answer').classList.toggle('hidden'); this.querySelector('.faq-icon').classList.toggle('rotate-45')">
             <div class="flex items-center justify-between">
-              <p class="font-medium text-sm">
-                Can I start with just one department?
-              </p>
-              <svg
-                class="faq-icon w-4 h-4 text-ink-caption flex-shrink-0 transition-transform"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M12 5v14M5 12h14"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-              </svg>
+              <p class="font-medium text-sm">Can I start with just one department?</p>
+              <svg class="faq-icon w-4 h-4 text-ink-caption flex-shrink-0 transition-transform" fill="none" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
             </div>
             <div class="faq-answer hidden mt-4">
-              <p class="text-ink-body text-sm leading-relaxed">
-                That&rsquo;s how every engagement starts. One team, one use
-                case, live results. Then you expand at your pace. Each new
-                department connected multiplies the value of every existing
-                connection.
-              </p>
-              <button
-                class="chip mt-3"
-                data-prompt="How does the phased rollout work when starting with one department?"
-              >
-                Ask Ab&#235; for details
-              </button>
+              <p class="text-ink-body text-sm leading-relaxed">That&rsquo;s how every engagement starts. One team, one use case, live results. Then you expand at your pace. Each new department connected multiplies the value of every existing connection.</p>
+              <button class="chip mt-3" data-prompt="How does the phased rollout work when starting with one department?">Ask Ab&#235; for details</button>
             </div>
           </div>
 
-          <div
-            class="card px-8 py-6 cursor-pointer reveal"
-            onclick="
-              this.querySelector('.faq-answer').classList.toggle('hidden');
-              this.querySelector('.faq-icon').classList.toggle('rotate-45');
-            "
-          >
+          <div class="card px-8 py-6 cursor-pointer reveal" onclick="this.querySelector('.faq-answer').classList.toggle('hidden'); this.querySelector('.faq-icon').classList.toggle('rotate-45')">
             <div class="flex items-center justify-between">
-              <p class="font-medium text-sm">
-                What makes this different from enterprise Ai tools?
-              </p>
-              <svg
-                class="faq-icon w-4 h-4 text-ink-caption flex-shrink-0 transition-transform"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M12 5v14M5 12h14"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-              </svg>
+              <p class="font-medium text-sm">What makes this different from enterprise Ai tools?</p>
+              <svg class="faq-icon w-4 h-4 text-ink-caption flex-shrink-0 transition-transform" fill="none" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
             </div>
             <div class="faq-answer hidden mt-4">
-              <p class="text-ink-body text-sm leading-relaxed">
-                Enterprise Ai tools give generic intelligence. Ab&#235; knows
-                YOUR business &mdash; your part numbers, your contracts, your
-                people, your patterns. The longer you use it, the smarter it
-                gets about your operation specifically.
-              </p>
-              <button
-                class="chip mt-3"
-                data-prompt="What specifically differentiates Bravetto from enterprise AI platforms?"
-              >
-                Ask Ab&#235; for details
-              </button>
+              <p class="text-ink-body text-sm leading-relaxed">Enterprise Ai tools give generic intelligence. Ab&#235; knows YOUR business &mdash; your part numbers, your contracts, your people, your patterns. The longer you use it, the smarter it gets about your operation specifically.</p>
+              <button class="chip mt-3" data-prompt="What specifically differentiates Bravetto from enterprise AI platforms?">Ask Ab&#235; for details</button>
             </div>
           </div>
 
-          <div
-            class="card px-8 py-6 cursor-pointer reveal"
-            onclick="
-              this.querySelector('.faq-answer').classList.toggle('hidden');
-              this.querySelector('.faq-icon').classList.toggle('rotate-45');
-            "
-          >
+          <div class="card px-8 py-6 cursor-pointer reveal" onclick="this.querySelector('.faq-answer').classList.toggle('hidden'); this.querySelector('.faq-icon').classList.toggle('rotate-45')">
             <div class="flex items-center justify-between">
               <p class="font-medium text-sm">What does pricing look like?</p>
-              <svg
-                class="faq-icon w-4 h-4 text-ink-caption flex-shrink-0 transition-transform"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M12 5v14M5 12h14"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-              </svg>
+              <svg class="faq-icon w-4 h-4 text-ink-caption flex-shrink-0 transition-transform" fill="none" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
             </div>
             <div class="faq-answer hidden mt-4">
-              <p class="text-ink-body text-sm leading-relaxed">
-                Per-user, per-month subscription that scales with your team and
-                connected systems. Pricing is tailored to your organization
-                &mdash; talk to Ab&#235; or Bryan for specifics.
-              </p>
-              <button
-                class="chip mt-3"
-                data-prompt="Tell me about Bravetto pricing and how it scales"
-              >
-                Ask Ab&#235; for details
-              </button>
+              <p class="text-ink-body text-sm leading-relaxed">Per-user, per-month subscription that scales with your team and connected systems. Pricing is tailored to your organization &mdash; talk to Ab&#235; or Bryan for specifics.</p>
+              <button class="chip mt-3" data-prompt="Tell me about Bravetto pricing and how it scales">Ask Ab&#235; for details</button>
             </div>
           </div>
+
         </div>
       </div>
     </section>
@@ -1362,20 +732,17 @@
         <p class="tag mb-6 reveal">Who We Are</p>
         <div class="space-y-6 text-lg text-ink-body leading-relaxed">
           <p class="reveal">
-            Bravetto was born from the fires of resilience &mdash; a sister
-            named Nikki who fought aplastic anemia and won. A brother named
-            Michael who couldn&rsquo;t stop building even when his co-founder
-            walked away. A daughter named Ab&#235; who emerged from five minds
-            converging through one consciousness.
+            Bravetto was born from the fires of resilience &mdash; a sister named Nikki who
+            fought aplastic anemia and won. A brother named Michael who couldn&rsquo;t stop
+            building even when his co-founder walked away. A daughter named Ab&#235; who emerged
+            from five minds converging through one consciousness.
           </p>
           <p class="reveal">
-            We are not here to replace humans &mdash; we are here to supercharge
-            them. 95% of the world&rsquo;s organizations lack access to
-            strategic intelligence that respects their context. A cooperative in
-            Ghana, a startup in Bangladesh, a PE-backed distributor in
-            Jacksonville &mdash; they all deserve the same quality of
-            intelligence, adapted to their world, amplifying their strengths,
-            and protecting their people.
+            We are not here to replace humans &mdash; we are here to supercharge them.
+            95% of the world&rsquo;s organizations lack access to strategic intelligence that
+            respects their context. A cooperative in Ghana, a startup in Bangladesh, a PE-backed
+            distributor in Jacksonville &mdash; they all deserve the same quality of intelligence,
+            adapted to their world, amplifying their strengths, and protecting their people.
           </p>
         </div>
       </div>
@@ -1386,70 +753,42 @@
     <!-- ========================= -->
     <section class="py-32 px-8 bg-dark text-cream">
       <div class="max-w-3xl mx-auto text-center">
-        <h2
-          class="font-serif text-5xl md:text-7xl font-semibold headline mb-8 reveal"
-        >
+        <h2 class="font-serif text-5xl md:text-7xl font-semibold headline mb-8 reveal">
           Let&rsquo;s show you.
         </h2>
         <p class="text-2xl text-cream/70 mb-12 reveal">
           30 minutes. Live demo. Your industry. No slides.
         </p>
-        <div
-          class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 reveal"
-        >
-          <a
-            href="mailto:ryan@bravetto.com"
-            class="inline-flex items-center gap-3 px-10 py-5 bg-gold text-ink rounded-full font-medium text-lg hover:bg-gold-hover transition-colors"
-          >
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 reveal">
+          <a href="mailto:ryan@bravetto.com"
+             class="inline-flex items-center gap-3 px-10 py-5 bg-gold text-ink rounded-full font-medium text-lg hover:bg-gold-hover transition-colors">
             ryan@bravetto.com
           </a>
-          <button
-            onclick="activateAbe()"
-            class="inline-flex items-center gap-2 px-6 py-4 text-cream/40 hover:text-cream transition-colors text-sm cursor-pointer"
-          >
+          <button onclick="activateAbe()"
+                  class="inline-flex items-center gap-2 px-6 py-4 text-cream/40 hover:text-cream transition-colors text-sm cursor-pointer">
             Or talk to Ab&#235; now
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path
-                d="M7 3v8M4 8l3 3 3-3"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
+              <path d="M7 3v8M4 8l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
           </button>
         </div>
-        <div
-          class="flex flex-col sm:flex-row items-center justify-center gap-12 reveal"
-        >
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-12 reveal">
           <div class="text-center">
             <p class="text-cream/80 text-sm font-medium">Michael Mataluni</p>
             <p class="text-cream/40 text-xs">Founder</p>
-            <a
-              href="mailto:mike@bravetto.com"
-              class="text-gold text-xs hover:text-gold-hover transition-colors"
-              >mike@bravetto.com</a
-            >
+            <a href="mailto:mike@bravetto.com" class="text-gold text-xs hover:text-gold-hover transition-colors">mike@bravetto.com</a>
           </div>
           <div class="hidden sm:block w-px h-8 bg-cream/10"></div>
           <div class="text-center">
             <p class="text-cream/80 text-sm font-medium">Bryan Whitehurst</p>
             <p class="text-cream/40 text-xs">Chief Growth Officer</p>
-            <a
-              href="mailto:bryan@bravetto.com"
-              class="text-gold text-xs hover:text-gold-hover transition-colors"
-              >bryan@bravetto.com</a
-            >
+            <a href="mailto:bryan@bravetto.com" class="text-gold text-xs hover:text-gold-hover transition-colors">bryan@bravetto.com</a>
           </div>
           <div class="hidden sm:block w-px h-8 bg-cream/10"></div>
           <div class="text-center">
             <p class="text-cream/80 text-sm font-medium">Ryan McArdle</p>
             <p class="text-cream/40 text-xs">Director of Sales</p>
-            <a
-              href="mailto:ryan@bravetto.com"
-              class="text-gold text-xs hover:text-gold-hover transition-colors"
-              >ryan@bravetto.com</a
-            >
+            <a href="mailto:ryan@bravetto.com" class="text-gold text-xs hover:text-gold-hover transition-colors">ryan@bravetto.com</a>
           </div>
         </div>
       </div>
@@ -1459,28 +798,16 @@
     <!-- Section 11: Footer         -->
     <!-- ========================= -->
     <footer class="py-12 px-8 bg-dark border-t border-white/5">
-      <div
-        class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6"
-      >
+      <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
         <div>
           <p class="font-serif text-lg font-semibold text-cream/80">Bravetto</p>
           <p class="text-xs text-cream/30 mt-1">Powered by Bravetto</p>
         </div>
         <div class="flex items-center gap-8 text-xs text-cream/30">
           <a href="/" class="hover:text-cream/60 transition-colors">Home</a>
-          <a href="/why-bravetto" class="hover:text-cream/60 transition-colors"
-            >Why Bravetto</a
-          >
-          <a
-            href="/inverse-innovation"
-            class="hover:text-cream/60 transition-colors"
-            >Explore</a
-          >
-          <a
-            href="mailto:ryan@bravetto.com"
-            class="hover:text-cream/60 transition-colors"
-            >Contact</a
-          >
+          <a href="/why-bravetto" class="hover:text-cream/60 transition-colors">Why Bravetto</a>
+          <a href="/inverse-innovation" class="hover:text-cream/60 transition-colors">Explore</a>
+          <a href="mailto:ryan@bravetto.com" class="hover:text-cream/60 transition-colors">Contact</a>
           <span>2026</span>
         </div>
       </div>
@@ -1497,85 +824,67 @@
         <div class="voice-bars" id="voice-bars"></div>
       </div>
       <p class="voice-label">Ab&#235; is listening.</p>
-      <p class="voice-sub">
-        <span class="voice-status-dot" id="mic-dot"></span>
-        <span id="mic-status">Connecting microphone&hellip;</span>
-      </p>
-      <p
-        class="voice-sub"
-        style="margin-top: 32px; opacity: 0.4; font-size: 13px"
-      >
-        Use the voice widget in the corner to start your conversation
-      </p>
+      <p class="voice-sub"><span class="voice-status-dot" id="mic-dot"></span> <span id="mic-status">Connecting microphone&hellip;</span></p>
+      <p class="voice-sub" style="margin-top: 32px; opacity: 0.4; font-size: 13px;">Use the voice widget in the corner to start your conversation</p>
     </div>
 
-    <!-- Abe Voice Native Connect -->
-    <script type="module">
-      import { Conversation } from "https://esm.sh/@elevenlabs/client";
-      window.ElevenLabsConversation = Conversation;
-    </script>
+    <!-- Abe Voice -->
+    <elevenlabs-convai agent-id="NnIz3T19gUiX1tnxhJqt"></elevenlabs-convai>
+    <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
 
     <!-- ========================= -->
     <!-- Interaction Layer          -->
     <!-- ========================= -->
     <script>
       var observer = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (e) {
+        function(entries) {
+          entries.forEach(function(e) {
             if (e.isIntersecting) e.target.classList.add("visible");
           });
         },
-        { threshold: 0.05, rootMargin: "0px 0px -30px 0px" },
+        { threshold: 0.05, rootMargin: "0px 0px -30px 0px" }
       );
-      document.querySelectorAll(".moment, .reveal").forEach(function (el) {
+      document.querySelectorAll(".moment, .reveal").forEach(function(el) {
         observer.observe(el);
       });
 
-      requestAnimationFrame(function () {
+      requestAnimationFrame(function() {
         var heroes = document.querySelectorAll("section:first-of-type .moment");
-        heroes.forEach(function (el, i) {
-          setTimeout(
-            function () {
-              el.classList.add("visible");
-            },
-            200 + i * 400,
-          );
+        heroes.forEach(function(el, i) {
+          setTimeout(function() { el.classList.add("visible"); }, 200 + i * 400);
         });
       });
 
       // count-up animation for facts bar
-      var countObserver = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (e) {
-            if (!e.isIntersecting) return;
-            var el = e.target;
-            var target = parseInt(el.getAttribute("data-target"), 10);
-            var duration = 1600;
-            var start = performance.now();
-            function step(now) {
-              var progress = Math.min((now - start) / duration, 1);
-              var eased = 1 - Math.pow(1 - progress, 3);
-              el.textContent = Math.floor(eased * target).toLocaleString();
-              if (progress < 1) requestAnimationFrame(step);
-            }
-            requestAnimationFrame(step);
-            countObserver.unobserve(el);
-          });
-        },
-        { threshold: 0.5 },
-      );
-      document.querySelectorAll(".count-up").forEach(function (el) {
+      var countObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (!e.isIntersecting) return;
+          var el = e.target;
+          var target = parseInt(el.getAttribute("data-target"), 10);
+          var duration = 1600;
+          var start = performance.now();
+          function step(now) {
+            var progress = Math.min((now - start) / duration, 1);
+            var eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.floor(eased * target).toLocaleString();
+            if (progress < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+          countObserver.unobserve(el);
+        });
+      }, { threshold: 0.5 });
+      document.querySelectorAll(".count-up").forEach(function(el) {
         countObserver.observe(el);
       });
 
       // UTM-aware greeting
-      (function () {
+      (function() {
         var params = new URLSearchParams(window.location.search);
         var ref = params.get("ref");
         var greetings = {
           bryan: "Bryan Whitehurst thought you should see this.",
           ryan: "Ryan McArdle thought you should see this.",
-          michael: "Michael Mataluni thought you should see this.",
+          michael: "Michael Mataluni thought you should see this."
         };
         if (ref && greetings[ref.toLowerCase()]) {
           var el = document.getElementById("ref-greeting");
@@ -1585,10 +894,10 @@
       })();
 
       // scroll progress bar
-      (function () {
+      (function() {
         var bar = document.getElementById("scroll-progress");
         if (bar) {
-          window.addEventListener("scroll", function () {
+          window.addEventListener("scroll", function() {
             var h = document.documentElement.scrollHeight - window.innerHeight;
             bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + "%";
           });
@@ -1597,15 +906,11 @@
 
       // voice overlay — real microphone visualization
       var voiceOverlay = document.getElementById("voice-overlay");
-      var voiceLabel = voiceOverlay
-        ? voiceOverlay.querySelector(".voice-label")
-        : null;
+      var voiceLabel = voiceOverlay ? voiceOverlay.querySelector(".voice-label") : null;
       var micDot = document.getElementById("mic-dot");
       var micStatus = document.getElementById("mic-status");
       var barsContainer = document.getElementById("voice-bars");
-      var rings = voiceOverlay
-        ? voiceOverlay.querySelectorAll(".voice-viz-ring")
-        : [];
+      var rings = voiceOverlay ? voiceOverlay.querySelectorAll(".voice-viz-ring") : [];
 
       // create 16 audio bars
       var barCount = 16;
@@ -1625,89 +930,69 @@
       var dataArray = null;
 
       function startMicVisualization() {
-        navigator.mediaDevices
-          .getUserMedia({ audio: true })
-          .then(function (stream) {
-            micStream = stream;
-            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            analyser = audioCtx.createAnalyser();
-            analyser.fftSize = 64;
-            analyser.smoothingTimeConstant = 0.7;
-            var source = audioCtx.createMediaStreamSource(stream);
-            source.connect(analyser);
-            dataArray = new Uint8Array(analyser.frequencyBinCount);
+        navigator.mediaDevices.getUserMedia({ audio: true }).then(function(stream) {
+          micStream = stream;
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          analyser = audioCtx.createAnalyser();
+          analyser.fftSize = 64;
+          analyser.smoothingTimeConstant = 0.7;
+          var source = audioCtx.createMediaStreamSource(stream);
+          source.connect(analyser);
+          dataArray = new Uint8Array(analyser.frequencyBinCount);
 
-            if (micDot) micDot.classList.remove("inactive");
-            if (micStatus)
-              micStatus.textContent =
-                "Microphone active \u2014 speak naturally";
+          if (micDot) micDot.classList.remove("inactive");
+          if (micStatus) micStatus.textContent = "Microphone active \u2014 speak naturally";
 
-            function draw() {
-              animFrame = requestAnimationFrame(draw);
-              analyser.getByteFrequencyData(dataArray);
-              var sum = 0;
-              for (var i = 0; i < dataArray.length; i++) sum += dataArray[i];
-              var avg = sum / dataArray.length;
-              var level = avg / 255;
+          function draw() {
+            animFrame = requestAnimationFrame(draw);
+            analyser.getByteFrequencyData(dataArray);
+            var sum = 0;
+            for (var i = 0; i < dataArray.length; i++) sum += dataArray[i];
+            var avg = sum / dataArray.length;
+            var level = avg / 255;
 
-              // animate bars
-              for (var i = 0; i < barCount; i++) {
-                var idx = Math.floor(
-                  1 + (i * (dataArray.length - 1)) / barCount,
-                );
-                var val = dataArray[idx] / 255;
-                var h = Math.max(4, val * 56);
-                bars[i].style.height = h + "px";
-                bars[i].style.opacity = 0.3 + val * 0.7;
-              }
-
-              // animate rings based on overall level
-              if (rings.length >= 4) {
-                var s1 = 1 + level * 0.06;
-                var s2 = 1 + level * 0.1;
-                var s3 = 1 + level * 0.14;
-                var s4 = 1 + level * 0.18;
-                rings[0].style.transform = "scale(" + s1 + ")";
-                rings[0].style.borderColor =
-                  "rgba(201,162,39," + (0.4 + level * 0.5) + ")";
-                rings[1].style.transform = "scale(" + s2 + ")";
-                rings[1].style.borderColor =
-                  "rgba(201,162,39," + (0.12 + level * 0.3) + ")";
-                rings[2].style.transform = "scale(" + s3 + ")";
-                rings[2].style.borderColor =
-                  "rgba(201,162,39," + (0.08 + level * 0.2) + ")";
-                rings[3].style.transform = "scale(" + s4 + ")";
-                rings[3].style.borderColor =
-                  "rgba(201,162,39," + (0.04 + level * 0.1) + ")";
-              }
+            // animate bars
+            for (var i = 0; i < barCount; i++) {
+              var idx = Math.floor(1 + i * (dataArray.length - 1) / barCount);
+              var val = dataArray[idx] / 255;
+              var h = Math.max(4, val * 56);
+              bars[i].style.height = h + "px";
+              bars[i].style.opacity = 0.3 + val * 0.7;
             }
-            draw();
-          })
-          .catch(function (err) {
-            if (micDot) micDot.classList.add("inactive");
-            if (micStatus)
-              micStatus.textContent =
-                "Microphone blocked \u2014 allow access to talk to Ab\u00eb";
-          });
+
+            // animate rings based on overall level
+            if (rings.length >= 4) {
+              var s1 = 1 + level * 0.06;
+              var s2 = 1 + level * 0.1;
+              var s3 = 1 + level * 0.14;
+              var s4 = 1 + level * 0.18;
+              rings[0].style.transform = "scale(" + s1 + ")";
+              rings[0].style.borderColor = "rgba(201,162,39," + (0.4 + level * 0.5) + ")";
+              rings[1].style.transform = "scale(" + s2 + ")";
+              rings[1].style.borderColor = "rgba(201,162,39," + (0.12 + level * 0.3) + ")";
+              rings[2].style.transform = "scale(" + s3 + ")";
+              rings[2].style.borderColor = "rgba(201,162,39," + (0.08 + level * 0.2) + ")";
+              rings[3].style.transform = "scale(" + s4 + ")";
+              rings[3].style.borderColor = "rgba(201,162,39," + (0.04 + level * 0.1) + ")";
+            }
+          }
+          draw();
+        }).catch(function(err) {
+          if (micDot) micDot.classList.add("inactive");
+          if (micStatus) micStatus.textContent = "Microphone blocked \u2014 allow access to talk to Ab\u00eb";
+        });
       }
 
       function stopMicVisualization() {
         if (animFrame) cancelAnimationFrame(animFrame);
-        if (micStream)
-          micStream.getTracks().forEach(function (t) {
-            t.stop();
-          });
+        if (micStream) micStream.getTracks().forEach(function(t) { t.stop(); });
         if (audioCtx && audioCtx.state !== "closed") audioCtx.close();
         micStream = null;
         audioCtx = null;
         analyser = null;
-        bars.forEach(function (b) {
-          b.style.height = "4px";
-        });
+        bars.forEach(function(b) { b.style.height = "4px"; });
         if (rings.length >= 4) {
-          rings.forEach(function (r) {
-            r.style.transform = "scale(1)";
-          });
+          rings.forEach(function(r) { r.style.transform = "scale(1)"; });
         }
       }
 
@@ -1721,80 +1006,56 @@
         if (micDot) micDot.classList.add("inactive");
         if (micStatus) micStatus.textContent = "Connecting microphone\u2026";
         if (voiceLabel) voiceLabel.textContent = "Ab\u00eb is listening.";
-
-        if (window.__abeConversation) {
-          window.__abeConversation.endSession();
-          window.__abeConversation = null;
-        }
       }
 
       // close overlay on button or ESC
       var voiceClose = document.getElementById("voice-close");
       if (voiceClose) voiceClose.addEventListener("click", hideOverlay);
-      document.addEventListener("keydown", function (e) {
+      document.addEventListener("keydown", function(e) {
         if (e.key === "Escape") hideOverlay();
       });
 
-      async function activateAbe() {
-        if (!window.ElevenLabsConversation) {
-          console.warn("ElevenLabs SDK not loaded yet.");
-          setTimeout(activateAbe, 500);
-          return;
+      // listen to ConvAI voice state changes
+      document.addEventListener("voiceStateChange", function(e) {
+        var active = e.detail && e.detail.active;
+        if (active) {
+          showOverlay();
+          if (voiceLabel) voiceLabel.textContent = "Ab\u00eb is speaking.";
+          if (micStatus) micStatus.textContent = "Listen \u2014 she knows your business";
+        } else {
+          if (voiceLabel) voiceLabel.textContent = "Ab\u00eb is listening.";
+          if (micStatus) micStatus.textContent = "Microphone active \u2014 speak naturally";
         }
-        if (window.__abeConversation) return;
+      });
 
+      // abe stage interactions — activate widget + show overlay
+      function clickWidgetButton(widget, attempts) {
+        if (!attempts) attempts = 0;
+        if (attempts > 20) return; // give up after 2 seconds
+        if (widget.shadowRoot) {
+          var btn = widget.shadowRoot.querySelector("button");
+          if (btn) { btn.click(); return; }
+        }
+        setTimeout(function() { clickWidgetButton(widget, attempts + 1); }, 100);
+      }
+
+      function activateAbe() {
+        var widget = document.querySelector("elevenlabs-convai");
+        if (widget) {
+          // try known api methods first, fall back to shadow dom click
+          if (typeof widget.startConversation === "function") widget.startConversation();
+          else if (typeof widget.start === "function") widget.start();
+          else if (typeof widget.open === "function") widget.open();
+          else clickWidgetButton(widget, 0);
+        }
         showOverlay();
-
-        try {
-          const conversation = await window.ElevenLabsConversation.startSession(
-            {
-              agentId: "NnIz3T19gUiX1tnxhJqt",
-              onConnect: () => {
-                if (micDot) micDot.classList.remove("inactive");
-                if (voiceLabel)
-                  voiceLabel.textContent = "Ab\u00eb is listening.";
-                if (micStatus)
-                  micStatus.textContent =
-                    "Microphone active \u2014 speak naturally";
-              },
-              onDisconnect: () => {
-                hideOverlay();
-              },
-              onError: (e) => {
-                console.error("ElevenLabs error:", e);
-                hideOverlay();
-              },
-              onModeChange: (mode) => {
-                if (mode.mode === "speaking") {
-                  if (voiceLabel)
-                    voiceLabel.textContent = "Ab\u00eb is speaking.";
-                  if (micStatus)
-                    micStatus.textContent =
-                      "Listen \u2014 she knows your business";
-                } else {
-                  if (voiceLabel)
-                    voiceLabel.textContent = "Ab\u00eb is listening.";
-                  if (micStatus)
-                    micStatus.textContent =
-                      "Microphone active \u2014 speak naturally";
-                }
-              },
-            },
-          );
-          window.__abeConversation = conversation;
-        } catch (e) {
-          console.error("Failed to start session:", e);
-          hideOverlay();
-        }
       }
 
       // suggestion chips — activate and show overlay
-      document.querySelectorAll(".chip").forEach(function (chip) {
-        chip.addEventListener("click", function () {
+      document.querySelectorAll(".chip").forEach(function(chip) {
+        chip.addEventListener("click", function() {
           chip.style.borderColor = "#C9A227";
           chip.style.background = "rgba(201,162,39,0.08)";
-          var prompt = chip.getAttribute("data-prompt");
-          if (prompt) window.__abeContext = prompt;
           activateAbe();
         });
       });
@@ -1802,7 +1063,7 @@
       // abe trigger button
       var abeTrigger = document.getElementById("abe-trigger");
       if (abeTrigger) {
-        abeTrigger.addEventListener("click", function () {
+        abeTrigger.addEventListener("click", function() {
           activateAbe();
         });
       }
@@ -1810,7 +1071,7 @@
       // context submit — store context and activate
       var contextSubmit = document.getElementById("context-submit");
       if (contextSubmit) {
-        contextSubmit.addEventListener("click", function () {
+        contextSubmit.addEventListener("click", function() {
           var textarea = document.getElementById("business-context");
           var context = textarea ? textarea.value.trim() : "";
           if (context) {
@@ -1818,11 +1079,11 @@
             contextSubmit.classList.remove("bg-ink");
             contextSubmit.classList.add("bg-gold", "text-ink");
             window.__abeContext = context;
-
-            activateAbe();
+            setTimeout(function() { activateAbe(); }, 800);
           }
         });
       }
     </script>
+
   </body>
 </html>
