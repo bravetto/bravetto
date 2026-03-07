@@ -467,6 +467,8 @@
     pointer-events: none;
     transition: opacity 0.2s;
     backdrop-filter: blur(4px);
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
   }
 
   .modal-overlay.open {
@@ -480,7 +482,10 @@
     padding: 48px;
     max-width: 520px;
     width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
     position: relative;
+    overscroll-behavior: contain;
   }
 
   .modal-close {
@@ -725,12 +730,17 @@
     color: var(--black);
   }
 
+  .hamburger { display: none; }
+
   @media (max-width: 768px) {
     nav, .section, .cta-section, footer { padding-left: 24px; padding-right: 24px; }
     .hero-content { padding: 0 24px; }
     .hero-ticker { padding-left: 24px; }
     .hero-stats { gap: 28px; }
     .nav-links { display: none; }
+    .nav-links.mobile-open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(8,8,8,0.97); padding: 16px 24px; gap: 12px; border-bottom: 1px solid var(--dim); backdrop-filter: blur(8px); z-index: 100; }
+    .hamburger { display: flex; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 8px; z-index: 101; }
+    .hamburger span { display: block; width: 20px; height: 2px; background: var(--gold); transition: all 0.2s; }
     .domain-grid { grid-template-columns: 1fr; }
     .search-box { margin-left: 0; margin-top: 12px; }
     .search-box input { width: 100%; }
@@ -788,12 +798,15 @@
   <div class="hero-bg"></div>
   <div class="hero-grid-lines"></div>
 
-  <nav>
+  <nav style="position: relative;">
     <a href="https://bravetto.com" class="nav-logo">BRAV<span>e</span>TTO</a>
+    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
     <ul class="nav-links">
       <li><a href="#vault">Domain Vault</a></li>
       <li><a href="https://bravetto.com/sales">Studio</a></li>
-      <li><a href="mailto:domains@bravetto.ai">Contact</a></li>
+      <li><a href="mailto:mike@bravetto.com?subject=Domain%20Inquiry">Contact</a></li>
     </ul>
     <a href="#vault" class="btn-primary">Browse Domains</a>
   </nav>
@@ -867,8 +880,8 @@
   <div class="cta-eyebrow">898 domains. One owner. Ready to deal.</div>
   <h2 class="cta-title">Your AI Brand<br>Starts Here</h2>
   <p class="cta-sub">Looking for something specific? We have 898 .ai domains across every category. Send us your industry and we will match you with the perfect name.</p>
-  <a href="mailto:domains@bravetto.ai?subject=Domain%20Inquiry" class="btn-primary" style="font-size: 0.85rem; padding: 16px 36px;">
-    Email domains@bravetto.ai
+  <a href="mailto:mike@bravetto.com?subject=Domain%20Inquiry" class="btn-primary" style="font-size: 0.85rem; padding: 16px 36px;">
+    Email mike@bravetto.com
   </a>
 </section>
 
@@ -876,7 +889,7 @@
   <div class="footer-logo">BRAV<span>e</span>TTO</div>
   <div class="footer-links">
     <a href="https://bravetto.com/sales">Studio</a>
-    <a href="mailto:domains@bravetto.ai">Contact</a>
+    <a href="mailto:mike@bravetto.com">Contact</a>
   </div>
   <div class="footer-copy">Bravetto 2026 Mataluni Enterprises</div>
 </footer>
@@ -967,6 +980,7 @@ function openModal(name, ask, appraised) {
     document.getElementById('modal-appraisal-block').style.display = 'none';
   }
   document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
   document.getElementById('modal')._domain = name + '.ai';
   document.getElementById('modal')._ask = ask > 0 ? fmt(ask) : 'Inquire';
 }
@@ -977,12 +991,14 @@ function openBulkModal() {
   document.getElementById('modal-price-label').textContent = 'Bulk Deal';
   document.getElementById('modal-appraisal-block').style.display = 'none';
   document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
   document.getElementById('modal')._domain = 'bulk-inquiry';
   document.getElementById('modal')._ask = 'Bulk';
 }
 
 function closeModal() {
   document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
   document.getElementById('contact-name').value = '';
   document.getElementById('contact-email').value = '';
   document.getElementById('contact-company').value = '';
@@ -1036,18 +1052,19 @@ async function submitInquiry() {
 
     if (res.ok) {
       closeModal();
-      showToast('Inquiry sent — expect a reply within 24h');
+      showToast('Inquiry sent — taking you to meet Abë...');
+      setTimeout(function() { window.location.href = 'https://bravetto.ai'; }, 2000);
     } else {
       var errText = await res.text();
       console.error('Lead submit error:', res.status, errText);
-      showToast('Something went wrong. Email domains@bravetto.ai directly.', true);
+      showToast('Something went wrong. Email mike@bravetto.com directly.', true);
     }
   } catch (err) {
     console.error('Lead submit failed:', err);
     // fallback to mailto
     var subject = encodeURIComponent('Domain Inquiry: ' + domainName);
     var body = encodeURIComponent('Hi Bravetto team,\n\nInterested in ' + domainName + ' (' + askPrice + ').\n\nName: ' + name + '\nEmail: ' + email + '\nCompany: ' + company + '\n\n' + message);
-    window.location.href = 'mailto:domains@bravetto.ai?subject=' + subject + '&body=' + body;
+    window.location.href = 'mailto:mike@bravetto.com?subject=' + subject + '&body=' + body;
     closeModal();
     showToast('Opening email — Supabase unavailable');
   } finally {
