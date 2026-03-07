@@ -470,11 +470,19 @@
     pointer-events: none;
     transition: opacity 0.2s;
     backdrop-filter: blur(4px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
   }
 
   .modal-overlay.open {
     opacity: 1;
     pointer-events: all;
+  }
+
+  body.modal-open {
+    overflow: hidden;
+    touch-action: none;
   }
 
   .modal {
@@ -484,6 +492,7 @@
     max-width: 520px;
     width: 90%;
     position: relative;
+    touch-action: pan-y;
   }
 
   .modal-close {
@@ -715,6 +724,9 @@
     .search-box { margin-left: 0; margin-top: 12px; }
     .search-box input { width: 100%; }
     footer { flex-direction: column; gap: 16px; text-align: center; }
+    .modal { padding: 28px 20px; width: 94%; }
+    .modal-domain { font-size: 1.8rem; }
+    .modal-ask-price { font-size: 2.2rem; }
   }
 
   @keyframes fadeUp {
@@ -774,9 +786,9 @@
     <ul class="nav-links">
       <li><a href="#vault">Domain Vault</a></li>
       <li><a href="https://bravetto.com">Studio</a></li>
-      <li><a href="mailto:domains@bravetto.ai">Contact</a></li>
+      <li><a href="mailto:mike@bravetto.com?subject=Domain%20Inquiry">Contact</a></li>
     </ul>
-    <a href="mailto:domains@bravetto.ai" class="btn-primary">Make an Offer</a>
+    <a href="mailto:mike@bravetto.com?subject=Domain%20Inquiry" class="btn-primary">Make an Offer</a>
   </nav>
 
   <div class="hero-content">
@@ -850,8 +862,8 @@
   <div class="cta-eyebrow">1,030 domains. One owner. Ready to deal.</div>
   <h2 class="cta-title">Your AI Brand<br>Starts Here</h2>
   <p class="cta-sub">Looking for something specific? We have 900+ .ai domains across every category. Send us your industry and we'll match you with the perfect name.</p>
-  <a href="mailto:domains@bravetto.ai?subject=Domain%20Inquiry&body=Hi%20Bravetto.ai%20team%2C%20I'm%20looking%20for%20a%20.ai%20domain%20in%20the%20[CATEGORY]%20space." class="btn-primary" style="font-size: 0.85rem; padding: 16px 36px;">
-    Email domains@bravetto.ai →
+  <a href="mailto:mike@bravetto.com?subject=Domain%20Inquiry&body=Hi%20Bravetto%20team%2C%20I'm%20looking%20for%20a%20.ai%20domain%20in%20the%20[CATEGORY]%20space." class="btn-primary" style="font-size: 0.85rem; padding: 16px 36px;">
+    Email mike@bravetto.com →
   </a>
 </section>
 
@@ -859,7 +871,7 @@
   <div class="footer-logo">BRAVETTO<span>.AI</span></div>
   <div class="footer-links">
     <a href="https://bravetto.com">Studio</a>
-    <a href="mailto:domains@bravetto.ai">Contact</a>
+    <a href="mailto:mike@bravetto.com?subject=Domain%20Inquiry">Contact</a>
     <a href="#">Escrow Info</a>
   </div>
   <div class="footer-copy">© 2025 Bravetto.ai · Mataluni Enterprises</div>
@@ -9190,18 +9202,20 @@ function openModal(fullDomain, ask, appraised) {
   const parts = fullDomain.split('.');
   const tld = parts.pop();
   const sld = parts.join('.');
-  
+
   document.getElementById('modal-domain-name').innerHTML = `${sld}<span class="tld">.${tld}</span>`;
   document.getElementById('modal-ask-price').textContent = ask;
   document.getElementById('modal-appraised').textContent = appraised;
   document.getElementById('modal').classList.add('open');
+  document.body.classList.add('modal-open');
 }
 
 function closeModal() {
   document.getElementById('modal').classList.remove('open');
+  document.body.classList.remove('modal-open');
 }
 
-async async async function submitInquiry() {
+async function submitInquiry() {
   const name = document.getElementById('contact-name').value;
   const email = document.getElementById('contact-email').value;
   const domainName = document.getElementById('modal-domain-name').textContent;
@@ -9227,15 +9241,18 @@ async async async function submitInquiry() {
     });
     
     if (!res.ok) throw new Error('Submission failed');
-    
+
     closeModal();
     const toast = document.getElementById('toast');
-    toast.textContent = "✓ Inquiry sent to Supabase — Bravetto.ai team will contact you.";
+    toast.textContent = "Inquiry sent -- Bravetto.ai team will contact you.";
     toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 4000);
+    setTimeout(() => {
+      toast.classList.remove('show');
+      window.location.href = 'https://bravetto.ai';
+    }, 2500);
   } catch (err) {
     console.error(err);
-    alert('Failed to send lead. Please e-mail domains@bravetto.ai.');
+    alert('Failed to send lead. Please e-mail mike@bravetto.com.');
   } finally {
     btn.textContent = orgText;
   }

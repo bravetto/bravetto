@@ -12,22 +12,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --black: #080808;
-    --white: #f5f3ef;
-    --gold: #c9a84c;
-    --gold-dim: #8a6f2e;
-    --red: #e63a2e;
-    --dim: #2a2824;
-    --mid: #4a4640;
-    --text-dim: #888078;
+    --black: #1A1A1A;
+    --white: #FAF9F6;
+    --gold: #C9A227;
+    --gold-dim: #A68520;
+    --red: #c0392b;
+    --dim: #EDEBE7;
+    --mid: #B0A99F;
+    --text-dim: #7A7268;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { font-size: 16px; scroll-behavior: smooth; }
 
   body {
-    background: var(--black);
-    color: var(--white);
+    background: var(--white);
+    color: var(--black);
     font-family: 'DM Sans', sans-serif;
     overflow-x: hidden;
     cursor: crosshair;
@@ -37,10 +37,10 @@
     content: '';
     position: fixed;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 1000;
-    opacity: 0.6;
+    opacity: 0.3;
   }
 
   .hero {
@@ -54,18 +54,18 @@
   .hero-bg {
     position: absolute;
     inset: 0;
-    background: 
-      radial-gradient(ellipse 80% 60% at 20% 50%, rgba(201,168,76,0.06) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 80% at 80% 20%, rgba(230,58,46,0.04) 0%, transparent 50%),
-      linear-gradient(180deg, #0d0c0a 0%, #080808 100%);
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 50%, rgba(201,162,39,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 80% 20%, rgba(201,162,39,0.04) 0%, transparent 50%),
+      linear-gradient(180deg, #F5F3EF 0%, #FAF9F6 100%);
   }
 
   .hero-grid-lines {
     position: absolute;
     inset: 0;
-    background-image: 
-      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-image:
+      linear-gradient(rgba(201,162,39,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,162,39,0.08) 1px, transparent 1px);
     background-size: 60px 60px;
     mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
   }
@@ -77,14 +77,14 @@
     padding: 28px 48px;
     position: relative;
     z-index: 10;
-    border-bottom: 1px solid rgba(201,168,76,0.12);
+    border-bottom: 1px solid rgba(201,162,39,0.2);
   }
 
   .nav-logo {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 1.8rem;
     letter-spacing: 0.15em;
-    color: var(--white);
+    color: var(--black);
     text-decoration: none;
   }
 
@@ -126,7 +126,8 @@
   }
 
   .btn-primary:hover {
-    background: var(--white);
+    background: var(--black);
+    color: var(--white);
     transform: translateY(-1px);
   }
 
@@ -166,13 +167,13 @@
     font-size: clamp(4rem, 10vw, 9rem);
     line-height: 0.9;
     letter-spacing: 0.02em;
-    color: var(--white);
+    color: var(--black);
     margin-bottom: 32px;
   }
 
   .hero-title .gold { color: var(--gold); }
   .hero-title .stroke {
-    -webkit-text-stroke: 1px rgba(245,243,239,0.3);
+    -webkit-text-stroke: 1px rgba(26,26,26,0.2);
     color: transparent;
   }
 
@@ -185,7 +186,7 @@
     margin-bottom: 40px;
   }
 
-  .hero-sub strong { color: var(--white); font-weight: 500; }
+  .hero-sub strong { color: var(--black); font-weight: 500; }
 
   .hero-stats {
     display: flex;
@@ -236,11 +237,11 @@
     border: none;
   }
 
-  .btn-ghost:hover { color: var(--white); }
+  .btn-ghost:hover { color: var(--black); }
 
   .hero-ticker {
     padding: 16px 48px;
-    border-top: 1px solid rgba(201,168,76,0.12);
+    border-top: 1px solid rgba(201,162,39,0.2);
     position: relative;
     z-index: 10;
     overflow: hidden;
@@ -327,7 +328,7 @@
   .filter-btn:hover, .filter-btn.active {
     border-color: var(--gold);
     color: var(--gold);
-    background: rgba(201,168,76,0.05);
+    background: rgba(201,162,39,0.08);
   }
 
   .search-box {
@@ -338,7 +339,7 @@
   .search-box input {
     background: var(--dim);
     border: 1px solid transparent;
-    color: var(--white);
+    color: var(--black);
     font-family: 'DM Mono', monospace;
     font-size: 0.72rem;
     padding: 8px 16px;
@@ -387,8 +388,8 @@
   }
 
   .domain-card:hover {
-    background: #1e1c18;
-    border-color: rgba(201,168,76,0.2);
+    background: #F0EDE8;
+    border-color: rgba(201,162,39,0.3);
     transform: translateY(-2px);
   }
 
@@ -400,7 +401,7 @@
     font-family: 'DM Mono', monospace;
     font-size: 1.05rem;
     font-weight: 500;
-    color: var(--white);
+    color: var(--black);
     letter-spacing: 0.02em;
   }
 
@@ -418,7 +419,7 @@
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--mid);
-    background: rgba(255,255,255,0.04);
+    background: rgba(26,26,26,0.05);
     padding: 3px 8px;
   }
 
@@ -458,7 +459,7 @@
   .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(8,8,8,0.92);
+    background: rgba(26,26,26,0.6);
     z-index: 500;
     display: flex;
     align-items: center;
@@ -467,6 +468,7 @@
     pointer-events: none;
     transition: opacity 0.2s;
     backdrop-filter: blur(4px);
+    overflow-y: auto;
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
   }
@@ -476,9 +478,14 @@
     pointer-events: all;
   }
 
+  body.modal-open {
+    overflow: hidden;
+    touch-action: none;
+  }
+
   .modal {
-    background: #111009;
-    border: 1px solid rgba(201,168,76,0.3);
+    background: var(--white);
+    border: 1px solid rgba(201,162,39,0.3);
     padding: 48px;
     max-width: 520px;
     width: 90%;
@@ -486,6 +493,8 @@
     overflow-y: auto;
     position: relative;
     overscroll-behavior: contain;
+    touch-action: pan-y;
+    box-shadow: 0 24px 48px rgba(26,26,26,0.15);
   }
 
   .modal-close {
@@ -503,7 +512,7 @@
   .modal-domain {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 2.4rem;
-    color: var(--white);
+    color: var(--black);
     margin-bottom: 8px;
   }
 
@@ -556,7 +565,7 @@
   .modal-form input, .modal-form textarea {
     background: var(--dim);
     border: 1px solid transparent;
-    color: var(--white);
+    color: var(--black);
     font-family: 'DM Mono', monospace;
     font-size: 0.78rem;
     padding: 12px 16px;
@@ -589,7 +598,7 @@
     width: 100%;
   }
 
-  .modal-submit:hover { background: var(--white); }
+  .modal-submit:hover { background: var(--black); color: var(--white); }
   .modal-submit:disabled { opacity: 0.5; cursor: not-allowed; }
 
   .modal-note {
@@ -612,7 +621,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 60% 60% at 50% 0%, rgba(201,168,76,0.06) 0%, transparent 70%);
+    background: radial-gradient(ellipse 60% 60% at 50% 0%, rgba(201,162,39,0.1) 0%, transparent 70%);
     pointer-events: none;
   }
 
@@ -738,7 +747,7 @@
     .hero-ticker { padding-left: 24px; }
     .hero-stats { gap: 28px; }
     .nav-links { display: none; }
-    .nav-links.mobile-open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(8,8,8,0.97); padding: 16px 24px; gap: 12px; border-bottom: 1px solid var(--dim); backdrop-filter: blur(8px); z-index: 100; }
+    .nav-links.mobile-open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(250,249,246,0.97); padding: 16px 24px; gap: 12px; border-bottom: 1px solid var(--dim); backdrop-filter: blur(8px); z-index: 100; }
     .hamburger { display: flex; flex-direction: column; gap: 4px; background: none; border: none; cursor: pointer; padding: 8px; z-index: 101; }
     .hamburger span { display: block; width: 20px; height: 2px; background: var(--gold); transition: all 0.2s; }
     .domain-grid { grid-template-columns: 1fr; }
