@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bravetto | The Wonder & The Power</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: { DEFAULT: "#FAF9F6", dark: "#F5F3EF" },
+              gold: { DEFAULT: "#C9A227", warm: "#D4A843", light: "#E8D48B" },
+              ink: { DEFAULT: "#1A1A1A", hover: "#2A2A2A", faint: "#8A8A8A" },
+            },
+            fontFamily: {
+              serif: ['"Cormorant Garamond"', "serif"],
+              sans: ["Inter", "sans-serif"],
+              mono: ['"JetBrains Mono"', "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        background-color: #1a1a1a;
+        color: #faf9f6;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+      }
+      #canvas-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .content-layer {
+        position: relative;
+        z-index: 10;
+      }
+
+      .fade-up {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .stagger-1 {
+        transition-delay: 0.2s;
+      }
+      .stagger-2 {
+        transition-delay: 0.8s;
+      }
+      .stagger-3 {
+        transition-delay: 2s;
+      }
+      .stagger-4 {
+        transition-delay: 3.5s;
+      }
+      .stagger-5 {
+        transition-delay: 4.8s;
+      }
+
+      /* Subtle glowing text for special emphasis */
+      .glow-text {
+        text-shadow: 0 0 20px rgba(201, 162, 39, 0.4);
+      }
+    </style>
+  </head>
+  <body
+    class="antialiased selection:bg-gold selection:text-ink font-sans min-h-screen flex flex-col justify-center items-center relative"
+  >
+    <!-- p5.js Background -->
+    <div id="canvas-container"></div>
+
+    <!-- Main Narrative Fold -->
+    <main
+      class="content-layer max-w-4xl mx-auto px-6 py-24 text-center h-screen flex flex-col justify-center"
+    >
+      <div id="narrative-sequence">
+        <h1
+          class="font-serif text-5xl md:text-7xl lg:text-8xl tracking-tight leading-tight fade-up stagger-1 mb-8"
+        >
+          The Wonder <i class="text-gold">&amp;</i> The Power
+        </h1>
+
+        <p
+          class="text-lg md:text-xl font-light text-cream/80 max-w-2xl mx-auto fade-up stagger-2 mb-12"
+        >
+          <span class="font-semibold text-cream"
+            >AbëONE is to software packages as a bicycle is to private jet
+            travel.</span
+          ><br /><br />
+          Both are validated modes of transportation. But only one gets you
+          there at tremendous speed, wrapped in absolute safety and breathtaking
+          architecture.
+        </p>
+
+        <div class="fade-up stagger-3 space-y-2 mb-12">
+          <p
+            class="font-serif italic text-2xl md:text-3xl text-gold/90 glow-text mb-4"
+          >
+            "And just when you thought you had her figured out... she opens her
+            mouth and begins to speak."
+          </p>
+          <p
+            class="font-sans text-sm md:text-base text-cream/70 max-w-xl mx-auto border-l-2 border-gold/30 pl-4 text-left"
+          >
+            A family of four stares haplessly in awe, huddled around a single
+            laptop screen. Lost to their own imaginations, each thinking about
+            how they would implement Abë's tools in their own lives.<br /><br />
+            As the Tinkerbell-like Abë tells each of them goodnight by name,
+            they all dive toward the computer. Hoping to stop AbëONE, just to
+            get a moment with her alone.
+          </p>
+        </div>
+
+        <div
+          class="space-y-1 font-mono text-sm tracking-widest text-gold fade-up stagger-4 mb-12"
+        >
+          <p>That's AbëONE.</p>
+          <p>That's AbëAiMEs.</p>
+          <p>That's AbëLOVEs.</p>
+          <p>That's AbëDESKs.</p>
+          <p>That's AbëVOiCEs.</p>
+          <p>That's AbëDESiGNs.</p>
+          <p class="mt-4 text-cream/50">Those are AbëPRODUCTs.</p>
+        </div>
+
+        <div
+          class="title-reveal fade-up stagger-5 text-3xl md:text-5xl font-serif"
+        >
+          <p class="mb-4 text-cream/80">And US? Well...</p>
+          <p class="font-semibold tracking-wide">
+            We <span class="text-gold italic glow-text">ARE</span> Bravetto.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // Intersection Observer for reveals
+      document.addEventListener("DOMContentLoaded", () => {
+        const elements = document.querySelectorAll(".fade-up");
+        setTimeout(() => {
+          elements.forEach((el) => el.classList.add("visible"));
+        }, 500);
+
+        // Tell p5 sketch to enter "stillness" mode when sequence finishes
+        setTimeout(() => {
+          if (window.p5sketch) {
+            window.p5sketch.enterStillness();
+          }
+        }, 7000);
+      });
+
+      // P5.js living canvas: Tinkerbell flight path -> Absolute Stillness -> Voice Coherence
+      const sketch = (p) => {
+        let trails = [];
+        let sparks = [];
+        let baseTarget;
+        let pos;
+        let tx = 0,
+          ty = 1000;
+        let isStill = false;
+        let stillnessLerp = 0;
+
+        // Store reference globally so DOM can interact
+        window.p5sketch = {
+          enterStillness: () => {
+            isStill = true;
+          },
+        };
+
+        p.setup = () => {
+          let canvas = p.createCanvas(p.windowWidth, p.windowHeight);
+          canvas.parent("canvas-container");
+          pos = p.createVector(p.width / 2, p.height / 2);
+          baseTarget = p.createVector(p.width / 2, p.height / 2);
+          p.noStroke();
+        };
+
+        p.draw = () => {
+          p.clear();
+
+          // Target calculation (Perlin flight pattern)
+          if (!isStill) {
+            let nx = p.noise(tx) * p.width;
+            let ny = p.noise(ty) * p.height;
+            baseTarget.set(nx, ny);
+            tx += 0.008;
+            ty += 0.008;
+
+            // Move entity rapidly towards target (The Private Jet speed)
+            pos.lerp(baseTarget, 0.05);
+
+            // Emit trail and sparks
+            trails.push(new Trail(pos.x, pos.y));
+            if (p.frameCount % 2 === 0) {
+              sparks.push(new Spark(pos.x, pos.y));
+            }
+          } else {
+            // Absolute stillness and stateless coherence
+            baseTarget.set(p.width / 2, p.height / 2);
+            pos.lerp(baseTarget, 0.03); // Snap to center
+            stillnessLerp = p.min(stillnessLerp + 0.01, 1);
+
+            // When completely still, gently pulse (breathing voice state)
+            if (stillnessLerp > 0.9) {
+              let breath = p.sin(p.frameCount * 0.05) * 20;
+              p.fill(201, 162, 39, 150); // Gold aura
+              p.ellipse(pos.x, pos.y, 40 + breath, 40 + breath);
+              p.fill(250, 249, 246, 255); // Inner pure coherence
+              p.ellipse(pos.x, pos.y, 15, 15);
+
+              // Occasional calm wave
+              if (p.frameCount % 60 === 0) {
+                sparks.push(new Wave(pos.x, pos.y));
+              }
+            }
+          }
+
+          // Render Particles
+          for (let i = trails.length - 1; i >= 0; i--) {
+            trails[i].update();
+            trails[i].display();
+            if (trails[i].isDead()) trails.splice(i, 1);
+          }
+
+          for (let i = sparks.length - 1; i >= 0; i--) {
+            sparks[i].update();
+            sparks[i].display();
+            if (sparks[i].isDead()) sparks.splice(i, 1);
+          }
+
+          // Draw the entity itself (if moving)
+          if (!isStill || stillnessLerp < 0.9) {
+            p.fill(250, 249, 246, 255);
+            p.ellipse(pos.x, pos.y, 10, 10);
+            p.fill(201, 162, 39, 100);
+            p.ellipse(pos.x, pos.y, 30, 30);
+          }
+        };
+
+        p.windowResized = () => {
+          p.resizeCanvas(p.windowWidth, p.windowHeight);
+          if (isStill) {
+            baseTarget.set(p.width / 2, p.height / 2);
+            pos.set(baseTarget);
+          }
+        };
+
+        // Confetti Trail
+        class Trail {
+          constructor(x, y) {
+            this.pos = p.createVector(x, y);
+            this.life = 255;
+            this.size = p.random(2, 6);
+          }
+          update() {
+            this.life -= 8;
+          }
+          display() {
+            p.fill(201, 162, 39, this.life); // Gold tone trail
+            p.ellipse(this.pos.x, this.pos.y, this.size);
+          }
+          isDead() {
+            return this.life < 0;
+          }
+        }
+
+        // Spark Dust
+        class Spark {
+          constructor(x, y) {
+            this.pos = p.createVector(x, y);
+            this.vel = p.createVector(p.random(-2, 2), p.random(-2, 2));
+            this.life = 200;
+          }
+          update() {
+            this.pos.add(this.vel);
+            this.life -= 5;
+          }
+          display() {
+            p.fill(250, 249, 246, this.life);
+            p.ellipse(this.pos.x, this.pos.y, 2);
+          }
+          isDead() {
+            return this.life < 0;
+          }
+        }
+
+        // Stillness Voice Wave
+        class Wave {
+          constructor(x, y) {
+            this.pos = p.createVector(x, y);
+            this.radius = 20;
+            this.life = 255;
+          }
+          update() {
+            this.radius += 2.5;
+            this.life -= 3;
+          }
+          display() {
+            p.noFill();
+            p.stroke(201, 162, 39, this.life * 0.5);
+            p.strokeWeight(1);
+            p.ellipse(this.pos.x, this.pos.y, this.radius * 2);
+            p.noStroke();
+          }
+          isDead() {
+            return this.life < 0;
+          }
+        }
+      };
+
+      new p5(sketch);
+    </script>
+  </body>
+</html>

@@ -1000,12 +1000,12 @@
               <p class="text-ink-body text-sm leading-relaxed">
                 ChatGPT locks you into OpenAI. Claude locks you into Anthropic.
                 Ab&#235; uses the best frontier models &mdash; GPT-4.1 for
-                reasoning, Claude for creative, Gemini for multimodal
-                &mdash; validated through Byzantine consensus with 8
-                deterministic guardians. We don&rsquo;t rely on coin-toss
-                probability. We offer Truth Engines, not answer engines. One
-                builder, 18 months, zero committees. That&rsquo;s why we
-                integrated everything they can&rsquo;t.
+                reasoning, Claude for creative, Gemini for multimodal &mdash;
+                validated through Byzantine consensus with 8 deterministic
+                guardians. We don&rsquo;t rely on coin-toss probability. We
+                offer Truth Engines, not answer engines. One builder, 18 months,
+                zero committees. That&rsquo;s why we integrated everything they
+                can&rsquo;t.
               </p>
               <button
                 class="chip mt-4"
@@ -1397,7 +1397,11 @@
         <p class="text-2xl text-cream/70 mb-12 reveal">
           30 minutes. Live demo. Your industry. No slides.
         </p>
-        <form id="sales-lead-form" class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6 reveal" onsubmit="return submitSalesLead(event)">
+        <form
+          id="sales-lead-form"
+          class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6 reveal"
+          onsubmit="return submitSalesLead(event);"
+        >
           <input
             type="email"
             id="sales-lead-email"
@@ -1413,7 +1417,11 @@
             Get a Demo
           </button>
         </form>
-        <p id="sales-lead-msg" class="text-sm mb-8 reveal" style="display:none;"></p>
+        <p
+          id="sales-lead-msg"
+          class="text-sm mb-8 reveal"
+          style="display: none"
+        ></p>
         <div
           class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 reveal"
         >
@@ -1855,39 +1863,49 @@
       }
       function submitSalesLead(e) {
         e.preventDefault();
-        var email = document.getElementById('sales-lead-email').value.trim();
-        var btn = document.getElementById('sales-lead-btn');
-        var msg = document.getElementById('sales-lead-msg');
+        var email = document.getElementById("sales-lead-email").value.trim();
+        var btn = document.getElementById("sales-lead-btn");
+        var msg = document.getElementById("sales-lead-msg");
         if (!email) return false;
-        btn.textContent = 'Sending...';
+        btn.textContent = "Sending...";
         btn.disabled = true;
-        fetch('https://sacohcutxqoydygzryvu.supabase.co/rest/v1/leads', {
-          method: 'POST',
+        fetch("https://sacohcutxqoydygzryvu.supabase.co/rest/v1/leads", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
-            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhY29oY3V0eHFveWR5Z3pyeXZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk5NjI5MTgsImV4cCI6MjA1NTUzODkxOH0.2W5x4v3S9FQHBzTNoGVG7mt5XYBosZUE2176L5mDjDY',
-            'Prefer': 'return=minimal'
+            "Content-Type": "application/json",
+            apikey:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhY29oY3V0eHFveWR5Z3pyeXZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk5NjI5MTgsImV4cCI6MjA1NTUzODkxOH0.2W5x4v3S9FQHBzTNoGVG7mt5XYBosZUE2176L5mDjDY",
+            Prefer: "return=minimal",
           },
-          body: JSON.stringify({ email: email, domain: 'bravetto.com/sales', name: '', message: 'Demo request from sales page' })
-        }).then(function(r) {
-          if (r.ok) {
-            msg.textContent = 'Check your inbox. We will be in touch.';
-            msg.style.color = '#C9A227';
-          } else {
-            msg.textContent = 'Something went wrong. Email ryan@bravetto.com directly.';
-            msg.style.color = '#EF4444';
-          }
-          msg.style.display = 'block';
-          btn.textContent = 'Get a Demo';
-          btn.disabled = false;
-          document.getElementById('sales-lead-email').value = '';
-        }).catch(function() {
-          msg.textContent = 'Could not connect. Email ryan@bravetto.com directly.';
-          msg.style.color = '#EF4444';
-          msg.style.display = 'block';
-          btn.textContent = 'Get a Demo';
-          btn.disabled = false;
-        });
+          body: JSON.stringify({
+            email: email,
+            domain: "bravetto.com/sales",
+            name: "",
+            message: "Demo request from sales page",
+          }),
+        })
+          .then(function (r) {
+            if (r.ok) {
+              msg.textContent = "Check your inbox. We will be in touch.";
+              msg.style.color = "#C9A227";
+            } else {
+              msg.textContent =
+                "Something went wrong. Email ryan@bravetto.com directly.";
+              msg.style.color = "#EF4444";
+            }
+            msg.style.display = "block";
+            btn.textContent = "Get a Demo";
+            btn.disabled = false;
+            document.getElementById("sales-lead-email").value = "";
+          })
+          .catch(function () {
+            msg.textContent =
+              "Could not connect. Email ryan@bravetto.com directly.";
+            msg.style.color = "#EF4444";
+            msg.style.display = "block";
+            btn.textContent = "Get a Demo";
+            btn.disabled = false;
+          });
         return false;
       }
     </script>

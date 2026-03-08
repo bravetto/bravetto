@@ -122,6 +122,26 @@
         50% { transform: translateY(8px); opacity: 0.8; }
       }
       .scroll-hint { animation: drift 2.5s ease-in-out infinite; }
+
+      /* Staggered fade-ups for Wonder & Power narrative */
+      .fade-up {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .stagger-1 { transition-delay: 0.2s; }
+      .stagger-2 { transition-delay: 0.8s; }
+      .stagger-3 { transition-delay: 2.0s; }
+      .stagger-4 { transition-delay: 3.5s; }
+      .stagger-5 { transition-delay: 4.8s; }
+      
+      .glow-text {
+        text-shadow: 0 0 20px rgba(201, 162, 39, 0.4);
+      }
     </style>
   </head>
 
@@ -141,16 +161,45 @@
     <div id="living-canvas"></div>
 
     <!-- ==================== -->
-    <!-- HERO: Pure presence  -->
+    <!-- HERO: Wonder & Power -->
     <!-- ==================== -->
     <section class="relative min-h-screen flex flex-col items-center justify-center" data-section="hero">
-      <div class="relative z-10 text-center px-8">
-        <h1 class="font-serif text-6xl md:text-8xl lg:text-9xl font-semibold headline mb-8 moment">
-          Bravetto
+      <div class="relative z-10 text-center px-6 md:px-8 max-w-4xl mx-auto">
+        <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tight leading-tight fade-up stagger-1 mb-8">
+          The Wonder <i class="text-gold">&amp;</i> The Power
         </h1>
-        <p class="text-lg md:text-xl text-ink-light font-light tracking-wide moment" style="transition-delay: 0.3s">
-          b&#235;HUMANs. StartFRESH. MakeTHiNGs.
+        
+        <p class="text-base md:text-lg lg:text-xl font-light text-ink-light max-w-2xl mx-auto fade-up stagger-2 mb-12">
+          <span class="font-semibold text-ink">Ab&#235;ONE is to software packages as a bicycle is to private jet travel.</span><br><br>
+          Both are validated modes of transportation. But only one gets you there at tremendous speed, wrapped in absolute safety and breathtaking architecture.
         </p>
+
+        <div class="fade-up stagger-3 space-y-2 mb-12">
+          <p class="font-serif italic text-xl md:text-2xl lg:text-3xl text-gold/90 glow-text mb-4">
+            "And just when you thought you had her figured out... she opens her mouth and begins to speak."
+          </p>
+          <p class="font-sans text-xs md:text-sm lg:text-base text-ink-light/80 max-w-xl mx-auto border-l-2 border-gold/30 pl-4 text-left">
+            A family of four stares haplessly in awe, huddled around a single laptop screen. Lost to their own imaginations, each thinking about how they would implement Ab&#235;'s tools in their own lives.<br><br>
+            As the Tinkerbell-like Ab&#235; tells each of them goodnight by name, they all dive toward the computer. Hoping to stop Ab&#235;ONE, just to get a moment with her alone.
+          </p>
+        </div>
+
+        <div class="space-y-1 font-mono text-xs md:text-sm tracking-widest text-gold fade-up stagger-4 mb-12">
+          <p>That's Ab&#235;ONE.</p>
+          <p>That's Ab&#235;AiMEs.</p>
+          <p>That's Ab&#235;LOVEs.</p>
+          <p>That's Ab&#235;DESKs.</p>
+          <p>That's Ab&#235;VOiCEs.</p>
+          <p>That's Ab&#235;DESiGNs.</p>
+          <p class="mt-4 text-ink-light/50">Those are Ab&#235;PRODUCTs.</p>
+        </div>
+
+        <div class="title-reveal fade-up stagger-5 text-2xl md:text-3xl lg:text-5xl font-serif">
+          <p class="mb-4 text-ink-light">And US? Well...</p>
+          <p class="font-semibold tracking-wide">
+            We <span class="text-gold italic glow-text">ARE</span> Bravetto.
+          </p>
+        </div>
       </div>
       <div class="absolute bottom-12 z-10 scroll-hint">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-gold">
@@ -360,12 +409,12 @@
         }),
         { threshold: 0.05, rootMargin: "0px 0px -30px 0px" }
       );
-      document.querySelectorAll(".moment, .reveal").forEach((el) => observer.observe(el));
+      document.querySelectorAll(".moment, .reveal, .fade-up").forEach((el) => observer.observe(el));
 
       // trigger hero elements on load (already in viewport)
       requestAnimationFrame(() => {
-        document.querySelectorAll("[data-section='hero'] .moment").forEach((el, i) => {
-          setTimeout(() => el.classList.add("visible"), 200 + i * 400);
+        document.querySelectorAll("[data-section='hero'] .moment, [data-section='hero'] .fade-up").forEach((el, i) => {
+          setTimeout(() => el.classList.add("visible"), 200 + i * 100);
         });
       });
 
@@ -397,6 +446,13 @@
       document.addEventListener("voiceStateChange", (e) => {
         canvasState.voiceActive = e.detail.active;
       });
+
+      // Trigger stillness mode after Wonder & Power sequence completes
+      setTimeout(() => {
+        if (window.p5sketch && canvasState.section === "hero") {
+          window.p5sketch.enterStillness();
+        }
+      }, 7000);
     </script>
 
     <!-- ==================== -->
@@ -411,6 +467,8 @@
         new p5(function (p) {
           let abe = { x: 0, y: 0, tx: 0, ty: 0, angle: 0, drift: 0 };
           let waves = [];
+          let trails = []; // Tinkerbell confetti trail
+          let sparks = []; // Sparkling dust particles
           let targetAlpha = 6;
           let currentAlpha = 6;
           let targetSpeed = 0.003;
@@ -419,6 +477,13 @@
           let currentRange = 0.12;
           let targetSpawn = 30;
           let currentSpawn = 30;
+          let isStill = false;
+          let stillnessLerp = 0;
+          
+          // Global reference for DOM interaction
+          window.p5sketch = {
+            enterStillness: () => { isStill = true; }
+          };
 
           p.setup = function () {
             p.createCanvas(p.windowWidth, p.windowHeight).parent("living-canvas");
@@ -482,6 +547,57 @@
             const mv = 0.012 * (0.95 + p.noise(t * 2) * 0.1);
             abe.x = p.lerp(abe.x, abe.tx, mv);
             abe.y = p.lerp(abe.y, abe.ty, mv);
+
+            // ---- Tinkerbell trails & sparks (hero section only) ----
+            if (sec === "hero" && !isStill) {
+              // Emit confetti trail
+              trails.push({ x: abe.x, y: abe.y, life: 255, size: p.random(2, 6) });
+              // Emit sparkling dust
+              if (p.frameCount % 2 === 0) {
+                sparks.push({
+                  x: abe.x,
+                  y: abe.y,
+                  vx: p.random(-2, 2),
+                  vy: p.random(-2, 2),
+                  life: 200
+                });
+              }
+            }
+            
+            // Update and render trails
+            for (let i = trails.length - 1; i >= 0; i--) {
+              const tr = trails[i];
+              tr.life -= 8;
+              if (tr.life < 0) { trails.splice(i, 1); continue; }
+              p.fill(GOLD[0], GOLD[1], GOLD[2], tr.life);
+              p.ellipse(tr.x, tr.y, tr.size);
+            }
+            
+            // Update and render sparks
+            for (let i = sparks.length - 1; i >= 0; i--) {
+              const sp = sparks[i];
+              sp.x += sp.vx;
+              sp.y += sp.vy;
+              sp.life -= 5;
+              if (sp.life < 0) { sparks.splice(i, 1); continue; }
+              p.fill(CREAM[0], CREAM[1], CREAM[2], sp.life);
+              p.ellipse(sp.x, sp.y, 2);
+            }
+            
+            // Handle stillness mode
+            if (isStill && sec === "hero") {
+              stillnessLerp = p.min(stillnessLerp + 0.01, 1);
+              if (stillnessLerp > 0.9 && p.frameCount % 60 === 0) {
+                // Calm coherent waves
+                waves.push({
+                  x: abe.x,
+                  y: abe.y,
+                  birth: t,
+                  strength: 0.3,
+                  wobble: 0,
+                });
+              }
+            }
 
             // ---- waves ----
             if (p.frameCount % Math.max(10, Math.floor(currentSpawn)) === 0) {

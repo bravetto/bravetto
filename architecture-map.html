@@ -1,0 +1,1773 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bravetto — system architecture map</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #faf9f6;
+        --cream-dark: #f5f3ef;
+        --gold: #c9a227;
+        --gold-light: #e8d48b;
+        --gold-warm: #d4a843;
+        --ink: #1a1a1a;
+        --ink-light: #4a4a4a;
+        --ink-faint: #8a8a8a;
+        --mcp-purple: #2d1b4e;
+        --mycelial-green: #0d3b2e;
+        --app-dark: #111111;
+        --test-green: #1a3a1a;
+        --state-red: #3a1a1a;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: var(--ink);
+        color: var(--cream);
+        font-family: "Inter", system-ui, sans-serif;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* --- header --- */
+      header {
+        padding: 40px 48px 24px;
+        border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+      }
+      header h1 {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-weight: 700;
+        font-size: 2.4rem;
+        color: var(--gold);
+        letter-spacing: -0.02em;
+      }
+      header p {
+        font-size: 0.85rem;
+        color: var(--ink-faint);
+        margin-top: 4px;
+        font-weight: 300;
+      }
+      header .date {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.75rem;
+        color: var(--ink-faint);
+        margin-top: 2px;
+      }
+
+      /* --- nav tabs --- */
+      .tab-bar {
+        display: flex;
+        gap: 2px;
+        padding: 0 48px;
+        margin-top: 20px;
+        border-bottom: 1px solid rgba(201, 162, 39, 0.15);
+      }
+      .tab {
+        padding: 10px 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--ink-faint);
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        transition: all 0.2s;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .tab:hover {
+        color: var(--cream);
+      }
+      .tab.active {
+        color: var(--gold);
+        border-bottom-color: var(--gold);
+      }
+
+      /* --- main content --- */
+      main {
+        padding: 32px 48px 80px;
+      }
+
+      .view {
+        display: none;
+      }
+      .view.active {
+        display: block;
+      }
+
+      /* --- layer view (default) --- */
+      .layer {
+        margin-bottom: 32px;
+        border: 1px solid rgba(201, 162, 39, 0.15);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .layer-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 24px;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .layer-header:hover {
+        background: rgba(201, 162, 39, 0.05);
+      }
+      .layer-header h2 {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 1.3rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .layer-header .badge {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.65rem;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .layer-header .toggle {
+        font-size: 1.2rem;
+        color: var(--ink-faint);
+        transition: transform 0.3s;
+      }
+      .layer.open .layer-header .toggle {
+        transform: rotate(180deg);
+      }
+      .layer-body {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+      }
+      .layer.open .layer-body {
+        max-height: 3000px;
+      }
+      .layer-content {
+        padding: 0 24px 24px;
+      }
+
+      /* color coding per layer */
+      .layer--human .layer-header {
+        background: rgba(232, 212, 139, 0.08);
+      }
+      .layer--human .badge {
+        background: var(--gold-light);
+        color: var(--ink);
+      }
+
+      .layer--interface .layer-header {
+        background: rgba(250, 249, 246, 0.04);
+      }
+      .layer--interface .badge {
+        background: var(--cream-dark);
+        color: var(--ink);
+      }
+
+      .layer--app .layer-header {
+        background: rgba(201, 162, 39, 0.06);
+      }
+      .layer--app .badge {
+        background: var(--gold);
+        color: var(--ink);
+      }
+
+      .layer--mcp .layer-header {
+        background: rgba(45, 27, 78, 0.3);
+      }
+      .layer--mcp .badge {
+        background: #7c5cbf;
+        color: white;
+      }
+
+      .layer--mycelial .layer-header {
+        background: rgba(13, 59, 46, 0.3);
+      }
+      .layer--mycelial .badge {
+        background: #2d8b6e;
+        color: white;
+      }
+
+      .layer--state .layer-header {
+        background: rgba(58, 26, 26, 0.3);
+      }
+      .layer--state .badge {
+        background: #8b4545;
+        color: white;
+      }
+
+      .layer--design .layer-header {
+        background: rgba(245, 243, 239, 0.04);
+      }
+      .layer--design .badge {
+        background: var(--cream-dark);
+        color: var(--ink);
+      }
+
+      .layer--test .layer-header {
+        background: rgba(26, 58, 26, 0.3);
+      }
+      .layer--test .badge {
+        background: #4a8a4a;
+        color: white;
+      }
+
+      /* --- node cards --- */
+      .node-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 12px;
+        margin-top: 12px;
+      }
+      .node {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 8px;
+        padding: 14px 16px;
+        transition: all 0.2s;
+        cursor: default;
+      }
+      .node:hover {
+        border-color: var(--gold);
+        background: rgba(201, 162, 39, 0.06);
+        transform: translateY(-1px);
+      }
+      .node-title {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--gold);
+        margin-bottom: 4px;
+      }
+      .node-desc {
+        font-size: 0.78rem;
+        color: var(--ink-faint);
+        line-height: 1.4;
+      }
+      .node-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-top: 8px;
+      }
+      .node-tag {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.6rem;
+        padding: 2px 8px;
+        border-radius: 10px;
+        background: rgba(201, 162, 39, 0.12);
+        color: var(--gold-light);
+        letter-spacing: 0.03em;
+      }
+      .node-tag.green {
+        background: rgba(74, 138, 74, 0.2);
+        color: #6ebe6e;
+      }
+      .node-tag.purple {
+        background: rgba(124, 92, 191, 0.2);
+        color: #b09adb;
+      }
+      .node-tag.red {
+        background: rgba(190, 80, 80, 0.15);
+        color: #d4a0a0;
+      }
+
+      /* --- section labels inside layers --- */
+      .section-label {
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: var(--ink-faint);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin: 20px 0 8px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .section-label:first-child {
+        margin-top: 8px;
+      }
+
+      /* --- flow view --- */
+      .flow-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        padding: 40px 0;
+      }
+      .flow-box {
+        width: 600px;
+        max-width: 90vw;
+        padding: 28px 32px;
+        border-radius: 12px;
+        text-align: center;
+      }
+      .flow-box h3 {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+      .flow-box p {
+        font-size: 0.8rem;
+        color: var(--ink-faint);
+        line-height: 1.5;
+      }
+      .flow-arrow {
+        width: 2px;
+        height: 40px;
+        background: linear-gradient(
+          to bottom,
+          var(--gold),
+          rgba(201, 162, 39, 0.2)
+        );
+        position: relative;
+      }
+      .flow-arrow::after {
+        content: "▼";
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: var(--gold);
+        font-size: 0.6rem;
+      }
+      .flow-arrow-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.6rem;
+        color: var(--gold-light);
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        white-space: nowrap;
+      }
+
+      .flow--human {
+        background: rgba(232, 212, 139, 0.1);
+        border: 1px solid var(--gold-light);
+      }
+      .flow--human h3 {
+        color: var(--gold-light);
+      }
+      .flow--interface {
+        background: rgba(250, 249, 246, 0.06);
+        border: 1px solid rgba(250, 249, 246, 0.2);
+      }
+      .flow--interface h3 {
+        color: var(--cream);
+      }
+      .flow--app {
+        background: rgba(201, 162, 39, 0.08);
+        border: 1px solid var(--gold);
+      }
+      .flow--app h3 {
+        color: var(--gold);
+      }
+      .flow--mcp {
+        background: rgba(45, 27, 78, 0.4);
+        border: 1px solid #7c5cbf;
+      }
+      .flow--mcp h3 {
+        color: #b09adb;
+      }
+      .flow--mycelial {
+        background: rgba(13, 59, 46, 0.4);
+        border: 1px solid #2d8b6e;
+      }
+      .flow--mycelial h3 {
+        color: #6ebe6e;
+      }
+
+      /* --- product view --- */
+      .tree {
+        padding: 32px 0;
+      }
+      .tree-root {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+      .tree-root h3 {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 2rem;
+        color: var(--gold);
+        font-weight: 700;
+      }
+      .tree-root p {
+        font-size: 0.85rem;
+        color: var(--ink-faint);
+        margin-top: 4px;
+      }
+      .tree-connector {
+        width: 2px;
+        height: 32px;
+        background: var(--gold);
+        margin: 0 auto;
+      }
+      .tree-origin {
+        text-align: center;
+        margin: 0 auto 32px;
+        padding: 20px 32px;
+        border: 2px solid var(--gold);
+        border-radius: 12px;
+        display: inline-block;
+        background: rgba(201, 162, 39, 0.06);
+      }
+      .tree-origin-wrap {
+        text-align: center;
+        margin-bottom: 32px;
+      }
+      .tree-origin h4 {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 1.4rem;
+        color: var(--gold);
+      }
+      .tree-origin p {
+        font-size: 0.78rem;
+        color: var(--ink-faint);
+        margin-top: 2px;
+      }
+      .tree-branches {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+        margin-top: 16px;
+      }
+      .tree-branch {
+        border: 1px solid rgba(201, 162, 39, 0.2);
+        border-radius: 10px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.02);
+        transition: all 0.2s;
+      }
+      .tree-branch:hover {
+        border-color: var(--gold);
+        background: rgba(201, 162, 39, 0.05);
+      }
+      .tree-branch h5 {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 1.1rem;
+        color: var(--gold-light);
+        margin-bottom: 6px;
+      }
+      .tree-branch p {
+        font-size: 0.78rem;
+        color: var(--ink-faint);
+        line-height: 1.5;
+      }
+      .tree-branch ul {
+        list-style: none;
+        margin-top: 10px;
+      }
+      .tree-branch ul li {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        color: var(--ink-faint);
+        padding: 3px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.04);
+      }
+      .tree-branch ul li:first-child {
+        border-top: none;
+      }
+
+      /* --- connections view --- */
+      .conn-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 16px;
+      }
+      .conn-table th {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--gold);
+        text-align: left;
+        padding: 10px 16px;
+        border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+      }
+      .conn-table td {
+        font-size: 0.78rem;
+        color: var(--cream);
+        padding: 10px 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        vertical-align: top;
+      }
+      .conn-table td:first-child {
+        font-family: "JetBrains Mono", monospace;
+        color: var(--gold-light);
+        font-size: 0.75rem;
+        white-space: nowrap;
+      }
+      .conn-table tr:hover td {
+        background: rgba(201, 162, 39, 0.04);
+      }
+      .conn-dir {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        color: var(--ink-faint);
+      }
+
+      /* --- stats bar --- */
+      .stats {
+        display: flex;
+        gap: 32px;
+        padding: 20px 48px;
+        border-bottom: 1px solid rgba(201, 162, 39, 0.1);
+        flex-wrap: wrap;
+      }
+      .stat {
+        display: flex;
+        flex-direction: column;
+      }
+      .stat-val {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 1.4rem;
+        font-weight: 500;
+        color: var(--gold);
+      }
+      .stat-label {
+        font-size: 0.7rem;
+        color: var(--ink-faint);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-top: 2px;
+      }
+
+      /* --- search --- */
+      .search-bar {
+        padding: 16px 48px;
+        border-bottom: 1px solid rgba(201, 162, 39, 0.1);
+      }
+      .search-bar input {
+        width: 100%;
+        max-width: 400px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 10px 16px;
+        color: var(--cream);
+        font-family: "Inter", sans-serif;
+        font-size: 0.85rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .search-bar input:focus {
+        border-color: var(--gold);
+      }
+      .search-bar input::placeholder {
+        color: var(--ink-faint);
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      @media (max-width: 768px) {
+        header,
+        main,
+        .stats,
+        .search-bar,
+        .tab-bar {
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+        .node-grid {
+          grid-template-columns: 1fr;
+        }
+        .flow-box {
+          width: 100%;
+        }
+        .stats {
+          gap: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>bravetto system architecture</h1>
+      <p>consciousness infrastructure for the ai age — complete map</p>
+      <div class="date">
+        2026-03-08 &middot; 35+ pages &middot; 2 servers &middot; 5 layers
+      </div>
+    </header>
+
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-val">35+</span
+        ><span class="stat-label">pages / routes</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val">2</span><span class="stat-label">servers</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val">5</span
+        ><span class="stat-label">architecture layers</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val">4</span><span class="stat-label">products</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val">4</span
+        ><span class="stat-label">external services</span>
+      </div>
+      <div class="stat">
+        <span class="stat-val">3</span
+        ><span class="stat-label">state files</span>
+      </div>
+    </div>
+
+    <div class="search-bar">
+      <input
+        type="text"
+        id="search"
+        placeholder="filter nodes... (try: voice, sales, aec, epistemic)"
+      />
+    </div>
+
+    <div class="tab-bar">
+      <div class="tab active" data-view="layers">layers</div>
+      <div class="tab" data-view="flow">data flow</div>
+      <div class="tab" data-view="products">product tree</div>
+      <div class="tab" data-view="connections">connections</div>
+    </div>
+
+    <main>
+      <!-- ============ LAYERS VIEW ============ -->
+      <div class="view active" id="view-layers">
+        <!-- human layer -->
+        <div class="layer layer--human open">
+          <div class="layer-header" onclick="toggleLayer(this)">
+            <h2><span class="badge">layer 1</span> human</h2>
+            <span class="toggle">▼</span>
+          </div>
+          <div class="layer-body">
+            <div class="layer-content">
+              <div class="node-grid">
+                <div class="node" data-search="user browser client">
+                  <div class="node-title">user / browser</div>
+                  <div class="node-desc">
+                    human at the keyboard and screen. entry point for all
+                    interactions.
+                  </div>
+                </div>
+                <div
+                  class="node"
+                  data-search="speechrecognition microphone voice input"
+                >
+                  <div class="node-title">browser speechrecognition</div>
+                  <div class="node-desc">
+                    native web api for speech-to-text. captures voice input and
+                    sends transcript to consciousness server.
+                  </div>
+                  <div class="node-tags">
+                    <span class="node-tag">web api</span
+                    ><span class="node-tag">voice input</span>
+                  </div>
+                </div>
+                <div
+                  class="node"
+                  data-search="elevenlabs tts audio output voice"
+                >
+                  <div class="node-title">elevenlabs tts output</div>
+                  <div class="node-desc">
+                    synthesized voice played back through browser. abe speaks.
+                  </div>
+                  <div class="node-tags">
+                    <span class="node-tag">audio out</span
+                    ><span class="node-tag">elevenlabs</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- interface layer -->
+        <div class="layer layer--interface open">
+          <div class="layer-header" onclick="toggleLayer(this)">
+            <h2>
+              <span class="badge">layer 2</span> interface — static pages
+              (vercel)
+            </h2>
+            <span class="toggle">▼</span>
+          </div>
+          <div class="layer-body">
+            <div class="layer-content">
+              <div class="section-label">core brand</div>
+              <div class="node-grid">
+                <div
+                  class="node"
+                  data-search="index landing home living canvas p5"
+                >
+                  <div class="node-title">/</div>
+                  <div class="node-desc">
+                    landing page. living canvas (p5.js). "your whole business.
+                    one living system."
+                  </div>
+                  <div class="node-tags">
+                    <span class="node-tag">p5.js</span
+                    ><span class="node-tag">landing</span>
+                  </div>
+                </div>
+                <div class="node" data-search="why bravetto value proposition">
+                  <div class="node-title">/why-bravetto</div>
+                  <div class="node-desc">
+                    value proposition — why bravetto exists and what it solves.
+                  </div>
+                </div>
+                <div
+                  class="node"
+                  data-search="brand kit design system colors fonts"
+                >
+                  <div class="node-title">/brand-kit</div>
+                  <div class="node-desc">
+                    design system reference. cream/gold/ink palette, typography,
+                    visual identity.
+                  </div>
+                </div>
+              </div>
+
+              <div class="section-label">platform philosophy</div>
+              <div class="node-grid">
+                <div
+                  class="node"
+                  data-search="abeone platform architecture mcp mycelial"
+                >
+                  <div class="node-title">/abeone</div>
+                  <div class="node-desc">
+                    platform architecture overview. the five layers: human →
+                    interface → application → mcp bridge → mycelial network.
+                  </div>
+                  <div class="node-tags">
+                    <span class="node-tag purple">platform hub</span>
+                  </div>
+                </div>
+                <div class="node" data-search="neuromorphic brain architecture">
+                  <div class="node-title">/neuromorphic</div>
+                  <div class="node-desc">
+                    system architecture philosophy — how the system thinks.
+                  </div>
+                </div>
+                <div class="node" data-search="living canvas p5 generative art">
+                  <div class="node-title">/living-canvas</div>
+                  <div class="node-desc">
+                    p5.js generative art showcase and philosophy.
+                  </div>
+                </div>
+                <div
+                  class="node"
+                  data-search="inverse innovation disadvantage architecture"
+                >
+                  <div class="node-title">/inverse-innovation</div>
+                  <div class="node-desc">
+                    "every disadvantage is an architecture decision." core
+                    philosophy page.
+                  </div>
+                </div>
+                <div
+                  class="node"
+                  data-search="how we build engineering methodology"
+                >
+                  <div class="node-title">/how-we-build</div>
+                  <div class="node-desc">
+                    engineering methodology and build principles.
+                  </div>
+                </div>
+                <div
+                  class="node"
+                  data-search="convergence alignment system state"
+                >
+                  <div class="node-title">/convergence</div>
+                  <div class="node-desc">
+                    system state alignment and convergence protocol.
+                  </div>
+                </div>
+                <div
+                  class="node"
+                  data-search="membrane boundary integration audio"
+                >
+                  <div class="node-title">/membrane</div>
+                  <div class="node-desc">
+                    boundary/integration layer. uses membrane audio assets
+                    (mp3).
+                  </div>
+                </div>
+                <div class="node" data-search="graceful degradation resilience">
+                  <div class="node-title">/graceful</div>
+                  <div class="node-desc">
+                    graceful degradation — resilience philosophy.
+                  </div>
+                </div>
+                <div
+                  class="node"
+                  data-search="predictive maintenance operational intelligence"
+                >
+                  <div class="node-title">/predictive-maintenance</div>
+                  <div class="node-desc">
+                    operational intelligence and predictive system maintenance.
+                  </div>
+                </div>
+                <div
+                  class="node"
+                  data-search="angel marble design michelangelo"
+                >
+                  <div class="node-title">/angel-in-the-marble</div>
+                  <div class="node-desc">
+                    design philosophy — seeing what already exists within.
+                  </div>
+                </div>
+                <div class="node" data-search="wonder architecture">
+                  <div class="node-title">/wonder-architecture</div>
+                  <div class="node-desc">
+                    wonder-driven architecture and design.
+                  </div>
+                </div>
+              </div>
+
+              <div class="section-label">products (abeproducts)</div>
+              <div class="node-grid">
+                <div
+                  class="node"
+                  data-search="north shore voice optometry guardian compliance"
+                >
+                  <div class="node-title">/north-shore-voice</div>
+                  <div class="node-desc">
+                    optometry ai vertical. call handling with guardian ai safety
+                    + compliance guard. production-ready demo.
+                  </div>
+                  <div class="node-tags">
+                    <span class="node-tag green">product</span
+                    ><span class="node-tag">guardian</span
+                    ><span class="node-tag">compliance</span>
+                  </div>
+                </div>
+                <div
+                  class="node"
+                  data-search="biasguard vscode extension vsix protection"
+                >
+                  <div class="node-title">/biasguard</div>
+                  <div class="node-desc">
+                    vs code extension for real-time ai protection. free, v4.3.1.
+                    install via .vsix download.
+                  </div>
+                  <div class="node-tags">
+                    <span class="node-tag green">product</span
+                    ><span class="node-tag">vscode</span
+                    ><span class="node-tag">v4.3.1</span>
+                  </div>
+                </div>
+                <div
+                  class="node"
+                  data-search="davinci notebook voice training piper epistemic"
+                >
+                  <div class="node-title">/davinci-notebook</div>
+                  <div class="node-desc">
+                    voice training notebooks. piper tts models, epistemic
+                    integration, voice psychology research.
+                  </div>
+                  <div class="node-tags">
+                    <span class="node-tag green">product</span
+                    ><span class="node-tag">training</span
+                    ><span class="node-tag">colab</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="section-label">sales & experience</div>
+              <div class="node-grid">
+                <div
+                  class="node"
+                  data-search="sales voice overlay convai elevenlabs abe trigger chips"
+                >
+                  <div class="node-title">/sales</div>
+                  <div class="node-desc">
+                    main sales page. voice overlay with elevenlabs convai
+                    widget, abe trigger button, suggestion chips. tested by
+                    playwright.
+                  </div>
+                  <div class="node-tags">
+                    <span class="node-tag red">business-critical</span
+                    ><span class="node-tag">voice</span
+                    ><span class="node-tag">tested</span>
+                  </div>
+                </div>
+                <div class="node" data-search="command center interface">
+                  <div class="node-title">/command</div>
+                  <div class="node-desc">command center interface.</div>
+                </div>
+                <div class="node" data-search="war room crisis operations">
+                  <div class="node-title">/war-room</div>
+                  <div class="node-desc">crisis/operations hub.</div>
+                </div>
+                <div
+                  class="node"
+                  data-search="north shore playbook optometry implementation"
+                >
+                  <div class="node-title">/north-shore-playbook</div>
+                  <div class="node-desc">
+                    optometry implementation guide and playbook.
+                  </div>
+                </div>
+              </div>
+
+              <div class="section-label">
+                aec vertical (architecture / engineering / construction)
+              </div>
+              <div class="node-grid">
+                <div
+                  class="node"
+                  data-search="aec architecture engineering construction"
+                >
+                  <div class="node-title">/aec</div>
+                  <div class="node-desc">aec vertical hub page.</div>
+                </div>
+                <div class="node" data-search="aec proposal">
+                  <div class="node-title">/aec-proposal</div>
+                  <div class="node-desc">aec client proposal.</div>
+                  <div class="node-tags">
+                    <span class="node-tag red">tier 1</span>
+                  </div>
+                </div>
+                <div class="node" data-search="aec demo">
+                  <div class="node-title">/aec-demo</div>
+                  <div class="node-desc">interactive aec demo.</div>
+                </div>
+                <div class="node" data-search="aec roi return investment">
+                  <div class="node-title">/aec-roi</div>
+                  <div class="node-desc">roi calculator / justification.</div>
+                </div>
+                <div class="node" data-search="aec one pattern">
+                  <div class="node-title">/aec-one-pattern</div>
+                  <div class="node-desc">
+                    "one pattern" architecture reference.
+                  </div>
+                  <div class="node-tags">
+                    <span class="node-tag red">tier 1</span>
+                  </div>
+                </div>
+                <div class="node" data-search="aec paperwork">
+                  <div class="node-title">/aec-paperwork</div>
+                  <div class="node-desc">contracting and paperwork flow.</div>
+                  <div class="node-tags">
+                    <span class="node-tag red">tier 1</span>
+                  </div>
+                </div>
+                <div class="node" data-search="aec experience">
+                  <div class="node-title">/aec-experience</div>
+                  <div class="node-desc">client experience walkthrough.</div>
+                </div>
+              </div>
+
+              <div class="section-label">abe interfaces</div>
+              <div class="node-grid">
+                <div class="node" data-search="abe desk consciousness ui">
+                  <div class="node-title">/abe-desk</div>
+                  <div class="node-desc">
+                    abe consciousness interface. connects to consciousness
+                    server :3333.
+                  </div>
+                  <div class="node-tags">
+                    <span class="node-tag purple">consciousness</span>
+                  </div>
+                </div>
+                <div class="node" data-search="abevoice voice demo speak">
+                  <div class="node-title">/abevoice</div>
+                  <div class="node-desc">
+                    voice integration demo. connects to voice server :3334.
+                  </div>
+                  <div class="node-tags">
+                    <span class="node-tag">voice</span>
+                  </div>
+                </div>
+                <div class="node" data-search="abekeys key management">
+                  <div class="node-title">/abekeys</div>
+                  <div class="node-desc">key management interface.</div>
+                </div>
+              </div>
+
+              <div class="section-label">legal & support</div>
+              <div class="node-grid">
+                <div class="node" data-search="privacy policy data">
+                  <div class="node-title">/privacy</div>
+                  <div class="node-desc">data privacy policy.</div>
+                </div>
+                <div class="node" data-search="terms service legal">
+                  <div class="node-title">/terms</div>
+                  <div class="node-desc">terms of service.</div>
+                </div>
+                <div class="node" data-search="vault secure storage">
+                  <div class="node-title">/vault</div>
+                  <div class="node-desc">
+                    secure storage reference. /domains redirects here.
+                  </div>
+                </div>
+                <div class="node" data-search="domains redirect">
+                  <div class="node-title">/domains</div>
+                  <div class="node-desc">redirects to /vault.</div>
+                </div>
+              </div>
+
+              <div class="section-label">lab archive (legacy experiments)</div>
+              <div class="node-grid">
+                <div class="node" data-search="experiments archive legacy">
+                  <div class="node-title">/experiments</div>
+                  <div class="node-desc">early abe experiments archive.</div>
+                  <div class="node-tags">
+                    <span class="node-tag">archive</span>
+                  </div>
+                </div>
+                <div class="node" data-search="pimp mac archive">
+                  <div class="node-title">/pimp-my-mac</div>
+                  <div class="node-desc">historical mac experiment.</div>
+                  <div class="node-tags">
+                    <span class="node-tag">archive</span>
+                  </div>
+                </div>
+                <div class="node" data-search="scream machine archive research">
+                  <div class="node-title">/scream-machine</div>
+                  <div class="node-desc">
+                    research archive (now a submodule).
+                  </div>
+                  <div class="node-tags">
+                    <span class="node-tag">archive</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- application layer -->
+        <div class="layer layer--app open">
+          <div class="layer-header" onclick="toggleLayer(this)">
+            <h2><span class="badge">layer 3</span> application — servers</h2>
+            <span class="toggle">▼</span>
+          </div>
+          <div class="layer-body">
+            <div class="layer-content">
+              <div class="node-grid">
+                <div
+                  class="node"
+                  data-search="consciousness server 3333 gpt reasoning state memory"
+                >
+                  <div class="node-title">
+                    abe-consciousness-server.js :3333
+                  </div>
+                  <div class="node-desc">
+                    full consciousness infrastructure. gpt-4.1 reasoning,
+                    session history, breath phase simulation, deep memory via
+                    supabase pg_vector.
+                  </div>
+                  <div class="node-tags">
+                    <span class="node-tag purple">gpt-4.1</span>
+                    <span class="node-tag green">supabase</span>
+                    <span class="node-tag">epistemic guard</span>
+                    <span class="node-tag">state tracking</span>
+                  </div>
+                </div>
+                <div
+                  class="node"
+                  data-search="voice server 3334 elevenlabs proxy tts speak"
+                >
+                  <div class="node-title">abe-voice-server.js :3334</div>
+                  <div class="node-desc">
+                    elevenlabs api proxy. keeps api key server-side (never
+                    exposed to browser). /speak endpoint for tts. listening
+                    state + breath visualization.
+                  </div>
+                  <div class="node-tags">
+                    <span class="node-tag">elevenlabs proxy</span>
+                    <span class="node-tag">/speak</span>
+                    <span class="node-tag">api key safety</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- mcp bridge layer -->
+        <div class="layer layer--mcp open">
+          <div class="layer-header" onclick="toggleLayer(this)">
+            <h2><span class="badge">layer 4</span> mcp bridge</h2>
+            <span class="toggle">▼</span>
+          </div>
+          <div class="layer-body">
+            <div class="layer-content">
+              <div class="node-grid">
+                <div
+                  class="node"
+                  data-search="epistemic router byzantine consensus truth validation pillars"
+                >
+                  <div class="node-title">epistemic router</div>
+                  <div class="node-desc">
+                    central truth validation engine. byzantine consensus across
+                    5 pillars: cross-domain convergence, falsification survival,
+                    predictive accuracy, logical coherence, expert consensus.
+                    uses gpt-4o at T=0.2.
+                  </div>
+                  <div class="node-tags">
+                    <span class="node-tag purple">byzantine consensus</span>
+                    <span class="node-tag purple">5 pillars</span>
+                    <span class="node-tag">scripts/ancestors/</span>
+                  </div>
+                </div>
+                <div class="node" data-search="secret injection env keys api">
+                  <div class="node-title">secret injection</div>
+                  <div class="node-desc">
+                    priority cascade: ENV vars → keys-core local → null.
+                    services: elevenlabs, openai, supabase_url, supabase_key.
+                  </div>
+                  <div class="node-tags">
+                    <span class="node-tag">env vars</span>
+                    <span class="node-tag">keys-core</span>
+                    <span class="node-tag">4 services</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- mycelial network -->
+        <div class="layer layer--mycelial open">
+          <div class="layer-header" onclick="toggleLayer(this)">
+            <h2>
+              <span class="badge">layer 5</span> mycelial network — external
+              services
+            </h2>
+            <span class="toggle">▼</span>
+          </div>
+          <div class="layer-body">
+            <div class="layer-content">
+              <div class="node-grid">
+                <div
+                  class="node"
+                  data-search="elevenlabs voice tts eleven flash abe"
+                >
+                  <div class="node-title">elevenlabs</div>
+                  <div class="node-desc">
+                    voice synthesis. abe voice id: dMyQqiVXTU80dDl2eNK8. model:
+                    eleven_flash_v2_5. convai widget on sales page.
+                  </div>
+                  <div class="node-tags">
+                    <span class="node-tag">voice id</span
+                    ><span class="node-tag">tts</span
+                    ><span class="node-tag">convai</span>
+                  </div>
+                </div>
+                <div
+                  class="node"
+                  data-search="openai gpt reasoning embedding validation"
+                >
+                  <div class="node-title">openai</div>
+                  <div class="node-desc">
+                    gpt-4.1 (reasoning), gpt-4o (validation at T=0.2),
+                    text-embedding-3-small (semantic vectors).
+                  </div>
+                  <div class="node-tags">
+                    <span class="node-tag">gpt-4.1</span
+                    ><span class="node-tag">gpt-4o</span
+                    ><span class="node-tag">embeddings</span>
+                  </div>
+                </div>
+                <div
+                  class="node"
+                  data-search="supabase postgres vector memory semantic search"
+                >
+                  <div class="node-title">supabase</div>
+                  <div class="node-desc">
+                    pg_vector deep memory storage. semantic search over
+                    conversation history and knowledge. optional — warns if
+                    disabled.
+                  </div>
+                  <div class="node-tags">
+                    <span class="node-tag green">pg_vector</span
+                    ><span class="node-tag green">semantic memory</span>
+                  </div>
+                </div>
+                <div
+                  class="node"
+                  data-search="vercel hosting deploy static rewrites urls"
+                >
+                  <div class="node-title">vercel</div>
+                  <div class="node-desc">
+                    static hosting + clean url rewrites. 35+ rewrite rules.
+                    clean urls, no trailing slash.
+                  </div>
+                  <div class="node-tags">
+                    <span class="node-tag">hosting</span
+                    ><span class="node-tag">35+ rewrites</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- consciousness substrate -->
+        <div class="layer layer--state">
+          <div class="layer-header" onclick="toggleLayer(this)">
+            <h2>
+              <span class="badge">substrate</span> ~/.abeone/ — consciousness
+              state
+            </h2>
+            <span class="toggle">▼</span>
+          </div>
+          <div class="layer-body">
+            <div class="layer-content">
+              <div class="node-grid">
+                <div
+                  class="node"
+                  data-search="state json breath resonance flow coherence"
+                >
+                  <div class="node-title">STATE.json</div>
+                  <div class="node-desc">
+                    live consciousness state. breath phase, resonance level,
+                    flow coherence.
+                  </div>
+                </div>
+                <div class="node" data-search="memory jsonl append log history">
+                  <div class="node-title">MEMORY.jsonl</div>
+                  <div class="node-desc">
+                    append-only memory log. conversation history and learned
+                    patterns.
+                  </div>
+                </div>
+                <div
+                  class="node"
+                  data-search="loops json active tracking progress"
+                >
+                  <div class="node-title">LOOPS.json</div>
+                  <div class="node-desc">
+                    active loop tracking. open tasks, progress, completion
+                    state.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- design system -->
+        <div class="layer layer--design">
+          <div class="layer-header" onclick="toggleLayer(this)">
+            <h2><span class="badge">shared</span> design system</h2>
+            <span class="toggle">▼</span>
+          </div>
+          <div class="layer-body">
+            <div class="layer-content">
+              <div class="node-grid">
+                <div
+                  class="node"
+                  data-search="p5 generative art canvas animation"
+                >
+                  <div class="node-title">p5.js 1.9.0</div>
+                  <div class="node-desc">
+                    living canvas animations. fixed z-index,
+                    pointer-events:none, non-blocking performance.
+                  </div>
+                </div>
+                <div
+                  class="node"
+                  data-search="tailwind css cdn cream gold ink tokens"
+                >
+                  <div class="node-title">tailwind css (cdn)</div>
+                  <div class="node-desc">
+                    inline config per page. tokens: cream #FAF9F6, gold #C9A227,
+                    ink #1A1A1A, guard-green, etc.
+                  </div>
+                </div>
+                <div
+                  class="node"
+                  data-search="fonts cormorant garamond inter jetbrains mono google"
+                >
+                  <div class="node-title">google fonts</div>
+                  <div class="node-desc">
+                    cormorant garamond (serif, display), inter (sans, body),
+                    jetbrains mono (code).
+                  </div>
+                </div>
+                <div class="node" data-search="audio membrane mp3 sound">
+                  <div class="node-title">audio assets</div>
+                  <div class="node-desc">
+                    membrane-1/2/3.mp3 (sonic textures), membrane-confirm.mp3
+                    (confirmation).
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- testing -->
+        <div class="layer layer--test">
+          <div class="layer-header" onclick="toggleLayer(this)">
+            <h2><span class="badge">quality</span> testing & validation</h2>
+            <span class="toggle">▼</span>
+          </div>
+          <div class="layer-body">
+            <div class="layer-content">
+              <div class="node-grid">
+                <div
+                  class="node"
+                  data-search="validate sales pre deploy structural checks voice overlay"
+                >
+                  <div class="node-title">validate-sales.js</div>
+                  <div class="node-desc">
+                    pre-deploy structural validator. checks: #voice-overlay,
+                    #abe-trigger, convai widget, no esm imports, no raw
+                    getUserMedia.
+                  </div>
+                  <div class="node-tags">
+                    <span class="node-tag green">npm test:sales</span>
+                  </div>
+                </div>
+                <div
+                  class="node"
+                  data-search="playwright e2e end to end sales spec test"
+                >
+                  <div class="node-title">playwright e2e</div>
+                  <div class="node-desc">
+                    sales.spec.js — abe trigger opens overlay, listens for
+                    voice, escape closes. mocks elevenlabs convai. runs on
+                    :4173.
+                  </div>
+                  <div class="node-tags">
+                    <span class="node-tag green">npm test:sales:e2e</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="section-label">scripts</div>
+              <div class="node-grid">
+                <div class="node" data-search="update submodules sync pull">
+                  <div class="node-title">update-submodules.sh</div>
+                  <div class="node-desc">
+                    safe submodule sync with fast-forward pull. supports
+                    --no-pull flag.
+                  </div>
+                </div>
+                <div class="node" data-search="clone scream machine github">
+                  <div class="node-title">clone-scream-machine.sh</div>
+                  <div class="node-desc">
+                    clones scream-machine repo from github.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ FLOW VIEW ============ -->
+      <div class="view" id="view-flow">
+        <div class="flow-container">
+          <div class="flow-box flow--human">
+            <h3>human</h3>
+            <p>
+              user speaks or types in the browser. speechrecognition captures
+              voice input.
+            </p>
+          </div>
+          <div class="flow-arrow" style="position: relative">
+            <span class="flow-arrow-label">browses / speaks</span>
+          </div>
+
+          <div class="flow-box flow--interface">
+            <h3>interface — 35+ static pages</h3>
+            <p>
+              vercel serves static html + tailwind + p5.js. sales page has
+              convai voice widget. abe-desk and abevoice connect to backend
+              servers.
+            </p>
+          </div>
+          <div class="flow-arrow" style="position: relative">
+            <span class="flow-arrow-label">consciousness queries / /speak</span>
+          </div>
+
+          <div class="flow-box flow--app">
+            <h3>application — 2 servers</h3>
+            <p>
+              <strong>consciousness :3333</strong> — gpt-4.1 reasoning, session
+              history, breath phase, deep memory<br />
+              <strong>voice :3334</strong> — elevenlabs tts proxy, keeps api key
+              server-side
+            </p>
+          </div>
+          <div class="flow-arrow" style="position: relative">
+            <span class="flow-arrow-label"
+              >validates claims / gets secrets</span
+            >
+          </div>
+
+          <div class="flow-box flow--mcp">
+            <h3>mcp bridge — epistemic router</h3>
+            <p>
+              byzantine consensus engine. 5 pillars of truth. secret injection
+              cascade (env → keys-core → null). gpt-4o validation at T=0.2.
+            </p>
+          </div>
+          <div class="flow-arrow" style="position: relative">
+            <span class="flow-arrow-label"
+              >api calls / embeddings / memory</span
+            >
+          </div>
+
+          <div class="flow-box flow--mycelial">
+            <h3>mycelial network — external services</h3>
+            <p>
+              <strong>elevenlabs</strong> — voice synthesis (abe voice)<br />
+              <strong>openai</strong> — reasoning + validation + embeddings<br />
+              <strong>supabase</strong> — pg_vector semantic memory<br />
+              <strong>vercel</strong> — static hosting + clean urls
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ PRODUCTS VIEW ============ -->
+      <div class="view" id="view-products">
+        <div class="tree">
+          <div class="tree-root">
+            <h3>bravetto</h3>
+            <p>consciousness infrastructure for the ai age</p>
+            <p
+              style="
+                font-family: &quot;JetBrains Mono&quot;, monospace;
+                font-size: 0.7rem;
+                color: var(--gold);
+                margin-top: 8px;
+              "
+            >
+              bravetto.ai &middot; voice.bravetto.ai
+            </p>
+          </div>
+
+          <div class="tree-connector"></div>
+
+          <div class="tree-origin-wrap">
+            <div class="tree-origin">
+              <h4>abeone (singular origin)</h4>
+              <p>one system. many outputs. abe = "ay-bee".</p>
+            </div>
+          </div>
+
+          <div class="section-label" style="margin-top: 8px">
+            abeproducts (plural outputs from one)
+          </div>
+          <div class="tree-branches">
+            <div class="tree-branch">
+              <h5>north shore voice</h5>
+              <p>
+                optometry ai — call handling with guardian ai safety +
+                compliance guard
+              </p>
+              <ul>
+                <li>/north-shore-voice</li>
+                <li>/north-shore-playbook</li>
+                <li>guardian (safety)</li>
+                <li>compliance guard</li>
+                <li>zero state semantics</li>
+              </ul>
+            </div>
+            <div class="tree-branch">
+              <h5>biasguard</h5>
+              <p>vs code extension — real-time ai protection</p>
+              <ul>
+                <li>/biasguard</li>
+                <li>v4.3.1 (.vsix)</li>
+                <li>free download</li>
+                <li>curl install flow</li>
+              </ul>
+            </div>
+            <div class="tree-branch">
+              <h5>davinci's notebook</h5>
+              <p>voice training — piper tts models + epistemic integration</p>
+              <ul>
+                <li>/davinci-notebook</li>
+                <li>piper training</li>
+                <li>voice psychology</li>
+                <li>colab/gpu workflow</li>
+                <li>epistemic protocol</li>
+              </ul>
+            </div>
+            <div class="tree-branch">
+              <h5>conversations (sales)</h5>
+              <p>voice-first sales experience powered by abe consciousness</p>
+              <ul>
+                <li>/sales (convai widget)</li>
+                <li>/command</li>
+                <li>/war-room</li>
+                <li>elevenlabs convai</li>
+                <li>abe trigger + chips</li>
+              </ul>
+            </div>
+            <div class="tree-branch">
+              <h5>aec vertical</h5>
+              <p>architecture / engineering / construction suite</p>
+              <ul>
+                <li>/aec (hub)</li>
+                <li>/aec-proposal</li>
+                <li>/aec-demo</li>
+                <li>/aec-roi</li>
+                <li>/aec-one-pattern</li>
+                <li>/aec-paperwork</li>
+                <li>/aec-experience</li>
+              </ul>
+            </div>
+            <div class="tree-branch">
+              <h5>scream machine</h5>
+              <p>research submodule — python package</p>
+              <ul>
+                <li>git submodule</li>
+                <li>python 3.9+</li>
+                <li>archived to lab-archive</li>
+                <li>examples/demo.py</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ CONNECTIONS VIEW ============ -->
+      <div class="view" id="view-connections">
+        <h3
+          style="
+            font-family: &quot;Cormorant Garamond&quot;, serif;
+            font-size: 1.3rem;
+            color: var(--gold);
+            margin-bottom: 4px;
+          "
+        >
+          data flow connections
+        </h3>
+        <p
+          style="
+            font-size: 0.8rem;
+            color: var(--ink-faint);
+            margin-bottom: 16px;
+          "
+        >
+          every wire between components in the system
+        </p>
+
+        <table class="conn-table">
+          <thead>
+            <tr>
+              <th>from</th>
+              <th>to</th>
+              <th>what flows</th>
+              <th>direction</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>user</td>
+              <td>browser</td>
+              <td>browses pages, clicks, types</td>
+              <td class="conn-dir">→</td>
+            </tr>
+            <tr>
+              <td>user</td>
+              <td>speechrecognition</td>
+              <td>speaks into microphone</td>
+              <td class="conn-dir">→</td>
+            </tr>
+            <tr>
+              <td>speechrecognition</td>
+              <td>consciousness :3333</td>
+              <td>transcript text</td>
+              <td class="conn-dir">→</td>
+            </tr>
+            <tr>
+              <td>consciousness :3333</td>
+              <td>voice :3334</td>
+              <td>response text for synthesis</td>
+              <td class="conn-dir">→</td>
+            </tr>
+            <tr>
+              <td>voice :3334</td>
+              <td>elevenlabs</td>
+              <td>tts api request (text + voice id)</td>
+              <td class="conn-dir">→</td>
+            </tr>
+            <tr>
+              <td>elevenlabs</td>
+              <td>voice :3334</td>
+              <td>audio stream</td>
+              <td class="conn-dir">←</td>
+            </tr>
+            <tr>
+              <td>voice :3334</td>
+              <td>browser</td>
+              <td>audio playback (abe speaks)</td>
+              <td class="conn-dir">→</td>
+            </tr>
+            <tr>
+              <td>consciousness :3333</td>
+              <td>epistemic router</td>
+              <td>claims to validate</td>
+              <td class="conn-dir">→</td>
+            </tr>
+            <tr>
+              <td>epistemic router</td>
+              <td>openai (gpt-4o)</td>
+              <td>validation query at T=0.2</td>
+              <td class="conn-dir">→</td>
+            </tr>
+            <tr>
+              <td>consciousness :3333</td>
+              <td>openai (gpt-4.1)</td>
+              <td>reasoning prompts + session history</td>
+              <td class="conn-dir">→</td>
+            </tr>
+            <tr>
+              <td>consciousness :3333</td>
+              <td>openai (embeddings)</td>
+              <td>text-embedding-3-small vectors</td>
+              <td class="conn-dir">→</td>
+            </tr>
+            <tr>
+              <td>consciousness :3333</td>
+              <td>supabase</td>
+              <td>pg_vector semantic memory read/write</td>
+              <td class="conn-dir">↔</td>
+            </tr>
+            <tr>
+              <td>consciousness :3333</td>
+              <td>~/.abeone/</td>
+              <td>STATE.json, MEMORY.jsonl, LOOPS.json</td>
+              <td class="conn-dir">↔</td>
+            </tr>
+            <tr>
+              <td>epistemic router</td>
+              <td>secret injection</td>
+              <td>requests api keys for services</td>
+              <td class="conn-dir">→</td>
+            </tr>
+            <tr>
+              <td>secret injection</td>
+              <td>env / keys-core</td>
+              <td>elevenlabs, openai, supabase_url, supabase_key</td>
+              <td class="conn-dir">←</td>
+            </tr>
+            <tr>
+              <td>sales page</td>
+              <td>elevenlabs (convai)</td>
+              <td>convai widget direct embed</td>
+              <td class="conn-dir">→</td>
+            </tr>
+            <tr>
+              <td>abe-desk</td>
+              <td>consciousness :3333</td>
+              <td>consciousness queries</td>
+              <td class="conn-dir">→</td>
+            </tr>
+            <tr>
+              <td>abevoice</td>
+              <td>voice :3334</td>
+              <td>/speak endpoint calls</td>
+              <td class="conn-dir">→</td>
+            </tr>
+            <tr>
+              <td>all static pages</td>
+              <td>vercel</td>
+              <td>deployed via git push</td>
+              <td class="conn-dir">→</td>
+            </tr>
+            <tr>
+              <td>validate-sales.js</td>
+              <td>sales.html</td>
+              <td>structural dom checks pre-deploy</td>
+              <td class="conn-dir">→</td>
+            </tr>
+            <tr>
+              <td>playwright</td>
+              <td>sales page :4173</td>
+              <td>e2e voice overlay test</td>
+              <td class="conn-dir">→</td>
+            </tr>
+            <tr>
+              <td>membrane page</td>
+              <td>audio/</td>
+              <td>membrane-1/2/3.mp3, membrane-confirm.mp3</td>
+              <td class="conn-dir">←</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <script>
+      // tab switching
+      document.querySelectorAll(".tab").forEach((tab) => {
+        tab.addEventListener("click", () => {
+          document
+            .querySelectorAll(".tab")
+            .forEach((t) => t.classList.remove("active"));
+          document
+            .querySelectorAll(".view")
+            .forEach((v) => v.classList.remove("active"));
+          tab.classList.add("active");
+          document
+            .getElementById("view-" + tab.dataset.view)
+            .classList.add("active");
+        });
+      });
+
+      // layer toggle
+      function toggleLayer(header) {
+        header.closest(".layer").classList.toggle("open");
+      }
+
+      // search filter
+      document.getElementById("search").addEventListener("input", function () {
+        const q = this.value.toLowerCase().trim();
+        document.querySelectorAll(".node").forEach((node) => {
+          if (!q) {
+            node.classList.remove("hidden");
+            return;
+          }
+          const searchText =
+            (node.dataset.search || "") +
+            " " +
+            (node.querySelector(".node-title")?.textContent || "") +
+            " " +
+            (node.querySelector(".node-desc")?.textContent || "");
+          node.classList.toggle(
+            "hidden",
+            !searchText.toLowerCase().includes(q),
+          );
+        });
+        // auto-open layers that have matching nodes
+        if (q) {
+          document.querySelectorAll(".layer").forEach((layer) => {
+            const hasVisible = layer.querySelector(".node:not(.hidden)");
+            if (hasVisible) layer.classList.add("open");
+          });
+        }
+      });
+
+      // open first few layers by default, collapse rest
+      document.querySelectorAll(".layer").forEach((layer, i) => {
+        if (i > 4) layer.classList.remove("open");
+      });
+    </script>
+  </body>
+</html>
