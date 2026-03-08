@@ -51,7 +51,9 @@ class EpistemicRouter {
   async validate(query, context = {}) {
     const apiKey = this.getSecret("openai");
     if (!apiKey) {
-      console.warn("[EPISTEMIC] no openai key available — returning unvalidated");
+      console.warn(
+        "[EPISTEMIC] no openai key available — returning unvalidated",
+      );
       return { validated: false, entropy: 1.0, reason: "no api key" };
     }
 

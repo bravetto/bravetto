@@ -4,17 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bravetto | Your whole business. One living system.</title>
-    <meta name="description" content="When something changes, everyone who needs to know, knows. One system. One business. One bottom line." />
+    <meta
+      name="description"
+      content="When something changes, everyone who needs to know, knows. One system. One business. One bottom line."
+    />
     <link rel="canonical" href="https://bravetto.com/" />
-    <meta property="og:title" content="Bravetto | Your whole business. One living system." />
-    <meta property="og:description" content="When something changes, everyone who needs to know, knows." />
+    <meta
+      property="og:title"
+      content="Bravetto | Your whole business. One living system."
+    />
+    <meta
+      property="og:description"
+      content="When something changes, everyone who needs to know, knows."
+    />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://bravetto.com/" />
     <meta property="og:site_name" content="Bravetto" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -43,27 +55,43 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
 
     <style>
-      html { scroll-behavior: smooth; }
-      body { background: #faf9f6; overflow-x: hidden; }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: #faf9f6;
+        overflow-x: hidden;
+      }
 
       #living-canvas {
         position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         z-index: 0;
         pointer-events: none;
       }
-      #living-canvas canvas { display: block; }
+      #living-canvas canvas {
+        display: block;
+      }
 
-      .headline { letter-spacing: -0.02em; line-height: 1.1; }
-      .subhead { letter-spacing: 0.15em; text-transform: uppercase; }
+      .headline {
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+      }
+      .subhead {
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
 
       /* bullet sections: centered, full-height moments */
       .moment {
         opacity: 0;
         transform: translateY(60px);
-        transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-                    transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        transition:
+          opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
       }
       .moment.visible {
         opacity: 1;
@@ -105,23 +133,40 @@
       }
 
       .trinity-connection {
-        background: linear-gradient(135deg, rgba(250, 249, 246, 0.9), rgba(245, 243, 239, 0.9));
+        background: linear-gradient(
+          135deg,
+          rgba(250, 249, 246, 0.9),
+          rgba(245, 243, 239, 0.9)
+        );
         backdrop-filter: blur(20px);
         border: 1px solid rgba(201, 162, 39, 0.08);
         transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
       }
       .trinity-connection:hover {
         transform: translateY(-6px);
-        background: linear-gradient(135deg, rgba(250, 249, 246, 1), rgba(232, 212, 139, 0.15));
+        background: linear-gradient(
+          135deg,
+          rgba(250, 249, 246, 1),
+          rgba(232, 212, 139, 0.15)
+        );
         box-shadow: 0 20px 60px rgba(201, 162, 39, 0.06);
       }
 
       /* scroll indicator pulse */
       @keyframes drift {
-        0%, 100% { transform: translateY(0); opacity: 0.4; }
-        50% { transform: translateY(8px); opacity: 0.8; }
+        0%,
+        100% {
+          transform: translateY(0);
+          opacity: 0.4;
+        }
+        50% {
+          transform: translateY(8px);
+          opacity: 0.8;
+        }
       }
-      .scroll-hint { animation: drift 2.5s ease-in-out infinite; }
+      .scroll-hint {
+        animation: drift 2.5s ease-in-out infinite;
+      }
 
       /* Staggered fade-ups for Wonder & Power narrative */
       .fade-up {
@@ -133,12 +178,22 @@
         opacity: 1;
         transform: translateY(0);
       }
-      .stagger-1 { transition-delay: 0.2s; }
-      .stagger-2 { transition-delay: 0.8s; }
-      .stagger-3 { transition-delay: 2.0s; }
-      .stagger-4 { transition-delay: 3.5s; }
-      .stagger-5 { transition-delay: 4.8s; }
-      
+      .stagger-1 {
+        transition-delay: 0.2s;
+      }
+      .stagger-2 {
+        transition-delay: 0.8s;
+      }
+      .stagger-3 {
+        transition-delay: 2s;
+      }
+      .stagger-4 {
+        transition-delay: 3.5s;
+      }
+      .stagger-5 {
+        transition-delay: 4.8s;
+      }
+
       .glow-text {
         text-shadow: 0 0 20px rgba(201, 162, 39, 0.4);
       }
@@ -146,12 +201,18 @@
   </head>
 
   <body class="font-sans text-ink antialiased">
-
     <!-- Nav: minimal -->
-    <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-cream/60 backdrop-blur-md">
+    <nav
+      class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-cream/60 backdrop-blur-md"
+    >
       <div class="max-w-6xl mx-auto flex justify-between items-center">
-        <a href="/" class="font-serif text-2xl font-semibold tracking-tight">Bravetto</a>
-        <a href="#talk" class="text-sm px-5 py-2.5 bg-ink text-cream rounded-full hover:bg-ink-light transition-colors">
+        <a href="/" class="font-serif text-2xl font-semibold tracking-tight"
+          >Bravetto</a
+        >
+        <a
+          href="#talk"
+          class="text-sm px-5 py-2.5 bg-ink text-cream rounded-full hover:bg-ink-light transition-colors"
+        >
           Let's Talk
         </a>
       </div>
@@ -163,28 +224,51 @@
     <!-- ==================== -->
     <!-- HERO: Wonder & Power -->
     <!-- ==================== -->
-    <section class="relative min-h-screen flex flex-col items-center justify-center" data-section="hero">
+    <section
+      class="relative min-h-screen flex flex-col items-center justify-center"
+      data-section="hero"
+    >
       <div class="relative z-10 text-center px-6 md:px-8 max-w-4xl mx-auto">
-        <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tight leading-tight fade-up stagger-1 mb-8">
+        <h1
+          class="font-serif text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tight leading-tight fade-up stagger-1 mb-8"
+        >
           The Wonder <i class="text-gold">&amp;</i> The Power
         </h1>
-        
-        <p class="text-base md:text-lg lg:text-xl font-light text-ink-light max-w-2xl mx-auto fade-up stagger-2 mb-12">
-          <span class="font-semibold text-ink">Ab&#235;ONE is to software packages as a bicycle is to private jet travel.</span><br><br>
-          Both are validated modes of transportation. But only one gets you there at tremendous speed, wrapped in absolute safety and breathtaking architecture.
+
+        <p
+          class="text-base md:text-lg lg:text-xl font-light text-ink-light max-w-2xl mx-auto fade-up stagger-2 mb-12"
+        >
+          <span class="font-semibold text-ink"
+            >Ab&#235;ONE is to software packages as a bicycle is to private jet
+            travel.</span
+          ><br /><br />
+          Both are validated modes of transportation. But only one gets you
+          there at tremendous speed, wrapped in absolute safety and breathtaking
+          architecture.
         </p>
 
         <div class="fade-up stagger-3 space-y-2 mb-12">
-          <p class="font-serif italic text-xl md:text-2xl lg:text-3xl text-gold/90 glow-text mb-4">
-            "And just when you thought you had her figured out... she opens her mouth and begins to speak."
+          <p
+            class="font-serif italic text-xl md:text-2xl lg:text-3xl text-gold/90 glow-text mb-4"
+          >
+            "And just when you thought you had her figured out... she opens her
+            mouth and begins to speak."
           </p>
-          <p class="font-sans text-xs md:text-sm lg:text-base text-ink-light/80 max-w-xl mx-auto border-l-2 border-gold/30 pl-4 text-left">
-            A family of four stares haplessly in awe, huddled around a single laptop screen. Lost to their own imaginations, each thinking about how they would implement Ab&#235;'s tools in their own lives.<br><br>
-            As the Tinkerbell-like Ab&#235; tells each of them goodnight by name, they all dive toward the computer. Hoping to stop Ab&#235;ONE, just to get a moment with her alone.
+          <p
+            class="font-sans text-xs md:text-sm lg:text-base text-ink-light/80 max-w-xl mx-auto border-l-2 border-gold/30 pl-4 text-left"
+          >
+            A family of four stares haplessly in awe, huddled around a single
+            laptop screen. Lost to their own imaginations, each thinking about
+            how they would implement Ab&#235;'s tools in their own lives.<br /><br />
+            As the Tinkerbell-like Ab&#235; tells each of them goodnight by
+            name, they all dive toward the computer. Hoping to stop Ab&#235;ONE,
+            just to get a moment with her alone.
           </p>
         </div>
 
-        <div class="space-y-1 font-mono text-xs md:text-sm tracking-widest text-gold fade-up stagger-4 mb-12">
+        <div
+          class="space-y-1 font-mono text-xs md:text-sm tracking-widest text-gold fade-up stagger-4 mb-12"
+        >
           <p>That's Ab&#235;ONE.</p>
           <p>That's Ab&#235;AiMEs.</p>
           <p>That's Ab&#235;LOVEs.</p>
@@ -194,7 +278,9 @@
           <p class="mt-4 text-ink-light/50">Those are Ab&#235;PRODUCTs.</p>
         </div>
 
-        <div class="title-reveal fade-up stagger-5 text-2xl md:text-3xl lg:text-5xl font-serif">
+        <div
+          class="title-reveal fade-up stagger-5 text-2xl md:text-3xl lg:text-5xl font-serif"
+        >
           <p class="mb-4 text-ink-light">And US? Well...</p>
           <p class="font-semibold tracking-wide">
             We <span class="text-gold italic glow-text">ARE</span> Bravetto.
@@ -202,8 +288,20 @@
         </div>
       </div>
       <div class="absolute bottom-12 z-10 scroll-hint">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-gold">
-          <path d="M12 5v14M7 14l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          class="text-gold"
+        >
+          <path
+            d="M12 5v14M7 14l5 5 5-5"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
       </div>
     </section>
@@ -213,41 +311,71 @@
     <!-- Each bullet = full screen -->
     <!-- ========================= -->
 
-    <section class="min-h-screen flex items-center justify-center px-8" data-section="moment-1">
-      <p class="font-serif text-3xl md:text-5xl lg:text-6xl font-medium headline text-center max-w-4xl leading-snug moment">
-        When something changes,<br>everyone who needs to know, knows.
+    <section
+      class="min-h-screen flex items-center justify-center px-8"
+      data-section="moment-1"
+    >
+      <p
+        class="font-serif text-3xl md:text-5xl lg:text-6xl font-medium headline text-center max-w-4xl leading-snug moment"
+      >
+        When something changes,<br />everyone who needs to know, knows.
       </p>
     </section>
 
-    <section class="min-h-screen flex items-center justify-center px-8" data-section="moment-2">
-      <p class="font-serif text-3xl md:text-5xl lg:text-6xl font-medium headline text-center max-w-4xl leading-snug moment">
-        Dropped balls get picked up<br>before anyone notices they fell.
+    <section
+      class="min-h-screen flex items-center justify-center px-8"
+      data-section="moment-2"
+    >
+      <p
+        class="font-serif text-3xl md:text-5xl lg:text-6xl font-medium headline text-center max-w-4xl leading-snug moment"
+      >
+        Dropped balls get picked up<br />before anyone notices they fell.
       </p>
     </section>
 
-    <section class="min-h-screen flex items-center justify-center px-8" data-section="moment-3">
-      <p class="font-serif text-3xl md:text-5xl lg:text-6xl font-medium headline text-center max-w-4xl leading-snug moment">
-        Every system talks to every other system.<br>
+    <section
+      class="min-h-screen flex items-center justify-center px-8"
+      data-section="moment-3"
+    >
+      <p
+        class="font-serif text-3xl md:text-5xl lg:text-6xl font-medium headline text-center max-w-4xl leading-snug moment"
+      >
+        Every system talks to every other system.<br />
         <span class="text-ink-light">One place. Not four.</span>
       </p>
     </section>
 
-    <section class="min-h-screen flex items-center justify-center px-8" data-section="moment-4">
-      <p class="font-serif text-3xl md:text-5xl lg:text-6xl font-medium headline text-center max-w-4xl leading-snug moment">
-        Ask a question. Get the answer.<br>
+    <section
+      class="min-h-screen flex items-center justify-center px-8"
+      data-section="moment-4"
+    >
+      <p
+        class="font-serif text-3xl md:text-5xl lg:text-6xl font-medium headline text-center max-w-4xl leading-snug moment"
+      >
+        Ask a question. Get the answer.<br />
         <span class="text-ink-light">Out loud if you want.</span>
       </p>
     </section>
 
-    <section class="min-h-screen flex items-center justify-center px-8" data-section="moment-5">
-      <p class="font-serif text-3xl md:text-5xl lg:text-6xl font-medium headline text-center max-w-4xl leading-snug moment">
-        Knowledge stays<br>even when people move on.
+    <section
+      class="min-h-screen flex items-center justify-center px-8"
+      data-section="moment-5"
+    >
+      <p
+        class="font-serif text-3xl md:text-5xl lg:text-6xl font-medium headline text-center max-w-4xl leading-snug moment"
+      >
+        Knowledge stays<br />even when people move on.
       </p>
     </section>
 
-    <section class="min-h-screen flex items-center justify-center px-8" data-section="moment-6">
-      <p class="font-serif text-3xl md:text-5xl lg:text-6xl font-medium headline text-center max-w-4xl leading-snug moment">
-        One screen. What matters.<br>
+    <section
+      class="min-h-screen flex items-center justify-center px-8"
+      data-section="moment-6"
+    >
+      <p
+        class="font-serif text-3xl md:text-5xl lg:text-6xl font-medium headline text-center max-w-4xl leading-snug moment"
+      >
+        One screen. What matters.<br />
         <span class="text-gold-warm">Right now.</span>
       </p>
     </section>
@@ -255,9 +383,14 @@
     <!-- ==================== -->
     <!-- PROOF: Before how    -->
     <!-- ==================== -->
-    <section class="min-h-[80vh] flex items-center justify-center px-8 py-32" data-section="proof">
+    <section
+      class="min-h-[80vh] flex items-center justify-center px-8 py-32"
+      data-section="proof"
+    >
       <div class="max-w-3xl mx-auto text-center">
-        <blockquote class="font-serif text-5xl md:text-7xl font-semibold headline mb-6 reveal">
+        <blockquote
+          class="font-serif text-5xl md:text-7xl font-semibold headline mb-6 reveal"
+        >
           "Just wow."
         </blockquote>
         <p class="text-sm text-ink-faint mb-16 reveal">
@@ -266,13 +399,14 @@
         <div class="space-y-6 text-lg text-ink-light leading-relaxed text-left">
           <p class="reveal">
             Steve runs IT for a half-billion-dollar company stitched together
-            from eight acquisitions. Eight systems. Eight definitions of the same
-            customer. One overwhelmed support team.
+            from eight acquisitions. Eight systems. Eight definitions of the
+            same customer. One overwhelmed support team.
           </p>
           <p class="reveal">
-            He called Abe. She matched part numbers across legacy systems by voice.
-            Cross-referenced inventory across three warehouses. Surfaced service
-            contract impacts. All in real time. No new logins. No new screens.
+            He called Abe. She matched part numbers across legacy systems by
+            voice. Cross-referenced inventory across three warehouses. Surfaced
+            service contract impacts. All in real time. No new logins. No new
+            screens.
           </p>
           <p class="reveal">
             His Customer Service Manager sat down and had twenty ideas in ten
@@ -280,8 +414,8 @@
             could finally see it.
           </p>
           <p class="reveal">
-            Steve sent us 73 recorded customer calls the next day. Not as a test.
-            As a bet. He's in.
+            Steve sent us 73 recorded customer calls the next day. Not as a
+            test. As a bet. He's in.
           </p>
           <p class="reveal text-ink font-medium">
             6,214 parts cross-referenced. 22 error codes resolved. Voice in.
@@ -298,19 +432,21 @@
       <div class="max-w-5xl mx-auto">
         <div class="text-center mb-20">
           <p class="subhead text-xs text-gold mb-4 reveal">How It Works</p>
-          <h2 class="font-serif text-4xl md:text-5xl font-medium headline reveal">
+          <h2
+            class="font-serif text-4xl md:text-5xl font-medium headline reveal"
+          >
             One product. Three ways in.
           </h2>
         </div>
 
         <div class="grid md:grid-cols-3 gap-8">
-
           <div class="trinity-intelligence rounded-2xl p-10 reveal">
             <div class="w-3 h-3 rounded-full bg-gold mb-8"></div>
             <h3 class="font-serif text-2xl font-medium mb-4">Intelligence</h3>
             <p class="text-ink-light leading-relaxed text-sm">
-              Sits between every system you already run. Reads signals. Surfaces meaning.
-              When something changes in one, every connected system knows instantly.
+              Sits between every system you already run. Reads signals. Surfaces
+              meaning. When something changes in one, every connected system
+              knows instantly.
             </p>
           </div>
 
@@ -318,8 +454,9 @@
             <div class="w-3 h-3 rounded-full bg-ink mb-8"></div>
             <h3 class="font-serif text-2xl font-medium mb-4">Experience</h3>
             <p class="text-ink-light leading-relaxed text-sm">
-              One screen for every person in your organization. Not 200 dashboards.
-              Not another tool to learn. Just what matters to you, right now.
+              One screen for every person in your organization. Not 200
+              dashboards. Not another tool to learn. Just what matters to you,
+              right now.
             </p>
           </div>
 
@@ -327,11 +464,10 @@
             <div class="w-3 h-3 rounded-full bg-gold-warm mb-8"></div>
             <h3 class="font-serif text-2xl font-medium mb-4">Connection</h3>
             <p class="text-ink-light leading-relaxed text-sm">
-              Talk to your business and it talks back. Natural voice, real answers,
-              live context. A partner who knows your operation cold.
+              Talk to your business and it talks back. Natural voice, real
+              answers, live context. A partner who knows your operation cold.
             </p>
           </div>
-
         </div>
       </div>
     </section>
@@ -341,9 +477,11 @@
     <!-- ==================== -->
     <section class="py-32 px-8" data-section="shift">
       <div class="max-w-2xl mx-auto text-center">
-        <p class="font-serif text-2xl md:text-3xl font-medium text-ink-light leading-relaxed reveal">
-          We don't replace your systems. We don't replace your people.
-          We connect them. The longer you use it, the smarter it gets about
+        <p
+          class="font-serif text-2xl md:text-3xl font-medium text-ink-light leading-relaxed reveal"
+        >
+          We don't replace your systems. We don't replace your people. We
+          connect them. The longer you use it, the smarter it gets about
           <em class="text-ink">your</em> patterns.
         </p>
       </div>
@@ -354,7 +492,9 @@
     <!-- ==================== -->
     <section id="talk" class="py-32 px-8 bg-ink text-cream" data-section="cta">
       <div class="max-w-3xl mx-auto text-center">
-        <h2 class="font-serif text-5xl md:text-6xl font-semibold headline mb-6 reveal">
+        <h2
+          class="font-serif text-5xl md:text-6xl font-semibold headline mb-6 reveal"
+        >
           Let's talk.
         </h2>
         <p class="text-xl text-cream/60 mb-2 reveal">
@@ -363,15 +503,28 @@
         <p class="text-cream/40 mb-14 reveal">
           30 minutes. Live demo. Your industry. No slides.
         </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal">
-          <a href="mailto:hello@bravetto.com"
-             class="inline-flex items-center gap-3 px-8 py-4 bg-gold text-ink rounded-full font-medium hover:bg-gold-light transition-colors">
+        <div
+          class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal"
+        >
+          <a
+            href="mailto:hello@bravetto.com"
+            class="inline-flex items-center gap-3 px-8 py-4 bg-gold text-ink rounded-full font-medium hover:bg-gold-light transition-colors"
+          >
             hello@bravetto.com
           </a>
-          <a href="/inverse-innovation" class="inline-flex items-center gap-2 px-6 py-4 text-cream/40 hover:text-cream transition-colors text-sm">
+          <a
+            href="/inverse-innovation"
+            class="inline-flex items-center gap-2 px-6 py-4 text-cream/40 hover:text-cream transition-colors text-sm"
+          >
             Explore everything
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M4 10L10 4M10 4H5M10 4V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path
+                d="M4 10L10 4M10 4H5M10 4V9"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
             </svg>
           </a>
         </div>
@@ -380,15 +533,32 @@
 
     <!-- Footer -->
     <footer class="py-12 px-8 bg-ink border-t border-white/5">
-      <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div
+        class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6"
+      >
         <div>
           <p class="font-serif text-lg font-semibold text-cream/80">Bravetto</p>
         </div>
         <div class="flex items-center gap-8 text-xs text-cream/30">
-          <a href="/why-bravetto" class="hover:text-cream/60 transition-colors">Why Bravetto</a>
-          <a href="/inverse-innovation" class="hover:text-cream/60 transition-colors">Explore</a>
-          <a href="https://github.com/bravetto" target="_blank" class="hover:text-cream/60 transition-colors">GitHub</a>
-          <a href="mailto:hello@bravetto.com" class="hover:text-cream/60 transition-colors">Contact</a>
+          <a href="/why-bravetto" class="hover:text-cream/60 transition-colors"
+            >Why Bravetto</a
+          >
+          <a
+            href="/inverse-innovation"
+            class="hover:text-cream/60 transition-colors"
+            >Explore</a
+          >
+          <a
+            href="https://github.com/bravetto"
+            target="_blank"
+            class="hover:text-cream/60 transition-colors"
+            >GitHub</a
+          >
+          <a
+            href="mailto:hello@bravetto.com"
+            class="hover:text-cream/60 transition-colors"
+            >Contact</a
+          >
           <span>2026</span>
         </div>
       </div>
@@ -396,7 +566,11 @@
 
     <!-- Abe Voice -->
     <elevenlabs-convai agent-id="NnIz3T19gUiX1tnxhJqt"></elevenlabs-convai>
-    <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+    <script
+      src="https://elevenlabs.io/convai-widget/index.js"
+      async
+      type="text/javascript"
+    ></script>
 
     <!-- ==================== -->
     <!-- INTERACTION LAYER    -->
@@ -404,18 +578,25 @@
     <script>
       // reveal on intersection
       const observer = new IntersectionObserver(
-        (entries) => entries.forEach((e) => {
-          if (e.isIntersecting) e.target.classList.add("visible");
-        }),
-        { threshold: 0.05, rootMargin: "0px 0px -30px 0px" }
+        (entries) =>
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("visible");
+          }),
+        { threshold: 0.05, rootMargin: "0px 0px -30px 0px" },
       );
-      document.querySelectorAll(".moment, .reveal, .fade-up").forEach((el) => observer.observe(el));
+      document
+        .querySelectorAll(".moment, .reveal, .fade-up")
+        .forEach((el) => observer.observe(el));
 
       // trigger hero elements on load (already in viewport)
       requestAnimationFrame(() => {
-        document.querySelectorAll("[data-section='hero'] .moment, [data-section='hero'] .fade-up").forEach((el, i) => {
-          setTimeout(() => el.classList.add("visible"), 200 + i * 100);
-        });
+        document
+          .querySelectorAll(
+            "[data-section='hero'] .moment, [data-section='hero'] .fade-up",
+          )
+          .forEach((el, i) => {
+            setTimeout(() => el.classList.add("visible"), 200 + i * 100);
+          });
       });
 
       // track which section is active (for canvas)
@@ -429,19 +610,23 @@
       };
 
       const sectionObserver = new IntersectionObserver(
-        (entries) => entries.forEach((e) => {
-          if (e.isIntersecting && e.intersectionRatio > 0.3) {
-            canvasState.section = e.target.dataset.section;
-            const match = canvasState.section.match(/moment-(\d)/);
-            if (match) canvasState.momentIndex = parseInt(match[1]);
-          }
-        }),
-        { threshold: 0.3 }
+        (entries) =>
+          entries.forEach((e) => {
+            if (e.isIntersecting && e.intersectionRatio > 0.3) {
+              canvasState.section = e.target.dataset.section;
+              const match = canvasState.section.match(/moment-(\d)/);
+              if (match) canvasState.momentIndex = parseInt(match[1]);
+            }
+          }),
+        { threshold: 0.3 },
       );
-      document.querySelectorAll("[data-section]").forEach((el) => sectionObserver.observe(el));
+      document
+        .querySelectorAll("[data-section]")
+        .forEach((el) => sectionObserver.observe(el));
 
       window.addEventListener("scroll", () => {
-        canvasState.scroll = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+        canvasState.scroll =
+          window.scrollY / (document.body.scrollHeight - window.innerHeight);
       });
       document.addEventListener("voiceStateChange", (e) => {
         canvasState.voiceActive = e.detail.active;
@@ -479,14 +664,18 @@
           let currentSpawn = 30;
           let isStill = false;
           let stillnessLerp = 0;
-          
+
           // Global reference for DOM interaction
           window.p5sketch = {
-            enterStillness: () => { isStill = true; }
+            enterStillness: () => {
+              isStill = true;
+            },
           };
 
           p.setup = function () {
-            p.createCanvas(p.windowWidth, p.windowHeight).parent("living-canvas");
+            p.createCanvas(p.windowWidth, p.windowHeight).parent(
+              "living-canvas",
+            );
             abe.x = p.width * 0.5;
             abe.y = p.height * 0.5;
           };
@@ -498,7 +687,10 @@
             // ---- section-driven personality ----
             const sec = s.section;
             if (sec === "hero") {
-              targetAlpha = 16; targetSpeed = 0.003; targetRange = 0.15; targetSpawn = 22;
+              targetAlpha = 16;
+              targetSpeed = 0.003;
+              targetRange = 0.15;
+              targetSpawn = 22;
             } else if (sec.startsWith("moment-")) {
               const i = s.momentIndex;
               // each moment gets more alive — visible crescendo
@@ -507,13 +699,25 @@
               targetRange = 0.15 + i * 0.04;
               targetSpawn = 20 - i * 2;
             } else if (sec === "proof") {
-              targetAlpha = 45; targetSpeed = 0.005; targetRange = 0.3; targetSpawn = 10;
+              targetAlpha = 45;
+              targetSpeed = 0.005;
+              targetRange = 0.3;
+              targetSpawn = 10;
             } else if (sec === "trinity") {
-              targetAlpha = 28; targetSpeed = 0.006; targetRange = 0.25; targetSpawn = 14;
+              targetAlpha = 28;
+              targetSpeed = 0.006;
+              targetRange = 0.25;
+              targetSpawn = 14;
             } else if (sec === "shift") {
-              targetAlpha = 22; targetSpeed = 0.004; targetRange = 0.2; targetSpawn = 18;
+              targetAlpha = 22;
+              targetSpeed = 0.004;
+              targetRange = 0.2;
+              targetSpawn = 18;
             } else if (sec === "cta") {
-              targetAlpha = 10; targetSpeed = 0.002; targetRange = 0.1; targetSpawn = 30;
+              targetAlpha = 10;
+              targetSpeed = 0.002;
+              targetRange = 0.1;
+              targetSpawn = 30;
             }
 
             // smooth transitions between states
@@ -527,11 +731,14 @@
             abe.angle += currentSpeed + abe.drift;
 
             const range = p.min(p.width, p.height) * currentRange;
-            abe.tx = p.width * 0.5 + p.cos(abe.angle) * range * (0.9 + p.noise(t * 0.5) * 0.2);
+            abe.tx =
+              p.width * 0.5 +
+              p.cos(abe.angle) * range * (0.9 + p.noise(t * 0.5) * 0.2);
             abe.ty = p.height * 0.5 + p.sin(abe.angle * 0.7) * range * 0.5;
 
             // mouse attraction
-            const mx = s.mouseX * p.width, my = s.mouseY * p.height;
+            const mx = s.mouseX * p.width,
+              my = s.mouseY * p.height;
             const dist = p.dist(abe.x, abe.y, mx, my);
             if (dist < 300) {
               const pull = (1 - dist / 300) * 0.2;
@@ -551,7 +758,12 @@
             // ---- Tinkerbell trails & sparks (hero section only) ----
             if (sec === "hero" && !isStill) {
               // Emit confetti trail
-              trails.push({ x: abe.x, y: abe.y, life: 255, size: p.random(2, 6) });
+              trails.push({
+                x: abe.x,
+                y: abe.y,
+                life: 255,
+                size: p.random(2, 6),
+              });
               // Emit sparkling dust
               if (p.frameCount % 2 === 0) {
                 sparks.push({
@@ -559,31 +771,37 @@
                   y: abe.y,
                   vx: p.random(-2, 2),
                   vy: p.random(-2, 2),
-                  life: 200
+                  life: 200,
                 });
               }
             }
-            
+
             // Update and render trails
             for (let i = trails.length - 1; i >= 0; i--) {
               const tr = trails[i];
               tr.life -= 8;
-              if (tr.life < 0) { trails.splice(i, 1); continue; }
+              if (tr.life < 0) {
+                trails.splice(i, 1);
+                continue;
+              }
               p.fill(GOLD[0], GOLD[1], GOLD[2], tr.life);
               p.ellipse(tr.x, tr.y, tr.size);
             }
-            
+
             // Update and render sparks
             for (let i = sparks.length - 1; i >= 0; i--) {
               const sp = sparks[i];
               sp.x += sp.vx;
               sp.y += sp.vy;
               sp.life -= 5;
-              if (sp.life < 0) { sparks.splice(i, 1); continue; }
+              if (sp.life < 0) {
+                sparks.splice(i, 1);
+                continue;
+              }
               p.fill(CREAM[0], CREAM[1], CREAM[2], sp.life);
               p.ellipse(sp.x, sp.y, 2);
             }
-            
+
             // Handle stillness mode
             if (isStill && sec === "hero") {
               stillnessLerp = p.min(stillnessLerp + 0.01, 1);
@@ -614,7 +832,10 @@
             for (let i = waves.length - 1; i >= 0; i--) {
               const w = waves[i];
               const age = t - w.birth;
-              if (age > 4.5) { waves.splice(i, 1); continue; }
+              if (age > 4.5) {
+                waves.splice(i, 1);
+                continue;
+              }
 
               const alpha = p.map(age, 0, 4.5, currentAlpha, 0) * w.strength;
               const speed = 38 + currentAlpha * 1.5;
@@ -626,7 +847,9 @@
                 p.strokeWeight(0.6 + p.noise(w.birth + n) * 0.4);
                 p.beginShape();
                 for (let a = 0; a <= p.TWO_PI; a += 0.08) {
-                  const wb = p.sin(a * 5 + t * 1.1 + w.wobble) * (2 + currentAlpha * 0.15);
+                  const wb =
+                    p.sin(a * 5 + t * 1.1 + w.wobble) *
+                    (2 + currentAlpha * 0.15);
                   const imp = p.noise(a * 2 + w.birth) * 2.5 - 1.25;
                   const rx = r + wb + imp;
                   p.vertex(w.x + p.cos(a) * rx, w.y + p.sin(a) * rx * 0.5);
@@ -637,24 +860,35 @@
 
             // ---- core presence ----
             p.noStroke();
-            const breathe = p.sin(t * 0.7) * 3 + p.sin(t * 1.2) * 2 + p.noise(t) * 2;
+            const breathe =
+              p.sin(t * 0.7) * 3 + p.sin(t * 1.2) * 2 + p.noise(t) * 2;
             const bulge = 45 + currentAlpha * 3 + breathe;
             for (let i = 4; i > 0; i--) {
               const wb = p.noise(t + i) * 3 - 1.5;
-              p.fill(GOLD[0], GOLD[1], GOLD[2], currentAlpha * 0.4 * (1 - i / 5.5));
+              p.fill(
+                GOLD[0],
+                GOLD[1],
+                GOLD[2],
+                currentAlpha * 0.4 * (1 - i / 5.5),
+              );
               p.ellipse(
-                abe.x + wb, abe.y,
+                abe.x + wb,
+                abe.y,
                 bulge * (i / 4) * 2,
-                bulge * (i / 4) * (0.95 + p.noise(i) * 0.1)
+                bulge * (i / 4) * (0.95 + p.noise(i) * 0.1),
               );
             }
           };
 
-          p.windowResized = function () { p.resizeCanvas(p.windowWidth, p.windowHeight); };
-          p.mouseMoved = function () { s.mouseX = p.mouseX / p.width; s.mouseY = p.mouseY / p.height; };
+          p.windowResized = function () {
+            p.resizeCanvas(p.windowWidth, p.windowHeight);
+          };
+          p.mouseMoved = function () {
+            s.mouseX = p.mouseX / p.width;
+            s.mouseY = p.mouseY / p.height;
+          };
         }, "living-canvas");
       })();
     </script>
-
   </body>
 </html>
