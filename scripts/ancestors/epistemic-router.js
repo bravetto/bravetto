@@ -51,9 +51,8 @@ class EpistemicRouter {
   async validate(query, context = {}) {
     const apiKey = this.getSecret("openai");
     if (!apiKey) {
-      throw new Error(
-        "No Identity Injection found (AbëKEYs missing for OpenAI).",
-      );
+      console.warn("[EPISTEMIC] no openai key available — returning unvalidated");
+      return { validated: false, entropy: 1.0, reason: "no api key" };
     }
 
     const prompt = `

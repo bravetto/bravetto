@@ -9240,7 +9240,11 @@ async function submitInquiry() {
       })
     });
     
-    if (!res.ok) throw new Error('Submission failed');
+    if (!res.ok) {
+      console.warn(`[LEADS] submission returned ${res.status}`);
+      alert('Submission did not go through. Please e-mail mike@bravetto.com.');
+      return;
+    }
 
     closeModal();
     const toast = document.getElementById('toast');
