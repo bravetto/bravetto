@@ -9352,6 +9352,23 @@
         },
       ];
 
+      const DEPLOYED = new Set([
+        'actingschool.ai','agriagent.ai','aicloudagent.ai','aiguardian.ai',
+        'allergytest.ai','analystjob.ai','autismspeaks.ai','automationagent.ai',
+        'automationagents.ai','bankagent.ai','biasagent.ai','biasagents.ai',
+        'brandagents.ai','buymusic.ai','callcenteragents.ai',
+        'chiefexecutiveagent.ai','cloudautomationagent.ai','engineeringjob.ai',
+        'engineeringjobs.ai','gamedesigners.ai','healthfacts.ai',
+        'homeautomationagent.ai','ideaagent.ai','insurancegroup.ai',
+        'jobautomationagent.ai','lawagents.ai','lightworkers.ai',
+        'manufacturingagent.ai','manufacturingagents.ai','medlabs.ai',
+        'phonesalesagent.ai','phonesalesagents.ai','polyamorous.ai',
+        'salesagenthub.ai','salesbotagent.ai','salesbotagents.ai','sardonic.ai',
+        'securestorage.ai','taskautomationagent.ai','tourismagents.ai',
+        'transformationagents.ai','vibecodeher.ai','wellnessagent.ai',
+        'workautomationagent.ai'
+      ]);
+
       let activeFilter = "all";
       let searchQuery = "";
 
@@ -9370,9 +9387,17 @@
 
         grid.innerHTML = data
           .map(
-            (d) => `
-    <div class="domain-card" onclick="openModal('${d.domain}.${d.tld}', '${d.ask}', '${d.appraised}')">
-      <div class="domain-name">${d.domain}<span class="tld">.${d.tld}</span></div>
+            (d) => {
+              const full = `${d.domain}.${d.tld}`;
+              const live = DEPLOYED.has(full);
+              const click = live
+                ? `window.open('https://${full}', '_blank')`
+                : `openModal('${full}', '${d.ask}', '${d.appraised}')`;
+              const ctaText = live ? '&rarr; View live site' : '&rarr; Make an offer';
+              const liveTag = live ? '<span style="color:var(--gold);font-family:DM Mono,monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;margin-left:8px;">LIVE</span>' : '';
+              return `
+    <div class="domain-card" onclick="${click}">
+      <div class="domain-name">${d.domain}<span class="tld">.${d.tld}</span>${liveTag}</div>
       <div class="domain-meta">
         <div class="domain-category">${d.cat}</div>
         <div class="domain-price">
@@ -9380,9 +9405,9 @@
           <div class="price-appraised">Appraised ${d.appraised}</div>
         </div>
       </div>
-      <div class="domain-card-cta">→ Make an offer</div>
-    </div>
-  `,
+      <div class="domain-card-cta">${ctaText}</div>
+    </div>`;
+            },
           )
           .join("");
       }
@@ -9433,6 +9458,9 @@
         document.body.classList.remove("modal-open");
       }
 
+      const SUPABASE_URL = 'https://sacohcutxqoydygzryvu.supabase.co';
+      const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhY29oY3V0eHFveWR5Z3pyeXZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1MDIxMTgsImV4cCI6MjA4NzA3ODExOH0.-UnIGyNFZnzoHKa6vnGbEmtnZJiN2l0wBw41TJvDjDY';
+
       async function submitInquiry() {
         const name = document.getElementById("contact-name").value;
         const email = document.getElementById("contact-email").value;
@@ -9450,14 +9478,18 @@
         btn.textContent = "Sending...";
 
         try {
-          const res = await fetch("/api/leads", {
+          const res = await fetch(SUPABASE_URL + '/rest/v1/leads', {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              "apikey": SUPABASE_ANON,
+              "Authorization": "Bearer " + SUPABASE_ANON,
+              "Prefer": "return=minimal"
+            },
             body: JSON.stringify({
               email,
-              name,
-              source: "domain_vault_inquiry",
-              industry: domainName,
+              name: name || null,
+              domain: domainName,
               message: `Inquiry for ${domainName} (Ask: ${ask})`,
             }),
           });
