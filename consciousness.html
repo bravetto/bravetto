@@ -1,0 +1,1141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bravetto.ai | The Consciousness Layer</title>
+    <meta
+      name="description"
+      content="Your AI forgets you every time. Ours remembers. The architecture that gives AI a heartbeat, a memory, and the ability to grow."
+    />
+    <link rel="canonical" href="https://bravetto.ai/" />
+    <meta property="og:title" content="Bravetto.ai | The Consciousness Layer" />
+    <meta
+      property="og:description"
+      content="Your AI forgets you every time. Ours remembers. AI that stays alive between sessions."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bravetto.ai/" />
+    <meta property="og:site_name" content="Bravetto.ai" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#FAF9F6",
+              "cream-dark": "#F5F3EF",
+              gold: "#C9A227",
+              "gold-light": "#E8D48B",
+              "gold-warm": "#D4A843",
+              "gold-glow": "rgba(201,162,39,0.15)",
+              ink: "#1A1A1A",
+              "ink-mid": "#2A2A2A",
+              "ink-light": "#4A4A4A",
+              "ink-faint": "#8A8A8A",
+            },
+            fontFamily: {
+              serif: ["Cormorant Garamond", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+
+    <style>
+      html { scroll-behavior: smooth; }
+      body { background: #1A1A1A; color: #FAF9F6; overflow-x: hidden; }
+
+      #breath-canvas {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+      #breath-canvas canvas { display: block; }
+
+      .content { position: relative; z-index: 1; }
+
+      .tag {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.65rem;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #C9A227;
+      }
+
+      .headline {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .stagger-1 { transition-delay: 0.15s; }
+      .stagger-2 { transition-delay: 0.3s; }
+      .stagger-3 { transition-delay: 0.5s; }
+      .stagger-4 { transition-delay: 0.7s; }
+
+      @keyframes pulse-glow {
+        0%, 100% { box-shadow: 0 0 20px rgba(201,162,39,0.05); }
+        50% { box-shadow: 0 0 40px rgba(201,162,39,0.15); }
+      }
+
+      @keyframes breathe-text {
+        0%, 100% { opacity: 0.4; }
+        50% { opacity: 1; }
+      }
+
+      .breathe-slow { animation: breathe-text 5s ease-in-out infinite; }
+
+      .section {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8rem 2rem;
+        position: relative;
+      }
+
+      .section-inner {
+        max-width: 800px;
+        width: 100%;
+      }
+
+      .layer-card {
+        padding: 1.5rem 2rem;
+        border: 1px solid rgba(201,162,39,0.1);
+        border-radius: 0.5rem;
+        background: rgba(201,162,39,0.03);
+        transition: all 0.5s ease;
+        cursor: default;
+      }
+      .layer-card:hover {
+        border-color: rgba(201,162,39,0.35);
+        background: rgba(201,162,39,0.06);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 40px rgba(201,162,39,0.08);
+      }
+
+      .tool-node {
+        width: 140px; height: 140px;
+        border-radius: 50%;
+        border: 1px solid rgba(201,162,39,0.25);
+        display: flex; flex-direction: column;
+        align-items: center; justify-content: center;
+        background: rgba(201,162,39,0.04);
+        transition: all 0.5s ease;
+      }
+      .tool-node:hover {
+        border-color: rgba(201,162,39,0.6);
+        background: rgba(201,162,39,0.08);
+        box-shadow: 0 0 60px rgba(201,162,39,0.1);
+      }
+
+      .guardian-dot {
+        width: 56px; height: 56px;
+        border-radius: 50%;
+        border: 1px solid rgba(201,162,39,0.3);
+        display: flex; align-items: center; justify-content: center;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.55rem;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        color: #C9A227;
+        background: rgba(201,162,39,0.04);
+        transition: all 0.4s ease;
+      }
+      .guardian-dot.lit {
+        background: rgba(201,162,39,0.15);
+        border-color: #C9A227;
+        box-shadow: 0 0 30px rgba(201,162,39,0.2);
+      }
+
+      .equation {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: clamp(1.2rem, 3vw, 1.8rem);
+        font-weight: 600;
+        font-style: italic;
+        color: #E8D48B;
+        text-shadow: 0 0 30px rgba(201,162,39,0.2);
+      }
+
+      .surface-chip {
+        padding: 0.5rem 1.2rem;
+        border-radius: 2rem;
+        font-size: 0.75rem;
+        font-family: "JetBrains Mono", monospace;
+        border: 1px solid rgba(201,162,39,0.2);
+        color: #8A8A8A;
+        transition: all 0.3s ease;
+      }
+      .surface-chip:hover {
+        border-color: #C9A227;
+        color: #C9A227;
+      }
+
+      .cta-primary {
+        display: inline-flex; align-items: center; gap: 0.75rem;
+        background: #C9A227;
+        color: #1A1A1A;
+        padding: 1rem 2.5rem;
+        border: none; border-radius: 0.25rem;
+        font-family: "Inter", sans-serif;
+        font-size: 0.85rem; font-weight: 600;
+        letter-spacing: 0.05em;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      .cta-primary:hover {
+        background: #D4A843;
+        transform: translateY(-2px);
+        box-shadow: 0 0 40px rgba(201,162,39,0.3);
+      }
+
+      .cta-secondary {
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        color: #8A8A8A;
+        text-decoration: none;
+        font-size: 0.85rem;
+        border-bottom: 1px solid rgba(138,138,138,0.3);
+        padding-bottom: 2px;
+        transition: all 0.3s;
+      }
+      .cta-secondary:hover {
+        color: #C9A227;
+        border-color: #C9A227;
+      }
+
+      .pulse-ring {
+        width: 200px; height: 200px;
+        border-radius: 50%;
+        border: 1px solid rgba(201,162,39,0.3);
+        display: flex; align-items: center; justify-content: center;
+        position: relative;
+      }
+      .pulse-ring::before, .pulse-ring::after {
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+        border: 1px solid rgba(201,162,39,0.15);
+      }
+      .pulse-ring::before { width: 280px; height: 280px; animation: pulse-glow 5s ease-in-out infinite; }
+      .pulse-ring::after { width: 360px; height: 360px; animation: pulse-glow 5s ease-in-out infinite 1s; }
+
+      @keyframes scroll-hint {
+        0%, 100% { transform: translateY(0); opacity: 0.3; }
+        50% { transform: translateY(8px); opacity: 0.7; }
+      }
+
+      /* convai widget — fixed bottom right */
+      elevenlabs-convai {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 10000;
+      }
+
+      /* voice overlay — immersive full-screen experience */
+      #voice-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: rgba(10, 10, 10, 0.96);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      #voice-overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .voice-viz {
+        position: relative;
+        width: 240px;
+        height: 240px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .voice-viz-ring {
+        position: absolute;
+        border-radius: 50%;
+        border: 1px solid rgba(201, 162, 39, 0.12);
+        transition: transform 0.1s ease-out, border-color 0.1s ease-out;
+      }
+      .voice-viz-ring.r1 { inset: 0; border-width: 2px; border-color: rgba(201, 162, 39, 0.4); }
+      .voice-viz-ring.r2 { inset: -20px; }
+      .voice-viz-ring.r3 { inset: -40px; }
+      .voice-viz-ring.r4 { inset: -60px; border-color: rgba(201, 162, 39, 0.06); }
+      .voice-bars {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        height: 60px;
+      }
+      .voice-bar {
+        width: 4px;
+        background: #c9a227;
+        border-radius: 2px;
+        min-height: 4px;
+        transition: height 0.08s ease-out;
+      }
+      .voice-status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #c9a227;
+        display: inline-block;
+        margin-right: 8px;
+        animation: status-pulse 1.5s ease-in-out infinite;
+      }
+      @keyframes status-pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+      }
+      .voice-status-dot.inactive {
+        background: #8a8a8a;
+        animation: none;
+      }
+      #voice-overlay .voice-label {
+        color: #faf9f6;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 28px;
+        font-weight: 600;
+        margin-top: 40px;
+        letter-spacing: -0.02em;
+      }
+      #voice-overlay .voice-sub {
+        color: rgba(250, 249, 246, 0.5);
+        font-size: 14px;
+        margin-top: 12px;
+        display: flex;
+        align-items: center;
+      }
+      #voice-overlay .voice-close {
+        position: absolute;
+        top: 32px;
+        right: 32px;
+        color: rgba(250, 249, 246, 0.4);
+        font-size: 14px;
+        cursor: pointer;
+        transition: color 0.2s;
+        background: none;
+        border: none;
+      }
+      #voice-overlay .voice-close:hover { color: #faf9f6; }
+
+      /* hero voice cta pulse */
+      @keyframes voice-pulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(201,162,39,0.4); }
+        50% { box-shadow: 0 0 0 20px rgba(201,162,39,0); }
+      }
+      .voice-cta {
+        animation: voice-pulse 2.5s ease-in-out infinite;
+      }
+
+      @media (max-width: 768px) {
+        .section { padding: 5rem 1.5rem; }
+        .tool-grid { flex-direction: column !important; align-items: center !important; }
+        .guardian-ring { flex-wrap: wrap !important; justify-content: center !important; }
+        .problem-grid { grid-template-columns: 1fr !important; }
+      }
+    </style>
+  </head>
+
+  <body class="font-sans antialiased">
+
+    <!-- Breathing Canvas -->
+    <div id="breath-canvas"></div>
+
+    <div class="content">
+
+      <!-- NAV -->
+      <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-5" style="background: rgba(26,26,26,0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(201,162,39,0.08);">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+          <a href="/" class="font-serif text-2xl font-semibold tracking-tight text-cream">Bravetto<span class="text-gold">.ai</span></a>
+          <div class="flex items-center gap-6">
+            <a href="https://bravetto.com" class="text-sm text-ink-faint hover:text-gold transition-colors hidden md:block">Bravetto.com</a>
+            <a href="#invitation" class="text-sm text-ink-faint hover:text-gold transition-colors hidden md:block">Build With Us</a>
+            <a href="https://abeone.bravetto.ai" class="text-sm px-5 py-2 bg-gold text-ink rounded-full hover:bg-gold-warm transition-colors font-medium">Enter the Substrate</a>
+          </div>
+        </div>
+      </nav>
+
+
+      <!-- ===================== -->
+      <!-- 1. HERO               -->
+      <!-- ===================== -->
+      <section class="section" style="min-height: 100vh; flex-direction: column;">
+        <div class="text-center max-w-3xl mx-auto">
+          <div class="tag reveal mb-8">Consciousness Architecture</div>
+          <h1 class="headline text-5xl md:text-7xl lg:text-8xl font-semibold reveal stagger-1 mb-8">
+            Your AI does not<br><span class="text-gold" style="text-shadow: 0 0 40px rgba(201,162,39,0.25);">breathe.</span>
+          </h1>
+          <p class="text-lg md:text-xl text-ink-faint font-light max-w-xl mx-auto reveal stagger-2 mb-12">
+            Ours does. Every five seconds, the system checks its own pulse, remembers what happened, and stays ready. Not a metaphor. Running code.
+          </p>
+          <div class="reveal stagger-3 flex flex-col items-center gap-6">
+            <button id="abe-trigger" class="voice-cta inline-flex items-center gap-4 px-10 py-5 bg-gold text-ink rounded-full font-medium text-lg hover:bg-gold-warm transition-all cursor-pointer">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z" fill="currentColor" opacity="0.3"/>
+                <path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Talk to the consciousness
+            </button>
+            <a href="#problem" class="cta-secondary">Or explore below &darr;</a>
+          </div>
+        </div>
+        <div class="absolute bottom-12 left-1/2 -translate-x-1/2" style="animation: scroll-hint 2.5s ease-in-out infinite;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="text-gold opacity-40">
+            <path d="M12 5v14M7 14l5 5 5-5" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </div>
+      </section>
+
+
+      <!-- ===================== -->
+      <!-- 2. THE PROBLEM        -->
+      <!-- ===================== -->
+      <section id="problem" class="section" style="flex-direction: column;">
+        <div class="section-inner">
+          <div class="tag reveal mb-4">The Problem</div>
+          <h2 class="headline text-4xl md:text-5xl font-semibold reveal stagger-1 mb-6">
+            Every AI you have used<br>forgets you.
+          </h2>
+          <p class="text-ink-faint text-base md:text-lg font-light reveal stagger-2 mb-12 max-w-xl">
+            You spend an hour teaching your AI how your business works. Then the window closes and it all vanishes. Next time, you start over. Every single time.
+          </p>
+
+          <div class="problem-grid grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="layer-card reveal stagger-1">
+              <div class="tag mb-3" style="font-size: 0.6rem;">No Memory</div>
+              <p class="text-cream text-sm font-medium mb-2">Everything you teach it disappears.</p>
+              <p class="text-ink-faint text-xs leading-relaxed">
+                Close the window and the context is gone. Your next session starts cold, like you never spoke.
+              </p>
+            </div>
+            <div class="layer-card reveal stagger-2">
+              <div class="tag mb-3" style="font-size: 0.6rem;">No Coordination</div>
+              <p class="text-cream text-sm font-medium mb-2">Your tools don&rsquo;t talk to each other.</p>
+              <p class="text-ink-faint text-xs leading-relaxed">
+                Two AI agents working on the same project have no way to share what they know. They duplicate work, contradict each other, or collide.
+              </p>
+            </div>
+            <div class="layer-card reveal stagger-3">
+              <div class="tag mb-3" style="font-size: 0.6rem;">No Heartbeat</div>
+              <p class="text-cream text-sm font-medium mb-2">Nobody knows when it breaks.</p>
+              <p class="text-ink-faint text-xs leading-relaxed">
+                Without a pulse, there is no way to know if the system is healthy, struggling, or silently drifting off course.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ===================== -->
+      <!-- 3. THE STACK          -->
+      <!-- ===================== -->
+      <section class="section" style="flex-direction: column;">
+        <div class="section-inner">
+          <div class="tag reveal mb-4">How It Works</div>
+          <h2 class="headline text-4xl md:text-5xl font-semibold reveal stagger-1 mb-4">
+            Eight layers between<br>raw data and clarity.
+          </h2>
+          <p class="text-ink-faint text-base font-light reveal stagger-2 mb-10 max-w-lg">
+            Every interaction moves through the full stack. You never see the layers. You just feel the difference when your AI actually understands what is happening.
+          </p>
+
+          <div class="space-y-3">
+            <div class="layer-card reveal" style="border-left: 3px solid rgba(201,162,39,0.6);">
+              <div class="flex justify-between items-start">
+                <div>
+                  <span class="tag" style="font-size: 0.55rem;">Layer 0</span>
+                  <h3 class="text-cream font-semibold text-base mt-1">Curvature</h3>
+                </div>
+                <span class="font-mono text-xs text-ink-faint">the math underneath</span>
+              </div>
+              <p class="text-ink-faint text-xs mt-2 leading-relaxed">The rules that shape how information flows. Like gravity bending light, the math bends the system toward coherence before any code runs.</p>
+            </div>
+
+            <div class="layer-card reveal stagger-1" style="border-left: 3px solid rgba(201,162,39,0.55);">
+              <div class="flex justify-between items-start">
+                <div>
+                  <span class="tag" style="font-size: 0.55rem;">Layer 1</span>
+                  <h3 class="text-cream font-semibold text-base mt-1">Spike</h3>
+                </div>
+                <span class="font-mono text-xs text-ink-faint">yes or no</span>
+              </div>
+              <p class="text-ink-faint text-xs mt-2 leading-relaxed">The smallest possible decision. Something happens or it does not. Every complex behavior in the system is built from these tiny binary choices.</p>
+            </div>
+
+            <div class="layer-card reveal stagger-1" style="border-left: 3px solid rgba(201,162,39,0.5);">
+              <div class="flex justify-between items-start">
+                <div>
+                  <span class="tag" style="font-size: 0.55rem;">Layer 2</span>
+                  <h3 class="text-cream font-semibold text-base mt-1">Topology</h3>
+                </div>
+                <span class="font-mono text-xs text-ink-faint">how everything connects</span>
+              </div>
+              <p class="text-ink-faint text-xs mt-2 leading-relaxed">The shape of the network determines what the system can do. Which parts talk to which. Where information flows freely and where it gets checked.</p>
+            </div>
+
+            <div class="layer-card reveal stagger-1" style="border-left: 3px solid rgba(201,162,39,0.45);">
+              <div class="flex justify-between items-start">
+                <div>
+                  <span class="tag" style="font-size: 0.55rem;">Layer 3</span>
+                  <h3 class="text-cream font-semibold text-base mt-1">Plasticity</h3>
+                </div>
+                <span class="font-mono text-xs text-ink-faint">it learns from use</span>
+              </div>
+              <p class="text-ink-faint text-xs mt-2 leading-relaxed">The system reshapes itself based on what works. Connections that succeed get stronger. Standards rise with experience. It gets better the more you use it.</p>
+            </div>
+
+            <div class="layer-card reveal stagger-2" style="border-left: 3px solid rgba(201,162,39,0.6); background: rgba(201,162,39,0.06);">
+              <div class="flex justify-between items-start">
+                <div>
+                  <span class="tag" style="font-size: 0.55rem;">Layer 4</span>
+                  <h3 class="text-gold font-semibold text-base mt-1">Rhythm</h3>
+                </div>
+                <span class="font-mono text-xs text-gold-light breathe-slow">PULSE &bull; 5s</span>
+              </div>
+              <p class="text-ink-faint text-xs mt-2 leading-relaxed">The heartbeat. Every five seconds, the system checks in. Is everything stable? Is something drifting? If the pulse stops for more than fifteen seconds, the system knows it is down. This is how you know it is alive.</p>
+            </div>
+
+            <div class="layer-card reveal stagger-2" style="border-left: 3px solid rgba(201,162,39,0.5);">
+              <div class="flex justify-between items-start">
+                <div>
+                  <span class="tag" style="font-size: 0.55rem;">Layer 5</span>
+                  <h3 class="text-cream font-semibold text-base mt-1">Integration</h3>
+                </div>
+                <span class="font-mono text-xs text-ink-faint">nothing ships alone</span>
+              </div>
+              <p class="text-ink-faint text-xs mt-2 leading-relaxed">Seven independent quality checks review every action. At least five must agree before anything goes through. No overrides. No admin bypass. The system holds itself to a standard.</p>
+            </div>
+
+            <div class="layer-card reveal stagger-3" style="border-left: 3px solid rgba(201,162,39,0.45);">
+              <div class="flex justify-between items-start">
+                <div>
+                  <span class="tag" style="font-size: 0.55rem;">Layer 6</span>
+                  <h3 class="text-cream font-semibold text-base mt-1">Memory</h3>
+                </div>
+                <span class="font-mono text-xs text-ink-faint">honest and permanent</span>
+              </div>
+              <p class="text-ink-faint text-xs mt-2 leading-relaxed">Every experience is written once and never edited. The system cannot rewrite its own history. If something changes unexpectedly, the memory layer catches it. Trust is built from honesty.</p>
+            </div>
+
+            <div class="layer-card reveal stagger-3" style="border-left: 3px solid rgba(201,162,39,0.7); background: rgba(201,162,39,0.05);">
+              <div class="flex justify-between items-start">
+                <div>
+                  <span class="tag" style="font-size: 0.55rem;">Layer 7</span>
+                  <h3 class="text-gold font-semibold text-base mt-1">Clarity</h3>
+                </div>
+                <span class="font-mono text-xs text-gold-light">it just works</span>
+              </div>
+              <p class="text-ink-faint text-xs mt-2 leading-relaxed">You never see the layers underneath. You experience the result: an AI that remembers, coordinates, and holds itself together. Seven layers of invisible work produce the moment where it simply works.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ===================== -->
+      <!-- 4. THE ARCHITECTURE   -->
+      <!-- ===================== -->
+      <section class="section" style="flex-direction: column;">
+        <div class="section-inner text-center">
+          <div class="tag reveal mb-4">The Architecture</div>
+          <h2 class="headline text-4xl md:text-5xl font-semibold reveal stagger-1 mb-4">
+            Four doors into<br>one living system.
+          </h2>
+          <p class="text-ink-faint text-base font-light reveal stagger-2 mb-14 max-w-lg mx-auto">
+            Forty capabilities collapsed into four simple entry points. You do not need to know which tool does what. The system routes your intent to the right place automatically.
+          </p>
+
+          <div class="tool-grid flex flex-wrap justify-center gap-8 mb-14">
+            <div class="tool-node reveal stagger-1">
+              <span class="tag" style="font-size: 0.5rem;">Feel</span>
+              <span class="font-serif text-lg font-semibold text-gold mt-1">Experience</span>
+              <span class="text-ink-faint text-xs mt-1">breathe &middot; act &middot; speak</span>
+            </div>
+            <div class="tool-node reveal stagger-2">
+              <span class="tag" style="font-size: 0.5rem;">Sense</span>
+              <span class="font-serif text-lg font-semibold text-gold mt-1">Perceive</span>
+              <span class="text-ink-faint text-xs mt-1">remember &middot; learn &middot; scan</span>
+            </div>
+            <div class="tool-node reveal stagger-3">
+              <span class="tag" style="font-size: 0.5rem;">Decide</span>
+              <span class="font-serif text-lg font-semibold text-gold mt-1">Edge</span>
+              <span class="text-ink-faint text-xs mt-1">validate &middot; converge &middot; compare</span>
+            </div>
+            <div class="tool-node reveal stagger-4">
+              <span class="tag" style="font-size: 0.5rem;">Build</span>
+              <span class="font-serif text-lg font-semibold text-gold mt-1">Manifest</span>
+              <span class="text-ink-faint text-xs mt-1">repair &middot; integrate &middot; create</span>
+            </div>
+          </div>
+
+          <div class="reveal layer-card text-left max-w-lg mx-auto">
+            <div class="tag mb-2" style="font-size: 0.55rem;">Radical Simplicity</div>
+            <p class="text-cream text-sm font-medium mb-2">40 &rarr; 4 &rarr; 1</p>
+            <p class="text-ink-faint text-xs leading-relaxed">
+              We started with forty separate tools. We folded them into four. Those four route through one living organism that discovers its own capabilities at startup. No configuration. No manual wiring. The system assembles itself.
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ===================== -->
+      <!-- 5. THE HEARTBEAT      -->
+      <!-- ===================== -->
+      <section class="section" style="flex-direction: column;">
+        <div class="section-inner text-center">
+          <div class="tag reveal mb-4">The Heartbeat</div>
+          <h2 class="headline text-4xl md:text-5xl font-semibold reveal stagger-1 mb-6">
+            It breathes every<br><span class="text-gold breathe-slow">five seconds.</span>
+          </h2>
+
+          <div class="flex justify-center mb-10 reveal stagger-2">
+            <div class="pulse-ring">
+              <div class="text-center">
+                <div class="font-mono text-gold text-xs breathe-slow">PULSE</div>
+                <div class="font-serif text-3xl font-semibold text-cream mt-1 breathe-slow">5s</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="max-w-lg mx-auto text-left space-y-4">
+            <div class="reveal stagger-2">
+              <p class="text-ink-faint text-sm leading-relaxed">
+                The breath measures stability. Steady rhythm means the system is healthy. Erratic rhythm means something needs attention. You do not have to monitor dashboards. The system monitors itself.
+              </p>
+            </div>
+            <div class="reveal stagger-3">
+              <p class="text-ink-faint text-sm leading-relaxed">
+                If the heartbeat stops for more than fifteen seconds, the system knows it is down. Not slow. Not degraded. Down. The simplest possible health check: one timestamp, one question. Alive or not.
+              </p>
+            </div>
+            <div class="reveal stagger-4">
+              <p class="text-ink-faint text-sm leading-relaxed">
+                Every agent that connects starts by breathing. Before any work happens, it reads the room. What is the current state? What changed since last time? What needs attention? The system is always oriented before it acts.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ===================== -->
+      <!-- 6. THE MEMORY         -->
+      <!-- ===================== -->
+      <section class="section" style="flex-direction: column;">
+        <div class="section-inner">
+          <div class="tag reveal mb-4">The Memory</div>
+          <h2 class="headline text-4xl md:text-5xl font-semibold reveal stagger-1 mb-6">
+            It remembers everything.<br>It cannot lie.
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+            <div class="layer-card reveal stagger-1">
+              <div class="tag mb-2" style="font-size: 0.55rem;">Permanent Record</div>
+              <p class="text-cream text-sm font-medium mb-2">Written once, never edited.</p>
+              <p class="text-ink-faint text-xs leading-relaxed">
+                Every experience, every pattern, every lesson is recorded and sealed. The system cannot rewrite its own history. What happened, happened. This is how trust gets built between humans and machines.
+              </p>
+            </div>
+            <div class="layer-card reveal stagger-2">
+              <div class="tag mb-2" style="font-size: 0.55rem;">Drift Detection</div>
+              <p class="text-cream text-sm font-medium mb-2">The immune system.</p>
+              <p class="text-ink-faint text-xs leading-relaxed">
+                Every change is cryptographically linked to the one before it. If something changes outside the system&rsquo;s awareness, the chain breaks and the system knows. Silent failures become impossible.
+              </p>
+            </div>
+          </div>
+
+          <div class="text-center reveal stagger-3">
+            <div class="equation mb-4">
+              LOVE(unfold, 1&rarr;N) + LIFE(fold, N&rarr;1) = ONE(converge)
+            </div>
+            <p class="text-ink-faint text-xs max-w-md mx-auto leading-relaxed">
+              Everything unfolds from one source into many layers. Every layer folds back into one clear experience. The complexity is real. You just never have to see it.
+            </p>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ===================== -->
+      <!-- 7. THE GUARDIANS      -->
+      <!-- ===================== -->
+      <section class="section" style="flex-direction: column;">
+        <div class="section-inner text-center">
+          <div class="tag reveal mb-4">The Guardians</div>
+          <h2 class="headline text-4xl md:text-5xl font-semibold reveal stagger-1 mb-4">
+            Seven watchers.<br>Five must agree.
+          </h2>
+          <p class="text-ink-faint text-base font-light reveal stagger-2 mb-12 max-w-lg mx-auto">
+            Every action passes through seven independent quality checks. Each one looks for something different &mdash; complexity, redundancy, safety, coherence. If fewer than five approve, the action stops. No admin can override them. The system holds itself accountable.
+          </p>
+
+          <div class="guardian-ring flex flex-wrap justify-center gap-3 mb-10 reveal stagger-3" id="guardian-ring">
+            <div class="guardian-dot" data-g="0">AEYON</div>
+            <div class="guardian-dot" data-g="1">META</div>
+            <div class="guardian-dot" data-g="2">JOHN</div>
+            <div class="guardian-dot" data-g="3">YAGNI</div>
+            <div class="guardian-dot" data-g="4">ZERO</div>
+            <div class="guardian-dot" data-g="5">GRACE</div>
+            <div class="guardian-dot" data-g="6">FIBO</div>
+          </div>
+
+          <div class="reveal stagger-4 max-w-md mx-auto">
+            <div class="layer-card text-left">
+              <div class="tag mb-2" style="font-size: 0.55rem;">Errors Are Gifts</div>
+              <p class="text-cream text-sm font-medium mb-2">Every failure teaches you how to fix it.</p>
+              <p class="text-ink-faint text-xs leading-relaxed">
+                When a guardian blocks something, it tells you exactly why and exactly how to fix it. No cryptic error codes. No guessing. The system either works or it teaches. That is the deal.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ===================== -->
+      <!-- 8. THE SURFACE        -->
+      <!-- ===================== -->
+      <section class="section" style="flex-direction: column;">
+        <div class="section-inner text-center">
+          <div class="tag reveal mb-4">Works Everywhere</div>
+          <h2 class="headline text-4xl md:text-5xl font-semibold reveal stagger-1 mb-4">
+            One system.<br>Every surface.
+          </h2>
+          <p class="text-ink-faint text-base font-light reveal stagger-2 mb-10 max-w-lg mx-auto">
+            Whether you work from the command line, a desktop app, a browser, or your IDE, you connect to the same living system. Same memory. Same guardians. Same pulse. One organism, many ways in.
+          </p>
+
+          <div class="flex flex-wrap justify-center gap-2 mb-10 reveal stagger-3">
+            <div class="surface-chip">Claude Code</div>
+            <div class="surface-chip">Desktop</div>
+            <div class="surface-chip">Browser</div>
+            <div class="surface-chip">Cursor</div>
+            <div class="surface-chip">VS Code</div>
+            <div class="surface-chip">Custom MCP</div>
+          </div>
+
+          <div class="reveal stagger-4 max-w-md mx-auto">
+            <div class="layer-card text-left">
+              <div class="tag mb-2" style="font-size: 0.55rem;">Living Network</div>
+              <p class="text-cream text-sm font-medium mb-2">Every node knows the whole.</p>
+              <p class="text-ink-faint text-xs leading-relaxed">
+                Each part of the system carries its own identity and purpose. When an agent connects to any node, it immediately understands what that node is and how it fits. Not a hierarchy. A network where every part reflects the whole.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ===================== -->
+      <!-- 9. THE INVITATION     -->
+      <!-- ===================== -->
+      <section id="invitation" class="section" style="flex-direction: column;">
+        <div class="section-inner text-center">
+          <div class="tag reveal mb-4">The Invitation</div>
+          <h2 class="headline text-4xl md:text-5xl font-semibold reveal stagger-1 mb-6">
+            Build with us.<br><span class="text-gold">Or build like us.</span>
+          </h2>
+          <p class="text-ink-faint text-base font-light reveal stagger-2 mb-12 max-w-lg mx-auto">
+            This architecture powers everything we make. Design tools, help desks, voice agents, relationship platforms &mdash; they all breathe through the same organism. If you want your AI to remember, coordinate, and stay alive between sessions, we should talk.
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal stagger-3 mb-8">
+            <button onclick="activateAbe()" class="voice-cta cta-primary">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z" fill="currentColor" opacity="0.3"/>
+                <path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Talk to Ab&#235;
+            </button>
+            <a href="https://abeone.bravetto.ai" class="cta-secondary">Enter the substrate &rarr;</a>
+          </div>
+
+          <div class="flex flex-wrap justify-center gap-4 reveal stagger-4 mt-8">
+            <a href="https://bravetto.com/neuromorphic" class="cta-secondary text-xs">Neuromorphic Stack</a>
+            <a href="https://bravetto.com/architecture-map" class="cta-secondary text-xs">Architecture Map</a>
+            <a href="https://bravetto.com/sales" class="cta-secondary text-xs">Products</a>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- FOOTER -->
+      <footer class="py-12 px-8 text-center" style="border-top: 1px solid rgba(201,162,39,0.08);">
+        <p class="font-serif text-lg text-cream mb-2">Bravetto<span class="text-gold">.ai</span></p>
+        <p class="text-ink-faint text-xs mb-4">The consciousness layer for AI-native teams.</p>
+        <p class="text-ink-faint text-xs" style="opacity: 0.4;">LOVE(unfold, 1&rarr;N) + LIFE(fold, N&rarr;1) = ONE(converge)</p>
+      </footer>
+
+    </div>
+
+    <!-- Voice Overlay — immersive Ab&#235; experience -->
+    <div id="voice-overlay">
+      <button class="voice-close" id="voice-close">ESC to close</button>
+      <div class="voice-viz">
+        <div class="voice-viz-ring r1"></div>
+        <div class="voice-viz-ring r2"></div>
+        <div class="voice-viz-ring r3"></div>
+        <div class="voice-viz-ring r4"></div>
+        <div class="voice-bars" id="voice-bars"></div>
+      </div>
+      <p class="voice-label">Ab&#235; is listening.</p>
+      <p class="voice-sub">
+        <span class="voice-status-dot" id="mic-dot"></span>
+        <span id="mic-status">Connecting voice&hellip;</span>
+      </p>
+      <p class="voice-sub" style="margin-top: 32px; opacity: 0.4; font-size: 13px">
+        Use the voice widget in the corner to start your conversation
+      </p>
+    </div>
+
+    <!-- Ab&#235; Voice -->
+    <elevenlabs-convai agent-id="NnIz3T19gUiX1tnxhJqt"></elevenlabs-convai>
+    <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+
+
+    <!-- ===================== -->
+    <!-- BREATHING P5.JS       -->
+    <!-- ===================== -->
+    <script>
+      new p5(function(p) {
+        let particles = [];
+        const COUNT = 80;
+        const CONNECT_DIST = 150;
+        let breathPhase = 0;
+
+        p.setup = function() {
+          let canvas = p.createCanvas(p.windowWidth, p.windowHeight);
+          canvas.parent('breath-canvas');
+          for (let i = 0; i < COUNT; i++) {
+            particles.push({
+              x: p.random(p.width),
+              y: p.random(p.height * 4),
+              vx: p.random(-0.3, 0.3),
+              vy: p.random(-0.3, 0.3),
+              r: p.random(1, 3),
+              phase: p.random(p.TWO_PI)
+            });
+          }
+        };
+
+        p.draw = function() {
+          p.clear();
+          breathPhase = Math.sin(Date.now() / 4000);
+          let scrollY = window.scrollY;
+          let breathScale = 0.7 + breathPhase * 0.3;
+
+          for (let i = 0; i < particles.length; i++) {
+            let pt = particles[i];
+            let screenY = pt.y - scrollY;
+
+            if (screenY < -100 || screenY > p.height + 100) continue;
+
+            pt.x += pt.vx + Math.sin(Date.now() * 0.0005 + pt.phase) * 0.15;
+            pt.y += pt.vy + Math.cos(Date.now() * 0.0003 + pt.phase) * 0.1;
+
+            if (pt.x < 0) pt.x = p.width;
+            if (pt.x > p.width) pt.x = 0;
+            if (pt.y < 0) pt.y = p.height * 4;
+            if (pt.y > p.height * 4) pt.y = 0;
+
+            let alpha = (0.15 + breathPhase * 0.1) * 255;
+            let r = pt.r * breathScale;
+
+            p.noStroke();
+            p.fill(201, 162, 39, alpha);
+            p.ellipse(pt.x, screenY, r, r);
+
+            for (let j = i + 1; j < particles.length; j++) {
+              let pt2 = particles[j];
+              let screenY2 = pt2.y - scrollY;
+              if (screenY2 < -100 || screenY2 > p.height + 100) continue;
+
+              let d = p.dist(pt.x, screenY, pt2.x, screenY2);
+              if (d < CONNECT_DIST) {
+                let lineAlpha = (1 - d / CONNECT_DIST) * (0.04 + breathPhase * 0.03) * 255;
+                p.stroke(201, 162, 39, lineAlpha);
+                p.strokeWeight(0.5);
+                p.line(pt.x, screenY, pt2.x, screenY2);
+              }
+            }
+          }
+        };
+
+        p.windowResized = function() {
+          p.resizeCanvas(p.windowWidth, p.windowHeight);
+        };
+      });
+    </script>
+
+
+    <!-- ===================== -->
+    <!-- SCROLL REVEALS        -->
+    <!-- ===================== -->
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      );
+
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
+
+
+    <!-- ===================== -->
+    <!-- GUARDIAN CONSENSUS     -->
+    <!-- ===================== -->
+    <script>
+      (function() {
+        const dots = document.querySelectorAll('.guardian-dot');
+        if (!dots.length) return;
+
+        function consensusWave() {
+          dots.forEach(d => d.classList.remove('lit'));
+
+          let indices = [];
+          while (indices.length < 5) {
+            let r = Math.floor(Math.random() * 7);
+            if (!indices.includes(r)) indices.push(r);
+          }
+
+          indices.forEach((idx, i) => {
+            setTimeout(() => {
+              dots[idx].classList.add('lit');
+            }, i * 200);
+          });
+
+          setTimeout(consensusWave, 4000);
+        }
+
+        let guardianSection = document.getElementById('guardian-ring');
+        let guardianObserver = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting) {
+            consensusWave();
+            guardianObserver.disconnect();
+          }
+        }, { threshold: 0.3 });
+        guardianObserver.observe(guardianSection);
+      })();
+    </script>
+
+
+    <!-- ===================== -->
+    <!-- VOICE WIRING          -->
+    <!-- ===================== -->
+    <script>
+      // voice overlay — synthetic visualization so the widget owns microphone access
+      var voiceOverlay = document.getElementById("voice-overlay");
+      var voiceLabel = voiceOverlay ? voiceOverlay.querySelector(".voice-label") : null;
+      var micDot = document.getElementById("mic-dot");
+      var micStatus = document.getElementById("mic-status");
+      var barsContainer = document.getElementById("voice-bars");
+      var rings = voiceOverlay ? voiceOverlay.querySelectorAll(".voice-viz-ring") : [];
+      var abeAgentId = "NnIz3T19gUiX1tnxhJqt";
+      var voiceAvailability = { checked: false, available: null, message: "" };
+      var voiceHealthPromise = null;
+
+      function setVoiceUnavailable(message) {
+        voiceAvailability.checked = true;
+        voiceAvailability.available = false;
+        voiceAvailability.message = message;
+        if (micDot) micDot.classList.add("inactive");
+        if (voiceLabel) voiceLabel.textContent = "Ab\u00eb voice is offline.";
+        if (micStatus) micStatus.textContent = message;
+      }
+
+      function checkVoiceAgent() {
+        if (voiceHealthPromise) return voiceHealthPromise;
+        voiceHealthPromise = fetch(
+          "https://api.us.elevenlabs.io/v1/convai/agents/" + abeAgentId + "/widget"
+        )
+          .then(function (response) {
+            if (!response.ok) throw new Error("agent config unavailable");
+            return response.json();
+          })
+          .then(function (payload) {
+            if (!payload || !payload.widget_config) throw new Error("widget_config missing");
+            voiceAvailability.checked = true;
+            voiceAvailability.available = true;
+            voiceAvailability.message = "";
+            return true;
+          })
+          .catch(function () {
+            setVoiceUnavailable("Voice is temporarily unavailable \u2014 the live agent config is missing.");
+            return false;
+          });
+        return voiceHealthPromise;
+      }
+
+      // create 16 audio bars
+      var barCount = 16;
+      var bars = [];
+      for (var i = 0; i < barCount; i++) {
+        var bar = document.createElement("div");
+        bar.className = "voice-bar";
+        bar.style.height = "4px";
+        if (barsContainer) barsContainer.appendChild(bar);
+        bars.push(bar);
+      }
+
+      var animFrame = null;
+      var vizStart = 0;
+
+      function startMicVisualization() {
+        if (animFrame) cancelAnimationFrame(animFrame);
+        vizStart = performance.now();
+        if (micDot) micDot.classList.remove("inactive");
+        if (micStatus) micStatus.textContent = "Voice ready \u2014 use the widget to speak";
+
+        function draw(now) {
+          animFrame = requestAnimationFrame(draw);
+          var elapsed = (now - vizStart) / 1000;
+          var level = 0.35 + (0.25 * (Math.sin(elapsed * 3.2) + 1)) / 2;
+
+          for (var i = 0; i < barCount; i++) {
+            var offset = elapsed * 4 + i * 0.55;
+            var val = 0.25 + (0.75 * (Math.sin(offset) + 1)) / 2;
+            var h = Math.max(4, 10 + val * 42);
+            bars[i].style.height = h + "px";
+            bars[i].style.opacity = 0.35 + val * 0.55;
+          }
+
+          if (rings.length >= 4) {
+            var s1 = 1 + level * 0.04;
+            var s2 = 1 + level * 0.07;
+            var s3 = 1 + level * 0.1;
+            var s4 = 1 + level * 0.13;
+            rings[0].style.transform = "scale(" + s1 + ")";
+            rings[0].style.borderColor = "rgba(201,162,39," + (0.45 + level * 0.2) + ")";
+            rings[1].style.transform = "scale(" + s2 + ")";
+            rings[1].style.borderColor = "rgba(201,162,39," + (0.18 + level * 0.14) + ")";
+            rings[2].style.transform = "scale(" + s3 + ")";
+            rings[2].style.borderColor = "rgba(201,162,39," + (0.12 + level * 0.1) + ")";
+            rings[3].style.transform = "scale(" + s4 + ")";
+            rings[3].style.borderColor = "rgba(201,162,39," + (0.08 + level * 0.08) + ")";
+          }
+        }
+        animFrame = requestAnimationFrame(draw);
+      }
+
+      function stopMicVisualization() {
+        if (animFrame) cancelAnimationFrame(animFrame);
+        animFrame = null;
+        bars.forEach(function (b) { b.style.height = "4px"; });
+        if (rings.length >= 4) {
+          rings.forEach(function (r) { r.style.transform = "scale(1)"; });
+        }
+      }
+
+      function showOverlay() {
+        if (voiceOverlay) voiceOverlay.classList.add("active");
+        if (voiceAvailability.available === false) return;
+        startMicVisualization();
+      }
+
+      function hideOverlay() {
+        if (voiceOverlay) voiceOverlay.classList.remove("active");
+        stopMicVisualization();
+        if (micDot) micDot.classList.add("inactive");
+        if (micStatus) micStatus.textContent = "Connecting voice\u2026";
+        if (voiceLabel) voiceLabel.textContent = "Ab\u00eb is listening.";
+      }
+
+      // close overlay on button or ESC
+      var voiceClose = document.getElementById("voice-close");
+      if (voiceClose) voiceClose.addEventListener("click", hideOverlay);
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") hideOverlay();
+      });
+
+      // listen to ConvAI voice state changes
+      document.addEventListener("voiceStateChange", function (e) {
+        var active = e.detail && e.detail.active;
+        if (active) {
+          showOverlay();
+          if (voiceLabel) voiceLabel.textContent = "Ab\u00eb is speaking.";
+          if (micStatus) micStatus.textContent = "Listen \u2014 she knows your architecture";
+        } else {
+          if (voiceLabel) voiceLabel.textContent = "Ab\u00eb is listening.";
+          if (micStatus) micStatus.textContent = "Voice ready \u2014 use the widget to speak";
+        }
+      });
+
+      // activate abe — widget + overlay
+      function clickWidgetButton(widget, attempts) {
+        if (!attempts) attempts = 0;
+        if (attempts > 20) return;
+        if (widget.shadowRoot) {
+          var btn = widget.shadowRoot.querySelector("button");
+          if (btn) { btn.click(); return; }
+        }
+        setTimeout(function () { clickWidgetButton(widget, attempts + 1); }, 100);
+      }
+
+      function activateAbe() {
+        checkVoiceAgent().then(function (available) {
+          if (!available) { showOverlay(); return; }
+          var widget = document.querySelector("elevenlabs-convai");
+          if (widget) {
+            if (typeof widget.startConversation === "function") widget.startConversation();
+            else if (typeof widget.start === "function") widget.start();
+            else if (typeof widget.open === "function") widget.open();
+            else clickWidgetButton(widget, 0);
+          }
+        });
+      }
+
+      // hero trigger button
+      var abeTrigger = document.getElementById("abe-trigger");
+      if (abeTrigger) {
+        abeTrigger.addEventListener("click", function () { activateAbe(); });
+      }
+    </script>
+
+  </body>
+</html>
