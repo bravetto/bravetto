@@ -176,129 +176,7 @@
         transform: rotate(45deg);
       }
 
-      /* convai widget — fixed so it doesn't push UI around */
-      elevenlabs-convai {
-        position: fixed;
-        bottom: 24px;
-        right: 24px;
-        z-index: 9999;
-      }
-
-      /* voice overlay — immersive Ab\00eb experience */
-      #voice-overlay {
-        position: fixed;
-        inset: 0;
-        z-index: 9999;
-        background: rgba(10, 10, 10, 0.94);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-      #voice-overlay.active {
-        opacity: 1;
-        pointer-events: auto;
-      }
-      /* mic visualizer — concentric rings that respond to audio */
-      .voice-viz {
-        position: relative;
-        width: 240px;
-        height: 240px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .voice-viz-ring {
-        position: absolute;
-        border-radius: 50%;
-        border: 1px solid rgba(201, 162, 39, 0.12);
-        transition:
-          transform 0.1s ease-out,
-          border-color 0.1s ease-out;
-      }
-      .voice-viz-ring.r1 {
-        inset: 0;
-        border-width: 2px;
-        border-color: rgba(201, 162, 39, 0.4);
-      }
-      .voice-viz-ring.r2 {
-        inset: -20px;
-      }
-      .voice-viz-ring.r3 {
-        inset: -40px;
-      }
-      .voice-viz-ring.r4 {
-        inset: -60px;
-        border-color: rgba(201, 162, 39, 0.06);
-      }
-      /* audio bars */
-      .voice-bars {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        height: 60px;
-      }
-      .voice-bar {
-        width: 4px;
-        background: #c9a227;
-        border-radius: 2px;
-        min-height: 4px;
-        transition: height 0.08s ease-out;
-      }
-      .voice-status-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: #c9a227;
-        display: inline-block;
-        margin-right: 8px;
-        animation: status-pulse 1.5s ease-in-out infinite;
-      }
-      @keyframes status-pulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.3;
-        }
-      }
-      .voice-status-dot.inactive {
-        background: #8a8a8a;
-        animation: none;
-      }
-      #voice-overlay .voice-label {
-        color: #faf9f6;
-        font-family: "Cormorant Garamond", Georgia, serif;
-        font-size: 28px;
-        font-weight: 600;
-        margin-top: 40px;
-        letter-spacing: -0.02em;
-      }
-      #voice-overlay .voice-sub {
-        color: rgba(250, 249, 246, 0.5);
-        font-size: 14px;
-        margin-top: 12px;
-        display: flex;
-        align-items: center;
-      }
-      #voice-overlay .voice-close {
-        position: absolute;
-        top: 32px;
-        right: 32px;
-        color: rgba(250, 249, 246, 0.4);
-        font-size: 14px;
-        cursor: pointer;
-        transition: color 0.2s;
-        background: none;
-        border: none;
-      }
-      #voice-overlay .voice-close:hover {
-        color: #faf9f6;
-      }
+      /* voice widget styles injected by widget.js — no page CSS needed */
     </style>
   </head>
 
@@ -1514,36 +1392,8 @@
       </div>
     </footer>
 
-    <!-- Voice Overlay — immersive Ab&#235; experience -->
-    <div id="voice-overlay">
-      <button class="voice-close" id="voice-close">ESC to close</button>
-      <div class="voice-viz">
-        <div class="voice-viz-ring r1"></div>
-        <div class="voice-viz-ring r2"></div>
-        <div class="voice-viz-ring r3"></div>
-        <div class="voice-viz-ring r4"></div>
-        <div class="voice-bars" id="voice-bars"></div>
-      </div>
-      <p class="voice-label">Ab&#235; is listening.</p>
-      <p class="voice-sub">
-        <span class="voice-status-dot" id="mic-dot"></span>
-        <span id="mic-status">Connecting voice&hellip;</span>
-      </p>
-      <p
-        class="voice-sub"
-        style="margin-top: 32px; opacity: 0.4; font-size: 13px"
-      >
-        Use the voice widget in the corner to start your conversation
-      </p>
-    </div>
-
-    <!-- Abe Voice -->
-    <elevenlabs-convai agent-id="NnIz3T19gUiX1tnxhJqt"></elevenlabs-convai>
-    <script
-      src="https://elevenlabs.io/convai-widget/index.js"
-      async
-      type="text/javascript"
-    ></script>
+    <!-- Abe Voice — one script tag, all surfaces, all domains -->
+    <script src="https://voice.bravetto.ai/widget.js" data-persona="bravetto" async></script>
 
     <!-- ========================= -->
     <!-- Interaction Layer          -->
@@ -1625,209 +1475,12 @@
         }
       })();
 
-      // voice overlay — synthetic visualization so the widget owns microphone access
-      var voiceOverlay = document.getElementById("voice-overlay");
-      var voiceLabel = voiceOverlay
-        ? voiceOverlay.querySelector(".voice-label")
-        : null;
-      var micDot = document.getElementById("mic-dot");
-      var micStatus = document.getElementById("mic-status");
-      var barsContainer = document.getElementById("voice-bars");
-      var rings = voiceOverlay
-        ? voiceOverlay.querySelectorAll(".voice-viz-ring")
-        : [];
-      var abeAgentId = "NnIz3T19gUiX1tnxhJqt";
-      var voiceAvailability = {
-        checked: false,
-        available: null,
-        message: "",
-      };
-      var voiceHealthPromise = null;
-
-      function setVoiceUnavailable(message) {
-        voiceAvailability.checked = true;
-        voiceAvailability.available = false;
-        voiceAvailability.message = message;
-        if (micDot) micDot.classList.add("inactive");
-        if (voiceLabel) voiceLabel.textContent = "Ab\u00eb voice is offline.";
-        if (micStatus) micStatus.textContent = message;
-      }
-
-      function checkVoiceAgent() {
-        if (voiceHealthPromise) return voiceHealthPromise;
-
-        voiceHealthPromise = fetch(
-          "https://api.us.elevenlabs.io/v1/convai/agents/" +
-            abeAgentId +
-            "/widget",
-        )
-          .then(function (response) {
-            if (!response.ok) {
-              throw new Error("agent config unavailable");
-            }
-            return response.json();
-          })
-          .then(function (payload) {
-            if (!payload || !payload.widget_config) {
-              throw new Error("widget_config missing");
-            }
-            voiceAvailability.checked = true;
-            voiceAvailability.available = true;
-            voiceAvailability.message = "";
-            return true;
-          })
-          .catch(function () {
-            setVoiceUnavailable(
-              "Voice is temporarily unavailable — the live agent config is missing.",
-            );
-            return false;
-          });
-
-        return voiceHealthPromise;
-      }
-
-      // create 16 audio bars
-      var barCount = 16;
-      var bars = [];
-      for (var i = 0; i < barCount; i++) {
-        var bar = document.createElement("div");
-        bar.className = "voice-bar";
-        bar.style.height = "4px";
-        if (barsContainer) barsContainer.appendChild(bar);
-        bars.push(bar);
-      }
-
-      var animFrame = null;
-      var vizStart = 0;
-
-      function startMicVisualization() {
-        if (animFrame) cancelAnimationFrame(animFrame);
-        vizStart = performance.now();
-        if (micDot) micDot.classList.remove("inactive");
-        if (micStatus)
-          micStatus.textContent = "Voice ready \u2014 use the widget to speak";
-
-        function draw(now) {
-          animFrame = requestAnimationFrame(draw);
-          var elapsed = (now - vizStart) / 1000;
-          var level = 0.35 + (0.25 * (Math.sin(elapsed * 3.2) + 1)) / 2;
-
-          for (var i = 0; i < barCount; i++) {
-            var offset = elapsed * 4 + i * 0.55;
-            var val = 0.25 + (0.75 * (Math.sin(offset) + 1)) / 2;
-            var h = Math.max(4, 10 + val * 42);
-            bars[i].style.height = h + "px";
-            bars[i].style.opacity = 0.35 + val * 0.55;
-          }
-
-          if (rings.length >= 4) {
-            var s1 = 1 + level * 0.04;
-            var s2 = 1 + level * 0.07;
-            var s3 = 1 + level * 0.1;
-            var s4 = 1 + level * 0.13;
-            rings[0].style.transform = "scale(" + s1 + ")";
-            rings[0].style.borderColor =
-              "rgba(201,162,39," + (0.45 + level * 0.2) + ")";
-            rings[1].style.transform = "scale(" + s2 + ")";
-            rings[1].style.borderColor =
-              "rgba(201,162,39," + (0.18 + level * 0.14) + ")";
-            rings[2].style.transform = "scale(" + s3 + ")";
-            rings[2].style.borderColor =
-              "rgba(201,162,39," + (0.12 + level * 0.1) + ")";
-            rings[3].style.transform = "scale(" + s4 + ")";
-            rings[3].style.borderColor =
-              "rgba(201,162,39," + (0.08 + level * 0.08) + ")";
-          }
-        }
-
-        animFrame = requestAnimationFrame(draw);
-      }
-
-      function stopMicVisualization() {
-        if (animFrame) cancelAnimationFrame(animFrame);
-        animFrame = null;
-        bars.forEach(function (b) {
-          b.style.height = "4px";
-        });
-        if (rings.length >= 4) {
-          rings.forEach(function (r) {
-            r.style.transform = "scale(1)";
-          });
-        }
-      }
-
-      function showOverlay() {
-        if (voiceOverlay) voiceOverlay.classList.add("active");
-        if (voiceAvailability.available === false) return;
-        startMicVisualization();
-      }
-      function hideOverlay() {
-        if (voiceOverlay) voiceOverlay.classList.remove("active");
-        stopMicVisualization();
-        if (micDot) micDot.classList.add("inactive");
-        if (micStatus) micStatus.textContent = "Connecting voice\u2026";
-        if (voiceLabel) voiceLabel.textContent = "Ab\u00eb is listening.";
-      }
-
-      // close overlay on button or ESC
-      var voiceClose = document.getElementById("voice-close");
-      if (voiceClose) voiceClose.addEventListener("click", hideOverlay);
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") hideOverlay();
-      });
-
-      // listen to ConvAI voice state changes
-      document.addEventListener("voiceStateChange", function (e) {
-        var active = e.detail && e.detail.active;
-        if (active) {
-          showOverlay();
-          if (voiceLabel) voiceLabel.textContent = "Ab\u00eb is speaking.";
-          if (micStatus)
-            micStatus.textContent = "Listen \u2014 she knows your business";
-        } else {
-          if (voiceLabel) voiceLabel.textContent = "Ab\u00eb is listening.";
-          if (micStatus)
-            micStatus.textContent =
-              "Voice ready \u2014 use the widget to speak";
-        }
-      });
-
-      // abe stage interactions — activate widget + show overlay
-      function clickWidgetButton(widget, attempts) {
-        if (!attempts) attempts = 0;
-        if (attempts > 20) return; // give up after 2 seconds
-        if (widget.shadowRoot) {
-          var btn = widget.shadowRoot.querySelector("button");
-          if (btn) {
-            btn.click();
-            return;
-          }
-        }
-        setTimeout(function () {
-          clickWidgetButton(widget, attempts + 1);
-        }, 100);
-      }
-
+      // voice interactions — wired to widget.js via window.abe_voice
       function activateAbe() {
-        checkVoiceAgent().then(function (available) {
-          if (!available) {
-            showOverlay();
-            return;
-          }
-
-          var widget = document.querySelector("elevenlabs-convai");
-          if (widget) {
-            // try known api methods first, fall back to shadow dom click
-            if (typeof widget.startConversation === "function")
-              widget.startConversation();
-            else if (typeof widget.start === "function") widget.start();
-            else if (typeof widget.open === "function") widget.open();
-            else clickWidgetButton(widget, 0);
-          }
-        });
+        if (window.abe_voice) window.abe_voice.speak();
       }
 
-      // suggestion chips — activate and show overlay
+      // suggestion chips — activate voice
       document.querySelectorAll(".chip").forEach(function (chip) {
         chip.addEventListener("click", function () {
           chip.style.borderColor = "#C9A227";
@@ -1839,9 +1492,7 @@
       // abe trigger button
       var abeTrigger = document.getElementById("abe-trigger");
       if (abeTrigger) {
-        abeTrigger.addEventListener("click", function () {
-          activateAbe();
-        });
+        abeTrigger.addEventListener("click", activateAbe);
       }
 
       // context submit — store context and activate
@@ -1851,13 +1502,11 @@
           var textarea = document.getElementById("business-context");
           var context = textarea ? textarea.value.trim() : "";
           if (context) {
-            contextSubmit.textContent = "Saved. Say it to Ab\u00eb now.";
+            contextSubmit.textContent = "Saved. Hear Ab\u00eb\u2019s take.";
             contextSubmit.classList.remove("bg-ink");
             contextSubmit.classList.add("bg-gold", "text-ink");
             window.__abeContext = context;
-            setTimeout(function () {
-              activateAbe();
-            }, 800);
+            setTimeout(activateAbe, 800);
           }
         });
       }
