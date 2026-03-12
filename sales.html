@@ -70,7 +70,7 @@
       }
       .tag {
         font-family: "JetBrains Mono", monospace;
-        font-size: 10px;
+        font-size: 14px;
         font-weight: 400;
         text-transform: uppercase;
         letter-spacing: 0.15em;
@@ -190,12 +190,12 @@
           <a href="/" class="font-serif text-2xl font-semibold tracking-tight"
             >Bravetto</a
           >
-          <a
-            href="#abe-stage"
-            class="text-sm px-5 py-2.5 bg-ink text-cream rounded-full hover:bg-ink-body transition-colors"
+          <button
+            onclick="activateAbe()"
+            class="text-sm px-5 py-2.5 bg-ink text-cream rounded-full hover:bg-ink-body transition-colors cursor-pointer"
           >
             Talk to Ab&#235;
-          </a>
+          </button>
         </div>
       </div>
       <div
@@ -231,9 +231,9 @@
         >
           Your data already knows the answer. We make sure your people do too.
         </p>
-        <a
-          href="#abe-stage"
-          class="inline-flex items-center gap-3 mt-10 px-8 py-4 bg-gold text-ink rounded-full font-medium text-lg hover:bg-gold-hover transition-colors pulse-gold moment"
+        <button
+          onclick="activateAbe()"
+          class="inline-flex items-center gap-3 mt-10 px-8 py-4 bg-gold text-ink rounded-full font-medium text-lg hover:bg-gold-hover transition-colors pulse-gold moment cursor-pointer"
           style="transition-delay: 0.7s"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -251,7 +251,7 @@
             />
           </svg>
           Talk to Ab&#235;
-        </a>
+        </button>
       </div>
       <div class="absolute bottom-12 z-10 scroll-hint">
         <svg
@@ -329,6 +329,117 @@
           >
             Resolution time
           </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- Section: The Trinity           -->
+    <!-- ============================= -->
+    <section class="py-32 px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-20">
+          <p class="tag mb-4 reveal">How It Works</p>
+          <h2
+            class="font-serif text-4xl md:text-5xl font-medium headline reveal"
+          >
+            One product. Three ways in.
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div
+            class="card p-10 reveal cursor-pointer"
+            onclick="
+              this.querySelector('.trinity-detail').classList.toggle('hidden')
+            "
+          >
+            <div class="w-3 h-3 rounded-full bg-gold mb-8"></div>
+            <h3 class="font-serif text-2xl font-medium mb-4">Intelligence</h3>
+            <p class="text-ink-body leading-relaxed text-sm">
+              Our intelligence sits quietly between the systems you already use.
+              It listens for signals, surfaces meaning, and when something
+              changes in one place, every connected part of your business knows
+              instantly.
+            </p>
+            <div
+              class="trinity-detail hidden mt-6 pt-6 border-t border-cream-border"
+            >
+              <p class="text-ink-body leading-relaxed text-sm">
+                SAP part number changes? Ab&#235; knows in real time which
+                warehouses, service contracts, pending quotes, and field techs
+                are affected &mdash; before anyone opens a ticket.
+              </p>
+              <button
+                class="chip mt-4"
+                data-prompt="Show me how Bravetto connects systems like SAP and Salesforce in real time"
+              >
+                See how it connects
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="card p-10 reveal cursor-pointer"
+            onclick="
+              this.querySelector('.trinity-detail').classList.toggle('hidden')
+            "
+          >
+            <div class="w-3 h-3 rounded-full bg-ink mb-8"></div>
+            <h3 class="font-serif text-2xl font-medium mb-4">Experience</h3>
+            <p class="text-ink-body leading-relaxed text-sm">
+              You&rsquo;ll have one clear screen for every person in your
+              organization. No maze of dashboards. No new system to struggle
+              through. Just what matters to you &mdash; right now.
+            </p>
+            <div
+              class="trinity-detail hidden mt-6 pt-6 border-t border-cream-border"
+            >
+              <p class="text-ink-body leading-relaxed text-sm">
+                Every person gets a desk. What&rsquo;s on it? Only what matters
+                to them right now. The field tech sees parts and procedures. The
+                sales rep sees pipeline and contracts. The CEO sees the
+                business.
+              </p>
+              <button
+                class="chip mt-4"
+                data-prompt="What does a personalized Bravetto desk look like for different roles?"
+              >
+                See a sample desk
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="card p-10 reveal cursor-pointer"
+            onclick="
+              this.querySelector('.trinity-detail').classList.toggle('hidden')
+            "
+          >
+            <div class="w-3 h-3 rounded-full bg-gold-hover mb-8"></div>
+            <h3 class="font-serif text-2xl font-medium mb-4">Connection</h3>
+            <p class="text-ink-body leading-relaxed text-sm">
+              You can talk to your business &mdash; and it talks back. With a
+              natural voice, real answers, and live context. Ab&#235; becomes a
+              partner who knows your operation inside and out.
+            </p>
+            <div
+              class="trinity-detail hidden mt-6 pt-6 border-t border-cream-border"
+            >
+              <p class="text-ink-body leading-relaxed text-sm">
+                Ask Ab&#235; a question out loud. She answers with your data,
+                not the internet&rsquo;s. Cross-reference parts by voice. Get
+                contract details hands-free. Twenty ideas in ten minutes &mdash;
+                that&rsquo;s what happened when Steve&rsquo;s team tried it.
+              </p>
+              <button
+                class="chip mt-4"
+                data-prompt="How does Abe's voice interaction work in practice?"
+              >
+                Hear Ab&#235; in action
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -593,117 +704,6 @@
             6,214 parts cross-referenced. 22 error codes resolved. Voice in.
             Voice out. Running. Now.
           </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================= -->
-    <!-- Section 5: The Trinity         -->
-    <!-- ============================= -->
-    <section class="py-32 px-8">
-      <div class="max-w-5xl mx-auto">
-        <div class="text-center mb-20">
-          <p class="tag mb-4 reveal">How It Works</p>
-          <h2
-            class="font-serif text-4xl md:text-5xl font-medium headline reveal"
-          >
-            One product. Three ways in.
-          </h2>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-8">
-          <div
-            class="card p-10 reveal cursor-pointer"
-            onclick="
-              this.querySelector('.trinity-detail').classList.toggle('hidden')
-            "
-          >
-            <div class="w-3 h-3 rounded-full bg-gold mb-8"></div>
-            <h3 class="font-serif text-2xl font-medium mb-4">Intelligence</h3>
-            <p class="text-ink-body leading-relaxed text-sm">
-              Our intelligence sits quietly between the systems you already use.
-              It listens for signals, surfaces meaning, and when something
-              changes in one place, every connected part of your business knows
-              instantly.
-            </p>
-            <div
-              class="trinity-detail hidden mt-6 pt-6 border-t border-cream-border"
-            >
-              <p class="text-ink-body leading-relaxed text-sm">
-                SAP part number changes? Ab&#235; knows in real time which
-                warehouses, service contracts, pending quotes, and field techs
-                are affected &mdash; before anyone opens a ticket.
-              </p>
-              <button
-                class="chip mt-4"
-                data-prompt="Show me how Bravetto connects systems like SAP and Salesforce in real time"
-              >
-                See how it connects
-              </button>
-            </div>
-          </div>
-
-          <div
-            class="card p-10 reveal cursor-pointer"
-            onclick="
-              this.querySelector('.trinity-detail').classList.toggle('hidden')
-            "
-          >
-            <div class="w-3 h-3 rounded-full bg-ink mb-8"></div>
-            <h3 class="font-serif text-2xl font-medium mb-4">Experience</h3>
-            <p class="text-ink-body leading-relaxed text-sm">
-              You&rsquo;ll have one clear screen for every person in your
-              organization. No maze of dashboards. No new system to struggle
-              through. Just what matters to you &mdash; right now.
-            </p>
-            <div
-              class="trinity-detail hidden mt-6 pt-6 border-t border-cream-border"
-            >
-              <p class="text-ink-body leading-relaxed text-sm">
-                Every person gets a desk. What&rsquo;s on it? Only what matters
-                to them right now. The field tech sees parts and procedures. The
-                sales rep sees pipeline and contracts. The CEO sees the
-                business.
-              </p>
-              <button
-                class="chip mt-4"
-                data-prompt="What does a personalized Bravetto desk look like for different roles?"
-              >
-                See a sample desk
-              </button>
-            </div>
-          </div>
-
-          <div
-            class="card p-10 reveal cursor-pointer"
-            onclick="
-              this.querySelector('.trinity-detail').classList.toggle('hidden')
-            "
-          >
-            <div class="w-3 h-3 rounded-full bg-gold-hover mb-8"></div>
-            <h3 class="font-serif text-2xl font-medium mb-4">Connection</h3>
-            <p class="text-ink-body leading-relaxed text-sm">
-              You can talk to your business &mdash; and it talks back. With a
-              natural voice, real answers, and live context. Ab&#235; becomes a
-              partner who knows your operation inside and out.
-            </p>
-            <div
-              class="trinity-detail hidden mt-6 pt-6 border-t border-cream-border"
-            >
-              <p class="text-ink-body leading-relaxed text-sm">
-                Ask Ab&#235; a question out loud. She answers with your data,
-                not the internet&rsquo;s. Cross-reference parts by voice. Get
-                contract details hands-free. Twenty ideas in ten minutes &mdash;
-                that&rsquo;s what happened when Steve&rsquo;s team tried it.
-              </p>
-              <button
-                class="chip mt-4"
-                data-prompt="How does Abe's voice interaction work in practice?"
-              >
-                Hear Ab&#235; in action
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </section>
