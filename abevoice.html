@@ -259,14 +259,14 @@
             <p class="text-white/60 text-sm">Click to start speaking</p>
           </div>
 
-          <!-- ElevenLabs ConvAI Widget -->
+          <!-- Abe Voice — wired to widget.js -->
           <div class="flex justify-center">
-            <elevenlabs-convai agent-id="NnIz3T19gUiX1tnxhJqt"></elevenlabs-convai>
+            <button onclick="if(window.abe_voice)window.abe_voice.speak()" class="px-6 py-3 bg-[#C9A227] text-[#1A1A1A] rounded-lg font-semibold hover:bg-[#d4ad2e] transition-colors">Speak with Ab&#235;</button>
           </div>
 
           <div class="mt-6 pt-6 border-t border-white/10">
             <p class="text-white/40 text-xs">
-              Powered by ElevenLabs neural voice synthesis
+              Powered by Bravetto
             </p>
           </div>
         </div>
@@ -600,8 +600,8 @@ voice.on('response', (audio) => {
       </div>
     </footer>
 
-    <!-- ElevenLabs ConvAI Widget Script -->
-    <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+    <!-- Abe Voice — one script tag, all surfaces, all domains -->
+    <script src="https://voice.bravetto.ai/widget.js" data-persona="bravetto" async></script>
 
     <!-- Reveal Animation Script -->
     <script>

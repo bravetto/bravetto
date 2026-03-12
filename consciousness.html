@@ -252,14 +252,6 @@
         50% { transform: translateY(8px); opacity: 0.7; }
       }
 
-      /* convai widget — fixed bottom right */
-      elevenlabs-convai {
-        position: fixed;
-        bottom: 24px;
-        right: 24px;
-        z-index: 10000;
-      }
-
       /* voice overlay — immersive full-screen experience */
       #voice-overlay {
         position: fixed;
@@ -828,9 +820,8 @@
       </p>
     </div>
 
-    <!-- Ab&#235; Voice -->
-    <elevenlabs-convai agent-id="NnIz3T19gUiX1tnxhJqt"></elevenlabs-convai>
-    <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+    <!-- Abe Voice — one script tag, all surfaces, all domains -->
+    <script src="https://voice.bravetto.ai/widget.js" data-persona="bravetto" async></script>
 
 
     <!-- ===================== -->
@@ -976,40 +967,12 @@
       var micStatus = document.getElementById("mic-status");
       var barsContainer = document.getElementById("voice-bars");
       var rings = voiceOverlay ? voiceOverlay.querySelectorAll(".voice-viz-ring") : [];
-      var abeAgentId = "NnIz3T19gUiX1tnxhJqt";
-      var voiceAvailability = { checked: false, available: null, message: "" };
-      var voiceHealthPromise = null;
+      // voice availability — wired to widget.js via window.abe_voice
 
       function setVoiceUnavailable(message) {
-        voiceAvailability.checked = true;
-        voiceAvailability.available = false;
-        voiceAvailability.message = message;
         if (micDot) micDot.classList.add("inactive");
         if (voiceLabel) voiceLabel.textContent = "Ab\u00eb voice is offline.";
         if (micStatus) micStatus.textContent = message;
-      }
-
-      function checkVoiceAgent() {
-        if (voiceHealthPromise) return voiceHealthPromise;
-        voiceHealthPromise = fetch(
-          "https://api.us.elevenlabs.io/v1/convai/agents/" + abeAgentId + "/widget"
-        )
-          .then(function (response) {
-            if (!response.ok) throw new Error("agent config unavailable");
-            return response.json();
-          })
-          .then(function (payload) {
-            if (!payload || !payload.widget_config) throw new Error("widget_config missing");
-            voiceAvailability.checked = true;
-            voiceAvailability.available = true;
-            voiceAvailability.message = "";
-            return true;
-          })
-          .catch(function () {
-            setVoiceUnavailable("Voice is temporarily unavailable \u2014 the live agent config is missing.");
-            return false;
-          });
-        return voiceHealthPromise;
       }
 
       // create 16 audio bars
@@ -1093,47 +1056,21 @@
         if (e.key === "Escape") hideOverlay();
       });
 
-      // listen to ConvAI voice state changes
-      document.addEventListener("voiceStateChange", function (e) {
-        var active = e.detail && e.detail.active;
-        if (active) {
-          showOverlay();
-          if (voiceLabel) voiceLabel.textContent = "Ab\u00eb is speaking.";
-          if (micStatus) micStatus.textContent = "Listen \u2014 she knows your architecture";
-        } else {
-          if (voiceLabel) voiceLabel.textContent = "Ab\u00eb is listening.";
-          if (micStatus) micStatus.textContent = "Voice ready \u2014 use the widget to speak";
-        }
-      });
-
-      // activate abe — widget + overlay
-      function clickWidgetButton(widget, attempts) {
-        if (!attempts) attempts = 0;
-        if (attempts > 20) return;
-        if (widget.shadowRoot) {
-          var btn = widget.shadowRoot.querySelector("button");
-          if (btn) { btn.click(); return; }
-        }
-        setTimeout(function () { clickWidgetButton(widget, attempts + 1); }, 100);
-      }
-
+      // voice interactions — wired to widget.js via window.abe_voice
       function activateAbe() {
-        checkVoiceAgent().then(function (available) {
-          if (!available) { showOverlay(); return; }
-          var widget = document.querySelector("elevenlabs-convai");
-          if (widget) {
-            if (typeof widget.startConversation === "function") widget.startConversation();
-            else if (typeof widget.start === "function") widget.start();
-            else if (typeof widget.open === "function") widget.open();
-            else clickWidgetButton(widget, 0);
-          }
-        });
+        if (window.abe_voice) {
+          showOverlay();
+          window.abe_voice.speak();
+        } else {
+          setVoiceUnavailable("Voice widget is loading\u2026");
+          showOverlay();
+        }
       }
 
       // hero trigger button
       var abeTrigger = document.getElementById("abe-trigger");
       if (abeTrigger) {
-        abeTrigger.addEventListener("click", function () { activateAbe(); });
+        abeTrigger.addEventListener("click", activateAbe);
       }
     </script>
 
