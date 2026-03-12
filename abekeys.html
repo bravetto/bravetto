@@ -47,23 +47,42 @@
     </script>
 
     <style>
-      html { scroll-behavior: smooth; }
-      body { background: #FAF9F6; overflow-x: hidden; }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: #faf9f6;
+        overflow-x: hidden;
+      }
 
-      .headline { letter-spacing: -0.02em; line-height: 1.1; }
-      .subhead { letter-spacing: 0.15em; text-transform: uppercase; }
+      .headline {
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+      }
+      .subhead {
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
 
       .reveal {
         opacity: 0;
         transform: translateY(30px);
         transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
       }
-      .reveal.visible { opacity: 1; transform: translateY(0); }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
 
       /* Fingerprint pulse */
       @keyframes fingerprint-pulse {
-        0%, 100% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.4); }
-        50% { box-shadow: 0 0 30px 15px rgba(236, 72, 153, 0.1); }
+        0%,
+        100% {
+          box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.4);
+        }
+        50% {
+          box-shadow: 0 0 30px 15px rgba(236, 72, 153, 0.1);
+        }
       }
 
       .fingerprint-pulse {
@@ -72,9 +91,17 @@
 
       /* Lock to unlock animation */
       @keyframes unlock {
-        0%, 40% { transform: translateY(0); }
-        50% { transform: translateY(-8px) rotate(-15deg); }
-        60%, 100% { transform: translateY(-8px) rotate(-15deg); }
+        0%,
+        40% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px) rotate(-15deg);
+        }
+        60%,
+        100% {
+          transform: translateY(-8px) rotate(-15deg);
+        }
       }
 
       .unlock-animation:hover .lock-shackle {
@@ -84,18 +111,22 @@
       /* Flow cards */
       .flow-card {
         background: white;
-        border: 1px solid rgba(0,0,0,0.06);
+        border: 1px solid rgba(0, 0, 0, 0.06);
         transition: all 0.3s ease;
       }
 
       .flow-card:hover {
         transform: translateY(-4px);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
       }
 
       /* Benefit cards */
       .benefit-card {
-        background: linear-gradient(135deg, rgba(34, 197, 94, 0.05), rgba(34, 197, 94, 0.02));
+        background: linear-gradient(
+          135deg,
+          rgba(34, 197, 94, 0.05),
+          rgba(34, 197, 94, 0.02)
+        );
         border: 1px solid rgba(34, 197, 94, 0.15);
       }
 
@@ -112,20 +143,32 @@
 
       /* Dark sections */
       .dark-section {
-        background: #1A1A1A;
-        color: #FAF9F6;
+        background: #1a1a1a;
+        color: #faf9f6;
       }
     </style>
   </head>
 
   <body class="font-sans text-ink antialiased">
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-cream/80 backdrop-blur-md">
+    <nav
+      class="fixed top-0 left-0 right-0 z-50 px-8 py-6 bg-cream/80 backdrop-blur-md"
+    >
       <div class="max-w-5xl mx-auto flex justify-between items-center">
-        <a href="/" class="font-serif text-2xl font-semibold tracking-tight">Bravetto</a>
+        <a href="/" class="font-serif text-2xl font-semibold tracking-tight"
+          >Bravetto</a
+        >
         <div class="flex items-center gap-6">
-          <a href="/command" class="text-sm text-ink-light hover:text-ink transition-colors">Command</a>
-          <a href="/" class="text-sm text-ink-light hover:text-ink transition-colors">Home</a>
+          <a
+            href="/command"
+            class="text-sm text-ink-light hover:text-ink transition-colors"
+            >Command</a
+          >
+          <a
+            href="/"
+            class="text-sm text-ink-light hover:text-ink transition-colors"
+            >Home</a
+          >
         </div>
       </div>
     </nav>
@@ -135,10 +178,14 @@
       <div class="max-w-5xl mx-auto w-full">
         <div class="grid md:grid-cols-2 gap-16 items-center">
           <div>
-            <p class="subhead text-xs text-bio mb-4 reveal">The Bottleneck Breaker</p>
+            <p class="subhead text-xs text-bio mb-4 reveal">
+              The Bottleneck Breaker
+            </p>
 
-            <h1 class="font-serif text-5xl md:text-6xl font-semibold headline mb-8 reveal">
-              Stop waiting<br/>on IT.
+            <h1
+              class="font-serif text-5xl md:text-6xl font-semibold headline mb-8 reveal"
+            >
+              Stop waiting<br />on IT.
             </h1>
 
             <p class="text-xl text-ink-light leading-relaxed mb-6 reveal">
@@ -148,11 +195,12 @@
 
             <p class="text-lg text-ink-light leading-relaxed mb-8 reveal">
               But there's a ticket. A queue. A tech team that doesn't have time.
-              And credentials scattered across 50 apps that no one wants to touch.
+              And credentials scattered across 50 apps that no one wants to
+              touch.
             </p>
 
             <p class="text-xl text-ink font-medium reveal">
-              What if you could give access yourself—<br/>
+              What if you could give access yourself—<br />
               securely, instantly, with just your fingerprint?
             </p>
           </div>
@@ -160,16 +208,31 @@
           <!-- Fingerprint visual -->
           <div class="flex justify-center reveal">
             <div class="relative">
-              <div class="w-48 h-48 rounded-full bg-gradient-to-br from-bio/20 to-vault/20 flex items-center justify-center fingerprint-pulse">
-                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#EC4899" stroke-width="1.5">
-                  <path d="M12 10v4M7.5 15.5c0-1.5.5-3 1.5-4s2.5-1.5 4-1.5 3 .5 4 1.5 1.5 2.5 1.5 4"/>
-                  <path d="M4.5 16.5c0-3 1-5.5 3-7.5s5-3 8-3 6 1 8 3 3 4.5 3 7.5"/>
-                  <path d="M12 22v-4"/>
-                  <path d="M9 18c0 1 .5 2 1.5 2.5"/>
-                  <path d="M15 18c0 1-.5 2-1.5 2.5"/>
+              <div
+                class="w-48 h-48 rounded-full bg-gradient-to-br from-bio/20 to-vault/20 flex items-center justify-center fingerprint-pulse"
+              >
+                <svg
+                  width="80"
+                  height="80"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#EC4899"
+                  stroke-width="1.5"
+                >
+                  <path
+                    d="M12 10v4M7.5 15.5c0-1.5.5-3 1.5-4s2.5-1.5 4-1.5 3 .5 4 1.5 1.5 2.5 1.5 4"
+                  />
+                  <path
+                    d="M4.5 16.5c0-3 1-5.5 3-7.5s5-3 8-3 6 1 8 3 3 4.5 3 7.5"
+                  />
+                  <path d="M12 22v-4" />
+                  <path d="M9 18c0 1 .5 2 1.5 2.5" />
+                  <path d="M15 18c0 1-.5 2-1.5 2.5" />
                 </svg>
               </div>
-              <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-secure text-white text-xs font-medium px-4 py-2 rounded-full">
+              <div
+                class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 bg-secure text-white text-xs font-medium px-4 py-2 rounded-full"
+              >
                 Touch to Authorize
               </div>
             </div>
@@ -182,8 +245,12 @@
     <section class="py-32 px-8 dark-section">
       <div class="max-w-5xl mx-auto">
         <div class="text-center mb-16">
-          <p class="subhead text-xs text-gold mb-4 reveal">What Changes For You</p>
-          <h2 class="font-serif text-4xl md:text-5xl font-medium headline reveal">
+          <p class="subhead text-xs text-gold mb-4 reveal">
+            What Changes For You
+          </p>
+          <h2
+            class="font-serif text-4xl md:text-5xl font-medium headline reveal"
+          >
             Your problems. Solved.
           </h2>
         </div>
@@ -192,13 +259,17 @@
           <!-- Benefit 1 -->
           <div class="bg-white/5 border border-white/10 rounded-2xl p-8 reveal">
             <div class="text-4xl mb-4">⏱️</div>
-            <h3 class="font-serif text-2xl font-medium mb-4 text-cream">No more tickets. No more waiting.</h3>
+            <h3 class="font-serif text-2xl font-medium mb-4 text-cream">
+              No more tickets. No more waiting.
+            </h3>
             <p class="text-cream/70 leading-relaxed mb-4">
-              New hire needs Salesforce access? <span class="text-secure">Done in 10 seconds.</span>
+              New hire needs Salesforce access?
+              <span class="text-secure">Done in 10 seconds.</span>
               No ticket. No queue. No "we'll get to it next week."
             </p>
             <p class="text-sm text-cream/50">
-              <strong class="text-cream">Before:</strong> 3-5 days average for access requests<br/>
+              <strong class="text-cream">Before:</strong> 3-5 days average for
+              access requests<br />
               <strong class="text-secure">After:</strong> Immediate
             </p>
           </div>
@@ -206,41 +277,51 @@
           <!-- Benefit 2 -->
           <div class="bg-white/5 border border-white/10 rounded-2xl p-8 reveal">
             <div class="text-4xl mb-4">🔐</div>
-            <h3 class="font-serif text-2xl font-medium mb-4 text-cream">Secure without seeing secrets.</h3>
+            <h3 class="font-serif text-2xl font-medium mb-4 text-cream">
+              Secure without seeing secrets.
+            </h3>
             <p class="text-cream/70 leading-relaxed mb-4">
               You authorize the action. You never see the password.
               <span class="text-secure">The AI never sees it either.</span>
               Zero exposure. Zero risk.
             </p>
             <p class="text-sm text-cream/50">
-              <strong class="text-cream">The magic:</strong> Access happens without anyone—human or AI—ever seeing the actual credentials.
+              <strong class="text-cream">The magic:</strong> Access happens
+              without anyone—human or AI—ever seeing the actual credentials.
             </p>
           </div>
 
           <!-- Benefit 3 -->
           <div class="bg-white/5 border border-white/10 rounded-2xl p-8 reveal">
             <div class="text-4xl mb-4">👆</div>
-            <h3 class="font-serif text-2xl font-medium mb-4 text-cream">Your fingerprint = your signature.</h3>
+            <h3 class="font-serif text-2xl font-medium mb-4 text-cream">
+              Your fingerprint = your signature.
+            </h3>
             <p class="text-cream/70 leading-relaxed mb-4">
-              Biometric authentication means <span class="text-secure">you can prove it was you.</span>
+              Biometric authentication means
+              <span class="text-secure">you can prove it was you.</span>
               Full audit trail. Complete accountability. Compliance-ready.
             </p>
             <p class="text-sm text-cream/50">
-              <strong class="text-cream">Non-repudiation:</strong> If your fingerprint authorized it, there's no "that wasn't me."
+              <strong class="text-cream">Non-repudiation:</strong> If your
+              fingerprint authorized it, there's no "that wasn't me."
             </p>
           </div>
 
           <!-- Benefit 4 -->
           <div class="bg-white/5 border border-white/10 rounded-2xl p-8 reveal">
             <div class="text-4xl mb-4">🎯</div>
-            <h3 class="font-serif text-2xl font-medium mb-4 text-cream">IT stays focused on IT things.</h3>
+            <h3 class="font-serif text-2xl font-medium mb-4 text-cream">
+              IT stays focused on IT things.
+            </h3>
             <p class="text-cream/70 leading-relaxed mb-4">
               Your tech team didn't go to school to add users to Marketo.
               <span class="text-secure">Free them for real work.</span>
               Empower the people who know the business.
             </p>
             <p class="text-sm text-cream/50">
-              <strong class="text-cream">The shift:</strong> From IT as bottleneck to IT as enabler.
+              <strong class="text-cream">The shift:</strong> From IT as
+              bottleneck to IT as enabler.
             </p>
           </div>
         </div>
@@ -260,37 +341,47 @@
         <div class="grid md:grid-cols-3 gap-8">
           <!-- Step 1 -->
           <div class="flow-card rounded-2xl p-8 text-center reveal">
-            <div class="w-16 h-16 rounded-full bg-bio/10 mx-auto mb-6 flex items-center justify-center">
+            <div
+              class="w-16 h-16 rounded-full bg-bio/10 mx-auto mb-6 flex items-center justify-center"
+            >
               <span class="text-3xl">👆</span>
             </div>
             <div class="font-mono text-xs text-bio mb-2">STEP 1</div>
             <h3 class="font-serif text-xl font-medium mb-3">Touch</h3>
             <p class="text-ink-light text-sm leading-relaxed">
-              Place your finger on the sensor. Apple Touch ID, Face ID, Windows Hello, Android biometrics—whatever you already use.
+              Place your finger on the sensor. Apple Touch ID, Face ID, Windows
+              Hello, Android biometrics—whatever you already use.
             </p>
           </div>
 
           <!-- Step 2 -->
           <div class="flow-card rounded-2xl p-8 text-center reveal">
-            <div class="w-16 h-16 rounded-full bg-vault/10 mx-auto mb-6 flex items-center justify-center">
+            <div
+              class="w-16 h-16 rounded-full bg-vault/10 mx-auto mb-6 flex items-center justify-center"
+            >
               <span class="text-3xl">🔓</span>
             </div>
             <div class="font-mono text-xs text-vault mb-2">STEP 2</div>
             <h3 class="font-serif text-xl font-medium mb-3">Unlock</h3>
             <p class="text-ink-light text-sm leading-relaxed">
-              AbëKeys validates your biometric against your authorization level. If you're allowed to grant this access, it unlocks.
+              AbëKeys validates your biometric against your authorization level.
+              If you're allowed to grant this access, it unlocks.
             </p>
           </div>
 
           <!-- Step 3 -->
           <div class="flow-card rounded-2xl p-8 text-center reveal">
-            <div class="w-16 h-16 rounded-full bg-secure/10 mx-auto mb-6 flex items-center justify-center">
+            <div
+              class="w-16 h-16 rounded-full bg-secure/10 mx-auto mb-6 flex items-center justify-center"
+            >
               <span class="text-3xl">✅</span>
             </div>
             <div class="font-mono text-xs text-secure mb-2">STEP 3</div>
             <h3 class="font-serif text-xl font-medium mb-3">Done</h3>
             <p class="text-ink-light text-sm leading-relaxed">
-              The action executes. User added to Marketo. Access granted to Salesforce. Invoice sent from QuickBooks. You never saw a password.
+              The action executes. User added to Marketo. Access granted to
+              Salesforce. Invoice sent from QuickBooks. You never saw a
+              password.
             </p>
           </div>
         </div>
@@ -298,9 +389,13 @@
         <!-- Flow diagram -->
         <div class="mt-16 reveal">
           <div class="bg-cream-dark rounded-2xl p-8">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-center">
+            <div
+              class="flex flex-col md:flex-row items-center justify-between gap-4 text-center"
+            >
               <div class="flex-1">
-                <div class="w-12 h-12 rounded-full bg-bio/20 mx-auto mb-2 flex items-center justify-center">
+                <div
+                  class="w-12 h-12 rounded-full bg-bio/20 mx-auto mb-2 flex items-center justify-center"
+                >
                   <span class="text-bio font-bold">You</span>
                 </div>
                 <p class="text-xs text-ink-light">Authorized Human</p>
@@ -309,7 +404,9 @@
               <div class="text-2xl text-gold">→</div>
 
               <div class="flex-1">
-                <div class="w-12 h-12 rounded-full bg-vault/20 mx-auto mb-2 flex items-center justify-center">
+                <div
+                  class="w-12 h-12 rounded-full bg-vault/20 mx-auto mb-2 flex items-center justify-center"
+                >
                   <span class="text-vault font-bold">🔐</span>
                 </div>
                 <p class="text-xs text-ink-light">Encrypted Vault</p>
@@ -318,23 +415,31 @@
               <div class="text-2xl text-gold">→</div>
 
               <div class="flex-1">
-                <div class="w-12 h-12 rounded-full bg-gold/20 mx-auto mb-2 flex items-center justify-center">
+                <div
+                  class="w-12 h-12 rounded-full bg-gold/20 mx-auto mb-2 flex items-center justify-center"
+                >
                   <span class="text-gold font-bold">AI</span>
                 </div>
-                <p class="text-xs text-ink-light">Gets Capability<br/>(Not the Key)</p>
+                <p class="text-xs text-ink-light">
+                  Gets Capability<br />(Not the Key)
+                </p>
               </div>
 
               <div class="text-2xl text-gold">→</div>
 
               <div class="flex-1">
-                <div class="w-12 h-12 rounded-full bg-secure/20 mx-auto mb-2 flex items-center justify-center">
+                <div
+                  class="w-12 h-12 rounded-full bg-secure/20 mx-auto mb-2 flex items-center justify-center"
+                >
                   <span class="text-secure font-bold">✓</span>
                 </div>
                 <p class="text-xs text-ink-light">Action Executes</p>
               </div>
             </div>
 
-            <div class="mt-8 pt-6 border-t border-ink/10 grid grid-cols-3 text-center text-xs">
+            <div
+              class="mt-8 pt-6 border-t border-ink/10 grid grid-cols-3 text-center text-xs"
+            >
               <div>
                 <p class="text-ink font-medium">You see:</p>
                 <p class="text-ink-light">✗ Nothing secret</p>
@@ -367,16 +472,25 @@
           <!-- Scenario 1 -->
           <div class="bg-white rounded-2xl p-8 reveal">
             <div class="flex items-start gap-6">
-              <div class="w-12 h-12 rounded-full bg-bio/10 flex items-center justify-center flex-shrink-0">
+              <div
+                class="w-12 h-12 rounded-full bg-bio/10 flex items-center justify-center flex-shrink-0"
+              >
                 <span class="text-xl">👥</span>
               </div>
               <div>
-                <h3 class="font-serif text-xl font-medium mb-2">New hire onboarding</h3>
+                <h3 class="font-serif text-xl font-medium mb-2">
+                  New hire onboarding
+                </h3>
                 <p class="text-ink-light mb-4">
-                  <strong class="text-ink">The problem:</strong> Sales hired Lisa on Monday. She needs access to Salesforce, Marketo, Slack, Zoom, and the company wiki. IT is backed up. She sits idle for a week.
+                  <strong class="text-ink">The problem:</strong> Sales hired
+                  Lisa on Monday. She needs access to Salesforce, Marketo,
+                  Slack, Zoom, and the company wiki. IT is backed up. She sits
+                  idle for a week.
                 </p>
                 <p class="text-secure">
-                  <strong>With AbëKeys:</strong> Her manager touches their fingerprint. Lisa has access to everything in 60 seconds. She's productive on day one.
+                  <strong>With AbëKeys:</strong> Her manager touches their
+                  fingerprint. Lisa has access to everything in 60 seconds.
+                  She's productive on day one.
                 </p>
               </div>
             </div>
@@ -385,16 +499,25 @@
           <!-- Scenario 2 -->
           <div class="bg-white rounded-2xl p-8 reveal">
             <div class="flex items-start gap-6">
-              <div class="w-12 h-12 rounded-full bg-vault/10 flex items-center justify-center flex-shrink-0">
+              <div
+                class="w-12 h-12 rounded-full bg-vault/10 flex items-center justify-center flex-shrink-0"
+              >
                 <span class="text-xl">🏢</span>
               </div>
               <div>
-                <h3 class="font-serif text-xl font-medium mb-2">Marketing's 50 apps</h3>
+                <h3 class="font-serif text-xl font-medium mb-2">
+                  Marketing's 50 apps
+                </h3>
                 <p class="text-ink-light mb-4">
-                  <strong class="text-ink">The problem:</strong> Marketing owns 50 different tools. They don't have time to manage access. IT doesn't have the credentials. Everyone sends emails. Nothing happens.
+                  <strong class="text-ink">The problem:</strong> Marketing owns
+                  50 different tools. They don't have time to manage access. IT
+                  doesn't have the credentials. Everyone sends emails. Nothing
+                  happens.
                 </p>
                 <p class="text-secure">
-                  <strong>With AbëKeys:</strong> Marketing leads can grant access to their own tools without involving IT. The credentials stay locked. Only the capability travels.
+                  <strong>With AbëKeys:</strong> Marketing leads can grant
+                  access to their own tools without involving IT. The
+                  credentials stay locked. Only the capability travels.
                 </p>
               </div>
             </div>
@@ -403,16 +526,24 @@
           <!-- Scenario 3 -->
           <div class="bg-white rounded-2xl p-8 reveal">
             <div class="flex items-start gap-6">
-              <div class="w-12 h-12 rounded-full bg-secure/10 flex items-center justify-center flex-shrink-0">
+              <div
+                class="w-12 h-12 rounded-full bg-secure/10 flex items-center justify-center flex-shrink-0"
+              >
                 <span class="text-xl">📋</span>
               </div>
               <div>
-                <h3 class="font-serif text-xl font-medium mb-2">Compliance audit</h3>
+                <h3 class="font-serif text-xl font-medium mb-2">
+                  Compliance audit
+                </h3>
                 <p class="text-ink-light mb-4">
-                  <strong class="text-ink">The problem:</strong> Auditor asks "Who granted access to this system and when?" You dig through emails, tickets, Slack messages. You can't prove anything.
+                  <strong class="text-ink">The problem:</strong> Auditor asks
+                  "Who granted access to this system and when?" You dig through
+                  emails, tickets, Slack messages. You can't prove anything.
                 </p>
                 <p class="text-secure">
-                  <strong>With AbëKeys:</strong> Every action has a biometric signature, timestamp, and full context. Pull the report in seconds. Auditor leaves happy.
+                  <strong>With AbëKeys:</strong> Every action has a biometric
+                  signature, timestamp, and full context. Pull the report in
+                  seconds. Auditor leaves happy.
                 </p>
               </div>
             </div>
@@ -421,16 +552,24 @@
           <!-- Scenario 4 -->
           <div class="bg-white rounded-2xl p-8 reveal">
             <div class="flex items-start gap-6">
-              <div class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0">
+              <div
+                class="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center flex-shrink-0"
+              >
                 <span class="text-xl">🔌</span>
               </div>
               <div>
-                <h3 class="font-serif text-xl font-medium mb-2">Legacy system access</h3>
+                <h3 class="font-serif text-xl font-medium mb-2">
+                  Legacy system access
+                </h3>
                 <p class="text-ink-light mb-4">
-                  <strong class="text-ink">The problem:</strong> You have 15-year-old systems with shared passwords on sticky notes. Everyone knows it's wrong. No one knows how to fix it.
+                  <strong class="text-ink">The problem:</strong> You have
+                  15-year-old systems with shared passwords on sticky notes.
+                  Everyone knows it's wrong. No one knows how to fix it.
                 </p>
                 <p class="text-secure">
-                  <strong>With AbëKeys:</strong> Wrap the legacy system in a secure vault. Users authenticate with biometrics. The sticky note password goes in a vault that no human ever opens again.
+                  <strong>With AbëKeys:</strong> Wrap the legacy system in a
+                  secure vault. Users authenticate with biometrics. The sticky
+                  note password goes in a vault that no human ever opens again.
                 </p>
               </div>
             </div>
@@ -455,45 +594,77 @@
         <div class="space-y-8">
           <!-- Security principle 1 -->
           <div class="reveal">
-            <h3 class="font-serif text-2xl font-medium mb-4">Zero-Knowledge Architecture</h3>
+            <h3 class="font-serif text-2xl font-medium mb-4">
+              Zero-Knowledge Architecture
+            </h3>
             <p class="text-ink-light leading-relaxed mb-4">
-              <strong class="text-ink">What it means:</strong> The system can prove you have access without ever revealing the password. It's like a bouncer who checks your ID without writing down your address.
+              <strong class="text-ink">What it means:</strong> The system can
+              prove you have access without ever revealing the password. It's
+              like a bouncer who checks your ID without writing down your
+              address.
             </p>
             <div class="bg-cream-dark rounded-lg p-4 text-sm text-ink-light">
-              <strong class="text-ink">Technical:</strong> Credentials are encrypted at rest with AES-256-GCM. The encryption key is derived from your biometric via scrypt KDF. The AI receives a capability token, not the underlying secret.
+              <strong class="text-ink">Technical:</strong> Credentials are
+              encrypted at rest with AES-256-GCM. The encryption key is derived
+              from your biometric via scrypt KDF. The AI receives a capability
+              token, not the underlying secret.
             </div>
           </div>
 
           <!-- Security principle 2 -->
           <div class="reveal">
-            <h3 class="font-serif text-2xl font-medium mb-4">Double-Blind Encryption</h3>
+            <h3 class="font-serif text-2xl font-medium mb-4">
+              Double-Blind Encryption
+            </h3>
             <p class="text-ink-light leading-relaxed mb-4">
-              <strong class="text-ink">What it means:</strong> The secret is encrypted twice—once going in, once coming out. Even if someone intercepts it mid-flight, they get gibberish. And we can prove they got gibberish.
+              <strong class="text-ink">What it means:</strong> The secret is
+              encrypted twice—once going in, once coming out. Even if someone
+              intercepts it mid-flight, they get gibberish. And we can prove
+              they got gibberish.
             </p>
             <div class="bg-cream-dark rounded-lg p-4 text-sm text-ink-light">
-              <strong class="text-ink">Technical:</strong> Envelope encryption with separate data keys and key-encryption-keys. Transport layer uses TLS 1.3. At rest, credentials are encrypted with per-user keys derived from biometric authentication.
+              <strong class="text-ink">Technical:</strong> Envelope encryption
+              with separate data keys and key-encryption-keys. Transport layer
+              uses TLS 1.3. At rest, credentials are encrypted with per-user
+              keys derived from biometric authentication.
             </div>
           </div>
 
           <!-- Security principle 3 -->
           <div class="reveal">
-            <h3 class="font-serif text-2xl font-medium mb-4">Biometric Non-Repudiation</h3>
+            <h3 class="font-serif text-2xl font-medium mb-4">
+              Biometric Non-Repudiation
+            </h3>
             <p class="text-ink-light leading-relaxed mb-4">
-              <strong class="text-ink">What it means:</strong> Your fingerprint is your signature. If you authorized something, we can prove it was you—and you can't deny it later. This is what auditors and compliance officers need.
+              <strong class="text-ink">What it means:</strong> Your fingerprint
+              is your signature. If you authorized something, we can prove it
+              was you—and you can't deny it later. This is what auditors and
+              compliance officers need.
             </p>
             <div class="bg-cream-dark rounded-lg p-4 text-sm text-ink-light">
-              <strong class="text-ink">Technical:</strong> LAContext (Apple), BiometricPrompt (Android), Windows Hello. Biometric data never leaves the secure enclave. We receive a signed attestation, not your fingerprint.
+              <strong class="text-ink">Technical:</strong> LAContext (Apple),
+              BiometricPrompt (Android), Windows Hello. Biometric data never
+              leaves the secure enclave. We receive a signed attestation, not
+              your fingerprint.
             </div>
           </div>
 
           <!-- Security principle 4 -->
           <div class="reveal">
-            <h3 class="font-serif text-2xl font-medium mb-4">Works With Your Keychain</h3>
+            <h3 class="font-serif text-2xl font-medium mb-4">
+              Works With Your Keychain
+            </h3>
             <p class="text-ink-light leading-relaxed mb-4">
-              <strong class="text-ink">What it means:</strong> Already using Apple Keychain? Google Password Manager? 1Password? Enterprise Vault? AbëKeys integrates. We don't replace your security infrastructure—we enhance it.
+              <strong class="text-ink">What it means:</strong> Already using
+              Apple Keychain? Google Password Manager? 1Password? Enterprise
+              Vault? AbëKeys integrates. We don't replace your security
+              infrastructure—we enhance it.
             </p>
             <div class="bg-cream-dark rounded-lg p-4 text-sm text-ink-light">
-              <strong class="text-ink">Technical:</strong> Native integrations with Keychain Services, Credential Manager API, PKCS#11, and enterprise vaults (HashiCorp, Azure Key Vault, AWS Secrets Manager).
+              <strong class="text-ink">Technical:</strong> Native integrations
+              with Keychain Services, Credential Manager API, PKCS#11, and
+              enterprise vaults (HashiCorp, Azure Key Vault, AWS Secrets
+              Manager).
             </div>
           </div>
         </div>
@@ -505,24 +676,44 @@
             class="w-full flex items-center justify-between p-6 bg-ink text-cream rounded-xl hover:bg-ink-light transition-colors"
           >
             <span class="font-medium">Full Technical Specification</span>
-            <svg id="tech-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="transition-transform">
-              <path d="M6 9l6 6 6-6"/>
+            <svg
+              id="tech-arrow"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              class="transition-transform"
+            >
+              <path d="M6 9l6 6 6-6" />
             </svg>
           </button>
 
-          <div id="tech-details" class="tech-details bg-ink text-cream rounded-b-xl -mt-2">
+          <div
+            id="tech-details"
+            class="tech-details bg-ink text-cream rounded-b-xl -mt-2"
+          >
             <div class="p-6 pt-8 space-y-6 font-mono text-sm">
               <div>
                 <p class="text-gold mb-2">// Encryption</p>
-                <p class="text-cream/70">Algorithm: AES-256-GCM (authenticated encryption)</p>
-                <p class="text-cream/70">Key Derivation: scrypt (N=32768, r=8, p=1)</p>
+                <p class="text-cream/70">
+                  Algorithm: AES-256-GCM (authenticated encryption)
+                </p>
+                <p class="text-cream/70">
+                  Key Derivation: scrypt (N=32768, r=8, p=1)
+                </p>
                 <p class="text-cream/70">Key Length: 256 bits</p>
               </div>
 
               <div>
                 <p class="text-gold mb-2">// Biometric Integration</p>
-                <p class="text-cream/70">Apple: LAContext with kSecAccessControlBiometryCurrentSet</p>
-                <p class="text-cream/70">Android: BiometricPrompt with BIOMETRIC_STRONG</p>
+                <p class="text-cream/70">
+                  Apple: LAContext with kSecAccessControlBiometryCurrentSet
+                </p>
+                <p class="text-cream/70">
+                  Android: BiometricPrompt with BIOMETRIC_STRONG
+                </p>
                 <p class="text-cream/70">Windows: Windows Hello for Business</p>
               </div>
 
@@ -536,7 +727,9 @@
               <div>
                 <p class="text-gold mb-2">// Audit</p>
                 <p class="text-cream/70">Immutable append-only log</p>
-                <p class="text-cream/70">Cryptographic attestation per action</p>
+                <p class="text-cream/70">
+                  Cryptographic attestation per action
+                </p>
                 <p class="text-cream/70">Tamper-evident hash chain</p>
               </div>
 
@@ -544,7 +737,9 @@
                 <p class="text-gold mb-2">// Compliance</p>
                 <p class="text-cream/70">SOC 2 Type II ready</p>
                 <p class="text-cream/70">HIPAA BAA available</p>
-                <p class="text-cream/70">GDPR compliant (no biometric data storage)</p>
+                <p class="text-cream/70">
+                  GDPR compliant (no biometric data storage)
+                </p>
               </div>
             </div>
           </div>
@@ -555,42 +750,58 @@
     <!-- Epistemic Awareness -->
     <section class="py-32 px-8 dark-section">
       <div class="max-w-3xl mx-auto">
-        <p class="subhead text-xs text-gold mb-8 reveal">The Intelligence Layer</p>
+        <p class="subhead text-xs text-gold mb-8 reveal">
+          The Intelligence Layer
+        </p>
 
-        <h2 class="font-serif text-3xl md:text-4xl font-medium headline mb-12 reveal">
-          It's not just secure.<br/>It's aware.
+        <h2
+          class="font-serif text-3xl md:text-4xl font-medium headline mb-12 reveal"
+        >
+          She's not just secure.<br />She's aware.
         </h2>
 
         <div class="space-y-8 text-lg text-cream/80 leading-relaxed">
           <p class="reveal">
-            AbëKeys doesn't just store and unlock credentials. It <em class="text-cream">understands context</em>.
+            AbëKeys doesn't just store and unlock credentials. It
+            <em class="text-cream">understands context</em>.
           </p>
           <p class="reveal">
-            When Lisa's manager grants access, the system knows: Who is Lisa? What team? What role?
-            What's the minimum access she needs? What's the risk profile of this action?
+            When Lisa's manager grants access, the system knows: Who is Lisa?
+            What team? What role? What's the minimum access she needs? What's
+            the risk profile of this action?
           </p>
           <p class="reveal">
-            This is <span class="text-gold">epistemic awareness</span>—the system validates not just that you <em>can</em>
-            do something, but whether you <em>should</em>.
+            This is <span class="text-gold">epistemic awareness</span>—the
+            system validates not just that you <em>can</em> do something, but
+            whether you <em>should</em>.
           </p>
           <p class="reveal text-cream">
-            It's the difference between a dumb lock and a security guard who knows your face,
-            your role, and company policy.
+            It's the difference between a dumb lock and a security guard who
+            knows your face, your role, and company policy.
           </p>
         </div>
 
         <div class="mt-16 grid md:grid-cols-3 gap-6 reveal">
           <div class="p-6 bg-white/5 rounded-xl">
             <p class="text-gold font-mono text-sm mb-2">VALIDATE</p>
-            <p class="text-cream/70 text-sm">Is this person authorized? Is this action appropriate? Is this the right time?</p>
+            <p class="text-cream/70 text-sm">
+              Is this person authorized? Is this action appropriate? Is this the
+              right time?
+            </p>
           </div>
           <div class="p-6 bg-white/5 rounded-xl">
             <p class="text-gold font-mono text-sm mb-2">LEARN</p>
-            <p class="text-cream/70 text-sm">What patterns indicate risk? What's normal for this user? What's anomalous?</p>
+            <p class="text-cream/70 text-sm">
+              What patterns indicate risk? What's normal for this user? What's
+              anomalous?
+            </p>
           </div>
           <div class="p-6 bg-white/5 rounded-xl">
             <p class="text-gold font-mono text-sm mb-2">PROTECT</p>
-            <p class="text-cream/70 text-sm">Flag suspicious patterns. Require step-up authentication. Alert security teams.</p>
+            <p class="text-cream/70 text-sm">
+              Flag suspicious patterns. Require step-up authentication. Alert
+              security teams.
+            </p>
           </div>
         </div>
       </div>
@@ -599,20 +810,33 @@
     <!-- CTA -->
     <section class="py-32 px-8">
       <div class="max-w-3xl mx-auto text-center">
-        <div class="w-24 h-24 rounded-full bg-gradient-to-br from-bio to-vault mx-auto mb-12 flex items-center justify-center reveal fingerprint-pulse">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5">
-            <path d="M12 10v4M7.5 15.5c0-1.5.5-3 1.5-4s2.5-1.5 4-1.5 3 .5 4 1.5 1.5 2.5 1.5 4"/>
-            <path d="M4.5 16.5c0-3 1-5.5 3-7.5s5-3 8-3 6 1 8 3 3 4.5 3 7.5"/>
+        <div
+          class="w-24 h-24 rounded-full bg-gradient-to-br from-bio to-vault mx-auto mb-12 flex items-center justify-center reveal fingerprint-pulse"
+        >
+          <svg
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="white"
+            stroke-width="1.5"
+          >
+            <path
+              d="M12 10v4M7.5 15.5c0-1.5.5-3 1.5-4s2.5-1.5 4-1.5 3 .5 4 1.5 1.5 2.5 1.5 4"
+            />
+            <path d="M4.5 16.5c0-3 1-5.5 3-7.5s5-3 8-3 6 1 8 3 3 4.5 3 7.5" />
           </svg>
         </div>
 
-        <h2 class="font-serif text-4xl md:text-5xl font-medium headline mb-6 reveal">
-          Unlock access.<br/>Without unlocking risk.
+        <h2
+          class="font-serif text-4xl md:text-5xl font-medium headline mb-6 reveal"
+        >
+          Unlock access.<br />Without unlocking risk.
         </h2>
 
         <p class="text-xl text-ink-light mb-12 reveal">
-          Empower your team to move fast—securely.<br/>
-          No more waiting on IT. No more shared passwords.<br/>
+          Empower your team to move fast—securely.<br />
+          No more waiting on IT. No more shared passwords.<br />
           Just your fingerprint and instant access.
         </p>
 
@@ -623,12 +847,21 @@
           >
             <span>Get AbëKeys</span>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path
+                d="M4 12L12 4M12 4H6M12 4V10"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
             </svg>
           </a>
 
           <p class="text-sm text-ink-light">
-            Or call: <a href="tel:+18127865927" class="text-gold hover:underline">812-786-5927</a>
+            Or call:
+            <a href="tel:+18127865927" class="text-gold hover:underline"
+              >812-786-5927</a
+            >
           </p>
         </div>
       </div>
@@ -636,15 +869,26 @@
 
     <!-- Footer -->
     <footer class="py-12 px-8 border-t border-cream-dark">
-      <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div
+        class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6"
+      >
         <div>
           <a href="/" class="font-serif text-xl font-semibold">Bravetto</a>
-          <p class="text-sm text-ink-light mt-1">Consciousness infrastructure for the AI age.</p>
+          <p class="text-sm text-ink-light mt-1">
+            Consciousness infrastructure for the AI age.
+          </p>
         </div>
         <div class="flex items-center gap-6 text-sm text-ink-light">
-          <a href="/command" class="hover:text-ink transition-colors">Command</a>
+          <a href="/command" class="hover:text-ink transition-colors"
+            >Command</a
+          >
           <a href="/abeone" class="hover:text-ink transition-colors">AbëONE</a>
-          <a href="https://github.com/bravetto" target="_blank" class="hover:text-ink transition-colors">GitHub</a>
+          <a
+            href="https://github.com/bravetto"
+            target="_blank"
+            class="hover:text-ink transition-colors"
+            >GitHub</a
+          >
           <span>2026</span>
         </div>
       </div>
@@ -653,19 +897,28 @@
     <!-- Scripts -->
     <script>
       // Scroll reveal
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
-      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(
+            (e) => e.isIntersecting && e.target.classList.add("visible"),
+          );
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
+      );
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
 
       // Tech details toggle
-      const techToggle = document.getElementById('tech-toggle');
-      const techDetails = document.getElementById('tech-details');
-      const techArrow = document.getElementById('tech-arrow');
+      const techToggle = document.getElementById("tech-toggle");
+      const techDetails = document.getElementById("tech-details");
+      const techArrow = document.getElementById("tech-arrow");
 
-      techToggle.addEventListener('click', () => {
-        techDetails.classList.toggle('open');
-        techArrow.style.transform = techDetails.classList.contains('open') ? 'rotate(180deg)' : '';
+      techToggle.addEventListener("click", () => {
+        techDetails.classList.toggle("open");
+        techArrow.style.transform = techDetails.classList.contains("open")
+          ? "rotate(180deg)"
+          : "";
       });
     </script>
   </body>
