@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AbëVOiCE | Talk to Your Business | Bravetto</title>
+    <meta
+      name="description"
+      content="Stop typing. Start talking. AI that listens, understands, and acts—just like talking to your smartest colleague. Voice-first intelligence for humans."
+    />
+    <link rel="canonical" href="https://bravetto.com/abevoice" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#FAF9F6",
+              "cream-dark": "#F5F3EF",
+              gold: "#C9A227",
+              "gold-light": "#E8D48B",
+              ink: "#1A1A1A",
+              "ink-light": "#4A4A4A",
+              voice: "#8B5CF6",
+              "voice-light": "#A78BFA",
+              "voice-dark": "#7C3AED",
+              wave: "#06B6D4",
+              listen: "#EC4899",
+            },
+            fontFamily: {
+              serif: ["Cormorant Garamond", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      html { scroll-behavior: smooth; }
+      body { background: #FAF9F6; overflow-x: hidden; }
+
+      .headline { letter-spacing: -0.02em; line-height: 1.1; }
+      .subhead { letter-spacing: 0.15em; text-transform: uppercase; }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.visible { opacity: 1; transform: translateY(0); }
+
+      /* Sound wave animation */
+      @keyframes wave-pulse {
+        0%, 100% { transform: scaleY(0.3); }
+        50% { transform: scaleY(1); }
+      }
+
+      .wave-bar {
+        animation: wave-pulse 1.2s ease-in-out infinite;
+      }
+      .wave-bar:nth-child(1) { animation-delay: 0s; }
+      .wave-bar:nth-child(2) { animation-delay: 0.1s; }
+      .wave-bar:nth-child(3) { animation-delay: 0.2s; }
+      .wave-bar:nth-child(4) { animation-delay: 0.3s; }
+      .wave-bar:nth-child(5) { animation-delay: 0.2s; }
+      .wave-bar:nth-child(6) { animation-delay: 0.1s; }
+      .wave-bar:nth-child(7) { animation-delay: 0s; }
+
+      /* Listening pulse */
+      @keyframes listen-pulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4); }
+        50% { box-shadow: 0 0 40px 20px rgba(139, 92, 246, 0.15); }
+      }
+
+      .listen-pulse {
+        animation: listen-pulse 2s ease-in-out infinite;
+      }
+
+      /* Flow cards */
+      .flow-card {
+        background: white;
+        border: 1px solid rgba(0,0,0,0.06);
+        transition: all 0.3s ease;
+      }
+
+      .flow-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      }
+
+      /* Benefit cards */
+      .benefit-card {
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(139, 92, 246, 0.02));
+        border: 1px solid rgba(139, 92, 246, 0.15);
+      }
+
+      /* Voice widget container */
+      .voice-widget-container {
+        background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%);
+        border-radius: 24px;
+        padding: 2rem;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+      }
+
+      /* Tech specs collapsible */
+      details summary {
+        cursor: pointer;
+        list-style: none;
+      }
+      details summary::-webkit-details-marker { display: none; }
+      details[open] .chevron { transform: rotate(180deg); }
+      .chevron { transition: transform 0.3s ease; }
+    </style>
+  </head>
+
+  <body class="font-sans text-ink antialiased">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-cream/90 backdrop-blur-md border-b border-ink/5">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="/" class="font-serif text-2xl font-semibold text-ink">Bravetto</a>
+        <div class="flex items-center gap-6">
+          <a href="/abekeys" class="text-sm text-ink-light hover:text-ink transition-colors">AbëKeys</a>
+          <a href="/command" class="text-sm text-ink-light hover:text-ink transition-colors">Command</a>
+          <a href="/how-we-build" class="text-sm text-ink-light hover:text-ink transition-colors">How We Build</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center pt-20 px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <!-- Sound Wave Animation -->
+        <div class="flex items-end justify-center gap-1 h-16 mb-8 reveal">
+          <div class="wave-bar w-1 bg-voice rounded-full" style="height: 100%"></div>
+          <div class="wave-bar w-1 bg-voice-light rounded-full" style="height: 100%"></div>
+          <div class="wave-bar w-1 bg-voice rounded-full" style="height: 100%"></div>
+          <div class="wave-bar w-1 bg-wave rounded-full" style="height: 100%"></div>
+          <div class="wave-bar w-1 bg-voice rounded-full" style="height: 100%"></div>
+          <div class="wave-bar w-1 bg-voice-light rounded-full" style="height: 100%"></div>
+          <div class="wave-bar w-1 bg-voice rounded-full" style="height: 100%"></div>
+        </div>
+
+        <p class="subhead text-voice text-sm font-medium mb-4 reveal">AbëVOiCE</p>
+        <h1 class="headline font-serif text-5xl md:text-7xl text-ink mb-6 reveal">
+          Talk to Your<br />
+          <span class="text-voice">Business</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-ink-light max-w-2xl mx-auto mb-12 reveal font-light">
+          Stop typing. Start talking. AI that listens, understands, and acts—just like talking to your smartest colleague.
+        </p>
+
+        <!-- Listening indicator -->
+        <div class="flex items-center justify-center gap-3 mb-12 reveal">
+          <div class="listen-pulse w-4 h-4 bg-voice rounded-full"></div>
+          <span class="text-voice font-medium">Always listening. Always learning.</span>
+        </div>
+
+        <a href="#try-it" class="inline-flex items-center gap-2 bg-voice text-white px-8 py-4 rounded-full font-medium hover:bg-voice-dark transition-colors reveal">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+          </svg>
+          Try It Now
+        </a>
+      </div>
+    </section>
+
+    <!-- Why Voice Section -->
+    <section class="py-24 px-6 bg-cream-dark">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="subhead text-voice text-xs mb-4 reveal">Why Voice?</p>
+          <h2 class="headline font-serif text-4xl md:text-5xl text-ink reveal">
+            Because Typing is a<br />Bottleneck
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Benefit 1 -->
+          <div class="benefit-card rounded-2xl p-8 reveal">
+            <div class="w-12 h-12 bg-voice/10 rounded-xl flex items-center justify-center mb-6">
+              <svg class="w-6 h-6 text-voice" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h3 class="font-serif text-2xl text-ink mb-3">3x Faster Than Typing</h3>
+            <p class="text-ink-light">
+              Average typing: 40 words per minute. Average speaking: 150 words per minute. You do the math. Your thoughts shouldn't wait for your fingers.
+            </p>
+          </div>
+
+          <!-- Benefit 2 -->
+          <div class="benefit-card rounded-2xl p-8 reveal">
+            <div class="w-12 h-12 bg-voice/10 rounded-xl flex items-center justify-center mb-6">
+              <svg class="w-6 h-6 text-voice" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <h3 class="font-serif text-2xl text-ink mb-3">Natural Conversation</h3>
+            <p class="text-ink-light">
+              No learning curve. No syntax. No special commands. Just talk like you would to a trusted colleague. "Hey, what happened with the Johnson account yesterday?"
+            </p>
+          </div>
+
+          <!-- Benefit 3 -->
+          <div class="benefit-card rounded-2xl p-8 reveal">
+            <div class="w-12 h-12 bg-voice/10 rounded-xl flex items-center justify-center mb-6">
+              <svg class="w-6 h-6 text-voice" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <h3 class="font-serif text-2xl text-ink mb-3">Hands-Free Operations</h3>
+            <p class="text-ink-light">
+              In the lab? In the field? Driving between sites? Your hands are busy, but your voice is free. Get answers, updates, and insights without touching a screen.
+            </p>
+          </div>
+
+          <!-- Benefit 4 -->
+          <div class="benefit-card rounded-2xl p-8 reveal">
+            <div class="w-12 h-12 bg-voice/10 rounded-xl flex items-center justify-center mb-6">
+              <svg class="w-6 h-6 text-voice" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+            </div>
+            <h3 class="font-serif text-2xl text-ink mb-3">Capture Thoughts Instantly</h3>
+            <p class="text-ink-light">
+              That brilliant idea at 2am? Speak it. That insight during lunch? Speak it. Your AI captures, organizes, and connects your thoughts—even when you forget.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Demo Section -->
+    <section id="try-it" class="py-24 px-6 bg-ink">
+      <div class="max-w-4xl mx-auto text-center">
+        <p class="subhead text-voice-light text-xs mb-4 reveal">Try It Yourself</p>
+        <h2 class="headline font-serif text-4xl md:text-5xl text-white mb-6 reveal">
+          Go Ahead. Talk to Me.
+        </h2>
+        <p class="text-xl text-white/70 mb-12 reveal">
+          Click the microphone below and start a conversation. Ask about Bravetto, our services, or just say hello.
+        </p>
+
+        <!-- Voice Widget Container -->
+        <div class="voice-widget-container max-w-md mx-auto reveal">
+          <div class="text-center mb-6">
+            <p class="text-white/60 text-sm">Click to start speaking</p>
+          </div>
+
+          <!-- Abe Voice — wired to widget.js -->
+          <div class="flex justify-center">
+            <button onclick="if(window.abe_voice)window.abe_voice.speak()" class="px-6 py-3 bg-[#C9A227] text-[#1A1A1A] rounded-lg font-semibold hover:bg-[#d4ad2e] transition-colors">Speak with Ab&#235;</button>
+          </div>
+
+          <div class="mt-6 pt-6 border-t border-white/10">
+            <p class="text-white/40 text-xs">
+              Powered by Bravetto
+            </p>
+          </div>
+        </div>
+
+        <p class="text-white/50 text-sm mt-8 reveal">
+          No account needed. No API key required. Just talk.
+        </p>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-24 px-6">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="subhead text-voice text-xs mb-4 reveal">The Flow</p>
+          <h2 class="headline font-serif text-4xl md:text-5xl text-ink reveal">
+            Speak. Understand. Act.
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Step 1 -->
+          <div class="flow-card rounded-2xl p-8 text-center reveal">
+            <div class="w-16 h-16 bg-voice/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-voice" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+              </svg>
+            </div>
+            <div class="text-4xl font-serif text-voice/30 mb-4">01</div>
+            <h3 class="font-serif text-xl text-ink mb-3">You Speak</h3>
+            <p class="text-ink-light text-sm">
+              "What's my calendar look like tomorrow?" "Summarize yesterday's sales calls." "Draft a response to that angry customer."
+            </p>
+          </div>
+
+          <!-- Arrow -->
+          <div class="hidden md:flex items-center justify-center">
+            <svg class="w-8 h-8 text-voice/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="flow-card rounded-2xl p-8 text-center reveal md:col-start-2">
+            <div class="w-16 h-16 bg-wave/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-wave" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+              </svg>
+            </div>
+            <div class="text-4xl font-serif text-wave/30 mb-4">02</div>
+            <h3 class="font-serif text-xl text-ink mb-3">AI Understands</h3>
+            <p class="text-ink-light text-sm">
+              Not just words—intent. Context. Nuance. The AI knows you, your business, your patterns. It gets what you actually mean.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="flow-card rounded-2xl p-8 text-center reveal md:col-start-3 md:row-start-1">
+            <div class="w-16 h-16 bg-listen/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-listen" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div class="text-4xl font-serif text-listen/30 mb-4">03</div>
+            <h3 class="font-serif text-xl text-ink mb-3">It Acts</h3>
+            <p class="text-ink-light text-sm">
+              Answers come back in natural speech. Actions happen. Emails get drafted. Meetings get scheduled. All without touching a keyboard.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Real Scenarios -->
+    <section class="py-24 px-6 bg-cream-dark">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="subhead text-voice text-xs mb-4 reveal">Real Scenarios</p>
+          <h2 class="headline font-serif text-4xl md:text-5xl text-ink reveal">
+            Conversations That<br />Get Things Done
+          </h2>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Scenario 1 -->
+          <div class="bg-white rounded-2xl p-8 reveal">
+            <div class="flex items-start gap-6">
+              <div class="w-12 h-12 bg-voice/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                <span class="text-2xl">🏥</span>
+              </div>
+              <div>
+                <h3 class="font-serif text-xl text-ink mb-2">The Practice Manager</h3>
+                <div class="bg-cream rounded-xl p-4 mb-4">
+                  <p class="text-ink-light italic">"Hey, how many no-shows did we have this week compared to last week?"</p>
+                </div>
+                <p class="text-ink-light text-sm">
+                  <span class="text-voice font-medium">AbëVOiCE:</span> "This week you had 12 no-shows, down from 18 last week. That's a 33% improvement. The new reminder system is working—should I pull the details by provider?"
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scenario 2 -->
+          <div class="bg-white rounded-2xl p-8 reveal">
+            <div class="flex items-start gap-6">
+              <div class="w-12 h-12 bg-wave/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                <span class="text-2xl">💼</span>
+              </div>
+              <div>
+                <h3 class="font-serif text-xl text-ink mb-2">The Executive</h3>
+                <div class="bg-cream rounded-xl p-4 mb-4">
+                  <p class="text-ink-light italic">"Give me the morning brief."</p>
+                </div>
+                <p class="text-ink-light text-sm">
+                  <span class="text-wave font-medium">AbëVOiCE:</span> "Good morning. Three priorities today: First, the board deck needs final review by noon. Second, Sarah flagged a potential issue with the Meridian contract—she's waiting for your input. Third, your 2pm got moved to 3pm because Dr. Chen's flight was delayed. Want me to expand on any of these?"
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scenario 3 -->
+          <div class="bg-white rounded-2xl p-8 reveal">
+            <div class="flex items-start gap-6">
+              <div class="w-12 h-12 bg-listen/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                <span class="text-2xl">🔧</span>
+              </div>
+              <div>
+                <h3 class="font-serif text-xl text-ink mb-2">The Field Technician</h3>
+                <div class="bg-cream rounded-xl p-4 mb-4">
+                  <p class="text-ink-light italic">"I'm looking at an OD Scan 3 throwing error code 47. What do I do?"</p>
+                </div>
+                <p class="text-ink-light text-sm">
+                  <span class="text-listen font-medium">AbëVOiCE:</span> "Error 47 on OD Scan 3 is typically a communication timeout between head unit and base. First, check the ethernet cable at both ends. If that's solid, the head unit IP might have drifted—I can walk you through resetting it. Want me to guide you step by step?"
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Integration Section -->
+    <section class="py-24 px-6">
+      <div class="max-w-5xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <div class="reveal">
+            <p class="subhead text-voice text-xs mb-4">Connects Everywhere</p>
+            <h2 class="headline font-serif text-4xl text-ink mb-6">
+              Your Voice,<br />Every Platform
+            </h2>
+            <p class="text-ink-light mb-8">
+              AbëVOiCE isn't just another voice assistant. It's an intelligence layer that connects to your entire digital ecosystem—calendars, CRMs, documents, databases, and custom systems.
+            </p>
+            <ul class="space-y-4">
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-voice" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-ink-light">Works with any browser—no app install</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-voice" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-ink-light">Embedded into your existing tools</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-voice" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-ink-light">Phone, tablet, desktop—your choice</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-voice" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-ink-light">Custom integrations in days, not months</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="reveal">
+            <!-- Integration visualization -->
+            <div class="relative">
+              <div class="absolute inset-0 bg-gradient-to-br from-voice/20 to-wave/20 rounded-3xl blur-3xl"></div>
+              <div class="relative bg-white rounded-3xl p-8 shadow-xl">
+                <div class="grid grid-cols-3 gap-4">
+                  <div class="aspect-square bg-cream rounded-xl flex items-center justify-center text-2xl">📅</div>
+                  <div class="aspect-square bg-cream rounded-xl flex items-center justify-center text-2xl">📧</div>
+                  <div class="aspect-square bg-cream rounded-xl flex items-center justify-center text-2xl">📊</div>
+                  <div class="aspect-square bg-cream rounded-xl flex items-center justify-center text-2xl">💬</div>
+                  <div class="aspect-square bg-voice/10 rounded-xl flex items-center justify-center">
+                    <svg class="w-8 h-8 text-voice" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                    </svg>
+                  </div>
+                  <div class="aspect-square bg-cream rounded-xl flex items-center justify-center text-2xl">📁</div>
+                  <div class="aspect-square bg-cream rounded-xl flex items-center justify-center text-2xl">🔐</div>
+                  <div class="aspect-square bg-cream rounded-xl flex items-center justify-center text-2xl">📱</div>
+                  <div class="aspect-square bg-cream rounded-xl flex items-center justify-center text-2xl">🖥️</div>
+                </div>
+                <p class="text-center text-ink-light text-sm mt-6">Voice at the center of your stack</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Specs (Expandable) -->
+    <section class="py-24 px-6 bg-cream-dark">
+      <div class="max-w-4xl mx-auto">
+        <details class="bg-white rounded-2xl overflow-hidden reveal">
+          <summary class="p-8 flex items-center justify-between cursor-pointer hover:bg-cream/50 transition-colors">
+            <div>
+              <p class="subhead text-voice text-xs mb-2">For Technical Teams</p>
+              <h3 class="font-serif text-2xl text-ink">Under the Hood</h3>
+            </div>
+            <svg class="chevron w-6 h-6 text-ink-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+
+          <div class="px-8 pb-8 border-t border-ink/5">
+            <div class="grid md:grid-cols-2 gap-8 pt-8">
+              <!-- Speech Recognition -->
+              <div>
+                <h4 class="font-mono text-sm text-voice mb-3">Speech Recognition</h4>
+                <ul class="space-y-2 text-ink-light text-sm">
+                  <li>• Neural speech-to-text (Whisper/Deepgram)</li>
+                  <li>• Real-time streaming transcription</li>
+                  <li>• Multi-language support (40+ languages)</li>
+                  <li>• Noise-robust processing</li>
+                  <li>• Speaker diarization (who said what)</li>
+                </ul>
+              </div>
+
+              <!-- Voice Synthesis -->
+              <div>
+                <h4 class="font-mono text-sm text-voice mb-3">Voice Synthesis</h4>
+                <ul class="space-y-2 text-ink-light text-sm">
+                  <li>• ElevenLabs neural voice models</li>
+                  <li>• Sub-500ms latency response</li>
+                  <li>• Custom voice cloning available</li>
+                  <li>• Emotional tone adaptation</li>
+                  <li>• SSML control for natural pacing</li>
+                </ul>
+              </div>
+
+              <!-- Intelligence Layer -->
+              <div>
+                <h4 class="font-mono text-sm text-voice mb-3">Intelligence Layer</h4>
+                <ul class="space-y-2 text-ink-light text-sm">
+                  <li>• GPT-4/Claude integration</li>
+                  <li>• Context-aware conversation memory</li>
+                  <li>• Function calling for actions</li>
+                  <li>• RAG for document knowledge</li>
+                  <li>• Custom fine-tuning available</li>
+                </ul>
+              </div>
+
+              <!-- Security -->
+              <div>
+                <h4 class="font-mono text-sm text-voice mb-3">Security & Privacy</h4>
+                <ul class="space-y-2 text-ink-light text-sm">
+                  <li>• End-to-end encryption</li>
+                  <li>• SOC 2 Type II compliant</li>
+                  <li>• HIPAA-ready configuration</li>
+                  <li>• On-prem deployment option</li>
+                  <li>• No voice data retention (configurable)</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="mt-8 pt-8 border-t border-ink/5">
+              <h4 class="font-mono text-sm text-voice mb-3">API Example</h4>
+              <pre class="bg-ink text-cream p-4 rounded-xl text-sm overflow-x-auto"><code>// Start voice conversation
+const voice = await AbëVOiCE.connect({
+  apiKey: process.env.ABEVOICE_KEY,
+  context: 'practice-management',
+  voice: 'professional-female'
+});
+
+voice.on('transcription', (text) => {
+  console.log('User said:', text);
+});
+
+voice.on('response', (audio) => {
+  // Stream audio response
+  audioPlayer.play(audio);
+});</code></pre>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 px-6 bg-gradient-to-br from-voice to-voice-dark">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="headline font-serif text-4xl md:text-5xl text-white mb-6 reveal">
+          Ready to Stop Typing<br />and Start Talking?
+        </h2>
+        <p class="text-xl text-white/80 mb-12 reveal">
+          Your business has a voice. Let's make sure it's heard.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal">
+          <a href="#try-it" class="bg-white text-voice px-8 py-4 rounded-full font-medium hover:bg-cream transition-colors">
+            Try the Demo Above
+          </a>
+          <a href="/graceful" class="border border-white/30 text-white px-8 py-4 rounded-full font-medium hover:bg-white/10 transition-colors">
+            Talk to Us
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 bg-ink">
+      <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="font-serif text-2xl text-white">Bravetto</div>
+        <div class="flex items-center gap-6 text-white/60 text-sm">
+          <a href="/abekeys" class="hover:text-white transition-colors">AbëKeys</a>
+          <a href="/command" class="hover:text-white transition-colors">Command</a>
+          <a href="/how-we-build" class="hover:text-white transition-colors">How We Build</a>
+          <a href="/graceful" class="hover:text-white transition-colors">Contact</a>
+        </div>
+        <div class="text-white/40 text-sm">
+          &copy; 2025 Bravetto. Building thoughtfully.
+        </div>
+      </div>
+    </footer>
+
+    <!-- Abe Voice — one script tag, all surfaces, all domains -->
+    <script src="https://voice.bravetto.ai/widget.js" data-persona="bravetto" async></script>
+
+    <!-- Reveal Animation Script -->
+    <script>
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>
+</code>
