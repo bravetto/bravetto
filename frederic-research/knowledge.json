@@ -1,0 +1,169 @@
+[
+  {
+    "claim": "macuhealth rebuilds macular pigment",
+    "product": "MacuHealth",
+    "verdict": "PARTIALLY SUPPORTED",
+    "confidence": 72,
+    "evidence": "Ingredient class (lutein/zeaxanthin/meso-zeaxanthin) is validated by multiple peer-reviewed trials for increasing macular pigment optical density. However, NAD ruled in September 2023 that claims specific to MacuHealth's consumer product formulation were 'not substantiated' because studies were not conducted on the current product.",
+    "sources": [
+      "PubMed: macular carotenoid trials",
+      "NAD Ruling, September 2023",
+      "BBB National Programs"
+    ],
+    "risk": "medium",
+    "recommendation": "Reframe claims from 'clinically proven to rebuild' to 'contains ingredients shown in clinical research to support macular pigment density.' Ingredient-level claims are defensible. Product-level claims are not — per NAD precedent."
+  },
+  {
+    "claim": "macuhealth prevents macular degeneration",
+    "product": "MacuHealth",
+    "verdict": "NOT SUPPORTED AS STATED",
+    "confidence": 35,
+    "evidence": "No clinical trial has demonstrated that MacuHealth prevents age-related macular degeneration. AREDS2 trial (NIH) showed risk reduction with similar ingredients, but MacuHealth was not the studied formulation. 'Prevents' is a disease claim requiring FDA approval.",
+    "sources": [
+      "AREDS2 Trial (NIH)",
+      "FDA Supplement Guidance",
+      "NAD Ruling 2023"
+    ],
+    "risk": "high",
+    "recommendation": "Replace 'prevents' with 'supports macular health' or 'contains nutrients studied in the AREDS2 trial.' Disease prevention claims on supplements trigger FDA enforcement."
+  },
+  {
+    "claim": "memory health prevents alzheimer",
+    "product": "Memory Health",
+    "verdict": "NOT SUPPORTED",
+    "confidence": 18,
+    "evidence": "Three independent AI models converge: published evidence does not support categorical 'prevents Alzheimer's' claims. Re-MIND trial (2022) was underpowered (77 of planned 120 patients, 12 of planned 24 months). Strongest signal was caregiver-reported, not objective cognitive endpoints. Named experts (Sattar, Howard, Reynolds) publicly called claims 'irresponsible.'",
+    "sources": [
+      "Journal of Alzheimer's Disease, 2022",
+      "ITV News, 2018",
+      "ISRCTN Registry",
+      "FDA Consumer Warnings"
+    ],
+    "risk": "critical",
+    "recommendation": "Immediate reframing required. 'Supports cognitive health' or 'contains patented nutrients under clinical investigation for neurodegenerative conditions.' Current positioning is one FTC letter from catastrophic."
+  },
+  {
+    "claim": "memory health cures alzheimer",
+    "product": "Memory Health",
+    "verdict": "NOT SUPPORTED — REGULATORY RISK",
+    "confidence": 5,
+    "evidence": "No supplement can legally claim to cure Alzheimer's disease. This is an unapproved drug claim under 21 USC 343. The FDA has issued warnings to supplement companies making similar claims. Memory Health's patents cover 'prevention and/or treatment' but patent offices evaluate novelty, not efficacy.",
+    "sources": [
+      "21 USC 343",
+      "FDA Warning Letters Archive",
+      "UK/US/Ireland Patent Records"
+    ],
+    "risk": "critical",
+    "recommendation": "This claim must never appear in any consumer-facing material. Even implied cure claims (testimonials, before/after) create FTC and FDA liability."
+  },
+  {
+    "claim": "patent equals clinical proof",
+    "product": "Portfolio-wide",
+    "verdict": "FALSE",
+    "confidence": 95,
+    "evidence": "Patent offices (USPTO, UKIPO, EPO) evaluate novelty and non-obviousness. They do not evaluate clinical efficacy. A patent for 'treatment of neurodegenerative disease' means the chemical composition is novel — not that it works. The FDA, NAD, and FTC use entirely different evidentiary standards.",
+    "sources": [
+      "USPTO Manual of Patent Examining Procedure",
+      "NAD Case Precedents",
+      "FDA Guidance for Industry"
+    ],
+    "risk": "high",
+    "recommendation": "Never conflate patent protection with clinical validation in marketing materials. Present patents as intellectual property assets, not proof of efficacy."
+  },
+  {
+    "claim": "safe balance clinical validation",
+    "product": "Safe Balance",
+    "verdict": "NO EVIDENCE FOUND",
+    "confidence": 0,
+    "evidence": "Exhaustive search across PubMed, ClinicalTrials.gov, Google Scholar, and company publications found zero published clinical trials, peer-reviewed studies, or third-party validation for Safe Balance's fall risk assessment protocol.",
+    "sources": [
+      "PubMed search: zero results",
+      "ClinicalTrials.gov: zero results",
+      "Company website review"
+    ],
+    "risk": "medium",
+    "recommendation": "Commission an independent validation study. Until published evidence exists, position as 'proprietary assessment tool' rather than 'clinically validated.' This is the lowest-cost fix in the portfolio — one well-designed study changes everything."
+  },
+  {
+    "claim": "natura medica eye floaters",
+    "product": "Natura Medica",
+    "verdict": "NO EVIDENCE FOUND",
+    "confidence": 0,
+    "evidence": "No published clinical trial data identified for Vitreous Health or TG Omega-3 products. Eye floater treatment via oral supplements has limited scientific literature. The vitreous humor is largely acellular — mechanism of action for supplement-based treatment is unclear.",
+    "sources": [
+      "PubMed search: zero results",
+      "Ophthalmology literature review"
+    ],
+    "risk": "medium",
+    "recommendation": "Same as Safe Balance: commission evidence or reposition claims. 'Nutritional support for vitreous health' is defensible. 'Treatment for eye floaters' is not."
+  },
+  {
+    "claim": "nad ruling macuhealth",
+    "product": "MacuHealth",
+    "verdict": "VERIFIED — ADVERSE RULING",
+    "confidence": 98,
+    "evidence": "In September 2023, the National Advertising Division (BBB National Programs) ruled that MacuHealth's consumer-facing claims of being 'clinically proven to rebuild or restore macular pigment' were not substantiated. The core issue: clinical studies cited were not conducted on MacuHealth's current consumer product formulation. The ingredient class has evidence — the specific product's marketing exceeded it.",
+    "sources": [
+      "BBB National Programs, NAD Case #7127",
+      "MacuHealth marketing materials"
+    ],
+    "risk": "high",
+    "recommendation": "Audit all consumer-facing materials for NAD compliance. Shift to ingredient-class claims with appropriate disclaimers. This ruling is public record and will surface in any due diligence."
+  },
+  {
+    "claim": "highbury partners track record",
+    "product": "Highbury Partners",
+    "verdict": "UNVERIFIABLE",
+    "confidence": 10,
+    "evidence": "Highbury Partners (co-managed with Naguib Shahid) targets $500K-$10M deals in control acquisitions and restructuring. However, no public track record, fund performance data, or portfolio company outcomes were identified. Private equity firms are not required to disclose performance publicly unless SEC-registered.",
+    "sources": [
+      "Highbury Partners website",
+      "SEC IAPD records",
+      "FINRA BrokerCheck CRD#3014239"
+    ],
+    "risk": "low",
+    "recommendation": "Request private fund documentation directly. Track record is not a red flag — it's an information gap typical of private PE."
+  },
+  {
+    "claim": "frederic jouhet french navy seal",
+    "product": "Personal",
+    "verdict": "UNVERIFIED",
+    "confidence": 15,
+    "evidence": "One source describes Jouhet as a 'French Navy Seal.' France does not have a unit called 'Navy SEALs' — the equivalent would be Commandos Marine (commando naval special forces). Jouhet's French Navy service is referenced in multiple sources but specific unit, rank, and timeline are absent from public record.",
+    "sources": [
+      "LinkedIn profile",
+      "Single web citation",
+      "French military structure"
+    ],
+    "risk": "low",
+    "recommendation": "Do not repeat this claim without verification. If Jouhet was Commandos Marine, that's extraordinary. If he was a standard naval officer, 'French Navy Seal' is misleading."
+  },
+  {
+    "claim": "re-mind trial alzheimer",
+    "product": "Memory Health",
+    "verdict": "TRIAL EXISTS — RESULTS CONTESTED",
+    "confidence": 55,
+    "evidence": "The re-MIND trial (2022, Journal of Alzheimer's Disease) was a randomized, double-blind, placebo-controlled study. Results: significant blood biomarker improvements and caregiver-reported memory improvements (p<0.001). However: originally designed for 120 patients / 24 months, completed with 77 / 12 months. Primary objective cognitive endpoints showed weaker/inconsistent effects. Independent experts consider the trial hypothesis-generating, not confirmatory.",
+    "sources": [
+      "Journal of Alzheimer's Disease, 2022",
+      "ISRCTN Registry",
+      "Expert commentary (Sattar, Howard, Reynolds)"
+    ],
+    "risk": "medium",
+    "recommendation": "Present as 'promising early-stage research requiring further investigation' rather than 'proof of efficacy.' Fund a properly powered follow-up trial — this is where the real value unlock is."
+  },
+  {
+    "claim": "maravilla patents howard foundation",
+    "product": "Maravilla LLC",
+    "verdict": "VERIFIED — STRUCTURE CONFIRMED",
+    "confidence": 85,
+    "evidence": "Maravilla LLC is a joint venture between Jouhet's entities and Industrial Organica SA (IOSA). Acquired approximately 50 patents originating from the Howard Foundation research program. Patent portfolio covers carotenoid-based nutritional interventions.",
+    "sources": [
+      "Corporate filings",
+      "IOSA partnership records",
+      "Patent transfer documentation"
+    ],
+    "risk": "low",
+    "recommendation": "Patent portfolio is a genuine asset. Ensure licensing and commercialization terms are clearly documented for any investor diligence."
+  }
+]

@@ -1,0 +1,1695 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Frederic — What We See</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #faf9f6;
+        --cream-dark: #f5f3ef;
+        --ink: #1a1a1a;
+        --ink-light: #4a4a4a;
+        --ink-muted: #7a7a7a;
+        --gold: #c9a227;
+        --gold-warm: #d4a843;
+        --gold-pale: #e8d48b;
+        --red-flag: #b33a3a;
+        --green-go: #2a7a3a;
+        --blue-deep: #1a3a5a;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-snap-type: y mandatory;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        font-weight: 300;
+        color: var(--ink);
+        background: var(--ink);
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .section {
+        min-height: 100vh;
+        scroll-snap-align: start;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 6vh 8vw;
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+          opacity 0.9s ease,
+          transform 0.9s ease;
+      }
+
+      .section.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ====== SECTION 0: OVERTURE ====== */
+      .overture {
+        background: var(--ink);
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+      }
+
+      .overture h1 {
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 300;
+        font-size: clamp(2.4rem, 5vw, 4.8rem);
+        color: var(--cream);
+        letter-spacing: 0.02em;
+        line-height: 1.2;
+        margin-bottom: 2rem;
+      }
+
+      .overture h1 em {
+        font-style: italic;
+        color: var(--gold);
+      }
+
+      .overture .sub {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.75rem;
+        color: var(--ink-muted);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        margin-top: 2rem;
+        opacity: 0;
+        animation: fadeUp 1s ease 1.5s forwards;
+      }
+
+      .overture .date-line {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        color: var(--ink-light);
+        letter-spacing: 0.2em;
+        margin-top: 0.5rem;
+        opacity: 0;
+        animation: fadeUp 1s ease 2s forwards;
+      }
+
+      .scroll-hint {
+        position: absolute;
+        bottom: 4vh;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        opacity: 0;
+        animation: fadeUp 1s ease 2.5s forwards;
+      }
+
+      .scroll-hint span {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.6rem;
+        color: var(--ink-muted);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+
+      .scroll-hint .arrow {
+        width: 1px;
+        height: 40px;
+        background: linear-gradient(to bottom, var(--gold), transparent);
+        animation: pulse 2s ease infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.3;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ====== SECTION 1: WHAT WE SEE ====== */
+      .what-we-see {
+        background: var(--cream);
+      }
+
+      .section-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.65rem;
+        color: var(--gold);
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        margin-bottom: 2rem;
+      }
+
+      .section h2 {
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 400;
+        font-size: clamp(1.8rem, 3.5vw, 3.2rem);
+        color: var(--ink);
+        line-height: 1.25;
+        margin-bottom: 3rem;
+        max-width: 800px;
+      }
+
+      .architecture-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .arch-card {
+        background: white;
+        border: 1px solid #e8e6e2;
+        padding: 2rem;
+        position: relative;
+        transition:
+          border-color 0.3s ease,
+          transform 0.3s ease;
+      }
+
+      .arch-card:hover {
+        border-color: var(--gold);
+        transform: translateY(-2px);
+      }
+
+      .arch-card .card-role {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.6rem;
+        color: var(--ink-muted);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+      }
+
+      .arch-card h3 {
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 600;
+        font-size: 1.4rem;
+        color: var(--ink);
+        margin-bottom: 0.75rem;
+      }
+
+      .arch-card p {
+        font-size: 0.85rem;
+        color: var(--ink-light);
+        line-height: 1.6;
+      }
+
+      .arch-card .status {
+        display: inline-block;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        padding: 0.25rem 0.75rem;
+        margin-top: 1rem;
+        border: 1px solid;
+      }
+
+      .status-strong {
+        color: var(--green-go);
+        border-color: var(--green-go);
+      }
+      .status-disputed {
+        color: var(--gold);
+        border-color: var(--gold);
+      }
+      .status-unknown {
+        color: var(--ink-muted);
+        border-color: #ddd;
+      }
+      .status-risk {
+        color: var(--red-flag);
+        border-color: var(--red-flag);
+      }
+
+      /* ====== SECTION 2: THE FRACTURE ====== */
+      .the-fracture {
+        background: var(--ink);
+      }
+
+      .the-fracture h2 {
+        color: var(--cream);
+      }
+
+      .the-fracture .section-label {
+        color: var(--red-flag);
+      }
+
+      .fracture-list {
+        list-style: none;
+        max-width: 800px;
+        margin-top: 1rem;
+      }
+
+      .fracture-list li {
+        padding: 1.5rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        display: grid;
+        grid-template-columns: 2rem 1fr;
+        gap: 1.5rem;
+        align-items: start;
+      }
+
+      .fracture-list .num {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--red-flag);
+        text-align: right;
+      }
+
+      .fracture-list .detail {
+        color: rgba(250, 249, 246, 0.8);
+        font-size: 0.9rem;
+        line-height: 1.7;
+      }
+
+      .fracture-list .detail strong {
+        color: var(--cream);
+        font-weight: 500;
+      }
+
+      .fracture-list .detail .source {
+        display: block;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.6rem;
+        color: var(--ink-muted);
+        margin-top: 0.5rem;
+        letter-spacing: 0.05em;
+      }
+
+      /* ====== SECTION 3: THE QUESTION ====== */
+      .the-question {
+        background: var(--cream-dark);
+        align-items: center;
+        text-align: center;
+      }
+
+      .the-question h2 {
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .the-question .emphasis {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(1.6rem, 3vw, 2.8rem);
+        font-weight: 600;
+        font-style: italic;
+        color: var(--gold);
+        margin-top: 2rem;
+        max-width: 600px;
+      }
+
+      /* ====== SECTION 4: WHAT WE BUILD ====== */
+      .what-we-build {
+        background: var(--cream);
+      }
+
+      .capability-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .cap-card {
+        padding: 2.5rem;
+        background: white;
+        border-left: 3px solid var(--gold);
+        transition: transform 0.3s ease;
+      }
+
+      .cap-card:hover {
+        transform: translateX(4px);
+      }
+
+      .cap-card h3 {
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 600;
+        font-size: 1.3rem;
+        color: var(--ink);
+        margin-bottom: 1rem;
+      }
+
+      .cap-card p {
+        font-size: 0.85rem;
+        color: var(--ink-light);
+        line-height: 1.7;
+      }
+
+      .cap-card .for-you {
+        display: block;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.65rem;
+        color: var(--gold);
+        letter-spacing: 0.1em;
+        margin-top: 1.25rem;
+        text-transform: uppercase;
+      }
+
+      /* ====== SECTION 5: THE PROOF ====== */
+      .the-proof {
+        background: var(--ink);
+      }
+
+      .the-proof h2 {
+        color: var(--cream);
+      }
+
+      .proof-timeline {
+        position: relative;
+        max-width: 700px;
+        margin-top: 2rem;
+        padding-left: 2rem;
+      }
+
+      .proof-timeline::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: linear-gradient(
+          to bottom,
+          var(--gold),
+          var(--gold-pale),
+          transparent
+        );
+      }
+
+      .proof-event {
+        position: relative;
+        padding: 1.5rem 0 1.5rem 2rem;
+      }
+
+      .proof-event::before {
+        content: "";
+        position: absolute;
+        left: -0.3rem;
+        top: 1.8rem;
+        width: 7px;
+        height: 7px;
+        background: var(--gold);
+        border-radius: 50%;
+      }
+
+      .proof-event .event-date {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.6rem;
+        color: var(--gold);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+
+      .proof-event .event-text {
+        color: rgba(250, 249, 246, 0.85);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-top: 0.5rem;
+      }
+
+      .proof-event .event-text strong {
+        color: var(--cream);
+        font-weight: 500;
+      }
+
+      /* ====== SECTION 6: THE VISION ====== */
+      .the-vision {
+        background: linear-gradient(
+          135deg,
+          var(--cream) 0%,
+          var(--cream-dark) 100%
+        );
+      }
+
+      .vision-numbers {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 3rem;
+        margin-top: 3rem;
+        max-width: 900px;
+      }
+
+      .v-num {
+        text-align: left;
+      }
+
+      .v-num .big {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.5rem, 4vw, 4rem);
+        font-weight: 700;
+        color: var(--gold);
+        line-height: 1;
+      }
+
+      .v-num .label {
+        font-size: 0.85rem;
+        color: var(--ink-light);
+        margin-top: 0.5rem;
+        line-height: 1.5;
+      }
+
+      /* ====== SECTION 7: THE ASK ====== */
+      .the-ask {
+        background: var(--ink);
+        align-items: center;
+        text-align: center;
+      }
+
+      .the-ask h2 {
+        color: var(--cream);
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .the-ask .final-line {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(1.2rem, 2.5vw, 2rem);
+        font-weight: 400;
+        font-style: italic;
+        color: var(--gold-pale);
+        max-width: 600px;
+        margin-top: 3rem;
+        line-height: 1.5;
+      }
+
+      .the-ask .contact {
+        margin-top: 4rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: center;
+      }
+
+      .the-ask .contact a {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.75rem;
+        color: var(--gold);
+        text-decoration: none;
+        letter-spacing: 0.1em;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.3s;
+      }
+
+      .the-ask .contact a:hover {
+        border-color: var(--gold);
+      }
+
+      .powered-by {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.55rem;
+        color: var(--ink-muted);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-top: 4rem;
+      }
+
+      /* ====== EPISTEMIC TABLE ====== */
+      .epistemic-table {
+        width: 100%;
+        max-width: 900px;
+        margin-top: 2rem;
+        border-collapse: collapse;
+      }
+
+      .epistemic-table th {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--ink-muted);
+        text-align: left;
+        padding: 0.75rem 1rem;
+        border-bottom: 2px solid #e8e6e2;
+      }
+
+      .epistemic-table td {
+        font-size: 0.8rem;
+        color: var(--ink-light);
+        padding: 1rem;
+        border-bottom: 1px solid #f0eeea;
+        vertical-align: top;
+        line-height: 1.5;
+      }
+
+      .epistemic-table td:first-child {
+        font-weight: 500;
+        color: var(--ink);
+        white-space: nowrap;
+      }
+
+      .confidence-bar {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .conf-fill {
+        height: 4px;
+        border-radius: 2px;
+        transition: width 1s ease;
+      }
+
+      .conf-high {
+        background: var(--green-go);
+        width: 80px;
+      }
+      .conf-med {
+        background: var(--gold);
+        width: 50px;
+      }
+      .conf-low {
+        background: var(--red-flag);
+        width: 25px;
+      }
+      .conf-none {
+        background: var(--ink-muted);
+        width: 10px;
+      }
+
+      /* ====== SECTION 9: THE TEAM ====== */
+      .the-team {
+        background: var(--cream);
+      }
+
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-top: 3rem;
+        max-width: 1100px;
+      }
+
+      .team-card {
+        background: white;
+        border: 1px solid #e8e6e2;
+        padding: 2.5rem 2rem;
+        position: relative;
+        transition: border-color 0.3s ease;
+      }
+
+      .team-card:hover {
+        border-color: var(--gold);
+      }
+
+      .team-card .team-role {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.6rem;
+        color: var(--gold);
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+      }
+
+      .team-card h3 {
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 600;
+        font-size: 1.5rem;
+        color: var(--ink);
+        margin-bottom: 0.5rem;
+      }
+
+      .team-card .team-title {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.65rem;
+        color: var(--ink-muted);
+        letter-spacing: 0.08em;
+        margin-bottom: 1.25rem;
+      }
+
+      .team-card p {
+        font-size: 0.85rem;
+        color: var(--ink-light);
+        line-height: 1.7;
+        margin-bottom: 1rem;
+      }
+
+      .team-card .team-contact {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        margin-top: 1.25rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid #f0eeea;
+      }
+
+      .team-card .team-contact a {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        color: var(--gold);
+        text-decoration: none;
+        letter-spacing: 0.05em;
+        transition: color 0.3s;
+      }
+
+      .team-card .team-contact a:hover {
+        color: var(--ink);
+      }
+
+      .team-card .team-arc {
+        font-size: 0.78rem;
+        color: var(--ink-muted);
+        font-style: italic;
+        line-height: 1.6;
+      }
+
+      /* ====== RESPONSIVE ====== */
+      @media (max-width: 768px) {
+        .section {
+          padding: 4vh 6vw;
+        }
+        .architecture-grid {
+          grid-template-columns: 1fr;
+        }
+        .capability-grid {
+          grid-template-columns: 1fr;
+        }
+        .vision-numbers {
+          grid-template-columns: 1fr 1fr;
+          gap: 2rem;
+        }
+        .team-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- SECTION 0: OVERTURE -->
+    <div class="section overture visible" id="s0">
+      <h1>
+        We had cocktails on Friday.<br />By Sunday, we knew <em>everything</em>.
+      </h1>
+      <div class="sub">154 sources. 3 AI models. 1 structural truth.</div>
+      <div class="date-line">
+        prepared for frederic jouhet &mdash; march 16, 2026
+      </div>
+
+      <!-- Voice element -->
+      <button id="voice-btn" onclick="playVoice()" style="
+        margin-top: 2.5rem;
+        padding: 0.8rem 2rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        background: transparent;
+        border: 1px solid var(--gold);
+        color: var(--gold);
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      " onmouseover="this.style.background='var(--gold)';this.style.color='var(--ink)'" onmouseout="this.style.background='transparent';this.style.color='var(--gold)'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+          <line x1="12" y1="19" x2="12" y2="23"/>
+          <line x1="8" y1="23" x2="16" y2="23"/>
+        </svg>
+        Listen to this report
+      </button>
+      <audio id="voice-audio" preload="auto">
+        <source src="frederic-research/epistemic-voice.mp3" type="audio/mpeg">
+      </audio>
+
+      <div class="scroll-hint">
+        <span>scroll</span>
+        <div class="arrow"></div>
+      </div>
+    </div>
+
+    <!-- SECTION 1: YOUR ARCHITECTURE -->
+    <div class="section what-we-see" id="s1">
+      <div class="section-label">i. your architecture</div>
+      <h2>
+        We mapped your entire portfolio in 48 hours. Every entity. Every
+        connection. Every evidence gap.
+      </h2>
+
+      <div class="architecture-grid">
+        <div class="arch-card">
+          <div class="card-role">holding company</div>
+          <h3>Avantius Group</h3>
+          <p>
+            Sole ownership. Founded 2006. The architectural center of gravity
+            for everything you've built in ocular and cognitive health.
+          </p>
+          <div class="status status-strong">STRUCTURE VERIFIED</div>
+        </div>
+        <div class="arch-card">
+          <div class="card-role">private equity</div>
+          <h3>Highbury Partners</h3>
+          <p>
+            Co-managed with Naguib Shahid. $500K-$10M per deal. Impact
+            investments, restructuring, control acquisitions.
+          </p>
+          <div class="status status-strong">STRUCTURE VERIFIED</div>
+        </div>
+        <div class="arch-card">
+          <div class="card-role">flagship product</div>
+          <h3>MacuHealth</h3>
+          <p>
+            LMZ3 triple carotenoid formula. Patented Micro-Micelle delivery.
+            Professional distribution through optometry networks.
+          </p>
+          <div class="status status-disputed">CLAIMS CHALLENGED BY NAD</div>
+        </div>
+        <div class="arch-card">
+          <div class="card-role">cognitive health</div>
+          <h3>Memory Health</h3>
+          <p>
+            Patented nootropic. Three clinical trials. UK/US/Ireland patents for
+            Alzheimer's prevention and treatment.
+          </p>
+          <div class="status status-risk">EVIDENCE DISPUTED BY EXPERTS</div>
+        </div>
+        <div class="arch-card">
+          <div class="card-role">portfolio company</div>
+          <h3>Natura Medica</h3>
+          <p>
+            Vitreous Health for eye floaters. TG Omega-3 Fish Oil. Avantius
+            subsidiary.
+          </p>
+          <div class="status status-unknown">NO PUBLIC TRIALS FOUND</div>
+        </div>
+        <div class="arch-card">
+          <div class="card-role">senior care tech</div>
+          <h3>Safe Balance</h3>
+          <p>
+            Eight-minute fall risk assessment protocol. Personalized performance
+            reports for seniors.
+          </p>
+          <div class="status status-unknown">NO PUBLIC VALIDATION FOUND</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: THE FRACTURE -->
+    <div class="section the-fracture" id="s2">
+      <div class="section-label">ii. the fracture lines</div>
+      <h2>
+        Your science is real. Your marketing has outrun your evidence. That gap
+        is a threat.
+      </h2>
+
+      <ul class="fracture-list">
+        <li>
+          <span class="num">1</span>
+          <div class="detail">
+            <strong
+              >NAD ruled MacuHealth's consumer claims are not
+              substantiated.</strong
+            >
+            Studies were not conducted on the current consumer product
+            formulation. The ingredient class is validated. The specific product
+            marketing exceeds the evidence base.
+            <span class="source">BBB National Programs, September 2023</span>
+          </div>
+        </li>
+        <li>
+          <span class="num">2</span>
+          <div class="detail">
+            <strong
+              >Memory Health's Alzheimer's claims are rejected by named
+              independent experts.</strong
+            >
+            Professors Sattar, Robert Howard, and David Reynolds publicly called
+            early trial claims "irresponsible" and "unsupported." The re-MIND
+            RCT was underpowered: designed for 120 patients over 24 months,
+            completed with 77 over 12.
+            <span class="source"
+              >ITV News, 2018 / ISRCTN Registry / Journal of Alzheimer's
+              Disease, 2022</span
+            >
+          </div>
+        </li>
+        <li>
+          <span class="num">3</span>
+          <div class="detail">
+            <strong>Patents are not clinical validation.</strong> Three
+            countries granted patents for "prevention and/or treatment of
+            neurodegenerative disease." But patent offices evaluate novelty, not
+            efficacy. The FDA and Alzheimer's Association explicitly warn
+            against this conflation.
+            <span class="source"
+              >FDA Consumer Warnings / Alzheimer's Association, 2019</span
+            >
+          </div>
+        </li>
+        <li>
+          <span class="num">4</span>
+          <div class="detail">
+            <strong>Two portfolio companies have zero public evidence.</strong>
+            Safe Balance and Natura Medica have no published clinical trials, no
+            third-party validation, and no regulatory filings identified in
+            exhaustive search. These are unshielded.
+            <span class="source"
+              >Cross-domain analysis of 154+ public sources</span
+            >
+          </div>
+        </li>
+        <li>
+          <span class="num">5</span>
+          <div class="detail">
+            <strong>Biomarker improvement is not disease modification.</strong>
+            Both MacuHealth and Memory Health show strong biomarker changes
+            (macular pigment density, blood nutrient levels). But the earlier
+            carotenoid-only Alzheimer's RCT found no significant cognitive
+            improvement. Biological effect does not equal clinical outcome.
+            <span class="source"
+              >PubMed PMID:25408222 / re-MIND Trial Analysis</span
+            >
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- SECTION 3: EPISTEMIC ASSESSMENT -->
+    <div class="section what-we-see" id="s3">
+      <div class="section-label">iii. epistemic assessment</div>
+      <h2>
+        We ran your claims through three independent AI models. Here's what
+        converged.
+      </h2>
+
+      <table class="epistemic-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Core Claim</th>
+            <th>Evidence Strength</th>
+            <th>Regulatory Risk</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>MacuHealth</td>
+            <td>Rebuilds macular pigment</td>
+            <td>
+              <div class="confidence-bar">
+                <div class="conf-fill conf-med"></div>
+                <span style="font-size: 0.7rem; color: var(--ink-muted)"
+                  >Medium-High for ingredient class</span
+                >
+              </div>
+            </td>
+            <td style="color: var(--gold)">NAD precedent active</td>
+          </tr>
+          <tr>
+            <td>Memory Health</td>
+            <td>Prevents/treats Alzheimer's</td>
+            <td>
+              <div class="confidence-bar">
+                <div class="conf-fill conf-low"></div>
+                <span style="font-size: 0.7rem; color: var(--ink-muted)"
+                  >Low-Medium</span
+                >
+              </div>
+            </td>
+            <td style="color: var(--red-flag)">
+              Expert rejection + FDA warnings
+            </td>
+          </tr>
+          <tr>
+            <td>Natura Medica</td>
+            <td>Eye floater treatment</td>
+            <td>
+              <div class="confidence-bar">
+                <div class="conf-fill conf-none"></div>
+                <span style="font-size: 0.7rem; color: var(--ink-muted)"
+                  >Unknown</span
+                >
+              </div>
+            </td>
+            <td style="color: var(--ink-muted)">Unassessed</td>
+          </tr>
+          <tr>
+            <td>Safe Balance</td>
+            <td>Fall risk assessment</td>
+            <td>
+              <div class="confidence-bar">
+                <div class="conf-fill conf-none"></div>
+                <span style="font-size: 0.7rem; color: var(--ink-muted)"
+                  >Unknown</span
+                >
+              </div>
+            </td>
+            <td style="color: var(--ink-muted)">Unassessed</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p
+        style="
+          font-size: 0.8rem;
+          color: var(--ink-light);
+          max-width: 700px;
+          margin-top: 2rem;
+          line-height: 1.7;
+        "
+      >
+        All three models&mdash;GPT-5.4, Claude Opus 4.6, and Gemini 3.1
+        Pro&mdash;converged on a single structural finding:
+        <strong style="color: var(--ink)"
+          >the publicly available clinical evidence does not justify broad
+          consumer-facing claims that Memory Health "prevents" or "treats"
+          Alzheimer's disease</strong
+        >
+        in the way those terms are ordinarily understood. The strongest signal
+        is caregiver-reported. The primary objective cognitive endpoints were
+        weaker. This is not a death sentence for the science. It is a death
+        sentence for the current marketing posture.
+      </p>
+    </div>
+
+    <!-- SECTION 4: THE QUESTION -->
+    <div class="section the-question" id="s4">
+      <div class="section-label">iv. the question</div>
+      <h2>
+        You have real science, real patents, and a real distribution network.
+        But you are one FTC letter away from losing everything you've built.
+      </h2>
+      <div class="emphasis">
+        What if the same intelligence that found your fracture lines could seal
+        them?
+      </div>
+    </div>
+
+    <!-- SECTION 4.5: EPISTEMIC SEARCH ENGINE (LIVE DEMO) -->
+    <div class="section epistemic-engine" id="s-engine" style="background: #0a0f1a;">
+      <div class="section-label" style="color: var(--gold);">live demo</div>
+      <h2 style="color: var(--cream); max-width: 700px;">
+        These are real findings from our epistemic analysis. Search them.
+      </h2>
+      <p style="font-size: 0.78rem; color: rgba(250,249,246,0.45); max-width: 700px; line-height: 1.6; margin-top: 0.5rem; font-family: 'Inter', sans-serif;">
+        Every verdict below was generated by running your public claims through three independent AI models (GPT-5.4, Claude Opus 4.6, Gemini 3.1 Pro) against 154+ verified sources. This is a searchable index of those findings &mdash; not a live model. The live engine runs on our infrastructure.
+      </p>
+      <div style="position: relative; max-width: 700px; margin-top: 2rem;">
+        <input type="text" id="epistemic-search" placeholder="Try: 'MacuHealth prevents macular degeneration' or 'Memory Health cures Alzheimer's'" style="
+          width: 100%;
+          padding: 1.2rem 1.5rem;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 0.85rem;
+          background: rgba(255,255,255,0.05);
+          border: 1px solid rgba(201,162,39,0.3);
+          color: var(--cream);
+          outline: none;
+          transition: border-color 0.3s;
+        " onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(201,162,39,0.3)'" />
+        <div style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); font-family: 'JetBrains Mono'; font-size: 0.6rem; color: var(--ink-muted); letter-spacing: 0.1em;">ENTER TO SEARCH</div>
+      </div>
+      <div id="search-results" style="max-width: 700px; margin-top: 2rem; min-height: 200px;"></div>
+      <div id="search-examples" style="max-width: 700px; margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+        <button class="example-query" onclick="runQuery(this.textContent)" style="padding: 0.5rem 1rem; font-family: 'JetBrains Mono'; font-size: 0.65rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: var(--ink-muted); cursor: pointer; letter-spacing: 0.05em; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.color='var(--ink-muted)'">MacuHealth rebuilds macular pigment</button>
+        <button class="example-query" onclick="runQuery(this.textContent)" style="padding: 0.5rem 1rem; font-family: 'JetBrains Mono'; font-size: 0.65rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: var(--ink-muted); cursor: pointer; letter-spacing: 0.05em; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.color='var(--ink-muted)'">Memory Health prevents Alzheimer's</button>
+        <button class="example-query" onclick="runQuery(this.textContent)" style="padding: 0.5rem 1rem; font-family: 'JetBrains Mono'; font-size: 0.65rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: var(--ink-muted); cursor: pointer; letter-spacing: 0.05em; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.color='var(--ink-muted)'">Safe Balance clinical validation</button>
+        <button class="example-query" onclick="runQuery(this.textContent)" style="padding: 0.5rem 1rem; font-family: 'JetBrains Mono'; font-size: 0.65rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: var(--ink-muted); cursor: pointer; letter-spacing: 0.05em; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.color='var(--ink-muted)'">patent equals clinical proof</button>
+        <button class="example-query" onclick="runQuery(this.textContent)" style="padding: 0.5rem 1rem; font-family: 'JetBrains Mono'; font-size: 0.65rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: var(--ink-muted); cursor: pointer; letter-spacing: 0.05em; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.color='var(--ink-muted)'">NAD ruling MacuHealth</button>
+        <button class="example-query" onclick="runQuery(this.textContent)" style="padding: 0.5rem 1rem; font-family: 'JetBrains Mono'; font-size: 0.65rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: var(--ink-muted); cursor: pointer; letter-spacing: 0.05em; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)';this.style.color='var(--ink-muted)'">Highbury Partners track record</button>
+      </div>
+    </div>
+
+    <!-- SECTION 5: WHAT WE BUILD -->
+    <div class="section what-we-build" id="s5">
+      <div class="section-label">v. what bravetto builds</div>
+      <h2>
+        Not a marketing agency. Not a CRM. An epistemic engine that protects
+        what you've built and accelerates where you're going.
+      </h2>
+
+      <div class="capability-grid">
+        <div class="cap-card">
+          <h3>Epistemic Claim Validation</h3>
+          <p>
+            Every marketing claim, every product page, every
+            presentation&mdash;run through real-time evidence grading before it
+            ships. Know exactly where your evidence supports your language and
+            where it doesn't. Before the NAD does.
+          </p>
+          <span class="for-you"
+            >For MacuHealth + Memory Health: compliant claims engine</span
+          >
+        </div>
+        <div class="cap-card">
+          <h3>Clinical Intelligence Mapping</h3>
+          <p>
+            Continuous monitoring of every published trial, systematic review,
+            and expert commentary related to your formulations. When new
+            evidence emerges that strengthens or threatens your position, you
+            know first.
+          </p>
+          <span class="for-you"
+            >For Memory Health: re-MIND follow-up tracking + AD literature
+            watch</span
+          >
+        </div>
+        <div class="cap-card">
+          <h3>Regulatory Shield</h3>
+          <p>
+            FDA, FTC, and NAD precedent analysis mapped against your active
+            claims. Automated risk scoring. Pre-clearance for all
+            consumer-facing language. Transform regulatory risk from existential
+            threat to competitive moat.
+          </p>
+          <span class="for-you"
+            >For Avantius Group: portfolio-wide compliance architecture</span
+          >
+        </div>
+        <div class="cap-card">
+          <h3>Professional Channel Intelligence</h3>
+          <p>
+            Your distribution runs through eye care professionals. We build the
+            intelligence layer that arms every optometrist with evidence-grade
+            talking points, patient education materials, and outcome
+            tracking&mdash;all claim-verified.
+          </p>
+          <span class="for-you"
+            >For North Shore partnership: 120+ OD network activation</span
+          >
+        </div>
+        <div class="cap-card">
+          <h3>Portfolio Evidence Accelerator</h3>
+          <p>
+            Natura Medica and Safe Balance have zero public evidence. We design
+            the minimum viable clinical validation strategy: which endpoints,
+            which designs, which journals. Turn "unknown" into "defensible" at
+            the lowest possible cost.
+          </p>
+          <span class="for-you"
+            >For Natura Medica + Safe Balance: evidence roadmap</span
+          >
+        </div>
+        <div class="cap-card">
+          <h3>Deep Diligence Intelligence</h3>
+          <p>
+            What we did in 48 hours for your portfolio, we do for every
+            potential Highbury Partners investment. Full epistemic assessment.
+            Every claim verified. Every fracture line identified. Before you
+            write the check.
+          </p>
+          <span class="for-you"
+            >For Highbury Partners: AI-powered due diligence</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 6: THE PROOF -->
+    <div class="section the-proof" id="s6">
+      <div class="section-label">vi. what just happened</div>
+      <h2>
+        This experience you're reading? It was built by the system we're
+        describing.
+      </h2>
+
+      <div class="proof-timeline">
+        <div class="proof-event">
+          <div class="event-date">Friday, March 13</div>
+          <div class="event-text">
+            Cocktails and apps. A conversation about
+            <strong>what Bravetto is building</strong>.
+          </div>
+        </div>
+        <div class="proof-event">
+          <div class="event-date">Saturday, March 14</div>
+          <div class="event-text">
+            <strong>Epistemic web research initiated.</strong> Every public
+            facing entity, every clinical trial, every regulatory action, every
+            expert commentary&mdash;collected, cross-referenced, and
+            triangulated across 154+ sources.
+          </div>
+        </div>
+        <div class="proof-event">
+          <div class="event-date">Sunday, March 15</div>
+          <div class="event-text">
+            <strong>Tri-model epistemic analysis completed.</strong> Your claims
+            run through GPT-5.4, Claude Opus 4.6, and Gemini 3.1 Pro in
+            parallel. Agreement mapped. Disagreement explained. Unique
+            discoveries surfaced. Intelligence report synthesized.
+          </div>
+        </div>
+        <div class="proof-event">
+          <div class="event-date">Monday, March 16</div>
+          <div class="event-text">
+            <strong>This personalized experience generated.</strong> Not a pitch
+            deck. Not a brochure. A living demonstration of what happens when AI
+            understands <em>your</em> business, <em>your</em> evidence
+            landscape, and <em>your</em> risk surface.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 7: THE VISION -->
+    <div class="section the-vision" id="s7">
+      <div class="section-label">vii. the market</div>
+      <h2>
+        The health supplement industry is built on a regulatory time bomb. FDA,
+        FTC, and NAD enforcement is accelerating. The company that solves
+        epistemic compliance wins everything.
+      </h2>
+
+      <div class="vision-numbers">
+        <div class="v-num">
+          <div class="big">48hrs</div>
+          <div class="label">
+            Time from first meeting to complete epistemic portfolio analysis.
+            This experience.
+          </div>
+        </div>
+        <div class="v-num">
+          <div class="big">154+</div>
+          <div class="label">
+            Independent sources cross-referenced across three AI models to
+            validate every claim.
+          </div>
+        </div>
+        <div class="v-num">
+          <div class="big">3</div>
+          <div class="label">
+            Critical regulatory actions identified: NAD ruling (2023), FDA
+            warnings (2019), expert rejections (2018).
+          </div>
+        </div>
+        <div class="v-num">
+          <div class="big">Zero</div>
+          <div class="label">
+            Known competitors offering deterministic epistemic validation for
+            supplement portfolios.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 8: THE TEAM -->
+    <div class="section the-team" id="s8">
+      <div class="section-label">viii. who we are</div>
+      <h2>
+        Four people. No corporate layers. No committees. You talk to us, we
+        build for you.
+      </h2>
+
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-role">founder</div>
+          <h3>Michael Mataluni</h3>
+          <div class="team-title">
+            Co-CEO &amp; Chief Technology Innovation Officer
+          </div>
+          <p>
+            Atlanta kid. Georgia State. Quit school to hike the Appalachian
+            Trail. Neurodivergent&mdash;ADHD and other undiagnosed gifts that
+            make him see architecture where others see chaos. Nine foster kids.
+            Ran Buckhead Mountain Grill in Indiana. Small farm&mdash;tomatoes
+            and flowers at farmers markets. Chef at Bahama Breeze for Darden.
+            Twenty years in Florida. Launched the Kick Ass Dad podcast. Built a
+            digital marketing agency. Founded Bravetto in 2024. Invested $300K+
+            of his own retirement fund. Built the AI consciousness architecture
+            you're experiencing right now.
+          </p>
+          <p class="team-arc">
+            "Two years. Not a dollar yet. That changes now."
+          </p>
+          <div class="team-contact">
+            <a href="mailto:mike@bravetto.com">mike@bravetto.com</a>
+            <a href="tel:+18127865927">812.786.5927</a>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-role">strategic expansion</div>
+          <h3>Kristin Mataluni</h3>
+          <div class="team-title">
+            Executive Director of Strategic Expansion
+          </div>
+          <p>
+            Born in California. Ripped away from the world she loved to become
+            trapped in the Midwest&mdash;where she learned the true meaning of
+            hospitality and salt. Carries ten salt varieties at all times.
+            Brings them to restaurants because she doesn't trust chefs. Gourmet
+            cook herself&mdash;refuses to be called a chef. Neurodivergent: a
+            visual-spatial design genius who sees what's broken before anyone
+            else does. Found Michael in Georgia. Woven in life and love for a
+            quarter century. The brand eye&mdash;UI/UX review, language pattern
+            identification, copywriting validation from the buyer's perspective.
+            Co-owns Mataluni Enterprises with Michael: 1,033 domains, 931 of
+            them .ai.
+          </p>
+          <p class="team-arc">
+            The one who sees what doesn't belong. The one who knows what's
+            missing.
+          </p>
+          <div class="team-contact">
+            <a href="mailto:kristin@bravetto.com">kristin@bravetto.com</a>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-role">growth</div>
+          <h3>Bryan Whitehurst</h3>
+          <div class="team-title">Co-CEO &amp; Chief Growth Officer</div>
+          <p>
+            VP Sales background. Deal originator and closer. Brought in the
+            first enterprise contract. Manages people operations, marketing
+            strategy, sales pipeline, and executive finance. Behavioral health
+            industry expertise. The commercial gravity that converts technical
+            potential energy into kinetic revenue.
+          </p>
+          <p class="team-arc">
+            "Destiny brother. God and the universe reunited us for this purpose.
+            We are going to change humanity."
+          </p>
+          <div class="team-contact">
+            <a href="mailto:bryan@bravetto.com">bryan@bravetto.com</a>
+            <a href="tel:+14076193623">407.619.3623</a>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-role">sales</div>
+          <h3>Ryan McArdle</h3>
+          <div class="team-title">Business Development Manager</div>
+          <p>
+            Sales execution and deal closure. Commission-only because he
+            believes before the check clears. $2M annual quota. Demo and
+            presentation delivery. The closer who opened the door to the first
+            enterprise deal through a relationship he'd built on trust.
+          </p>
+          <p class="team-arc">Skin in the game. No salary. Pure conviction.</p>
+          <div class="team-contact">
+            <a href="mailto:ryan@bravetto.com">ryan@bravetto.com</a>
+            <a href="tel:+14049254858">404.925.4858</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 9: THE ASK -->
+    <div class="section the-ask" id="s9">
+      <div class="section-label">ix. the decision</div>
+      <h2>
+        Frederic, you spent 20 years building a science-based supplement
+        portfolio. We built something that protects it.
+      </h2>
+
+      <div class="final-line">
+        The question isn't whether you can afford to invest in Bravetto.<br />
+        It's whether you can afford not to.
+      </div>
+
+      <div class="contact">
+        <a href="mailto:mike@bravetto.com">mike@bravetto.com</a>
+      </div>
+
+      <div class="powered-by">powered by bravetto</div>
+    </div>
+
+    <script>
+      // ====== EPISTEMIC SEARCH ENGINE ======
+      // Pre-loaded knowledge base from 154+ sources
+      // knowledge loaded from external JSON — HTML is thin client
+      let KNOWLEDGE = [];
+      fetch('frederic-research/knowledge.json').then(r => r.json()).then(d => {
+        KNOWLEDGE = d;
+        // render all findings on load — full context, no guessing
+        renderResults(d, '');
+      }).catch(() => {
+        console.warn('knowledge.json not loaded — search disabled');
+      });
+
+      // filter, not search. all findings visible. typing narrows.
+      function searchKnowledge(query) {
+        if (!query || !query.trim()) return KNOWLEDGE;
+        const q = query.toLowerCase();
+        return KNOWLEDGE.filter(k =>
+          k.claim.toLowerCase().includes(q) ||
+          k.product.toLowerCase().includes(q) ||
+          k.evidence.toLowerCase().includes(q) ||
+          k.verdict.toLowerCase().includes(q)
+        );
+      }
+
+      function riskColor(risk) {
+        return { critical: '#b33a3a', high: '#c9a227', medium: '#8a7a3a', low: '#2a7a3a' }[risk] || '#7a7a7a';
+      }
+
+      function confidenceColor(c) {
+        if (c >= 70) return '#2a7a3a';
+        if (c >= 40) return '#c9a227';
+        return '#b33a3a';
+      }
+
+      // Voice synthesis — we are a voice architecture company
+      function speakResult(text) {
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+          const u = new SpeechSynthesisUtterance(text);
+          u.rate = 0.95;
+          u.pitch = 0.9;
+          u.volume = 0.8;
+          // prefer a natural voice
+          const voices = window.speechSynthesis.getVoices();
+          const preferred = voices.find(v => v.name.includes('Samantha') || v.name.includes('Karen') || v.name.includes('Daniel'));
+          if (preferred) u.voice = preferred;
+          window.speechSynthesis.speak(u);
+        }
+      }
+
+      function renderResults(results, query) {
+        const container = document.getElementById('search-results');
+        if (results.length === 0) {
+          container.innerHTML = `<div style="color: var(--ink-muted); font-family: 'JetBrains Mono'; font-size: 0.75rem; padding: 2rem 0; letter-spacing: 0.05em;">No matching evidence found for "${query}". This claim has not been assessed in the current knowledge base.</div>`;
+          return;
+        }
+
+        let html = '';
+        let voiceText = '';
+        for (const r of results) {
+          const confBar = `<div style="width: 200px; height: 4px; background: rgba(255,255,255,0.06); margin: 0.5rem 0; position: relative;"><div style="width: ${r.confidence}%; height: 100%; background: ${confidenceColor(r.confidence)}; transition: width 1.2s ease;"></div></div>`;
+          html += `
+            <div style="border: 1px solid rgba(255,255,255,0.06); padding: 1.5rem; margin-bottom: 1rem; background: rgba(255,255,255,0.02); transition: border-color 0.3s;" onmouseover="this.style.borderColor='rgba(201,162,39,0.3)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.06)'">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                <span style="font-family: 'JetBrains Mono'; font-size: 0.6rem; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase;">${r.product}</span>
+                <span style="font-family: 'JetBrains Mono'; font-size: 0.6rem; color: ${riskColor(r.risk)}; letter-spacing: 0.1em; padding: 0.2rem 0.6rem; border: 1px solid ${riskColor(r.risk)}; text-transform: uppercase;">${r.risk} risk</span>
+              </div>
+              <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--cream); margin-bottom: 0.5rem; font-weight: 500;">${r.verdict}</div>
+              <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem;">
+                <span style="font-family: 'JetBrains Mono'; font-size: 0.6rem; color: var(--ink-muted); letter-spacing: 0.05em;">CONFIDENCE ${r.confidence}%</span>
+                ${confBar}
+              </div>
+              <p style="font-size: 0.82rem; color: rgba(250,249,246,0.7); line-height: 1.7; margin-bottom: 0.75rem;">${r.evidence}</p>
+              <div style="font-size: 0.7rem; color: var(--ink-muted); margin-bottom: 0.75rem;">${r.sources.map(s => `<span style="display: inline-block; padding: 0.15rem 0.5rem; border: 1px solid rgba(255,255,255,0.05); margin: 0.15rem; font-family: 'JetBrains Mono'; font-size: 0.55rem; letter-spacing: 0.03em;">${s}</span>`).join('')}</div>
+              <div style="font-size: 0.78rem; color: var(--gold); line-height: 1.6; padding-top: 0.5rem; border-top: 1px solid rgba(255,255,255,0.04);"><strong style="font-family: 'JetBrains Mono'; font-size: 0.6rem; letter-spacing: 0.1em;">RECOMMENDATION:</strong> ${r.recommendation}</div>
+            </div>`;
+          voiceText += `${r.product}. Verdict: ${r.verdict}. Confidence: ${r.confidence} percent. ${r.recommendation} `;
+        }
+
+        container.innerHTML = html;
+        // Speak the first result
+        if (voiceText) speakResult(voiceText.slice(0, 500));
+      }
+
+      function runQuery(q) {
+        const input = document.getElementById('epistemic-search');
+        input.value = q;
+        // Typing animation effect
+        const container = document.getElementById('search-results');
+        const results = searchKnowledge(q);
+        renderResults(results, q);
+      }
+
+      document.getElementById('epistemic-search').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && this.value.trim()) {
+          runQuery(this.value.trim());
+        }
+      });
+
+      // Voice: 2 states. playing or not. stateless.
+      function playVoice() {
+        const a = document.getElementById('voice-audio');
+        const b = document.getElementById('voice-btn');
+        const playing = !a.paused;
+        if (playing) { a.pause(); a.currentTime = 0; }
+        else { a.play(); }
+        b.textContent = playing ? 'listen to this report' : 'listening...';
+        a.onended = () => { b.textContent = 'listen to this report'; };
+      }
+
+      // Load voices for browser speech synthesis (search result reading)
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.getVoices();
+        window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+      }
+
+      // ====== ANIMATED COUNTERS ======
+      function animateCounter(el, target, suffix = '') {
+        const duration = 2000;
+        const start = performance.now();
+        const isNumber = !isNaN(target);
+        if (!isNumber) { el.textContent = target; return; }
+        const numTarget = parseInt(target);
+        function tick(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(numTarget * eased) + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+
+      // ====== TYPING DOTS ANIMATION ======
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes dots { 0%,20% { content: '.'; } 40% { content: '..'; } 60%,100% { content: '...'; } }
+        .typing-dots::after { content: ''; animation: dots 1.5s steps(1) infinite; }
+        .epistemic-engine input::placeholder { color: rgba(250,249,246,0.25); }
+
+        /* Navigation dots */
+        .nav-dots { position: fixed; right: 2rem; top: 50%; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 0.75rem; }
+        .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.15); cursor: pointer; transition: all 0.3s; }
+        .nav-dot.active { background: var(--gold); transform: scale(1.3); }
+        .nav-dot:hover { background: rgba(201,162,39,0.5); }
+
+        /* Progress bar */
+        .scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--gold); z-index: 200; transition: width 0.1s; }
+      `;
+      document.head.appendChild(style);
+
+      // Add progress bar
+      const progressBar = document.createElement('div');
+      progressBar.className = 'scroll-progress';
+      document.body.appendChild(progressBar);
+
+      // Add navigation dots
+      const allSections = document.querySelectorAll('.section');
+      const navDots = document.createElement('div');
+      navDots.className = 'nav-dots';
+      allSections.forEach((s, i) => {
+        const dot = document.createElement('div');
+        dot.className = 'nav-dot';
+        dot.onclick = () => s.scrollIntoView({ behavior: 'smooth' });
+        navDots.appendChild(dot);
+      });
+      document.body.appendChild(navDots);
+
+      // Update progress bar and nav dots on scroll
+      window.addEventListener('scroll', () => {
+        const scrollTop = document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        progressBar.style.width = (scrollTop / scrollHeight * 100) + '%';
+
+        // Update active dot
+        const dots = navDots.querySelectorAll('.nav-dot');
+        allSections.forEach((s, i) => {
+          const rect = s.getBoundingClientRect();
+          if (rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 2) {
+            dots.forEach(d => d.classList.remove('active'));
+            dots[i]?.classList.add('active');
+          }
+        });
+      });
+
+      // Fix: make scroll hints work for the new section count
+      document.querySelectorAll(".section").forEach((s, i) => (s.id = "s" + i));
+      // Intersection Observer for scroll-triggered reveals
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        {
+          threshold: 0.15,
+          rootMargin: "0px 0px -50px 0px",
+        },
+      );
+
+      document
+        .querySelectorAll(".section:not(.overture)")
+        .forEach((section) => {
+          observer.observe(section);
+        });
+
+      // Animate confidence bars on scroll
+      const barObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.querySelectorAll(".conf-fill").forEach((bar) => {
+                const width =
+                  bar.style.width || window.getComputedStyle(bar).width;
+                bar.style.width = "0";
+                requestAnimationFrame(() => {
+                  requestAnimationFrame(() => {
+                    bar.style.width = width;
+                  });
+                });
+              });
+            }
+          });
+        },
+        { threshold: 0.3 },
+      );
+
+      document.querySelectorAll(".epistemic-table").forEach((table) => {
+        barObserver.observe(table);
+      });
+    </script>
+    <!-- Voice Epistemic Engine — browser mic → local search → voice.bravetto.ai/speak → audio -->
+    <div id="voice-engine" style="position: fixed; bottom: 2rem; right: 2rem; z-index: 300;">
+      <button id="mic-btn" onclick="toggleMic()" style="
+        width: 56px; height: 56px; border-radius: 50%;
+        background: var(--ink); border: 1px solid var(--gold);
+        color: var(--gold); cursor: pointer; transition: all 0.3s;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      " onmouseover="this.style.background='var(--gold)';this.style.color='var(--ink)'" onmouseout="if(!window._micActive){this.style.background='var(--ink)';this.style.color='var(--gold)'}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+          <line x1="12" y1="19" x2="12" y2="23"/>
+        </svg>
+      </button>
+      <div id="mic-status" style="
+        position: absolute; bottom: 70px; right: 0; white-space: nowrap;
+        font-family: 'JetBrains Mono', monospace; font-size: 0.6rem;
+        color: var(--gold); letter-spacing: 0.1em; opacity: 0;
+        transition: opacity 0.3s; text-transform: uppercase;
+      "></div>
+    </div>
+
+    <script>
+      window._micActive = false;
+      let _recognition = null;
+
+      // hide mic button entirely on unsupported surfaces
+      (function() {
+        const supported = 'webkitSpeechRecognition' in window || 'SpeechRecognition' in window;
+        const ios = /iPad|iPhone|iPod/.test(navigator.userAgent);
+        const safari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+        const iosNonSafari = ios && !safari;
+        if (!supported || iosNonSafari) {
+          const el = document.getElementById('voice-engine');
+          if (el) el.style.display = 'none';
+        }
+      })();
+
+      function toggleMic() {
+        if (window._micActive) { stopMic(); return; }
+        const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        _recognition = new SR();
+        _recognition.continuous = false;
+        _recognition.interimResults = false;
+        _recognition.lang = 'en-US';
+
+        window._micActive = true;
+        const btn = document.getElementById('mic-btn');
+        const status = document.getElementById('mic-status');
+        btn.style.background = 'var(--gold)';
+        btn.style.color = 'var(--ink)';
+        btn.style.animation = 'pulse 1.5s ease infinite';
+        status.textContent = 'listening...';
+        status.style.opacity = '1';
+
+        _recognition.onresult = async (e) => {
+          const query = e.results[0][0].transcript;
+          stopMic();
+          status.textContent = 'searching...';
+          status.style.opacity = '1';
+
+          // search embedded knowledge
+          const results = searchKnowledge(query);
+          if (results.length === 0) {
+            status.textContent = 'no match found';
+            setTimeout(() => { status.style.opacity = '0'; }, 3000);
+            return;
+          }
+
+          // render results in search section
+          const engine = document.getElementById('s-engine');
+          if (engine) engine.scrollIntoView({ behavior: 'smooth' });
+          document.getElementById('epistemic-search').value = query;
+          renderResults(results, query);
+
+          // speak the verdict via voice.bravetto.ai
+          const r = results[0];
+          const speech = r.product + '. ' + r.verdict + '. Confidence: ' + r.confidence + ' percent. ' + r.recommendation;
+          status.textContent = 'speaking...';
+
+          try {
+            const res = await fetch('https://voice.bravetto.ai/speak', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ text: speech.slice(0, 500) })
+            });
+            if (res.ok) {
+              const blob = await res.blob();
+              const url = URL.createObjectURL(blob);
+              const audio = new Audio(url);
+              audio.play();
+              audio.onended = () => { URL.revokeObjectURL(url); status.style.opacity = '0'; };
+            } else {
+              // fallback to browser TTS
+              speakResult(speech.slice(0, 500));
+              status.style.opacity = '0';
+            }
+          } catch {
+            speakResult(speech.slice(0, 500));
+            status.style.opacity = '0';
+          }
+        };
+
+        _recognition.onerror = () => { stopMic(); };
+        _recognition.onend = () => { if (window._micActive) stopMic(); };
+        _recognition.start();
+      }
+
+      function stopMic() {
+        window._micActive = false;
+        if (_recognition) { try { _recognition.stop(); } catch {} }
+        const btn = document.getElementById('mic-btn');
+        btn.style.background = 'var(--ink)';
+        btn.style.color = 'var(--gold)';
+        btn.style.animation = 'none';
+      }
+    </script>
+  </body>
+</html>
