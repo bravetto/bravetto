@@ -1371,20 +1371,7 @@
       }
 
       // Voice synthesis — we are a voice architecture company
-      function speakResult(text) {
-        if ('speechSynthesis' in window) {
-          window.speechSynthesis.cancel();
-          const u = new SpeechSynthesisUtterance(text);
-          u.rate = 0.95;
-          u.pitch = 0.9;
-          u.volume = 0.8;
-          // prefer a natural voice
-          const voices = window.speechSynthesis.getVoices();
-          const preferred = voices.find(v => v.name.includes('Samantha') || v.name.includes('Karen') || v.name.includes('Daniel'));
-          if (preferred) u.voice = preferred;
-          window.speechSynthesis.speak(u);
-        }
-      }
+      // no browser TTS. ElevenLabs only.
 
       function renderResults(results, query) {
         const container = document.getElementById('search-results');
@@ -1417,7 +1404,7 @@
 
         container.innerHTML = html;
         // Speak the first result
-        if (voiceText) speakResult(voiceText.slice(0, 500));
+        // voice handled by mic handler via voice.bravetto.ai/speak
       }
 
       function runQuery(q) {
@@ -1446,11 +1433,6 @@
         a.onended = () => { b.textContent = 'listen to this report'; };
       }
 
-      // Load voices for browser speech synthesis (search result reading)
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.getVoices();
-        window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
-      }
 
       // ====== ANIMATED COUNTERS ======
       function animateCounter(el, target, suffix = '') {
@@ -1652,7 +1634,7 @@
             a.play();
             a.onended = () => { status.style.opacity = '0'; };
           }).catch(() => {
-            speakResult(speech.slice(0, 500));
+            status.style.opacity = '0';
             status.style.opacity = '0';
           });
         };
