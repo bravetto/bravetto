@@ -1342,15 +1342,11 @@
     <script>
       // ====== EPISTEMIC SEARCH ENGINE ======
       // Pre-loaded knowledge base from 154+ sources
-      // knowledge loaded from external JSON — HTML is thin client
+      // knowledge: loaded or not. binary.
       let KNOWLEDGE = [];
-      fetch('frederic-research/knowledge.json').then(r => r.json()).then(d => {
-        KNOWLEDGE = d;
-        // render all findings on load — full context, no guessing
-        renderResults(d, '');
-      }).catch(() => {
-        console.warn('knowledge.json not loaded — search disabled');
-      });
+      fetch('frederic-research/knowledge.json')
+        .then(r => r.json())
+        .then(d => { KNOWLEDGE = d; renderResults(d, ''); });
 
       // filter, not search. all findings visible. typing narrows.
       function searchKnowledge(query) {
@@ -1632,53 +1628,37 @@
         _recognition.onresult = async (e) => {
           const query = e.results[0][0].transcript;
           stopMic();
-          status.textContent = 'searching...';
-          status.style.opacity = '1';
 
-          // search embedded knowledge
-          const results = searchKnowledge(query);
-          if (results.length === 0) {
-            status.textContent = 'no match found';
-            setTimeout(() => { status.style.opacity = '0'; }, 3000);
-            return;
-          }
-
-          // render results in search section
+          // scroll to engine, show query, filter results
           const engine = document.getElementById('s-engine');
           if (engine) engine.scrollIntoView({ behavior: 'smooth' });
           document.getElementById('epistemic-search').value = query;
-          renderResults(results, query);
+          const results = searchKnowledge(query);
+          renderResults(results.length ? results : KNOWLEDGE, query);
 
-          // speak the verdict via voice.bravetto.ai
-          const r = results[0];
-          const speech = r.product + '. ' + r.verdict + '. Confidence: ' + r.confidence + ' percent. ' + r.recommendation;
+          // speak first result
+          const r = results[0] || KNOWLEDGE[0];
+          if (!r) return;
+          const speech = r.product + '. ' + r.verdict + '. ' + r.recommendation;
           status.textContent = 'speaking...';
+          status.style.opacity = '1';
 
-          try {
-            const res = await fetch('https://voice.bravetto.ai/speak', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ text: speech.slice(0, 500) })
-            });
-            if (res.ok) {
-              const blob = await res.blob();
-              const url = URL.createObjectURL(blob);
-              const audio = new Audio(url);
-              audio.play();
-              audio.onended = () => { URL.revokeObjectURL(url); status.style.opacity = '0'; };
-            } else {
-              // fallback to browser TTS
-              speakResult(speech.slice(0, 500));
-              status.style.opacity = '0';
-            }
-          } catch {
+          fetch('https://voice.bravetto.ai/speak', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: speech.slice(0, 500) })
+          }).then(res => res.blob()).then(blob => {
+            const a = new Audio(URL.createObjectURL(blob));
+            a.play();
+            a.onended = () => { status.style.opacity = '0'; };
+          }).catch(() => {
             speakResult(speech.slice(0, 500));
             status.style.opacity = '0';
-          }
+          });
         };
 
-        _recognition.onerror = () => { stopMic(); };
-        _recognition.onend = () => { if (window._micActive) stopMic(); };
+        _recognition.onerror = () => stopMic();
+        _recognition.onend = () => stopMic();
         _recognition.start();
       }
 
