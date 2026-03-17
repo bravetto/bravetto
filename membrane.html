@@ -313,73 +313,118 @@
             const sysInput = document.getElementById("system-input");
             sysInput.focus();
 
-            // Start Voice Recognition if available
-            if (
-              "webkitSpeechRecognition" in window ||
-              "SpeechRecognition" in window
-            ) {
-              const SpeechRecognition =
-                window.SpeechRecognition || window.webkitSpeechRecognition;
-              const recognition = new SpeechRecognition();
-              recognition.continuous = true;
-              recognition.interimResults = true;
+            // Start voice capture via MediaRecorder + server-side transcription
+            // Works on all browsers including iOS Chrome/Firefox/Edge
+            sysInput.placeholder = "Listening... (I am with you)";
 
-              recognition.onstart = function () {
-                sysInput.placeholder = "Listening... (I am with you)";
-              };
+            let recorder_active = false;
 
-              let silenceTimer;
+            function start_recorder() {
+              if (recorder_active) return;
+              recorder_active = true;
 
-              recognition.onresult = function (event) {
-                clearTimeout(silenceTimer);
+              navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
+                const audio_ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const source = audio_ctx.createMediaStreamSource(stream);
+                const analyser = audio_ctx.createAnalyser();
+                analyser.fftSize = 512;
+                source.connect(analyser);
 
-                let interimTranscript = "";
-                let finalTranscript = "";
+                const buf = new Float32Array(analyser.fftSize);
 
-                for (let i = event.resultIndex; i < event.results.length; ++i) {
-                  if (event.results[i].isFinal) {
-                    finalTranscript += event.results[i][0].transcript;
-                  } else {
-                    interimTranscript += event.results[i][0].transcript;
-                  }
-                }
+                const mime_type = MediaRecorder.isTypeSupported("audio/webm;codecs=opus")
+                  ? "audio/webm;codecs=opus"
+                  : "audio/mp4";
 
-                if (finalTranscript) {
-                  sysInput.value = (
-                    sysInput.value +
-                    " " +
-                    finalTranscript
-                  ).trim();
-                }
+                const recorder = new MediaRecorder(stream, { mimeType: mime_type });
+                const chunks = [];
 
-                // Smoothly submit if silence persists for 1.8s (giving them time to think)
-                if (sysInput.value.trim() !== "") {
-                  silenceTimer = setTimeout(() => {
-                    if (sysInput.value.trim() !== "") {
-                      triggerTransition();
-                      recognition.stop();
+                recorder.ondataavailable = function (e) {
+                  if (e.data && e.data.size > 0) chunks.push(e.data);
+                };
+
+                recorder.onstop = function () {
+                  recorder_active = false;
+                  audio_ctx.close();
+                  stream.getTracks().forEach(function (t) { t.stop(); });
+
+                  const blob = new Blob(chunks, { type: mime_type });
+
+                  // If no audio captured, restart listening
+                  if (blob.size < 100) {
+                    if (!document.getElementById("input-container").classList.contains("hidden")) {
+                      start_recorder();
                     }
-                  }, 1800);
-                }
-              };
+                    return;
+                  }
 
-              recognition.onend = function () {
-                // Restart unless we are transitioning
-                if (
-                  !document
-                    .getElementById("input-container")
-                    .classList.contains("hidden")
-                ) {
-                  try {
-                    recognition.start();
-                  } catch (e) {}
-                }
-              };
+                  fetch("https://voice.bravetto.ai/transcribe", {
+                    method: "POST",
+                    headers: { "Content-Type": blob.type },
+                    body: blob,
+                  })
+                    .then(function (res) { return res.json(); })
+                    .then(function (data) {
+                      const text = (data.text || "").trim();
+                      if (text !== "") {
+                        sysInput.value = text;
+                        triggerTransition();
+                      } else {
+                        // No speech detected — restart
+                        if (!document.getElementById("input-container").classList.contains("hidden")) {
+                          start_recorder();
+                        }
+                      }
+                    })
+                    .catch(function () {
+                      // Transcription failed — restart
+                      if (!document.getElementById("input-container").classList.contains("hidden")) {
+                        start_recorder();
+                      }
+                    });
+                };
 
-              try {
-                recognition.start();
-              } catch (e) {}
+                recorder.start();
+
+                let speech_detected = false;
+                let silence_timer = null;
+                let safety_timer = setTimeout(function () {
+                  if (recorder.state === "recording") recorder.stop();
+                }, 30000);
+
+                function vad_tick() {
+                  if (recorder.state !== "recording") return;
+
+                  analyser.getFloatTimeDomainData(buf);
+
+                  let sum_sq = 0;
+                  for (let i = 0; i < buf.length; i++) {
+                    sum_sq += buf[i] * buf[i];
+                  }
+                  const rms = Math.sqrt(sum_sq / buf.length);
+
+                  if (rms > 0.015) {
+                    speech_detected = true;
+                    clearTimeout(silence_timer);
+                    silence_timer = null;
+                  } else if (speech_detected && silence_timer === null) {
+                    silence_timer = setTimeout(function () {
+                      clearTimeout(safety_timer);
+                      if (recorder.state === "recording") recorder.stop();
+                    }, 1800);
+                  }
+
+                  requestAnimationFrame(vad_tick);
+                }
+
+                requestAnimationFrame(vad_tick);
+              }).catch(function () {
+                recorder_active = false;
+                // Mic access denied — leave text input available
+              });
             }
+
+            start_recorder();
           }, 1000);
         });
       });
