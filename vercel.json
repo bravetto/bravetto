@@ -50,6 +50,7 @@
     { "source": "/sales", "destination": "/sales.html" },
     { "source": "/brand-kit", "destination": "/bravetto-brand-kit.html" },
     { "source": "/vault", "destination": "/vault.html" },
-    { "source": "/domains", "destination": "/vault.html" }
+    { "source": "/domains", "destination": "/vault.html" },
+    { "source": "/products", "destination": "/products.html" }
   ]
 }

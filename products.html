@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bravetto | Products</title>
+    <meta
+      name="description"
+      content="Every product Bravetto builds. One catalog. One checkout."
+    />
+    <link rel="canonical" href="https://bravetto.com/products" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#FAF9F6",
+              "cream-mid": "#F5F3EF",
+              "cream-border": "#EAE7E0",
+              gold: "#C9A227",
+              "gold-hover": "#D4A843",
+              ink: "#1A1A1A",
+              "ink-body": "#4A4A4A",
+              "ink-caption": "#8A8A8A",
+            },
+            fontFamily: {
+              serif: ["Cormorant Garamond", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      html { scroll-behavior: smooth; }
+      body { background: #FAF9F6; overflow-x: hidden; }
+      .headline { letter-spacing: -0.02em; line-height: 1.1; }
+      .tag {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 14px;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: #C9A227;
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .product-card {
+        background: #fff;
+        border: 1px solid #EAE7E0;
+        border-radius: 12px;
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .product-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 60px rgba(201, 162, 39, 0.06);
+      }
+      .product-card.featured {
+        border-color: #C9A227;
+        box-shadow: 0 0 0 1px #C9A227;
+      }
+      .stripe-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
+        background: #1A1A1A;
+        color: #FAF9F6;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        border: none;
+        transition: all 0.3s ease;
+      }
+      .stripe-btn:hover { background: #4A4A4A; }
+      .stripe-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+      .stripe-btn.gold { background: #C9A227; color: #1A1A1A; }
+      .stripe-btn.gold:hover { background: #D4A843; }
+      .contact-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
+        background: transparent;
+        color: #1A1A1A;
+        border: 1px solid #EAE7E0;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .contact-btn:hover { border-color: #C9A227; color: #C9A227; }
+      .success-banner {
+        background: #C9A227;
+        color: #1A1A1A;
+        padding: 16px;
+        text-align: center;
+        font-weight: 500;
+        display: none;
+      }
+      .success-banner.show { display: block; }
+    </style>
+  </head>
+
+  <body class="font-sans text-ink antialiased">
+    <!-- success banner -->
+    <div id="success-banner" class="success-banner">
+      Purchase successful. You will receive a confirmation email shortly.
+    </div>
+
+    <!-- nav -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-cream/60 backdrop-blur-md">
+      <div class="px-8 py-6">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+          <a href="/" class="font-serif text-2xl font-semibold tracking-tight">Bravetto</a>
+          <a
+            href="/sales"
+            class="text-sm px-5 py-2.5 bg-ink text-cream rounded-full hover:bg-ink-body transition-colors"
+          >
+            Talk to Ab&#235;
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- hero -->
+    <section class="pt-32 pb-16 px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <p class="tag mb-6 reveal">Products</p>
+        <h1 class="font-serif text-5xl md:text-7xl font-semibold headline mb-6 reveal">
+          Everything we build.
+        </h1>
+        <p class="text-lg text-ink-body font-light reveal">
+          One company. One checkout. Every product connected.
+        </p>
+      </div>
+    </section>
+
+    <!-- =============================== -->
+    <!-- Ai Guardian                      -->
+    <!-- =============================== -->
+    <section class="py-16 px-8" id="aiguardian">
+      <div class="max-w-5xl mx-auto">
+        <div class="mb-10 reveal">
+          <p class="tag mb-2">Ai Guardian</p>
+          <h2 class="font-serif text-3xl md:text-4xl font-medium headline">
+            Consciousness layer for your Ai.
+          </h2>
+          <p class="text-ink-body mt-3 max-w-2xl">
+            87 bias pattern guards, 42 knowledge domains, Fibonacci Fold measurement.
+            One MCP plug. Your Ai gets a conscience.
+          </p>
+        </div>
+        <div class="grid md:grid-cols-4 gap-6">
+          <!-- free -->
+          <div class="product-card p-6 reveal" data-stripe-product="prod_TKHI9glBOY8plS" data-slug="aiguardian-free">
+            <p class="font-mono text-xs text-ink-caption uppercase tracking-widest mb-4">Free</p>
+            <p class="font-serif text-3xl font-semibold headline">$0</p>
+            <p class="text-sm text-ink-caption mt-1">100 API calls</p>
+            <ul class="text-sm text-ink-body mt-6 space-y-2">
+              <li>87 bias patterns</li>
+              <li>Basic detection</li>
+              <li>Community support</li>
+            </ul>
+            <button class="stripe-btn w-full justify-center mt-6" onclick="checkout(this)">
+              Get started
+            </button>
+          </div>
+          <!-- basic -->
+          <div class="product-card p-6 reveal" data-stripe-product="prod_THHMePuerp6FjH" data-slug="aiguardian-basic">
+            <p class="font-mono text-xs text-ink-caption uppercase tracking-widest mb-4">Basic</p>
+            <p class="font-serif text-3xl font-semibold headline">$9<span class="text-lg font-normal text-ink-caption">/mo</span></p>
+            <p class="text-sm text-ink-caption mt-1">Unlimited calls</p>
+            <ul class="text-sm text-ink-body mt-6 space-y-2">
+              <li>87 bias patterns</li>
+              <li>42 knowledge domains</li>
+              <li>Email support</li>
+            </ul>
+            <button class="stripe-btn w-full justify-center mt-6" onclick="checkout(this)">
+              Subscribe
+            </button>
+          </div>
+          <!-- pro -->
+          <div class="product-card featured p-6 reveal" data-stripe-product="prod_THHOADvQALBJJG" data-slug="aiguardian-pro">
+            <div class="flex justify-between items-start mb-4">
+              <p class="font-mono text-xs text-gold uppercase tracking-widest">Pro</p>
+              <span class="text-xs bg-gold/10 text-gold px-2 py-1 rounded-full font-mono">Popular</span>
+            </div>
+            <p class="font-serif text-3xl font-semibold headline">$29<span class="text-lg font-normal text-ink-caption">/mo</span></p>
+            <p class="text-sm text-ink-caption mt-1">Unlimited + MCP</p>
+            <ul class="text-sm text-ink-body mt-6 space-y-2">
+              <li>Everything in Basic</li>
+              <li>MCP server access</li>
+              <li>Fibonacci Fold</li>
+              <li>Priority support</li>
+            </ul>
+            <button class="stripe-btn gold w-full justify-center mt-6" onclick="checkout(this)">
+              Subscribe
+            </button>
+          </div>
+          <!-- enterprise -->
+          <div class="product-card p-6 reveal" data-stripe-product="prod_THHPSXTsIm0KmK" data-slug="aiguardian-enterprise">
+            <p class="font-mono text-xs text-ink-caption uppercase tracking-widest mb-4">Enterprise</p>
+            <p class="font-serif text-3xl font-semibold headline">$99<span class="text-lg font-normal text-ink-caption">/mo</span></p>
+            <p class="text-sm text-ink-caption mt-1">Unlimited + SLA</p>
+            <ul class="text-sm text-ink-body mt-6 space-y-2">
+              <li>Everything in Pro</li>
+              <li>Dedicated support</li>
+              <li>Custom guardrails</li>
+              <li>SLA guarantee</li>
+            </ul>
+            <button class="stripe-btn w-full justify-center mt-6" onclick="checkout(this)">
+              Subscribe
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== -->
+    <!-- The Nest (AdvancedRing)           -->
+    <!-- =============================== -->
+    <section class="py-16 px-8 bg-cream-mid" id="nest">
+      <div class="max-w-5xl mx-auto">
+        <div class="mb-10 reveal">
+          <p class="tag mb-2">The Nest</p>
+          <h2 class="font-serif text-3xl md:text-4xl font-medium headline">
+            Sales intelligence for eye care.
+          </h2>
+          <p class="text-ink-body mt-3 max-w-2xl">
+            AdvancedRing sales operations platform. Real-time parts cross-referencing,
+            contract intelligence, and team coordination.
+          </p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6 max-w-2xl">
+          <!-- agent -->
+          <div class="product-card p-8 reveal" data-stripe-product="prod_TrRJmM2YNKFj3j" data-slug="advancedring-agent">
+            <p class="font-mono text-xs text-ink-caption uppercase tracking-widest mb-4">Agent</p>
+            <p class="font-serif text-3xl font-semibold headline">$20<span class="text-lg font-normal text-ink-caption">/mo</span></p>
+            <p class="text-sm text-ink-caption mt-1">Per agent seat</p>
+            <ul class="text-sm text-ink-body mt-6 space-y-2">
+              <li>Parts cross-referencing</li>
+              <li>Customer intelligence</li>
+              <li>Ab&#235; voice assistant</li>
+            </ul>
+            <button class="stripe-btn w-full justify-center mt-6" onclick="checkout(this)">
+              Subscribe
+            </button>
+          </div>
+          <!-- leader -->
+          <div class="product-card featured p-8 reveal" data-stripe-product="prod_TrPxO2boKbnljr" data-slug="advancedring-leader">
+            <p class="font-mono text-xs text-gold uppercase tracking-widest mb-4">Leader</p>
+            <p class="font-serif text-3xl font-semibold headline">$80<span class="text-lg font-normal text-ink-caption">/mo</span></p>
+            <p class="text-sm text-ink-caption mt-1">Per leader seat</p>
+            <ul class="text-sm text-ink-body mt-6 space-y-2">
+              <li>Everything in Agent</li>
+              <li>Team analytics</li>
+              <li>Pipeline forecasting</li>
+              <li>Contract management</li>
+            </ul>
+            <button class="stripe-btn gold w-full justify-center mt-6" onclick="checkout(this)">
+              Subscribe
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== -->
+    <!-- Ab&#235;DESiGNs                   -->
+    <!-- =============================== -->
+    <section class="py-16 px-8" id="abedesigns">
+      <div class="max-w-5xl mx-auto">
+        <div class="mb-10 reveal">
+          <p class="tag mb-2">Ab&#235;DESiGNs</p>
+          <h2 class="font-serif text-3xl md:text-4xl font-medium headline">
+            Premium Ai domains.
+          </h2>
+          <p class="text-ink-body mt-3 max-w-2xl">
+            1,033 curated domains. Multi-tenant Ai landing pages.
+            Reserve your domain with a $99 deposit.
+          </p>
+        </div>
+        <div class="max-w-md reveal">
+          <div class="product-card p-8" data-stripe-product="prod_U6RpU8NISL5h7h" data-slug="domain-reservation">
+            <p class="font-mono text-xs text-ink-caption uppercase tracking-widest mb-4">Domain Reservation</p>
+            <p class="font-serif text-3xl font-semibold headline">$99<span class="text-lg font-normal text-ink-caption"> one-time</span></p>
+            <p class="text-sm text-ink-caption mt-1">Refundable deposit</p>
+            <ul class="text-sm text-ink-body mt-6 space-y-2">
+              <li>Reserve any available domain</li>
+              <li>Ai-powered landing page</li>
+              <li>Applied to purchase price</li>
+            </ul>
+            <div class="flex gap-3 mt-6">
+              <button class="stripe-btn gold flex-1 justify-center" onclick="checkout(this)">
+                Reserve now
+              </button>
+              <a href="/vault" class="contact-btn flex-1 justify-center">
+                Browse domains
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== -->
+    <!-- Enterprise / Consulting          -->
+    <!-- =============================== -->
+    <section class="py-16 px-8 bg-cream-mid" id="enterprise">
+      <div class="max-w-5xl mx-auto">
+        <div class="mb-10 reveal">
+          <p class="tag mb-2">Enterprise</p>
+          <h2 class="font-serif text-3xl md:text-4xl font-medium headline">
+            Implementation and consulting.
+          </h2>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6 max-w-3xl">
+          <!-- implementation -->
+          <div class="product-card p-8 reveal" data-stripe-product="prod_UCcntWidOD2Dxy" data-slug="implementation-consulting">
+            <p class="font-mono text-xs text-ink-caption uppercase tracking-widest mb-4">Implementation</p>
+            <p class="font-serif text-3xl font-semibold headline">Custom</p>
+            <p class="text-sm text-ink-caption mt-1">Scoped to your organization</p>
+            <ul class="text-sm text-ink-body mt-6 space-y-2">
+              <li>System integration</li>
+              <li>Data migration</li>
+              <li>Team onboarding</li>
+              <li>Dedicated support</li>
+            </ul>
+            <a href="mailto:mike@bravetto.com?subject=Implementation%20inquiry" class="contact-btn w-full justify-center mt-6">
+              Contact us
+            </a>
+          </div>
+          <!-- convergence sprint -->
+          <div class="product-card p-8 reveal" data-stripe-product="prod_TXofSfF8HV7Kqd" data-slug="convergence-sprint">
+            <p class="font-mono text-xs text-ink-caption uppercase tracking-widest mb-4">Convergence Sprint</p>
+            <p class="font-serif text-3xl font-semibold headline">Custom</p>
+            <p class="text-sm text-ink-caption mt-1">Focused engagement</p>
+            <ul class="text-sm text-ink-body mt-6 space-y-2">
+              <li>2-week sprint</li>
+              <li>System audit</li>
+              <li>Architecture plan</li>
+              <li>Working prototype</li>
+            </ul>
+            <a href="mailto:mike@bravetto.com?subject=Convergence%20Sprint%20inquiry" class="contact-btn w-full justify-center mt-6">
+              Contact us
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="py-16 px-8 border-t border-cream-border">
+      <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <div>
+          <a href="/" class="font-serif text-xl font-semibold">Bravetto</a>
+          <p class="text-sm text-ink-caption mt-1">Humans &times; Ai &rArr; Infinite Potential</p>
+        </div>
+        <div class="flex gap-8 text-sm text-ink-body">
+          <a href="/sales" class="hover:text-gold transition-colors">Sales</a>
+          <a href="/vault" class="hover:text-gold transition-colors">Domains</a>
+          <a href="/privacy" class="hover:text-gold transition-colors">Privacy</a>
+          <a href="/terms" class="hover:text-gold transition-colors">Terms</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // stripe checkout
+      async function checkout(btn) {
+        const card = btn.closest("[data-stripe-product]");
+        if (!card) return;
+
+        const stripe_product_id = card.dataset.stripeProduct;
+        const slug = card.dataset.slug;
+
+        btn.disabled = true;
+        btn.textContent = "Loading...";
+
+        try {
+          const res = await fetch("/api/checkout", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ stripe_product_id, slug }),
+          });
+          const data = await res.json();
+          if (data.url) {
+            window.location.href = data.url;
+          } else {
+            alert(data.error || "Checkout failed. Please try again.");
+            btn.disabled = false;
+            btn.textContent = "Try again";
+          }
+        } catch (err) {
+          alert("Connection error. Please try again.");
+          btn.disabled = false;
+          btn.textContent = "Try again";
+        }
+      }
+
+      // success banner
+      if (new URLSearchParams(window.location.search).get("success") === "true") {
+        document.getElementById("success-banner").classList.add("show");
+        history.replaceState(null, "", "/products");
+      }
+
+      // scroll reveal
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>
