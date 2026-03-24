@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Integrity Engine — Verified Consumer Data Marketplace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8C97A;
+  --gold-dim: #7A5E28;
+  --navy: #03060F;
+  --navy-mid: #080D1A;
+  --navy-light: #0D1526;
+  --white: #F5F2EC;
+  --white-dim: rgba(245,242,236,0.6);
+  --white-faint: rgba(245,242,236,0.15);
+}
+
+html {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  height: 100%;
+}
+
+canvas#particles {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* PROGRESS */
+#progress {
+  position: fixed;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  z-index: 100;
+}
+.dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--white-faint);
+  border: 1px solid var(--gold-dim);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.dot.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  transform: scale(1.4);
+}
+
+/* SLIDES */
+section {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2rem;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* DIVIDER LINE */
+.gold-line {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 1.5rem auto;
+}
+
+/* FADE IN */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.45s; }
+.reveal-delay-4 { transition-delay: 0.6s; }
+
+/* ================================
+   SLIDE 1: TITLE
+================================ */
+#slide-1 {
+  background: radial-gradient(ellipse at 50% 40%, #0D1A35 0%, var(--navy) 70%);
+  text-align: center;
+}
+.title-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.title-main {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3.5rem, 10vw, 8rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--white) 0%, var(--gold-light) 60%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+.title-sub {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  font-style: italic;
+  color: var(--white-dim);
+  margin-bottom: 2.5rem;
+  max-width: 480px;
+}
+.title-tagline {
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  border: 1px solid var(--gold-dim);
+  padding: 0.6rem 1.8rem;
+  display: inline-block;
+}
+
+/* ================================
+   SLIDE 2: PROBLEM
+================================ */
+#slide-2 {
+  background: linear-gradient(160deg, #080D1A 0%, #03060F 100%);
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+.slide-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 1rem;
+}
+.slide-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  line-height: 1.1;
+}
+.problem-list {
+  list-style: none;
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: left;
+  max-width: 600px;
+  width: 100%;
+}
+.problem-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  line-height: 1.5;
+  color: var(--white-dim);
+  padding: 1rem 1.2rem;
+  border-left: 2px solid var(--gold-dim);
+  background: var(--white-faint);
+}
+.problem-list li .bullet {
+  color: var(--gold);
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+.big-stat {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.3rem, 3.5vw, 2rem);
+  font-style: italic;
+  color: var(--gold-light);
+  margin-top: 2rem;
+  padding: 1.5rem 2rem;
+  border: 1px solid var(--gold-dim);
+  background: rgba(201,168,76,0.05);
+  max-width: 600px;
+  width: 100%;
+}
+
+/* ================================
+   SLIDE 3: SOLUTION
+================================ */
+#slide-3 {
+  background: radial-gradient(ellipse at 30% 60%, #0A1428 0%, #03060F 70%);
+  text-align: center;
+}
+.solution-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.2rem;
+  margin: 2.5rem 0;
+  max-width: 820px;
+  width: 100%;
+}
+.solution-card {
+  background: linear-gradient(135deg, rgba(201,168,76,0.08) 0%, rgba(13,21,38,0.6) 100%);
+  border: 1px solid var(--gold-dim);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.solution-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold);
+}
+.solution-icon {
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+.solution-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: var(--gold-light);
+  margin-bottom: 0.4rem;
+}
+.solution-card p {
+  font-size: 0.82rem;
+  color: var(--white-dim);
+  line-height: 1.4;
+}
+.solution-cta {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: var(--gold-light);
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+/* ================================
+   SLIDE 4: TWO-TOKEN ENGINE
+================================ */
+#slide-4 {
+  background: linear-gradient(180deg, #03060F 0%, #060B17 100%);
+  text-align: center;
+  gap: 2rem;
+}
+.token-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 860px;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+@media (max-width: 640px) {
+  .token-split { grid-template-columns: 1fr; }
+}
+.token-card {
+  padding: 2rem 1.5rem;
+  border: 1px solid var(--gold-dim);
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+}
+.token-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.token-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 900;
+  color: rgba(201,168,76,0.15);
+  position: absolute;
+  top: 0.5rem; right: 1rem;
+  line-height: 1;
+}
+.token-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+.token-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  color: var(--white);
+  line-height: 1.3;
+}
+.token-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.token-items li {
+  font-size: 0.85rem;
+  color: var(--white-dim);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  line-height: 1.4;
+}
+.token-items li .check {
+  color: var(--gold);
+  flex-shrink: 0;
+  font-size: 0.9rem;
+}
+.token-kicker {
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--white-faint);
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--gold-light);
+  line-height: 1.4;
+}
+
+/* ================================
+   SLIDE 5: FLYWHEEL
+================================ */
+#slide-5 {
+  background: radial-gradient(ellipse at 50% 50%, #0A1428 0%, #03060F 80%);
+  text-align: center;
+  flex-direction: column;
+  gap: 0;
+}
+.flywheel-wrap {
+  position: relative;
+  width: min(420px, 85vw);
+  height: min(420px, 85vw);
+  margin: 1.5rem auto;
+}
+.flywheel-outer {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid var(--gold-dim);
+  animation: spin 30s linear infinite;
+}
+.flywheel-inner-ring {
+  position: absolute;
+  inset: 18%;
+  border-radius: 50%;
+  border: 1px dashed rgba(201,168,76,0.2);
+  animation: spin 20s linear infinite reverse;
+}
+.flywheel-center {
+  position: absolute;
+  inset: 35%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(201,168,76,0.12), rgba(201,168,76,0.03));
+  border: 1px solid var(--gold-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0.5rem;
+}
+.flywheel-center-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(0.65rem, 2vw, 0.85rem);
+  font-style: italic;
+  color: var(--gold-light);
+  text-align: center;
+  line-height: 1.3;
+}
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+.flywheel-node {
+  position: absolute;
+  width: clamp(80px, 22%, 110px);
+  background: rgba(13,21,38,0.9);
+  border: 1px solid var(--gold-dim);
+  padding: 0.5rem 0.4rem;
+  text-align: center;
+  font-size: clamp(0.6rem, 1.5vw, 0.72rem);
+  font-weight: 500;
+  color: var(--gold-light);
+  line-height: 1.3;
+  transform: translate(-50%, -50%);
+  transition: border-color 0.3s;
+}
+.flywheel-node:hover { border-color: var(--gold); }
+
+/* position nodes around circle */
+.node-1 { top: 7%; left: 50%; }
+.node-2 { top: 30%; left: 93%; }
+.node-3 { top: 73%; left: 83%; }
+.node-4 { top: 93%; left: 50%; }
+.node-5 { top: 73%; left: 17%; }
+.node-6 { top: 30%; left: 7%; }
+
+.flywheel-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+  font-style: italic;
+  color: var(--gold-light);
+  margin-top: 0.5rem;
+}
+
+/* ================================
+   SLIDE 6: VOICE-FIRST
+================================ */
+#slide-6 {
+  background: linear-gradient(160deg, #060B17 0%, #03060F 100%);
+  text-align: center;
+}
+.voice-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 820px;
+  width: 100%;
+  margin: 2rem 0;
+  text-align: left;
+}
+@media (max-width: 600px) {
+  .voice-compare { grid-template-columns: 1fr; }
+}
+.compare-panel {
+  padding: 1.5rem;
+  border: 1px solid;
+}
+.compare-panel.bad {
+  border-color: rgba(201,168,76,0.2);
+  background: rgba(255,255,255,0.02);
+}
+.compare-panel.good {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.05);
+  position: relative;
+}
+.compare-panel.good::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.compare-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 1rem;
+}
+.compare-steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.compare-steps li {
+  font-size: 0.85rem;
+  color: var(--white-dim);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  line-height: 1.4;
+}
+.step-num {
+  background: var(--gold-dim);
+  color: var(--navy);
+  font-size: 0.65rem;
+  font-weight: 700;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+.voice-utterance {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  font-style: italic;
+  color: var(--gold-light);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  border-left: 2px solid var(--gold);
+  background: rgba(201,168,76,0.04);
+}
+.voice-outputs {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.voice-outputs li {
+  font-size: 0.8rem;
+  color: var(--white-dim);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.voice-outputs li .check { color: var(--gold); }
+.voice-kicker {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  font-style: italic;
+  color: var(--gold-light);
+  max-width: 600px;
+  margin-top: 0.5rem;
+}
+
+/* ================================
+   SLIDE 7: BUYERS
+================================ */
+#slide-7 {
+  background: radial-gradient(ellipse at 70% 30%, #0A1428 0%, #03060F 70%);
+  text-align: center;
+}
+.buyer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+  max-width: 820px;
+  width: 100%;
+  margin: 2rem 0;
+}
+@media (max-width: 500px) {
+  .buyer-grid { grid-template-columns: 1fr; }
+}
+.buyer-card {
+  padding: 1.5rem;
+  border: 1px solid var(--gold-dim);
+  text-align: left;
+  background: linear-gradient(135deg, rgba(201,168,76,0.05) 0%, transparent 100%);
+  transition: transform 0.3s, border-color 0.3s;
+}
+.buyer-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold);
+}
+.buyer-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.6rem;
+  display: block;
+}
+.buyer-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: var(--gold-light);
+  margin-bottom: 0.4rem;
+}
+.buyer-card p {
+  font-size: 0.8rem;
+  color: var(--white-dim);
+  line-height: 1.5;
+}
+.revenue-model {
+  max-width: 600px;
+  width: 100%;
+  padding: 1.2rem 1.5rem;
+  border-top: 1px solid var(--gold-dim);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+}
+.rev-pill {
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold-dim);
+  padding: 0.3rem 0.8rem;
+  background: rgba(201,168,76,0.05);
+}
+
+/* ================================
+   SLIDE 8: THE ASK
+================================ */
+#slide-8 {
+  background: radial-gradient(ellipse at 50% 60%, #0D1A35 0%, #03060F 65%);
+  text-align: center;
+}
+.closing-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 680px;
+  width: 100%;
+  margin: 2rem 0;
+}
+.closing-line {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  line-height: 1.4;
+  color: var(--white-dim);
+}
+.closing-line strong {
+  color: var(--gold-light);
+  font-style: italic;
+}
+.closing-cta {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--white) 0%, var(--gold-light) 60%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-top: 1rem;
+}
+
+/* UTILITY */
+.center-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<nav id="progress" aria-label="Slide navigation">
+  <div class="dot active" data-slide="0" onclick="goTo(0)" title="Title"></div>
+  <div class="dot" data-slide="1" onclick="goTo(1)" title="Problem"></div>
+  <div class="dot" data-slide="2" onclick="goTo(2)" title="Solution"></div>
+  <div class="dot" data-slide="3" onclick="goTo(3)" title="Two-Token Engine"></div>
+  <div class="dot" data-slide="4" onclick="goTo(4)" title="Flywheel"></div>
+  <div class="dot" data-slide="5" onclick="goTo(5)" title="Voice-First"></div>
+  <div class="dot" data-slide="6" onclick="goTo(6)" title="Buyers"></div>
+  <div class="dot" data-slide="7" onclick="goTo(7)" title="The Ask"></div>
+</nav>
+
+<!-- SLIDE 1: TITLE -->
+<section id="slide-1">
+  <div class="center-col">
+    <p class="title-eyebrow reveal">Introducing</p>
+    <h1 class="title-main reveal reveal-delay-1">INTEGRITY<br>ENGINE</h1>
+    <div class="gold-line reveal reveal-delay-2"></div>
+    <p class="title-sub reveal reveal-delay-2">The world's first verified consumer data marketplace</p>
+    <div class="title-tagline reveal reveal-delay-3">"Your truth has value. We prove it."</div>
+  </div>
+</section>
+
+<!-- SLIDE 2: PROBLEM -->
+<section id="slide-2">
+  <div class="center-col">
+    <p class="slide-label reveal">The Problem</p>
+    <h2 class="slide-heading reveal reveal-delay-1">The system is<br><em style="color:var(--gold-light)">broken by design.</em></h2>
+    <div class="gold-line reveal reveal-delay-2"></div>
+    <ul class="problem-list reveal reveal-delay-2">
+      <li><span class="bullet">—</span>90% of online reviews are completely unverified</li>
+      <li><span class="bullet">—</span>$0 goes to the people who write them</li>
+      <li><span class="bullet">—</span>Yelp, Google, TripAdvisor monetize YOUR words without paying you</li>
+      <li><span class="bullet">—</span>Data brokers sell YOUR behavior without telling you</li>
+    </ul>
+    <div class="big-stat reveal reveal-delay-3">
+      "$250B consumer data market. $0 to consumers."
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 3: SOLUTION -->
+<section id="slide-3">
+  <div class="center-col">
+    <p class="slide-label reveal">The Solution</p>
+    <h2 class="slide-heading reveal reveal-delay-1">Verified Reviews.<br><em style="color:var(--gold-light)">Direct Payment.</em></h2>
+    <div class="gold-line reveal reveal-delay-2"></div>
+    <div class="solution-grid reveal reveal-delay-2">
+      <div class="solution-card">
+        <span class="solution-icon">🧾</span>
+        <h3>Upload Receipt</h3>
+        <p>Proof of purchase. You were there. You spent money.</p>
+      </div>
+      <div class="solution-card">
+        <span class="solution-icon">📷</span>
+        <h3>Photo Evidence</h3>
+        <p>Proof of experience. Visual context the algorithm can verify.</p>
+      </div>
+      <div class="solution-card">
+        <span class="solution-icon">📍</span>
+        <h3>Geolocation</h3>
+        <p>Proof you were physically present. Location-locked data.</p>
+      </div>
+      <div class="solution-card">
+        <span class="solution-icon">⭐</span>
+        <h3>Your Voice</h3>
+        <p>Written review + star rating. Your honest opinion, timestamped.</p>
+      </div>
+    </div>
+    <p class="solution-cta reveal reveal-delay-3">YOU get paid for YOUR data.</p>
+  </div>
+</section>
+
+<!-- SLIDE 4: TWO-TOKEN ENGINE -->
+<section id="slide-4">
+  <div class="center-col">
+    <p class="slide-label reveal">The Architecture</p>
+    <h2 class="slide-heading reveal reveal-delay-1">Two-Token<br><em style="color:var(--gold-light)">Integrity Engine</em></h2>
+    <div class="gold-line reveal reveal-delay-2"></div>
+    <div class="token-split reveal reveal-delay-2">
+      <div class="token-card">
+        <span class="token-number">01</span>
+        <p class="token-label">Token One</p>
+        <h3 class="token-title">Verification Currency<br><em style="color:var(--white-dim);font-size:0.8rem;font-family:Inter">Earned by proving</em></h3>
+        <ul class="token-items">
+          <li><span class="check">✓</span>Receipt uploaded = verified</li>
+          <li><span class="check">✓</span>Photo matches location = verified</li>
+          <li><span class="check">✓</span>Geolocation confirms presence = verified</li>
+          <li><span class="check">✓</span>Each verification stacks → integrity compounds</li>
+        </ul>
+        <p class="token-kicker">Higher integrity = your reviews are worth more to buyers</p>
+      </div>
+      <div class="token-card">
+        <span class="token-number">02</span>
+        <p class="token-label">Token Two</p>
+        <h3 class="token-title">Value Currency<br><em style="color:var(--white-dim);font-size:0.8rem;font-family:Inter">Earned by contributing</em></h3>
+        <ul class="token-items">
+          <li><span class="check">✓</span>More reviews = more data = more payout</li>
+          <li><span class="check">✓</span>Payout weighted by integrity score</li>
+          <li><span class="check">✓</span>95% verified → 5x payout vs 60% reviewer</li>
+          <li><span class="check">✓</span>Quality over quantity, always</li>
+        </ul>
+        <p class="token-kicker">The more honest you are, the more you earn. Full stop.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 5: FLYWHEEL -->
+<section id="slide-5">
+  <div class="center-col">
+    <p class="slide-label reveal">The Moat</p>
+    <h2 class="slide-heading reveal reveal-delay-1">The <em style="color:var(--gold-light)">Flywheel</em></h2>
+    <div class="flywheel-wrap reveal reveal-delay-2">
+      <div class="flywheel-outer"></div>
+      <div class="flywheel-inner-ring"></div>
+      <div class="flywheel-center">
+        <div class="flywheel-center-text">Self-reinforcing<br>integrity loop</div>
+      </div>
+      <div class="flywheel-node node-1">Higher<br>Integrity</div>
+      <div class="flywheel-node node-2">Expensive<br>Data</div>
+      <div class="flywheel-node node-3">Better<br>Buyers</div>
+      <div class="flywheel-node node-4">Higher<br>Payouts</div>
+      <div class="flywheel-node node-5">More Verified<br>Reviewers</div>
+      <div class="flywheel-node node-6">More<br>Integrity</div>
+    </div>
+    <p class="flywheel-quote reveal reveal-delay-3">"Yelp has volume. We have <strong style="color:var(--gold)">PROOF.</strong>"</p>
+  </div>
+</section>
+
+<!-- SLIDE 6: VOICE-FIRST -->
+<section id="slide-6">
+  <div class="center-col">
+    <p class="slide-label reveal">The Differentiator</p>
+    <h2 class="slide-heading reveal reveal-delay-1">Voice-First Capture.<br><em style="color:var(--gold-light)">Zero Friction.</em></h2>
+    <div class="gold-line reveal reveal-delay-2"></div>
+    <div class="voice-compare reveal reveal-delay-2">
+      <div class="compare-panel bad">
+        <p class="compare-label">Without Voice — 6 steps</p>
+        <ol class="compare-steps">
+          <li><span class="step-num">1</span>Open app</li>
+          <li><span class="step-num">2</span>Take photo</li>
+          <li><span class="step-num">3</span>Scan receipt</li>
+          <li><span class="step-num">4</span>Type review</li>
+          <li><span class="step-num">5</span>Confirm location</li>
+          <li><span class="step-num">6</span>Submit</li>
+        </ol>
+      </div>
+      <div class="compare-panel good">
+        <p class="compare-label">With Voice — 1 step</p>
+        <p class="voice-utterance">"Just had the salmon at North Shore Grill, 8 out of 10, great flavor but took 30 minutes, receipt's in my hand"</p>
+        <ul class="voice-outputs">
+          <li><span class="check">→</span>Voice transcription detected</li>
+          <li><span class="check">→</span>Star rating parsed (8/10)</li>
+          <li><span class="check">→</span>Location auto-detected</li>
+          <li><span class="check">→</span>Camera triggers for receipt</li>
+          <li><span class="check">→</span>Done.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="voice-kicker reveal reveal-delay-3">"One utterance. Five data points. Zero friction."</p>
+  </div>
+</section>
+
+<!-- SLIDE 7: WHO BUYS -->
+<section id="slide-7">
+  <div class="center-col">
+    <p class="slide-label reveal">The Market</p>
+    <h2 class="slide-heading reveal reveal-delay-1">Who Buys<br><em style="color:var(--gold-light)">This Data</em></h2>
+    <div class="gold-line reveal reveal-delay-2"></div>
+    <div class="buyer-grid reveal reveal-delay-2">
+      <div class="buyer-card">
+        <span class="buyer-icon">🍽️</span>
+        <h3>Restaurant Groups</h3>
+        <p>Real-time verified sentiment by location. Know what's actually happening at each unit.</p>
+      </div>
+      <div class="buyer-card">
+        <span class="buyer-icon">📦</span>
+        <h3>CPG Brands</h3>
+        <p>Verified purchase feedback on new products. Receipt-confirmed opinions, not guesses.</p>
+      </div>
+      <div class="buyer-card">
+        <span class="buyer-icon">🏢</span>
+        <h3>Commercial Real Estate</h3>
+        <p>Geolocated consumer behavior for site selection. Where are people actually going?</p>
+      </div>
+      <div class="buyer-card">
+        <span class="buyer-icon">📊</span>
+        <h3>Market Research Firms</h3>
+        <p>API access to verified consumer data streams. The cleanest signal in the market.</p>
+      </div>
+    </div>
+    <div class="revenue-model reveal reveal-delay-3">
+      <span class="rev-pill">B2B Data Licensing</span>
+      <span class="rev-pill">API Access</span>
+      <span class="rev-pill">Trend Reports</span>
+      <span class="rev-pill">Brand Partnerships</span>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 8: THE ASK -->
+<section id="slide-8">
+  <div class="center-col">
+    <p class="slide-label reveal">The Invitation</p>
+    <h2 class="slide-heading reveal reveal-delay-1">The Market That<br><em style="color:var(--gold-light)">Doesn't Exist Yet</em></h2>
+    <div class="gold-line reveal reveal-delay-2"></div>
+    <div class="closing-lines reveal reveal-delay-2">
+      <p class="closing-line">The app isn't a review platform. It's an <strong>integrity engine.</strong></p>
+      <p class="closing-line"><strong>Voice</strong> makes it frictionless. <strong>Verification</strong> makes it valuable.</p>
+      <p class="closing-line">The more <strong>honest</strong> you are, the more you <strong>earn.</strong></p>
+      <p class="closing-line">That's a market that <strong>doesn't exist yet.</strong></p>
+    </div>
+    <p class="closing-cta reveal reveal-delay-3">Let's build it.</p>
+  </div>
+</section>
+
+<script src="https://voice.bravetto.ai/widget.js" data-persona="abe" data-position="bottom-right" data-theme="dark" data-mode="conversation"></script>
+
+<script>
+// ── PARTICLES ─────────────────────────────────────────────
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let W, H, particles;
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+
+function initParticles() {
+  const count = Math.min(Math.floor(W * H / 14000), 80);
+  particles = Array.from({ length: count }, () => ({
+    x: Math.random() * W,
+    y: Math.random() * H,
+    r: Math.random() * 1.5 + 0.3,
+    vx: (Math.random() - 0.5) * 0.18,
+    vy: (Math.random() - 0.5) * 0.18,
+    alpha: Math.random() * 0.5 + 0.1
+  }));
+}
+
+function drawParticles() {
+  ctx.clearRect(0, 0, W, H);
+  for (const p of particles) {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(201,168,76,${p.alpha})`;
+    ctx.fill();
+    p.x += p.vx;
+    p.y += p.vy;
+    if (p.x < 0) p.x = W;
+    if (p.x > W) p.x = 0;
+    if (p.y < 0) p.y = H;
+    if (p.y > H) p.y = 0;
+  }
+  requestAnimationFrame(drawParticles);
+}
+
+resize();
+initParticles();
+drawParticles();
+window.addEventListener('resize', () => { resize(); initParticles(); });
+
+// ── INTERSECTION OBSERVER — REVEAL ─────────────────────────
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.15 });
+revealEls.forEach(el => revealObserver.observe(el));
+
+// ── PROGRESS DOTS ──────────────────────────────────────────
+const slides = document.querySelectorAll('section');
+const dots = document.querySelectorAll('.dot');
+
+const slideObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting && e.intersectionRatio >= 0.5) {
+      const idx = Array.from(slides).indexOf(e.target);
+      dots.forEach(d => d.classList.remove('active'));
+      if (dots[idx]) dots[idx].classList.add('active');
+    }
+  });
+}, { threshold: 0.5 });
+slides.forEach(s => slideObserver.observe(s));
+
+function goTo(idx) {
+  slides[idx].scrollIntoView({ behavior: 'smooth' });
+}
+
+// ── KEYBOARD NAV ───────────────────────────────────────────
+let currentSlide = 0;
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+    e.preventDefault();
+    currentSlide = Math.min(currentSlide + 1, slides.length - 1);
+    goTo(currentSlide);
+  }
+  if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+    e.preventDefault();
+    currentSlide = Math.max(currentSlide - 1, 0);
+    goTo(currentSlide);
+  }
+});
+
+// sync currentSlide with scroll
+const syncObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting && e.intersectionRatio >= 0.5) {
+      currentSlide = Array.from(slides).indexOf(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+slides.forEach(s => syncObserver.observe(s));
+</script>
+</body>
+</html>
