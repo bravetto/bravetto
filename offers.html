@@ -687,6 +687,8 @@
             <li>Event-triggered pay gate (first verified payment, not a date)</li>
             <li>Non-AEC revenue enters same pool — more pipeline = higher weighted share</li>
             <li>Net-45 payment terms compute the gate date at runtime</li>
+            <li>Deal origination: 10% up to $100K, 5% $100K-$1M, 1% over $1M — anyone can originate</li>
+            <li>$1,000 signing bonus on origination, deducted from final if client leaves before 90 days</li>
             <li>Never pay more than we make</li>
           </ul>
         </div>
@@ -2359,6 +2361,7 @@
       incentives: [
         { name: 'Founder Debt Paydown', desc: 'Surplus above weighted share accelerates $300K debt repayment. At $40K/mo AEC: ~$7K/mo paydown.' },
         { name: 'Pipeline Multiplier', desc: 'Every non-AEC product, partner, or deal you architect raises the entire pool.' },
+        { name: 'Deal Origination', desc: '10% up to $100K, 5% $100K-$1M, 1% over $1M on any deal you originate. Bryan closes. $1,000 bonus on sign, deducted if client leaves before 90 days.' },
       ],
       // Enterprise incentives (AEC delivery)
       enterprise: [
@@ -2388,13 +2391,14 @@
       incentives: [
         { name: 'ARR Scale', desc: 'Base scales with ARR: $500K=$10K/mo, $1M=$15K/mo, $2M+=$20,833/mo ($250K/yr cap).' },
         { name: 'Pipeline Multiplier', desc: 'Every deal you close or architect raises the entire pool.' },
+        { name: 'Deal Origination', desc: '10% up to $100K, 5% $100K-$1M, 1% over $1M on any deal you originate. Bryan closes. $1,000 bonus on sign, deducted if client leaves before 90 days.' },
       ],
       enterprise: [
         { name: 'AEC Account Growth', amount: 'Upsell commission TBD', trigger: 'New services or expanded scope sold to AEC beyond base contract.' },
         { name: 'AEC Renewal', amount: 'Renewal bonus at month 27', trigger: 'Contract renewal at or above current rate.' },
       ],
       pipeline: [
-        { name: 'Deal Origination', amount: '5% of first-year revenue', trigger: 'Non-AEC deals Bryan originates that close.' },
+        { name: 'Deal Origination', amount: '10%/5%/1% tiered', trigger: 'Non-AEC deals Bryan originates: 10% up to $100K, 5% $100K-$1M, 1% over $1M. $1,000 bonus on sign, 90-day retention gate.' },
         { name: 'Sales Team Revenue', amount: '2-5% above target', trigger: 'When Ryan + Caleb exceed collective quota.' },
       ],
       equity: '10.000%', equity_note: '4yr vest, 1yr cliff. Buyback at FMV.',
@@ -2414,6 +2418,7 @@
       incentives: [
         { name: 'Brand Protection', desc: 'Every brand inconsistency she catches before it ships saves rework.' },
         { name: 'Market Expansion', desc: 'New verticals and markets she identifies that generate revenue.' },
+        { name: 'Deal Origination', desc: '10% up to $100K, 5% $100K-$1M, 1% over $1M on any deal you originate. Bryan closes. $1,000 bonus on sign, deducted if client leaves before 90 days.' },
       ],
       enterprise: [
         { name: 'Brand Validation', amount: 'Caught errors = saved money', trigger: 'Every brand/copy error caught before it reaches AEC or public saves rework cost.' },
@@ -2439,6 +2444,7 @@
       incentives: [
         { name: 'Mentorship Track', desc: 'Shadows Mike. Weekly 1:1 minimum. Growth = velocity.' },
         { name: 'Advanced Knock', desc: '35% owner. Revenue from Advanced Knock flows separately.' },
+        { name: 'Deal Origination', desc: '10% up to $100K, 5% $100K-$1M, 1% over $1M on any deal you originate. Bryan closes. $1,000 bonus on sign, deducted if client leaves before 90 days.' },
       ],
       enterprise: [
         { name: 'AEC Product Delivery', amount: '$1,000 per surface', trigger: 'Each product surface shipped to AEC production (The Nest, Advanced Knock, voice tools).' },
@@ -2490,6 +2496,7 @@
       incentives: [
         { name: 'Tier Advancement', desc: 'Tier 1: $80K/yr. Tier 2: $95K/yr. Tier 3: $107.5K/yr. Tier 4: $120K/yr. Quarterly review.' },
         { name: 'Operational Excellence', desc: 'Cost savings and process efficiencies she identifies that save real money.' },
+        { name: 'Deal Origination', desc: '10% up to $100K, 5% $100K-$1M, 1% over $1M on any deal you originate. Bryan closes. $1,000 bonus on sign, deducted if client leaves before 90 days.' },
       ],
       enterprise: [
         { name: 'AEC Comms Strategy', amount: '$2,500 milestone', trigger: '90-day comms strategy delivered for AEC implementation.' },
@@ -2515,6 +2522,7 @@
       incentives: [
         { name: 'Market Positioning', desc: 'Every product she positions that sells is revenue she created.' },
         { name: 'Pipeline Sourcing', desc: 'Deals she sources go into the pool. Pool rises. Everyone wins.' },
+        { name: 'Deal Origination', desc: '10% up to $100K, 5% $100K-$1M, 1% over $1M on any deal you originate. Bryan closes. $1,000 bonus on sign, deducted if client leaves before 90 days.' },
       ],
       enterprise: [
         { name: 'AEC Market Positioning', amount: '3% of first-year product revenue', trigger: 'Products she positions for the AEC vertical that generate sales.' },
@@ -2540,6 +2548,7 @@
       incentives: [
         { name: 'Operational Buildout', desc: 'SOPs, onboarding docs, process documentation that scales the company.' },
         { name: 'Recruiting Pipeline', desc: 'Every hire she sources that sticks past 90 days.' },
+        { name: 'Deal Origination', desc: '10% up to $100K, 5% $100K-$1M, 1% over $1M on any deal you originate. Bryan closes. $1,000 bonus on sign, deducted if client leaves before 90 days.' },
       ],
       enterprise: [
         { name: 'AEC Process Delivery', amount: '$1,000 per milestone', trigger: 'QuickBooks live, first budget, first P&L, first audit — each one is a gate.' },
@@ -2565,6 +2574,7 @@
       incentives: [
         { name: 'Enterprise Readiness', desc: 'Every product he hardens for enterprise clients raises AEC satisfaction and renewal probability.' },
         { name: 'IP Creation', desc: 'Patents, proprietary methods, or unique AI architectures that create defensible moats.' },
+        { name: 'Deal Origination', desc: '10% up to $100K, 5% $100K-$1M, 1% over $1M on any deal you originate. Bryan closes. $1,000 bonus on sign, deducted if client leaves before 90 days.' },
       ],
       enterprise: [
         { name: 'AEC Production Deploy', amount: '$1,000 per surface', trigger: 'Each AI surface deployed to AEC production with passing security audit.' },
@@ -2610,6 +2620,35 @@
 
   // FOUNDER DEBT — $300K (Bravetto investment). Domain debt ($125K) is Mataluni Enterprises, separate.
   var FOUNDER_DEBT = 300000;
+
+  // ORIGINATION INCENTIVE (non-sales team members)
+  // Anyone not in sales who originates a deal gets commission on deal revenue.
+  // Bryan closes with Mike support. Originator gets the commission.
+  // $1,000 bonus immediately on deal sign. Deducted from final after 90-day retention gate.
+  var ORIGINATION = {
+    tiers: [
+      { ceiling: 100000, rate: 0.10, label: '10% up to $100K' },
+      { ceiling: 1000000, rate: 0.05, label: '5% $100K-$1M' },
+      { ceiling: Infinity, rate: 0.01, label: '1% over $1M' }
+    ],
+    signing_bonus: 1000,
+    retention_days: 90,
+    note: '$1,000 bonus on deal sign. Deducted from final commission if client leaves before 90 days.'
+  };
+
+  function computeOrigination(deal_value) {
+    var commission = 0;
+    var remaining = deal_value;
+    for (var i = 0; i < ORIGINATION.tiers.length; i++) {
+      var tier = ORIGINATION.tiers[i];
+      var prev = i > 0 ? ORIGINATION.tiers[i-1].ceiling : 0;
+      var band = Math.min(remaining, tier.ceiling - prev);
+      if (band <= 0) break;
+      commission += band * tier.rate;
+      remaining -= band;
+    }
+    return { commission: Math.round(commission), signing_bonus: ORIGINATION.signing_bonus };
+  }
 
   // WEIGHTED POOL MODEL (Bryan+Mike 2026-03-25, founder weight adjustable 2026-03-26)
   // Founder(Mike)=slider, Bryan CEO=3.0, ExecDir=1.5, Team=1.0. KPI bonus adds 0-1.0 to weight.
