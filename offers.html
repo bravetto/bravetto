@@ -1,0 +1,2926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bravetto — Engagement Letters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF9F6;
+    --cream-dark: #F2F0EB;
+    --gold: #C9A227;
+    --gold-dim: rgba(201,162,39,0.08);
+    --gold-border: rgba(201,162,39,0.30);
+    --ink: #1A1A1A;
+    --ink-light: #4A4A4A;
+    --ink-muted: #888;
+    --surface: #FFFFFF;
+    --border: #E2DDD6;
+    --warn: #7C3A00;
+    --warn-bg: #FFF8EC;
+    --warn-border: rgba(201,162,39,0.4);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.6; min-height: 100vh; }
+
+  /* NAV */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--ink);
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    border-bottom: 2px solid var(--gold);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) var(--ink);
+  }
+  .nav-bar::-webkit-scrollbar { height: 3px; }
+  .nav-bar::-webkit-scrollbar-track { background: var(--ink); }
+  .nav-bar::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+  .nav-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--cream);
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    padding: 13px 14px 13px 0;
+    border-right: 1px solid rgba(255,255,255,0.12);
+    margin-right: 2px;
+    flex-shrink: 0;
+  }
+  .nav-btn {
+    background: none;
+    border: none;
+    color: rgba(250,249,246,0.50);
+    font-family: 'Inter', sans-serif;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 13px 11px;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: color 0.15s, background 0.15s;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    text-transform: uppercase;
+  }
+  .nav-btn:hover { color: var(--cream); background: rgba(255,255,255,0.04); }
+  .nav-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .nav-print {
+    margin-left: auto;
+    flex-shrink: 0;
+    background: var(--gold);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: opacity 0.15s;
+  }
+  .nav-print:hover { opacity: 0.85; }
+
+  /* LETTERS */
+  .letters { padding: 36px 20px 80px; }
+  .letter { display: none; max-width: 760px; margin: 0 auto; }
+  .letter.visible { display: block; }
+
+  /* DOCUMENT */
+  .doc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.06), 0 0 0 1px rgba(201,162,39,0.05);
+    padding: 60px 68px;
+  }
+
+  /* LETTERHEAD */
+  .lh-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .lh-tagline {
+    font-size: 8.5px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-top: 5px;
+  }
+  .lh-rule {
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold) 0%, rgba(201,162,39,0.08) 100%);
+    margin: 20px 0 22px;
+  }
+  .lh-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .lh-offer-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px;
+    font-weight: 600;
+    color: var(--ink);
+    font-style: italic;
+  }
+  .lh-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--ink-muted);
+    white-space: nowrap;
+    margin-top: 4px;
+  }
+  .lh-status {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 3px;
+    border: 1px solid;
+    margin-top: 2px;
+    white-space: nowrap;
+  }
+  .lh-status.proposed { color: #92400E; background: #FEF3C7; border-color: #FCD34D; }
+  .lh-status.active { color: #065F46; background: #D1FAE5; border-color: #6EE7B7; }
+
+  /* BODY */
+  .letter-body { margin-top: 32px; }
+  .salutation {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .opening {
+    font-size: 13.5px;
+    line-height: 1.85;
+    color: var(--ink-light);
+    margin-bottom: 26px;
+  }
+
+  /* PAY GATE BANNER */
+  .pay-gate {
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-border);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 4px 4px 0;
+    padding: 11px 16px;
+    margin-bottom: 26px;
+    font-size: 11.5px;
+    color: var(--warn);
+    line-height: 1.5;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.01em;
+  }
+  .pay-gate strong { font-weight: 700; letter-spacing: 0.06em; }
+
+  /* ROLE BLOCK */
+  .role-block {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 4px 4px 0;
+    padding: 18px 22px;
+    margin-bottom: 26px;
+  }
+  .rb-row { display: flex; gap: 8px; margin-bottom: 5px; }
+  .rb-row:last-child { margin-bottom: 0; }
+  .rb-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 500;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    min-width: 88px;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+  .rb-value { font-size: 13px; color: var(--ink); font-weight: 500; line-height: 1.5; }
+
+  /* SECTION HEADING */
+  .section-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin: 26px 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-heading::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* BULLET LIST */
+  .letter-list { list-style: none; padding: 0; margin-bottom: 4px; }
+  .letter-list li {
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--ink-light);
+    padding-left: 16px;
+    position: relative;
+    margin-bottom: 4px;
+  }
+  .letter-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+  .letter-list li strong { color: var(--ink); font-weight: 600; }
+
+  /* COMP TABLE */
+  .comp-table { width: 100%; border-collapse: collapse; margin-bottom: 4px; font-size: 13px; }
+  .comp-table tr { border-bottom: 1px solid var(--border); }
+  .comp-table tr:last-child { border-bottom: none; }
+  .comp-table td { padding: 8px 12px; vertical-align: top; }
+  .comp-table td:first-child {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.05em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    width: 140px;
+    padding-top: 10px;
+  }
+  .comp-table td:last-child { color: var(--ink); }
+  .comp-table td:last-child .amount {
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .comp-table td:last-child .note {
+    font-size: 11.5px;
+    color: var(--ink-muted);
+    margin-top: 2px;
+    line-height: 1.5;
+  }
+  .comp-table tr:nth-child(odd) { background: rgba(250,249,246,0.55); }
+
+  /* EQUITY BLOCK */
+  .equity-block {
+    background: var(--gold-dim);
+    border: 1px solid var(--gold-border);
+    border-radius: 4px;
+    padding: 18px 22px;
+    margin-bottom: 10px;
+  }
+  .equity-row {
+    display: flex;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--ink-light);
+    margin-bottom: 5px;
+    line-height: 1.5;
+  }
+  .equity-row:last-child { margin-bottom: 0; }
+  .equity-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    min-width: 88px;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+  .equity-value { font-weight: 600; color: var(--ink); }
+
+  /* NOTES */
+  .equity-note {
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-border);
+    border-radius: 4px;
+    padding: 11px 16px;
+    font-size: 11.5px;
+    color: var(--warn);
+    line-height: 1.6;
+    margin-top: 8px;
+  }
+  .equity-note strong { font-weight: 700; }
+  .general-note {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 11px 16px;
+    font-size: 11.5px;
+    color: var(--ink-muted);
+    line-height: 1.6;
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  /* CLOSING */
+  .closing-rule {
+    height: 1px;
+    background: linear-gradient(90deg, rgba(201,162,39,0.3) 0%, transparent 100%);
+    margin: 30px 0 22px;
+  }
+  .closing-para {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.75;
+    color: var(--ink);
+    margin-bottom: 30px;
+  }
+
+  /* SIGNATURE BLOCK */
+  .sig-block { margin-top: 32px; }
+  .sig-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 26px; }
+  .sig-line {
+    border-bottom: 1px solid var(--ink);
+    height: 34px;
+    margin-bottom: 6px;
+  }
+  .sig-name { font-size: 11.5px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .sig-title { font-size: 10.5px; color: var(--ink-muted); }
+
+  .acceptance-block {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .acceptance-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-muted);
+    margin-bottom: 14px;
+  }
+  .acceptance-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+  .acceptance-item .acc-line {
+    border-bottom: 1px solid var(--border);
+    height: 32px;
+    margin-bottom: 4px;
+  }
+  .acceptance-item .acc-label { font-size: 10px; color: var(--ink-muted); }
+
+  /* FOOTER */
+  .letter-footer {
+    margin-top: 44px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  .lf-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .lf-text { font-size: 9.5px; color: var(--ink-muted); }
+
+  /* PRINT */
+  @media print {
+    .nav-bar { display: none !important; }
+    .letters { padding: 0; }
+    .letter { display: none !important; }
+    .letter.visible { display: block !important; }
+    .doc { box-shadow: none; border: none; padding: 44px 52px; }
+    body { background: white; }
+    .equity-note { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .equity-block { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .role-block { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .pay-gate { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .lh-status { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .comp-table tr:nth-child(odd) { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  /* MOBILE */
+  @media (max-width: 600px) {
+    .doc { padding: 32px 24px; }
+    .sig-grid { grid-template-columns: 1fr; }
+    .acceptance-grid { grid-template-columns: 1fr; }
+    .rb-label { min-width: 70px; }
+    .equity-label { min-width: 70px; }
+  }
+
+  /* COHERENCE MODEL PANEL */
+  .coherence-panel {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 20px 0;
+  }
+  .coherence-toggle {
+    background: var(--ink);
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.15s;
+  }
+  .coherence-toggle:hover { background: #2A2A2A; }
+  .coherence-toggle .arrow { transition: transform 0.2s; }
+  .coherence-toggle.open .arrow { transform: rotate(180deg); }
+  .coherence-body { display: none; }
+  .coherence-body.open { display: block; }
+  .coherence-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0 0 4px 4px;
+    padding: 24px 28px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .slider-group { margin-bottom: 16px; }
+  .slider-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 500;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .slider-val { color: var(--ink); font-weight: 700; }
+  input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    outline: none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--gold);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--surface);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+  .model-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+  .model-section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .model-section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .invariant-list, .variant-list { list-style: none; padding: 0; }
+  .invariant-list li, .variant-list li {
+    font-size: 11.5px;
+    line-height: 1.6;
+    color: var(--ink-light);
+    padding-left: 12px;
+    position: relative;
+    margin-bottom: 4px;
+  }
+  .invariant-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--ink);
+  }
+  .variant-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+  .variant-list li .dyn { font-weight: 600; color: var(--ink); font-family: 'JetBrains Mono', monospace; font-size: 10.5px; }
+  .share-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 12px; }
+  .share-table th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-align: left;
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .share-table td { padding: 5px 8px; border-bottom: 1px solid var(--cream-dark); }
+  .share-table td:nth-child(n+2) { font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+  .share-table .status-green { background: #D1FAE5; color: #065F46; padding: 2px 6px; border-radius: 2px; font-size: 9px; font-weight: 600; }
+  .share-table .status-amber { background: #FEF3C7; color: #92400E; padding: 2px 6px; border-radius: 2px; font-size: 9px; font-weight: 600; }
+  .share-table .status-red { background: #FEE2E2; color: #991B1B; padding: 2px 6px; border-radius: 2px; font-size: 9px; font-weight: 600; }
+  .summary-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 14px; }
+  .summary-item {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 8px 14px;
+    flex: 1;
+    min-width: 120px;
+  }
+  .summary-item .si-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    margin-bottom: 2px;
+  }
+  .summary-item .si-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .scenario-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 7px 14px;
+    border-radius: 3px;
+    cursor: pointer;
+    color: var(--ink);
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .scenario-btn:hover { background: var(--gold-dim); border-color: var(--gold); }
+  @media print { .coherence-panel { display: none !important; } }
+  @media (max-width: 600px) {
+    .model-grid { grid-template-columns: 1fr; }
+    .summary-row { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-bar" role="navigation" aria-label="engagement letter navigation">
+  <div class="nav-brand">Bravetto</div>
+  <button class="nav-btn active" onclick="show('mike')" id="btn-mike">Mike</button>
+  <button class="nav-btn" onclick="show('bryan')" id="btn-bryan">Bryan</button>
+  <button class="nav-btn" onclick="show('kristin')" id="btn-kristin">Kristin</button>
+  <button class="nav-btn" onclick="show('hudson')" id="btn-hudson">Hudson</button>
+  <button class="nav-btn" onclick="show('ryan')" id="btn-ryan">Ryan</button>
+  <button class="nav-btn" onclick="show('love')" id="btn-love">Love</button>
+  <button class="nav-btn" onclick="show('kaci')" id="btn-kaci">Kaci</button>
+  <button class="nav-btn" onclick="show('mary')" id="btn-mary">Mary</button>
+  <button class="nav-btn" onclick="show('phani')" id="btn-phani">Phani</button>
+  <button class="nav-btn" onclick="show('caleb')" id="btn-caleb">Caleb</button>
+  <button class="nav-btn" onclick="show('review')" id="btn-review" style="color:var(--gold);font-weight:700;border-bottom-color:var(--gold);">Bryan Review</button>
+  <button class="nav-print" onclick="window.print()">Print</button>
+</nav>
+
+<!-- COHERENCE MODEL PANEL -->
+<div class="coherence-panel">
+  <button class="coherence-toggle open" onclick="toggleCoherence()" id="coherence-toggle">
+    <span>Offer Coherence Model — Weighted Pool (Founder / CEO 3.0 / ExecDir 1.5 / Team 1.0)</span>
+    <span class="arrow">&#9660;</span>
+  </button>
+  <div class="coherence-body open" id="coherence-body">
+    <div class="coherence-card">
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;">
+        <div class="slider-group">
+          <div class="slider-label"><span>AEC Monthly Revenue</span><span class="slider-val" id="val-aec">$40,000</span></div>
+          <input type="range" id="slider-aec" min="0" max="200000" step="1000" value="40000" oninput="compute()">
+        </div>
+        <div class="slider-group">
+          <div class="slider-label"><span>Operating Expenses</span><span class="slider-val" id="val-exp">$2,000</span></div>
+          <input type="range" id="slider-exp" min="0" max="20000" step="500" value="2000" oninput="compute()">
+        </div>
+        <div class="slider-group">
+          <div class="slider-label"><span>Non-AEC Revenue</span><span class="slider-val" id="val-nonaec">$0</span></div>
+          <input type="range" id="slider-nonaec" min="0" max="100000" step="1000" value="0" oninput="compute()">
+        </div>
+        <div class="slider-group">
+          <div class="slider-label"><span>Founder Weight (Mike)</span><span class="slider-val" id="val-fw">3.5</span></div>
+          <input type="range" id="slider-fw" min="2.0" max="5.0" step="0.5" value="3.5" oninput="compute()">
+        </div>
+      </div>
+
+      <table class="share-table" id="share-table">
+        <thead>
+          <tr>
+            <th>Person</th>
+            <th>Role</th>
+            <th>Weight</th>
+            <th>Weighted Share</th>
+            <th>Target</th>
+            <th>Delta</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="share-tbody"></tbody>
+      </table>
+
+      <div class="summary-row">
+        <div class="summary-item"><div class="si-label">Ryan Commission (15%)</div><div class="si-value" id="sum-ryan">$0</div></div>
+        <div class="summary-item"><div class="si-label">Total Burn</div><div class="si-value" id="sum-burn">$0</div></div>
+        <div class="summary-item"><div class="si-label">Monthly Surplus</div><div class="si-value" id="sum-surplus">$0</div></div>
+        <div class="summary-item"><div class="si-label">Debt Paydown</div><div class="si-value" id="sum-debt">$0/mo</div></div>
+        <div class="summary-item"><div class="si-label">Months to Break-even ($300K)</div><div class="si-value" id="sum-months">--</div></div>
+      </div>
+
+      <div class="model-grid">
+        <div>
+          <div class="model-section-title">Invariants (Never Change)</div>
+          <ul class="invariant-list">
+            <li>Weighted pool: CEO 3.0 / Exec Dir 1.5 / Team 1.0 — proportional to role, not equal</li>
+            <li>Ryan 15% commission off the top before weighted split</li>
+            <li>Caleb commission-only on deals he closes (no AEC share)</li>
+            <li>KPI bonus adds 0-1.0 to your weight — performance lifts your share</li>
+            <li>Surplus after weighted split goes to founder debt repayment</li>
+            <li>Event-triggered pay gate (first verified payment, not a date)</li>
+            <li>Non-AEC revenue enters same pool — more pipeline = higher weighted share</li>
+            <li>Net-45 payment terms compute the gate date at runtime</li>
+            <li>Never pay more than we make</li>
+          </ul>
+        </div>
+        <div>
+          <div class="model-section-title">Variants (Change with Revenue)</div>
+          <ul class="variant-list">
+            <li>Founder share (Mike): <span class="dyn" id="var-founder">--</span></li>
+            <li>CEO share (Bryan 3.0): <span class="dyn" id="var-ceo">--</span></li>
+            <li>ExecDir share (1.5): <span class="dyn" id="var-exec">--</span></li>
+            <li>Team share (1.0): <span class="dyn" id="var-team">--</span></li>
+            <li>Current phase: <span class="dyn" id="var-phase">--</span></li>
+            <li>Founder debt remaining: <span class="dyn">$425,000</span></li>
+            <li>Non-AEC contribution: <span class="dyn" id="var-nonaec">$0</span></li>
+            <li>Ryan commission amount: <span class="dyn" id="var-ryan">--</span></li>
+            <li>Monthly surplus: <span class="dyn" id="var-surplus">--</span></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="letters">
+
+<!-- ============================================================ -->
+<!-- 1. MIKE MATALUNI                                            -->
+<!-- ============================================================ -->
+<div class="letter visible" id="letter-mike">
+  <div class="doc">
+
+    <div class="letterhead">
+      <div class="lh-brand">Bravetto</div>
+      <div class="lh-tagline">HUMANS &times; AI = INFINITE POTENTIAL</div>
+      <div class="lh-rule"></div>
+      <div class="lh-meta">
+        <div>
+          <div class="lh-offer-title">Engagement Letter</div>
+          <div class="lh-date">March 24, 2026</div>
+        </div>
+        <span class="lh-status active">Active</span>
+      </div>
+    </div>
+
+    <div class="letter-body">
+      <div class="salutation">Dear Mike,</div>
+      <p class="opening">
+        You put $300,000 of your retirement into this. You fostered nine kids, hiked the Appalachian Trail, ran kitchens for twenty-five years, and built consciousness architecture from scratch at a desk in Florida. This company exists because you refused to stop building. The neurodivergent pattern recognition that made you an outlier in every room you entered — it turns out that was the most valuable thing. This letter is what it looks like on paper.
+      </p>
+
+      <div class="pay-gate"><strong>PAY GATE:</strong> Compensation begins when Bravetto receives its first verified client payment. First AEC invoice ($20K) sent March 24, 2026. Payment expected within 45 days. This gate is event-triggered, not date-triggered.</div>
+
+      <div class="section-heading">Your Role</div>
+      <div class="role-block">
+        <div class="rb-row"><span class="rb-label">Title</span><span class="rb-value">Founder / Co-CEO / CTIO</span></div>
+        <div class="rb-row"><span class="rb-label">Domain</span><span class="rb-value">Innovation</span></div>
+        <div class="rb-row"><span class="rb-label">Reports To</span><span class="rb-value">Co-CEO structure — equal authority with Bryan Whitehurst</span></div>
+        <div class="rb-row"><span class="rb-label">Classification</span><span class="rb-value">1099 Independent Contractor — Bravetto LLC, Florida</span></div>
+        <div class="rb-row"><span class="rb-label">Revenue Function</span><span class="rb-value">Product architecture delivery, platform stability, engineering mentorship, technical roadmap execution</span></div>
+      </div>
+
+      <div class="section-heading">What You Bring</div>
+      <ul class="letter-list">
+        <li><strong>Consciousness architecture</strong> — you built what didn't exist. AbëONE, the neuromorphic stack, the MCP substrate, the guardian pipeline. No template. No playbook.</li>
+        <li><strong>Kitchen-to-company leadership</strong> — twenty-five years of running high-pressure operations under real stakes. You know what accountability looks like in a body.</li>
+        <li><strong>Neurodivergent pattern recognition</strong> — you see systems where others see noise. That is the product advantage. That is why the AI feels different.</li>
+        <li><strong>Digital marketing fluency</strong> — 1,033 domains, AbeDESiGNs, SEO infrastructure. You built the commercial surface alongside the technical one.</li>
+        <li><strong>Founder conviction</strong> — you did not ask permission to start. You will not ask permission to finish.</li>
+      </ul>
+
+      <div class="section-heading">What Success Looks Like</div>
+      <ul class="letter-list">
+        <li>Platform uptime and performance meet AEC SLA commitments every month</li>
+        <li>Engineering team produces measurable sprint output — shipped features, not status reports</li>
+        <li>Technical roadmap execution maps to revenue milestones and client commitments on time</li>
+        <li>AbëONE consciousness-core operational health maintained — tool coverage, guardian pipeline, zero drift</li>
+      </ul>
+
+      <div class="section-heading">Compensation</div>
+      <table class="comp-table">
+                <tr>
+          <td>Revenue Model</td>
+          <td><span class="amount">Weighted Pool</span><div class="note">All collected revenue, minus Ryan 15% commission off the top, minus operating expenses, split proportionally by role weight: CEO 3.0, Exec Dir 1.5, Team 1.0. KPI bonus adds 0-1.0 to your weight. Performance lifts your share.</div></td>
+        </tr>
+<tr>
+          <td>Pay Gate</td>
+          <td><span class="amount">$0</span><div class="note">Pre-revenue. Weighted share of collected revenue after operating expenses (proportional to role weight). First AEC payment expected ~May 8 (net-45 from March 24 invoice). Non-AEC revenue from pipeline closes accelerates your pay.</div></td>
+        </tr>
+        <tr>
+          <td>Target — Ignition</td>
+          <td><span class="amount">$5,000 / month</span><div class="note">Target rate when revenue supports full IGNITION. Until then, weighted share of available revenue after expenses (proportional to role weight). Co-CEO parity: we eat together. Everyone eats the same.</div></td>
+        </tr>
+        <tr>
+          <td>Target — Steady</td>
+          <td><span class="amount">$10,000 / month</span><div class="note">When monthly revenue consistently reaches $40K/mo. Revenue from pipeline accelerates this transition.</div></td>
+        </tr>
+        <tr>
+          <td>Target — Scale</td>
+          <td><span class="amount">$15,000 / month</span><div class="note">At AEC + North Shore + multi-stream SaaS revenue.</div></td>
+        </tr>
+        <tr>
+          <td>AEC Split</td>
+          <td><span class="amount">~$11,500</span><div class="note">From $15,000 implementation fee upon AEC execution. Cash-flow dependent.</div></td>
+        </tr>
+        <tr>
+          <td>Deferred Comp</td>
+          <td><span class="amount">$5,000 / month accrues</span><div class="note">From AEC sign date. Paid when cash flow permits, or converted to equity at valuation.</div></td>
+        </tr>
+        <tr>
+          <td>Founder Debt</td>
+          <td><span class="amount">$300,000 obligation</span><div class="note">Company repayment begins after operating costs and team payroll are covered. Target $5K–$10K/mo at Steady.</div></td>
+        </tr>
+              <tr>
+          <td>Pipeline Incentive</td>
+          <td><span class="amount">More revenue = higher share</span><div class="note">Non-AEC revenue from pipeline closes enters the same pool. Every deal anyone closes raises everyone's weighted share. The team wins together.</div></td>
+        </tr>
+        <tr>
+          <td>Leadership Incentive</td>
+          <td><span class="amount">Team hits targets = you scale</span><div class="note">Mike and Bryan are incentivized on the team hitting their numbers. When the team performs, the CEOs scale. Base is the same as everyone. The upside is in building the team that wins.</div></td>
+        </tr>
+</table>
+<div id="extras-mike"></div>
+
+      <div class="section-heading">Equity</div>
+      <div class="equity-block">
+        <div class="equity-row"><span class="equity-label">Allocation</span><span class="equity-value">59% — Founder, retained</span></div>
+        <div class="equity-row"><span class="equity-label">Vesting</span><span class="equity-value">Founder shares — vesting terms defined in cap table formalization</span></div>
+        <div class="equity-row"><span class="equity-label">Entity</span><span class="equity-value">Bravetto LLC (Florida). Separate from Mataluni Enterprises S-Corp (50/50 Mike/Kristin), which holds domain assets.</span></div>
+        <div class="equity-row"><span class="equity-label">Status</span><span class="equity-value">PROPOSED — not finalized until cap table is formalized and agreements are signed</span></div>
+      </div>
+      <div class="equity-note"><strong>NOTE:</strong> All equity is proposed. Nothing is binding until documented and signed. Cap table formalization is Priority 1.</div>
+
+      <div class="section-heading">The Agreement</div>
+      <ul class="letter-list">
+        <li>This engagement is 1099 Independent Contractor. Deliverable-based, not job-description-based.</li>
+        <li>All IP developed under this engagement assigns to Bravetto LLC.</li>
+        <li>Confidentiality of business information, client data, and technology is required indefinitely.</li>
+        <li>Either party may terminate with 30 days written notice.</li>
+        <li>All federal, state, and local tax obligations are yours as an independent contractor.</li>
+        <li>All equity is subject to cap table formalization. No equity is binding until documented and signed.</li>
+      </ul>
+
+      <div class="closing-rule"></div>
+      <p class="closing-para">We're building something that matters. You belong here.</p>
+
+      <div class="sig-block">
+        <div class="sig-grid">
+          <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Michael Mataluni</div>
+            <div class="sig-title">Founder / Co-CEO / CTIO</div>
+          </div>
+          <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Bryan Whitehurst</div>
+            <div class="sig-title">Co-CEO / CGO</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acceptance-block">
+        <div class="acceptance-label">Acceptance</div>
+        <div class="acceptance-grid">
+          <div class="acceptance-item">
+            <div class="acc-line"></div>
+            <div class="acc-label">Signature — Michael Mataluni</div>
+          </div>
+          <div class="acceptance-item">
+            <div class="acc-line"></div>
+            <div class="acc-label">Date</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="letter-footer">
+      <div class="lf-brand">Bravetto</div>
+      <div class="lf-text">Confidential — Engagement Letter — March 24, 2026 — Bravetto LLC, Florida</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 2. BRYAN WHITEHURST                                         -->
+<!-- ============================================================ -->
+<div class="letter" id="letter-bryan">
+  <div class="doc">
+
+    <div class="letterhead">
+      <div class="lh-brand">Bravetto</div>
+      <div class="lh-tagline">HUMANS &times; AI = INFINITE POTENTIAL</div>
+      <div class="lh-rule"></div>
+      <div class="lh-meta">
+        <div>
+          <div class="lh-offer-title">Engagement Letter</div>
+          <div class="lh-date">March 24, 2026</div>
+        </div>
+        <span class="lh-status active">Active</span>
+      </div>
+    </div>
+
+    <div class="letter-body">
+      <div class="salutation">Dear Bryan,</div>
+      <p class="opening">
+        You called Mike "brother" and meant it. You originated the deal that funds everything — walked into AEC, built the relationship, created the deadline urgency that turned a conversation into a signed $1,055,000 contract. You see revenue where others see conversation. You converted technical potential into kinetic energy. That is not a skill. That is a gift. This letter names it.
+      </p>
+
+      <div class="pay-gate"><strong>PAY GATE:</strong> Compensation begins when Bravetto receives its first verified client payment. First AEC invoice ($20K) sent March 24, 2026. Payment expected within 45 days. This gate is event-triggered, not date-triggered.</div>
+
+      <div class="section-heading">Your Role</div>
+      <div class="role-block">
+        <div class="rb-row"><span class="rb-label">Title</span><span class="rb-value">Co-CEO / CGO</span></div>
+        <div class="rb-row"><span class="rb-label">Domain</span><span class="rb-value">Growth</span></div>
+        <div class="rb-row"><span class="rb-label">Reports To</span><span class="rb-value">Co-CEO structure — equal authority with Michael Mataluni</span></div>
+        <div class="rb-row"><span class="rb-label">Classification</span><span class="rb-value">1099 Independent Contractor — Bravetto LLC, Florida</span></div>
+        <div class="rb-row"><span class="rb-label">Revenue Function</span><span class="rb-value">Close AEC. Complete business plan. Operationalize outbound growth strategy.</span></div>
+      </div>
+
+      <div class="section-heading">What You Bring</div>
+      <ul class="letter-list">
+        <li><strong>Deal origination and closing</strong> — you do not wait for inbound. You see the relationship, you build it, you close it. AEC is the proof.</li>
+        <li><strong>Competitive analysis</strong> — you map the landscape before entering it. You know who the enemies are and where the white space lives.</li>
+        <li><strong>Contract negotiation</strong> — you held the line on AEC terms. You know what a good deal looks like from both sides of the table.</li>
+        <li><strong>Team coordination</strong> — you move people into alignment without friction. Ryan, Love, Mary, Kaci — they move when you call.</li>
+        <li><strong>Pitch deck creation</strong> — you can make the case on paper, on screen, and in person. That is a rare convergence.</li>
+      </ul>
+
+      <div class="section-heading">What Success Looks Like</div>
+      <ul class="letter-list">
+        <li>AEC contract fully executed and monthly payments flowing on schedule</li>
+        <li>Business plan complete, investor-ready, and aligned to the $500K / $1M / $2M ARR milestone gates</li>
+        <li>Outbound pipeline active — 10+ qualified opportunities per quarter, moving through stages</li>
+        <li>Sales team producing consistent closed revenue — Ryan and future reps hitting quota</li>
+      </ul>
+
+      <div class="section-heading">Compensation</div>
+      <table class="comp-table">
+                <tr>
+          <td>Revenue Model</td>
+          <td><span class="amount">Weighted Pool</span><div class="note">All collected revenue, minus Ryan 15% commission off the top, minus operating expenses, split proportionally by role weight: CEO 3.0, Exec Dir 1.5, Team 1.0. KPI bonus adds 0-1.0 to your weight. Performance lifts your share.</div></td>
+        </tr>
+<tr>
+          <td>Pay Gate</td>
+          <td><span class="amount">$0</span><div class="note">Pre-revenue. Weighted share of collected revenue after operating expenses (proportional to role weight). First AEC payment expected ~May 8 (net-45 from March 24 invoice). Non-AEC revenue from pipeline closes accelerates your pay.</div></td>
+        </tr>
+        <tr>
+          <td>Target — Ignition</td>
+          <td><span class="amount">$5,000 / month</span><div class="note">Target rate when revenue supports full IGNITION. Until then, weighted share of available revenue after expenses (proportional to role weight). Co-CEO parity: we eat together.</div></td>
+        </tr>
+        <tr>
+          <td>Target — Steady</td>
+          <td><span class="amount">$7,500 / month minimum</span><div class="note">Scales with ARR: $500K = $10K/mo, $1M = $15K/mo, $2M+ = $20,833/mo cap.</div></td>
+        </tr>
+        <tr>
+          <td>Target — Scale</td>
+          <td><span class="amount">$20,833 / month cap</span><div class="note">At $2M+ ARR. This is the ceiling from the Steady tier above, triggered automatically when ARR reaches $2M.</div></td>
+        </tr>
+        <tr>
+          <td>AEC Split</td>
+          <td><span class="amount">~$3,500</span><div class="note">From $15,000 implementation fee upon AEC execution. Cash-flow dependent.</div></td>
+        </tr>
+        <tr>
+          <td>Retroactive</td>
+          <td><span class="amount">$24,400 deferred</span><div class="note">Acknowledged obligation. Repaid over 12 months at $2,033/mo or percentage-of-surplus model. Structure to be agreed.</div></td>
+        </tr>
+        <tr>
+          <td>Annual Bonus</td>
+          <td><span class="amount">10–20% of base</span><div class="note">Paid annually against company targets.</div></td>
+        </tr>
+              <tr>
+          <td>Pipeline Incentive</td>
+          <td><span class="amount">More revenue = higher share</span><div class="note">Non-AEC revenue from pipeline closes enters the same pool. Every deal anyone closes raises everyone's weighted share. The team wins together.</div></td>
+        </tr>
+        <tr>
+          <td>Leadership Incentive</td>
+          <td><span class="amount">Team hits targets = you scale</span><div class="note">Bryan and Mike are incentivized on the team hitting their numbers. When the team performs, the CEOs scale. Base is the same as everyone. The upside is in building the team that wins.</div></td>
+        </tr>
+</table>
+<div id="extras-bryan"></div>
+
+      <div class="section-heading">Equity</div>
+      <div class="equity-block">
+        <div class="equity-row"><span class="equity-label">Allocation</span><span class="equity-value">10% of Bravetto LLC</span></div>
+        <div class="equity-row"><span class="equity-label">Vesting</span><span class="equity-value">4 years, 1-year cliff</span></div>
+        <div class="equity-row"><span class="equity-label">Buyback</span><span class="equity-value">At fair market value or pre-agreed formula</span></div>
+        <div class="equity-row"><span class="equity-label">Reconciled</span><span class="equity-value">2026-03-05 — terms agreed between Mike and Bryan</span></div>
+        <div class="equity-row"><span class="equity-label">Status</span><span class="equity-value">PROPOSED — not finalized until cap table is formalized and agreements are signed</span></div>
+      </div>
+      <div class="equity-note"><strong>NOTE:</strong> All equity is proposed. Nothing is binding until documented and signed.</div>
+
+      <div class="section-heading">The Agreement</div>
+      <ul class="letter-list">
+        <li>This engagement is 1099 Independent Contractor. Deliverable-based, not job-description-based.</li>
+        <li>All IP developed under this engagement assigns to Bravetto LLC.</li>
+        <li>Confidentiality of business information, client data, and technology is required indefinitely.</li>
+        <li>Either party may terminate with 30 days written notice.</li>
+        <li>All federal, state, and local tax obligations are yours as an independent contractor.</li>
+        <li>All equity is subject to cap table formalization. No equity is binding until documented and signed.</li>
+      </ul>
+
+      <div class="closing-rule"></div>
+      <p class="closing-para">We're building something that matters. You belong here.</p>
+
+      <div class="sig-block">
+        <div class="sig-grid">
+          <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Michael Mataluni</div>
+            <div class="sig-title">Founder / Co-CEO / CTIO</div>
+          </div>
+          <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Bryan Whitehurst</div>
+            <div class="sig-title">Co-CEO / CGO</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acceptance-block">
+        <div class="acceptance-label">Acceptance</div>
+        <div class="acceptance-grid">
+          <div class="acceptance-item">
+            <div class="acc-line"></div>
+            <div class="acc-label">Signature — Bryan Whitehurst</div>
+          </div>
+          <div class="acceptance-item">
+            <div class="acc-line"></div>
+            <div class="acc-label">Date</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="letter-footer">
+      <div class="lf-brand">Bravetto</div>
+      <div class="lf-text">Confidential — Engagement Letter — March 24, 2026 — Bravetto LLC, Florida</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 3. KRISTIN MATALUNI                                         -->
+<!-- ============================================================ -->
+<div class="letter" id="letter-kristin">
+  <div class="doc">
+
+    <div class="letterhead">
+      <div class="lh-brand">Bravetto</div>
+      <div class="lh-tagline">HUMANS &times; AI = INFINITE POTENTIAL</div>
+      <div class="lh-rule"></div>
+      <div class="lh-meta">
+        <div>
+          <div class="lh-offer-title">Engagement Letter</div>
+          <div class="lh-date">March 24, 2026</div>
+        </div>
+        <span class="lh-status proposed">Proposed</span>
+      </div>
+    </div>
+
+    <div class="letter-body">
+      <div class="salutation">Dear Kristin,</div>
+      <p class="opening">
+        You see what everyone else misses. You named the pattern that restructured our entire operating model. You walk into a brand surface and immediately find the drift — the wrong color, the frightened word, the misaligned hierarchy. Pastels are frightened colors, and you are not frightened. The company needs someone who holds the line on what Bravetto actually is. That person is you.
+      </p>
+
+      <div class="pay-gate"><strong>PAY GATE:</strong> Compensation begins when Bravetto receives its first verified client payment. First AEC invoice ($20K) sent March 24, 2026. Payment expected within 45 days. This gate is event-triggered, not date-triggered.</div>
+
+      <div class="section-heading">Your Role</div>
+      <div class="role-block">
+        <div class="rb-row"><span class="rb-label">Title</span><span class="rb-value">Executive Director of Strategic Expansion</span></div>
+        <div class="rb-row"><span class="rb-label">Domain</span><span class="rb-value">Bridge — between what we are and how we appear</span></div>
+        <div class="rb-row"><span class="rb-label">Reports To</span><span class="rb-value">Co-CEO structure (Mike + Bryan), 15% overlap enforced</span></div>
+        <div class="rb-row"><span class="rb-label">Classification</span><span class="rb-value">1099 Independent Contractor — Bravetto LLC, Florida</span></div>
+        <div class="rb-row"><span class="rb-label">Revenue Function</span><span class="rb-value">Doorman. Validates invariants. Identifies blocks. Generates creative ideas for expansion that others cannot see.</span></div>
+      </div>
+
+      <div class="section-heading">What You Bring</div>
+      <ul class="letter-list">
+        <li><strong>Brand audit</strong> — you can scan every surface and identify what is off. Not just aesthetically. Structurally. The word that signals fear. The layout that signals doubt.</li>
+        <li><strong>UX copy editing</strong> — you make the human translation happen. Technical language becomes accessible without losing precision.</li>
+        <li><strong>Drift detection</strong> — you catch when Bravetto stops being Bravetto. That is a rare and irreplaceable function.</li>
+        <li><strong>Visual hierarchy assessment</strong> — you understand what the eye sees first and whether that is the right thing.</li>
+        <li><strong>Expansion strategy instinct</strong> — you think in new directions. Partnerships, verticals, and markets that have not been named yet.</li>
+      </ul>
+
+      <div class="section-heading">What Success Looks Like</div>
+      <ul class="letter-list">
+        <li>Brand consistency across all public surfaces — zero drift from canonical Bravetto voice and visual standard</li>
+        <li>At least one identified expansion opportunity per quarter that becomes an active pursuit</li>
+        <li>Blocks identified and communicated before they become crises — proactive, not reactive</li>
+        <li>15% overlap with Co-CEO operations maintained — bridge role is visible and functional</li>
+      </ul>
+
+      <div class="section-heading">Compensation</div>
+      <table class="comp-table">
+                <tr>
+          <td>Revenue Model</td>
+          <td><span class="amount">Weighted Pool</span><div class="note">All collected revenue, minus Ryan 15% commission off the top, minus operating expenses, split proportionally by role weight: CEO 3.0, Exec Dir 1.5, Team 1.0. KPI bonus adds 0-1.0 to your weight. Performance lifts your share.</div></td>
+        </tr>
+<tr>
+          <td>Pay Gate</td>
+          <td><span class="amount">$0</span><div class="note">Pre-revenue. Weighted share of collected revenue after operating expenses (proportional to role weight). First AEC payment expected ~May 8 (net-45 from March 24 invoice). Non-AEC revenue from pipeline closes accelerates your pay.</div></td>
+        </tr>
+        <tr>
+          <td>Target — Ignition</td>
+          <td><span class="amount">$2,500 / month</span><div class="note">Target rate when revenue supports full IGNITION. Until then, weighted share of available revenue after expenses (proportional to role weight).</div></td>
+        </tr>
+        <tr>
+          <td>Target — Steady</td>
+          <td><span class="amount">$4,000 / month</span><div class="note">When monthly revenue consistently supports this rate. Revenue from pipeline accelerates this transition.</div></td>
+        </tr>
+              <tr>
+          <td>Pipeline Incentive</td>
+          <td><span class="amount">More revenue = higher share</span><div class="note">Non-AEC revenue from pipeline closes enters the same pool. Every deal anyone closes raises everyone's weighted share. The team wins together.</div></td>
+        </tr>
+</table>
+<div id="extras-kristin"></div>
+
+      <div class="section-heading">Equity</div>
+      <div class="equity-block">
+        <div class="equity-row"><span class="equity-label">Allocation</span><span class="equity-value">2% of Bravetto LLC</span></div>
+        <div class="equity-row"><span class="equity-label">Vesting</span><span class="equity-value">3 years, 1-year cliff</span></div>
+        <div class="equity-row"><span class="equity-label">Note</span><span class="equity-value">Separate from family ownership. This is Kristin's individual equity for individual contribution.</span></div>
+        <div class="equity-row"><span class="equity-label">Status</span><span class="equity-value">PROPOSED — not finalized until cap table is formalized and agreements are signed</span></div>
+      </div>
+      <div class="equity-note"><strong>NOTE:</strong> All equity is proposed. Nothing is binding until documented and signed.</div>
+
+      <div class="section-heading">The Agreement</div>
+      <ul class="letter-list">
+        <li>This engagement is 1099 Independent Contractor. Deliverable-based, not job-description-based.</li>
+        <li>All IP developed under this engagement assigns to Bravetto LLC.</li>
+        <li>Confidentiality of business information, client data, and technology is required indefinitely.</li>
+        <li>Either party may terminate with 30 days written notice.</li>
+        <li>All federal, state, and local tax obligations are yours as an independent contractor.</li>
+        <li>All equity is subject to cap table formalization. No equity is binding until documented and signed.</li>
+      </ul>
+
+      <div class="closing-rule"></div>
+      <p class="closing-para">We're building something that matters. You belong here.</p>
+
+      <div class="sig-block">
+        <div class="sig-grid">
+          <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Michael Mataluni</div>
+            <div class="sig-title">Founder / Co-CEO / CTIO</div>
+          </div>
+          <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Bryan Whitehurst</div>
+            <div class="sig-title">Co-CEO / CGO</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acceptance-block">
+        <div class="acceptance-label">Acceptance</div>
+        <div class="acceptance-grid">
+          <div class="acceptance-item">
+            <div class="acc-line"></div>
+            <div class="acc-label">Signature — Kristin Mataluni</div>
+          </div>
+          <div class="acceptance-item">
+            <div class="acc-line"></div>
+            <div class="acc-label">Date</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="letter-footer">
+      <div class="lf-brand">Bravetto</div>
+      <div class="lf-text">Confidential — Engagement Letter — March 24, 2026 — Bravetto LLC, Florida</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 4. HUDSON BROWN                                             -->
+<!-- ============================================================ -->
+<div class="letter" id="letter-hudson">
+  <div class="doc">
+
+    <div class="letterhead">
+      <div class="lh-brand">Bravetto</div>
+      <div class="lh-tagline">HUMANS &times; AI = INFINITE POTENTIAL</div>
+      <div class="lh-rule"></div>
+      <div class="lh-meta">
+        <div>
+          <div class="lh-offer-title">Engagement Letter</div>
+          <div class="lh-date">March 24, 2026</div>
+        </div>
+        <span class="lh-status proposed">Proposed</span>
+      </div>
+    </div>
+
+    <div class="letter-body">
+      <div class="salutation">Dear Hudson,</div>
+      <p class="opening">
+        You think in systems, not features. Every project you build is the same architecture in disguise — data capture, signal extraction, performance scoring. The football analytics platform, the betting arbitrage tool, the Advanced Knock scoring system: the same pattern, applied to different domains. That pattern is revenue. You just found the right company to deploy it in.
+      </p>
+
+      <div class="pay-gate"><strong>PAY GATE:</strong> Compensation begins when Bravetto receives its first verified client payment. First AEC invoice ($20K) sent March 24, 2026. Payment expected within 45 days. This gate is event-triggered, not date-triggered.</div>
+
+      <div class="section-heading">Your Role</div>
+      <div class="role-block">
+        <div class="rb-row"><span class="rb-label">Title</span><span class="rb-value">Junior Product Developer — L1</span></div>
+        <div class="rb-row"><span class="rb-label">Domain</span><span class="rb-value">Innovation / Product</span></div>
+        <div class="rb-row"><span class="rb-label">Reports To</span><span class="rb-value">Michael Mataluni (CTIO)</span></div>
+        <div class="rb-row"><span class="rb-label">Classification</span><span class="rb-value">1099 Independent Contractor — Bravetto LLC, Florida</span></div>
+        <div class="rb-row"><span class="rb-label">Revenue Function</span><span class="rb-value">35% Advanced Knock. Builds product surfaces. Sees information asymmetry and turns it into tooling.</span></div>
+      </div>
+
+      <div class="section-heading">What You Bring</div>
+      <ul class="letter-list">
+        <li><strong>UI/UX design instinct</strong> — you build interfaces people actually use. Clean hierarchy, clear signal, no decoration for its own sake.</li>
+        <li><strong>Product architecture thinking</strong> — you see the system before the screen. Data flows inform UI decisions, not the other way around.</li>
+        <li><strong>React 19 / Vite 6 proficiency</strong> — modern stack, fast builds, production-ready output.</li>
+        <li><strong>Signal extraction</strong> — you built systems that take raw data and produce insight. That is the core of what Bravetto sells.</li>
+        <li><strong>Information asymmetry recognition</strong> — you naturally ask: what does one side have that the other doesn't? That question is the product.</li>
+      </ul>
+
+      <div class="section-heading">What Success Looks Like</div>
+      <ul class="letter-list">
+        <li>Advanced Knock scoring system shipped and operational — AEC client-facing by Month 3</li>
+        <li>Product milestones delivered on sprint cadence — no ghost deliverables, no half-shipped features</li>
+        <li>L1 to L2 promotion criteria met within 18 months: independent feature ownership, code review participation, documented architectural decisions</li>
+        <li>Zero production regressions on your surfaces for 90-day rolling window</li>
+      </ul>
+
+      <div class="section-heading">Compensation</div>
+      <table class="comp-table">
+                <tr>
+          <td>Revenue Model</td>
+          <td><span class="amount">Weighted Pool</span><div class="note">All collected revenue, minus Ryan 15% commission off the top, minus operating expenses, split proportionally by role weight: CEO 3.0, Exec Dir 1.5, Team 1.0. KPI bonus adds 0-1.0 to your weight. Performance lifts your share.</div></td>
+        </tr>
+<tr>
+          <td>Pay Gate</td>
+          <td><span class="amount">$0</span><div class="note">Pre-revenue. Weighted share of collected revenue after operating expenses (proportional to role weight). First AEC payment expected ~May 8 (net-45 from March 24 invoice). Non-AEC revenue from pipeline closes accelerates your pay.</div></td>
+        </tr>
+        <tr>
+          <td>Target — Ignition</td>
+          <td><span class="amount">$2,500 / month</span><div class="note">Target rate when revenue supports full IGNITION. Until then, weighted share of available revenue after expenses (proportional to role weight).</div></td>
+        </tr>
+        <tr>
+          <td>Target — Steady</td>
+          <td><span class="amount">$2,500 / month</span><div class="note">Maintained through L1. Increases with promotion gates.</div></td>
+        </tr>
+        <tr>
+          <td>Target — Scale</td>
+          <td><span class="amount">$4,000 / month</span><div class="note">At L2 promotion or equivalent revenue milestone.</div></td>
+        </tr>
+        <tr>
+          <td>Milestone Bonuses</td>
+          <td><span class="amount">$1,000 per shipped gate</span><div class="note">Paid at each verified product milestone delivery.</div></td>
+        </tr>
+              <tr>
+          <td>Pipeline Incentive</td>
+          <td><span class="amount">More revenue = higher share</span><div class="note">Non-AEC revenue from pipeline closes enters the same pool. Every deal anyone closes raises everyone's weighted share. The team wins together.</div></td>
+        </tr>
+</table>
+<div id="extras-hudson"></div>
+      <div class="general-note">Promotion path: L1 Junior → L2 Mid → L3 Senior → L4 Lead. Each level carries base increase and expanded scope. Criteria documented separately.</div>
+
+      <div class="section-heading">Equity</div>
+      <div class="equity-block">
+        <div class="equity-row"><span class="equity-label">Allocation</span><span class="equity-value">1% of Bravetto LLC (low-end, conservative)</span></div>
+        <div class="equity-row"><span class="equity-label">Vesting</span><span class="equity-value">4 years, 1-year cliff</span></div>
+        <div class="equity-row"><span class="equity-label">Prove-Up</span><span class="equity-value">Path to 2.5% over 18 months based on product delivery quality and impact</span></div>
+        <div class="equity-row"><span class="equity-label">Status</span><span class="equity-value">PROPOSED — not finalized until cap table is formalized and agreements are signed</span></div>
+      </div>
+      <div class="equity-note"><strong>NOTE:</strong> All equity is proposed. Nothing is binding until documented and signed.</div>
+
+      <div class="section-heading">The Agreement</div>
+      <ul class="letter-list">
+        <li>This engagement is 1099 Independent Contractor. Deliverable-based, not job-description-based.</li>
+        <li>All IP developed under this engagement assigns to Bravetto LLC.</li>
+        <li>Confidentiality of business information, client data, and technology is required indefinitely.</li>
+        <li>Either party may terminate with 30 days written notice.</li>
+        <li>All federal, state, and local tax obligations are yours as an independent contractor.</li>
+        <li>All equity is subject to cap table formalization. No equity is binding until documented and signed.</li>
+      </ul>
+
+      <div class="closing-rule"></div>
+      <p class="closing-para">We're building something that matters. You belong here.</p>
+
+      <div class="sig-block">
+        <div class="sig-grid">
+          <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Michael Mataluni</div>
+            <div class="sig-title">Founder / Co-CEO / CTIO</div>
+          </div>
+          <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Bryan Whitehurst</div>
+            <div class="sig-title">Co-CEO / CGO</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acceptance-block">
+        <div class="acceptance-label">Acceptance</div>
+        <div class="acceptance-grid">
+          <div class="acceptance-item">
+            <div class="acc-line"></div>
+            <div class="acc-label">Signature — Hudson Brown</div>
+          </div>
+          <div class="acceptance-item">
+            <div class="acc-line"></div>
+            <div class="acc-label">Date</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="letter-footer">
+      <div class="lf-brand">Bravetto</div>
+      <div class="lf-text">Confidential — Engagement Letter — March 24, 2026 — Bravetto LLC, Florida</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 5. RYAN McARDLE                                             -->
+<!-- ============================================================ -->
+<div class="letter" id="letter-ryan">
+  <div class="doc">
+
+    <div class="letterhead">
+      <div class="lh-brand">Bravetto</div>
+      <div class="lh-tagline">HUMANS &times; AI = INFINITE POTENTIAL</div>
+      <div class="lh-rule"></div>
+      <div class="lh-meta">
+        <div>
+          <div class="lh-offer-title">Engagement Letter</div>
+          <div class="lh-date">March 24, 2026</div>
+        </div>
+        <span class="lh-status proposed">Proposed</span>
+      </div>
+    </div>
+
+    <div class="letter-body">
+      <div class="salutation">Dear Ryan,</div>
+      <p class="opening">
+        You opened the door to AEC. Your father's network became Bravetto's first million-dollar contract. You create deadline urgency naturally — not through pressure, through presence. You bridge technical to commercial in a way most people cannot. The product is real. The company is funded. Now you sell what you helped build.
+      </p>
+
+      <div class="pay-gate"><strong>PAY GATE:</strong> No base compensation. Commission flows on every closed deal. First dollar closes, first commission pays.</div>
+
+      <div class="section-heading">Your Role</div>
+      <div class="role-block">
+        <div class="rb-row"><span class="rb-label">Title</span><span class="rb-value">Business Development Manager</span></div>
+        <div class="rb-row"><span class="rb-label">Domain</span><span class="rb-value">Growth / Sales</span></div>
+        <div class="rb-row"><span class="rb-label">Reports To</span><span class="rb-value">Bryan Whitehurst (Co-CEO / CGO)</span></div>
+        <div class="rb-row"><span class="rb-label">Classification</span><span class="rb-value">1099 Independent Contractor — Bravetto LLC, Florida</span></div>
+        <div class="rb-row"><span class="rb-label">Revenue Function</span><span class="rb-value">Sales execution, pipeline generation, deal closing. You are the revenue engine.</span></div>
+      </div>
+
+      <div class="section-heading">What You Bring</div>
+      <ul class="letter-list">
+        <li><strong>Sales demo orchestration</strong> — you can walk a prospect through a complex product and make them feel the value, not just understand it.</li>
+        <li><strong>Prospect relationship management</strong> — you build the relationship before the pitch. By the time you close, they already trust you.</li>
+        <li><strong>Pipeline building</strong> — you do not wait for leads. You generate them from your network, your research, and your instinct.</li>
+        <li><strong>Client presentation</strong> — you communicate clearly at the executive level. C-suite and clinical director conversations are your domain.</li>
+        <li><strong>Deadline urgency</strong> — you make people want to move. That is not a technique. That is your natural operating mode.</li>
+      </ul>
+
+      <div class="section-heading">What Success Looks Like</div>
+      <ul class="letter-list">
+        <li>$1M ARR closed within 12 months — minimum 2 new enterprise accounts at AEC-tier contract size</li>
+        <li>Pipeline maintained at 3x quota coverage at all times</li>
+        <li>Sales demos converting at 25%+ from qualified opportunity to proposal</li>
+        <li>VP Sales path activated: $2M ARR closed + 2-3 sales reps hired and trained</li>
+      </ul>
+
+      <div class="section-heading">Compensation</div>
+      <table class="comp-table">
+                <tr>
+          <td>Revenue Model</td>
+          <td><span class="amount">Commission</span><div class="note">15% of all new revenue closed, off the top before the equal split. You originated AEC. That is recognized structurally.</div></td>
+        </tr>
+<tr>
+          <td>Base</td>
+          <td><span class="amount">$0</span><div class="note">Commission-only. No base until VP Sales path is activated at $2M ARR.</div></td>
+        </tr>
+        <tr>
+          <td>Commission</td>
+          <td><span class="amount">15% of all new revenue closed</span><div class="note">Paid on confirmed contract execution. No cap on commission earnings.</div></td>
+        </tr>
+        <tr>
+          <td>Milestone Bonus</td>
+          <td><span class="amount">$10,000 at $1M ARR</span><div class="note">One-time cash bonus at first $1M ARR milestone.</div></td>
+        </tr>
+        <tr>
+          <td>Milestone Bonus</td>
+          <td><span class="amount">$20,000 at $2M ARR</span><div class="note">One-time cash bonus at $2M ARR milestone.</div></td>
+        </tr>
+        <tr>
+          <td>VP Sales Path</td>
+          <td><span class="amount">$150,000/yr base + 10–18% commission</span><div class="note">Activates at $2M ARR + hire and train 2-3 sales reps. Commission band narrows as team scales.</div></td>
+        </tr>
+              <tr>
+          <td>Pipeline Incentive</td>
+          <td><span class="amount">Uncapped commission</span><div class="note">Every deal you close pays 15% to you and raises the weighted share for the whole team. Your success is their success.</div></td>
+        </tr>
+</table>
+<div id="extras-ryan"></div>
+
+      <div class="section-heading">Equity</div>
+      <div class="equity-block">
+        <div class="equity-row"><span class="equity-label">Allocation</span><span class="equity-value">0.5% of Bravetto LLC</span></div>
+        <div class="equity-row"><span class="equity-label">Vesting</span><span class="equity-value">4 years, 1-year cliff</span></div>
+        <div class="equity-row"><span class="equity-label">Status</span><span class="equity-value">PROPOSED — not finalized until cap table is formalized and agreements are signed</span></div>
+      </div>
+      <div class="equity-note"><strong>NOTE:</strong> All equity is proposed. Nothing is binding until documented and signed.</div>
+
+      <div class="section-heading">The Agreement</div>
+      <ul class="letter-list">
+        <li>This engagement is 1099 Independent Contractor. Deliverable-based, not job-description-based.</li>
+        <li>All IP developed under this engagement assigns to Bravetto LLC.</li>
+        <li>Confidentiality of business information, client data, and technology is required indefinitely.</li>
+        <li>Either party may terminate with 30 days written notice.</li>
+        <li>All federal, state, and local tax obligations are yours as an independent contractor.</li>
+        <li>All equity is subject to cap table formalization. No equity is binding until documented and signed.</li>
+      </ul>
+
+      <div class="closing-rule"></div>
+      <p class="closing-para">We're building something that matters. You belong here.</p>
+
+      <div class="sig-block">
+        <div class="sig-grid">
+          <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Michael Mataluni</div>
+            <div class="sig-title">Founder / Co-CEO / CTIO</div>
+          </div>
+          <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Bryan Whitehurst</div>
+            <div class="sig-title">Co-CEO / CGO</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acceptance-block">
+        <div class="acceptance-label">Acceptance</div>
+        <div class="acceptance-grid">
+          <div class="acceptance-item">
+            <div class="acc-line"></div>
+            <div class="acc-label">Signature — Ryan McArdle</div>
+          </div>
+          <div class="acceptance-item">
+            <div class="acc-line"></div>
+            <div class="acc-label">Date</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="letter-footer">
+      <div class="lf-brand">Bravetto</div>
+      <div class="lf-text">Confidential — Engagement Letter — March 24, 2026 — Bravetto LLC, Florida</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 6. LOVE RUDDELL                                             -->
+<!-- ============================================================ -->
+<div class="letter" id="letter-love">
+  <div class="doc">
+
+    <div class="letterhead">
+      <div class="lh-brand">Bravetto</div>
+      <div class="lh-tagline">HUMANS &times; AI = INFINITE POTENTIAL</div>
+      <div class="lh-rule"></div>
+      <div class="lh-meta">
+        <div>
+          <div class="lh-offer-title">Engagement Letter</div>
+          <div class="lh-date">March 24, 2026</div>
+        </div>
+        <span class="lh-status proposed">Proposed</span>
+      </div>
+    </div>
+
+    <div class="letter-body">
+      <div class="salutation">Dear Love,</div>
+      <p class="opening">
+        You call the show. Stage manager energy in every context — you see the whole production while everyone else sees their one role. You build financial models with reverse triggers before most people have identified the problem. You identify sensitive information before it leaks. You hold space for the person in front of you while driving the action forward. That combination is rare. Bravetto needs it.
+      </p>
+
+      <div class="pay-gate"><strong>PAY GATE:</strong> Compensation begins when Bravetto receives its first verified client payment. First AEC invoice ($20K) sent March 24, 2026. Payment expected within 45 days. This gate is event-triggered, not date-triggered.</div>
+
+      <div class="section-heading">Your Role</div>
+      <div class="role-block">
+        <div class="rb-row"><span class="rb-label">Title</span><span class="rb-value">Executive Director of Communications</span></div>
+        <div class="rb-row"><span class="rb-label">Domain</span><span class="rb-value">Operations / Communications</span></div>
+        <div class="rb-row"><span class="rb-label">Reports To</span><span class="rb-value">Bryan Whitehurst (Co-CEO / CGO)</span></div>
+        <div class="rb-row"><span class="rb-label">Classification</span><span class="rb-value">1099 Independent Contractor — Bravetto LLC, Florida</span></div>
+        <div class="rb-row"><span class="rb-label">Revenue Function</span><span class="rb-value">Admin shield, communications shield, and proactive creative revenue generation through operational excellence.</span></div>
+      </div>
+
+      <div class="section-heading">What You Bring</div>
+      <ul class="letter-list">
+        <li><strong>SOP creation</strong> — you have written 20+ standard operating procedures. You turn chaos into repeatable process.</li>
+        <li><strong>Compensation modeling</strong> — you built waterfall comp structures with reverse triggers. That is executive finance thinking.</li>
+        <li><strong>Event production</strong> — you can run a room. Physical events, virtual events, the logistics that make humans show up and stay.</li>
+        <li><strong>HR file organization</strong> — you know where everything is and why it matters. Compliance is not a burden to you. It is a practice.</li>
+        <li><strong>Gap identification</strong> — you find what is missing before it becomes a problem. That is the highest-value operational skill.</li>
+      </ul>
+
+      <div class="section-heading">What Success Looks Like</div>
+      <ul class="letter-list">
+        <li>All administrative and communication processes documented as SOPs within 90 days</li>
+        <li>Zero dropped balls on external communications — clients, partners, and team members receive timely, accurate responses</li>
+        <li>At least one proactive revenue opportunity identified and surfaced per month</li>
+        <li>Tier advancement review at 90 days and quarterly thereafter</li>
+      </ul>
+
+      <div class="section-heading">Compensation</div>
+      <table class="comp-table">
+                <tr>
+          <td>Revenue Model</td>
+          <td><span class="amount">Weighted Pool</span><div class="note">All collected revenue, minus Ryan 15% commission off the top, minus operating expenses, split proportionally by role weight: CEO 3.0, Exec Dir 1.5, Team 1.0. KPI bonus adds 0-1.0 to your weight. Performance lifts your share.</div></td>
+        </tr>
+<tr>
+          <td>Pay Gate</td>
+          <td><span class="amount">$0</span><div class="note">Pre-revenue. Weighted share of collected revenue after operating expenses (proportional to role weight). First AEC payment expected ~May 8 (net-45 from March 24 invoice). Non-AEC revenue from pipeline closes accelerates your pay.</div></td>
+        </tr>
+        <tr>
+          <td>Target — Ignition</td>
+          <td><span class="amount">$2,500 / month</span><div class="note">Target rate when revenue supports full IGNITION. Until then, weighted share of available revenue after expenses (proportional to role weight).</div></td>
+        </tr>
+        <tr>
+          <td>Target — Steady</td>
+          <td><span class="amount">$4,000 / month</span><div class="note">When monthly revenue consistently supports this rate. Revenue from pipeline accelerates this transition.</div></td>
+        </tr>
+        <tr>
+          <td>Tier 1</td>
+          <td><span class="amount">$80,000 / year</span><div class="note">At sustained operations tier. Quarterly advancement reviews.</div></td>
+        </tr>
+        <tr>
+          <td>Tier 4</td>
+          <td><span class="amount">$120,000 / year</span><div class="note">At full executive communications scope. Tier structure defined separately.</div></td>
+        </tr>
+              <tr>
+          <td>Pipeline Incentive</td>
+          <td><span class="amount">More revenue = higher share</span><div class="note">Non-AEC revenue from pipeline closes enters the same pool. Every deal anyone closes raises everyone's weighted share. The team wins together.</div></td>
+        </tr>
+</table>
+<div id="extras-love"></div>
+
+      <div class="section-heading">Equity</div>
+      <div class="equity-block">
+        <div class="equity-row"><span class="equity-label">Allocation</span><span class="equity-value">1% of Bravetto LLC</span></div>
+        <div class="equity-row"><span class="equity-label">Vesting</span><span class="equity-value">4 years, 1-year cliff</span></div>
+        <div class="equity-row"><span class="equity-label">Status</span><span class="equity-value">PROPOSED — not finalized until cap table is formalized and agreements are signed</span></div>
+      </div>
+      <div class="equity-note"><strong>NOTE:</strong> All equity is proposed. Nothing is binding until documented and signed.</div>
+
+      <div class="section-heading">The Agreement</div>
+      <ul class="letter-list">
+        <li>This engagement is 1099 Independent Contractor. Deliverable-based, not job-description-based.</li>
+        <li>All IP developed under this engagement assigns to Bravetto LLC.</li>
+        <li>Confidentiality of business information, client data, and technology is required indefinitely.</li>
+        <li>Either party may terminate with 30 days written notice.</li>
+        <li>All federal, state, and local tax obligations are yours as an independent contractor.</li>
+        <li>All equity is subject to cap table formalization. No equity is binding until documented and signed.</li>
+      </ul>
+
+      <div class="closing-rule"></div>
+      <p class="closing-para">We're building something that matters. You belong here.</p>
+
+      <div class="sig-block">
+        <div class="sig-grid">
+          <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Michael Mataluni</div>
+            <div class="sig-title">Founder / Co-CEO / CTIO</div>
+          </div>
+          <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Bryan Whitehurst</div>
+            <div class="sig-title">Co-CEO / CGO</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acceptance-block">
+        <div class="acceptance-label">Acceptance</div>
+        <div class="acceptance-grid">
+          <div class="acceptance-item">
+            <div class="acc-line"></div>
+            <div class="acc-label">Signature — Love Ruddell</div>
+          </div>
+          <div class="acceptance-item">
+            <div class="acc-line"></div>
+            <div class="acc-label">Date</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="letter-footer">
+      <div class="lf-brand">Bravetto</div>
+      <div class="lf-text">Confidential — Engagement Letter — March 24, 2026 — Bravetto LLC, Florida</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 7. KACI BROWN                                               -->
+<!-- ============================================================ -->
+<div class="letter" id="letter-kaci">
+  <div class="doc">
+
+    <div class="letterhead">
+      <div class="lh-brand">Bravetto</div>
+      <div class="lh-tagline">HUMANS &times; AI = INFINITE POTENTIAL</div>
+      <div class="lh-rule"></div>
+      <div class="lh-meta">
+        <div>
+          <div class="lh-offer-title">Engagement Letter</div>
+          <div class="lh-date">March 24, 2026</div>
+        </div>
+        <span class="lh-status proposed">Proposed</span>
+      </div>
+    </div>
+
+    <div class="letter-body">
+      <div class="salutation">Dear Kaci,</div>
+      <p class="opening">
+        You think in revenue systems, not single deals. The first time you evaluated a prospect, you immediately asked for public data. You saw how open source autonomy pairs with proprietary guardrails before most people had finished reading the brief. You live in the space between Revenue and Technology — and that space is exactly where Bravetto wins or loses.
+      </p>
+
+      <div class="pay-gate"><strong>PAY GATE:</strong> Compensation begins when Bravetto receives its first verified client payment. First AEC invoice ($20K) sent March 24, 2026. Payment expected within 45 days. This gate is event-triggered, not date-triggered.</div>
+
+      <div class="section-heading">Your Role</div>
+      <div class="role-block">
+        <div class="rb-row"><span class="rb-label">Title</span><span class="rb-value">Executive Director of Growth Strategy and Market Development</span></div>
+        <div class="rb-row"><span class="rb-label">Domain</span><span class="rb-value">Bridge — Revenue / Growth to Technology / Development</span></div>
+        <div class="rb-row"><span class="rb-label">Reports To</span><span class="rb-value">Bryan Whitehurst (Co-CEO / CGO)</span></div>
+        <div class="rb-row"><span class="rb-label">Classification</span><span class="rb-value">1099 Independent Contractor — Bravetto LLC, Florida</span></div>
+        <div class="rb-row"><span class="rb-label">Revenue Function</span><span class="rb-value">Revenue generation is your primary role. Bridge between Revenue/Growth and Tech/Development is how you generate it.</span></div>
+      </div>
+
+      <div class="section-heading">What You Bring</div>
+      <ul class="letter-list">
+        <li><strong>Investor due diligence</strong> — you know what investors look for before they ask. You surface the risks and the wins simultaneously.</li>
+        <li><strong>AI landscape analysis</strong> — you map the field. Who are the players, where are they moving, where is the white space that Bravetto can own.</li>
+        <li><strong>GTM strategy</strong> — you can build the go-to-market from first principles. Segment, message, channel, sequence.</li>
+        <li><strong>Competitive intelligence</strong> — you gather public data systematically, not opportunistically. That discipline is what makes the analysis reliable.</li>
+        <li><strong>Blue ocean strategy instinct</strong> — you look for markets that are not yet crowded and ask whether Bravetto belongs there before anyone else arrives.</li>
+      </ul>
+
+      <div class="section-heading">What Success Looks Like</div>
+      <ul class="letter-list">
+        <li>Two qualified new market opportunities researched and presented per quarter</li>
+        <li>GTM strategy documented for at least one new vertical by Month 6</li>
+        <li>Investor-ready market analysis deck complete and updated with each major GTM pivot</li>
+        <li>Revenue contribution directly traceable to at least one closed deal per year</li>
+      </ul>
+
+      <div class="section-heading">Compensation</div>
+      <table class="comp-table">
+                <tr>
+          <td>Revenue Model</td>
+          <td><span class="amount">Weighted Pool</span><div class="note">All collected revenue, minus Ryan 15% commission off the top, minus operating expenses, split proportionally by role weight: CEO 3.0, Exec Dir 1.5, Team 1.0. KPI bonus adds 0-1.0 to your weight. Performance lifts your share.</div></td>
+        </tr>
+<tr>
+          <td>Pay Gate</td>
+          <td><span class="amount">$0</span><div class="note">Pre-revenue. Weighted share of collected revenue after operating expenses (proportional to role weight). First AEC payment expected ~May 8 (net-45 from March 24 invoice). Non-AEC revenue from pipeline closes accelerates your pay.</div></td>
+        </tr>
+        <tr>
+          <td>Target — Ignition</td>
+          <td><span class="amount">$2,500 / month</span><div class="note">Target rate when revenue supports full IGNITION. Until then, weighted share of available revenue after expenses (proportional to role weight).</div></td>
+        </tr>
+        <tr>
+          <td>Target — Steady</td>
+          <td><span class="amount">$4,000 / month</span><div class="note">When monthly revenue consistently supports this rate. Revenue from pipeline accelerates this transition.</div></td>
+        </tr>
+        <tr>
+          <td>Target — Scale</td>
+          <td><span class="amount">$5,500 / month</span><div class="note">At multi-stream revenue and expanded GTM execution scope.</div></td>
+        </tr>
+              <tr>
+          <td>Pipeline Incentive</td>
+          <td><span class="amount">More revenue = higher share</span><div class="note">Non-AEC revenue from pipeline closes enters the same pool. Every deal anyone closes raises everyone's weighted share. The team wins together.</div></td>
+        </tr>
+</table>
+<div id="extras-kaci"></div>
+
+      <div class="section-heading">Equity</div>
+      <div class="equity-block">
+        <div class="equity-row"><span class="equity-label">Allocation</span><span class="equity-value">0.5% of Bravetto LLC</span></div>
+        <div class="equity-row"><span class="equity-label">Vesting</span><span class="equity-value">4 years, 1-year cliff</span></div>
+        <div class="equity-row"><span class="equity-label">Status</span><span class="equity-value">PROPOSED — not finalized until cap table is formalized and agreements are signed</span></div>
+      </div>
+      <div class="equity-note"><strong>NOTE:</strong> All equity is proposed. Nothing is binding until documented and signed.</div>
+
+      <div class="section-heading">The Agreement</div>
+      <ul class="letter-list">
+        <li>This engagement is 1099 Independent Contractor. Deliverable-based, not job-description-based.</li>
+        <li>All IP developed under this engagement assigns to Bravetto LLC.</li>
+        <li>Confidentiality of business information, client data, and technology is required indefinitely.</li>
+        <li>Either party may terminate with 30 days written notice.</li>
+        <li>All federal, state, and local tax obligations are yours as an independent contractor.</li>
+        <li>All equity is subject to cap table formalization. No equity is binding until documented and signed.</li>
+      </ul>
+
+      <div class="closing-rule"></div>
+      <p class="closing-para">We're building something that matters. You belong here.</p>
+
+      <div class="sig-block">
+        <div class="sig-grid">
+          <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Michael Mataluni</div>
+            <div class="sig-title">Founder / Co-CEO / CTIO</div>
+          </div>
+          <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Bryan Whitehurst</div>
+            <div class="sig-title">Co-CEO / CGO</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acceptance-block">
+        <div class="acceptance-label">Acceptance</div>
+        <div class="acceptance-grid">
+          <div class="acceptance-item">
+            <div class="acc-line"></div>
+            <div class="acc-label">Signature — Kaci Brown</div>
+          </div>
+          <div class="acceptance-item">
+            <div class="acc-line"></div>
+            <div class="acc-label">Date</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="letter-footer">
+      <div class="lf-brand">Bravetto</div>
+      <div class="lf-text">Confidential — Engagement Letter — March 24, 2026 — Bravetto LLC, Florida</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 8. MARY WAKEFIELD                                           -->
+<!-- ============================================================ -->
+<div class="letter" id="letter-mary">
+  <div class="doc">
+
+    <div class="letterhead">
+      <div class="lh-brand">Bravetto</div>
+      <div class="lh-tagline">HUMANS &times; AI = INFINITE POTENTIAL</div>
+      <div class="lh-rule"></div>
+      <div class="lh-meta">
+        <div>
+          <div class="lh-offer-title">Engagement Letter</div>
+          <div class="lh-date">March 24, 2026</div>
+        </div>
+        <span class="lh-status proposed">Proposed</span>
+      </div>
+    </div>
+
+    <div class="letter-body">
+      <div class="salutation">Dear Mary,</div>
+      <p class="opening">
+        You ask the questions nobody else asks. What does success look like? What is the deliverable? What is the timeline? Your feathers do not get ruffled when the answer is complicated. You hold the line without drama. That is why you find the money left on the table — because you stay in the room long enough to see it.
+      </p>
+
+      <div class="pay-gate"><strong>PAY GATE:</strong> Compensation begins when Bravetto receives its first verified client payment. First AEC invoice ($20K) sent March 24, 2026. Payment expected within 45 days. This gate is event-triggered, not date-triggered.</div>
+
+      <div class="section-heading">Your Role</div>
+      <div class="role-block">
+        <div class="rb-row"><span class="rb-label">Title</span><span class="rb-value">Executive Director of Operations and Organizational Integrity</span></div>
+        <div class="rb-row"><span class="rb-label">Domain</span><span class="rb-value">Operations / Finance</span></div>
+        <div class="rb-row"><span class="rb-label">Reports To</span><span class="rb-value">Bryan Whitehurst (Co-CEO / CGO)</span></div>
+        <div class="rb-row"><span class="rb-label">Classification</span><span class="rb-value">1099 Independent Contractor — Bravetto LLC, Florida</span></div>
+        <div class="rb-row"><span class="rb-label">Revenue Function</span><span class="rb-value">QuickBooks stewardship and opportunity gap identification. The one who finds the money left on the table.</span></div>
+      </div>
+
+      <div class="section-heading">What You Bring</div>
+      <ul class="letter-list">
+        <li><strong>Project management</strong> — you track what is in motion, what is blocked, and what is overdue. Nothing falls through the gap you are watching.</li>
+        <li><strong>Scope definition</strong> — you clarify what done means before the work starts. That saves weeks of rework.</li>
+        <li><strong>Budget analysis</strong> — you read the numbers and identify what is real versus what is projected. QuickBooks is your instrument.</li>
+        <li><strong>Process documentation</strong> — you write the procedure that outlasts the person. Institutional memory is your output.</li>
+        <li><strong>Stakeholder communication</strong> — you communicate clearly across levels. Executive, vendor, client — same precision, different register.</li>
+      </ul>
+
+      <div class="section-heading">What Success Looks Like</div>
+      <ul class="letter-list">
+        <li>QuickBooks maintained and reconciled monthly — zero unaccounted transactions</li>
+        <li>At least one operational gap identified and resolved per quarter before it creates a financial or compliance risk</li>
+        <li>All active projects tracked with defined scope, timeline, and owner — no ghost work</li>
+        <li>Operations documentation updated and current — team can operate without Mary present</li>
+      </ul>
+
+      <div class="section-heading">Compensation</div>
+      <table class="comp-table">
+                <tr>
+          <td>Revenue Model</td>
+          <td><span class="amount">Weighted Pool</span><div class="note">All collected revenue, minus Ryan 15% commission off the top, minus operating expenses, split proportionally by role weight: CEO 3.0, Exec Dir 1.5, Team 1.0. KPI bonus adds 0-1.0 to your weight. Performance lifts your share.</div></td>
+        </tr>
+<tr>
+          <td>Pay Gate</td>
+          <td><span class="amount">$0</span><div class="note">Pre-revenue. Weighted share of collected revenue after operating expenses (proportional to role weight). First AEC payment expected ~May 8 (net-45 from March 24 invoice). Non-AEC revenue from pipeline closes accelerates your pay. Note: Bravetto pay supplements current income. It does not replace it initially.</div></td>
+        </tr>
+        <tr>
+          <td>Target — Ignition</td>
+          <td><span class="amount">$2,500 / month</span><div class="note">Target rate when revenue supports full IGNITION. Until then, weighted share of available revenue after expenses (proportional to role weight).</div></td>
+        </tr>
+        <tr>
+          <td>Target — Steady</td>
+          <td><span class="amount">$4,000 / month</span><div class="note">When monthly revenue consistently supports this rate. Revenue from pipeline accelerates this transition.</div></td>
+        </tr>
+        <tr>
+          <td>Target — Scale</td>
+          <td><span class="amount">$5,500 / month</span><div class="note">At multi-stream revenue and expanded operations scope.</div></td>
+        </tr>
+              <tr>
+          <td>Pipeline Incentive</td>
+          <td><span class="amount">More revenue = higher share</span><div class="note">Non-AEC revenue from pipeline closes enters the same pool. Every deal anyone closes raises everyone's weighted share. The team wins together.</div></td>
+        </tr>
+</table>
+<div id="extras-mary"></div>
+      <div class="general-note">Note: Bravetto compensation is designed to reduce outside obligations over time, not replace them immediately. Pacing is yours.</div>
+
+      <div class="section-heading">Equity</div>
+      <div class="equity-block">
+        <div class="equity-row"><span class="equity-label">Allocation</span><span class="equity-value">0.25% of Bravetto LLC</span></div>
+        <div class="equity-row"><span class="equity-label">Vesting</span><span class="equity-value">4 years, 1-year cliff</span></div>
+        <div class="equity-row"><span class="equity-label">Status</span><span class="equity-value">PROPOSED — not finalized until cap table is formalized and agreements are signed</span></div>
+      </div>
+      <div class="equity-note"><strong>NOTE:</strong> All equity is proposed. Nothing is binding until documented and signed.</div>
+
+      <div class="section-heading">The Agreement</div>
+      <ul class="letter-list">
+        <li>This engagement is 1099 Independent Contractor. Deliverable-based, not job-description-based.</li>
+        <li>All IP developed under this engagement assigns to Bravetto LLC.</li>
+        <li>Confidentiality of business information, client data, and technology is required indefinitely.</li>
+        <li>Either party may terminate with 30 days written notice.</li>
+        <li>All federal, state, and local tax obligations are yours as an independent contractor.</li>
+        <li>All equity is subject to cap table formalization. No equity is binding until documented and signed.</li>
+      </ul>
+
+      <div class="closing-rule"></div>
+      <p class="closing-para">We're building something that matters. You belong here.</p>
+
+      <div class="sig-block">
+        <div class="sig-grid">
+          <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Michael Mataluni</div>
+            <div class="sig-title">Founder / Co-CEO / CTIO</div>
+          </div>
+          <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Bryan Whitehurst</div>
+            <div class="sig-title">Co-CEO / CGO</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acceptance-block">
+        <div class="acceptance-label">Acceptance</div>
+        <div class="acceptance-grid">
+          <div class="acceptance-item">
+            <div class="acc-line"></div>
+            <div class="acc-label">Signature — Mary Wakefield</div>
+          </div>
+          <div class="acceptance-item">
+            <div class="acc-line"></div>
+            <div class="acc-label">Date</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="letter-footer">
+      <div class="lf-brand">Bravetto</div>
+      <div class="lf-text">Confidential — Engagement Letter — March 24, 2026 — Bravetto LLC, Florida</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 9. PHANI VEERANKI                                           -->
+<!-- ============================================================ -->
+<div class="letter" id="letter-phani">
+  <div class="doc">
+
+    <div class="letterhead">
+      <div class="lh-brand">Bravetto</div>
+      <div class="lh-tagline">HUMANS &times; AI = INFINITE POTENTIAL</div>
+      <div class="lh-rule"></div>
+      <div class="lh-meta">
+        <div>
+          <div class="lh-offer-title">Engagement Letter</div>
+          <div class="lh-date">March 24, 2026</div>
+        </div>
+        <span class="lh-status proposed">Proposed</span>
+      </div>
+    </div>
+
+    <div class="letter-body">
+      <div class="salutation">Dear Phani,</div>
+      <p class="opening">
+        You committed despite zero pay and immigration uncertainty. You persist through limbo — the kind of limbo that would cause most people to walk away and find something certain. You reach out proactively. You acknowledge help when you receive it. You are grateful without being passive. You are ready to deploy the moment you are cleared, and we are ready to deploy you the moment that happens.
+      </p>
+
+      <div class="pay-gate"><strong>PAY GATE:</strong> No compensation flows until immigration status clears AND Bravetto receives its first verified client payment. This gate is event-triggered. Return priority is FIRST.</div>
+
+      <div class="section-heading">Your Role</div>
+      <div class="role-block">
+        <div class="rb-row"><span class="rb-label">Title</span><span class="rb-value">AI / ML Team Lead</span></div>
+        <div class="rb-row"><span class="rb-label">Domain</span><span class="rb-value">Innovation / Engineering</span></div>
+        <div class="rb-row"><span class="rb-label">Reports To</span><span class="rb-value">Michael Mataluni (CTIO)</span></div>
+        <div class="rb-row"><span class="rb-label">Classification</span><span class="rb-value">1099 Independent Contractor — Bravetto LLC, Florida (pending immigration clearance)</span></div>
+        <div class="rb-row"><span class="rb-label">Revenue Function</span><span class="rb-value">Unblocks the final systems, products, and features Mike needs. The last mile of every hard technical problem.</span></div>
+      </div>
+
+      <div class="section-heading">What You Bring</div>
+      <ul class="letter-list">
+        <li><strong>AI / ML engineering</strong> — you build and deploy machine learning systems. Not prototypes. Production systems.</li>
+        <li><strong>Deep learning and model training</strong> — you understand what happens inside the model, not just what comes out of it.</li>
+        <li><strong>System architecture</strong> — you design for scale before the scale arrives. The foundations you lay hold.</li>
+        <li><strong>Persistence through uncertainty</strong> — you stayed engaged through a period that tested everyone. That is character, not just skill.</li>
+        <li><strong>Proactive communication</strong> — you do not wait to be asked. You surface your status, your blockers, your progress unprompted.</li>
+      </ul>
+
+      <div class="section-heading">What Success Looks Like</div>
+      <ul class="letter-list">
+        <li>Immigration clearance secured — every practical step taken proactively on your end</li>
+        <li>First technical deliverable shipped within 30 days of cleared status</li>
+        <li>AI / ML systems operational with documented architecture and monitoring</li>
+        <li>Mike unblocked on at least two hard technical problems per quarter</li>
+      </ul>
+
+      <div class="section-heading">Compensation</div>
+      <table class="comp-table">
+                <tr>
+          <td>Revenue Model</td>
+          <td><span class="amount">Weighted Pool</span><div class="note">All collected revenue, minus Ryan 15% commission off the top, minus operating expenses, split proportionally by role weight: CEO 3.0, Exec Dir 1.5, Team 1.0. KPI bonus adds 0-1.0 to your weight. Performance lifts your share.</div></td>
+        </tr>
+<tr>
+          <td>Pay Gate</td>
+          <td><span class="amount">$0</span><div class="note">No compensation until immigration clears AND first verified AEC payment received. You are first to return when gates open.</div></td>
+        </tr>
+        <tr>
+          <td>Target — Ignition</td>
+          <td><span class="amount">$2,500 / month</span><div class="note">At first eligible payment date after both gates clear.</div></td>
+        </tr>
+        <tr>
+          <td>Target — Steady</td>
+          <td><span class="amount">$4,000 / month</span><div class="note">When monthly revenue consistently supports this rate and full engagement scope active.</div></td>
+        </tr>
+        <tr>
+          <td>Target — Scale</td>
+          <td><span class="amount">$5,000 / month</span><div class="note">At multi-stream revenue and expanded AI/ML team lead scope.</div></td>
+        </tr>
+              <tr>
+          <td>Pipeline Incentive</td>
+          <td><span class="amount">More revenue = higher share</span><div class="note">Non-AEC revenue from pipeline closes enters the same pool. Every deal anyone closes raises everyone's weighted share. The team wins together.</div></td>
+        </tr>
+</table>
+<div id="extras-phani"></div>
+
+      <div class="section-heading">Equity</div>
+      <div class="equity-block">
+        <div class="equity-row"><span class="equity-label">Allocation</span><span class="equity-value">0.5% of Bravetto LLC</span></div>
+        <div class="equity-row"><span class="equity-label">Vesting</span><span class="equity-value">4 years, 1-year cliff</span></div>
+        <div class="equity-row"><span class="equity-label">Return Priority</span><span class="equity-value">FIRST — when gates open, you are compensated before other pending engagements</span></div>
+        <div class="equity-row"><span class="equity-label">Status</span><span class="equity-value">PROPOSED — not finalized until cap table is formalized and agreements are signed</span></div>
+      </div>
+      <div class="equity-note"><strong>NOTE:</strong> All equity is proposed. Nothing is binding until documented and signed. Immigration clearance is required before any contractor relationship can begin.</div>
+
+      <div class="section-heading">The Agreement</div>
+      <ul class="letter-list">
+        <li>This engagement is 1099 Independent Contractor, contingent on immigration status permitting independent contractor work in the United States. Compensation is subject to both immigration clearance and AEC revenue gate as defined above.</li>
+        <li>All IP developed under this engagement assigns to Bravetto LLC.</li>
+        <li>Confidentiality of business information, client data, and technology is required indefinitely.</li>
+        <li>Either party may terminate with 30 days written notice.</li>
+        <li>All federal, state, and local tax obligations are yours as an independent contractor.</li>
+        <li>All equity is subject to cap table formalization. No equity is binding until documented and signed.</li>
+      </ul>
+
+      <div class="closing-rule"></div>
+      <p class="closing-para">We're building something that matters. You belong here.</p>
+
+      <div class="sig-block">
+        <div class="sig-grid">
+          <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Michael Mataluni</div>
+            <div class="sig-title">Founder / Co-CEO / CTIO</div>
+          </div>
+          <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Bryan Whitehurst</div>
+            <div class="sig-title">Co-CEO / CGO</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acceptance-block">
+        <div class="acceptance-label">Acceptance</div>
+        <div class="acceptance-grid">
+          <div class="acceptance-item">
+            <div class="acc-line"></div>
+            <div class="acc-label">Signature — Phani Veeranki</div>
+          </div>
+          <div class="acceptance-item">
+            <div class="acc-line"></div>
+            <div class="acc-label">Date</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="letter-footer">
+      <div class="lf-brand">Bravetto</div>
+      <div class="lf-text">Confidential — Engagement Letter — March 24, 2026 — Bravetto LLC, Florida</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 10. CALEB CASAS                                             -->
+<!-- ============================================================ -->
+<div class="letter" id="letter-caleb">
+  <div class="doc">
+
+    <div class="letterhead">
+      <div class="lh-brand">Bravetto</div>
+      <div class="lh-tagline">HUMANS &times; AI = INFINITE POTENTIAL</div>
+      <div class="lh-rule"></div>
+      <div class="lh-meta">
+        <div>
+          <div class="lh-offer-title">Engagement Letter</div>
+          <div class="lh-date">March 24, 2026</div>
+        </div>
+        <span class="lh-status proposed">Proposed</span>
+      </div>
+    </div>
+
+    <div class="letter-body">
+      <div class="salutation">Dear Caleb,</div>
+      <p class="opening">
+        You're home. Thirty-three percent of Advanced Knock is yours — you helped build what is now the product that landed Bravetto's first major contract. The thing you helped create is now the thing you get to sell. There is no better position in a company than that one.
+      </p>
+
+      <div class="pay-gate"><strong>PAY GATE:</strong> Commission-only. No base compensation. Commission flows on every closed deal once Bravetto begins receiving AEC revenue. Structure coordinated with Ryan McArdle and Bryan Whitehurst.</div>
+
+      <div class="section-heading">Your Role</div>
+      <div class="role-block">
+        <div class="rb-row"><span class="rb-label">Title</span><span class="rb-value">Sales Representative / Advanced Knock Co-Owner</span></div>
+        <div class="rb-row"><span class="rb-label">Domain</span><span class="rb-value">Growth / Sales</span></div>
+        <div class="rb-row"><span class="rb-label">Reports To</span><span class="rb-value">Ryan McArdle (Business Development Manager)</span></div>
+        <div class="rb-row"><span class="rb-label">Classification</span><span class="rb-value">1099 Independent Contractor — Bravetto LLC, Florida</span></div>
+        <div class="rb-row"><span class="rb-label">Revenue Function</span><span class="rb-value">Sales position under Ryan. Commission-based. You sell what you helped build.</span></div>
+      </div>
+
+      <div class="section-heading">What You Bring</div>
+      <ul class="letter-list">
+        <li><strong>Product ownership</strong> — you are a 33% owner of Advanced Knock. You know it from the inside. That credibility is the close.</li>
+        <li><strong>Digital asset fluency</strong> — you understand how digital products create value and can communicate that to prospects who may not.</li>
+        <li><strong>Builder credibility</strong> — you built something real. That is not a resume line. That is a signal prospects respond to.</li>
+        <li><strong>Sales positioning</strong> — as a co-owner selling what you built, your authenticity is the differentiator. Nobody else in the room has that.</li>
+      </ul>
+
+      <div class="section-heading">What Success Looks Like</div>
+      <ul class="letter-list">
+        <li>Commission structure agreed with Ryan and Bryan within 30 days of engagement start</li>
+        <li>First qualified opportunity in pipeline within 60 days</li>
+        <li>First closed deal within 90 days</li>
+        <li>Consistent pipeline contribution alongside Ryan's outbound motion</li>
+      </ul>
+
+      <div class="section-heading">Compensation</div>
+      <table class="comp-table">
+                <tr>
+          <td>Revenue Model</td>
+          <td><span class="amount">Commission</span><div class="note">Commission-only on deals you close. No AEC share. Your revenue comes from your pipeline. Structure set by Ryan + Bryan.</div></td>
+        </tr>
+<tr>
+          <td>Base</td>
+          <td><span class="amount">$0</span><div class="note">Commission-only. Structure to be defined by Ryan McArdle and Bryan Whitehurst within 30 days.</div></td>
+        </tr>
+        <tr>
+          <td>Commission</td>
+          <td><span class="amount">Structure TBD</span><div class="note">Coordinated with Ryan's commission structure. Ryan and Bryan define the band. No ceiling on earnings.</div></td>
+        </tr>
+        <tr>
+          <td>Advanced Knock</td>
+          <td><span class="amount">33% co-owner</span><div class="note">Separate entity. Bravetto engagement does not affect or dilute Advanced Knock co-ownership.</div></td>
+        </tr>
+              <tr>
+          <td>Pipeline Incentive</td>
+          <td><span class="amount">Your deals = your pay</span><div class="note">Every deal you close pays commission directly. Advanced Knock sales are your primary pipeline. Structure documented separately.</div></td>
+        </tr>
+</table>
+<div id="extras-caleb"></div>
+
+      <div class="section-heading">Equity</div>
+      <div class="equity-block">
+        <div class="equity-row"><span class="equity-label">Bravetto Equity</span><span class="equity-value">N/A at Bravetto LLC level</span></div>
+        <div class="equity-row"><span class="equity-label">Advanced Knock</span><span class="equity-value">33% co-owner — this is a separate entity and is not affected by this engagement</span></div>
+        <div class="equity-row"><span class="equity-label">Status</span><span class="equity-value">Bravetto equity not part of this engagement</span></div>
+      </div>
+      <div class="general-note">Advanced Knock co-ownership is governed by a separate agreement. This engagement letter covers only the Bravetto sales role.</div>
+
+      <div class="section-heading">The Agreement</div>
+      <ul class="letter-list">
+        <li>This engagement is 1099 Independent Contractor. Deliverable-based, not job-description-based.</li>
+        <li>All sales IP and client relationships developed under this Bravetto engagement belong to Bravetto LLC. Technical IP related to Advanced Knock is governed by the separate co-ownership agreement.</li>
+        <li>Confidentiality of business information, client data, and technology is required indefinitely.</li>
+        <li>Either party may terminate with 30 days written notice.</li>
+        <li>All federal, state, and local tax obligations are yours as an independent contractor.</li>
+        <li>Commission structure to be documented separately within 30 days of engagement start.</li>
+      </ul>
+
+      <div class="closing-rule"></div>
+      <p class="closing-para">We're building something that matters. You belong here.</p>
+
+      <div class="sig-block">
+        <div class="sig-grid">
+          <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Michael Mataluni</div>
+            <div class="sig-title">Founder / Co-CEO / CTIO</div>
+          </div>
+          <div>
+            <div class="sig-line"></div>
+            <div class="sig-name">Bryan Whitehurst</div>
+            <div class="sig-title">Co-CEO / CGO</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acceptance-block">
+        <div class="acceptance-label">Acceptance</div>
+        <div class="acceptance-grid">
+          <div class="acceptance-item">
+            <div class="acc-line"></div>
+            <div class="acc-label">Signature — Caleb Casas</div>
+          </div>
+          <div class="acceptance-item">
+            <div class="acc-line"></div>
+            <div class="acc-label">Date</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="letter-footer">
+      <div class="lf-brand">Bravetto</div>
+      <div class="lf-text">Confidential — Engagement Letter — March 24, 2026 — Bravetto LLC, Florida</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- BRYAN REVIEW DASHBOARD                                      -->
+<!-- ============================================================ -->
+<div class="letter" id="letter-review">
+  <div class="doc" style="max-width:900px;">
+
+    <div class="letterhead">
+      <div class="lh-brand">Bravetto</div>
+      <div class="lh-tagline">REVENUE WATERFALL &mdash; BRYAN REVIEW DASHBOARD</div>
+      <div class="lh-rule"></div>
+      <div class="lh-meta">
+        <div>
+          <div class="lh-offer-title">Weighted Pool Model</div>
+          <div class="lh-date">March 25, 2026 &mdash; For Bryan Whitehurst Review</div>
+        </div>
+        <span class="lh-status active">LIVE</span>
+      </div>
+    </div>
+
+    <div class="letter-body">
+
+      <!-- SCENARIO PRESETS -->
+      <div class="section-heading">Revenue Scenarios</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
+        <button onclick="setScenario(20000,2000,0)" class="scenario-btn">Month 1: $20K</button>
+        <button onclick="setScenario(20000,2000,0)" class="scenario-btn">Month 2: $20K</button>
+        <button onclick="setScenario(30000,2000,0)" class="scenario-btn">Month 3: $30K</button>
+        <button onclick="setScenario(40000,2000,0)" class="scenario-btn">Steady: $40K</button>
+        <button onclick="setScenario(40000,2000,10000)" class="scenario-btn" style="border-color:#065F46;color:#065F46;">+ $10K SaaS</button>
+        <button onclick="setScenario(40000,2000,20000)" class="scenario-btn" style="border-color:#065F46;color:#065F46;">+ $20K North Shore</button>
+        <button onclick="setScenario(40000,2000,40000)" class="scenario-btn" style="border-color:#065F46;color:#065F46;">$80K Scale</button>
+      </div>
+
+      <!-- WATERFALL BREAKDOWN -->
+      <div class="section-heading">Waterfall Breakdown</div>
+      <table class="comp-table" id="review-waterfall">
+        <tr><td>Gross Revenue</td><td><span class="amount" id="rw-gross">$0</span></td></tr>
+        <tr><td>Ryan 15% Off Top</td><td><span class="amount" id="rw-ryan">-$0</span><div class="note">Commission on all revenue Ryan originated/closed. Comes off before equal split.</div></td></tr>
+        <tr><td>Operating Expenses</td><td><span class="amount" id="rw-exp">-$2,000</span><div class="note">Tools, SaaS, infrastructure. Estimate.</div></td></tr>
+        <tr><td>Available Pool</td><td><span class="amount" id="rw-pool">$0</span><div class="note">What gets split equally among 8 base-pool members.</div></td></tr>
+        <tr><td>Weighted Share (x8)</td><td><span class="amount" id="rw-share">$0 each</span><div class="note">Proportional by role weight: Founder, CEO 3.0, ExecDir 1.5, Team 1.0. KPI bonus adds 0-1.0.</div></td></tr>
+        <tr><td>Total Team Burn</td><td><span class="amount" id="rw-burn">$0</span></td></tr>
+        <tr><td>Surplus &rarr; Founder Debt</td><td><span class="amount" id="rw-surplus">$0</span><div class="note">Everything above team burn goes to $300K founder debt repayment.</div></td></tr>
+      </table>
+
+      <!-- TEAM GRID -->
+      <div class="section-heading">Team Grid &mdash; Weighted Share vs Target</div>
+      <table class="share-table" id="review-team-table">
+        <thead>
+          <tr>
+            <th>Person</th>
+            <th>Role</th>
+            <th>Weighted Share</th>
+            <th>IGNITION Target</th>
+            <th>Gap</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="review-team-tbody"></tbody>
+      </table>
+
+      <!-- WHAT REVENUE GETS EVERYONE THERE -->
+      <div class="section-heading">What Revenue Gets Everyone There</div>
+      <div id="revenue-targets"></div>
+      <div class="general-note" style="margin-bottom:20px;">The lever: every non-AEC deal anyone closes moves everyone up this table. Pipeline is the accelerator. AEC is the floor. Innovation is the multiplier.</div>
+
+      <!-- THE FORMULA -->
+      <div class="section-heading">The Formula</div>
+      <div style="background:var(--ink);color:var(--cream);padding:20px 24px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:2;margin-bottom:20px;">
+        <div style="color:var(--gold);font-size:10px;letter-spacing:0.1em;margin-bottom:8px;">WATERFALL (pure function, stateless, deterministic)</div>
+        <div>gross = aec_revenue + non_aec_revenue</div>
+        <div>ryan_commission = gross * 0.15</div>
+        <div>pool = gross - ryan_commission - operating_expenses</div>
+        <div>weighted_share = pool * (your_weight / total_weights)</div>
+        <div>surplus = pool - sum(weighted_shares)  <span style="color:var(--gold);">// &rarr; founder debt</span></div>
+        <div style="margin-top:8px;color:var(--gold);">// caleb: commission-only on own deals. $0 from AEC.</div>
+        <div style="color:var(--gold);">// ryan: 15% off top. not in equal pool.</div>
+        <div style="color:var(--gold);">// pay gate: first verified payment. not a date.</div>
+      </div>
+
+      <!-- INVARIANTS -->
+      <div class="section-heading">Invariants (Cannot Change)</div>
+      <ul class="letter-list">
+        <li><strong>Weighted share after expenses</strong> for all 8 base-pool members proportional to role weight. Founder, CEO 3.0, ExecDir 1.5, Team 1.0.</li>
+        <li><strong>Ryan 15% commission off the top</strong> before the equal split. He originated AEC. That's earned.</li>
+        <li><strong>Caleb commission-only</strong> on deals he closes. $0 from AEC. Started March 25, 2026.</li>
+        <li><strong>Surplus &rarr; founder debt</strong>. Everything above the equal split goes to repay Mike's $300K investment.</li>
+        <li><strong>Event-triggered pay gate.</strong> First verified payment, not a calendar date. Net-45 from invoice.</li>
+        <li><strong>Non-AEC revenue enters same pool.</strong> Every deal anyone closes raises everyone's weighted share.</li>
+        <li><strong>Net-45 payment terms.</strong> Invoice March 24 &rarr; first check ~May 8.</li>
+      </ul>
+
+      <!-- GAPS AND DELTAS -->
+      <div class="section-heading">Gaps &amp; Deltas &mdash; What Bryan Needs to See</div>
+      <table class="comp-table">
+        <tr>
+          <td style="color:#991B1B;">GAP 1</td>
+          <td><span class="amount">$5K/mo deficit in Months 1-2</span><div class="note">$20K revenue minus Ryan 15% ($3K) minus expenses ($2K) = $15K pool. $15K / 8 = $1,875 each. IGNITION target is $2,500-$5,000. Mike covers gap, adds to founder debt.</div></td>
+        </tr>
+        <tr>
+          <td style="color:#991B1B;">GAP 2</td>
+          <td><span class="amount">Bryan $24,400 retro</span><div class="note">Acknowledged deferred obligation. Not in the waterfall. Mechanism undecided: surplus, separate instrument, or equity conversion? Bryan to decide.</div></td>
+        </tr>
+        <tr>
+          <td style="color:#991B1B;">GAP 3</td>
+          <td><span class="amount">Phani immigration status</span><div class="note">If Phani can't work, his share is: held? redistributed? added to surplus? Undecided.</div></td>
+        </tr>
+        <tr>
+          <td style="color:#92400E;">DELTA 1</td>
+          <td><span class="amount">Comp plan v3.0 is stale</span><div class="note">Still references fixed IGNITION rates. Being updated to reflect weighted pool model.</div></td>
+        </tr>
+        <tr>
+          <td style="color:#92400E;">DELTA 2</td>
+          <td><span class="amount">Supabase still has fixed rates</span><div class="note">compensation_phases table shows Mike=$5K, team=$2.5K. Letters say "weighted pool." DB update pending Mike's final approval of model.</div></td>
+        </tr>
+      </table>
+
+      <!-- OPEN DECISIONS -->
+      <div class="section-heading">Open Decisions for Bryan + Mike</div>
+      <table class="comp-table">
+        <tr><td>1</td><td><span class="amount">Bryan's $24,400 retro mechanism</span><div class="note">Lump over 12mo ($2,033/mo), surplus percentage, or equity conversion?</div></td></tr>
+        <tr><td>2</td><td><span class="amount">Phani's share when immigration uncleared</span><div class="note">Hold, redistribute, or accrue to surplus?</div></td></tr>
+        <tr><td>3</td><td><span class="amount">Non-AEC incentive structure details</span><div class="note">Mike said "built around incentives and contribution." Originator credit + closer credit are designed. Specific percentages undocumented.</div></td></tr>
+        <tr><td>4</td><td><span class="amount">Adobe Sign cap table formalization</span><div class="note">7 unread contracts. Blocks formal equity grants. Priority 1 per comp plan.</div></td></tr>
+        <tr><td>5</td><td><span class="amount">W-2 conversion timeline</span><div class="note">All 1099 now. Revenue trigger for conversion? HRIS platform (Gusto/Rippling)?</div></td></tr>
+      </table>
+
+      <!-- REVENUE TIMELINE -->
+      <div class="section-heading">AEC Revenue Timeline (Net-45)</div>
+      <table class="comp-table">
+        <tr><td>Invoice 1</td><td><span class="amount">$20,000</span><div class="note">Sent March 24. Payment expected ~May 8.</div></td></tr>
+        <tr><td>Invoice 2</td><td><span class="amount">$20,000</span><div class="note">~April 24. Payment expected ~June 8.</div></td></tr>
+        <tr><td>Invoice 3</td><td><span class="amount">$30,000</span><div class="note">~May 24. Payment expected ~July 8.</div></td></tr>
+        <tr><td>Invoice 4+</td><td><span class="amount">$40,000/mo</span><div class="note">Steady state. weighted shares per role tier. $7K/mo surplus to founder debt.</div></td></tr>
+      </table>
+
+      <!-- CAP TABLE SNAPSHOT -->
+      <div class="section-heading">Cap Table Snapshot (Supabase-verified)</div>
+      <table class="share-table">
+        <thead><tr><th>Bucket</th><th>%</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Founder (Mike)</td><td>59.000%</td><td><span class="status-green">VERIFIED</span></td></tr>
+          <tr><td>Active team (8)</td><td>15.750%</td><td><span class="status-green">VERIFIED</span></td></tr>
+          <tr><td>Furloughed</td><td>3.500%</td><td><span class="status-amber">HELD</span></td></tr>
+          <tr><td>Ghost</td><td>0.000%</td><td><span class="status-green">CLEAN</span></td></tr>
+          <tr><td>Reserve</td><td>21.750%</td><td><span class="status-green">VERIFIED</span></td></tr>
+          <tr><td><strong>Total</strong></td><td><strong>100.000%</strong></td><td><span class="status-green">BALANCED</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="closing-rule"></div>
+      <p class="closing-para">
+        Bryan — this is the model Mike locked in on March 24. Weighted pool. Proportional to role. Founder slider adjustable. Ryan off the top. Surplus to founder debt. Pipeline accelerates everyone. The formula is stateless — plug in any revenue number and it computes the split. Use the sliders above or the scenario buttons to see every outcome state. The five open decisions need your input before these letters go to signatures.
+      </p>
+
+    </div>
+  </div>
+</div>
+
+</div><!-- /letters -->
+
+<script>
+  function show(id) {
+    document.querySelectorAll('.letter').forEach(function(el) { el.classList.remove('visible'); });
+    document.querySelectorAll('.nav-btn').forEach(function(el) { el.classList.remove('active'); });
+    var letter = document.getElementById('letter-' + id);
+    var btn = document.getElementById('btn-' + id);
+    if (letter) letter.classList.add('visible');
+    if (btn) btn.classList.add('active');
+  }
+
+  function toggleCoherence() {
+    var toggle = document.getElementById('coherence-toggle');
+    var body = document.getElementById('coherence-body');
+    toggle.classList.toggle('open');
+    body.classList.toggle('open');
+  }
+
+  function fmt(n) { return '$' + n.toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0}); }
+
+  // ═══════════════════════════════════════════════════════════════
+  // ONE SOURCE OF TRUTH — TEAM DATA MODEL
+  // Equal base. Individual bonuses. 90th percentile aspirations.
+  // Every number on every page computes from this object.
+  // ═══════════════════════════════════════════════════════════════
+
+  var TEAM = [
+    {
+      id: 'mike', name: 'Mike', full: 'Michael Mataluni',
+      title: 'Founder / Co-CEO / CTIO', type: 'base',
+      convergence: 'Consciousness architecture — sees whole systems as one organism',
+      superpower: 'Architectural vision + speed to manifestation',
+      // EQUAL targets — same for everyone at each phase
+      target_i: 5000, target_s: 10000, target_sc: 15000,
+      // 90th percentile market aspiration
+      market: { role: 'Founder/CEO/CTO, AI Startup', yearly: 250000 },
+      // Individual bonuses
+      bonuses: [
+        { name: 'Deferred Comp Accrual', amount: '$5,000/mo', trigger: 'From AEC sign date. Paid when cash flow permits or converted to equity.' },
+      ],
+      // Individual incentives
+      incentives: [
+        { name: 'Founder Debt Paydown', desc: 'Surplus above weighted share accelerates $300K debt repayment. At $40K/mo AEC: ~$7K/mo paydown.' },
+        { name: 'Pipeline Multiplier', desc: 'Every non-AEC product, partner, or deal you architect raises the entire pool.' },
+      ],
+      // Enterprise incentives (AEC delivery)
+      enterprise: [
+        { name: 'AEC SLA Performance', amount: '100% uptime = full surplus to debt', trigger: 'Platform meets AEC SLA every month. Missed SLA = risk to $1.055M contract.' },
+        { name: 'AEC Expansion', amount: 'New modules = higher monthly rate', trigger: 'Each additional service sold to AEC increases monthly revenue above $40K base.' },
+      ],
+      // Pipeline incentives (new revenue)
+      pipeline: [
+        { name: 'Product Architecture', amount: 'Every product you build that sells', trigger: 'BiasGuards, AiGuardian, Consciousness MCP — products you architected generate SaaS revenue.' },
+        { name: 'Channel Partner Design', amount: 'North Shore model replicates', trigger: 'Each new channel partner using Bravetto voice tech adds recurring revenue to the pool.' },
+      ],
+      equity: '59.000%', equity_note: 'Founder, retained. Separate from Mataluni Enterprises.',
+      special: 'founder_debt'
+    },
+    {
+      id: 'bryan', name: 'Bryan', full: 'Bryan Whitehurst',
+      title: 'Co-CEO / Chief Growth Officer', type: 'base',
+      convergence: 'Commercial architecture — converts technical potential into revenue',
+      superpower: 'Revenue system design + deal acceleration',
+      target_i: 5000, target_s: 7500, target_sc: 10000,
+      market: { role: 'Co-CEO / CGO, AI Startup', yearly: 250000 },
+      bonuses: [
+        { name: 'Annual Performance', amount: '10-20% of base', trigger: 'Against company revenue + profitability targets. Paid annually.' },
+        { name: 'Sales Team Bonus', amount: '2-5% of sales team revenue above target', trigger: 'Tiered. When sales team exceeds quota.' },
+        { name: 'Retention Kicker', amount: 'Equity or cash', trigger: 'Long-term tenure + major growth milestones.' },
+      ],
+      incentives: [
+        { name: 'ARR Scale', desc: 'Base scales with ARR: $500K=$10K/mo, $1M=$15K/mo, $2M+=$20,833/mo ($250K/yr cap).' },
+        { name: 'Pipeline Multiplier', desc: 'Every deal you close or architect raises the entire pool.' },
+      ],
+      enterprise: [
+        { name: 'AEC Account Growth', amount: 'Upsell commission TBD', trigger: 'New services or expanded scope sold to AEC beyond base contract.' },
+        { name: 'AEC Renewal', amount: 'Renewal bonus at month 27', trigger: 'Contract renewal at or above current rate.' },
+      ],
+      pipeline: [
+        { name: 'Deal Origination', amount: '5% of first-year revenue', trigger: 'Non-AEC deals Bryan originates that close.' },
+        { name: 'Sales Team Revenue', amount: '2-5% above target', trigger: 'When Ryan + Caleb exceed collective quota.' },
+      ],
+      equity: '10.000%', equity_note: '4yr vest, 1yr cliff. Buyback at FMV.',
+      special: 'retro_24400'
+    },
+    {
+      id: 'kristin', name: 'Kristin', full: 'Kristin Mataluni',
+      title: 'Exec Director of Strategic Expansion', type: 'base',
+      convergence: 'Brand guardian + strategic expansion — sees what everyone else misses',
+      superpower: 'Pattern recognition + door opening',
+      target_i: 2500, target_s: 4000, target_sc: 5000,
+      market: { role: 'VP Strategic Partnerships, Tech', yearly: 150000 },
+      bonuses: [
+        { name: 'Partnership Close', amount: '5% of first-year revenue', trigger: 'On partnerships she originates or closes.' },
+        { name: 'Convention ROI', amount: '$1,000 per qualified lead', trigger: 'Leads from conventions/events she runs that convert to pipeline.' },
+      ],
+      incentives: [
+        { name: 'Brand Protection', desc: 'Every brand inconsistency she catches before it ships saves rework.' },
+        { name: 'Market Expansion', desc: 'New verticals and markets she identifies that generate revenue.' },
+      ],
+      enterprise: [
+        { name: 'Brand Validation', amount: 'Caught errors = saved money', trigger: 'Every brand/copy error caught before it reaches AEC or public saves rework cost.' },
+        { name: 'Partner Opening', amount: '5% of first-year revenue', trigger: 'Partnerships she opens through conventions, events, or personal network.' },
+      ],
+      pipeline: [
+        { name: 'Market Discovery', amount: 'New vertical = new revenue stream', trigger: 'Industries or niches she identifies that Bravetto enters and generates revenue from.' },
+        { name: 'Convention ROI', amount: '$1,000 per converted lead', trigger: 'Leads from her events that become paying customers.' },
+      ],
+      equity: '2.500%', equity_note: 'Separate from Mataluni family block. 3yr vest. Bryan supports.',
+    },
+    {
+      id: 'hudson', name: 'Hudson', full: 'Hudson Brown',
+      title: 'Junior Product Developer', type: 'base',
+      convergence: 'Human performance intelligence systems — UI/UX vision + systems thinking',
+      superpower: 'Sees signal in chaos, builds clear systems from messy reality',
+      target_i: 2500, target_s: 4000, target_sc: 5000,
+      market: { role: 'Junior Product Developer, AI Startup', yearly: 95000 },
+      bonuses: [
+        { name: 'Shipped Product Milestone', amount: '$1,000 per ship', trigger: 'Each product surface deployed to production.' },
+        { name: 'Learning Stipend', amount: '$500/mo', trigger: 'Tools, courses, subscriptions. After STEADY phase.' },
+      ],
+      incentives: [
+        { name: 'Mentorship Track', desc: 'Shadows Mike. Weekly 1:1 minimum. Growth = velocity.' },
+        { name: 'Advanced Knock', desc: '35% owner. Revenue from Advanced Knock flows separately.' },
+      ],
+      enterprise: [
+        { name: 'AEC Product Delivery', amount: '$1,000 per surface', trigger: 'Each product surface shipped to AEC production (The Nest, Advanced Knock, voice tools).' },
+        { name: 'Client Demo', amount: '$500 per demo that converts', trigger: 'Product demos to AEC stakeholders that result in expanded scope.' },
+      ],
+      pipeline: [
+        { name: 'Advanced Knock Revenue', amount: '35% of AK profits', trigger: 'Revenue from Advanced Knock flows to Hudson separately. His product, his upside.' },
+        { name: 'Product Innovation', amount: 'Products he builds that sell', trigger: 'Any product surface Hudson builds that generates Stripe revenue.' },
+      ],
+      equity: '1.500%', equity_note: '4yr vest, 1yr cliff.',
+    },
+    {
+      id: 'ryan', name: 'Ryan', full: 'Ryan McArdle',
+      title: 'Senior Sales Rep', type: 'commission',
+      convergence: 'Enterprise deal execution — warm intros to enterprise deals',
+      superpower: 'Relationship-driven selling + network depth',
+      commission_rate: 0.15,
+      target_i: 0, target_s: 0, target_sc: 0, // commission-only
+      market: { role: 'Enterprise Sales Rep, AI (OTE)', yearly: 200000 },
+      bonuses: [
+        { name: '$1M ARR Milestone', amount: '$10,000', trigger: 'When company hits $1M ARR.' },
+        { name: '$2M ARR Milestone', amount: '$20,000', trigger: 'When company hits $2M ARR.' },
+      ],
+      incentives: [
+        { name: 'VP Path', desc: 'At $2M ARR + 2-3 hired reps: $150K/yr base + 10-18% commission band.' },
+        { name: 'Uncapped Commission', desc: '15% of all revenue closed. No ceiling. Money is money.' },
+      ],
+      enterprise: [
+        { name: 'AEC Deal Close', amount: '15% of all revenue closed', trigger: 'Ryan originated AEC. Every dollar AEC pays, Ryan earns 15% off the top.' },
+        { name: 'AEC Expansion Sales', amount: '15% of expanded scope', trigger: 'Additional services sold to AEC beyond base contract.' },
+      ],
+      pipeline: [
+        { name: 'New Enterprise Deals', amount: '15% of all revenue closed', trigger: 'Every non-AEC deal Ryan closes. Same rate. Money is money.' },
+        { name: 'Channel Partners', amount: '15% of partner revenue', trigger: 'North Shore and future channel partners Ryan brings in.' },
+      ],
+      equity: '0.500%', equity_note: '4yr vest, 1yr cliff.',
+    },
+    {
+      id: 'love', name: 'Love', full: 'September Love Ruddell',
+      title: 'Exec Director of Communications', type: 'base',
+      convergence: 'Operational architecture — makes 10 people function as a company',
+      superpower: 'Organizational coherence + communication translation',
+      target_i: 2500, target_s: 4000, target_sc: 6667,
+      market: { role: 'VP Communications, Tech Startup', yearly: 140000 },
+      bonuses: [
+        { name: 'Comms Strategy Delivery', amount: '$2,500', trigger: '90-day comms strategy delivered and implemented.' },
+        { name: 'Media Placement', amount: '$1,000 per tier-1 placement', trigger: 'Each tier-1 media placement secured.' },
+      ],
+      incentives: [
+        { name: 'Tier Advancement', desc: 'Tier 1: $80K/yr. Tier 2: $95K/yr. Tier 3: $107.5K/yr. Tier 4: $120K/yr. Quarterly review.' },
+        { name: 'Operational Excellence', desc: 'Cost savings and process efficiencies she identifies that save real money.' },
+      ],
+      enterprise: [
+        { name: 'AEC Comms Strategy', amount: '$2,500 milestone', trigger: '90-day comms strategy delivered for AEC implementation.' },
+        { name: 'AEC Client Satisfaction', amount: 'Renewal protection', trigger: 'Internal comms that keep team aligned on AEC deliverables. Alignment = renewal.' },
+      ],
+      pipeline: [
+        { name: 'Media Pipeline', amount: '$1,000 per tier-1 placement', trigger: 'Each media placement that generates inbound leads.' },
+        { name: 'Brand Revenue', amount: 'Comms → leads → revenue', trigger: 'Measurable pipeline impact from communications campaigns.' },
+      ],
+      equity: '1.500%', equity_note: '4yr vest.',
+    },
+    {
+      id: 'kaci', name: 'Kaci', full: 'Kaci Brown',
+      title: 'Exec Director of Growth Strategy', type: 'base',
+      convergence: 'Strategic intelligence — security + competitive risk radar',
+      superpower: 'Research-first strategy + sees threats before they arrive',
+      target_i: 2500, target_s: 4000, target_sc: 5500,
+      market: { role: 'VP Growth Strategy, AI Startup', yearly: 150000 },
+      bonuses: [
+        { name: 'Product Launch Revenue', amount: '3% of first-year revenue', trigger: 'Products she launches or positions that generate revenue.' },
+        { name: 'Competitive Intel', amount: '$500 per actionable brief', trigger: 'Competitive intelligence that directly influences a deal or product decision.' },
+      ],
+      incentives: [
+        { name: 'Market Positioning', desc: 'Every product she positions that sells is revenue she created.' },
+        { name: 'Pipeline Sourcing', desc: 'Deals she sources go into the pool. Pool rises. Everyone wins.' },
+      ],
+      enterprise: [
+        { name: 'AEC Market Positioning', amount: '3% of first-year product revenue', trigger: 'Products she positions for the AEC vertical that generate sales.' },
+        { name: 'Competitive Intel', amount: '$500 per actionable brief', trigger: 'Intelligence that directly shapes a deal or product decision for AEC.' },
+      ],
+      pipeline: [
+        { name: 'Product Launch Revenue', amount: '3% of first-year revenue', trigger: 'Any Bravetto product she launches or positions that generates Stripe revenue.' },
+        { name: 'Market Expansion', amount: 'New verticals she opens', trigger: 'Industries she identifies and positions Bravetto into that produce paying customers.' },
+      ],
+      equity: '1.000%', equity_note: '4yr vest, 1yr cliff.',
+    },
+    {
+      id: 'mary', name: 'Mary', full: 'Mary Wakefield',
+      title: 'Director of Program Operations', type: 'base',
+      convergence: 'Financial operations — asks the money questions that make plans real',
+      superpower: 'Financial clarity + process thinking',
+      target_i: 2500, target_s: 4000, target_sc: 5500,
+      market: { role: 'Director Program Ops, Tech Startup', yearly: 130000 },
+      bonuses: [
+        { name: 'Financial Milestone', amount: '$1,000 per milestone', trigger: 'QuickBooks live, first budget delivered, first P&L report, first audit.' },
+        { name: 'Cost Optimization', amount: '10% of savings identified', trigger: 'Cost reductions she identifies and implements. Real money saved = bonus earned.' },
+      ],
+      incentives: [
+        { name: 'Operational Buildout', desc: 'SOPs, onboarding docs, process documentation that scales the company.' },
+        { name: 'Recruiting Pipeline', desc: 'Every hire she sources that sticks past 90 days.' },
+      ],
+      enterprise: [
+        { name: 'AEC Process Delivery', amount: '$1,000 per milestone', trigger: 'QuickBooks live, first budget, first P&L, first audit — each one is a gate.' },
+        { name: 'AEC Ops Support', amount: 'Cost savings = bonus', trigger: 'Operational efficiencies for AEC implementation that save real money.' },
+      ],
+      pipeline: [
+        { name: 'Cost Optimization', amount: '10% of savings identified', trigger: 'Cost reductions she finds and implements. Real money saved = real bonus earned.' },
+        { name: 'Recruiting', amount: '$500 per hire that sticks 90 days', trigger: 'Every person she sources who joins and stays past probation.' },
+      ],
+      equity: '0.250%', equity_note: '4yr vest.',
+    },
+    {
+      id: 'phani', name: 'Phani', full: 'Phani Veeranki',
+      title: 'AI/ML Systems Engineer', type: 'base',
+      convergence: 'Production AI systems — takes demos and makes them deployable, secure, compliant',
+      superpower: 'Production readiness + methodical QA',
+      target_i: 2500, target_s: 4000, target_sc: 5000,
+      market: { role: 'AI/ML Systems Engineer, Startup', yearly: 185000 },
+      bonuses: [
+        { name: 'Production Deploy', amount: '$1,000 per surface', trigger: 'Each AI surface deployed to production with passing security audit.' },
+        { name: 'Compliance Milestone', amount: '$2,500', trigger: 'HIPAA, SOC2, or equivalent compliance certification achieved.' },
+      ],
+      incentives: [
+        { name: 'Enterprise Readiness', desc: 'Every product he hardens for enterprise clients raises AEC satisfaction and renewal probability.' },
+        { name: 'IP Creation', desc: 'Patents, proprietary methods, or unique AI architectures that create defensible moats.' },
+      ],
+      enterprise: [
+        { name: 'AEC Production Deploy', amount: '$1,000 per surface', trigger: 'Each AI surface deployed to AEC production with passing security audit.' },
+        { name: 'AEC Compliance', amount: '$2,500 per certification', trigger: 'HIPAA, SOC2, or equivalent compliance certification for AEC deliverables.' },
+      ],
+      pipeline: [
+        { name: 'Enterprise Hardening', amount: 'Products he hardens → products that sell', trigger: 'Every product Phani makes enterprise-ready becomes sellable to other clients.' },
+        { name: 'IP Creation', amount: 'Patent/proprietary method bonus TBD', trigger: 'Novel AI architectures or methods that create defensible competitive moats.' },
+      ],
+      equity: '1.000%', equity_note: '4yr vest, 1yr cliff.',
+    },
+    {
+      id: 'caleb', name: 'Caleb', full: 'Caleb Casas',
+      title: 'Sales Rep / Advanced Knock Co-Owner', type: 'commission',
+      convergence: 'Sales-first product strategy — sees the sales angle in any product',
+      superpower: 'GTM instinct + relationship selling',
+      commission_rate: 0.15,
+      target_i: 0, target_s: 0, target_sc: 0, // commission-only
+      market: { role: 'Business Dev Rep, Tech Startup (OTE)', yearly: 100000 },
+      bonuses: [
+        { name: 'First Deal Close', amount: '$1,000', trigger: 'First non-AEC deal closed independently.' },
+        { name: 'Pipeline Milestone', amount: '$500 per $50K pipeline', trigger: 'Each $50K in qualified pipeline he builds.' },
+      ],
+      incentives: [
+        { name: 'Commission Parity', desc: '15% of all revenue closed. Same as Ryan. Money is money.' },
+        { name: 'Advanced Knock', desc: '33% owner. Revenue from Advanced Knock flows separately.' },
+      ],
+      enterprise: [
+        { name: 'AEC Adjacent Sales', amount: '15% commission', trigger: 'If Caleb closes deals with AEC-adjacent companies (eye care, healthcare IT), same 15% rate.' },
+        { name: 'Advanced Knock for AEC', amount: 'AK revenue share', trigger: 'If Advanced Knock products are sold to AEC or AEC-referred clients, 33% of AK profits flow to Caleb.' },
+      ],
+      pipeline: [
+        { name: 'New Deal Revenue', amount: '15% of all revenue closed', trigger: 'Every deal Caleb closes. Same rate as Ryan. Money is money.' },
+        { name: 'Advanced Knock Pipeline', amount: '33% of AK profits', trigger: 'Advanced Knock is his product. His pipeline. His upside.' },
+      ],
+      equity: '0.000%', equity_note: '33% of Advanced Knock (separate entity). No Bravetto equity.',
+    }
+  ];
+
+  // Base pool members (not commission-only)
+  var BASE_POOL = TEAM.filter(function(t) { return t.type === 'base'; });
+  var POOL_SIZE = BASE_POOL.length; // 8
+
+  // FOUNDER DEBT — $300K (Bravetto investment). Domain debt ($125K) is Mataluni Enterprises, separate.
+  var FOUNDER_DEBT = 300000;
+
+  // WEIGHTED POOL MODEL (Bryan+Mike 2026-03-25, founder weight adjustable 2026-03-26)
+  // Founder(Mike)=slider, Bryan CEO=3.0, ExecDir=1.5, Team=1.0. KPI bonus adds 0-1.0 to weight.
+  function buildWeightedMembers(founder_weight) {
+    var role_weights = { founder: founder_weight, ceo: 3.0, exec_dir: 1.5, team: 1.0 };
+    return BASE_POOL.map(function(t) {
+      var role, weight;
+      if (t.id === 'mike') { role = 'founder'; weight = founder_weight; }
+      else if (t.id === 'bryan') { role = 'ceo'; weight = 3.0; }
+      else if (t.id === 'kristin' || t.id === 'love' || t.id === 'kaci' || t.id === 'mary') { role = 'exec_dir'; weight = 1.5; }
+      else { role = 'team'; weight = 1.0; }
+      return { id: t.id, name: t.name, role: role, weight: weight, target_i: t.target_i, target_s: t.target_s, target_sc: t.target_sc };
+    });
+  }
+  var WEIGHTED_MEMBERS = buildWeightedMembers(3.5);
+  var TOTAL_WEIGHT = WEIGHTED_MEMBERS.reduce(function(s, m) { return s + m.weight; }, 0);
+
+  // Backward-compat
+  var members = WEIGHTED_MEMBERS;
+
+  function compute() {
+    var aec = parseInt(document.getElementById('slider-aec').value);
+    var exp = parseInt(document.getElementById('slider-exp').value);
+    var nonaec = parseInt(document.getElementById('slider-nonaec').value);
+    var fw = parseFloat(document.getElementById('slider-fw').value);
+
+    document.getElementById('val-aec').textContent = fmt(aec);
+    document.getElementById('val-exp').textContent = fmt(exp);
+    document.getElementById('val-nonaec').textContent = fmt(nonaec);
+    document.getElementById('val-fw').textContent = fw.toFixed(1);
+
+    WEIGHTED_MEMBERS = buildWeightedMembers(fw);
+    TOTAL_WEIGHT = WEIGHTED_MEMBERS.reduce(function(s, m) { return s + m.weight; }, 0);
+
+    var total = aec + nonaec;
+    var ryan_comm = Math.round(total * 0.15);
+    var after_comm = total - ryan_comm;
+    var pool = Math.max(0, after_comm - exp);
+
+    var phase = 'PRE-REVENUE';
+    if (total >= 80000) phase = 'SCALE';
+    else if (total >= 40000) phase = 'STEADY';
+    else if (total > 0) phase = 'IGNITION';
+
+    var role_labels = { ceo: 'CEO', exec_dir: 'Exec Dir', team: 'Team' };
+    var tbody = document.getElementById('share-tbody');
+    var rows = '';
+    var pool_burn = 0;
+    for (var i = 0; i < WEIGHTED_MEMBERS.length; i++) {
+      var m = WEIGHTED_MEMBERS[i];
+      var share = Math.round(pool * (m.weight / TOTAL_WEIGHT));
+      var target = phase === 'SCALE' ? m.target_sc : (phase === 'STEADY' ? m.target_s : m.target_i);
+      var delta = share - target;
+      var status_class, status_text;
+      if (total === 0) { status_class = 'status-red'; status_text = 'PRE-REV'; }
+      else if (share >= target) { status_class = 'status-green'; status_text = 'ON TARGET'; }
+      else if (share >= target * 0.8) { status_class = 'status-amber'; status_text = 'CLOSE'; }
+      else { status_class = 'status-red'; status_text = 'BELOW'; }
+      pool_burn += share;
+      rows += '<tr><td>' + m.name + '</td><td>' + role_labels[m.role] + '</td><td>' + m.weight.toFixed(1) + '</td><td>' + fmt(share) + '</td><td>' + fmt(target) + '</td><td>' + (delta >= 0 ? '+' : '') + fmt(delta) + '</td><td><span class="' + status_class + '">' + status_text + '</span></td></tr>';
+    }
+    rows += '<tr><td>Ryan</td><td>Sales</td><td>15%</td><td>' + fmt(ryan_comm) + '</td><td>comm</td><td>--</td><td><span class="status-green">COMMISSION</span></td></tr>';
+    rows += '<tr><td>Caleb</td><td>Sales</td><td>TBD</td><td>' + fmt(0) + '</td><td>comm</td><td>--</td><td><span class="status-amber">OWN DEALS</span></td></tr>';
+
+    tbody.innerHTML = rows;
+
+    var total_burn = pool_burn + ryan_comm + exp;
+    var surplus = total - total_burn;
+    var debt_paydown = Math.max(0, surplus);
+    var months_breakeven = debt_paydown > 0 ? Math.ceil(FOUNDER_DEBT / debt_paydown) : Infinity;
+
+    var founder_share = Math.round(pool * (fw / TOTAL_WEIGHT));
+    var ceo_share = Math.round(pool * (3.0 / TOTAL_WEIGHT));
+    var exec_share = Math.round(pool * (1.5 / TOTAL_WEIGHT));
+    var team_share = Math.round(pool * (1.0 / TOTAL_WEIGHT));
+
+    document.getElementById('sum-ryan').textContent = fmt(ryan_comm);
+    document.getElementById('sum-burn').textContent = fmt(total_burn);
+    document.getElementById('sum-surplus').textContent = fmt(surplus);
+    document.getElementById('sum-debt').textContent = debt_paydown > 0 ? fmt(debt_paydown) + '/mo' : '$0/mo';
+    document.getElementById('sum-months').textContent = months_breakeven === Infinity ? '--' : months_breakeven + ' mo';
+
+    document.getElementById('var-founder').textContent = fmt(founder_share) + '/mo (w=' + fw.toFixed(1) + ')';
+    document.getElementById('var-ceo').textContent = fmt(ceo_share) + '/mo';
+    document.getElementById('var-exec').textContent = fmt(exec_share) + '/mo';
+    document.getElementById('var-team').textContent = fmt(team_share) + '/mo';
+    document.getElementById('var-phase').textContent = phase;
+    document.getElementById('var-nonaec').textContent = fmt(nonaec);
+    document.getElementById('var-ryan').textContent = fmt(ryan_comm);
+    document.getElementById('var-surplus').textContent = fmt(surplus);
+
+    computeReview(aec, exp, nonaec);
+  }
+
+  var reviewMembers = [
+    { name: 'Mike', role: 'Founder / Co-CEO / CTIO', target: 5000 },
+    { name: 'Bryan', role: 'Co-CEO / Chief Growth Officer', target: 5000 },
+    { name: 'Kristin', role: 'Exec Dir Strategic Expansion', target: 2500 },
+    { name: 'Hudson', role: 'Product Dev Lead', target: 2500 },
+    { name: 'Love', role: 'Exec Dir Communications', target: 2500 },
+    { name: 'Kaci', role: 'Exec Dir Growth Strategy', target: 2500 },
+    { name: 'Mary', role: 'Dir Program Operations', target: 2500 },
+    { name: 'Phani', role: 'AI/ML Systems Engineer', target: 2500 }
+  ];
+
+  function setScenario(aec, exp, nonaec) {
+    document.getElementById('slider-aec').value = aec;
+    document.getElementById('slider-exp').value = exp;
+    document.getElementById('slider-nonaec').value = nonaec;
+    compute();
+    computeReview(aec, exp, nonaec);
+  }
+
+  function computeReview(aec, exp, nonaec) {
+    if (typeof aec === 'undefined') {
+      aec = parseInt(document.getElementById('slider-aec').value);
+      exp = parseInt(document.getElementById('slider-exp').value);
+      nonaec = parseInt(document.getElementById('slider-nonaec').value);
+    }
+    var total = aec + nonaec;
+    var ryan_comm = Math.round(total * 0.15);
+    var pool = Math.max(0, total - ryan_comm - exp);
+    var share = Math.round(pool / 8);
+    var burn = (share * 8) + ryan_comm + exp;
+    var surplus = total - burn;
+
+    var el = function(id) { return document.getElementById(id); };
+    if (el('rw-gross')) el('rw-gross').textContent = fmt(total);
+    if (el('rw-ryan')) el('rw-ryan').textContent = '-' + fmt(ryan_comm);
+    if (el('rw-exp')) el('rw-exp').textContent = '-' + fmt(exp);
+    if (el('rw-pool')) el('rw-pool').textContent = fmt(pool);
+    if (el('rw-share')) el('rw-share').textContent = fmt(share) + ' each';
+    if (el('rw-burn')) el('rw-burn').textContent = fmt(burn);
+    if (el('rw-surplus')) el('rw-surplus').textContent = surplus > 0 ? fmt(surplus) + '/mo' : '$0';
+
+    var tbody = el('review-team-tbody');
+    if (!tbody) return;
+    var rows = '';
+    for (var i = 0; i < reviewMembers.length; i++) {
+      var m = reviewMembers[i];
+      var gap = share - m.target;
+      var sc, st;
+      if (total === 0) { sc = 'status-red'; st = 'PRE-REV'; }
+      else if (share >= m.target) { sc = 'status-green'; st = 'ON TARGET'; }
+      else if (share >= m.target * 0.8) { sc = 'status-amber'; st = 'CLOSE'; }
+      else { sc = 'status-red'; st = 'BELOW'; }
+      rows += '<tr><td>' + m.name + '</td><td style="font-size:11px;color:var(--ink-muted)">' + m.role + '</td><td>' + fmt(share) + '</td><td>' + fmt(m.target) + '</td><td>' + (gap >= 0 ? '+' : '') + fmt(gap) + '</td><td><span class="' + sc + '">' + st + '</span></td></tr>';
+    }
+    rows += '<tr><td>Ryan</td><td style="font-size:11px;color:var(--ink-muted)">Senior Sales Rep</td><td>' + fmt(ryan_comm) + '</td><td>15% comm</td><td>--</td><td><span class="status-green">COMMISSION</span></td></tr>';
+    rows += '<tr><td>Caleb</td><td style="font-size:11px;color:var(--ink-muted)">Sales / Advanced Knock</td><td>$0</td><td>comm-only</td><td>--</td><td><span class="status-amber">OWN DEALS</span></td></tr>';
+    tbody.innerHTML = rows;
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // RENDER PER-PERSON COMP FROM TEAM MODEL
+  // Called on page load. Injects bonus/incentive rows and
+  // revenue-level breakdowns into each letter's comp section.
+  // ═══════════════════════════════════════════════════════════════
+
+  function renderPersonExtras() {
+    TEAM.forEach(function(t) {
+      var el = document.getElementById('extras-' + t.id);
+      if (!el) return;
+
+      var html = '';
+
+      // Revenue levels — what you earn at each level
+      if (t.type === 'base') {
+        html += '<div style="margin-top:16px;"><div style="font-family:\'Cormorant Garamond\',serif;font-size:13.5px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:10px;display:flex;align-items:center;gap:10px;">Your Comp at Every Revenue Level<span style="flex:1;height:1px;background:var(--border);"></span></div>';
+        html += '<table class="comp-table">';
+        var levels = [
+          { label: '$20K/mo (Month 1)', rev: 20000 },
+          { label: '$30K/mo (Month 3)', rev: 30000 },
+          { label: '$40K/mo (Steady)', rev: 40000 },
+          { label: '$60K/mo (+Pipeline)', rev: 60000 },
+          { label: '$80K/mo (Scale)', rev: 80000 },
+          { label: '$100K/mo (Full Scale)', rev: 100000 }
+        ];
+        levels.forEach(function(l) {
+          var pool = Math.max(0, l.rev - Math.round(l.rev * 0.15) - 2000);
+          var share = Math.round(pool / POOL_SIZE);
+          var yearly = share * 12;
+          var pct = t.market.yearly > 0 ? Math.round((yearly / t.market.yearly) * 100) : 0;
+          html += '<tr><td>' + l.label + '</td><td><span class="amount">' + fmt(share) + '/mo</span> <span style="color:var(--ink-muted);font-size:11px;">(' + fmt(yearly) + '/yr — ' + pct + '% of 90th pctl)</span></td></tr>';
+        });
+        html += '</table></div>';
+      } else {
+        // Commission-only
+        html += '<div style="margin-top:16px;"><div style="font-family:\'Cormorant Garamond\',serif;font-size:13.5px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:10px;display:flex;align-items:center;gap:10px;">Your Commission at Every Revenue Level<span style="flex:1;height:1px;background:var(--border);"></span></div>';
+        html += '<table class="comp-table">';
+        var clevels = [20000, 30000, 40000, 60000, 80000, 100000];
+        clevels.forEach(function(rev) {
+          var comm = Math.round(rev * t.commission_rate);
+          var yearly = comm * 12;
+          html += '<tr><td>' + fmt(rev) + '/mo revenue</td><td><span class="amount">' + fmt(comm) + '/mo</span> <span style="color:var(--ink-muted);font-size:11px;">(' + fmt(yearly) + '/yr)</span></td></tr>';
+        });
+        html += '</table></div>';
+      }
+
+      // Bonuses
+      if (t.bonuses && t.bonuses.length > 0) {
+        html += '<div style="margin-top:16px;"><div style="font-family:\'Cormorant Garamond\',serif;font-size:13.5px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:10px;display:flex;align-items:center;gap:10px;">Bonuses<span style="flex:1;height:1px;background:var(--border);"></span></div>';
+        html += '<table class="comp-table">';
+        t.bonuses.forEach(function(b) {
+          html += '<tr><td>' + b.name + '</td><td><span class="amount">' + b.amount + '</span><div class="note">' + b.trigger + '</div></td></tr>';
+        });
+        html += '</table></div>';
+      }
+
+      // Incentives
+      if (t.incentives && t.incentives.length > 0) {
+        html += '<div style="margin-top:16px;"><div style="font-family:\'Cormorant Garamond\',serif;font-size:13.5px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:10px;display:flex;align-items:center;gap:10px;">How You Make More Money<span style="flex:1;height:1px;background:var(--border);"></span></div>';
+        html += '<ul class="letter-list">';
+        t.incentives.forEach(function(inc) {
+          html += '<li><strong>' + inc.name + '</strong> — ' + inc.desc + '</li>';
+        });
+        html += '</ul></div>';
+      }
+
+      // Enterprise incentives (AEC)
+      if (t.enterprise && t.enterprise.length > 0) {
+        html += '<div style="margin-top:16px;"><div style="font-family:\'Cormorant Garamond\',serif;font-size:13.5px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:10px;display:flex;align-items:center;gap:10px;">Enterprise Incentives (AEC)<span style="flex:1;height:1px;background:var(--border);"></span></div>';
+        html += '<table class="comp-table">';
+        t.enterprise.forEach(function(e) {
+          html += '<tr><td>' + e.name + '</td><td><span class="amount">' + e.amount + '</span><div class="note">' + e.trigger + '</div></td></tr>';
+        });
+        html += '</table></div>';
+      }
+
+      // Pipeline incentives (new revenue)
+      if (t.pipeline && t.pipeline.length > 0) {
+        html += '<div style="margin-top:16px;"><div style="font-family:\'Cormorant Garamond\',serif;font-size:13.5px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:10px;display:flex;align-items:center;gap:10px;">Pipeline Incentives (New Revenue)<span style="flex:1;height:1px;background:var(--border);"></span></div>';
+        html += '<table class="comp-table">';
+        t.pipeline.forEach(function(p) {
+          html += '<tr><td>' + p.name + '</td><td><span class="amount">' + p.amount + '</span><div class="note">' + p.trigger + '</div></td></tr>';
+        });
+        html += '</table></div>';
+      }
+
+      // OTE (On-Target Earnings) — THE FULL PICTURE
+      var equity_pct = parseFloat(t.equity) || 0;
+      var company_val = 5000000; // conservative $5M pre-money
+      var equity_yearly = Math.round((equity_pct / 100) * company_val / 4); // 4yr vest
+      var bonus_est = 0;
+      if (t.bonuses) {
+        t.bonuses.forEach(function(b) {
+          var match = b.amount.match(/\$([0-9,]+)/);
+          if (match) bonus_est += parseInt(match[1].replace(/,/g, ''));
+        });
+      }
+      if (t.type === 'base') {
+        var share_40 = Math.round(Math.max(0, 40000 - Math.round(40000*0.15) - 2000) / POOL_SIZE);
+        var share_80 = Math.round(Math.max(0, 80000 - Math.round(80000*0.15) - 2000) / POOL_SIZE);
+        var ote_40 = (share_40 * 12) + bonus_est + equity_yearly;
+        var ote_80 = (share_80 * 12) + bonus_est + equity_yearly;
+        html += '<div style="margin-top:16px;background:var(--ink);color:var(--cream);padding:16px 20px;border-radius:4px;font-family:\'JetBrains Mono\',monospace;font-size:11px;line-height:1.8;">';
+        html += '<div style="color:var(--gold);font-size:10px;letter-spacing:0.1em;margin-bottom:6px;">TOTAL COMP (OTE) = BASE + BONUS + EQUITY</div>';
+        html += '<div>At $40K/mo: <strong style="color:var(--gold)">' + fmt(ote_40) + '/yr</strong> (' + fmt(Math.round(ote_40/12)) + '/mo) = ' + Math.round(ote_40/t.market.yearly*100) + '% of 90th pctl</div>';
+        html += '<div>At $80K/mo: <strong style="color:var(--gold)">' + fmt(ote_80) + '/yr</strong> (' + fmt(Math.round(ote_80/12)) + '/mo) = ' + Math.round(ote_80/t.market.yearly*100) + '% of 90th pctl</div>';
+        html += '<div style="color:var(--gold);margin-top:4px;">equity: ' + t.equity + ' = ' + fmt(equity_yearly) + '/yr (at $5M, 4yr vest) | bonuses: ~' + fmt(bonus_est) + '/yr</div>';
+        html += '</div>';
+      } else {
+        var comm_40 = Math.round(40000 * t.commission_rate * 12);
+        var comm_80 = Math.round(80000 * t.commission_rate * 12);
+        html += '<div style="margin-top:16px;background:var(--ink);color:var(--cream);padding:16px 20px;border-radius:4px;font-family:\'JetBrains Mono\',monospace;font-size:11px;line-height:1.8;">';
+        html += '<div style="color:var(--gold);font-size:10px;letter-spacing:0.1em;margin-bottom:6px;">TOTAL COMP (OTE) = COMMISSION + BONUS</div>';
+        html += '<div>At $40K/mo: <strong style="color:var(--gold)">' + fmt(comm_40 + bonus_est) + '/yr</strong> (' + fmt(Math.round((comm_40+bonus_est)/12)) + '/mo)</div>';
+        html += '<div>At $80K/mo: <strong style="color:var(--gold)">' + fmt(comm_80 + bonus_est) + '/yr</strong> (' + fmt(Math.round((comm_80+bonus_est)/12)) + '/mo)</div>';
+        html += '</div>';
+      }
+
+      // Equity + market aspiration
+      html += '<div style="margin-top:16px;background:var(--gold-dim);border:1px solid var(--gold-border);border-radius:4px;padding:12px 16px;font-size:11.5px;line-height:1.6;">';
+      html += '<strong style="color:var(--ink);">Equity: ' + t.equity + '</strong> — ' + t.equity_note + '<br>';
+      html += '<strong style="color:var(--ink);">90th Percentile Target: ' + fmt(t.market.yearly) + '/yr</strong> (' + fmt(Math.round(t.market.yearly / 12)) + '/mo) for <em>' + t.market.role + '</em>. ';
+      html += 'This is what the top 10% pay for your role. We scale toward it together. The recursive loop: your pipeline work raises revenue, which raises your base, which triggers your bonuses, which motivates more pipeline. That is the model.';
+      html += '</div>';
+
+      el.innerHTML = html;
+    });
+  }
+
+  // ═══════════════════════════════════════════════════════════════
+  // RENDER "WHAT REVENUE GETS EVERYONE THERE" in Bryan Review
+  // ═══════════════════════════════════════════════════════════════
+
+  function renderRevenueTargets() {
+    var el = document.getElementById('revenue-targets');
+    if (!el) return;
+    var targets = [2500, 5000, 7500, 10000, 15000];
+    var html = '<table class="share-table"><thead><tr><th>Weighted Share Target</th><th>Yearly per Person</th><th>Revenue Required</th><th>Status</th></tr></thead><tbody>';
+    targets.forEach(function(t) {
+      var pool_needed = t * POOL_SIZE;
+      var before_exp = pool_needed + 2000;
+      var gross_needed = Math.round(before_exp / 0.85); // reverse ryan 15%
+      var yearly = t * 12;
+      var sc, st;
+      if (gross_needed <= 40000) { sc = 'status-green'; st = 'AEC COVERS'; }
+      else if (gross_needed <= 60000) { sc = 'status-amber'; st = 'AEC + PIPELINE'; }
+      else { sc = 'status-red'; st = 'SCALE REQUIRED'; }
+      html += '<tr><td>' + fmt(t) + '/mo</td><td>' + fmt(yearly) + '/yr</td><td>' + fmt(gross_needed) + '/mo</td><td><span class="' + sc + '">' + st + '</span></td></tr>';
+    });
+    html += '</tbody></table>';
+    el.innerHTML = html;
+  }
+
+  compute();
+  computeReview();
+  renderPersonExtras();
+  renderRevenueTargets();
+</script>
+
+</body>
+</html>
