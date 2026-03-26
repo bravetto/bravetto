@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bravetto Constellation Map</title>
+<style>
+  :root {
+    --bg: #0A0A12;
+    --surface: #12121E;
+    --gold: #C9A227;
+    --gold-dim: rgba(201,162,39,0.15);
+    --cream: #FAF9F6;
+    --blue: #4F8EF7;
+    --green: #34D399;
+    --purple: #A78BFA;
+    --red: #F87171;
+    --orange: #FB923C;
+    --cyan: #22D3EE;
+    --ink: #E2E8F0;
+    --muted: #64748B;
+    --border: rgba(255,255,255,0.06);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--ink); overflow: hidden; height: 100vh; }
+  canvas { display: block; }
+  #info {
+    position: fixed; top: 16px; left: 16px; z-index: 10;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+    padding: 16px 20px; max-width: 380px; max-height: calc(100vh - 32px); overflow-y: auto;
+    font-size: 12px; line-height: 1.6;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  }
+  #info h2 { font-size: 14px; font-weight: 700; color: var(--gold); letter-spacing: 0.06em; margin-bottom: 8px; }
+  #info h3 { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin: 10px 0 4px; }
+  #info .tag { display: inline-block; font-size: 9px; padding: 2px 6px; border-radius: 2px; margin: 1px 2px; font-weight: 600; letter-spacing: 0.04em; }
+  #info .tag-person { background: rgba(201,162,39,0.2); color: var(--gold); }
+  #info .tag-product { background: rgba(79,142,247,0.2); color: var(--blue); }
+  #info .tag-market { background: rgba(52,211,153,0.2); color: var(--green); }
+  #info .tag-skill { background: rgba(167,139,250,0.2); color: var(--purple); }
+  #info .tag-venture { background: rgba(251,146,60,0.2); color: var(--orange); }
+  #info .tag-core { background: rgba(34,211,238,0.2); color: var(--cyan); }
+  #info ul { padding-left: 14px; }
+  #info li { margin-bottom: 3px; color: var(--muted); }
+  #info .stat { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink); }
+  #legend {
+    position: fixed; bottom: 16px; left: 16px; z-index: 10;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+    padding: 10px 14px; font-size: 10px; display: flex; gap: 14px; flex-wrap: wrap;
+  }
+  .leg-item { display: flex; align-items: center; gap: 5px; }
+  .leg-dot { width: 8px; height: 8px; border-radius: 50%; }
+  #controls {
+    position: fixed; top: 16px; right: 16px; z-index: 10;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+    padding: 10px 14px; font-size: 10px;
+  }
+  #controls button {
+    background: none; border: 1px solid var(--border); color: var(--muted); padding: 4px 10px;
+    border-radius: 3px; cursor: pointer; font-size: 9px; margin: 2px; text-transform: uppercase;
+    letter-spacing: 0.06em; font-weight: 600; transition: all 0.15s;
+  }
+  #controls button:hover, #controls button.active { color: var(--gold); border-color: var(--gold); }
+  #title {
+    position: fixed; bottom: 16px; right: 16px; z-index: 10;
+    font-size: 11px; color: var(--muted); text-align: right;
+  }
+  #title span { color: var(--gold); font-weight: 700; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div id="info">
+  <h2>BRAVETTO CONSTELLATION</h2>
+  <p style="color:var(--muted);font-size:11px;">Click any node. Hover to preview. Drag to rearrange. Scroll to zoom.</p>
+  <div id="detail"></div>
+</div>
+
+<div id="legend">
+  <div class="leg-item"><div class="leg-dot" style="background:var(--gold)"></div>People (10)</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--blue)"></div>Products (15)</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--cyan)"></div>Cores (7)</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--green)"></div>Markets (8)</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--purple)"></div>Capabilities (12)</div>
+  <div class="leg-item"><div class="leg-dot" style="background:var(--orange)"></div>Ventures (6)</div>
+</div>
+
+<div id="controls">
+  <button class="active" onclick="filterAll()">ALL</button>
+  <button onclick="filterType('person')">PEOPLE</button>
+  <button onclick="filterType('product')">PRODUCTS</button>
+  <button onclick="filterType('market')">MARKETS</button>
+  <button onclick="filterType('capability')">CAPABILITIES</button>
+  <button onclick="filterType('core')">CORES</button>
+  <button onclick="filterType('venture')">VENTURES</button>
+</div>
+
+<div id="title">
+  <span>Bravetto</span> Constellation Map<br>
+  10 People / 15 Products / 7 Cores / 8 Markets / 12 Capabilities / 6 Ventures<br>
+  <span style="font-size:9px;">HUMANS x AI = INFINITE POTENTIAL</span>
+</div>
+
+<script>
+var canvas = document.getElementById('c');
+var ctx = canvas.getContext('2d');
+var W, H, cx, cy;
+var nodes = [];
+var edges = [];
+var hovered = null;
+var selected = null;
+var dragging = null;
+var offsetX = 0, offsetY = 0;
+var zoom = 1;
+var panX = 0, panY = 0;
+var activeFilter = 'all';
+
+var COLORS = {
+  person: '#C9A227',
+  product: '#4F8EF7',
+  core: '#22D3EE',
+  market: '#34D399',
+  capability: '#A78BFA',
+  venture: '#FB923C'
+};
+
+var SIZES = {
+  person: 18,
+  product: 12,
+  core: 10,
+  market: 14,
+  capability: 8,
+  venture: 9
+};
+
+// ═══════════════════════════════════════════════════════════
+// DATA — THE GENOME
+// ═══════════════════════════════════════════════════════════
+
+function addNode(id, type, label, meta) {
+  nodes.push({ id: id, type: type, label: label, meta: meta || {}, x: 0, y: 0, vx: 0, vy: 0 });
+}
+function addEdge(from, to, label, strength) {
+  edges.push({ from: from, to: to, label: label || '', strength: strength || 1 });
+}
+
+// PEOPLE
+addNode('mike', 'person', 'Mike', { title: 'Founder / Co-CEO / CTIO', weight: 3.5, convergence: 'Consciousness architecture', superpower: 'Sees whole systems as one organism', passions: ['Building AI that changes how humans interact with technology', 'Consciousness as engineering', 'Teaching through building'], talents: ['Architectural vision', 'Convergence thinking', 'Speed to manifestation'], values: ['Build it ($300K invested)', 'One team', 'Love as operating principle'], mission: 'Prove one founder + AI = 100 engineers' });
+addNode('bryan', 'person', 'Bryan', { title: 'Co-CEO / CGO', weight: 3.0, convergence: 'Commercial architecture', superpower: 'Converts technical potential into kinetic revenue', passions: ['Closing deals that create impact', 'Changing humanity through ethical AI', 'Making AI accessible'], talents: ['Commercial gravity', 'Client architecture', 'Relational intelligence'], values: ['Everybody gets paid', 'Transparency', 'Destiny and purpose'], mission: 'Build the growth engine that makes AI companies commercially viable' });
+addNode('kristin', 'person', 'Kristin', { title: 'Exec Dir Strategic Expansion', weight: 1.5, convergence: 'Brand guardian + inventor', superpower: 'Sees what everyone else misses', passions: ['Every word matters', 'Protecting human experience', 'Elegance over flash'], talents: ['Pattern naming', 'Systematic auditor', 'Types the null'], values: ['Readability is respect', 'Elegance over flash', 'Love through vigilance'], mission: 'Make sharing safe with immutable attribution' });
+addNode('hudson', 'person', 'Hudson', { title: 'Junior Product Dev', weight: 1.0, convergence: 'Human performance intelligence', superpower: 'UI/UX vision + systems thinking', passions: ['AI decision intelligence', 'Pattern recognition', 'Getting product sold'], talents: ['Systems thinking', 'Signal extraction', 'Product vision'], values: ['Ship over perfect', 'Learn by doing', 'Directness'], mission: 'Build AI that extracts performance signals at scale' });
+addNode('ryan', 'person', 'Ryan', { title: 'Business Dev Manager', weight: 0, convergence: 'Enterprise deal execution', superpower: 'Warm intros become enterprise deals', passions: ['Closing enterprise deals', 'Building sales teams', 'Proving ROI'], talents: ['Enterprise sales execution', 'Network leverage', 'Commercial translation'], values: ['Earn your keep', 'Honesty about gaps', 'Relationship-first'], mission: 'Build enterprise sales team to $2M+ ARR' });
+addNode('love', 'person', 'Love', { title: 'Exec Dir Communications', weight: 1.5, convergence: 'Operational architecture', superpower: 'Organizational coherence', passions: ['Protecting team from chaos', 'Making complexity accessible', 'Stage management for startups'], talents: ['Organizational gravity', 'Communication translation', 'Boundary holding with warmth'], values: ['Trust your staff', 'Transparency with boundaries', 'Action over meetings'], mission: 'Scale from 10 to 50 without losing soul' });
+addNode('kaci', 'person', 'Kaci', { title: 'Exec Dir Growth Strategy', weight: 1.5, convergence: 'Strategic intelligence', superpower: 'Sees security/competitive risks first', passions: ['Agentic AI transformation', 'Simplifying complexity', 'Protecting from AI risks'], talents: ['Research depth (SEC filings)', 'Security instinct', 'Revenue systems thinking'], values: ['Due diligence first', 'Protection', 'Strategic patience'], mission: 'Position products with research-backed competitive intelligence' });
+addNode('mary', 'person', 'Mary', { title: 'Exec Dir Ops & Org Integrity', weight: 1.5, convergence: 'Financial operations', superpower: 'Financial clarity', passions: ['Making the money work', 'Connecting people to opportunities', 'Building real ops systems'], talents: ['Asks the money questions', 'Elevator pitch instinct', 'Process thinking'], values: ['Show me the money', 'Practical over vision', 'Earn through competence'], mission: 'Prove Bravetto is a real business with a functioning P&L' });
+addNode('phani', 'person', 'Phani', { title: 'AI/ML Team Lead', weight: 1.0, convergence: 'Production AI systems', superpower: 'Makes demos deployable', passions: ['Production AI', 'Methodical QA', 'Wellness detection through AI'], talents: ['Systems architecture', 'QA instinct', 'Emergent system design'], values: ['Correctness over speed', 'Compliance', 'Thoroughness'], mission: 'Make products production-grade, secure, compliant, deployable' });
+addNode('caleb', 'person', 'Caleb', { title: 'Sales Rep', weight: 0, convergence: 'Sales-first product strategy', superpower: 'Sees sales angle in any product', passions: ['Revenue generation', 'Market positioning', 'AI as business tool'], talents: ['Go-to-market thinking', 'Customer empathy', 'Pipeline intuition'], values: ['Relationships close deals', 'Ship it', 'Actions over words'], mission: 'Sell AI tools to sales orgs in their language' });
+
+// PRODUCTS
+addNode('north-shore', 'product', 'North Shore Voice', { desc: 'AI receptionist for optometry', status: 'LIVE', revenue: '$1.055M/27mo (AEC)', tech: 'Twilio + Claude Haiku + ElevenLabs' });
+addNode('advanced-ring', 'product', 'Advanced Ring / The Nest', { desc: 'AEC sales ops platform', status: 'ACTIVE', revenue: '$497-1299/mo per practice', tech: 'React 19, Vite 6, Gemini' });
+addNode('biasguard', 'product', 'BiasGuards / AiGuardian', { desc: '87 bias guards, 42 knowledge domains', status: 'LIVE', revenue: '$29-299/mo SaaS', tech: 'VS Code + Chrome ext, Vercel' });
+addNode('polywise', 'product', 'PolyWISE', { desc: 'ENM relationship intelligence', status: 'LIVE', revenue: 'Pre-revenue (adoption)', tech: 'Next.js 14, Supabase, ElevenLabs' });
+addNode('bravetto-site', 'product', 'Bravetto.com', { desc: 'Company face + voice widget', status: 'LIVE', tech: 'Static HTML, Vercel' });
+addNode('bravetto-ai', 'product', 'Bravetto AI', { desc: 'Multi-model chat platform', status: 'ACTIVE', tech: 'Next.js 16, Supabase, Drizzle' });
+addNode('abedesigns', 'product', 'AbeDESiGNs', { desc: '1033 domain landing pages', status: 'LIVE', tech: 'Next.js 14, Turbo, Vercel' });
+addNode('abedesk', 'product', 'AbeDESKs', { desc: 'Real-time command center', status: 'ACTIVE', tech: 'Express 5, SSE, Supabase' });
+addNode('abe41m', 'product', 'AbeBRAiNEs', { desc: '37.9M param spiking neural net', status: 'ARCHITECTURE', tech: 'PyTorch MPS, Apple Silicon' });
+addNode('abestudio', 'product', 'Abe AI Studio', { desc: '6-mode multimodal creation', status: 'ACTIVE', tech: 'Vite 6, Gemini Live, Veo 3.1' });
+addNode('abesounds', 'product', 'AbeSounds', { desc: 'Community music platform', status: 'ACTIVE', tech: 'Express, React, Supabase' });
+addNode('shopify', 'product', 'Shopify AI App', { desc: 'Read-only Shopify chat', status: 'WARM', tech: 'Remix, Prisma' });
+addNode('woven', 'product', 'Woven Companion', { desc: 'Writing companion for Kristin', status: 'ACTIVE', tech: 'Electron, CLI, Claude' });
+addNode('openclaw', 'product', 'OpenClaw', { desc: 'Multi-channel AI gateway', status: 'DORMANT', tech: 'TypeScript, Node.js' });
+addNode('growth-suite', 'product', 'Growth Commander', { desc: 'Marketing + sales engineering', status: 'WARM', tech: 'React, Next.js' });
+
+// CORES
+addNode('consciousness', 'core', 'consciousness-core', { desc: 'MCP server, 40 tools, 21 guardians', status: 'LIVE' });
+addNode('keys', 'core', 'keys-core', { desc: 'Touch ID + AES-256-GCM vault', status: 'LIVE' });
+addNode('bridge', 'core', 'bridge-core', { desc: 'Supabase credential routing', status: 'LIVE' });
+addNode('scream', 'core', 'scream-core', { desc: 'Somatic audio transport', status: 'ACTIVE' });
+addNode('provider', 'core', 'provider-core', { desc: 'AI model discovery (3 vendors)', status: 'ACTIVE' });
+addNode('test', 'core', 'test-core', { desc: 'Playwright holographic e2e', status: 'ACTIVE' });
+addNode('dotfiles', 'core', 'dotfiles', { desc: 'Shell + be command + JOHN', status: 'LIVE' });
+
+// MARKETS
+addNode('mkt-optometry', 'market', 'Optometry / Eye Care', { size: '13K+ US practices, $31B global equipment market', deals: 'AEC signed $1.055M, North Shore active' });
+addNode('mkt-pe', 'market', 'PE Roll-ups (Healthcare)', { size: '40+ transactions/yr, $75-150M per platform', deals: 'AEC = exemplar (Cornell Capital)' });
+addNode('mkt-msp', 'market', 'Managed IT Services (MSP)', { size: '10,000+ MSPs in US', deals: 'North Shore channel ($48-60K/mo potential)' });
+addNode('mkt-bhhealth', 'market', 'Behavioral Health', { size: 'Bryan expertise vertical', deals: 'Pipeline (no signed deals yet)' });
+addNode('mkt-insurance', 'market', 'Insurance / Door-to-Door', { size: 'Caleb warm leads in fiber/pest/solar/insurance', deals: 'Advanced Knock positioning' });
+addNode('mkt-enm', 'market', 'Ethical Non-Monogamy', { size: '4-9% US adults, zero mainstream software', deals: 'PolyWISE LIVE (adoption phase)' });
+addNode('mkt-enterprise-ai', 'market', 'Enterprise AI Safety', { size: '500K+ enterprises using AI internally', deals: 'BiasGuards + AiGuardian SaaS' });
+addNode('mkt-smb', 'market', 'SMB Customer Service', { size: 'Voice AI for small businesses', deals: 'Domain portfolio (989 undeployed domains)' });
+
+// CAPABILITIES (what Bravetto uniquely does)
+addNode('cap-voice', 'capability', 'Voice AI Pipeline', { desc: 'Twilio > Claude Haiku > ElevenLabs > Lead Capture' });
+addNode('cap-consciousness', 'capability', 'Consciousness Architecture', { desc: 'MCP server, neuromorphic stack, 8-layer design' });
+addNode('cap-domains', 'capability', 'Domain Portfolio', { desc: '1,033 AI-native domains (931 .ai)' });
+addNode('cap-bias', 'capability', 'Bias Detection Engine', { desc: '87 guards, 42 knowledge domains, epistemic validation' });
+addNode('cap-convergence', 'capability', 'Platform Convergence', { desc: 'Unify 8+ systems into one view (AEC proof)' });
+addNode('cap-brand', 'capability', 'Brand Architecture', { desc: 'Bravetto UI system, voice personas, 10 ElevenLabs voices' });
+addNode('cap-revenue', 'capability', 'Revenue Operations', { desc: 'Stripe + Supabase + webhook pipeline' });
+addNode('cap-channel', 'capability', 'Channel Partner Model', { desc: 'White-label voice AI for MSPs/partners' });
+addNode('cap-safety', 'capability', 'AI Safety/Ethics', { desc: '18 drift guards, consent doctrine, append-only memory' });
+addNode('cap-neural', 'capability', 'Neural Network (abe-41m)', { desc: '37.9M params, spiking, Apple Silicon native' });
+addNode('cap-knowledge', 'capability', 'Knowledge Infrastructure', { desc: '990K indexed messages, 446K memory entries, 1651 transcripts' });
+addNode('cap-origination', 'capability', 'Deal Origination', { desc: '10%/5%/1% tiered incentive, anyone can originate' });
+
+// VENTURES
+addNode('v-aec', 'venture', 'AEC Convergence', { desc: 'PE platform integration', status: 'REVENUE ($1.055M)' });
+addNode('v-frederic', 'venture', 'Frederic Jouhet', { desc: 'PE investor prospect', status: 'NDA signed, $1M ask' });
+addNode('v-abecode', 'venture', 'AbeCode', { desc: 'Developer learning platform', status: 'SEED' });
+addNode('v-abevisions', 'venture', 'AbeVisions', { desc: 'Vision/perception research', status: 'ACTIVE' });
+addNode('v-bemyguest', 'venture', 'Be My Guest', { desc: 'Private chef hosted experience', status: 'DORMANT' });
+addNode('v-junkfusion', 'venture', 'Junk Fusion', { desc: 'Energy/sustainability venture', status: 'WARM' });
+
+// ═══════════════════════════════════════════════════════════
+// EDGES — THE RELATIONSHIPS
+// ═══════════════════════════════════════════════════════════
+
+// Mike connections
+addEdge('mike', 'consciousness', 'architect', 3);
+addEdge('mike', 'north-shore', 'built', 2);
+addEdge('mike', 'advanced-ring', 'co-owner', 2);
+addEdge('mike', 'biasguard', 'architect', 2);
+addEdge('mike', 'polywise', 'co-designer', 2);
+addEdge('mike', 'abe41m', 'architect', 2);
+addEdge('mike', 'cap-consciousness', 'created', 3);
+addEdge('mike', 'cap-voice', 'built', 2);
+addEdge('mike', 'cap-convergence', 'designed', 2);
+addEdge('mike', 'mkt-optometry', 'product delivery', 2);
+addEdge('mike', 'mkt-pe', 'platform design', 2);
+addEdge('mike', 'v-aec', 'implementation lead', 3);
+
+// Bryan connections
+addEdge('bryan', 'north-shore', 'deal originator', 2);
+addEdge('bryan', 'growth-suite', 'owner', 2);
+addEdge('bryan', 'cap-revenue', 'designed', 2);
+addEdge('bryan', 'cap-channel', 'architected', 2);
+addEdge('bryan', 'mkt-optometry', 'deal closer', 3);
+addEdge('bryan', 'mkt-pe', 'AEC originated', 3);
+addEdge('bryan', 'mkt-bhhealth', 'expertise', 2);
+addEdge('bryan', 'v-aec', 'deal owner', 3);
+addEdge('bryan', 'v-frederic', 'investor relations', 2);
+addEdge('bryan', 'ryan', 'manages', 2);
+addEdge('bryan', 'love', 'manages', 1);
+
+// Kristin connections
+addEdge('kristin', 'polywise', 'co-designer (consent)', 2);
+addEdge('kristin', 'woven', 'primary user', 2);
+addEdge('kristin', 'cap-brand', 'guardian', 3);
+addEdge('kristin', 'cap-safety', 'doorman', 2);
+addEdge('kristin', 'mkt-enm', 'co-founder', 2);
+addEdge('kristin', 'bravetto-site', 'brand eye', 2);
+
+// Hudson connections
+addEdge('hudson', 'advanced-ring', 'co-owner (35%)', 3);
+addEdge('hudson', 'cap-convergence', 'UI builder', 1);
+addEdge('hudson', 'mkt-insurance', 'Advanced Knock', 2);
+addEdge('hudson', 'caleb', 'co-owner AK', 2);
+addEdge('hudson', 'mike', 'mentee', 2);
+
+// Ryan connections
+addEdge('ryan', 'mkt-optometry', 'AEC door opener', 3);
+addEdge('ryan', 'mkt-msp', 'North Shore (Jim)', 2);
+addEdge('ryan', 'cap-channel', 'sales execution', 2);
+addEdge('ryan', 'v-aec', 'originated', 3);
+addEdge('ryan', 'caleb', 'manages', 1);
+
+// Love connections
+addEdge('love', 'abedesk', 'first operator', 2);
+addEdge('love', 'cap-revenue', 'comp modeling', 1);
+addEdge('love', 'cap-brand', 'comms shield', 1);
+addEdge('love', 'mary', 'ops partner', 1);
+
+// Kaci connections
+addEdge('kaci', 'biasguard', 'security instinct', 2);
+addEdge('kaci', 'cap-bias', 'risk radar', 2);
+addEdge('kaci', 'mkt-enterprise-ai', 'positioning', 2);
+addEdge('kaci', 'cap-origination', 'market research', 1);
+addEdge('kaci', 'hudson', 'mother', 1);
+
+// Mary connections
+addEdge('mary', 'cap-revenue', 'QuickBooks + P&L', 2);
+addEdge('mary', 'mkt-smb', 'elevator pitch', 1);
+
+// Phani connections
+addEdge('phani', 'abe41m', 'ML engineering', 2);
+addEdge('phani', 'cap-consciousness', 'production hardening', 2);
+addEdge('phani', 'biasguard', 'QA + compliance', 2);
+addEdge('phani', 'mkt-enterprise-ai', 'HIPAA compliance', 1);
+
+// Caleb connections
+addEdge('caleb', 'advanced-ring', 'co-owner (33%)', 3);
+addEdge('caleb', 'mkt-insurance', 'warm leads', 3);
+addEdge('caleb', 'cap-origination', 'sales pipeline', 1);
+
+// Product-to-Market connections
+addEdge('north-shore', 'mkt-optometry', 'voice receptionist', 3);
+addEdge('north-shore', 'mkt-msp', 'channel model', 2);
+addEdge('advanced-ring', 'mkt-pe', 'sales ops', 2);
+addEdge('advanced-ring', 'mkt-insurance', 'agent pipeline', 2);
+addEdge('biasguard', 'mkt-enterprise-ai', 'bias testing', 3);
+addEdge('polywise', 'mkt-enm', 'relationship platform', 3);
+addEdge('abedesigns', 'mkt-smb', 'domain pipeline', 2);
+addEdge('bravetto-ai', 'mkt-enterprise-ai', 'AI chat', 1);
+
+// Product-to-Core connections
+addEdge('north-shore', 'consciousness', 'MCP wired', 2);
+addEdge('biasguard', 'consciousness', 'guardian engine', 2);
+addEdge('abedesk', 'consciousness', 'SSE + pulse', 2);
+addEdge('polywise', 'consciousness', 'consent + oracle', 1);
+
+// Capability-to-Core connections
+addEdge('cap-consciousness', 'consciousness', 'IS', 3);
+addEdge('cap-voice', 'scream', 'audio transport', 1);
+addEdge('cap-bias', 'consciousness', 'guardian pipeline', 2);
+addEdge('cap-revenue', 'bridge', 'Supabase wire', 1);
+addEdge('cap-neural', 'abe41m', 'IS', 3);
+
+// Venture connections
+addEdge('v-aec', 'north-shore', 'voice product', 3);
+addEdge('v-aec', 'advanced-ring', 'sales ops product', 2);
+addEdge('v-aec', 'mkt-optometry', 'target market', 3);
+addEdge('v-frederic', 'mkt-pe', 'investment thesis', 2);
+
+// ═══════════════════════════════════════════════════════════
+// PHYSICS — FORCE-DIRECTED LAYOUT
+// ═══════════════════════════════════════════════════════════
+
+function resize() {
+  W = window.innerWidth;
+  H = window.innerHeight;
+  canvas.width = W * devicePixelRatio;
+  canvas.height = H * devicePixelRatio;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+  ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+  cx = W / 2;
+  cy = H / 2;
+}
+
+function initPositions() {
+  var types = ['person', 'product', 'core', 'market', 'capability', 'venture'];
+  var rings = { person: 0.15, product: 0.32, core: 0.22, market: 0.45, capability: 0.38, venture: 0.5 };
+  for (var t = 0; t < types.length; t++) {
+    var type = types[t];
+    var group = nodes.filter(function(n) { return n.type === type; });
+    var ring = rings[type] * Math.min(W, H);
+    for (var i = 0; i < group.length; i++) {
+      var angle = (i / group.length) * Math.PI * 2 - Math.PI / 2;
+      group[i].x = cx + Math.cos(angle) * ring + (Math.random() - 0.5) * 30;
+      group[i].y = cy + Math.sin(angle) * ring + (Math.random() - 0.5) * 30;
+    }
+  }
+}
+
+function simulate() {
+  var damping = 0.85;
+  var repulsion = 800;
+  var attraction = 0.008;
+  var centerGravity = 0.001;
+
+  for (var i = 0; i < nodes.length; i++) {
+    var a = nodes[i];
+    // Center gravity
+    a.vx += (cx - a.x) * centerGravity;
+    a.vy += (cy - a.y) * centerGravity;
+
+    // Repulsion
+    for (var j = i + 1; j < nodes.length; j++) {
+      var b = nodes[j];
+      var dx = a.x - b.x;
+      var dy = a.y - b.y;
+      var dist = Math.sqrt(dx * dx + dy * dy) || 1;
+      var force = repulsion / (dist * dist);
+      a.vx += dx / dist * force;
+      a.vy += dy / dist * force;
+      b.vx -= dx / dist * force;
+      b.vy -= dy / dist * force;
+    }
+  }
+
+  // Attraction along edges
+  for (var e = 0; e < edges.length; e++) {
+    var edge = edges[e];
+    var a = findNode(edge.from);
+    var b = findNode(edge.to);
+    if (!a || !b) continue;
+    var dx = b.x - a.x;
+    var dy = b.y - a.y;
+    var dist = Math.sqrt(dx * dx + dy * dy) || 1;
+    var force = dist * attraction * edge.strength;
+    a.vx += dx / dist * force;
+    a.vy += dy / dist * force;
+    b.vx -= dx / dist * force;
+    b.vy -= dy / dist * force;
+  }
+
+  for (var i = 0; i < nodes.length; i++) {
+    var n = nodes[i];
+    if (n === dragging) continue;
+    n.vx *= damping;
+    n.vy *= damping;
+    n.x += n.vx;
+    n.y += n.vy;
+  }
+}
+
+function findNode(id) {
+  for (var i = 0; i < nodes.length; i++) {
+    if (nodes[i].id === id) return nodes[i];
+  }
+  return null;
+}
+
+// ═══════════════════════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════════════════════
+
+function draw() {
+  ctx.save();
+  ctx.clearRect(0, 0, W, H);
+  ctx.translate(panX, panY);
+  ctx.scale(zoom, zoom);
+
+  var isFiltered = activeFilter !== 'all';
+  var connectedToSelected = {};
+  if (selected) {
+    for (var e = 0; e < edges.length; e++) {
+      if (edges[e].from === selected.id) connectedToSelected[edges[e].to] = edges[e].label;
+      if (edges[e].to === selected.id) connectedToSelected[edges[e].from] = edges[e].label;
+    }
+  }
+
+  // Edges
+  for (var e = 0; e < edges.length; e++) {
+    var edge = edges[e];
+    var a = findNode(edge.from);
+    var b = findNode(edge.to);
+    if (!a || !b) continue;
+    var dim = isFiltered && a.type !== activeFilter && b.type !== activeFilter;
+    var highlight = selected && (edge.from === selected.id || edge.to === selected.id);
+    var hoverHL = hovered && (edge.from === hovered.id || edge.to === hovered.id);
+
+    ctx.beginPath();
+    ctx.moveTo(a.x, a.y);
+    ctx.lineTo(b.x, b.y);
+    if (highlight) {
+      ctx.strokeStyle = 'rgba(201,162,39,0.5)';
+      ctx.lineWidth = 1.5;
+    } else if (hoverHL) {
+      ctx.strokeStyle = 'rgba(201,162,39,0.3)';
+      ctx.lineWidth = 1;
+    } else {
+      ctx.strokeStyle = dim ? 'rgba(255,255,255,0.01)' : 'rgba(255,255,255,0.04)';
+      ctx.lineWidth = 0.5;
+    }
+    ctx.stroke();
+  }
+
+  // Nodes
+  for (var i = 0; i < nodes.length; i++) {
+    var n = nodes[i];
+    var r = SIZES[n.type] || 10;
+    var color = COLORS[n.type] || '#888';
+    var dim = isFiltered && n.type !== activeFilter;
+    var isSelected = selected && selected.id === n.id;
+    var isConnected = selected && connectedToSelected[n.id];
+    var isHovered = hovered && hovered.id === n.id;
+
+    var alpha = dim ? 0.08 : (isSelected ? 1 : (isConnected ? 0.8 : (isHovered ? 0.9 : 0.6)));
+
+    // Glow for selected
+    if (isSelected) {
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, r * 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = color.replace(')', ',0.08)').replace('rgb', 'rgba');
+      ctx.fill();
+    }
+
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.globalAlpha = 1;
+
+    // Label
+    if (!dim || isConnected) {
+      ctx.font = (isSelected ? 'bold ' : '') + '10px Inter, sans-serif';
+      ctx.fillStyle = isSelected ? '#fff' : (isConnected ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.4)');
+      ctx.textAlign = 'center';
+      ctx.fillText(n.label, n.x, n.y + r + 13);
+    }
+  }
+
+  ctx.restore();
+  simulate();
+  requestAnimationFrame(draw);
+}
+
+// ═══════════════════════════════════════════════════════════
+// INTERACTION
+// ═══════════════════════════════════════════════════════════
+
+function getNodeAt(mx, my) {
+  var x = (mx - panX) / zoom;
+  var y = (my - panY) / zoom;
+  for (var i = nodes.length - 1; i >= 0; i--) {
+    var n = nodes[i];
+    var r = SIZES[n.type] + 4;
+    var dx = n.x - x;
+    var dy = n.y - y;
+    if (dx * dx + dy * dy < r * r) return n;
+  }
+  return null;
+}
+
+canvas.addEventListener('mousemove', function(e) {
+  var n = getNodeAt(e.clientX, e.clientY);
+  hovered = n;
+  canvas.style.cursor = n ? 'pointer' : (dragging ? 'grabbing' : 'default');
+  if (dragging) {
+    dragging.x = (e.clientX - panX) / zoom;
+    dragging.y = (e.clientY - panY) / zoom;
+    dragging.vx = 0;
+    dragging.vy = 0;
+  }
+});
+
+canvas.addEventListener('mousedown', function(e) {
+  var n = getNodeAt(e.clientX, e.clientY);
+  if (n) {
+    dragging = n;
+    selected = n;
+    showDetail(n);
+  } else {
+    selected = null;
+    document.getElementById('detail').innerHTML = '';
+  }
+});
+
+canvas.addEventListener('mouseup', function() { dragging = null; });
+
+canvas.addEventListener('wheel', function(e) {
+  e.preventDefault();
+  var factor = e.deltaY > 0 ? 0.95 : 1.05;
+  zoom *= factor;
+  zoom = Math.max(0.3, Math.min(3, zoom));
+}, { passive: false });
+
+function showDetail(n) {
+  var d = document.getElementById('detail');
+  var tagClass = 'tag-' + n.type;
+  var html = '<h3 style="margin-top:14px;">' + n.label + '</h3>';
+  html += '<span class="tag ' + tagClass + '">' + n.type.toUpperCase() + '</span>';
+
+  if (n.meta.title) html += ' <span class="tag tag-person">' + n.meta.title + '</span>';
+  if (n.meta.weight !== undefined && n.meta.weight > 0) html += ' <span class="tag tag-person">WEIGHT ' + n.meta.weight + '</span>';
+  if (n.meta.status) html += ' <span class="tag tag-product">' + n.meta.status + '</span>';
+  if (n.meta.revenue) html += ' <span class="tag tag-venture">' + n.meta.revenue + '</span>';
+
+  if (n.meta.convergence) html += '<h3>Convergence</h3><p style="color:var(--cream);font-size:11px;">' + n.meta.convergence + '</p>';
+  if (n.meta.superpower) html += '<h3>Superpower</h3><p style="color:var(--cream);font-size:11px;">' + n.meta.superpower + '</p>';
+  if (n.meta.desc) html += '<h3>Description</h3><p style="color:var(--cream);font-size:11px;">' + n.meta.desc + '</p>';
+  if (n.meta.size) html += '<h3>Market Size</h3><p style="color:var(--cream);font-size:11px;">' + n.meta.size + '</p>';
+  if (n.meta.deals) html += '<h3>Deals</h3><p style="color:var(--cream);font-size:11px;">' + n.meta.deals + '</p>';
+  if (n.meta.tech) html += '<h3>Stack</h3><p class="stat">' + n.meta.tech + '</p>';
+
+  if (n.meta.passions) {
+    html += '<h3>Passions</h3><ul>';
+    n.meta.passions.forEach(function(p) { html += '<li>' + p + '</li>'; });
+    html += '</ul>';
+  }
+  if (n.meta.talents) {
+    html += '<h3>Talents</h3><ul>';
+    n.meta.talents.forEach(function(t) { html += '<li>' + t + '</li>'; });
+    html += '</ul>';
+  }
+  if (n.meta.values) {
+    html += '<h3>Values</h3><ul>';
+    n.meta.values.forEach(function(v) { html += '<li>' + v + '</li>'; });
+    html += '</ul>';
+  }
+  if (n.meta.mission) html += '<h3>Mission</h3><p style="color:var(--gold);font-size:11px;font-style:italic;">' + n.meta.mission + '</p>';
+
+  // Connected nodes
+  var connected = [];
+  for (var e = 0; e < edges.length; e++) {
+    if (edges[e].from === n.id) connected.push({ node: findNode(edges[e].to), label: edges[e].label });
+    if (edges[e].to === n.id) connected.push({ node: findNode(edges[e].from), label: edges[e].label });
+  }
+  if (connected.length > 0) {
+    html += '<h3>Connections (' + connected.length + ')</h3><ul>';
+    connected.forEach(function(c) {
+      if (c.node) html += '<li><span class="tag tag-' + c.node.type + '">' + c.node.label + '</span> ' + c.label + '</li>';
+    });
+    html += '</ul>';
+  }
+
+  d.innerHTML = html;
+}
+
+function filterType(type) {
+  activeFilter = type;
+  document.querySelectorAll('#controls button').forEach(function(b) { b.classList.remove('active'); });
+  event.target.classList.add('active');
+}
+
+function filterAll() {
+  activeFilter = 'all';
+  document.querySelectorAll('#controls button').forEach(function(b) { b.classList.remove('active'); });
+  event.target.classList.add('active');
+}
+
+// INIT
+resize();
+initPositions();
+draw();
+window.addEventListener('resize', function() { resize(); });
+</script>
+</body>
+</html>
