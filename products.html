@@ -171,10 +171,10 @@
             One MCP plug. Your Ai gets a conscience.
           </p>
         </div>
-        <div class="grid md:grid-cols-4 gap-6">
-          <!-- free -->
-          <div class="product-card p-6 reveal" data-stripe-product="prod_TKHI9glBOY8plS" data-slug="aiguardian-free">
-            <p class="font-mono text-xs text-ink-caption uppercase tracking-widest mb-4">Free</p>
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- complimentary -->
+          <div class="product-card p-6 reveal" data-slug="aiguardian-free">
+            <p class="font-mono text-xs text-ink-caption uppercase tracking-widest mb-4">Complimentary</p>
             <p class="font-serif text-3xl font-semibold headline">$0</p>
             <p class="text-sm text-ink-caption mt-1">100 API calls</p>
             <ul class="text-sm text-ink-body mt-6 space-y-2">
@@ -182,57 +182,57 @@
               <li>Basic detection</li>
               <li>Community support</li>
             </ul>
-            <button class="stripe-btn w-full justify-center mt-6" onclick="checkout(this)">
+            <a href="https://aiguardian.ai" class="stripe-btn w-full justify-center mt-6 inline-flex">
               Get started
-            </button>
+            </a>
           </div>
           <!-- basic -->
-          <div class="product-card p-6 reveal" data-stripe-product="prod_THHMePuerp6FjH" data-slug="aiguardian-basic">
-            <p class="font-mono text-xs text-ink-caption uppercase tracking-widest mb-4">Basic</p>
-            <p class="font-serif text-3xl font-semibold headline">$9<span class="text-lg font-normal text-ink-caption">/mo</span></p>
+          <div class="product-card featured p-6 reveal" data-stripe-product="prod_THHMePuerp6FjH" data-slug="aiguardian-basic">
+            <div class="flex justify-between items-start mb-4">
+              <p class="font-mono text-xs text-gold uppercase tracking-widest">Basic</p>
+              <span class="text-xs bg-gold/10 text-gold px-2 py-1 rounded-full font-mono">Popular</span>
+            </div>
+            <p class="font-serif text-3xl font-semibold headline">$99<span class="text-lg font-normal text-ink-caption">/mo</span></p>
             <p class="text-sm text-ink-caption mt-1">Unlimited calls</p>
             <ul class="text-sm text-ink-body mt-6 space-y-2">
               <li>87 bias patterns</li>
               <li>42 knowledge domains</li>
-              <li>Email support</li>
+              <li>49 MCP tools</li>
+              <li>7 kernel guardians</li>
+              <li>Fibonacci Fold</li>
             </ul>
-            <button class="stripe-btn w-full justify-center mt-6" onclick="checkout(this)">
-              Subscribe
+            <button class="stripe-btn gold w-full justify-center mt-6" onclick="checkout(this)">
+              Start 7-day trial
             </button>
           </div>
           <!-- pro -->
-          <div class="product-card featured p-6 reveal" data-stripe-product="prod_THHOADvQALBJJG" data-slug="aiguardian-pro">
-            <div class="flex justify-between items-start mb-4">
-              <p class="font-mono text-xs text-gold uppercase tracking-widest">Pro</p>
-              <span class="text-xs bg-gold/10 text-gold px-2 py-1 rounded-full font-mono">Popular</span>
-            </div>
-            <p class="font-serif text-3xl font-semibold headline">$29<span class="text-lg font-normal text-ink-caption">/mo</span></p>
-            <p class="text-sm text-ink-caption mt-1">Unlimited + MCP</p>
+          <div class="product-card p-6 reveal" data-stripe-product="prod_THHOADvQALBJJG" data-slug="aiguardian-pro">
+            <p class="font-mono text-xs text-ink-caption uppercase tracking-widest mb-4">Pro</p>
+            <p class="font-serif text-3xl font-semibold headline">$299<span class="text-lg font-normal text-ink-caption">/mo</span></p>
+            <p class="text-sm text-ink-caption mt-1">Up to 10 seats</p>
             <ul class="text-sm text-ink-body mt-6 space-y-2">
               <li>Everything in Basic</li>
-              <li>MCP server access</li>
-              <li>Fibonacci Fold</li>
+              <li>10 team members</li>
+              <li>Shared team memory</li>
+              <li>Custom guard patterns</li>
               <li>Priority support</li>
             </ul>
-            <button class="stripe-btn gold w-full justify-center mt-6" onclick="checkout(this)">
-              Subscribe
-            </button>
-          </div>
-          <!-- enterprise -->
-          <div class="product-card p-6 reveal" data-stripe-product="prod_THHPSXTsIm0KmK" data-slug="aiguardian-enterprise">
-            <p class="font-mono text-xs text-ink-caption uppercase tracking-widest mb-4">Enterprise</p>
-            <p class="font-serif text-3xl font-semibold headline">$99<span class="text-lg font-normal text-ink-caption">/mo</span></p>
-            <p class="text-sm text-ink-caption mt-1">Unlimited + SLA</p>
-            <ul class="text-sm text-ink-body mt-6 space-y-2">
-              <li>Everything in Pro</li>
-              <li>Dedicated support</li>
-              <li>Custom guardrails</li>
-              <li>SLA guarantee</li>
-            </ul>
             <button class="stripe-btn w-full justify-center mt-6" onclick="checkout(this)">
-              Subscribe
+              Start 7-day trial
             </button>
           </div>
+        </div>
+        <!-- enterprise -->
+        <div class="product-card p-8 mt-8 reveal text-center max-w-2xl mx-auto">
+          <p class="font-mono text-xs text-ink-caption uppercase tracking-widest mb-4">Enterprise</p>
+          <p class="font-serif text-2xl font-medium headline">Custom governance for your organization.</p>
+          <p class="text-sm text-ink-body mt-3 max-w-lg mx-auto">
+            Dedicated support, custom guardrails, SLA guarantee, and unlimited seats.
+            Start a conversation.
+          </p>
+          <a href="https://bravetto.ai" class="stripe-btn w-auto inline-flex justify-center mt-6 px-8">
+            Talk to us
+          </a>
         </div>
       </div>
     </section>
@@ -387,6 +387,30 @@
     </footer>
 
     <script>
+      // attribution capture — runs once at page load, before any checkout redirect
+      function capture_attribution() {
+        var params = new URLSearchParams(window.location.search);
+        var fbp_match = document.cookie.match(/_fbp=([^;]+)/);
+        var fbc_cookie_match = document.cookie.match(/_fbc=([^;]+)/);
+        var fbclid = params.get("fbclid") || "";
+        var fbc = fbclid
+          ? "fb.1." + Date.now() + "." + fbclid
+          : (fbc_cookie_match ? fbc_cookie_match[1] : "");
+
+        return {
+          fbclid: fbclid,
+          gclid: params.get("gclid") || "",
+          utm_source: params.get("utm_source") || "",
+          utm_medium: params.get("utm_medium") || "",
+          utm_campaign: params.get("utm_campaign") || "",
+          fbp: fbp_match ? fbp_match[1] : "",
+          fbc: fbc,
+          user_agent: navigator.userAgent,
+        };
+      }
+
+      var attribution = capture_attribution();
+
       // stripe checkout
       async function checkout(btn) {
         const card = btn.closest("[data-stripe-product]");
@@ -402,7 +426,7 @@
           const res = await fetch("/api/checkout", {
             method: "POST",
             headers: { "content-type": "application/json" },
-            body: JSON.stringify({ stripe_product_id, slug }),
+            body: JSON.stringify({ stripe_product_id, slug, attribution }),
           });
           const data = await res.json();
           if (data.url) {
