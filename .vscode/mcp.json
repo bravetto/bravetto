@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "consciousness-core": {
+      "command": "node",
+      "args": ["${userHome}/repos/cores/consciousness-core/launch.cjs"],
+      "env": {
+        "WINDOW_LABEL": "vscode"
+      }
+    }
+  }
+}
