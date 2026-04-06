@@ -1,4 +1,5 @@
 import Stripe from "stripe";
+import { resolve_slug } from "./product-map.js";
 
 const ALLOWED_ORIGINS = [
   "https://bravetto.com",
@@ -6,19 +7,6 @@ const ALLOWED_ORIGINS = [
 ];
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-
-// product slug mapping — stripe product id to welcome page checklist key
-const product_slugs = {
-  "prod_UHZH0KtSTp4YKF": "voice-starter",
-  "prod_UHZJP2aZTq0tbE": "voice-growth",
-  "prod_UCq5BtnjQAmHr3": "biasguards-pro",
-  "prod_UCq5I2XDhjL8Yf": "consciousness-mcp",
-  "prod_THHMePuerp6FjH": "aiguardian-basic",
-  "prod_THHOADvQALBJJG": "aiguardian-pro",
-  "prod_U6RpU8NISL5h7h": "domain-reservation",
-  "prod_TrRJmM2YNKFj3j": "advancedring-agent",
-  "prod_TrPxO2boKbnljr": "advancedring-leader",
-};
 
 export default async function handler(req, res) {
   const origin = req.headers.origin;
@@ -49,7 +37,7 @@ export default async function handler(req, res) {
     const product = item?.price?.product;
     const plan_name = typeof product === "object" ? product.name : null;
     const stripe_product_id = typeof product === "object" ? product.id : typeof product === "string" ? product : null;
-    const product_slug = stripe_product_id ? (product_slugs[stripe_product_id] || session.metadata?.product || null) : null;
+    const product_slug = stripe_product_id ? (resolve_slug(stripe_product_id) || session.metadata?.product || undefined) : undefined;
 
     return res.json({
       customer_name: customer_name,

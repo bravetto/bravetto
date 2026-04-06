@@ -1,4 +1,5 @@
 import Stripe from "stripe";
+import { resolve_product_id } from "./product-map.js";
 
 const ALLOWED_ORIGINS = [
   "https://bravetto.com",
@@ -20,13 +21,16 @@ export default async function handler(req, res) {
   if (req.method === "OPTIONS") return res.status(200).end();
   if (req.method !== "POST") return res.status(405).json({ error: "method not allowed" });
 
-  const { stripe_product_id, slug, attribution } = req.body || {};
-  if (!stripe_product_id || typeof stripe_product_id !== "string") {
-    return res.status(400).json({ error: "stripe_product_id required" });
+  const { slug, attribution } = req.body || {};
+  if (!slug || typeof slug !== "string") {
+    return res.status(400).json({ error: "slug required" });
   }
-  if (!stripe_product_id.startsWith("prod_")) {
-    return res.status(400).json({ error: "invalid stripe_product_id format" });
+
+  const resolved = resolve_product_id(slug);
+  if (resolved.absent) {
+    return res.status(400).json({ error: resolved.reason });
   }
+  const stripe_product_id = resolved.id;
 
   // attribution data from client — embedded in session metadata for webhook retrieval
   const attr = attribution && typeof attribution === "object" ? attribution : {};
