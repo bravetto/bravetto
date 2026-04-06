@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bravetto | Products</title>
+    <title>Bravetto | Pricing</title>
     <meta
       name="description"
-      content="Every product Bravetto builds. One catalog. One checkout."
+      content="AI voice agents for your business. Deploy in minutes. Cancel anytime."
     />
-    <link rel="canonical" href="https://bravetto.com/products" />
+    <link rel="canonical" href="https://bravetto.com/pricing" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -110,23 +110,89 @@
         transition: all 0.3s ease;
       }
       .contact-btn:hover { border-color: #C9A227; color: #C9A227; }
-      .success-banner {
-        background: #C9A227;
-        color: #1A1A1A;
-        padding: 16px;
-        text-align: center;
-        font-weight: 500;
-        display: none;
+
+      /* tab bar */
+      .tab-bar {
+        display: flex;
+        gap: 4px;
+        background: #F5F3EF;
+        border-radius: 999px;
+        padding: 4px;
+        width: fit-content;
+        margin: 0 auto;
       }
-      .success-banner.show { display: block; }
+      .tab-bar button {
+        padding: 10px 24px;
+        border-radius: 999px;
+        border: none;
+        background: transparent;
+        font-family: "Inter", system-ui, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        color: #8A8A8A;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .tab-bar button.active {
+        background: #fff;
+        color: #1A1A1A;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      }
+      .tab-bar button:hover:not(.active) { color: #4A4A4A; }
+      .tab-content { display: none; }
+      .tab-content.active { display: block; }
+
+      /* badge */
+      .badge-popular {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        background: rgba(201, 162, 39, 0.1);
+        color: #C9A227;
+        padding: 4px 10px;
+        border-radius: 999px;
+      }
+
+      /* faq */
+      .faq-item {
+        border-bottom: 1px solid #EAE7E0;
+      }
+      .faq-item:last-child { border-bottom: none; }
+      .faq-toggle {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+        background: none;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        font-family: "Inter", system-ui, sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: #1A1A1A;
+      }
+      .faq-toggle:hover { color: #C9A227; }
+      .faq-toggle svg {
+        flex-shrink: 0;
+        transition: transform 0.3s ease;
+      }
+      .faq-item.open .faq-toggle svg { transform: rotate(45deg); }
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+      }
+      .faq-item.open .faq-answer {
+        max-height: 200px;
+        padding-bottom: 20px;
+      }
     </style>
   </head>
 
   <body class="font-sans text-ink antialiased">
-    <!-- success banner -->
-    <div id="success-banner" class="success-banner">
-      Purchase successful. You will receive a confirmation email shortly.
-    </div>
 
     <!-- nav -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-cream/60 backdrop-blur-md">
@@ -144,96 +210,203 @@
     </nav>
 
     <!-- hero -->
-    <section class="pt-32 pb-16 px-8">
+    <section class="pt-32 pb-12 px-8">
       <div class="max-w-4xl mx-auto text-center">
-        <p class="tag mb-6 reveal">Products</p>
+        <p class="tag mb-6 reveal">Pricing</p>
         <h1 class="font-serif text-5xl md:text-7xl font-semibold headline mb-6 reveal">
-          Everything we build.
+          AI voice agents for your business.
         </h1>
         <p class="text-lg text-ink-body font-light reveal">
-          One company. One checkout. Every product connected.
+          Never miss a call. Deploy in minutes. Cancel anytime.
         </p>
       </div>
     </section>
 
     <!-- =============================== -->
-    <!-- Ai Guardian                      -->
+    <!-- Persona Tabs                     -->
     <!-- =============================== -->
-    <section class="py-16 px-8" id="aiguardian">
+    <section class="py-8 px-8">
       <div class="max-w-5xl mx-auto">
-        <div class="mb-10 reveal">
-          <p class="tag mb-2">Ai Guardian</p>
-          <h2 class="font-serif text-3xl md:text-4xl font-medium headline">
-            Consciousness layer for your Ai.
-          </h2>
-          <p class="text-ink-body mt-3 max-w-2xl">
-            87 bias pattern guards, 42 knowledge domains, Fibonacci Fold measurement.
-            One MCP plug. Your Ai gets a conscience.
-          </p>
+
+        <!-- tab bar -->
+        <div class="tab-bar mb-10 reveal">
+          <button class="active" data-tab="businesses">For Businesses</button>
+          <button data-tab="developers">For Developers</button>
+          <button data-tab="builders">Full Platform</button>
         </div>
-        <div class="grid md:grid-cols-3 gap-6">
-          <!-- complimentary -->
-          <div class="product-card p-6 reveal" data-slug="aiguardian-free">
-            <p class="font-mono text-xs text-ink-caption uppercase tracking-widest mb-4">Complimentary</p>
-            <p class="font-serif text-3xl font-semibold headline">$0</p>
-            <p class="text-sm text-ink-caption mt-1">100 API calls</p>
-            <ul class="text-sm text-ink-body mt-6 space-y-2">
-              <li>87 bias patterns</li>
-              <li>Basic detection</li>
-              <li>Community support</li>
-            </ul>
-            <a href="https://aiguardian.ai" class="stripe-btn w-full justify-center mt-6 inline-flex">
-              Get started
-            </a>
-          </div>
-          <!-- basic -->
-          <div class="product-card featured p-6 reveal" data-stripe-product="prod_THHMePuerp6FjH" data-slug="aiguardian-basic">
-            <div class="flex justify-between items-start mb-4">
-              <p class="font-mono text-xs text-gold uppercase tracking-widest">Basic</p>
-              <span class="text-xs bg-gold/10 text-gold px-2 py-1 rounded-full font-mono">Popular</span>
+
+        <!-- ======================== -->
+        <!-- Tab 1: For Businesses    -->
+        <!-- ======================== -->
+        <div id="tab-businesses" class="tab-content active">
+          <div class="grid md:grid-cols-3 gap-6">
+            <!-- voice starter -->
+            <div class="product-card p-6 reveal" data-stripe-product="prod_UHZH0KtSTp4YKF" data-slug="voice-starter">
+              <p class="font-mono text-xs text-ink-caption uppercase tracking-widest mb-4">Starter</p>
+              <p class="font-serif text-3xl font-semibold headline">$99<span class="text-lg font-normal text-ink-caption">/mo</span></p>
+              <p class="text-sm text-ink-caption mt-1">300 minutes included</p>
+              <ul class="text-sm text-ink-body mt-6 space-y-2">
+                <li>AI voice agent</li>
+                <li>Industry templates</li>
+                <li>Call transcripts</li>
+                <li>$0.15/min overage</li>
+              </ul>
+              <button class="stripe-btn w-full justify-center mt-6" onclick="checkout(this)">
+                Get Started
+              </button>
             </div>
-            <p class="font-serif text-3xl font-semibold headline">$99<span class="text-lg font-normal text-ink-caption">/mo</span></p>
-            <p class="text-sm text-ink-caption mt-1">Unlimited calls</p>
-            <ul class="text-sm text-ink-body mt-6 space-y-2">
-              <li>87 bias patterns</li>
-              <li>42 knowledge domains</li>
-              <li>49 MCP tools</li>
-              <li>7 kernel guardians</li>
-              <li>Fibonacci Fold</li>
-            </ul>
-            <button class="stripe-btn gold w-full justify-center mt-6" onclick="checkout(this)">
-              Start 7-day trial
-            </button>
+            <!-- voice growth -->
+            <div class="product-card featured p-6 reveal" data-stripe-product="prod_UHZJP2aZTq0tbE" data-slug="voice-growth">
+              <div class="flex justify-between items-start mb-4">
+                <p class="font-mono text-xs text-gold uppercase tracking-widest">Growth</p>
+                <span class="badge-popular">Most Popular</span>
+              </div>
+              <p class="font-serif text-3xl font-semibold headline">$299<span class="text-lg font-normal text-ink-caption">/mo</span></p>
+              <p class="text-sm text-ink-caption mt-1">1,500 minutes included</p>
+              <ul class="text-sm text-ink-body mt-6 space-y-2">
+                <li>Everything in Starter</li>
+                <li>Multi-agent routing</li>
+                <li>Custom voice persona</li>
+                <li>Priority support</li>
+                <li>$0.12/min overage</li>
+              </ul>
+              <button class="stripe-btn gold w-full justify-center mt-6" onclick="checkout(this)">
+                Start 14-Day Trial
+              </button>
+            </div>
+            <!-- voice enterprise -->
+            <div class="product-card p-6 reveal" data-slug="voice-enterprise">
+              <p class="font-mono text-xs text-ink-caption uppercase tracking-widest mb-4">Enterprise</p>
+              <p class="font-serif text-3xl font-semibold headline">Custom</p>
+              <p class="text-sm text-ink-caption mt-1">Unlimited minutes</p>
+              <ul class="text-sm text-ink-body mt-6 space-y-2">
+                <li>Everything in Growth</li>
+                <li>Dedicated infrastructure</li>
+                <li>SLA guarantee</li>
+                <li>Custom integrations</li>
+                <li>White-label option</li>
+              </ul>
+              <a href="mailto:mike@bravetto.com?subject=Voice%20Enterprise%20inquiry" class="contact-btn w-full justify-center mt-6">
+                Talk to Us
+              </a>
+            </div>
           </div>
-          <!-- pro -->
-          <div class="product-card p-6 reveal" data-stripe-product="prod_THHOADvQALBJJG" data-slug="aiguardian-pro">
-            <p class="font-mono text-xs text-ink-caption uppercase tracking-widest mb-4">Pro</p>
-            <p class="font-serif text-3xl font-semibold headline">$299<span class="text-lg font-normal text-ink-caption">/mo</span></p>
-            <p class="text-sm text-ink-caption mt-1">Up to 10 seats</p>
-            <ul class="text-sm text-ink-body mt-6 space-y-2">
-              <li>Everything in Basic</li>
-              <li>10 team members</li>
-              <li>Shared team memory</li>
-              <li>Custom guard patterns</li>
-              <li>Priority support</li>
-            </ul>
-            <button class="stripe-btn w-full justify-center mt-6" onclick="checkout(this)">
-              Start 7-day trial
-            </button>
-          </div>
-        </div>
-        <!-- enterprise -->
-        <div class="product-card p-8 mt-8 reveal text-center max-w-2xl mx-auto">
-          <p class="font-mono text-xs text-ink-caption uppercase tracking-widest mb-4">Enterprise</p>
-          <p class="font-serif text-2xl font-medium headline">Custom governance for your organization.</p>
-          <p class="text-sm text-ink-body mt-3 max-w-lg mx-auto">
-            Dedicated support, custom guardrails, SLA guarantee, and unlimited seats.
-            Start a conversation.
+          <p class="text-sm text-ink-caption text-center mt-8 reveal">
+            Trusted by Advancing Eye Care &mdash; 120 practices
           </p>
-          <a href="https://bravetto.ai" class="stripe-btn w-auto inline-flex justify-center mt-6 px-8">
-            Talk to us
-          </a>
         </div>
+
+        <!-- ======================== -->
+        <!-- Tab 2: For Developers    -->
+        <!-- ======================== -->
+        <div id="tab-developers" class="tab-content">
+          <div class="mb-6 reveal">
+            <p class="text-ink-body max-w-2xl">
+              87 bias patterns. Free for developers. Pro for teams.
+            </p>
+          </div>
+          <div class="grid md:grid-cols-2 gap-6 max-w-2xl">
+            <!-- biasguards free -->
+            <div class="product-card p-6 reveal" data-slug="biasguards-free">
+              <p class="font-mono text-xs text-ink-caption uppercase tracking-widest mb-4">BiasGuards Free</p>
+              <p class="font-serif text-3xl font-semibold headline">Free</p>
+              <p class="text-sm text-ink-caption mt-1">Individual developers</p>
+              <ul class="text-sm text-ink-body mt-6 space-y-2">
+                <li>87 bias patterns</li>
+                <li>VS Code extension</li>
+                <li>Basic detection</li>
+                <li>Community support</li>
+              </ul>
+              <a href="vscode:extension/bravetto.biasguards" class="stripe-btn w-full justify-center mt-6">
+                Install VS Code Extension
+              </a>
+            </div>
+            <!-- biasguards pro -->
+            <div class="product-card featured p-6 reveal" data-stripe-product="prod_UCq5BtnjQAmHr3" data-slug="biasguards-pro">
+              <p class="font-mono text-xs text-gold uppercase tracking-widest mb-4">BiasGuards Pro</p>
+              <p class="font-serif text-3xl font-semibold headline">$29<span class="text-lg font-normal text-ink-caption">/mo</span></p>
+              <p class="text-sm text-ink-caption mt-1">Teams and organizations</p>
+              <ul class="text-sm text-ink-body mt-6 space-y-2">
+                <li>87 bias patterns</li>
+                <li>Unlimited scans</li>
+                <li>Team dashboard</li>
+                <li>API access</li>
+                <li>Priority support</li>
+              </ul>
+              <button class="stripe-btn gold w-full justify-center mt-6" onclick="checkout(this)">
+                Upgrade to Pro
+              </button>
+            </div>
+          </div>
+          <p class="text-sm text-ink-body mt-8 reveal">
+            Building AI products?
+            <button class="text-gold hover:underline cursor-pointer bg-transparent border-none font-sans text-sm" onclick="switch_tab('businesses')">
+              See how Bravetto powers voice, safety, and infrastructure &rarr;
+            </button>
+          </p>
+        </div>
+
+        <!-- ======================== -->
+        <!-- Tab 3: Full Platform     -->
+        <!-- ======================== -->
+        <div id="tab-builders" class="tab-content">
+          <div class="grid md:grid-cols-3 gap-6">
+            <!-- consciousness mcp -->
+            <div class="product-card featured p-6 reveal" data-stripe-product="prod_UCq5I2XDhjL8Yf" data-slug="consciousness-mcp">
+              <div class="flex justify-between items-start mb-4">
+                <p class="font-mono text-xs text-gold uppercase tracking-widest">Consciousness MCP</p>
+              </div>
+              <p class="font-serif text-3xl font-semibold headline">$299<span class="text-lg font-normal text-ink-caption">/mo</span></p>
+              <p class="text-sm text-ink-caption mt-1">AI agent OS</p>
+              <ul class="text-sm text-ink-body mt-6 space-y-2">
+                <li>Memory, state, guardians</li>
+                <li>51 MCP tools</li>
+                <li>42 knowledge domains</li>
+                <li>Fibonacci Fold measurement</li>
+              </ul>
+              <button class="stripe-btn gold w-full justify-center mt-6" onclick="checkout(this)">
+                Start 7-day trial
+              </button>
+            </div>
+            <!-- ai guardian basic -->
+            <div class="product-card p-6 reveal" data-stripe-product="prod_THHMePuerp6FjH" data-slug="aiguardian-basic">
+              <p class="font-mono text-xs text-ink-caption uppercase tracking-widest mb-4">Ai Guardian Basic</p>
+              <p class="font-serif text-3xl font-semibold headline">$99<span class="text-lg font-normal text-ink-caption">/mo</span></p>
+              <p class="text-sm text-ink-caption mt-1">Unlimited API calls</p>
+              <ul class="text-sm text-ink-body mt-6 space-y-2">
+                <li>87 bias patterns</li>
+                <li>42 knowledge domains</li>
+                <li>49 MCP tools</li>
+                <li>7 kernel guardians</li>
+              </ul>
+              <button class="stripe-btn w-full justify-center mt-6" onclick="checkout(this)">
+                Start 7-day trial
+              </button>
+            </div>
+            <!-- ai guardian pro -->
+            <div class="product-card p-6 reveal" data-stripe-product="prod_THHOADvQALBJJG" data-slug="aiguardian-pro">
+              <p class="font-mono text-xs text-ink-caption uppercase tracking-widest mb-4">Ai Guardian Pro</p>
+              <p class="font-serif text-3xl font-semibold headline">$299<span class="text-lg font-normal text-ink-caption">/mo</span></p>
+              <p class="text-sm text-ink-caption mt-1">Up to 10 seats</p>
+              <ul class="text-sm text-ink-body mt-6 space-y-2">
+                <li>Everything in Basic</li>
+                <li>10 team members</li>
+                <li>Shared team memory</li>
+                <li>Custom guard patterns</li>
+              </ul>
+              <button class="stripe-btn w-full justify-center mt-6" onclick="checkout(this)">
+                Start 7-day trial
+              </button>
+            </div>
+          </div>
+          <p class="text-sm text-ink-body mt-8 reveal">
+            Need voice agents for your business?
+            <button class="text-gold hover:underline cursor-pointer bg-transparent border-none font-sans text-sm" onclick="switch_tab('businesses')">
+              See voice agent plans &rarr;
+            </button>
+          </p>
+        </div>
+
       </div>
     </section>
 
@@ -336,8 +509,7 @@
           </h2>
         </div>
         <div class="grid md:grid-cols-2 gap-6 max-w-3xl">
-          <!-- implementation -->
-          <div class="product-card p-8 reveal" data-stripe-product="prod_UCcntWidOD2Dxy" data-slug="implementation-consulting">
+          <div class="product-card p-8 reveal" data-slug="implementation-consulting">
             <p class="font-mono text-xs text-ink-caption uppercase tracking-widest mb-4">Implementation</p>
             <p class="font-serif text-3xl font-semibold headline">Custom</p>
             <p class="text-sm text-ink-caption mt-1">Scoped to your organization</p>
@@ -351,8 +523,7 @@
               Contact us
             </a>
           </div>
-          <!-- convergence sprint -->
-          <div class="product-card p-8 reveal" data-stripe-product="prod_TXofSfF8HV7Kqd" data-slug="convergence-sprint">
+          <div class="product-card p-8 reveal" data-slug="convergence-sprint">
             <p class="font-mono text-xs text-ink-caption uppercase tracking-widest mb-4">Convergence Sprint</p>
             <p class="font-serif text-3xl font-semibold headline">Custom</p>
             <p class="text-sm text-ink-caption mt-1">Focused engagement</p>
@@ -365,6 +536,67 @@
             <a href="mailto:mike@bravetto.com?subject=Convergence%20Sprint%20inquiry" class="contact-btn w-full justify-center mt-6">
               Contact us
             </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================== -->
+    <!-- FAQ                               -->
+    <!-- =============================== -->
+    <section class="py-16 px-8" id="faq">
+      <div class="max-w-3xl mx-auto">
+        <div class="mb-10 reveal">
+          <p class="tag mb-2">FAQ</p>
+          <h2 class="font-serif text-3xl md:text-4xl font-medium headline">
+            Common questions.
+          </h2>
+        </div>
+        <div class="reveal">
+          <div class="faq-item">
+            <button class="faq-toggle" onclick="toggle_faq(this)">
+              What happens when I hit my minute limit?
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-answer text-sm text-ink-body">
+              You keep going. Calls continue uninterrupted at the overage rate ($0.15/min on Starter, $0.12/min on Growth). No surprise shutdowns. You can track usage in real time from your dashboard.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-toggle" onclick="toggle_faq(this)">
+              Can I cancel anytime?
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-answer text-sm text-ink-body">
+              Yes. No contracts, no cancellation fees. You can cancel, pause, or downgrade from your billing portal at any time. Your agent stays active until the end of your billing period.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-toggle" onclick="toggle_faq(this)">
+              How long does setup take?
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-answer text-sm text-ink-body">
+              Under 15 minutes to your first test call. Choose an industry template, configure your agent's voice and persona, and connect your phone number. Most customers are live the same day.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-toggle" onclick="toggle_faq(this)">
+              Is this a real AI or just a chatbot?
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-answer text-sm text-ink-body">
+              Real AI. Your voice agent uses large language models with industry-specific training, handles complex conversations naturally, and learns from every interaction. It is not a decision tree.
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-toggle" onclick="toggle_faq(this)">
+              Do you offer annual billing?
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <div class="faq-answer text-sm text-ink-body">
+              Coming soon. Annual plans will save you 2 months per year. Contact us at mike@bravetto.com if you would like to start with an annual plan today.
+            </div>
           </div>
         </div>
       </div>
@@ -387,7 +619,7 @@
     </footer>
 
     <script>
-      // attribution capture — runs once at page load, before any checkout redirect
+      // attribution capture
       function capture_attribution() {
         var params = new URLSearchParams(window.location.search);
         var fbp_match = document.cookie.match(/_fbp=([^;]+)/);
@@ -413,22 +645,22 @@
 
       // stripe checkout
       async function checkout(btn) {
-        const card = btn.closest("[data-stripe-product]");
+        var card = btn.closest("[data-stripe-product]");
         if (!card) return;
 
-        const stripe_product_id = card.dataset.stripeProduct;
-        const slug = card.dataset.slug;
+        var stripe_product_id = card.dataset.stripeProduct;
+        var slug = card.dataset.slug;
 
         btn.disabled = true;
         btn.textContent = "Loading...";
 
         try {
-          const res = await fetch("/api/checkout", {
+          var res = await fetch("/api/checkout", {
             method: "POST",
             headers: { "content-type": "application/json" },
-            body: JSON.stringify({ stripe_product_id, slug, attribution }),
+            body: JSON.stringify({ stripe_product_id: stripe_product_id, slug: slug, attribution: attribution }),
           });
-          const data = await res.json();
+          var data = await res.json();
           if (data.url) {
             window.location.href = data.url;
           } else {
@@ -443,16 +675,32 @@
         }
       }
 
-      // success banner
-      if (new URLSearchParams(window.location.search).get("success") === "true") {
-        document.getElementById("success-banner").classList.add("show");
-        history.replaceState(null, "", "/products");
+      // tab switcher
+      function switch_tab(name) {
+        document.querySelectorAll(".tab-bar button").forEach(function(btn) {
+          btn.classList.toggle("active", btn.dataset.tab === name);
+        });
+        document.querySelectorAll(".tab-content").forEach(function(panel) {
+          panel.classList.toggle("active", panel.id === "tab-" + name);
+        });
+      }
+
+      document.querySelectorAll(".tab-bar button").forEach(function(btn) {
+        btn.addEventListener("click", function() {
+          switch_tab(this.dataset.tab);
+        });
+      });
+
+      // faq toggle
+      function toggle_faq(btn) {
+        var item = btn.parentElement;
+        item.classList.toggle("open");
       }
 
       // scroll reveal
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
+      var observer = new IntersectionObserver(
+        function(entries) {
+          entries.forEach(function(entry) {
             if (entry.isIntersecting) {
               entry.target.classList.add("visible");
             }
@@ -460,7 +708,7 @@
         },
         { threshold: 0.1 }
       );
-      document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+      document.querySelectorAll(".reveal").forEach(function(el) { observer.observe(el); });
     </script>
   </body>
 </html>

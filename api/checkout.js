@@ -50,8 +50,8 @@ export default async function handler(req, res) {
     const session_params = {
       mode: checkout_mode,
       line_items: [{ price: price_id, quantity: 1 }],
-      success_url: `${process.env.SITE_URL || "https://bravetto.com"}/products?success=true&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.SITE_URL || "https://bravetto.com"}/products`,
+      success_url: `${process.env.SITE_URL || "https://bravetto.com"}/welcome?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.SITE_URL || "https://bravetto.com"}/pricing`,
       metadata: {
         source: "bravetto-catalog",
         product: slug || product.name,

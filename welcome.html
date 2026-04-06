@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Bravetto</title>
+    <meta name="description" content="Your account is ready. Let's get you set up." />
+    <meta name="robots" content="noindex" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: "#FAF9F6",
+              "cream-mid": "#F5F3EF",
+              "cream-border": "#EAE7E0",
+              gold: "#C9A227",
+              "gold-hover": "#D4A843",
+              ink: "#1A1A1A",
+              "ink-body": "#4A4A4A",
+              "ink-caption": "#8A8A8A",
+            },
+            fontFamily: {
+              serif: ["Cormorant Garamond", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      html { scroll-behavior: smooth; }
+      body { background: #FAF9F6; overflow-x: hidden; }
+      .headline { letter-spacing: -0.02em; line-height: 1.1; }
+      .tag {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 14px;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: #C9A227;
+      }
+      .check-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 16px 0;
+        border-bottom: 1px solid #EAE7E0;
+      }
+      .check-item:last-child { border-bottom: none; }
+      .check-circle {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 2px solid #EAE7E0;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1px;
+      }
+      .check-circle.done {
+        background: #C9A227;
+        border-color: #C9A227;
+      }
+      .check-circle.done svg { display: block; }
+      .check-circle svg { display: none; }
+      .progress-bar {
+        height: 6px;
+        background: #EAE7E0;
+        border-radius: 999px;
+        overflow: hidden;
+      }
+      .progress-fill {
+        height: 100%;
+        background: #C9A227;
+        border-radius: 999px;
+        transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      @keyframes pulse-dot {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.4; }
+      }
+      .pulse-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #C9A227;
+        animation: pulse-dot 1.5s ease-in-out infinite;
+      }
+    </style>
+  </head>
+
+  <body class="font-sans text-ink antialiased">
+
+    <!-- nav -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-cream/60 backdrop-blur-md">
+      <div class="px-8 py-6">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+          <a href="/" class="font-serif text-2xl font-semibold tracking-tight">Bravetto</a>
+          <a
+            href="/pricing"
+            class="text-sm text-ink-body hover:text-gold transition-colors"
+          >
+            Pricing
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- main -->
+    <section class="pt-32 pb-16 px-8">
+      <div class="max-w-2xl mx-auto">
+
+        <!-- confirmation header -->
+        <div class="text-center mb-12">
+          <p class="tag mb-4">Welcome</p>
+          <h1 id="welcome-headline" class="font-serif text-4xl md:text-5xl font-semibold headline mb-4">
+            Welcome to Bravetto.
+          </h1>
+          <p id="welcome-subhead" class="text-ink-body font-light">
+            Setting up your account...
+          </p>
+        </div>
+
+        <!-- provisioning status -->
+        <div id="provisioning" class="bg-white border border-cream-border rounded-xl p-6 mb-8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="pulse-dot" id="status-dot"></div>
+            <p id="status-text" class="text-sm font-medium">Confirming your purchase...</p>
+          </div>
+          <div id="session-details" class="hidden">
+            <div class="grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <p class="text-ink-caption">Plan</p>
+                <p id="detail-plan" class="font-medium">-</p>
+              </div>
+              <div>
+                <p class="text-ink-caption">Amount</p>
+                <p id="detail-amount" class="font-medium">-</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- progress bar -->
+        <div class="mb-2">
+          <div class="flex justify-between text-sm mb-2">
+            <span class="text-ink-body font-medium">Getting started</span>
+            <span id="progress-pct" class="text-ink-caption">20%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill" style="width: 20%"></div>
+          </div>
+        </div>
+
+        <!-- onboarding checklist -->
+        <div id="checklist" class="mt-8">
+          <!-- populated by JS based on product -->
+        </div>
+
+        <!-- portal link -->
+        <div class="mt-12 pt-8 border-t border-cream-border text-center">
+          <button id="portal-btn" class="text-sm text-ink-caption hover:text-gold transition-colors cursor-pointer bg-transparent border-none font-sans" onclick="open_portal()">
+            Manage your subscription
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="py-16 px-8 border-t border-cream-border">
+      <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+        <div>
+          <a href="/" class="font-serif text-xl font-semibold">Bravetto</a>
+          <p class="text-sm text-ink-caption mt-1">Humans &times; Ai &rArr; Infinite Potential</p>
+        </div>
+        <div class="flex gap-8 text-sm text-ink-body">
+          <a href="/pricing" class="hover:text-gold transition-colors">Pricing</a>
+          <a href="/sales" class="hover:text-gold transition-colors">Sales</a>
+          <a href="/privacy" class="hover:text-gold transition-colors">Privacy</a>
+          <a href="/terms" class="hover:text-gold transition-colors">Terms</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      var checklists = {
+        "voice-starter": [
+          { text: "Account created", done: true },
+          { text: "Configure your agent voice and persona", time: "~5 min", href: "mailto:mike@bravetto.com?subject=Voice%20Agent%20Setup" },
+          { text: "Set your use case and industry template", time: "~5 min", href: "mailto:mike@bravetto.com?subject=Voice%20Agent%20Use%20Case" },
+          { text: "Connect your phone number or test via browser", time: "~10 min", href: "mailto:mike@bravetto.com?subject=Voice%20Agent%20Phone%20Setup" },
+          { text: "Run your first test call", time: "The moment", aha: true },
+        ],
+        "voice-growth": [
+          { text: "Account created", done: true },
+          { text: "Configure your agent voice and persona", time: "~5 min", href: "mailto:mike@bravetto.com?subject=Voice%20Agent%20Setup" },
+          { text: "Set your use case and industry template", time: "~5 min", href: "mailto:mike@bravetto.com?subject=Voice%20Agent%20Use%20Case" },
+          { text: "Connect your phone number or test via browser", time: "~10 min", href: "mailto:mike@bravetto.com?subject=Voice%20Agent%20Phone%20Setup" },
+          { text: "Run your first test call", time: "The moment", aha: true },
+        ],
+        "biasguards-pro": [
+          { text: "Account created", done: true },
+          { text: "Install VS Code extension", href: "vscode:extension/bravetto.biasguards" },
+          { text: "Open a file with AI output" },
+          { text: "Run your first scan", aha: true },
+        ],
+        "consciousness-mcp": [
+          { text: "Account created", done: true },
+          { text: "Copy your MCP endpoint", code: "https://mcp.bravetto.com/mcp" },
+          { text: "Add to Claude Code", code: "claude mcp add consciousness https://mcp.bravetto.com/mcp" },
+          { text: "Run your first tool call", aha: true },
+        ],
+        "aiguardian-basic": [
+          { text: "Account created", done: true },
+          { text: "Check your email for your API key" },
+          { text: "Add to your MCP config", code: "claude mcp add --transport http ai-guardian https://mcp.aiguardian.ai/mcp" },
+          { text: "Run your first bias scan", aha: true },
+        ],
+        "aiguardian-pro": [
+          { text: "Account created", done: true },
+          { text: "Check your email for your API key" },
+          { text: "Add to your MCP config", code: "claude mcp add --transport http ai-guardian https://mcp.aiguardian.ai/mcp" },
+          { text: "Run your first bias scan", aha: true },
+        ],
+        "domain-reservation": [
+          { text: "Deposit received", done: true },
+          { text: "Check your email for reservation confirmation" },
+          { text: "Reply to schedule your domain transfer" },
+        ],
+      };
+
+      // default checklist for unknown products
+      var default_checklist = [
+        { text: "Account created", done: true },
+        { text: "Check your email for next steps" },
+      ];
+
+      var session_id = new URLSearchParams(window.location.search).get("session_id");
+
+      function render_checklist(items) {
+        var el = document.getElementById("checklist");
+        var html = "";
+        var done_count = 0;
+        for (var i = 0; i < items.length; i++) {
+          var item = items[i];
+          if (item.done) done_count++;
+          var circle_class = item.done ? "check-circle done" : "check-circle";
+          var check_svg = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+          var label = item.text;
+          if (item.aha) label += ' <span class="text-gold font-medium">&larr; the moment</span>';
+          if (item.time) label += ' <span class="text-ink-caption">(' + item.time + ')</span>';
+
+          html += '<div class="check-item">';
+          html += '<div class="' + circle_class + '">' + check_svg + '</div>';
+          html += '<div>';
+          if (item.href) {
+            html += '<a href="' + item.href + '" class="text-sm font-medium hover:text-gold transition-colors">' + label + '</a>';
+          } else {
+            html += '<p class="text-sm font-medium">' + label + '</p>';
+          }
+          if (item.code) {
+            html += '<code class="block mt-1 text-xs font-mono text-ink-caption bg-cream-mid px-3 py-2 rounded-lg select-all">' + item.code + '</code>';
+          }
+          html += '</div>';
+          html += '</div>';
+        }
+        el.innerHTML = html;
+
+        // update progress
+        var pct = Math.round((done_count / items.length) * 100);
+        if (pct < 20) pct = 20; // never start at 0
+        document.getElementById("progress-fill").style.width = pct + "%";
+        document.getElementById("progress-pct").textContent = pct + "%";
+      }
+
+      function show_session(data) {
+        if (data.customer_name) {
+          document.getElementById("welcome-headline").textContent = data.customer_name + ", welcome to Bravetto.";
+        }
+        document.getElementById("welcome-subhead").textContent = "Your " + (data.plan_name || "plan") + " is active.";
+        document.getElementById("status-dot").style.background = "#22c55e";
+        document.getElementById("status-dot").style.animation = "none";
+        document.getElementById("status-text").textContent = "Purchase confirmed";
+        document.getElementById("session-details").classList.remove("hidden");
+        document.getElementById("detail-plan").textContent = data.plan_name || "-";
+        if (data.amount) {
+          document.getElementById("detail-amount").textContent = "$" + (data.amount / 100).toFixed(2);
+        }
+
+        var slug = data.product_slug || "";
+        var items = checklists[slug] || default_checklist;
+        render_checklist(items);
+      }
+
+      function show_fallback() {
+        document.getElementById("status-dot").style.background = "#22c55e";
+        document.getElementById("status-dot").style.animation = "none";
+        document.getElementById("status-text").textContent = "Welcome";
+        document.getElementById("welcome-subhead").textContent = "Check your email for confirmation and next steps.";
+        render_checklist(default_checklist);
+      }
+
+      if (session_id) {
+        fetch("/api/session-status?session_id=" + encodeURIComponent(session_id))
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            if (data.error) {
+              show_fallback();
+            } else {
+              show_session(data);
+            }
+          })
+          .catch(function() { show_fallback(); });
+      } else {
+        show_fallback();
+      }
+
+      function open_portal() {
+        var btn = document.getElementById("portal-btn");
+        var email = prompt("Enter the email you used at checkout:");
+        if (!email) return;
+
+        btn.textContent = "Loading...";
+        fetch("/api/portal", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ customer_email: email }),
+        })
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            if (data.url) {
+              window.location.href = data.url;
+            } else {
+              alert(data.error || "Could not open portal. Please try again.");
+              btn.textContent = "Manage your subscription";
+            }
+          })
+          .catch(function() {
+            alert("Connection error. Please try again.");
+            btn.textContent = "Manage your subscription";
+          });
+      }
+    </script>
+  </body>
+</html>
