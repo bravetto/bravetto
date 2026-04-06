@@ -14,7 +14,15 @@ const test = {
 };
 
 const live = {
-  // populated after running: op run --env-file=.env -- node scripts/create-live-products.mjs
+  "voice-starter": "prod_UHf9z4kvcpYTKO",
+  "voice-growth": "prod_UHf90Qu1QDJpIu",
+  "biasguards-pro": "prod_UHf9xx9crwz5kJ",
+  "consciousness-mcp": "prod_UHf9l75S4S1ojP",
+  "aiguardian-basic": "prod_UHf9dLrsjWTJ3k",
+  "aiguardian-pro": "prod_UHf9LZ1t4QKYwp",
+  "advancedring-agent": "prod_UHf9LJIqVfRlto",
+  "advancedring-leader": "prod_UHf9AoOTRHjJxc",
+  "domain-reservation": "prod_UHf9MfPJ0S5Ler",
 };
 
 const is_test = (process.env.STRIPE_SECRET_KEY || "").startsWith("sk_test_");
