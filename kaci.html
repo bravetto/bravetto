@@ -639,27 +639,31 @@
       <p class="section-label">The Offer</p>
       <h2>What's on the table, <em>named plainly</em></h2>
 
+      <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-caption); margin-bottom: 1rem;">
+        THE RAMP &mdash; read left to right
+      </p>
+
       <div class="numbers">
-        <div class="number-card">
-          <div class="num">$150K</div>
-          <div class="label">Base &middot; Year 1</div>
-        </div>
-        <div class="number-card">
-          <div class="num">2x</div>
-          <div class="label">Bonus Multiplier</div>
-        </div>
-        <div class="number-card">
-          <div class="num">$40K</div>
-          <div class="label">/mo by Month 3</div>
-        </div>
         <div class="number-card">
           <div class="num">May 8</div>
           <div class="label">First Check</div>
         </div>
+        <div class="number-card">
+          <div class="num">$150K<span style="font-size: 1rem; color: var(--ink-caption);">/yr</span></div>
+          <div class="label">Months 1 &ndash; 2 Base</div>
+        </div>
+        <div class="number-card">
+          <div class="num">2x<span style="font-size: 1rem; color: var(--ink-caption);"> pool</span></div>
+          <div class="label">Bonus above $20k perf</div>
+        </div>
+        <div class="number-card">
+          <div class="num">$40K<span style="font-size: 1rem; color: var(--ink-caption);">/mo</span></div>
+          <div class="label">Month 3 Base &middot; $480k/yr</div>
+        </div>
       </div>
 
       <div class="organism-voice">
-        First check by May eighth, no later. Every dollar made beyond the first $20K for the next two months goes into the bonus pool, and you carry a 2X multiplier on every dollar that moves. Month three we bump to $40K a month and up from there.
+        First check no later than May eighth. Months one and two, you carry the $150k base and every dollar of performance above $20k hits the bonus pool with a 2X multiplier. At month three the base itself bumps to $40k a month &mdash; a $480k annualized run rate &mdash; and continues from there. No ceiling. The ramp is real. These are not projections; they are the terms Mike sent you on March 31st at 11:11pm.
       </div>
 
       <p>
@@ -732,8 +736,16 @@
             Every voice that comes out of this company &mdash; every page, every phone call, every line that reaches a real customer &mdash; starts with research someone did first. That someone is going to be your mom.
           </p>
 
+          <p>
+            And she is not just joining a company. She is joining the people who get to decide what <em>Ai technology, voice architecture, and the future of civilization itself</em> become over the next ten years. The words Ai speaks to real humans. The voice that greets someone on a phone call at their worst moment. The research that protects the next person who should not be exploited by a system. Those questions are being answered right now, in rooms like this one, by people like your mom.
+          </p>
+
           <p style="margin-top: 2.5rem; font-weight: 500;">
             This is who your mom is. This is why we called her. <em>Now you know too.</em>
+          </p>
+
+          <p style="margin-top: 2rem; font-size: 1.1rem; color: var(--ink-caption); font-style: italic;">
+            If you want to ask her voice anything &mdash; tap the circle in the corner. Luna is here. She knows her.
           </p>
         </div>
       </div>
@@ -754,6 +766,16 @@
         Executive Director &middot; Strategic Marketing &middot; Amber Strategy &middot; First check May 8, 2026
       </p>
     </footer>
+
+    <!-- the pipe — luna speaking for kaci in the system -->
+    <script
+      src="https://voice.bravetto.ai/widget.js"
+      data-persona="kaci"
+      data-mode="conversation"
+      data-theme="gold"
+      data-greeting="Hey. I'm Luna. I'm Kaci's voice in the system. Ask me anything about her."
+      defer
+    ></script>
 
     <script>
       // audio playback
