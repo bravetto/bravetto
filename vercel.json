@@ -54,6 +54,7 @@
     { "source": "/pricing", "destination": "/products" },
     { "source": "/welcome", "destination": "/welcome.html" },
     { "source": "/products", "destination": "/products.html" },
-    { "source": "/insights/001", "destination": "/insights/001/index.html" }
+    { "source": "/insights/001", "destination": "/insights/001/index.html" },
+    { "source": "/harari", "destination": "/harari.html" }
   ]
 }
