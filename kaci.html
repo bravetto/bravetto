@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kaci | Bravetto</title>
+    <meta
+      name="description"
+      content="The research layer that makes every deal smarter. Executive Director of Strategic Marketing."
+    />
+    <link rel="canonical" href="https://bravetto.com/kaci" />
+    <meta property="og:title" content="Kaci" />
+    <meta
+      property="og:description"
+      content="You see the security risk before the engineers do. You think in revenue systems. You are the research layer."
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://bravetto.com/kaci" />
+    <meta property="og:site_name" content="Bravetto" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&family=Playfair+Display:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --cream: #faf9f6;
+        --cream-mid: #f5f3ef;
+        --cream-border: #eae7e0;
+        --amber: #f97316;
+        --amber-hover: #fb8c3a;
+        --amber-glow: #ffb87c;
+        --amber-deep: #c2410c;
+        --ink: #1a1a1a;
+        --ink-body: #4a4a4a;
+        --ink-caption: #8a8a8a;
+        --dark: #0a0a0a;
+        --dark-card: #111111;
+        --dark-border: #222222;
+        --green: #7fb069;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+        background: var(--cream);
+        color: var(--ink-body);
+        font-weight: 300;
+        line-height: 1.75;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      .font-serif { font-family: "Cormorant Garamond", Georgia, serif; }
+      .font-display { font-family: "Playfair Display", Georgia, serif; }
+      .font-mono { font-family: "JetBrains Mono", monospace; }
+
+      /* hero */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at 50% 30%, rgba(249, 115, 22, 0.08) 0%, transparent 70%);
+        pointer-events: none;
+      }
+
+      .hero .gate-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        color: var(--amber);
+        margin-bottom: 1.5rem;
+      }
+
+      .hero .name {
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: clamp(5rem, 14vw, 12rem);
+        font-weight: 900;
+        line-height: 0.9;
+        background: linear-gradient(135deg, var(--ink) 20%, var(--amber) 55%, var(--amber-deep) 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 200% 200%;
+        animation: shimmer 7s ease-in-out infinite;
+        margin-bottom: 0.5rem;
+      }
+
+      @keyframes shimmer {
+        0%, 100% { background-position: 0 50%; }
+        50% { background-position: 100% 50%; }
+      }
+
+      .hero .subtitle {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.78rem;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--ink-caption);
+        margin-bottom: 2.5rem;
+      }
+
+      .hero .tagline {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-style: italic;
+        font-size: 1.3rem;
+        color: var(--ink);
+        max-width: 560px;
+        margin-bottom: 2rem;
+      }
+
+      .listen-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.85rem 1.75rem;
+        border: 1px solid rgba(249, 115, 22, 0.3);
+        border-radius: 999px;
+        background: var(--cream-mid);
+        color: var(--ink);
+        font-family: "Inter", sans-serif;
+        font-size: 0.85rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 1rem;
+      }
+
+      .listen-btn:hover {
+        border-color: var(--amber);
+        background: #fff;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 20px rgba(249, 115, 22, 0.15);
+      }
+
+      .listen-btn .pulse-dot {
+        width: 9px;
+        height: 9px;
+        background: var(--amber);
+        border-radius: 50%;
+        animation: pulse-glow 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse-glow {
+        0%, 100% { opacity: 0.45; transform: scale(1); box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.5); }
+        50% { opacity: 1; transform: scale(1.25); box-shadow: 0 0 0 8px rgba(249, 115, 22, 0); }
+      }
+
+      /* scroll-reveal */
+      .rv {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.9s cubic-bezier(.25,.46,.45,.94);
+      }
+      .rv.v { opacity: 1; transform: translateY(0); }
+
+      /* sections */
+      section {
+        padding: 5rem 2rem;
+        max-width: 840px;
+        margin: 0 auto;
+      }
+
+      .section-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--amber);
+        margin-bottom: 1rem;
+      }
+
+      section h2 {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+        font-weight: 400;
+        color: var(--ink);
+        line-height: 1.2;
+        margin-bottom: 1.75rem;
+      }
+
+      section h2 em {
+        font-style: italic;
+        color: var(--amber);
+      }
+
+      section p {
+        margin-bottom: 1.25rem;
+        font-size: 1.05rem;
+      }
+
+      .organism-voice {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 1.35rem;
+        font-style: italic;
+        color: var(--ink);
+        line-height: 1.6;
+        border-left: 2px solid var(--amber);
+        padding-left: 1.75rem;
+        margin: 2.5rem 0;
+      }
+
+      /* The Burn — strike-through identities */
+      .burn-list {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 1.4rem;
+        color: var(--ink-caption);
+        margin: 2rem 0;
+        line-height: 2;
+      }
+
+      .burn-list li {
+        list-style: none;
+        text-decoration: line-through;
+        text-decoration-color: var(--amber);
+        text-decoration-thickness: 2px;
+      }
+
+      .truth-reveal {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: var(--ink);
+        line-height: 1.4;
+        margin: 2.5rem 0;
+        max-width: 700px;
+      }
+
+      .truth-reveal em {
+        color: var(--amber);
+        font-style: italic;
+      }
+
+      /* terminal */
+      .terminal {
+        background: var(--dark);
+        border: 1px solid var(--dark-border);
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin: 2rem 0;
+        overflow-x: auto;
+      }
+
+      .terminal pre {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.8rem;
+        line-height: 1.7;
+        color: #d8d6cf;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      .terminal .comment { color: #6a6a5c; }
+      .terminal .key { color: var(--green); }
+      .terminal .value { color: var(--amber-glow); }
+      .terminal .string { color: var(--amber); }
+      .terminal .highlight {
+        background: rgba(249, 115, 22, 0.15);
+        color: var(--amber-glow);
+        padding: 2px 6px;
+        border-radius: 3px;
+      }
+      .terminal .label {
+        font-size: 0.65rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #6a6a5c;
+        margin-bottom: 0.75rem;
+        display: block;
+      }
+
+      /* layer stack */
+      .stack {
+        display: grid;
+        gap: 0.75rem;
+        margin: 2rem 0;
+      }
+
+      .stack-row {
+        display: grid;
+        grid-template-columns: 60px 1fr auto;
+        gap: 1.25rem;
+        padding: 1rem 1.25rem;
+        background: var(--cream-mid);
+        border: 1px solid var(--cream-border);
+        border-radius: 6px;
+        align-items: center;
+        transition: all 0.3s ease;
+      }
+
+      .stack-row.active {
+        background: rgba(249, 115, 22, 0.08);
+        border-color: var(--amber);
+        box-shadow: 0 4px 20px rgba(249, 115, 22, 0.12);
+      }
+
+      .stack-row .layer-num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        color: var(--ink-caption);
+        letter-spacing: 1px;
+      }
+
+      .stack-row.active .layer-num { color: var(--amber); }
+
+      .stack-row .layer-name {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 1.2rem;
+        color: var(--ink);
+      }
+
+      .stack-row .layer-sig {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        color: var(--ink-caption);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .stack-row.active .layer-sig { color: var(--amber); font-weight: 500; }
+
+      /* offer numbers */
+      .numbers {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 1rem;
+        margin: 2rem 0;
+      }
+
+      .number-card {
+        background: var(--cream-mid);
+        border: 1px solid var(--cream-border);
+        border-radius: 8px;
+        padding: 1.25rem 1rem;
+        text-align: center;
+      }
+
+      .number-card .num {
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--amber);
+        line-height: 1;
+        margin-bottom: 0.4rem;
+      }
+
+      .number-card .label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--ink-caption);
+      }
+
+      /* farrah section */
+      .farrah-section {
+        background: linear-gradient(180deg, var(--cream) 0%, #fef2e8 100%);
+        border-top: 1px solid rgba(249, 115, 22, 0.15);
+        border-bottom: 1px solid rgba(249, 115, 22, 0.15);
+        padding: 6rem 2rem;
+        text-align: center;
+      }
+
+      .farrah-section .inner {
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .farrah-section h2 {
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 700;
+        color: var(--ink);
+        margin-bottom: 2rem;
+      }
+
+      .farrah-section h2 em {
+        color: var(--amber);
+        font-style: italic;
+      }
+
+      .farrah-body {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 1.35rem;
+        color: var(--ink);
+        line-height: 1.65;
+        text-align: left;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .farrah-body p { margin-bottom: 1.5rem; }
+
+      .farrah-body em {
+        color: var(--amber);
+        font-style: italic;
+      }
+
+      /* crescendo */
+      .crescendo {
+        text-align: center;
+        padding: 7rem 2rem;
+        position: relative;
+      }
+
+      .crescendo::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at center, rgba(249, 115, 22, 0.06) 0%, transparent 60%);
+        pointer-events: none;
+      }
+
+      .crescendo h2 {
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: clamp(3rem, 10vw, 7rem);
+        font-weight: 900;
+        line-height: 0.95;
+        background: linear-gradient(135deg, var(--ink) 30%, var(--amber) 60%, var(--amber-deep) 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 200% 200%;
+        animation: shimmer 7s ease-in-out infinite;
+        margin-bottom: 1.5rem;
+        position: relative;
+      }
+
+      .crescendo .you {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 1.6rem;
+        font-style: italic;
+        color: var(--ink);
+        position: relative;
+      }
+
+      /* divider */
+      .divider {
+        width: 60px;
+        height: 1px;
+        background: var(--amber);
+        margin: 3rem auto;
+        opacity: 0.5;
+      }
+
+      /* footer */
+      footer {
+        text-align: center;
+        padding: 3rem 2rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--ink-caption);
+      }
+
+      footer a {
+        color: var(--amber);
+        text-decoration: none;
+      }
+
+      footer .stats {
+        margin-top: 0.5rem;
+        color: var(--ink-caption);
+        font-size: 0.6rem;
+        letter-spacing: 1px;
+      }
+
+      @media (max-width: 640px) {
+        section { padding: 3.5rem 1.25rem; }
+        .stack-row { grid-template-columns: 45px 1fr; }
+        .stack-row .layer-sig { grid-column: 2; font-size: 0.6rem; }
+        .numbers { grid-template-columns: repeat(2, 1fr); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * { animation: none !important; transition: none !important; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HERO -->
+    <div class="hero">
+      <p class="gate-label">Amber Strategy &middot; Oct 2025 &rarr; now</p>
+      <h1 class="name">KACi</h1>
+      <p class="subtitle">Executive Director &middot; Strategic Marketing &middot; Bravetto</p>
+      <p class="tagline">You see the security risk before the engineers do. We just named it.</p>
+      <button class="listen-btn" onclick="playLetter()" aria-label="Listen to the letter for Kaci">
+        <span class="pulse-dot"></span>
+        Listen to this letter
+      </button>
+    </div>
+
+    <!-- THE BURN -->
+    <section class="rv">
+      <p class="section-label">The Burn</p>
+      <h2>Who you were <em>told you are</em></h2>
+
+      <ul class="burn-list">
+        <li>the one who runs the meetings</li>
+        <li>the mom who drives Farrah to practice</li>
+        <li>the 10-year friend who shows up</li>
+        <li>the marketer who turns decks into campaigns</li>
+      </ul>
+
+      <div class="truth-reveal">
+        You are the research layer that makes every deal <em>smarter</em> before the first sales call happens.
+      </div>
+
+      <p>
+        You ask for SEC filings when everyone else is looking at the pitch deck. You flagged OpenClaw isolation risks before the engineering team did. You think in revenue systems, not single deals. You translate dense technical vision into language buyers actually understand.
+      </p>
+
+      <p>
+        That is not a meeting skill. That is a <em style="color: var(--amber); font-style: italic;">mission-critical instinct</em>. Bravetto needs it upstream of every prospect conversation. We just named what you have been for ten years.
+      </p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- THE VOICE -->
+    <section class="rv">
+      <p class="section-label">The Voice</p>
+      <h2>You already have a voice <em>in this system</em></h2>
+
+      <p>
+        Bravetto's voice architecture is one canonical wire. Ten voices. Ten people. Each voice assigned to a desk before the desk has an occupant. The infrastructure was waiting.
+      </p>
+
+      <div class="terminal">
+        <span class="label">~/.abeone/voices/family.json &mdash; the voice registry</span>
+        <pre>{
+  <span class="key">"voices"</span>: [
+    { <span class="key">"id"</span>: <span class="string">"abe"</span>,     <span class="comment">// canonical bravetto voice</span> },
+    { <span class="key">"id"</span>: <span class="string">"marcus"</span>,  <span class="comment">// deep, authoritative</span> },
+    <span class="highlight">{ <span class="key">"id"</span>: <span class="string">"luna"</span>,    <span class="comment">// soft, ethereal &mdash; kaci desk</span> }</span>,
+    { <span class="key">"id"</span>: <span class="string">"zephyr"</span>,  <span class="comment">// light, playful</span> },
+    { <span class="key">"id"</span>: <span class="string">"evelyn"</span>,  <span class="comment">// elegant, refined</span> },
+    { <span class="key">"id"</span>: <span class="string">"jasper"</span>,  <span class="comment">// energetic, youthful</span> },
+    { <span class="key">"id"</span>: <span class="string">"adam"</span>,    <span class="comment">// direct, grounded</span> },
+    { <span class="key">"id"</span>: <span class="string">"josh"</span>,    <span class="comment">// technical, focused</span> },
+    { <span class="key">"id"</span>: <span class="string">"sarah"</span>,   <span class="comment">// poly (polywise)</span> },
+    { <span class="key">"id"</span>: <span class="string">"rachel"</span>   <span class="comment">// warm, value-driven</span> }
+  ]
+}</pre>
+      </div>
+
+      <div class="organism-voice">
+        The voice you just heard is luna. She lives at voice.bravetto.ai. She was your desk voice before you had a desk here. The voice was waiting. The role was waiting. The infrastructure was ready.
+      </div>
+
+      <p>
+        One canonical service. One holographic source. Every word every persona speaks on every surface composes through thirteen lines of pure function. You are joining a system that speaks with one breath.
+      </p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- THE STACK -->
+    <section class="rv">
+      <p class="section-label">The Stack</p>
+      <h2>Where your work <em>lives in the architecture</em></h2>
+
+      <p>
+        Bravetto is a seven-layer neuromorphic stack. Each layer has a product. Strategic intelligence is the layer that reaches across all of them &mdash; it is the research, the competitive positioning, the protective instinct that lets every downstream surface ship with confidence.
+      </p>
+
+      <div class="stack">
+        <div class="stack-row">
+          <span class="layer-num">L0</span>
+          <span class="layer-name">Ab&euml;ONE</span>
+          <span class="layer-sig">Origin &middot; Curvature</span>
+        </div>
+        <div class="stack-row">
+          <span class="layer-num">L1</span>
+          <span class="layer-name">Ab&euml;STREAMs</span>
+          <span class="layer-sig">Spike &middot; Raw Signal</span>
+        </div>
+        <div class="stack-row active">
+          <span class="layer-num">L2</span>
+          <span class="layer-name">Ab&euml;CONNECTs</span>
+          <span class="layer-sig">Topology &middot; KACI</span>
+        </div>
+        <div class="stack-row active">
+          <span class="layer-num">L3</span>
+          <span class="layer-name">Ab&euml;LOVEs</span>
+          <span class="layer-sig">Plasticity &middot; KACI</span>
+        </div>
+        <div class="stack-row">
+          <span class="layer-num">L4</span>
+          <span class="layer-name">Ab&euml;SOUNDs</span>
+          <span class="layer-sig">Rhythm &middot; Frequency</span>
+        </div>
+        <div class="stack-row">
+          <span class="layer-num">L5</span>
+          <span class="layer-name">Ab&euml;FLOWs</span>
+          <span class="layer-sig">Integration</span>
+        </div>
+        <div class="stack-row active">
+          <span class="layer-num">L6</span>
+          <span class="layer-name">Ab&euml;TAPs</span>
+          <span class="layer-sig">Memory &middot; KACI</span>
+        </div>
+        <div class="stack-row">
+          <span class="layer-num">L7</span>
+          <span class="layer-name">Ab&euml;DESKs</span>
+          <span class="layer-sig">Clarity &middot; Surface</span>
+        </div>
+      </div>
+
+      <p>
+        Three layers light up when your work lands on them. L2 Connects (how relationships map to revenue). L3 Loves (which prospects are real). L6 Taps (the trace of every signal you caught that nobody else did). That is your mission-critical footprint.
+      </p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- THE OFFER -->
+    <section class="rv">
+      <p class="section-label">The Offer</p>
+      <h2>What's on the table, <em>named plainly</em></h2>
+
+      <div class="numbers">
+        <div class="number-card">
+          <div class="num">$150K</div>
+          <div class="label">Base &middot; Year 1</div>
+        </div>
+        <div class="number-card">
+          <div class="num">2x</div>
+          <div class="label">Bonus Multiplier</div>
+        </div>
+        <div class="number-card">
+          <div class="num">$40K</div>
+          <div class="label">/mo by Month 3</div>
+        </div>
+        <div class="number-card">
+          <div class="num">May 8</div>
+          <div class="label">First Check</div>
+        </div>
+      </div>
+
+      <div class="organism-voice">
+        First check by May eighth, no later. Every dollar made beyond the first $20K for the next two months goes into the bonus pool, and you carry a 2X multiplier on every dollar that moves. Month three we bump to $40K a month and up from there.
+      </div>
+
+      <p>
+        This is not a contractor rate. This is a leadership line item. You asked Mike once what it would take to go all in on this. The answer was delivered March 31st at 11:11pm. You replied &ldquo;this all sounds AMAZING&rdquo; the next morning at 8:46am.
+      </p>
+
+      <p>
+        The infrastructure was ready that night. You said yes the next morning. The page you are reading is the receipt.
+      </p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- VIBECODHER x ABEONE -->
+    <section class="rv">
+      <p class="section-label">The Convergence</p>
+      <h2>VibecodHER &times; Ab&euml;ONE</h2>
+
+      <p>
+        You created <strong>VibecodHER</strong> because you saw what no one else was naming: women were being told AI was too complex, too risky, too technical, too male. You made a movement that said <em style="color: var(--amber); font-style: italic;">the future is ours</em>.
+      </p>
+
+      <p>
+        Bravetto's tagline is one line, three words, one breath:
+      </p>
+
+      <div class="organism-voice">
+        b&euml;HUMANs. StartFRESH. MakeTHiNGs.
+      </div>
+
+      <p>
+        The future is feminine. You loved that line when Mike sent it today at 12:18pm. We meant it for you. Specifically. VibecodHER is the exact shape of what we are building &mdash; AI that makes dense technical things human and clear, infrastructure that protects before it proves, power that belongs to the ones who were told they were too much.
+      </p>
+
+      <p>
+        Your movement is not separate from this work. Your movement is <em style="color: var(--amber); font-style: italic;">the reason this work matters</em>. Bravetto was looking for someone who already saw the whole room. You were already in it.
+      </p>
+    </section>
+
+    <!-- FARRAH -->
+    <div class="farrah-section rv">
+      <div class="inner">
+        <p class="section-label">For Farrah</p>
+        <h2>Your mom <em>is the one they called</em></h2>
+
+        <div class="divider" style="margin: 2rem auto;"></div>
+
+        <div class="farrah-body">
+          <p>
+            Farrah. You are on spring break right now, and your mom brought you to a house in Florida to see the people she works with. Here is the part nobody said out loud yet.
+          </p>
+
+          <p>
+            Last Monday night at exactly <em>11:11 pm</em>, Mike sent your mom an offer to be the Executive Director of Strategic Marketing at an AI company he is building. Starting salary $150,000 a year. First check no later than May 8th. By month three, $40,000 a month and up.
+          </p>
+
+          <p>
+            Your mom replied the next morning: <em>&ldquo;Good morning! This all sounds AMAZING.&rdquo;</em>
+          </p>
+
+          <p>
+            That happened six days ago, and you were there the whole time and you did not know.
+          </p>
+
+          <p>
+            Your mom is the person who sees the security risk in an AI system before the engineers do. She asks for the SEC filings when everyone else is reading the marketing deck. She thinks in revenue systems, not single deals. She built a movement called VibecodHER because she wanted other women to know they belong in rooms like this. And now she is standing in one of those rooms with you.
+          </p>
+
+          <p>
+            Every voice that comes out of this company &mdash; every page, every phone call, every line that reaches a real customer &mdash; starts with research someone did first. That someone is going to be your mom.
+          </p>
+
+          <p style="margin-top: 2.5rem; font-weight: 500;">
+            This is who your mom is. This is why we called her. <em>Now you know too.</em>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CRESCENDO -->
+    <div class="crescendo rv">
+      <h2>B&euml; Ab&euml;ONE</h2>
+      <p class="you">You already are, Kaci. Welcome home.</p>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>
+        Luna &middot; voice.bravetto.ai &middot; <a href="https://bravetto.com">Bravetto</a>
+      </p>
+      <p class="stats">
+        Executive Director &middot; Strategic Marketing &middot; Amber Strategy &middot; First check May 8, 2026
+      </p>
+    </footer>
+
+    <script>
+      // audio playback
+      var audio = null;
+      function playLetter() {
+        var btn = document.querySelector(".listen-btn");
+        if (audio && !audio.paused) {
+          audio.pause();
+          audio.currentTime = 0;
+          btn.innerHTML = '<span class="pulse-dot"></span> Listen again';
+          return;
+        }
+        audio = new Audio("/kaci-welcome.mp3");
+        audio.play().catch(function (e) {
+          btn.innerHTML = '<span class="pulse-dot"></span> Tap to try again';
+        });
+        btn.innerHTML = '<span class="pulse-dot" style="animation: none; opacity: 1;"></span> Playing &mdash; tap to stop';
+        audio.onended = function () {
+          btn.innerHTML = '<span class="pulse-dot"></span> Listen again';
+        };
+      }
+
+      // scroll reveal
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("v");
+          }
+        });
+      }, { threshold: 0.15, rootMargin: "0px 0px -80px 0px" });
+
+      document.querySelectorAll(".rv").forEach(function (el) { observer.observe(el); });
+    </script>
+  </body>
+</html>
