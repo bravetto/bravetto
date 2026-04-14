@@ -619,8 +619,8 @@
     </footer>
 
     <script>
-      // attribution capture
-      function capture_attribution() {
+      // attribution illumination — we reveal what the person already offered, we do not capture
+      function illuminate_attribution() {
         var params = new URLSearchParams(window.location.search);
         var fbp_match = document.cookie.match(/_fbp=([^;]+)/);
         var fbc_cookie_match = document.cookie.match(/_fbc=([^;]+)/);
@@ -641,7 +641,7 @@
         };
       }
 
-      var attribution = capture_attribution();
+      var attribution = illuminate_attribution();
 
       // stripe checkout
       async function checkout(btn) {
