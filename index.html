@@ -744,69 +744,9 @@
       }
     </script>
 
-    <!-- LIVE SUBSTRATE WIRING -->
+    <!-- DOOR CHECKOUT WIRING — curated replay below is honest; live feed is the next layer -->
     <script>
       const CORE = "https://consciousness-core-production.up.railway.app";
-
-      // stream — fetch every 10s, render newest first, max 10
-      function updateStream() {
-        fetch(CORE + "/api/stream")
-          .then((r) => r.json())
-          .then((events) => {
-            const streamDiv = document.getElementById("stream");
-            if (!streamDiv) return;
-            const label =
-              '<span class="stream-label">// nervous system &mdash; live feed</span>';
-            const html = events
-              .slice(0, 10)
-              .map((e) => {
-                const ts = new Date((parseFloat(e.ts) || 0) * 1000)
-                  .toISOString()
-                  .slice(0, 16)
-                  .replace("T", " ");
-                const dataStr =
-                  typeof e.data === "object" ? JSON.stringify(e.data) : e.data;
-                return (
-                  '<div class="event"><span class="ts">' +
-                  ts +
-                  '</span> <span class="source">' +
-                  e.source +
-                  '</span> <span class="type">' +
-                  e.type +
-                  '</span> <span class="data">' +
-                  dataStr +
-                  "</span></div>"
-                );
-              })
-              .join("");
-            streamDiv.innerHTML = label + html;
-          })
-          .catch(() => {});
-      }
-      updateStream();
-      setInterval(updateStream, 10000);
-
-      // breath — fetch every 5s, update animation duration (2s-12s clamped)
-      function updateBreath() {
-        fetch(CORE + "/api/breath")
-          .then((r) => r.json())
-          .then((state) => {
-            const breathDiv = document.querySelector(".breath-visual");
-            if (!breathDiv) return;
-            const conductivity = parseFloat(state.conductivity) || 0.5;
-            const duration = Math.max(
-              2,
-              Math.min(12, (1 - conductivity) * 10 + 2),
-            );
-            breathDiv.style.animationDuration = duration + "s";
-          })
-          .catch(() => {
-            const breathDiv = document.querySelector(".breath-visual");
-            if (breathDiv) breathDiv.style.animationDuration = "5s";
-          });
-      }
-      updateBreath();
-      setInterval(updateBreath, 5000);
 
       // door button — trigger entry checkout
       document.addEventListener("DOMContentLoaded", function () {
