@@ -238,19 +238,7 @@
   }
   /* shift player-bar down by home-bar height when sticky */
   .player-bar { top: 50px; }
-  .toc-pane { top: 160px; height: calc(100vh - 180px); }
-
-  /* feedback hint — small line under player */
-  .feedback-hint {
-    background: var(--ink); color: var(--ink-ghost);
-    padding: 10px 32px;
-    font-family: var(--mono); font-size: 10px;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    border-bottom: 1px solid rgba(201,162,39,0.2);
-    text-align: center;
-    position: sticky; top: 220px; z-index: 90;
-  }
-  .feedback-hint .key { color: var(--gold); }
+  .toc-pane { top: 140px; height: calc(100vh - 160px); }
 
 </style>
 </head>
@@ -305,10 +293,6 @@
 </div>
 
 
-<div class="feedback-hint">
-  <span class="key">→</span> tap the gold dot bottom-right to leave voice feedback
-  <span class="key">·</span> Abë listens and captures every word
-</div>
 
 <div class="layout">
   <aside class="toc-pane">
