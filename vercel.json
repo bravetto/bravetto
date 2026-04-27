@@ -20,6 +20,7 @@
     { "source": "/abekeys", "destination": "/abekeys.html" },
     { "source": "/abevoice", "destination": "/abevoice.html" },
     { "source": "/abeone", "destination": "/abeone/index.html" },
+    { "source": "/analyst-briefing", "destination": "/analyst-briefing/index.html" },
     { "source": "/biasguard", "destination": "/biasguard/index.html" },
     {
       "source": "/north-shore-voice",

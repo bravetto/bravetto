@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Bravetto · Analyst Briefing — AbëONE</title>
+<meta name="description" content="Analyst briefing on Bravetto and AbëONE — platform, three verticals, eight surfaces, identity tiers. Voice-narrated read-along.">
+<meta property="og:title" content="Bravetto · Analyst Briefing — AbëONE">
+<meta property="og:description" content="Voice-narrated analyst briefing. Click and listen.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://bravetto.com/analyst-briefing">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://bravetto.com/analyst-briefing">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF9F6;
+    --cream-dark: #F5F3EF;
+    --cream-mid: #EAE7E0;
+    --ink: #1A1A1A;
+    --ink-light: #4A4A4A;
+    --ink-faint: #8A8A8A;
+    --ink-ghost: #BFBFBF;
+    --gold: #C9A227;
+    --gold-warm: #D4A843;
+    --gold-pale: #F5ECC4;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--cream); color: var(--ink); font-family: var(--sans); font-weight: 300; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+
+  /* PLAYER BAR — sticky top */
+  .player-bar {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--ink); color: var(--cream);
+    padding: 14px 24px;
+    border-bottom: 2px solid var(--gold);
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: 18px;
+    align-items: center;
+  }
+  .player-controls { display: flex; gap: 6px; align-items: center; }
+  .player-btn {
+    background: transparent; border: 1px solid rgba(250,249,246,0.18);
+    color: var(--cream); width: 38px; height: 38px;
+    border-radius: 50%; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--sans); font-size: 14px;
+    transition: all 0.15s ease;
+  }
+  .player-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .player-btn.primary {
+    background: var(--gold); border-color: var(--gold); color: var(--ink);
+    width: 44px; height: 44px;
+  }
+  .player-btn.primary:hover { background: var(--gold-warm); border-color: var(--gold-warm); color: var(--ink); }
+  .player-btn svg { width: 16px; height: 16px; fill: currentColor; }
+  .player-btn.primary svg { width: 18px; height: 18px; }
+
+  .player-meta { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .player-title {
+    font-family: var(--mono); font-size: 10px;
+    color: var(--gold); letter-spacing: 0.16em; text-transform: uppercase;
+  }
+  .player-now {
+    font-family: var(--serif); font-size: 16px; font-weight: 500;
+    color: var(--cream);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .player-times { font-family: var(--mono); font-size: 11px; color: var(--ink-ghost); }
+
+  .scrub-wrap { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; padding-top: 4px; }
+  .scrub {
+    flex: 1; height: 4px; background: rgba(250,249,246,0.12); border-radius: 2px;
+    cursor: pointer; position: relative; overflow: hidden;
+  }
+  .scrub-fill { height: 100%; background: var(--gold); width: 0%; transition: width 0.1s linear; }
+  .scrub-handle {
+    position: absolute; top: 50%; transform: translate(-50%, -50%);
+    width: 12px; height: 12px; background: var(--gold); border-radius: 50%;
+    left: 0%; pointer-events: none;
+  }
+
+  .speed-group { display: flex; gap: 2px; }
+  .speed-btn {
+    background: transparent; border: 1px solid rgba(250,249,246,0.12);
+    color: var(--ink-ghost); padding: 6px 9px; cursor: pointer;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.05em;
+    transition: all 0.12s;
+  }
+  .speed-btn:hover { color: var(--gold); border-color: var(--gold); }
+  .speed-btn.active { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+
+  /* LAYOUT */
+  .layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .toc-pane { position: static; max-height: none; border-right: none; border-bottom: 1px solid var(--cream-mid); }
+  }
+
+  /* TOC */
+  .toc-pane {
+    position: sticky; top: 110px;
+    align-self: start;
+    height: calc(100vh - 130px);
+    overflow-y: auto;
+    border-right: 1px solid var(--cream-mid);
+    padding: 32px 22px 32px 32px;
+  }
+  .toc-pane::-webkit-scrollbar { width: 6px; }
+  .toc-pane::-webkit-scrollbar-thumb { background: var(--cream-mid); border-radius: 3px; }
+  .toc-label {
+    font-family: var(--mono); font-size: 10px;
+    color: var(--gold); letter-spacing: 0.16em; text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .toc-list { list-style: none; padding: 0; margin: 0; }
+  .toc-list li { margin: 0 0 2px 0; }
+  .toc-item {
+    width: 100%; text-align: left;
+    background: transparent; border: none; cursor: pointer;
+    padding: 9px 12px; border-radius: 4px;
+    display: flex; gap: 12px; align-items: baseline;
+    color: var(--ink-light); font-family: var(--sans); font-size: 13px; line-height: 1.4;
+    transition: all 0.12s;
+  }
+  .toc-item:hover { background: var(--cream-dark); color: var(--ink); }
+  .toc-item.active { background: var(--ink); color: var(--cream); }
+  .toc-item.active .toc-num { color: var(--gold); }
+  .toc-num { font-family: var(--mono); font-size: 10px; color: var(--ink-ghost); flex-shrink: 0; padding-top: 2px; }
+  .toc-title { flex: 1; }
+
+  /* CONTENT */
+  .content-pane {
+    padding: 48px 56px 96px 56px;
+    max-width: 760px;
+  }
+  .report-section {
+    padding: 8px 0;
+    transition: opacity 0.3s;
+  }
+  .report-section[data-active="false"] { opacity: 0.55; }
+  .report-section[data-active="true"] { opacity: 1; }
+  .report-section h2 {
+    font-family: var(--serif); font-weight: 600; font-size: 30pt;
+    line-height: 1.15; letter-spacing: -0.015em;
+    margin: 0 0 22px 0; padding-bottom: 16px;
+    border-bottom: 1px solid var(--cream-mid);
+    scroll-margin-top: 130px;
+  }
+  .report-section h2::before {
+    content: ""; display: block; width: 32px; height: 2px;
+    background: var(--gold); margin-bottom: 14px;
+  }
+  .report-section h3 { font-family: var(--serif); font-weight: 600; font-size: 18pt; margin: 26px 0 10px 0; }
+  .report-section h4 {
+    font-family: var(--sans); font-weight: 600; font-size: 11pt;
+    text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold);
+    margin: 22px 0 6px 0;
+  }
+  .report-section h1 {
+    font-family: var(--serif); font-weight: 500; font-size: 44pt;
+    line-height: 1.05; margin: 14px 0 22px 0; letter-spacing: -0.02em;
+  }
+  .report-section p { margin: 0 0 14px 0; color: var(--ink-light); }
+  .report-section p strong { color: var(--ink); font-weight: 600; }
+  .report-section em { color: var(--ink); }
+  .report-section ul, .report-section ol { margin: 8px 0 18px 0; padding-left: 22px; }
+  .report-section ul li, .report-section ol li { margin: 6px 0; color: var(--ink-light); }
+  .report-section ul li::marker { color: var(--gold); }
+  .report-section blockquote {
+    margin: 22px 0; padding: 22px 26px;
+    background: var(--ink); color: var(--cream);
+    border-left: 3px solid var(--gold);
+    font-family: var(--serif); font-style: italic; font-size: 16pt; line-height: 1.5;
+  }
+  .report-section blockquote p { color: var(--cream); margin: 0; }
+  .report-section table { width: 100%; border-collapse: collapse; margin: 16px 0 22px 0; font-size: 13px; }
+  .report-section table th {
+    text-align: left; font-family: var(--sans); font-weight: 600;
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--gold); padding: 10px 14px 10px 0;
+    border-bottom: 2px solid var(--ink);
+  }
+  .report-section table td {
+    padding: 10px 14px 10px 0; border-bottom: 1px solid var(--cream-mid);
+    color: var(--ink-light); vertical-align: top;
+  }
+  .report-section table td:first-child { color: var(--ink); font-weight: 500; }
+  .report-section code {
+    font-family: var(--mono); font-size: 11px;
+    background: var(--cream-dark); padding: 2px 6px; border-radius: 3px; color: var(--ink);
+  }
+  .report-section pre {
+    background: var(--ink); color: var(--cream);
+    padding: 18px 22px; border-radius: 4px; font-family: var(--mono); font-size: 11px;
+    line-height: 1.6; overflow-x: auto;
+  }
+  .report-section pre code { background: transparent; color: var(--cream); padding: 0; }
+  .report-section hr { border: none; border-top: 1px solid var(--cream-mid); margin: 32px 0; }
+  .report-section a { color: var(--gold); text-decoration: none; border-bottom: 1px dotted var(--gold-warm); }
+  .report-section a:hover { color: var(--gold-warm); }
+
+  /* HOME BAR — links back to bravetto.com */
+  .home-bar {
+    background: var(--cream);
+    border-bottom: 1px solid var(--cream-mid);
+    padding: 14px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 110;
+  }
+  .home-link {
+    display: flex; align-items: center; gap: 14px;
+    text-decoration: none; color: var(--ink);
+    transition: color 0.15s;
+  }
+  .home-link:hover { color: var(--gold); }
+  .bravetto-mark {
+    font-family: var(--serif); font-weight: 600; font-size: 19px;
+    letter-spacing: -0.01em;
+  }
+  .bravetto-mark .dot { color: var(--gold); }
+  .back-arrow {
+    font-family: var(--mono); font-size: 10px;
+    color: var(--ink-faint); letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .home-link:hover .back-arrow { color: var(--gold); }
+  .briefing-label {
+    font-family: var(--mono); font-size: 10px;
+    color: var(--gold); letter-spacing: 0.16em; text-transform: uppercase;
+  }
+  /* shift player-bar down by home-bar height when sticky */
+  .player-bar { top: 50px; }
+  .toc-pane { top: 160px; height: calc(100vh - 180px); }
+
+  /* feedback hint — small line under player */
+  .feedback-hint {
+    background: var(--ink); color: var(--ink-ghost);
+    padding: 10px 32px;
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    border-bottom: 1px solid rgba(201,162,39,0.2);
+    text-align: center;
+    position: sticky; top: 220px; z-index: 90;
+  }
+  .feedback-hint .key { color: var(--gold); }
+
+</style>
+</head>
+<body>
+
+<div class="home-bar">
+  <a class="home-link" href="https://bravetto.com/">
+    <span class="bravetto-mark">Bravetto<span class="dot">.</span></span>
+    <span class="back-arrow">← back</span>
+  </a>
+  <div class="briefing-label">Analyst Briefing</div>
+</div>
+
+<div class="player-bar">
+  <div class="player-controls">
+    <button class="player-btn" id="btn-prev" title="Previous section">
+      <svg viewBox="0 0 24 24"><path d="M19 5L9 12l10 7V5zM5 5h2v14H5V5z"/></svg>
+    </button>
+    <button class="player-btn primary" id="btn-play" title="Play / Pause (space)">
+      <svg id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7L8 5z"/></svg>
+      <svg id="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+    </button>
+    <button class="player-btn" id="btn-stop" title="Stop">
+      <svg viewBox="0 0 24 24"><path d="M6 6h12v12H6z"/></svg>
+    </button>
+    <button class="player-btn" id="btn-next" title="Next section">
+      <svg viewBox="0 0 24 24"><path d="M5 5l10 7-10 7V5zM17 5h2v14h-2V5z"/></svg>
+    </button>
+  </div>
+
+  <div class="player-meta">
+    <div class="player-title">Now Playing · ABE</div>
+    <div class="player-now" id="now-title">—</div>
+  </div>
+
+  <div class="player-times" id="times">0:00 / 0:00</div>
+
+  <div class="speed-group">
+    <button class="speed-btn" data-speed="0.85">0.85×</button>
+    <button class="speed-btn active" data-speed="1">1×</button>
+    <button class="speed-btn" data-speed="1.25">1.25×</button>
+    <button class="speed-btn" data-speed="1.5">1.5×</button>
+    <button class="speed-btn" data-speed="2">2×</button>
+  </div>
+
+  <div class="scrub-wrap">
+    <div class="scrub" id="scrub">
+      <div class="scrub-fill" id="scrub-fill"></div>
+      <div class="scrub-handle" id="scrub-handle"></div>
+    </div>
+  </div>
+</div>
+
+
+<div class="feedback-hint">
+  <span class="key">→</span> tap the gold dot bottom-right to leave voice feedback
+  <span class="key">·</span> Abë listens and captures every word
+</div>
+
+<div class="layout">
+  <aside class="toc-pane">
+    <div class="toc-label">Sections</div>
+    <ul class="toc-list">
+      <li><button class="toc-item" data-idx="0">
+  <span class="toc-num">00</span>
+  <span class="toc-title">Cover</span>
+</button></li>
+<li><button class="toc-item" data-idx="1">
+  <span class="toc-num">01</span>
+  <span class="toc-title">Executive Summary</span>
+</button></li>
+<li><button class="toc-item" data-idx="2">
+  <span class="toc-num">02</span>
+  <span class="toc-title">1. The Company</span>
+</button></li>
+<li><button class="toc-item" data-idx="3">
+  <span class="toc-num">03</span>
+  <span class="toc-title">2. The Platform: AbëONE</span>
+</button></li>
+<li><button class="toc-item" data-idx="4">
+  <span class="toc-num">04</span>
+  <span class="toc-title">3. The Three Verticals</span>
+</button></li>
+<li><button class="toc-item" data-idx="5">
+  <span class="toc-num">05</span>
+  <span class="toc-title">4. The Eight Surfaces</span>
+</button></li>
+<li><button class="toc-item" data-idx="6">
+  <span class="toc-num">06</span>
+  <span class="toc-title">5. The Three Identity Tiers</span>
+</button></li>
+<li><button class="toc-item" data-idx="7">
+  <span class="toc-num">07</span>
+  <span class="toc-title">6. The Land Bank: 1,033 Domains</span>
+</button></li>
+<li><button class="toc-item" data-idx="8">
+  <span class="toc-num">08</span>
+  <span class="toc-title">7. Differentiation: Relational vs. Constitutional AI</span>
+</button></li>
+<li><button class="toc-item" data-idx="9">
+  <span class="toc-num">09</span>
+  <span class="toc-title">8. Current Traction</span>
+</button></li>
+<li><button class="toc-item" data-idx="10">
+  <span class="toc-num">10</span>
+  <span class="toc-title">9. Open Questions for Content Strategy (for Monday)</span>
+</button></li>
+<li><button class="toc-item" data-idx="11">
+  <span class="toc-num">11</span>
+  <span class="toc-title">Closing — what an outside analyst would say</span>
+</button></li>
+    </ul>
+  </aside>
+
+  <main class="content-pane">
+    <section class="report-section" data-idx="0" data-has-audio="true">
+<h1>Bravetto / AbëONE — Analyst Briefing</h1>
+<p><strong>Prepared for:</strong> Bill Dorman</p>
+<p><strong>Prepared by:</strong> AbëONE (substrate-grounded), reviewed by Michael Mataluni</p>
+<p><strong>Date:</strong> April 27, 2026</p>
+<p><strong>Purpose:</strong> Pre-read for Monday content-strategy call. Treats Bravetto as if a third-party analyst were profiling it for the first time. Plain English. No internal jargon.</p>
+<hr>
+</section>
+<section class="report-section" data-idx="1" data-has-audio="true">
+<h2>Executive Summary</h2>
+<p>Bravetto is a Florida-based technology company that has spent the last 18 months building what it calls a <em>personal-and-business operating system</em> — a platform you can talk to in your own voice, that remembers you, connects every app and channel you use, and helps you get things made. The platform is called <strong>AbëONE</strong> (pronounced "aybee-one"). On top of it sits a small set of named products — eight in total — that together let one person, one team, or one enterprise run their work and their life through a single conversation.</p>
+<p>The company sits inside a larger picture. Bravetto is the operating company building AbëONE and a developer-facing AI governance product called <strong>AiGuardian</strong>. A sister entity — <strong>Mataluni Enterprises</strong>, owned 50/50 by founders Michael and Kristin Mataluni — owns 1,033 domains (90% .ai) and runs <strong>PolyWiSE</strong>, a relational-intelligence product for couples and constellations. PolyWiSE is the proof that AbëONE can build a real business: it runs <em>on</em> the platform, but it is owned and operated separately.</p>
+<p>The strategic claim Bravetto is making is unusual: most consumer AI today is <em>constitutional</em> — built on a fixed set of guardrails that change when the lab updates them. AbëONE is <em>relational</em> — it builds a continuous relationship with one person, with persistent memory and explicit consent, and improves as that relationship deepens. The bet is that the next generation of consumer AI is not smarter; it is <strong>known</strong>.</p>
+<p>For a content-strategy audience, the most important takeaway is this: Bravetto is not nine products. It is <strong>one platform, three verticals, eight surfaces, three identity tiers, and a land bank of ~1,000 future doors</strong>. Every page of the website should clarify which of those things it is talking about, and to whom.</p>
+<hr>
+</section>
+<section class="report-section" data-idx="2" data-has-audio="true">
+<h2>1. The Company</h2>
+<h3>Bravetto</h3>
+<p>The operating company. Builds and ships AbëONE and AiGuardian. Houses the engineering team, the customer relationships, and the brand. Florida-based.</p>
+<h3>Mataluni Enterprises</h3>
+<p>A separate S-corporation, owned 50/50 by Michael and Kristin Mataluni. Originally a domain holding company; now also a product-shipping entity. Owns the 1,033-domain portfolio and PolyWiSE. The legal separation between Bravetto and Mataluni Enterprises was confirmed in March 2026.</p>
+<h3>Why this matters for content</h3>
+<p>Most companies tell a single corporate story. Bravetto's truth is two-parented: Bravetto-the-company sells the platform; Mataluni Enterprises uses the platform to run a separately-branded business (PolyWiSE) and holds the asset bank. The pitch <em>"we eat our own cooking"</em> is not metaphor — PolyWiSE is a real, separately-incorporated business running on Bravetto's platform. That is a credibility lever.</p>
+<h3>Leadership</h3>
+<ul>
+<li><strong>Michael Mataluni</strong> — Chief Executive Architect (CEO). Founder, technical lead, primary system designer.</li>
+<li><strong>Bryan Whitehurst</strong> — Chief Growth Officer (CGO).</li>
+<li><strong>Kristin Mataluni</strong> — Chief Operating Officer (COO). Co-owner of Mataluni Enterprises and the operational driver of PolyWiSE's hospitality protocol.</li>
+</ul>
+<hr>
+</section>
+<section class="report-section" data-idx="3" data-has-audio="true">
+<h2>2. The Platform: AbëONE</h2>
+<h3>What it is, in one sentence</h3>
+<p>AbëONE is the platform layer underneath everything Bravetto sells — your identity, your memory, your voice, your keys, and your commerce, in one place.</p>
+<h3>What it does</h3>
+<ul>
+<li><strong>Knows who you are</strong> across every product and surface. One profile. One login. No re-introducing yourself every time you switch tools.</li>
+<li><strong>Remembers you</strong> — every conversation, every preference, every decision, in a private append-only memory that you can read and audit.</li>
+<li><strong>Speaks with you</strong> — voice-first interface. You talk, it talks back. No keyboard required.</li>
+<li><strong>Connects your stuff</strong> — credentials and connections to your apps (WhatsApp, Signal, iMessage, email, Facebook, Instagram, LinkedIn, your business systems) live in a vault, so the platform can act across them without you switching tabs.</li>
+<li><strong>Handles your money</strong> — single login becomes the commerce hub. Buy any product Bravetto offers, manage the subscription, in one place.</li>
+</ul>
+<h3>What makes it different</h3>
+<p>Most personal AI today is <strong>constitutional</strong> — the model has a fixed set of rules baked in by the lab that built it, and those rules shift week to week as policy teams update them. The user is the visitor; the model is the host.</p>
+<p>AbëONE is <strong>relational</strong>. The user is the host. The platform is the relationship. Guardrails still exist, but they are scoped to one person and improve over time. The architecture treats memory, consent, and identity as primary objects of the system — not afterthoughts.</p>
+<p>The phrase Mike uses internally: <em>"the last app you'll ever need."</em> That is what the platform is reaching for.</p>
+<h3>What the user sees</h3>
+<p>A conversation interface. Voice or text. The interface knows them. It remembers what they said yesterday. It can take action across every app they have connected. It does not lecture, does not reset, does not pretend to be meeting them for the first time.</p>
+<h3>What the buyer sees on the website</h3>
+<p>A login button. Three plans (consumer, small business, enterprise). A short list of what AbëONE does. Not nine products. Not a stack diagram. <strong>One platform.</strong></p>
+<hr>
+</section>
+<section class="report-section" data-idx="4" data-has-audio="true">
+<h2>3. The Three Verticals</h2>
+<p>The platform sits underneath all of Bravetto's customer-facing brands. Today there are three. Each has its own door, its own audience, its own pricing, and its own brand voice — but all three log in through the same AbëONE account.</p>
+<h3>Vertical 1: Bravetto.ai — <em>Run your life and your business.</em></h3>
+<p><strong>Audience:</strong> Individual consumers, entrepreneurs, small business owners, and enterprises.</p>
+<p><strong>Promise:</strong> One platform that handles everything from "I have an idea, get it launched" (campaigns, websites, landing pages, ads) to "run my whole company on this" (team communication, marketing automation, brand work, voice infrastructure, AI assistants for every department).</p>
+<p><strong>Origin story:</strong> This was the original vision — <em>take an idea and get it launched fast</em>. The platform expanded into business operations because the same engine that ships a campaign also runs a company.</p>
+<p><strong>Differentiator:</strong> Voice-first, relational, memory-coherent. Connects to everything you already use instead of asking you to abandon it.</p>
+<h3>Vertical 2: PolyWiSE — <em>Relational intelligence for couples and constellations.</em></h3>
+<p><strong>Audience:</strong> Couples, polyamorous and ENM relationships, family constellations, anyone navigating multi-person emotional dynamics.</p>
+<p><strong>Promise:</strong> A graceful, hospitality-first AI host that helps relationships hear each other better. It does not diagnose, does not prescribe, does not psychoanalyze. It holds space.</p>
+<p><strong>Owned by:</strong> Mataluni Enterprises (separately from Bravetto).</p>
+<p><strong>WiSE family roadmap:</strong></p>
+<ul>
+<li><strong>PolyWiSE</strong> — the origin product, for non-monogamous and constellation-based relationships.</li>
+<li><strong>CoupleWiSE</strong> — same engine, scoped for monogamous couples or any committed dyad.</li>
+<li><strong>SelfWiSE</strong> — same engine, scoped for the individual practicing self-reflection.</li>
+</ul>
+<p><strong>Why it matters for the Bravetto story:</strong> PolyWiSE is the proof. It demonstrates that AbëONE can build and run a real, separately-funded, separately-branded business with its own audience and its own pricing. When buyers ask "what does it look like to build something on AbëONE?" — PolyWiSE is the answer.</p>
+<h3>Vertical 3: AiGuardian — <em>AI governance for builders and AI teams.</em></h3>
+<p><strong>Audience:</strong> Software developers, AI engineers, and enterprises deploying AI internally who need guardrails, observability, and bias detection.</p>
+<p><strong>Promise:</strong> Keeps your AI on the rails. Detects bias, prevents drift, observes your AI agents in real time, surfaces problems before they ship.</p>
+<p><strong>Surfaces:</strong> Web product (aiguardian.ai), VS Code extension (BiasGuard), MCP gateway for AI-agent integrations.</p>
+<p><strong>Status:</strong> Live on Railway. Three pricing tiers — Complimentary, $99, $299.</p>
+<p><strong>Why it is its own vertical:</strong> Different audience (developers), different sales motion (technical buyers, often enterprise compliance teams), different distribution (developer-tool channels, not consumer or SMB marketing). Routes back to AbëONE login, but otherwise stands on its own.</p>
+<h3>What the website needs to do</h3>
+<p>Three doors. Three brand voices. One login. Each vertical gets its own home page that speaks to its audience in their language. The "platform underneath" is briefly named on each page, but the buyer is never asked to learn the architecture before buying.</p>
+<hr>
+</section>
+<section class="report-section" data-idx="5" data-has-audio="true">
+<h2>4. The Eight Surfaces</h2>
+<p>Inside the Bravetto.ai vertical, the platform offers eight named <em>surfaces</em> — discrete capabilities a user or business can turn on. Surfaces are not separate apps. They are functional extensions of AbëONE that share identity, memory, and voice. A user with the right plan turns them on; a smaller user only sees what they need.</p>
+<table><thead><tr><th>Surface</th><th>What it does</th><th>Who turns it on</th></tr></thead><tbody>
+<tr><td><strong>AbëDESKs</strong></td><td>Personal workspace for each team member. The place a human sits and works. Communication, coordination, daily flow.</td><td>Anyone running a team.</td></tr>
+<tr><td><strong>AbëVOiCEs</strong></td><td>Voice infrastructure. Answers your phones, makes outbound calls, transcribes, runs voice-driven workflows. Powered by Twilio + Claude.</td><td>Businesses with phone presence. Already in production with major eyecare client.</td></tr>
+<tr><td><strong>AbëAiMs</strong></td><td>Marketing automation. Campaigns, ad management, audience targeting across Meta, Google, and beyond. The original "idea-to-launch" surface.</td><td>Marketers, agencies, SMBs running paid acquisition.</td></tr>
+<tr><td><strong>AbëDESiGNs</strong></td><td>Visual engine. Brand kits, creative assets, page generation, design system enforcement.</td><td>Anyone who needs to look professional fast.</td></tr>
+<tr><td><strong>AbëKEYs</strong></td><td>The vault. Connects every credential, every API, every channel into one place so the platform can act across them. Touch ID protected.</td><td>Any user — this is the connective tissue under everything else.</td></tr>
+<tr><td><strong>AbëSOUNDs</strong></td><td>Sound scenes. Harmonic frequencies, audio environments, soundscape generation.</td><td>Wellness, focus, ambience use cases.</td></tr>
+<tr><td><strong>AbëBRAiNEs</strong></td><td>Local AI inference. A 37.9-million-parameter spiking neural network that runs on-device for fast, private inference.</td><td>Privacy-sensitive use cases, edge deployments.</td></tr>
+<tr><td><strong>AbëONE</strong></td><td>The door — the conversation interface itself. Voice and text. The "last app you'll ever need."</td><td>Every user. This is what they actually open.</td></tr>
+</tbody></table>
+<h3>How surfaces relate to verticals</h3>
+<p>A surface is a <em>capability</em>. A vertical is a <em>brand and audience</em>. PolyWiSE uses some of the same underlying engine (voice, memory, identity) but presents itself as a single product to its buyers — they never hear the word "AbëVOiCEs," they just see PolyWiSE work. AiGuardian uses different surfaces (developer-facing). Bravetto.ai is the only vertical that exposes the full eight-surface menu to its buyers, and even then only the SMB and Enterprise tiers see the full set.</p>
+<h3>What the website should not do</h3>
+<p>List nine products on the homepage. The buyer cares about <em>outcomes</em>. Surfaces are the menu inside the restaurant; they should not be on the front door.</p>
+<hr>
+</section>
+<section class="report-section" data-idx="6" data-has-audio="true">
+<h2>5. The Three Identity Tiers</h2>
+<p>This is the cleanest way to think about pricing and audience. The same platform serves three scopes:</p>
+<h3>Tier 1: Consumer (DTC) — <em>AbëONE for me.</em></h3>
+<ul>
+<li><strong>Identity scope:</strong> One person.</li>
+<li><strong>Pitch:</strong> "Your last app. The one that knows you. Voice-first. Connects everything you use."</li>
+<li><strong>What you get:</strong> AbëONE conversation interface, AbëKEYs vault for your personal connections, basic memory, voice-first interaction.</li>
+<li><strong>Use case:</strong> Personal assistant. Life coordination. Memory companion. Cross-channel messaging hub.</li>
+<li><strong>Why someone buys:</strong> They are tired of switching apps, tired of re-explaining themselves to every AI, and tired of guardrails written for someone else.</li>
+</ul>
+<h3>Tier 2: Business (SMB) — <em>Run your shop.</em></h3>
+<ul>
+<li><strong>Identity scope:</strong> One organization with multiple people.</li>
+<li><strong>Pitch:</strong> "Idea to launch. Then run the whole company on it."</li>
+<li><strong>What you get:</strong> Tier 1, plus AbëDESKs (team workspace), AbëVOiCEs (phone), AbëAiMs (marketing), AbëDESiGNs (creative), shared memory scoped by role.</li>
+<li><strong>Use case:</strong> Solo entrepreneurs, small agencies, multi-person businesses, coaches, creators with a team.</li>
+<li><strong>Why someone buys:</strong> They want one platform that handles the whole stack of running a company without integrating six SaaS tools.</li>
+</ul>
+<h3>Tier 3: Enterprise — <em>Many teams, one nervous system.</em></h3>
+<ul>
+<li><strong>Identity scope:</strong> Multiple organizations, governance and compliance requirements.</li>
+<li><strong>Pitch:</strong> "AI infrastructure that scales without losing the relationship."</li>
+<li><strong>What you get:</strong> Tier 2, plus fleet management, role-based memory boundaries, governance policies, AiGuardian integration, and dedicated implementation.</li>
+<li><strong>Use case:</strong> Multi-location businesses, regulated industries, organizations with internal AI risk programs.</li>
+<li><strong>Why someone buys:</strong> They need governance and observability without losing the relational, voice-first experience.</li>
+</ul>
+<h3>How it shows on the website</h3>
+<p>Three tiers, three prices, one comparison table. <em>Same platform, scaled boundaries.</em> This is also the place to retire any confusion about "DTC versus enterprise" — they are not two products. They are two scopes of the same product.</p>
+<hr>
+</section>
+<section class="report-section" data-idx="7" data-has-audio="true">
+<h2>6. The Land Bank: 1,033 Domains</h2>
+<p>Mataluni Enterprises owns 1,033 domains, 90% on the .ai TLD, accumulated over time as a strategic asset bank. Total invested: $125,000.</p>
+<h3>Top verticals by domain count</h3>
+<ul>
+<li>418 in agents (e.g., AbëAGENTs.ai variants)</li>
+<li>80 in retail</li>
+<li>64 in education</li>
+<li>42 in personalization</li>
+<li>38 in HR</li>
+<li>32 in creation</li>
+<li>28 in finance</li>
+</ul>
+<h3>What this is, and what it isn't</h3>
+<p><strong>It is</strong> a portfolio of <em>future doors</em>. Each domain is a potential vertical of AbëONE — a scoped configuration of the platform for a specific audience. AbëMEDs.ai becomes a wellness-clinic configuration of AbëVOiCEs and AbëLOVEs. AbëAGENTs.ai becomes a talent-vertical front door. AbëiNSUREs.ai becomes a configuration for insurance.</p>
+<p><strong>It is not</strong> 1,033 separate products. It is the same platform, configured and branded for 1,033 potential audiences. The right way to think about this is the way Apple thinks about App Store categories, or Shopify thinks about themes — these are <em>targeting surfaces</em>, not separate codebases.</p>
+<p><strong>44 domains are live</strong> today on Vercel via AbëDESiGNs middleware. <strong>989 are dormant.</strong></p>
+<h3>What this means for content strategy</h3>
+<p>The website should <strong>not</strong> list these. They are a strategic asset, not a product menu. They might appear in an investor or partner deck as "we own the front door for 1,000 verticals," but the consumer-facing site needs to present today's three verticals and eight surfaces clearly. Anything more dilutes the message.</p>
+<hr>
+</section>
+<section class="report-section" data-idx="8" data-has-audio="true">
+<h2>7. Differentiation: Relational vs. Constitutional AI</h2>
+<p>This is the most important paragraph for the website's positioning. It is also the hardest to communicate because the language does not yet exist in the consumer market.</p>
+<h3>Constitutional AI (the default everywhere else)</h3>
+<ul>
+<li>Built on a fixed set of guardrails written by the lab.</li>
+<li>Rules change with policy updates.</li>
+<li>The user starts every conversation as a stranger.</li>
+<li>The model is the host; the user is the visitor.</li>
+<li>"Personalization" usually means a system prompt cached for the session.</li>
+</ul>
+<h3>Relational AI (Bravetto's claim)</h3>
+<ul>
+<li>Continuous relationship with one identified person.</li>
+<li>Persistent, append-only memory the user can read and audit.</li>
+<li>Explicit consent gates control what the system knows and what it can do.</li>
+<li>The user is the host; the platform is the relationship.</li>
+<li>Guardrails are scoped to the relationship and improve over time.</li>
+</ul>
+<h3>Why this matters</h3>
+<p>Every consumer AI competitor today (ChatGPT, Claude.ai, Gemini, Copilot) is constitutional. Their differentiation race is on capability and price. Bravetto's bet is that the next axis of competition is <strong>continuity</strong> — does this AI know me, did it remember what I told it last month, does it act in my interest, and can I see what it knows about me.</p>
+<p>This is the <em>one sentence that should be on the homepage</em>: not "smarter AI," not "faster AI," not "AI for business." Something like:</p>
+<blockquote><p><em>Most AI is built for the model. AbëONE is built for the relationship.</em></p></blockquote>
+<p>Or in Mike's own voice:</p>
+<blockquote><p><em>The last app you'll ever need. Talk to it. It remembers you. It connects everything you use. It's yours.</em></p></blockquote>
+<hr>
+</section>
+<section class="report-section" data-idx="9" data-has-audio="true">
+<h2>8. Current Traction</h2>
+<p>A short, honest list. Where the company actually is today.</p>
+<h3>Live in production</h3>
+<ul>
+<li><strong>Advancing Eye Care (AEC)</strong> — $1.055M client. North Shore Voice deployed (a tailored AbëVOiCEs implementation). Fleet rollout of AbëSHADOWs (AI-powered desktop knowledge agents) across 13+ machines underway.</li>
+<li><strong>AiGuardian</strong> — Live on Railway, three tiers selling.</li>
+<li><strong>PolyWiSE</strong> — Live, paying users, separate brand. Hospitality protocol shipped.</li>
+<li><strong>AbëONE substrate</strong> — In daily production use by the founding team and select clients. The platform that all of the above run on.</li>
+</ul>
+<h3>Customer Zero</h3>
+<ul>
+<li><strong>Hudson</strong> — first paying Pro-tier consumer customer of AbëONE.</li>
+</ul>
+<h3>Domain assets</h3>
+<ul>
+<li>1,033 domains owned (Mataluni Enterprises)</li>
+<li>44 live on Vercel</li>
+<li>$125,000 invested</li>
+</ul>
+<h3>What's not yet shipped (be honest)</h3>
+<ul>
+<li>Full SMB/enterprise tier UI for AbëONE (the consumer-facing platform front door is still being built — current users come in through specific verticals like AiGuardian, PolyWiSE, or directly through AEC's deployment).</li>
+<li>Most of the eight surfaces are at varying maturity. Some (AbëVOiCEs, AbëDESiGNs) are in production; others are wired but not yet a product page.</li>
+<li>A unified marketing site for "Bravetto / AbëONE" — this is the work Bill is being brought in to scope.</li>
+</ul>
+<h3>What this means for the call</h3>
+<p>The story is real. The product is real. The platform is real. What is unfinished is the <em>narrative layer</em> — the way the company tells its story to the world. That is the work in front of us.</p>
+<hr>
+</section>
+<section class="report-section" data-idx="10" data-has-audio="true">
+<h2>9. Open Questions for Content Strategy (for Monday)</h2>
+<p>Honest list. These are the decisions Bill should help drive.</p>
+<ol>
+<li><strong>What is the front door?</strong> Bravetto.com? AbëONE.ai? bravetto.ai? Today there are several. Pick one or define how they relate.</li>
+<li><strong>Who is the primary buyer of AbëONE consumer tier?</strong> Tech-forward individuals? Coaches? Knowledge workers? Solopreneurs? The pitch differs sharply by audience, and we need one to lead with.</li>
+<li><strong>Should AiGuardian have its own marketing site, or sit as a sub-brand of Bravetto?</strong> Today it's standalone (aiguardian.ai). Either is defensible. Pick one.</li>
+<li><strong>How visible is PolyWiSE on the Bravetto site?</strong> Two truths in tension: PolyWiSE proves the platform works, AND PolyWiSE is owned by a different entity with a different audience. Resolution: probably a "built on AbëONE" credit on PolyWiSE, no PolyWiSE on Bravetto. Bill to confirm.</li>
+<li><strong>What do we say about the 1,033 domains?</strong> Investor-only? Partner deck only? Or part of the public story ("we own the future of vertical AI")?</li>
+<li><strong>Constitutional vs. relational AI</strong> — is that a wedge a consumer audience can hear, or is it too inside-baseball? Need to test the language.</li>
+<li><strong>What gets retired?</strong> The internal substrate has named a number of products that don't exist yet — AbëWELLs, AbëMEDs, AbëAGENTs, etc. None should be on the marketing site until they are real. Confirm and prune.</li>
+</ol>
+<hr>
+</section>
+<section class="report-section" data-idx="11" data-has-audio="true">
+<h2>Closing — what an outside analyst would say</h2>
+<p>Bravetto is in the unusual position of having built more substrate than narrative. The platform is real, the differentiator is sharp, the customers are paying, and the founders have a clear point of view. What is missing is the public-facing story — the version of all of this that an outside buyer can hear in 30 seconds and decide they want to learn more.</p>
+<p>The temptation will be to put everything on the homepage. The discipline is to put one thing on the homepage and let the depth reveal itself only as the buyer asks for it.</p>
+<p>Three doors. One platform. One sentence on the front of each door. That is the brief.</p>
+<hr>
+<p>*Prepared 2026-04-27 for Monday content-strategy call with Bill Dorman.</p>
+<p>Source material: substrate canonical documents, founder transcripts, registry data.</p>
+<p>Powered by Bravetto.*</p>
+</section>
+  </main>
+</div>
+
+<audio id="audio" preload="auto"></audio>
+
+<script>
+const MANIFEST = [{"idx":0,"title":"Cover","file":"audio/00-cover.abe.mp3","bytes":386656,"is_cover":true},{"idx":1,"title":"Executive Summary","file":"audio/01-executive-summary.abe.mp3","bytes":1783057,"is_cover":false},{"idx":2,"title":"1. The Company","file":"audio/02-1-the-company.abe.mp3","bytes":1365098,"is_cover":false},{"idx":3,"title":"2. The Platform: AbëONE","file":"audio/03-2-the-platform-ab-one.abe.mp3","bytes":2037177,"is_cover":false},{"idx":4,"title":"3. The Three Verticals","file":"audio/04-3-the-three-verticals.abe.mp3","bytes":3458238,"is_cover":false},{"idx":5,"title":"4. The Eight Surfaces","file":"audio/05-4-the-eight-surfaces.abe.mp3","bytes":2929519,"is_cover":false},{"idx":6,"title":"5. The Three Identity Tiers","file":"audio/06-5-the-three-identity-tiers.abe.mp3","bytes":2274577,"is_cover":false},{"idx":7,"title":"6. The Land Bank: 1,033 Domains","file":"audio/07-6-the-land-bank-1-033-domains.abe.mp3","bytes":1694450,"is_cover":false},{"idx":8,"title":"7. Differentiation: Relational vs. Constitutional AI","file":"audio/08-7-differentiation-relational-vs-constitutional-ai.abe.mp3","bytes":1611276,"is_cover":false},{"idx":9,"title":"8. Current Traction","file":"audio/09-8-current-traction.abe.mp3","bytes":1677314,"is_cover":false},{"idx":10,"title":"9. Open Questions for Content Strategy (for Monday)","file":"audio/10-9-open-questions-for-content-strategy-for-monday.abe.mp3","bytes":1458303,"is_cover":false},{"idx":11,"title":"Closing — what an outside analyst would say","file":"audio/11-closing-what-an-outside-analyst-would-say.abe.mp3","bytes":846829,"is_cover":false}];
+const audio = document.getElementById('audio');
+const iconPlay = document.getElementById('icon-play');
+const iconPause = document.getElementById('icon-pause');
+const nowTitle = document.getElementById('now-title');
+const times = document.getElementById('times');
+const scrub = document.getElementById('scrub');
+const scrubFill = document.getElementById('scrub-fill');
+const scrubHandle = document.getElementById('scrub-handle');
+
+let cur = 0;
+let playing = false;
+
+const fmt = (s) => {
+  if (!isFinite(s)) return '0:00';
+  const m = Math.floor(s / 60), x = Math.floor(s % 60);
+  return m + ':' + (x < 10 ? '0' : '') + x;
+};
+
+function highlight(idx) {
+  document.querySelectorAll('.toc-item').forEach(el => {
+    el.classList.toggle('active', Number(el.dataset.idx) === idx);
+  });
+  document.querySelectorAll('.report-section').forEach(el => {
+    el.dataset.active = (Number(el.dataset.idx) === idx) ? 'true' : 'false';
+  });
+}
+
+function load(idx) {
+  if (idx < 0 || idx >= MANIFEST.length) return;
+  cur = idx;
+  const m = MANIFEST[idx];
+  audio.src = m.file;
+  nowTitle.textContent = m.title;
+  highlight(m.idx);
+  // scroll matching report-section into view
+  const sec = document.querySelector('.report-section[data-idx="' + m.idx + '"] h2, .report-section[data-idx="' + m.idx + '"]');
+  if (sec) sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function play() { audio.play(); }
+function pause() { audio.pause(); }
+function toggle() { playing ? pause() : play(); }
+function stop() { pause(); audio.currentTime = 0; }
+
+audio.addEventListener('play', () => {
+  playing = true;
+  iconPlay.style.display = 'none';
+  iconPause.style.display = 'block';
+});
+audio.addEventListener('pause', () => {
+  playing = false;
+  iconPlay.style.display = 'block';
+  iconPause.style.display = 'none';
+});
+audio.addEventListener('timeupdate', () => {
+  const pct = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+  scrubFill.style.width = pct + '%';
+  scrubHandle.style.left = pct + '%';
+  times.textContent = fmt(audio.currentTime) + ' / ' + fmt(audio.duration);
+});
+audio.addEventListener('ended', () => {
+  if (cur < MANIFEST.length - 1) { load(cur + 1); play(); }
+  else { stop(); }
+});
+audio.addEventListener('loadedmetadata', () => {
+  times.textContent = fmt(audio.currentTime) + ' / ' + fmt(audio.duration);
+});
+
+document.getElementById('btn-play').addEventListener('click', toggle);
+document.getElementById('btn-stop').addEventListener('click', stop);
+document.getElementById('btn-prev').addEventListener('click', () => {
+  if (cur > 0) { load(cur - 1); play(); }
+});
+document.getElementById('btn-next').addEventListener('click', () => {
+  if (cur < MANIFEST.length - 1) { load(cur + 1); play(); }
+});
+
+document.querySelectorAll('.toc-item').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = Number(btn.dataset.idx);
+    const i = MANIFEST.findIndex(m => m.idx === target);
+    if (i >= 0) { load(i); play(); }
+  });
+});
+
+document.querySelectorAll('.speed-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    audio.playbackRate = parseFloat(btn.dataset.speed);
+  });
+});
+
+scrub.addEventListener('click', (e) => {
+  const rect = scrub.getBoundingClientRect();
+  const pct = (e.clientX - rect.left) / rect.width;
+  if (audio.duration) audio.currentTime = pct * audio.duration;
+});
+
+window.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (e.code === 'Space') { e.preventDefault(); toggle(); }
+  if (e.code === 'ArrowRight' && e.shiftKey) { e.preventDefault(); audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 10); }
+  if (e.code === 'ArrowLeft' && e.shiftKey) { e.preventDefault(); audio.currentTime = Math.max(0, audio.currentTime - 10); }
+  if (e.code === 'KeyN') { if (cur < MANIFEST.length - 1) { load(cur + 1); play(); } }
+  if (e.code === 'KeyP') { if (cur > 0) { load(cur - 1); play(); } }
+  if (e.code === 'KeyS') { stop(); }
+});
+
+if (MANIFEST.length) load(0);
+</script>
+
+
+<!-- Abë Voice — comment-overlay intake. one script tag. -->
+<script
+  src="https://voice.bravetto.ai/widget.js"
+  data-persona="abe"
+  data-mode="conversation"
+  async
+></script>
+
+</body>
+</html>
