@@ -62,35 +62,49 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* ========== SCREEN-ONLY POLISH ========== */
+  /* ========== SCREEN-ONLY POLISH (full-bleed web, not paper-shaped) ========== */
   @media screen {
     body {
-      background: #F0F2F5;
+      background: var(--white);
       font-size: 16px;
       line-height: 1.6;
     }
-    .page-frame {
-      max-width: 8.5in;
-      margin: 32px auto;
-      background: var(--white);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    .page-frame { max-width: none; margin: 0; box-shadow: none; }
+    .body { padding: 0; max-width: none; }
+    section.lane {
+      padding: 96px clamp(32px, 8vw, 120px);
+      max-width: 1280px;
+      margin: 0 auto;
+      page-break-before: auto;
     }
-    .body { padding: 56px 72px 64px; }
-    section.lane { padding-top: 28px; }
-    section.lane.first { padding-top: 0; }
-    h2 { font-size: 32pt; }
-    h3 { font-size: 16pt; }
-    p { font-size: 15px; }
-    .lede { font-size: 17pt; }
-    .pull { font-size: 19pt; }
-    .moment p { font-size: 14px; }
-    .why-grid .item p { font-size: 14px; }
-    .closing p { font-size: 16px; }
-    .bridge-block p { font-size: 16px; }
-    .bridge-block .ask { font-size: 15pt; }
-    table { font-size: 14px; }
+    section.lane.first { padding-top: 96px; }
+    section.lane:nth-of-type(even) {
+      background: var(--bg-soft);
+      max-width: none;
+      padding-left: clamp(32px, 8vw, 120px);
+      padding-right: clamp(32px, 8vw, 120px);
+    }
+    section.lane:nth-of-type(even) > * {
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h2 { font-size: clamp(32px, 5vw, 56px); line-height: 1.05; max-width: 16ch; }
+    h3 { font-size: 22px; }
+    p { font-size: 17px; max-width: 68ch; }
+    .lede { font-size: clamp(20px, 2.4vw, 26px); max-width: 60ch; }
+    .pull { font-size: clamp(22px, 2.6vw, 30px); max-width: 60ch; }
+    .moment p { font-size: 15px; }
+    .why-grid .item p { font-size: 15px; }
+    .closing p { font-size: 17px; }
+    .bridge-block p { font-size: 18px; max-width: 70ch; }
+    .bridge-block .ask { font-size: clamp(17px, 2vw, 22px); }
+    table { font-size: 15px; max-width: 1100px; }
     th { font-size: 13px; }
-    .object-grid .obj { font-size: 14px; }
+    .object-grid { max-width: 720px; }
+    .object-grid .obj { font-size: 15px; padding: 14px 18px; }
+    .two-cards, .moments, .why-grid { max-width: 1100px; }
+    .num-tag { font-size: 14px; }
   }
 
   /* ========== COVER ========== */
@@ -105,7 +119,14 @@
     flex-direction: column;
     justify-content: center;
   }
-  @media screen { .cover { min-height: 800px; padding: 100px 80px; } }
+  @media screen {
+    .cover {
+      min-height: 100vh;
+      padding: clamp(80px, 12vh, 160px) clamp(32px, 8vw, 120px);
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+  }
 
   .cover::before {
     content: '';
@@ -169,7 +190,14 @@
     font-size: 9pt;
     color: var(--ink-faint);
   }
-  @media screen { .cover .footer-band { bottom: 60px; left: 80px; right: 80px; font-size: 13px; } }
+  @media screen {
+    .cover .footer-band {
+      bottom: clamp(40px, 8vh, 80px);
+      left: clamp(32px, 8vw, 120px);
+      right: clamp(32px, 8vw, 120px);
+      font-size: 14px;
+    }
+  }
 
   .cover .footer-band .lockup {
     font-family: var(--font-ui);
@@ -188,7 +216,13 @@
     color: var(--ink-faint);
     letter-spacing: 1px;
   }
-  @media screen { .cover .date { bottom: 130px; left: 80px; font-size: 13px; } }
+  @media screen {
+    .cover .date {
+      bottom: clamp(100px, 14vh, 150px);
+      left: clamp(32px, 8vw, 120px);
+      font-size: 13px;
+    }
+  }
 
   /* ========== BODY ========== */
   .body { padding: 0.4in 0.8in 0.4in; }
