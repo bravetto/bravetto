@@ -1,0 +1,1871 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Care Hub Convergence Review Room | Bravetto</title>
+    <meta
+      name="description"
+      content="A private Care Hub convergence review room prepared for Angie, Nalie, and Sue."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #faf9f6;
+        --cream-dark: #f5f3ef;
+        --cream-mid: #eae7e0;
+        --paper: #fffdf8;
+        --ink: #1a1a1a;
+        --ink-light: #4a4a4a;
+        --ink-faint: #8a8a8a;
+        --gold: #c9a227;
+        --gold-warm: #d4a843;
+        --gold-pale: #f5ecc4;
+        --blue: #17468f;
+        --teal: #187c77;
+        --rose: #9f4f61;
+        --line: rgba(26, 26, 26, 0.12);
+        --shadow: 0 18px 42px rgba(39, 31, 12, 0.1);
+        --font-serif: "Cormorant Garamond", Georgia, serif;
+        --font-sans: "Inter", system-ui, sans-serif;
+        --font-mono: "JetBrains Mono", monospace;
+        --scale: 1;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background:
+          linear-gradient(90deg, rgba(201, 162, 39, 0.06), transparent 24%),
+          var(--cream);
+        color: var(--ink);
+        font-family: var(--font-sans);
+        font-size: 16px;
+        line-height: 1.6;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        min-height: 68px;
+        padding: 14px clamp(18px, 4vw, 56px);
+        border-bottom: 1px solid var(--cream-mid);
+        background: rgba(250, 249, 246, 0.94);
+        backdrop-filter: blur(18px);
+      }
+
+      .brand {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.1;
+      }
+
+      .brand strong {
+        font-family: var(--font-serif);
+        font-size: 24px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+
+      .brand span {
+        color: var(--ink-faint);
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 8px;
+      }
+
+      .nav a,
+      .button,
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 34px;
+        padding: 8px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--ink-light);
+        font-size: 12px;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .nav a:hover,
+      .button:hover {
+        border-color: rgba(201, 162, 39, 0.55);
+        color: var(--ink);
+      }
+
+      button.button {
+        cursor: pointer;
+      }
+
+      button.button:disabled {
+        cursor: not-allowed;
+        opacity: 0.45;
+      }
+
+      .button.primary {
+        border-color: var(--gold);
+        background: var(--gold);
+        color: white;
+      }
+
+      .wrap {
+        width: min(1220px, calc(100vw - 36px));
+        margin: 0 auto;
+      }
+
+      .hero {
+        padding: clamp(52px, 8vw, 92px) 0 46px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--gold);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        color: var(--ink);
+        font-family: var(--font-serif);
+        letter-spacing: -0.025em;
+      }
+
+      h1 {
+        max-width: 920px;
+        margin-top: 18px;
+        font-size: clamp(46px, 8vw, 92px);
+        font-weight: 600;
+        line-height: 0.94;
+      }
+
+      h2 {
+        font-size: clamp(34px, 5vw, 56px);
+        font-weight: 600;
+        line-height: 0.98;
+      }
+
+      h3 {
+        font-size: 28px;
+        font-weight: 600;
+        line-height: 1.05;
+      }
+
+      p {
+        margin: 0;
+        color: var(--ink-light);
+      }
+
+      .lede {
+        max-width: 760px;
+        margin-top: 24px;
+        font-size: clamp(18px, 2vw, 24px);
+        line-height: 1.48;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 30px;
+      }
+
+      .voice-invite {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+        width: min(760px, 100%);
+        margin-top: 18px;
+        padding: 14px;
+        border: 1px solid rgba(201, 162, 39, 0.34);
+        border-radius: 8px;
+        background:
+          linear-gradient(135deg, rgba(201, 162, 39, 0.14), transparent 42%),
+          rgba(255, 253, 248, 0.9);
+        box-shadow: 0 12px 26px rgba(39, 31, 12, 0.08);
+      }
+
+      .voice-invite p {
+        flex: 1 1 280px;
+        margin: 0;
+        color: var(--ink-light);
+        font-size: 14px;
+      }
+
+      .voice-invite strong {
+        color: var(--ink);
+      }
+
+      .notice {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 14px;
+        max-width: 920px;
+        margin-top: 32px;
+        padding: 18px;
+        border: 1px solid rgba(201, 162, 39, 0.28);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.72);
+        box-shadow: var(--shadow);
+      }
+
+      .notice .mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: var(--gold);
+      }
+
+      section {
+        padding: 58px 0;
+        border-top: 1px solid var(--cream-mid);
+      }
+
+      .section-head {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        gap: 28px;
+        align-items: end;
+        margin-bottom: 28px;
+      }
+
+      .section-head p {
+        max-width: 600px;
+        font-size: 17px;
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .grid-4 {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .card,
+      .artifact-card,
+      .gate,
+      .atom {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.78);
+        box-shadow: var(--shadow);
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      .label {
+        display: inline-flex;
+        align-items: center;
+        min-height: 24px;
+        margin-bottom: 12px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: var(--gold-pale);
+        color: #7a5a13;
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .card h3 {
+        margin-bottom: 12px;
+      }
+
+      .card p + p {
+        margin-top: 12px;
+      }
+
+      .aha {
+        margin-top: 18px;
+        padding: 26px;
+        border-left: 5px solid var(--gold);
+        border-radius: 8px;
+        background: var(--paper);
+        box-shadow: var(--shadow);
+        color: var(--ink);
+        font-family: var(--font-serif);
+        font-size: clamp(24px, 3vw, 38px);
+        line-height: 1.14;
+      }
+
+      .flow {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 22px;
+      }
+
+      .flow .card {
+        min-height: 180px;
+      }
+
+      .voice-shell {
+        display: grid;
+        grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+        gap: 18px;
+        align-items: stretch;
+      }
+
+      .voice-panel {
+        border: 1px solid rgba(23, 70, 143, 0.18);
+        border-radius: 8px;
+        background:
+          linear-gradient(135deg, rgba(23, 70, 143, 0.08), transparent 42%),
+          rgba(255, 255, 255, 0.82);
+        box-shadow: var(--shadow);
+        padding: 22px;
+      }
+
+      .voice-panel h3 {
+        margin-bottom: 12px;
+      }
+
+      .voice-contract {
+        display: grid;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .voice-step {
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--ink-light);
+        font-size: 13px;
+      }
+
+      .voice-step strong {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--ink);
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .voice-status {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 16px;
+        color: var(--ink-faint);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .voice-status strong {
+        color: var(--ink-light);
+        font-weight: 600;
+      }
+
+      .voice-dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: var(--teal);
+        box-shadow: 0 0 0 5px rgba(24, 124, 119, 0.12);
+      }
+
+      .voice-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 18px 0;
+      }
+
+      .voice-button {
+        cursor: pointer;
+      }
+
+      .voice-button.is-active,
+      .voice-button.is-loading {
+        border-color: var(--blue);
+        background: var(--blue);
+        color: white;
+      }
+
+      .voice-button.is-loading::after {
+        content: "";
+        width: 8px;
+        height: 8px;
+        margin-left: 8px;
+        border: 2px solid rgba(255, 255, 255, 0.45);
+        border-top-color: white;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .voice-ask {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 8px;
+      }
+
+      .voice-ask input {
+        min-height: 42px;
+        min-width: 0;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: white;
+        color: var(--ink);
+        font: 500 13px/1.2 var(--font-sans);
+        padding: 10px 14px;
+      }
+
+      .voice-output {
+        min-height: 132px;
+        margin-top: 16px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-left: 5px solid var(--gold);
+        border-radius: 8px;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--font-serif);
+        font-size: clamp(21px, 2.4vw, 31px);
+        line-height: 1.18;
+      }
+
+      .voice-note {
+        margin-top: 12px;
+        color: var(--ink-faint);
+        font-size: 12px;
+      }
+
+      .agreement-list {
+        display: grid;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .agreement-list span {
+        display: block;
+        padding: 9px 10px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.68);
+        color: var(--ink-light);
+        font-size: 13px;
+        line-height: 1.35;
+      }
+
+      .artifact-card {
+        display: grid;
+        grid-template-rows: 150px auto;
+        overflow: hidden;
+        text-decoration: none;
+      }
+
+      .artifact-card .thumb {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px;
+        background: #eee9e1;
+      }
+
+      .artifact-card img {
+        display: block;
+        max-width: 100%;
+        max-height: 126px;
+        object-fit: contain;
+        background: white;
+        box-shadow: 0 10px 24px rgba(35, 27, 9, 0.18);
+      }
+
+      .artifact-card .meta {
+        padding: 14px;
+      }
+
+      .artifact-card strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 14px;
+      }
+
+      .artifact-card span {
+        color: var(--ink-faint);
+        font-size: 12px;
+      }
+
+      .review-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(250, 249, 246, 0.94);
+      }
+
+      .review-toolbar label {
+        color: var(--ink-faint);
+        font-size: 13px;
+      }
+
+      input[type="range"] {
+        width: 170px;
+        accent-color: var(--gold);
+      }
+
+      .page-picker {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .page-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.8);
+        color: var(--ink-light);
+        cursor: pointer;
+        font: 700 12px/1 var(--font-sans);
+      }
+
+      .page-button:hover,
+      .page-button.is-active {
+        border-color: var(--gold);
+        background: var(--gold);
+        color: white;
+      }
+
+      .atom-row {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .atom {
+        min-height: 96px;
+        padding: 14px;
+        box-shadow: none;
+      }
+
+      .atom strong {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--blue);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .atom span {
+        color: var(--ink-light);
+        font-size: 13px;
+        line-height: 1.4;
+      }
+
+      .compare {
+        display: grid;
+        gap: 18px;
+      }
+
+      .page-row {
+        display: none;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.72);
+        overflow: hidden;
+      }
+
+      .page-row.is-active {
+        display: block;
+      }
+
+      .row-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 253, 248, 0.88);
+      }
+
+      .row-head strong {
+        color: var(--blue);
+        font-family: var(--font-mono);
+        font-size: 12px;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+
+      .row-head span {
+        color: var(--ink-faint);
+        font-size: 12px;
+      }
+
+      .panes {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 1px;
+        background: var(--line);
+      }
+
+      .pane {
+        min-width: 0;
+        background: #f1eee8;
+      }
+
+      .review-note {
+        display: grid;
+        gap: 12px;
+        min-height: calc(440px * var(--scale));
+        padding: 22px;
+        background:
+          linear-gradient(135deg, rgba(201, 162, 39, 0.08), transparent 46%),
+          var(--paper);
+      }
+
+      .review-note h3 {
+        font-size: 25px;
+      }
+
+      .review-note p {
+        font-size: 14px;
+      }
+
+      .review-point {
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.74);
+        color: var(--ink-light);
+        font-size: 13px;
+      }
+
+      .review-point strong {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--ink);
+      }
+
+      .pane-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 38px;
+        gap: 10px;
+        padding: 8px 10px;
+        border-bottom: 1px solid var(--line);
+        background: var(--paper);
+      }
+
+      .pane-title strong {
+        font-size: 13px;
+      }
+
+      .pane-title span {
+        color: var(--ink-faint);
+        font-size: 12px;
+      }
+
+      .image-wrap {
+        height: calc(440px * var(--scale));
+        min-height: 280px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px;
+        overflow: auto;
+      }
+
+      .image-wrap img {
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        background: white;
+        box-shadow: 0 12px 30px rgba(28, 22, 12, 0.18);
+      }
+
+      .candidate {
+        outline: 4px solid rgba(24, 124, 119, 0.16);
+      }
+
+      .previous {
+        outline: 4px solid rgba(159, 79, 97, 0.12);
+      }
+
+      .matrix-wrap {
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.82);
+        box-shadow: var(--shadow);
+      }
+
+      table {
+        width: 100%;
+        min-width: 980px;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 14px;
+        border-bottom: 1px solid var(--line);
+        border-right: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th:last-child,
+      td:last-child {
+        border-right: none;
+      }
+
+      th {
+        background: var(--ink);
+        color: white;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      td {
+        color: var(--ink-light);
+        font-size: 14px;
+      }
+
+      td strong {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--ink);
+      }
+
+      .gates {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 14px;
+      }
+
+      .gate {
+        min-height: 190px;
+        padding: 20px;
+      }
+
+      .status {
+        display: inline-flex;
+        margin-bottom: 12px;
+        padding: 5px 8px;
+        border-radius: 999px;
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .status.pass {
+        background: rgba(24, 124, 119, 0.12);
+        color: var(--teal);
+      }
+
+      .status.pending {
+        background: var(--gold-pale);
+        color: #7a5a13;
+      }
+
+      .status.block {
+        background: rgba(159, 79, 97, 0.12);
+        color: var(--rose);
+      }
+
+      .questions {
+        display: grid;
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .question {
+        display: grid;
+        grid-template-columns: 36px 1fr;
+        gap: 12px;
+        align-items: start;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      .question span {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--gold);
+        color: white;
+        font-weight: 700;
+      }
+
+      footer {
+        padding: 42px 0 54px;
+        border-top: 1px solid var(--cream-mid);
+        color: var(--ink-faint);
+        font-size: 13px;
+      }
+
+      .cmt-toolbar {
+        position: fixed;
+        bottom: 22px;
+        right: 22px;
+        z-index: 80;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        padding: 8px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 253, 248, 0.96);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(14px);
+      }
+
+      .cmt-toolbar button {
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.78);
+        color: var(--ink-light);
+        border-radius: 999px;
+        padding: 6px 12px;
+        font: 600 12px var(--font-sans);
+        cursor: pointer;
+      }
+
+      .cmt-toolbar button:hover {
+        border-color: var(--gold);
+        color: var(--ink);
+      }
+
+      .cmt-toolbar .cmt-count {
+        padding: 0 4px;
+        color: var(--ink-faint);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .cmt-tooltip {
+        position: absolute;
+        z-index: 90;
+        display: none;
+        padding: 6px 10px;
+        border: 1px solid var(--gold);
+        border-radius: 999px;
+        background: var(--paper);
+        color: var(--ink);
+        font: 600 12px var(--font-sans);
+        cursor: pointer;
+        box-shadow: var(--shadow);
+      }
+
+      .cmt-composer {
+        position: absolute;
+        z-index: 95;
+        display: none;
+        width: min(340px, calc(100vw - 32px));
+        padding: 14px;
+        border: 1px solid var(--gold);
+        border-radius: 10px;
+        background: var(--paper);
+        box-shadow: 0 22px 44px rgba(39, 31, 12, 0.18);
+      }
+
+      .cmt-composer .cmt-snippet {
+        max-height: 64px;
+        margin-bottom: 10px;
+        padding: 4px 8px;
+        border-left: 3px solid var(--gold);
+        color: var(--ink);
+        font-family: var(--font-serif);
+        font-size: 14px;
+        line-height: 1.3;
+        overflow: hidden;
+      }
+
+      .cmt-composer textarea {
+        width: 100%;
+        min-height: 92px;
+        box-sizing: border-box;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        font: 400 14px/1.45 var(--font-sans);
+        resize: vertical;
+      }
+
+      .cmt-composer .cmt-actions {
+        display: flex;
+        gap: 8px;
+        justify-content: flex-end;
+        margin-top: 10px;
+      }
+
+      .cmt-composer button {
+        padding: 6px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.85);
+        color: var(--ink-light);
+        font: 600 12px var(--font-sans);
+        cursor: pointer;
+      }
+
+      .cmt-composer button.cmt-save {
+        border-color: var(--gold);
+        background: var(--gold);
+        color: white;
+      }
+
+      .cmt-highlight {
+        background: rgba(201, 162, 39, 0.18);
+        border-bottom: 2px solid var(--gold);
+        cursor: pointer;
+      }
+
+      .cmt-marker {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        min-width: 18px;
+        margin: 0 2px;
+        border-radius: 50%;
+        background: var(--gold);
+        color: white;
+        font: 700 10px/1 var(--font-sans);
+        cursor: pointer;
+        vertical-align: super;
+        line-height: 18px;
+      }
+
+      .cmt-marker:hover {
+        background: var(--blue);
+      }
+
+      .cmt-panel {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 85;
+        display: flex;
+        flex-direction: column;
+        width: min(420px, 100vw);
+        background: var(--cream);
+        border-left: 1px solid var(--line);
+        box-shadow: -22px 0 44px rgba(28, 22, 12, 0.18);
+        transform: translateX(100%);
+        transition: transform 0.25s ease;
+      }
+
+      .cmt-panel.is-open {
+        transform: translateX(0);
+      }
+
+      .cmt-panel header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 18px 22px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .cmt-panel header strong {
+        font-family: var(--font-serif);
+        font-size: 22px;
+      }
+
+      .cmt-panel-close {
+        padding: 6px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.85);
+        color: var(--ink-light);
+        font: 600 12px var(--font-sans);
+        cursor: pointer;
+      }
+
+      .cmt-list {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px 22px;
+      }
+
+      .cmt-item {
+        margin-bottom: 12px;
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      .cmt-item .cmt-meta {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 6px;
+        color: var(--ink-faint);
+        font-family: var(--font-mono);
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .cmt-item .cmt-anchor-snippet {
+        margin-bottom: 8px;
+        padding: 4px 8px;
+        border-left: 3px solid var(--gold);
+        color: var(--ink);
+        font-family: var(--font-serif);
+        font-size: 14px;
+        line-height: 1.3;
+      }
+
+      .cmt-item .cmt-body {
+        color: var(--ink-light);
+        font-size: 14px;
+        line-height: 1.5;
+        white-space: pre-wrap;
+      }
+
+      .cmt-item .cmt-row-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .cmt-item .cmt-row-actions button {
+        padding: 4px 10px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.85);
+        color: var(--ink-light);
+        font: 600 11px var(--font-sans);
+        cursor: pointer;
+      }
+
+      .cmt-item .cmt-row-actions button:hover {
+        border-color: var(--gold);
+        color: var(--ink);
+      }
+
+      .cmt-empty {
+        padding: 18px 0;
+        color: var(--ink-faint);
+        font-size: 14px;
+        text-align: center;
+      }
+
+      .cmt-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 18px;
+        background: rgba(28, 22, 12, 0.42);
+      }
+
+      .cmt-modal.is-open {
+        display: flex;
+      }
+
+      .cmt-modal-card {
+        width: min(360px, 100%);
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--paper);
+        box-shadow: 0 22px 50px rgba(28, 22, 12, 0.24);
+      }
+
+      .cmt-modal-card h3 {
+        margin-bottom: 12px;
+        font-family: var(--font-serif);
+      }
+
+      .cmt-modal-card p {
+        margin-bottom: 12px;
+        color: var(--ink-light);
+        font-size: 14px;
+      }
+
+      .cmt-modal-card input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        font: 500 14px var(--font-sans);
+      }
+
+      .cmt-modal-card .cmt-actions {
+        display: flex;
+        gap: 8px;
+        justify-content: flex-end;
+        margin-top: 14px;
+      }
+
+      .cmt-modal-card button {
+        padding: 8px 14px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.85);
+        color: var(--ink-light);
+        font: 600 13px var(--font-sans);
+        cursor: pointer;
+      }
+
+      .cmt-modal-card button.cmt-primary {
+        border-color: var(--gold);
+        background: var(--gold);
+        color: white;
+      }
+
+      .cmt-tip {
+        margin-top: 6px;
+        color: var(--ink-faint);
+        font-size: 12px;
+      }
+
+      @media (max-width: 980px) {
+        .topbar,
+        .section-head,
+        .grid-3,
+        .grid-4,
+        .flow,
+        .voice-shell,
+        .atom-row,
+        .panes,
+        .gates {
+          grid-template-columns: 1fr;
+        }
+
+        .topbar {
+          align-items: flex-start;
+          flex-direction: column;
+          max-width: 100vw;
+          overflow: hidden;
+        }
+
+        .nav {
+          width: 100%;
+          max-width: 100%;
+          justify-content: flex-start;
+          overflow-x: auto;
+          padding-bottom: 4px;
+        }
+
+        h1 {
+          font-size: clamp(40px, 13vw, 64px);
+        }
+
+        .hero-actions {
+          align-items: stretch;
+          flex-direction: column;
+        }
+
+        .hero-actions .button {
+          width: 100%;
+        }
+
+        .notice {
+          grid-template-columns: 1fr;
+        }
+
+        .voice-ask {
+          grid-template-columns: 1fr;
+        }
+
+        .image-wrap {
+          height: calc(360px * var(--scale));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <strong>Bravetto</strong>
+        <span>private review room</span>
+      </div>
+      <nav class="nav" aria-label="Page sections">
+        <a href="#truth">Truth</a>
+        <a href="#voice">Voice</a>
+        <a href="#review-board">Snapshot Board</a>
+        <a href="#matrix">Pilot Matrix</a>
+        <a href="#validation">Validation</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="wrap">
+          <div class="eyebrow">Prepared for alignment review</div>
+          <h1>Care Hub Convergence Review Room</h1>
+          <p class="lede">
+            A private working surface for Angie, Nalie, and Sue. OOUX and Experience Layer already work together. What this room is here to do is help name the middle layer between them — the part that has not yet been defined — and bridge it.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="/mayo/assets/care-hub-executive-alignment-sue.pdf">Open executive PDF</a>
+            <a class="button" href="#review-board">Review snapshots</a>
+            <a class="button" href="#matrix">Review pilot matrix</a>
+          </div>
+          <div class="voice-invite" aria-label="ONE Voice preview">
+            <p><strong>Hear the alignment in Abë voice.</strong> The audio is the same claim surface as the page: positioning without persuasion.</p>
+            <button class="button voice-button primary" type="button" data-voice="intro" data-scroll-voice>Hear ONE Voice</button>
+          </div>
+          <div class="notice" role="note" aria-label="Review boundary">
+            <div class="mark" aria-hidden="true"></div>
+            <p>
+              This is a review room, not an official Mayo Clinic publication and not a claim of Mayo adoption. Care Hub is treated as the working pilot frame until Angie and Nalie resolve the final object stance.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="truth">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">The convergence story</div>
+              <h2>The work is in the middle.</h2>
+            </div>
+            <p>
+              OOUX and Experience Layer are already working together. The story is not a debate between them. The unfinished part is a third, middle layer — yet to be defined — that the agency has been asked to help name and bridge.
+            </p>
+          </div>
+
+          <div class="grid-3">
+            <article class="card">
+              <span class="label">OOUX</span>
+              <h3>Source truth, in place.</h3>
+              <p>Canonical care objects, relationships, attributes, evidence, and ownership stay stable across surfaces. The OOUX layer is already doing its work.</p>
+            </article>
+            <article class="card">
+              <span class="label">Experience Layer</span>
+              <h3>Decision moments, in place.</h3>
+              <p>Search entry, AI answers, Care Hub pages, request paths — each is a moment where someone has to decide what to do next. The Experience Layer is already doing its work.</p>
+            </article>
+            <article class="card">
+              <span class="label">The gap</span>
+              <h3>The middle is unnamed.</h3>
+              <p>Between source truth and decision moment lives a third layer that has not yet been defined. Naming what that gap is — and how to bridge it — is the work the agency has been asked to help with.</p>
+            </article>
+          </div>
+
+          <div class="aha">
+            OOUX and Experience Layer are not in competition. The convergence is the middle layer between them — the one that has not yet been named, and the part the agency is here to help define.
+          </div>
+
+          <div class="flow">
+            <article class="card">
+              <span class="label">1. Opportunity</span>
+              <p>Serious-care patients need decision clarity, not more disconnected pages.</p>
+            </article>
+            <article class="card">
+              <span class="label">2. Already working</span>
+              <p>OOUX gives source truth. Experience Layer gives decision moments. Both practices are in motion.</p>
+            </article>
+            <article class="card">
+              <span class="label">3. The middle</span>
+              <p>The third layer between them — the practice that turns canonical objects into the experiences those moments need — is yet to be defined. That is the work.</p>
+            </article>
+            <article class="card">
+              <span class="label">4. What scales after</span>
+              <p>Once the middle is named and the bridge is built, the same governance can carry many surfaces and engineering can trust the pattern.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="voice">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Universal voice layer</div>
+              <h2>Let the truth speak.</h2>
+            </div>
+            <p>
+              The AEC lesson is not the novelty of voice. It is the preservation of source wisdom. Here, voice should expose the reusable loop without pretending the review is finished.
+            </p>
+          </div>
+
+          <div class="voice-shell">
+            <article class="card">
+              <span class="label">Universal loop</span>
+              <h3>Source. Moment. Surface. Gate.</h3>
+              <p>
+                A simple voice layer should work anywhere this pattern appears. It names the source truth, the decision moment, the rendered surface, and the human gate.
+              </p>
+              <p>
+                Care Hub is the current instance. The loop is the reusable capability.
+              </p>
+              <div class="voice-contract" aria-label="ONE Voice contract">
+                <div class="voice-step"><strong>OOUX</strong>Conversation speaks from stable source truth, not page improvisation.</div>
+                <div class="voice-step"><strong>Experience Layer</strong>The answer is shaped for the moment: orient, build confidence, or help someone act.</div>
+                <div class="voice-step"><strong>Engineering</strong>The surface calls one bounded voice endpoint and leaves text visible as the source of review.</div>
+                <div class="voice-step"><strong>Human agreement</strong>People decide whether the voice feels useful, accurate, and quietly confident enough to send forward.</div>
+              </div>
+            </article>
+
+            <article class="voice-panel" aria-label="Truth voice layer">
+              <div class="voice-status"><span class="voice-dot" aria-hidden="true"></span><strong id="voice-status-text">Canonical voice ready</strong></div>
+              <h3>Ask the ONE Voice loop.</h3>
+              <p>Choose an atom or ask a short question. The answer stays grounded in this room.</p>
+              <div class="voice-controls">
+                <button class="button voice-button primary" type="button" data-voice="source">OOUX source</button>
+                <button class="button voice-button" type="button" data-voice="moment">Experience moment</button>
+                <button class="button voice-button" type="button" data-voice="middle">The middle</button>
+                <button class="button voice-button" type="button" data-voice="surface">Rendered surface</button>
+                <button class="button voice-button" type="button" data-voice="engineering">Engineering contract</button>
+                <button class="button voice-button" type="button" data-voice="agreement">Experience agreement</button>
+                <button class="button voice-button" id="voice-stop" type="button">Stop</button>
+              </div>
+              <div class="voice-ask">
+                <input id="voice-question" type="text" autocomplete="off" placeholder="Ask about source, moments, surfaces, gates, Care Hub, or engineering..." />
+                <button class="button" id="voice-ask" type="button">Ask</button>
+              </div>
+              <div class="voice-output" id="voice-output" aria-live="polite">
+                Source truth stays stable. Decision moments make it useful. Rendered surfaces make it visible. The human gate keeps the system honest.
+              </div>
+              <p class="voice-note">Text appears first. Audio uses the Bravetto voice endpoint when available; no browser speech fallback.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="artifacts">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Artifacts</div>
+              <h2>The room holds the candidate.</h2>
+            </div>
+            <p>
+              The review room should not become an artifact dump. Raw source files stay out of this surface; the candidate PDF, snapshots, and decision matrix carry the review.
+            </p>
+          </div>
+
+          <div class="grid-3">
+            <a class="artifact-card" href="/mayo/assets/care-hub-executive-alignment-sue.pdf">
+              <div class="thumb"><img src="/mayo/assets/sue-snapshots/care-hub-executive-alignment-sue-1.png" alt="Executive alignment PDF thumbnail" /></div>
+              <div class="meta"><strong>Executive Candidate</strong><span>Sue-ready candidate, 8 pages</span></div>
+            </a>
+            <article class="card">
+              <span class="label">Snapshot board</span>
+              <h3>Review the pages as rendered.</h3>
+              <p>Each candidate page is pre-rendered as a stable PNG so Angie and Nalie can inspect sequencing, language, and visual flow without waiting on PDF software.</p>
+            </article>
+            <article class="card">
+              <span class="label">Pilot matrix</span>
+              <h3>Move from surface to system.</h3>
+              <p>The Lung Transplant Care Hub matrix turns the convergence into a concrete first working surface without claiming final Mayo adoption.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="review-board">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Snapshot board</div>
+              <h2>Review the candidate without waiting on Adobe.</h2>
+            </div>
+            <p>
+              These are pre-rendered PNG snapshots of the executive candidate. The old artifact is summarized as a learning source, not exposed as delivery evidence.
+            </p>
+          </div>
+
+          <div class="review-toolbar">
+            <a class="button primary" href="/mayo/assets/care-hub-executive-alignment-sue.pdf">Open candidate PDF</a>
+            <span class="pill">8 candidate pages</span>
+            <button class="button" id="prev-page" type="button">Previous page</button>
+            <div class="page-picker" aria-label="Choose comparison page">
+              <button class="page-button is-active" type="button" data-target-page="1" aria-pressed="true">1</button>
+              <button class="page-button" type="button" data-target-page="2" aria-pressed="false">2</button>
+              <button class="page-button" type="button" data-target-page="3" aria-pressed="false">3</button>
+              <button class="page-button" type="button" data-target-page="4" aria-pressed="false">4</button>
+              <button class="page-button" type="button" data-target-page="5" aria-pressed="false">5</button>
+              <button class="page-button" type="button" data-target-page="6" aria-pressed="false">6</button>
+              <button class="page-button" type="button" data-target-page="7" aria-pressed="false">7</button>
+              <button class="page-button" type="button" data-target-page="8" aria-pressed="false">8</button>
+            </div>
+            <button class="button" id="next-page" type="button">Next page</button>
+            <label for="zoom">Preview height</label>
+            <input id="zoom" type="range" min="0.75" max="1.8" step="0.05" value="1" />
+          </div>
+
+          <div class="atom-row" aria-label="Review atoms">
+            <div class="atom"><strong>Source atom</strong><span>PDFs are delivery files, not the fastest review surfaces.</span></div>
+            <div class="atom"><strong>Render atom</strong><span>PNG snapshots are stable visual evidence. Render once, review many times.</span></div>
+            <div class="atom"><strong>Focus atom</strong><span>Human review works best one candidate page and one decision question at a time.</span></div>
+            <div class="atom"><strong>Decision atom</strong><span>The question is whether the candidate is ready for Angie and Nalie's human gate.</span></div>
+          </div>
+
+          <div class="compare" aria-label="Side-by-side page comparison">
+            <article class="page-row is-active" id="page-1" data-page="1">
+              <div class="row-head"><strong>Page 1</strong><span>Candidate page review</span></div>
+              <div class="panes">
+                <div class="pane">
+                  <div class="pane-title"><strong>Review Focus</strong><span>opening thesis</span></div>
+                  <div class="review-note">
+                    <h3>Does the first page name the convergence clearly enough?</h3>
+                    <p>The opening should make the move from page production to governed care experience feel obvious, useful, and bounded.</p>
+                    <div class="review-point"><strong>Keep</strong>The core sentence about OOUX, Experience Layer, and moments of decision.</div>
+                    <div class="review-point"><strong>Check</strong>Whether Angie and Nalie both recognize their contribution without overexplaining internal terminology.</div>
+                  </div>
+                </div>
+                <div class="pane">
+                  <div class="pane-title"><strong>Executive Candidate</strong><span>page snapshot</span></div>
+                  <div class="image-wrap"><img class="candidate" src="/mayo/assets/sue-snapshots/care-hub-executive-alignment-sue-1.png" alt="Executive candidate PDF page 1" /></div>
+                </div>
+              </div>
+            </article>
+            <article class="page-row" id="page-2" data-page="2">
+              <div class="row-head"><strong>Page 2</strong><span>Candidate page review</span></div>
+              <div class="panes">
+                <div class="pane"><div class="pane-title"><strong>Review Focus</strong><span>opportunity</span></div><div class="review-note"><h3>Does the problem stay human before it becomes systemic?</h3><p>The opportunity page should lead with patient decision clarity, then explain why governed source truth matters.</p><div class="review-point"><strong>Keep</strong>Serious-care patients need confidence, evidence, and next-step clarity.</div><div class="review-point"><strong>Check</strong>Whether “more pages” sounds like a critique of people or a critique of the operating model.</div></div></div>
+                <div class="pane"><div class="pane-title"><strong>Executive Candidate</strong><span>page snapshot</span></div><div class="image-wrap"><img class="candidate" src="/mayo/assets/sue-snapshots/care-hub-executive-alignment-sue-2.png" alt="Executive candidate PDF page 2" /></div></div>
+              </div>
+            </article>
+            <article class="page-row" id="page-3" data-page="3">
+              <div class="row-head"><strong>Page 3</strong><span>Candidate page review</span></div>
+              <div class="panes">
+                <div class="pane"><div class="pane-title"><strong>Review Focus</strong><span>OOUX layer</span></div><div class="review-note"><h3>Does Angie’s layer read as the source of stability?</h3><p>This page should make OOUX feel practical: canonical objects, relationships, and governance that survive across surfaces.</p><div class="review-point"><strong>Keep</strong>The distinction between stable objects and changing page representations.</div><div class="review-point"><strong>Check</strong>Whether Care Hub is the right pilot frame, resolved object, or working assembly.</div></div></div>
+                <div class="pane"><div class="pane-title"><strong>Executive Candidate</strong><span>page snapshot</span></div><div class="image-wrap"><img class="candidate" src="/mayo/assets/sue-snapshots/care-hub-executive-alignment-sue-3.png" alt="Executive candidate PDF page 3" /></div></div>
+              </div>
+            </article>
+            <article class="page-row" id="page-4" data-page="4">
+              <div class="row-head"><strong>Page 4</strong><span>Candidate page review</span></div>
+              <div class="panes">
+                <div class="pane"><div class="pane-title"><strong>Review Focus</strong><span>Experience Layer</span></div><div class="review-note"><h3>Does Nalie’s layer turn truth into decision usefulness?</h3><p>The Experience Layer should not compete with OOUX. It should sequence object truth into entry, confidence, and action moments.</p><div class="review-point"><strong>Keep</strong>The Find, Trust, Act framing if it feels native to Nalie’s language.</div><div class="review-point"><strong>Check</strong>Whether Sue needs Nalie named, or whether the artifact should say “Experience Layer” only.</div></div></div>
+                <div class="pane"><div class="pane-title"><strong>Executive Candidate</strong><span>page snapshot</span></div><div class="image-wrap"><img class="candidate" src="/mayo/assets/sue-snapshots/care-hub-executive-alignment-sue-4.png" alt="Executive candidate PDF page 4" /></div></div>
+              </div>
+            </article>
+            <article class="page-row" id="page-5" data-page="5">
+              <div class="row-head"><strong>Page 5</strong><span>Candidate page review</span></div>
+              <div class="panes">
+                <div class="pane"><div class="pane-title"><strong>Review Focus</strong><span>convergence</span></div><div class="review-note"><h3>Does “Design Concepts” feel like the bridge?</h3><p>This is the naming page. It should make the bridge from OOUX to Experience Layer feel repeatable, not theoretical.</p><div class="review-point"><strong>Keep</strong>Canonical objects become reusable care ideas, then rendered moments.</div><div class="review-point"><strong>Check</strong>Whether “Design Concepts” is the right shared term for Angie and Nalie to stand behind.</div></div></div>
+                <div class="pane"><div class="pane-title"><strong>Executive Candidate</strong><span>page snapshot</span></div><div class="image-wrap"><img class="candidate" src="/mayo/assets/sue-snapshots/care-hub-executive-alignment-sue-5.png" alt="Executive candidate PDF page 5" /></div></div>
+              </div>
+            </article>
+            <article class="page-row" id="page-6" data-page="6">
+              <div class="row-head"><strong>Page 6</strong><span>Candidate page review</span></div>
+              <div class="panes">
+                <div class="pane"><div class="pane-title"><strong>Review Focus</strong><span>example</span></div><div class="review-note"><h3>Does the Lung Transplant example make the model concrete?</h3><p>The example should prove that one governed Care Hub can support search, AI answers, and Mayo-owned pages without rewriting source truth.</p><div class="review-point"><strong>Keep</strong>One source model, multiple rendered experiences, one governed journey.</div><div class="review-point"><strong>Check</strong>Whether the surfaces are the right first three for the pilot proof.</div></div></div>
+                <div class="pane"><div class="pane-title"><strong>Executive Candidate</strong><span>page snapshot</span></div><div class="image-wrap"><img class="candidate" src="/mayo/assets/sue-snapshots/care-hub-executive-alignment-sue-6.png" alt="Executive candidate PDF page 6" /></div></div>
+              </div>
+            </article>
+            <article class="page-row" id="page-7" data-page="7">
+              <div class="row-head"><strong>Page 7</strong><span>Candidate page review</span></div>
+              <div class="panes">
+                <div class="pane"><div class="pane-title"><strong>Review Focus</strong><span>change rationale</span></div><div class="review-note"><h3>Does this page explain the upgrade without relitigating the rough draft?</h3><p>The page should preserve the insight while making the delivery standard clear: executive sequence, clean surface, and no internal artifact language.</p><div class="review-point"><strong>Keep</strong>“Keep the insight. Upgrade the artifact.”</div><div class="review-point"><strong>Check</strong>Whether the change list is candid enough without exposing implementation debris.</div></div></div>
+                <div class="pane"><div class="pane-title"><strong>Executive Candidate</strong><span>page snapshot</span></div><div class="image-wrap"><img class="candidate" src="/mayo/assets/sue-snapshots/care-hub-executive-alignment-sue-7.png" alt="Executive candidate PDF page 7" /></div></div>
+              </div>
+            </article>
+            <article class="page-row" id="page-8" data-page="8">
+              <div class="row-head"><strong>Page 8</strong><span>Candidate page review</span></div>
+              <div class="panes">
+                <div class="pane"><div class="pane-title"><strong>Review Focus</strong><span>why it matters</span></div><div class="review-note"><h3>Does the close land as a pilotable next move?</h3><p>The last page should make the engineering and governance value explicit without claiming the solution is already adopted.</p><div class="review-point"><strong>Keep</strong>The next move: create the Lung Transplant pilot matrix.</div><div class="review-point"><strong>Check</strong>Whether “Primary object stance” is clearly framed as a decision to resolve.</div></div></div>
+                <div class="pane"><div class="pane-title"><strong>Executive Candidate</strong><span>page snapshot</span></div><div class="image-wrap"><img class="candidate" src="/mayo/assets/sue-snapshots/care-hub-executive-alignment-sue-8.png" alt="Executive candidate PDF page 8" /></div></div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="matrix">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Pilot matrix seed</div>
+              <h2>The first real working surface.</h2>
+            </div>
+            <p>
+              Lung Transplant Care Hub is the smallest concrete pilot. Care Hub is the working decision surface here, not a claim that the final object model is settled.
+            </p>
+          </div>
+
+          <div class="matrix-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Surface</th>
+                  <th>Patient question</th>
+                  <th>Primary stance</th>
+                  <th>Required truth</th>
+                  <th>Evidence / proof</th>
+                  <th>Next action</th>
+                  <th>What must not vary</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Search entry</strong>Entry moment</td>
+                  <td>Does Mayo have a relevant lung transplant care path for me?</td>
+                  <td>Care Hub, as working pilot frame</td>
+                  <td>Care Hub label, short summary, who this is for, related pathway</td>
+                  <td>Mayo-approved proof point or evidence bundle reference</td>
+                  <td>Open the Care Hub experience</td>
+                  <td>Object label, Mayo-specific boundary, CTA ownership</td>
+                </tr>
+                <tr>
+                  <td><strong>AI answer</strong>Confidence moment</td>
+                  <td>Why might Mayo be worth considering for advanced lung disease care?</td>
+                  <td>Care Hub</td>
+                  <td>Mayo-specific value proposition, pathway summary, confidence framing, answer limits</td>
+                  <td>Attributed evidence bundle; no unsourced clinical claim</td>
+                  <td>Continue to Care Hub page or request-evaluation path</td>
+                  <td>Claim provenance, non-diagnostic boundary, no overpromised booking</td>
+                </tr>
+                <tr>
+                  <td><strong>Care Hub page</strong>Action moment</td>
+                  <td>What would care look like if I pursued lung transplant at Mayo?</td>
+                  <td>Care Hub</td>
+                  <td>Who we treat, how care works, outcomes/proof, care team, travel/support, next step</td>
+                  <td>Approved evidence, patient example policy, team/service ownership</td>
+                  <td>Request evaluation or discuss referral</td>
+                  <td>Stable object relationships, evidence source, CTA meaning</td>
+                </tr>
+                <tr>
+                  <td><strong>Request evaluation</strong>Next-step moment</td>
+                  <td>Am I ready to take the next step?</td>
+                  <td>Care Pathway</td>
+                  <td>What request evaluation means, what information may be needed, what Mayo can and cannot promise</td>
+                  <td>Intake requirements and review-process language</td>
+                  <td>Start request or prepare information</td>
+                  <td>Eligibility boundaries, privacy/compliance language, no physician-level promise</td>
+                </tr>
+                <tr>
+                  <td><strong>Referring clinician</strong>Referral moment</td>
+                  <td>Is this a credible referral path for my patient?</td>
+                  <td>Care Pathway</td>
+                  <td>Referral fit, evidence of expertise, coordination expectations, handoff clarity</td>
+                  <td>Clinician-facing proof and referral-policy source</td>
+                  <td>Refer or contact Mayo pathway</td>
+                  <td>Referral rules, source attribution, care-team ownership</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="validation">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Validation boundary</div>
+              <h2>What is ready, what is pending.</h2>
+            </div>
+            <p>
+              This room is a working surface, not a finished artifact. The middle layer between OOUX and Experience Layer has not yet been defined — naming it, and bridging it, is what comes next with Angie and Nalie.
+            </p>
+          </div>
+
+          <div class="gates">
+            <article class="gate">
+              <span class="status pass">Technical pass</span>
+              <h3>Render integrity</h3>
+              <p>Chrome headless rendered the executive PDF. PDF metadata, text extraction, and page snapshots were checked.</p>
+            </article>
+            <article class="gate">
+              <span class="status pass">Leakage pass</span>
+              <h3>Clean executive surface</h3>
+              <p>No package links, repository paths, placeholder organization names, raw artifact framing, or internal implementation labels should appear in the candidate PDF.</p>
+            </article>
+            <article class="gate">
+              <span class="status pending">Definition pending</span>
+              <h3>Name the middle, with Angie and Nalie.</h3>
+              <p>The next conversation is not approval of a settled position. It is naming the middle layer between OOUX and Experience Layer — the one that is yet to be defined — and deciding how to bridge it. That definition belongs to Angie and Nalie, with the agency's help.</p>
+            </article>
+            <article class="gate">
+              <span class="status pending">Experience agreement</span>
+              <h3>Does the room feel true?</h3>
+              <p>Runtime proves the wire. Human agreement proves the experience.</p>
+              <div class="agreement-list" aria-label="Experience agreement checks">
+                <span>Angie can trace the voice back to OOUX source truth.</span>
+                <span>Nalie can trace the moment back to the Experience Layer.</span>
+                <span>Engineering can trace the surface back to a contract.</span>
+                <span>Sue can see a bounded next step, not a premature claim.</span>
+              </div>
+            </article>
+          </div>
+
+          <div class="questions">
+            <div class="question">
+              <span>1</span>
+              <p>What is the middle layer between OOUX and Experience Layer? In your own words — without forcing a name yet — what shape does that gap have?</p>
+            </div>
+            <div class="question">
+              <span>2</span>
+              <p>What would have to be true for that middle layer to feel defined, not theoretical?</p>
+            </div>
+            <div class="question">
+              <span>3</span>
+              <p>What is the agency's most useful contribution to the bridge — language, structure, evidence, examples, all of those, or something else?</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        Prepared by Bravetto as a private review surface. Noindex. Not an official Mayo Clinic publication.
+      </div>
+    </footer>
+
+    <script>
+      const voiceAnswers = {
+        intro:
+          "OOUX is in place. Experience Layer is in place. The convergence is the middle layer between them, yet to be defined. Naming what that middle is, and how to bridge it, is the work this room exists to begin.",
+        source:
+          "Source truth is the stable layer. OOUX keeps care objects, relationships, evidence, claims, and ownership from drifting across pages, answers, and tools. That layer is already doing its work.",
+        moment:
+          "A decision moment is where truth has to become useful. A patient, caregiver, or clinician is trying to orient, trust, or act. The Experience Layer gives that moment shape. That layer is also already doing its work.",
+        middle:
+          "Between source truth and decision moment lives a third layer that has not yet been defined. It is the practice that turns canonical objects into the experiences those moments need. Naming the middle, and bridging it, is the part the agency has been asked to help with.",
+        surface:
+          "A rendered surface is one expression of the truth. Search, AI answers, Care Hub pages, and request paths can vary without inventing new source truth every time.",
+        engineering:
+          "The engineering contract is simple: one source truth, one decision moment, one rendered surface, and one human validation gate, with the middle layer named between them so the bridge is inspectable.",
+        gate:
+          "The human gate keeps the system honest. Angie and Nalie are not approvers of a settled position. They are the ones who, with the agency's help, define the middle layer that has not yet been named.",
+        agreement:
+          "The Experience Agreement is the human validation layer. Runtime can prove the voice played; people decide whether it felt accurate, useful, and worthy of sending forward.",
+      };
+
+      const voiceOutput = document.querySelector("#voice-output");
+      const voiceQuestion = document.querySelector("#voice-question");
+      const voiceStatusText = document.querySelector("#voice-status-text");
+      let activeAudio = null;
+      let activeAudioUrl = null;
+      let activeVoiceController = null;
+      let voiceRequestId = 0;
+
+      function setVoiceStatus(text) {
+        voiceStatusText.textContent = text;
+      }
+
+      function answerQuestion(question) {
+        const text = question.toLowerCase();
+        if (text.includes("middle") || text.includes("gap") || text.includes("bridge") || text.includes("between") || text.includes("third")) return voiceAnswers.middle;
+        if (text.includes("moment") || text.includes("experience") || text.includes("decision")) return voiceAnswers.moment;
+        if (text.includes("surface") || text.includes("care hub") || text.includes("page") || text.includes("ai")) return voiceAnswers.surface;
+        if (text.includes("agreement") || text.includes("feel") || text.includes("validate")) return voiceAnswers.agreement;
+        if (text.includes("gate") || text.includes("human") || text.includes("angie") || text.includes("nalie") || text.includes("sue")) return voiceAnswers.gate;
+        if (text.includes("engineering") || text.includes("contract")) {
+          return voiceAnswers.engineering;
+        }
+        if (text.includes("voice") || text.includes("speak")) return "ONE Voice is positioning without persuasion. It lets confidence emerge from governed source truth, the decision moment, the middle layer that bridges them, the rendered surface, and human agreement.";
+        if (text.includes("ooux") || text.includes("source") || text.includes("truth")) return voiceAnswers.source;
+        return "OOUX and Experience Layer are already in place. The middle layer between them is yet to be defined — naming and bridging it is the work this room is here to begin.";
+      }
+
+      function setVoiceButtonState(button, state) {
+        document.querySelectorAll("[data-voice]").forEach((voiceButton) => {
+          voiceButton.classList.remove("is-active", "is-loading");
+          voiceButton.setAttribute("aria-pressed", "false");
+        });
+        if (!button) return;
+        button.classList.add("is-active");
+        if (state === "loading") button.classList.add("is-loading");
+        button.setAttribute("aria-pressed", "true");
+      }
+
+      function stopAudio(status = "Canonical voice ready") {
+        voiceRequestId += 1;
+        if (activeVoiceController) {
+          activeVoiceController.abort();
+          activeVoiceController = null;
+        }
+        if (activeAudio) {
+          activeAudio.pause();
+          activeAudio.removeAttribute("src");
+          activeAudio = null;
+        }
+        if (activeAudioUrl) {
+          URL.revokeObjectURL(activeAudioUrl);
+          activeAudioUrl = null;
+        }
+        setVoiceButtonState(null);
+        setVoiceStatus(status);
+      }
+
+      async function speak(text, triggerButton = null) {
+        voiceOutput.textContent = text;
+        stopAudio("Requesting canonical voice");
+        const requestId = ++voiceRequestId;
+        activeVoiceController = new AbortController();
+        setVoiceButtonState(triggerButton, "loading");
+
+        try {
+          const response = await fetch("/api/mayo-speak", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text }),
+            signal: activeVoiceController.signal,
+          });
+          if (!response.ok) throw new Error(`voice ${response.status}`);
+          if (requestId !== voiceRequestId) return;
+
+          const blob = await response.blob();
+          if (requestId !== voiceRequestId) return;
+          activeAudioUrl = URL.createObjectURL(blob);
+          activeAudio = new Audio(activeAudioUrl);
+          activeAudio.onended = () => {
+            if (requestId === voiceRequestId) stopAudio("Canonical voice ready");
+          };
+          activeAudio.onerror = () => {
+            if (requestId === voiceRequestId) stopAudio("Voice unavailable; text preserved");
+          };
+          setVoiceStatus("Playing canonical voice");
+          setVoiceButtonState(triggerButton, "active");
+          await activeAudio.play();
+        } catch {
+          if (requestId === voiceRequestId) stopAudio("Voice unavailable; text preserved");
+        }
+      }
+
+      document.querySelectorAll("[data-voice]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const text = voiceAnswers[button.dataset.voice];
+          if (!text) return;
+          if (button.hasAttribute("data-scroll-voice")) {
+            document.querySelector("#voice").scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+          speak(text, button);
+        });
+      });
+
+      document.querySelector("#voice-ask").addEventListener("click", () => {
+        speak(answerQuestion(voiceQuestion.value.trim()));
+      });
+
+      voiceQuestion.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") speak(answerQuestion(voiceQuestion.value.trim()));
+      });
+
+      document.querySelector("#voice-stop").addEventListener("click", () => {
+        stopAudio();
+      });
+
+      const zoom = document.querySelector("#zoom");
+      zoom.addEventListener("input", () => {
+        document.documentElement.style.setProperty("--scale", zoom.value);
+      });
+
+      const pageRows = [...document.querySelectorAll(".page-row")];
+      const pageButtons = [...document.querySelectorAll("[data-target-page]")];
+      const previousPage = document.querySelector("#prev-page");
+      const nextPage = document.querySelector("#next-page");
+      let activePage = 1;
+
+      function setActivePage(page) {
+        activePage = Math.min(Math.max(page, 1), pageRows.length);
+        pageRows.forEach((row) => {
+          row.classList.toggle("is-active", Number(row.dataset.page) === activePage);
+        });
+        pageButtons.forEach((button) => {
+          const isActive = Number(button.dataset.targetPage) === activePage;
+          button.classList.toggle("is-active", isActive);
+          button.setAttribute("aria-pressed", String(isActive));
+        });
+        previousPage.disabled = activePage === 1;
+        nextPage.disabled = activePage === pageRows.length;
+      }
+
+      pageButtons.forEach((button) => {
+        button.addEventListener("click", () => setActivePage(Number(button.dataset.targetPage)));
+      });
+      previousPage.addEventListener("click", () => setActivePage(activePage - 1));
+      nextPage.addEventListener("click", () => setActivePage(activePage + 1));
+      setActivePage(activePage);
+    </script>
+  </body>
+</html>
