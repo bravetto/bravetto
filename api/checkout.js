@@ -10,6 +10,19 @@ const ALLOWED_ORIGINS = [
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
+const AIGUARDIAN_SLUGS = new Set([
+  "aiguardian-basic",
+  "aiguardian-pro",
+  "consciousness-mcp",
+]);
+
+function success_url_for(slug) {
+  if (AIGUARDIAN_SLUGS.has(slug)) {
+    return "https://mcp.aiguardian.ai/keys";
+  }
+  return `${process.env.SITE_URL || "https://bravetto.com"}/welcome?session_id={CHECKOUT_SESSION_ID}`;
+}
+
 export default async function handler(req, res) {
   const origin = req.headers.origin;
   if (ALLOWED_ORIGINS.includes(origin)) {
@@ -54,7 +67,7 @@ export default async function handler(req, res) {
     const session_params = {
       mode: checkout_mode,
       line_items: [{ price: price_id, quantity: 1 }],
-      success_url: `${process.env.SITE_URL || "https://bravetto.com"}/welcome?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: success_url_for(slug),
       cancel_url: `${process.env.SITE_URL || "https://bravetto.com"}/pricing`,
       metadata: {
         source: "bravetto-catalog",
