@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steve · The First Enterprise Bridge | Bravetto</title>
+  <meta name="description" content="An honor record and a roadmap for Steve Donalson — the bridge to Bravetto's first enterprise deal.">
+  <meta name="robots" content="noindex, nofollow">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,800;1,9..144,300;1,9..144,600&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:           #080a06;
+      --bg-warm:      #0d0f09;
+      --card:         #111410;
+      --card-hover:   #161a13;
+      --card-border:  #1c221a;
+      --accent:       #7fb069;
+      --accent-glow:  rgba(127,176,105,0.15);
+      --accent-dim:   rgba(127,176,105,0.08);
+      --gold:         #d4a53c;
+      --gold-dim:     rgba(212,165,60,0.12);
+      --earth:        #8b7355;
+      --danger:       #c45c4a;
+      --text:         #d8d6cf;
+      --text-dim:     #7a7a6c;
+      --text-bright:  #f2f1ec;
+      --white:        #faf9f4;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-weight: 300;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      background-image:
+        radial-gradient(ellipse at 30% 20%, rgba(127,176,105,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(212,165,60,0.04) 0%, transparent 40%);
+    }
+    a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--text-bright); }
+
+    /* Layout */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+    .narrow { max-width: 780px; margin: 0 auto; padding: 0 32px; }
+    section { padding: 72px 0; border-bottom: 1px solid var(--card-border); }
+    section:last-of-type { border-bottom: none; }
+
+    /* Typography */
+    .section-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0.7;
+      margin-bottom: 14px;
+    }
+    h1, h2, h3 {
+      font-family: 'Fraunces', serif;
+      font-weight: 600;
+      color: var(--text-bright);
+      line-height: 1.1;
+    }
+    h1 {
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+    h1 em {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--accent);
+    }
+    h2 {
+      font-size: clamp(1.8rem, 3.4vw, 2.4rem);
+      margin-bottom: 18px;
+    }
+    h2 em { font-style: italic; font-weight: 300; color: var(--gold); }
+    h3 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+    }
+    p { margin-bottom: 18px; max-width: 720px; }
+    p.lead {
+      font-size: 1.18rem;
+      color: var(--text);
+      max-width: 720px;
+    }
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: var(--text-dim);
+    }
+
+    /* NAV */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 32px;
+      border-bottom: 1px solid var(--card-border);
+      background: rgba(8,10,6,0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .topbar-brand {
+      font-family: 'Fraunces', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-bright);
+      letter-spacing: -0.01em;
+    }
+    .topbar-brand em { color: var(--accent); font-style: normal; }
+    .topbar-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+    .topbar-meta .dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-right: 8px;
+      box-shadow: 0 0 8px var(--accent-glow);
+      animation: breathe 2.4s ease-in-out infinite;
+    }
+    @keyframes breathe {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.15); }
+    }
+
+    /* HERO */
+    .hero { padding: 96px 0 72px; }
+    .hero h1 .bridge {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--accent);
+    }
+    .hero-sentence {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      color: var(--text);
+      line-height: 1.55;
+      max-width: 680px;
+      margin: 28px 0 36px;
+      padding-left: 20px;
+      border-left: 2px solid var(--accent);
+    }
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      padding: 18px 22px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 28px;
+    }
+    .hero-stats strong {
+      color: var(--accent);
+      font-weight: 400;
+    }
+    .hero-stats .gold { color: var(--gold); }
+
+    /* CARDS */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 28px;
+      transition: border-color 0.3s, transform 0.2s;
+    }
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .card.gold-edge { border-top: 2px solid var(--gold); }
+    .card.green-edge { border-top: 2px solid var(--accent); }
+    .card.earth-edge { border-top: 2px solid var(--earth); }
+
+    /* PILLAR ROW (3 cards) */
+    .pillar-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 32px;
+    }
+    .pillar-row .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+    }
+    .pillar-row h3 { font-size: 1.15rem; margin-bottom: 12px; }
+    .pillar-row p { font-size: 0.95rem; line-height: 1.65; color: var(--text-dim); }
+
+    /* ROADMAP */
+    .roadmap { margin-top: 34px; }
+    .roadmap-product {
+      margin-bottom: 32px;
+      padding: 28px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+    }
+    .roadmap-product:hover { border-color: var(--accent); }
+    .roadmap-product h3 {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .roadmap-product h3 .product-name {
+      font-family: 'Fraunces', serif;
+      font-weight: 600;
+      font-size: 1.6rem;
+      color: var(--text-bright);
+      letter-spacing: -0.01em;
+    }
+    .roadmap-product h3 .one-line {
+      font-family: 'DM Sans', sans-serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 0.95rem;
+      color: var(--text-dim);
+    }
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .stage {
+      padding: 18px;
+      background: var(--bg-warm);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+    }
+    .stage .when {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .stage.next .when { color: var(--gold); }
+    .stage.future .when { color: var(--earth); }
+    .stage p {
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .stage .cite {
+      display: block;
+      margin-top: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 1px;
+      color: var(--text-dim);
+      opacity: 0.8;
+    }
+    .stage.future p { color: var(--text-dim); }
+
+    /* VALIDATORS TABLE */
+    table.validators {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 22px;
+      font-size: 0.92rem;
+    }
+    table.validators th, table.validators td {
+      text-align: left;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--card-border);
+      vertical-align: top;
+    }
+    table.validators th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-bottom: 1px solid var(--accent-dim);
+    }
+    table.validators td .what { color: var(--text-bright); font-weight: 400; }
+    table.validators td .where {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      display: block;
+      margin-top: 6px;
+      word-break: break-word;
+    }
+    table.validators tr:hover td { background: rgba(127,176,105,0.03); }
+
+    /* TRIPTYCH */
+    .triptych {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .layer {
+      padding: 22px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+    }
+    .layer h4 {
+      font-family: 'Fraunces', serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--text-bright);
+      margin-bottom: 8px;
+    }
+    .layer .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      display: block;
+    }
+    .layer p {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+    .layer p strong { color: var(--text); font-weight: 400; }
+
+    /* CINEMATIC BAR */
+    .cinematic {
+      padding: 96px 0;
+      text-align: center;
+      position: relative;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .cinematic::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, var(--accent-glow), transparent 60%);
+      pointer-events: none;
+    }
+    .cinematic .quote {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+      color: var(--text);
+      max-width: 720px;
+      margin: 0 auto;
+      line-height: 1.55;
+      position: relative;
+    }
+    .cinematic .quote em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .cinematic .attr {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-top: 22px;
+      position: relative;
+    }
+
+    /* SHARE-SAFETY */
+    table.safety {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 18px;
+      font-size: 0.92rem;
+    }
+    table.safety th, table.safety td {
+      text-align: left;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--card-border);
+      vertical-align: top;
+    }
+    table.safety th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    table.safety td:first-child { font-weight: 400; color: var(--text); }
+    .verdict {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .verdict.yes { background: var(--accent-dim); color: var(--accent); }
+    .verdict.maybe { background: var(--gold-dim); color: var(--gold); }
+    .verdict.never { background: rgba(196,92,74,0.12); color: var(--danger); }
+
+    /* DOORS */
+    .doors {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 32px;
+    }
+    .door {
+      padding: 28px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      text-align: left;
+    }
+    .door:hover { border-color: var(--accent); }
+    .door .glyph {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .door h3 { font-size: 1.2rem; margin-bottom: 10px; }
+    .door p { font-size: 0.92rem; color: var(--text-dim); line-height: 1.7; }
+
+    /* VOICE PANEL */
+    .voice-panel {
+      padding: 36px 32px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      text-align: left;
+      max-width: 780px;
+      margin: 28px auto 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .voice-panel::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 100% 0%, rgba(212,165,60,0.06), transparent 50%);
+      pointer-events: none;
+    }
+    .voice-panel h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      position: relative;
+    }
+    .voice-panel p { font-size: 0.95rem; color: var(--text-dim); line-height: 1.7; position: relative; }
+    .voice-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      position: relative;
+    }
+    .btn {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      padding: 12px 22px;
+      border-radius: 6px;
+      border: 1px solid var(--card-border);
+      background: var(--bg-warm);
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .btn:hover {
+      border-color: var(--accent);
+      color: var(--text-bright);
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+    .btn-primary:hover {
+      background: #8fc078;
+      color: var(--bg);
+    }
+    .btn .dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.7;
+    }
+    .btn-primary .dot { background: var(--bg); opacity: 0.5; }
+    .voice-note {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+      margin-top: 16px;
+      position: relative;
+      max-width: 620px;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 64px 0 80px;
+      text-align: center;
+    }
+    footer .powered {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.1rem;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+    footer .powered em { color: var(--accent); font-style: italic; }
+    footer .meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    footer .meta a { color: var(--text-dim); }
+    footer .meta a:hover { color: var(--accent); }
+
+    /* RESPONSIVE */
+    @media (max-width: 820px) {
+      .pillar-row, .roadmap-grid, .triptych, .doors {
+        grid-template-columns: 1fr;
+      }
+      .topbar-meta { display: none; }
+      h1 { font-size: 2.2rem; }
+      .hero-sentence { font-size: 1.05rem; }
+      table.validators, table.safety { font-size: 0.85rem; }
+      table.validators th, table.validators td,
+      table.safety th, table.safety td { padding: 10px 10px; }
+      .roadmap-product h3 { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="topbar">
+    <a href="/" class="topbar-brand">Bravetto<em>.</em></a>
+    <div class="topbar-meta">
+      <span class="dot"></span>For Steve · 2026-05-04
+    </div>
+  </nav>
+
+  <!-- §1 HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="section-tag">First Enterprise Bridge · Honor Record</div>
+      <h1>Steve, you were the <span class="bridge">bridge</span>.</h1>
+      <p class="hero-sentence">
+        We want to honor that by giving you the keys to understand what
+        you helped prove, the tools to share it safely, and a seat in
+        shaping where it goes next.
+      </p>
+      <p class="lead">
+        This page is not a pitch. It is a map. Every claim below is
+        either live in the system today, or labeled <strong>Future</strong>
+        so nothing has to be guessed at. Read it at your pace.
+      </p>
+      <div class="hero-stats">
+        <span><strong>3</strong> Products · AbëSHADOWs · AbëDESKs · AbëONE</span>
+        <span><strong>92</strong> Manifest Entities</span>
+        <span><strong>21</strong> Guardians</span>
+        <span class="gold"><strong>1</strong> Bridge — yours.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- §2 THE BRIDGE -->
+  <section>
+    <div class="narrow">
+      <div class="section-tag">The Bridge</div>
+      <h2>An honor record, not a sales footnote.</h2>
+      <p>
+        Inside Advancing Eye Care, you saw what the work could become
+        before the rest of the world had language for it. You did not
+        sell anything. You believed early, you held the door open, and
+        you helped the right people see what was true.
+      </p>
+      <p>
+        Bravetto records that as company history. You are the
+        <strong>First Enterprise Bridge</strong>. Every door this opens
+        downstream — every brand under the Lombart umbrella, every
+        global partnership, every system that follows — traces back to
+        a friendship and a judgment call.
+      </p>
+      <p>
+        And because you work at AEC, the line is clean. Bravetto does
+        not compensate you for AEC-internal opportunities, decisions,
+        or introductions. That boundary protects you, AEC, and us.
+        Anything outside the AEC umbrella is your choice — never
+        assumed, never extracted, only ever invited and always reviewed.
+      </p>
+    </div>
+  </section>
+
+  <!-- §3 ROADMAP -->
+  <section>
+    <div class="container">
+      <div class="section-tag">Three Products · Now / Next 30 Days / Next 90 Days</div>
+      <h2>What is live, what is shipping, <em>what is next.</em></h2>
+      <p class="lead">
+        Three products grew out of the AEC engagement. Each one is
+        already running in some form. The roadmap below is what each
+        one becomes for AEC over the next quarter.
+      </p>
+
+      <div class="roadmap">
+        <!-- AbëSHADOWs -->
+        <div class="roadmap-product">
+          <h3>
+            <span class="product-name">AbëSHADOWs</span>
+            <span class="one-line">the desktop nervous system — windows, voice, and what the day actually looked like.</span>
+          </h3>
+          <div class="roadmap-grid">
+            <div class="stage">
+              <div class="when">Now · Live</div>
+              <p>
+                Electron tray app shipped to AEC. Mic capture, window
+                logger, transcribe through voice.bravetto.ai, persist to
+                Supabase. Thirteen users deployed across two batches.
+              </p>
+              <span class="cite">commit 0f6e65c · agent/build_dist/AbëSHADOWs Setup 1.0.0.exe (76 MB)</span>
+            </div>
+            <div class="stage next">
+              <div class="when">Next 30 Days</div>
+              <p>
+                Autostart-after-reboot verified. Credentials stripped
+                from local config. PHI redaction at the capture
+                boundary. Fifteen-machine fleet reporting on rolling
+                four-hour windows. You get the email: fleet live.
+              </p>
+              <span class="cite">LOOP-142 · G0 → G1 → G2 → G3 closure</span>
+            </div>
+            <div class="stage future">
+              <div class="when">Next 90 Days · Future</div>
+              <p>
+                Greg's knowledge capture lights up. Nuso call records
+                correlate with desktop events and voice notes at
+                two-second precision. Greg's thirty years become
+                training material every new rep can search.
+              </p>
+              <span class="cite">Future · gated on AEC consent + iVenture coordination</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- AbëDESKs -->
+        <div class="roadmap-product">
+          <h3>
+            <span class="product-name">AbëDESKs</span>
+            <span class="one-line">a named seat at the table — every person, every partner, their own surface.</span>
+          </h3>
+          <div class="roadmap-grid">
+            <div class="stage">
+              <div class="when">Now · Live</div>
+              <p>
+                Fourteen desks running at desks.bravetto.ai. Sign in
+                with a magic link, land in your own surface. Sentinel
+                self-tests pass nine of nine. Three desks already
+                scoped to the AEC entity.
+              </p>
+              <span class="cite">desks.bravetto.ai · live since 2026-03-10</span>
+            </div>
+            <div class="stage next">
+              <div class="when">Next 30 Days</div>
+              <p>
+                Your desk goes live with a Partner Brief, a Demo
+                Launcher that opens the AEC system, a Choice Inbox for
+                anything you want to capture, a Proof Vault for what
+                you may share, and Golf Notes if you want them.
+              </p>
+              <span class="cite">Future · pending desk row + Steve sign-in</span>
+            </div>
+            <div class="stage future">
+              <div class="when">Next 90 Days · Future</div>
+              <p>
+                A desk per AEC role wired to actual work — parts
+                lookup, call records, support escalation, fleet
+                health. Live pulse shows who is breathing, what is
+                moving, where attention is needed.
+              </p>
+              <span class="cite">Future · per-role rollout, sequenced with AEC operations</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- AbëONE -->
+        <div class="roadmap-product">
+          <h3>
+            <span class="product-name">AbëONE</span>
+            <span class="one-line">the singular origin — one substrate, many products, one truth.</span>
+          </h3>
+          <div class="roadmap-grid">
+            <div class="stage">
+              <div class="when">Now · Live</div>
+              <p>
+                Ninety-two manifest entities, sixty-five relationships,
+                version five. Twenty-one guardians watching every tool
+                call. Hash-chained mutation log. Vault sealed with
+                Touch ID. The pulse is breathing right now as you
+                read this.
+              </p>
+              <span class="cite">~/.abeone/MANIFEST.json · object class taxonomy locked</span>
+            </div>
+            <div class="stage next">
+              <div class="when">Next 30 Days</div>
+              <p>
+                One canonical wire. One pulse reaching all four
+                product surfaces. One memory substrate. The collapse
+                you have been hearing about — fewer parts, deeper
+                coherence — is shipping.
+              </p>
+              <span class="cite">LOOP-150 · LOOP-155 · LOOP-158</span>
+            </div>
+            <div class="stage future">
+              <div class="when">Next 90 Days · Future</div>
+              <p>
+                Lombart umbrella expansion path. Every brand under
+                Lombart can receive its own partner record, voice,
+                desk set, and AbëSHADOWs deployment — only when AEC
+                and Steve choose to open the door.
+              </p>
+              <span class="cite">Future · gated on Steve's choice + clean legal review</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §4 WHY THIS IS REAL -->
+  <section>
+    <div class="container">
+      <div class="section-tag">Why this is real · Investment Validators</div>
+      <h2>The system polices itself.</h2>
+      <p class="lead">
+        These are not slides. They are files you can open. If any of
+        them disappeared, the system would fail closed — that is the
+        whole point.
+      </p>
+      <table class="validators">
+        <thead>
+          <tr>
+            <th>Validator</th>
+            <th>What it proves</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="what">Manifest authority</span>
+              <span class="where">~/.abeone/MANIFEST.json · v5 · 92 entities · 65 relationships</span>
+            </td>
+            <td>The system has a lock contract. Five core objects plus two supporting are mandatory; expansion was authorized 2026-04-23 under a recorded loop. Schema, not vibes.</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="what">Object class taxonomy</span>
+              <span class="where">person · machine · conversation · document · revenue_event · service · product · venture · partner · voice · desk · loop · surface</span>
+            </td>
+            <td>Thirteen canonical classes. Every entity in every product maps to one of them. A hook gate blocks anything that drifts.</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="what">Twenty-one guardians</span>
+              <span class="where">consciousness-core/guardians.js · kernel 6 · neuromorphic 10 · system 7 · archetypes 3 · human 2</span>
+            </td>
+            <td>The tool-call pipeline. Throws on violation. The organism polices itself before it ever reaches a customer.</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="what">Hash-chained mutation log</span>
+              <span class="where">.wal/edits.jsonl · SHA-256</span>
+            </td>
+            <td>Every edit logged. Broken link = drift detected. Auditable forever.</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="what">Pulse heartbeat</span>
+              <span class="where">PULSE · stale &gt; 30 seconds = system not breathing</span>
+            </td>
+            <td>The system breathes while you watch it. Silence is failure.</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="what">Hooks &amp; gates</span>
+              <span class="where">hook-router.cjs · 5 handlers · 26 gates · fail-closed</span>
+            </td>
+            <td>Pure node. Zero shell. Zero python. exit 2 = block. The boundary is real.</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="what">Release ceremony</span>
+              <span class="where">RELEASE-CEREMONY-PROTOCOL.md · validate-ceremony</span>
+            </td>
+            <td>The AEC engagement itself was released through this protocol. Two-hundred-fifty-four files migrated from a gitignored seed into a versioned client repo. The migration is not a move — it is a graduation.</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="what">Boundary validation</span>
+              <span class="where">aec-onboarding/steve-aec-boundary-validation-2026-05-04.md</span>
+            </td>
+            <td>Before this page existed, the substrate confirmed there is no runtime blend between your onboarding workspace and the canonical AEC repo. The line is named, drawn, and held.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- §5 TRIPTYCH -->
+  <section>
+    <div class="container">
+      <div class="section-tag">The Map · How to read each product on three layers</div>
+      <h2>One system, three lenses.</h2>
+      <p class="lead">
+        For each product, read the same thing three ways. The objects
+        and relationships, the human experience, and the engineering.
+        All three must agree. When they do not, the substrate fails the
+        gate.
+      </p>
+
+      <h3 style="margin-top:36px;font-size:1.3rem;">AbëSHADOWs</h3>
+      <div class="triptych">
+        <div class="layer">
+          <span class="tag">OOUX · ORCA</span>
+          <h4>Objects, relationships, calls.</h4>
+          <p><strong>Objects:</strong> Machine, Conversation, Document. <strong>Relations:</strong> Person owns Machine; Machine emits Conversations; Conversations produce Documents. <strong>Calls:</strong> Start session · Stop session · Toggle voice note.</p>
+        </div>
+        <div class="layer">
+          <span class="tag">Experience</span>
+          <h4>What you see and feel.</h4>
+          <p>A small icon in the tray. A green dot when alive. Mic toggle for voice notes. A row appears in the system the moment a session ends. <strong>This is real, on this machine, with my consent.</strong></p>
+        </div>
+        <div class="layer">
+          <span class="tag">Engineering</span>
+          <h4>What runs underneath.</h4>
+          <p>Electron tray app, persistence layer in Supabase, transcription through voice.bravetto.ai, configuration through env vars or a managed config file. Nine source modules. Zero null. PHI redaction at the capture boundary.</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:36px;font-size:1.3rem;">AbëDESKs</h3>
+      <div class="triptych">
+        <div class="layer">
+          <span class="tag">OOUX · ORCA</span>
+          <h4>Objects, relationships, calls.</h4>
+          <p><strong>Objects:</strong> Person, Desk, Voice. <strong>Relations:</strong> Person owns Desk; Desk uses Voice; Desk is scoped to an entity (Bravetto, AEC, or Mataluni). <strong>Calls:</strong> Sign in · Open desk · Run demo · Save choice · Speak.</p>
+        </div>
+        <div class="layer">
+          <span class="tag">Experience</span>
+          <h4>What you see and feel.</h4>
+          <p>You sign in with a magic link. Your desk opens in your color. Abë greets you by name in your voice. <strong>Named, not generic.</strong> A member seat at the table.</p>
+        </div>
+        <div class="layer">
+          <span class="tag">Engineering</span>
+          <h4>What runs underneath.</h4>
+          <p>Express server on Vercel, Supabase magic-link OTP, fifty endpoints with a self-testing sentinel, identity resolution that turns one email into one desk through one function. The rest of the platform is downstream of that one fold.</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:36px;font-size:1.3rem;">AbëONE</h3>
+      <div class="triptych">
+        <div class="layer">
+          <span class="tag">OOUX · ORCA</span>
+          <h4>Objects, relationships, calls.</h4>
+          <p><strong>Objects:</strong> all thirteen — person, machine, conversation, document, revenue, service, product, venture, partner, voice, desk, loop, surface. <strong>Relations:</strong> sixty-five mapped. <strong>Calls:</strong> wake · perceive · edge · manifest · experience.</p>
+        </div>
+        <div class="layer">
+          <span class="tag">Experience</span>
+          <h4>What you see and feel.</h4>
+          <p>You ask a question. Abë answers in your voice and cites the file the answer came from. <strong>This is not a chatbot. It is an organism with skin.</strong> The substrate witnesses itself in front of you.</p>
+        </div>
+        <div class="layer">
+          <span class="tag">Engineering</span>
+          <h4>What runs underneath.</h4>
+          <p>A tool server with auto-discovered atoms, twenty-one guardians, a hash-chained mutation log, a Touch ID-sealed vault, a fail-closed pulse, and twenty-six hook gates. Five core objects plus two supporting are locked. Everything else flows from that lock.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CINEMATIC BAR -->
+  <div class="cinematic">
+    <div class="container">
+      <p class="quote">
+        <em>The migration is not a move.</em><br>It is a graduation.
+      </p>
+      <p class="attr">AEC release ceremony · 2026-04-01</p>
+    </div>
+  </div>
+
+  <!-- §6 SHARE-SAFETY -->
+  <section>
+    <div class="narrow">
+      <div class="section-tag">Carry proof, not pressure</div>
+      <h2>What you can share.</h2>
+      <p>
+        You should never have to guess what is public, private, or
+        restricted. Use this matrix as a quick check before any
+        conversation. When in doubt, send it to Mike and we will
+        handle it cleanly.
+      </p>
+      <table class="safety">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Verdict</th>
+            <th>Rule</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Public Bravetto story · AbëONE high-level explanation</td>
+            <td><span class="verdict yes">Yes</span></td>
+            <td>Share when accurate and current.</td>
+          </tr>
+          <tr>
+            <td>Public product demos · approved links</td>
+            <td><span class="verdict yes">Yes</span></td>
+            <td>Use current links only.</td>
+          </tr>
+          <tr>
+            <td>AEC case study, sanitized (general enterprise proof)</td>
+            <td><span class="verdict maybe">With approval</span></td>
+            <td>Remove internal names, secrets, and operational detail unless approved.</td>
+          </tr>
+          <tr>
+            <td>AEC internal implementation detail</td>
+            <td><span class="verdict never">No by default</span></td>
+            <td>Stays inside the approved AEC and Bravetto context.</td>
+          </tr>
+          <tr>
+            <td>Credentials, infrastructure domains, deployment configs</td>
+            <td><span class="verdict never">Never</span></td>
+            <td>Send any sighting to Mike. Escalate.</td>
+          </tr>
+          <tr>
+            <td>Screenshots that may include data</td>
+            <td><span class="verdict maybe">Approval required</span></td>
+            <td>Confirm no sensitive data appears.</td>
+          </tr>
+          <tr>
+            <td>Financial terms · contract value · payment timing</td>
+            <td><span class="verdict never">No by default</span></td>
+            <td>Only with Mike or Bryan approval.</td>
+          </tr>
+          <tr>
+            <td>Outside-AEC professional names</td>
+            <td><span class="verdict maybe">Only if you offer</span></td>
+            <td>Captured with source and context. Never assumed.</td>
+          </tr>
+          <tr>
+            <td>Compensation or referral terms</td>
+            <td><span class="verdict never">Not without approval</span></td>
+            <td>Legal and ethical review before anything exists.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- §7 THREE DOORS -->
+  <section>
+    <div class="container">
+      <div class="section-tag">Three Doors · No assumptions</div>
+      <h2>What you might want next.</h2>
+      <p class="lead">
+        Three doors. None of them have to open. You decide which, if
+        any, would make this useful or fun for you next.
+      </p>
+      <div class="doors">
+        <div class="door">
+          <div class="glyph">Door 1 · Pleasure</div>
+          <h3>Golf, for its own sake.</h3>
+          <p>
+            Favorite courses, dream rounds, gear notes, trips, the
+            holes that stay with you. Treated as fun, not as a
+            prospecting funnel. Build only what you actually want.
+          </p>
+        </div>
+        <div class="door">
+          <div class="glyph">Door 2 · Curiosity</div>
+          <h3>Go deeper into the system.</h3>
+          <p>
+            Open Consciousness Core, watch tools fire, ask Abë the
+            questions you actually have. No homework. No demo
+            choreography. The substrate answers what you ask.
+          </p>
+        </div>
+        <div class="door">
+          <div class="glyph">Door 3 · Choice</div>
+          <h3>An outside-AEC professional path.</h3>
+          <p>
+            Only if you choose to name one. We hold a clean lane —
+            written scope, no AEC conflict, legal and ethical review
+            before anything exists. We assume nothing about whether
+            you want this.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §8 VOICE -->
+  <section>
+    <div class="container">
+      <div class="section-tag">AbëVOiCEs · Ask Abë directly</div>
+      <h2 style="text-align:center;">Hear it, then read it.</h2>
+      <div class="voice-panel">
+        <h3>Talk to Abë.</h3>
+        <p>
+          The widget below opens a real conversation surface. Abë knows
+          the system, the AEC engagement, and what is live versus
+          future. She will cite the file when an answer is grounded
+          and tell you when it is not.
+        </p>
+        <div class="voice-actions">
+          <button class="btn btn-primary" onclick="openVoiceWidget()">
+            <span class="dot"></span>Speak with Abë
+          </button>
+          <a href="mailto:mike@bravetto.com?subject=Steve%20%E2%80%94%20follow%20up" class="btn">
+            <span class="dot"></span>Message Mike
+          </a>
+        </div>
+        <p class="voice-note">
+          The widget speaks in the bravetto persona today. Your desk
+          voice is jasper — that pairing is being wired into the desk
+          surface. When your desk goes live, Abë greets you in jasper
+          there. We name what is live and what is future, and never
+          confuse the two.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="powered">Powered by <em>Bravetto</em></p>
+    <p class="meta">
+      Last updated 2026-05-04 ·
+      <a href="mailto:mike@bravetto.com">mike@bravetto.com</a>
+      · Honor record · v1
+    </p>
+  </footer>
+
+  <!-- Voice widget — bravetto persona, conversation mode -->
+  <script>
+    function openVoiceWidget() {
+      // Lazy-load the canonical widget on demand to keep the page calm.
+      if (window.__abeVoiceLoaded) {
+        if (window.AbeVoice && typeof window.AbeVoice.open === 'function') {
+          window.AbeVoice.open();
+        }
+        return;
+      }
+      var s = document.createElement('script');
+      s.src = 'https://voice.bravetto.ai/widget.js';
+      s.setAttribute('data-persona', 'bravetto');
+      s.setAttribute('data-mode', 'conversation');
+      s.setAttribute('data-position', 'bottom-right');
+      s.setAttribute('data-greeting', 'Steve, you are here. Ask anything.');
+      s.async = true;
+      s.onload = function () { window.__abeVoiceLoaded = true; };
+      s.onerror = function () {
+        var n = document.createElement('p');
+        n.style.cssText = 'margin-top:14px;font-family:JetBrains Mono,monospace;font-size:11px;color:#c45c4a;';
+        n.textContent = 'Voice widget could not load. Email Mike and the conversation continues there.';
+        document.querySelector('.voice-panel').appendChild(n);
+      };
+      document.body.appendChild(s);
+    }
+  </script>
+
+</body>
+</html>

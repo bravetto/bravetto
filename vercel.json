@@ -2,6 +2,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
+    { "source": "/steve", "destination": "/steve.html" },
     { "source": "/inverse-innovation", "destination": "/inverse-innovation.html" },
     { "source": "/aec-proposal", "destination": "/aec-proposal.html" },
     { "source": "/war-room", "destination": "/war-room.html" },
