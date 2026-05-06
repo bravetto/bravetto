@@ -1,0 +1,37 @@
+name: Witness Stream Smoke
+
+on:
+  pull_request:
+    paths:
+      - "sales.html"
+      - "api/witness.js"
+      - "scripts/validate-witness-stream.js"
+      - "package.json"
+      - ".github/workflows/witness-stream-smoke.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "sales.html"
+      - "api/witness.js"
+      - "scripts/validate-witness-stream.js"
+      - "package.json"
+      - ".github/workflows/witness-stream-smoke.yml"
+
+jobs:
+  witness-stream-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Validate witness stream contract
+        run: npm run test:stream

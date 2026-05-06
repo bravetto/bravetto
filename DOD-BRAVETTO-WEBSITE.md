@@ -201,23 +201,23 @@ source: google fonts via preconnect (`fonts.googleapis.com`)
 
 ## testing
 
-### contract validation (`npm run test:sales`)
+### witness stream validation (`npm run test:stream`)
 
-- `scripts/validate-sales.js` -- 56-line node.js validator
-- required patterns: `#voice-overlay`, `#abe-trigger`, `.chip`, `<elevenlabs-convai`, elevenlabs cdn, fixed positioning
-- forbidden patterns: esm import of `@elevenlabs/client`, page-level `getUserMedia()`
-- exit 0 = valid, exit 1 = broken
+- `scripts/validate-witness-stream.js` -- node.js validator for the real organism witness path
+- required local contract: sales lead success calls `/api/witness`
+- required server contract: `api/witness.js` reads `MCP_AUTH_TOKEN` server-side and forwards to organism `/api/witness`
+- live contract: `npm run test:stream` requires `BRAVETTO_SITE_ORIGIN`, `ABEONE_MCP_ORIGIN`, and `MCP_AUTH_TOKEN`, then posts to live Bravetto `/api/witness`, organism `/api/witness`, and organism `/api/stream`
+- exit 0 = connected, exit 1 = broken
 
-### e2e tests (`npm run test:sales:e2e`)
+### released sales overlay tests
 
-- `tests/sales.spec.js` -- playwright browser test
-- validates: voice trigger opens/closes overlay, mic status shows ready, escape to close
-- config: `playwright.sales.config.js` -- headless, python http server on port 4173, 30s timeout, 1 retry
+- old `scripts/validate-sales.js`, `tests/sales.spec.js`, and `playwright.sales.config.js` released to `ancestors/test-sales-era-2026-05-06/`
+- reason: they validated a removed ElevenLabs overlay shape instead of the live witness/stream organism loop
 
-### ci/cd (`.github/workflows/sales-smoke.yml`)
+### ci/cd (`.github/workflows/witness-stream-smoke.yml`)
 
-- triggers: pr/push to `main` when `sales.html`, scripts, or tests change
-- steps: checkout, node 20 setup, playwright install, contract validation, e2e test
+- triggers: pr/push to `main` when `sales.html`, `api/witness.js`, stream validator, package scripts, or workflow change
+- steps: checkout, node 20 setup, install, witness stream contract validation
 
 ---
 
@@ -286,8 +286,11 @@ source: google fonts via preconnect (`fonts.googleapis.com`)
 
 ### gate 4: voice integration functional
 
-- [ ] `npm run test:sales` exits 0 (contract validation passes)
-- [ ] `npm run test:sales:e2e` passes (playwright overlay open/close/escape)
+- [ ] `npm run test:stream` exits 0 (witness stream contract validation passes)
+- [ ] `npm run test:stream` passes after deploy with `BRAVETTO_SITE_ORIGIN`, `ABEONE_MCP_ORIGIN`, and `MCP_AUTH_TOKEN`
+- [ ] sales lead capture reports through `/api/witness`
+- [ ] organism `/api/witness` accepts product witness events
+- [ ] organism `/api/stream` exposes text/event-stream replay
 - [ ] elevenlabs convai widget loads on sales.html
 - [ ] elevenlabs convai widget loads on abevoice.html
 - [ ] no esm import of @elevenlabs/client anywhere
@@ -324,9 +327,9 @@ source: google fonts via preconnect (`fonts.googleapis.com`)
 
 ### gate 9: ci/cd pipeline green
 
-- [ ] `.github/workflows/sales-smoke.yml` runs on pr/push to main
-- [ ] contract validation + e2e tests pass in ci
-- [ ] `scripts/validate-sales.js` validates current sales.html successfully
+- [ ] `.github/workflows/witness-stream-smoke.yml` runs on pr/push to main
+- [ ] witness stream validation passes in ci
+- [ ] `scripts/validate-witness-stream.js` validates the current sales witness bridge successfully
 - [ ] `scripts/update-submodules.sh` executes without error
 
 ### gate 10: seo & metadata
@@ -373,4 +376,4 @@ source: google fonts via preconnect (`fonts.googleapis.com`)
 
 **next owner**: controller (prioritize gate validation) or builder (execute fixes against failed gates)
 
-**recommended first action**: run `npm run test:sales` and `python3 -m http.server 8000` to validate current state against gates 1, 4, and 9.
+**recommended first action**: run `npm run test:stream` and, after deploy with organism credentials available, `npm run test:stream:live` to validate current state against gates 1, 4, and 9.

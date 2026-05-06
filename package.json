@@ -4,8 +4,8 @@
   "description": "bravetto company site — living canvas, elevenlabs voice widget, product demos",
   "private": true,
   "scripts": {
-    "test:sales": "node scripts/validate-sales.js",
-    "test:sales:e2e": "playwright test --config=playwright.sales.config.js"
+    "test:catalog": "node scripts/validate-product-catalog.mjs",
+    "test:stream": "node scripts/validate-witness-stream.js"
   },
   "devDependencies": {
     "@playwright/test": "^1.52.0"

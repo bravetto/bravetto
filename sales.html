@@ -434,7 +434,7 @@
               </p>
               <button
                 class="chip mt-4"
-                data-prompt="How does Abe's voice interaction work in practice?"
+                data-prompt="How does Abë's voice interaction work in practice?"
               >
                 Hear Ab&#235; in action
               </button>
@@ -541,7 +541,7 @@
     </section>
 
     <!-- ================================ -->
-    <!-- Abe Stage â€” Interactive Center    -->
+    <!-- Abë Stage â€” Interactive Center    -->
     <!-- ================================ -->
     <section id="abe-stage" class="py-32 px-8 bg-cream-mid">
       <div class="max-w-4xl mx-auto">
@@ -1392,7 +1392,7 @@
       </div>
     </footer>
 
-    <!-- Abe Voice â€” one script tag, all surfaces, all domains -->
+    <!-- Abë Voice â€” one script tag, all surfaces, all domains -->
     <script src="https://voice.bravetto.ai/widget.js" data-persona="bravetto" data-mode="conversation" async></script>
 
     <!-- ========================= -->
@@ -1535,8 +1535,20 @@
         })
           .then(function (r) {
             if (r.ok) {
-              msg.textContent = "Check your inbox. We will be in touch.";
-              msg.style.color = "#C9A227";
+              return fetch("/api/witness", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  email: email,
+                  domain: "bravetto.com/sales",
+                }),
+              }).then(function (witnessResponse) {
+                if (!witnessResponse.ok) {
+                  throw new Error("organism witness failed");
+                }
+                msg.textContent = "Check your inbox. We will be in touch.";
+                msg.style.color = "#C9A227";
+              });
             } else {
               msg.textContent =
                 "Something went wrong. Email ryan@bravetto.com directly.";
