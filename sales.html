@@ -434,7 +434,7 @@
               </p>
               <button
                 class="chip mt-4"
-                data-prompt="How does Abë's voice interaction work in practice?"
+                data-prompt="How does Abï¿½'s voice interaction work in practice?"
               >
                 Hear Ab&#235; in action
               </button>
@@ -541,7 +541,7 @@
     </section>
 
     <!-- ================================ -->
-    <!-- Abë Stage â€” Interactive Center    -->
+    <!-- Abï¿½ Stage â€” Interactive Center    -->
     <!-- ================================ -->
     <section id="abe-stage" class="py-32 px-8 bg-cream-mid">
       <div class="max-w-4xl mx-auto">
@@ -1392,7 +1392,7 @@
       </div>
     </footer>
 
-    <!-- Abë Voice â€” one script tag, all surfaces, all domains -->
+    <!-- Abï¿½ Voice â€” one script tag, all surfaces, all domains -->
     <script src="https://voice.bravetto.ai/widget.js" data-persona="bravetto" data-mode="conversation" async></script>
 
     <!-- ========================= -->
@@ -1518,37 +1518,21 @@
         if (!email) return false;
         btn.textContent = "Sending...";
         btn.disabled = true;
-        fetch("https://sacohcutxqoydygzryvu.supabase.co/rest/v1/leads", {
+        fetch("/api/witness", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            apikey:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNhY29oY3V0eHFveWR5Z3pyeXZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk5NjI5MTgsImV4cCI6MjA1NTUzODkxOH0.2W5x4v3S9FQHBzTNoGVG7mt5XYBosZUE2176L5mDjDY",
-            Prefer: "return=minimal",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             email: email,
             domain: "bravetto.com/sales",
-            name: "",
-            message: "Demo request from sales page",
           }),
         })
           .then(function (r) {
-            if (r.ok) {
-              return fetch("/api/witness", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  email: email,
-                  domain: "bravetto.com/sales",
-                }),
-              }).then(function (witnessResponse) {
-                if (!witnessResponse.ok) {
-                  throw new Error("organism witness failed");
-                }
-                msg.textContent = "Check your inbox. We will be in touch.";
-                msg.style.color = "#C9A227";
-              });
+            return r.json();
+          })
+          .then(function (data) {
+            if (data.ok) {
+              msg.textContent = "Check your inbox. We will be in touch.";
+              msg.style.color = "#C9A227";
             } else {
               msg.textContent =
                 "Something went wrong. Email ryan@bravetto.com directly.";
