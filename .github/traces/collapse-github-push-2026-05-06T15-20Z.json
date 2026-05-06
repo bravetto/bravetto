@@ -1,0 +1,187 @@
+{
+  "collapse_id": "collapse-github-push-2026-05-06T15-20Z",
+  "mode": "execute",
+  "created_at": "2026-05-06T15:20:00Z",
+  "skill": "collapse",
+  "trace": [
+    {
+      "phase": "TRACE 1/5 PERCEIVE",
+      "status": "PASS",
+      "evidence": [
+        "Canonical collapse skill read end to end from /Users/michaelmataluni/repos/cores/abe-skills/skills/collapse/SKILL.md.",
+        "MCP session_init returned READY.",
+        "MCP breathe returned CLEAR resonance, READY flow, zero active loops.",
+        "Dirty lanes were mapped across Bravetto, AEC, Abë Designs, Bravetto AI, and Bravetto Growth."
+      ]
+    },
+    {
+      "phase": "TRACE 2/5 HARVEST",
+      "status": "PASS",
+      "evidence": [
+        "MCP remember found the fresh learning that collapse trace-owned paths are stageable.",
+        "No new root beyond the prior correction survived: the post-collapse work was execution of the already encoded staging/push discipline."
+      ]
+    },
+    {
+      "phase": "TRACE 3/5 HOUSEKEEPING",
+      "status": "PASS",
+      "evidence": [
+        "One fresh collapse artifact was written.",
+        "pre_collapse_owned_files is empty because no code/doc files were edited after the prior collapse; only Git push orchestration occurred.",
+        "The artifact itself is the only file to commit for this invocation."
+      ]
+    },
+    {
+      "phase": "TRACE 4/5 ENCODE",
+      "status": "PASS_SHIPPING_ARC",
+      "evidence": [
+        "Encoding lives in pushed commits and in the prior collapse artifact.",
+        "This artifact records the remote-shipping evidence and the remaining local divergence without changing unrelated dirty files."
+      ]
+    },
+    {
+      "phase": "TRACE 5/5 WITNESS_AND_PORTAL",
+      "status": "PASS_TEXT_WITNESS",
+      "evidence": [
+        "Text witness and next-session portal are persisted here.",
+        "Voice witness was not required under collapse degradation rules."
+      ]
+    }
+  ],
+  "session_arc": {
+    "where_we_were": "We were at the precise place collapse is supposed to test: the trace existed, but the work had not fully landed. Mike challenged the gap directly: if not us, who reads the trace and stages it?",
+    "what_happened": "We used the trace-owned file list as the staging source, created path-scoped commits across Bravetto, AEC, Abë Designs, Bravetto AI, and Bravetto Growth, then pushed the GitHub-facing repos. The sandbox DNS failed first, escalation resolved AEC, Abë Designs, and Bravetto AI, and Bravetto Growth needed a temporary clean worktree because origin/main had advanced.",
+    "what_it_means": "Collapse is not just witness text. When ownership is explicit, the trace becomes executable staging data. Dirty sibling files are not an excuse to stop; they are the reason to stage from the manifest and prove the boundary.",
+    "what_we_chose_not_to_do": "We did not reset dirty worktrees, did not force-push, did not rewrite Bravetto Growth local main, and did not push this second collapse artifact because collapse commits only by contract."
+  },
+  "learnings": {
+    "root": [],
+    "leaf": [
+      "GitHub push orchestration succeeded after network escalation for AEC, Abë Designs, and Bravetto AI.",
+      "Bravetto Growth required a temp worktree because the local worktree had unrelated dirty state and origin/main had advanced.",
+      "Bravetto was already on origin/main; no push was needed for the prior Bravetto commits."
+    ]
+  },
+  "remote_push_evidence": [
+    {
+      "repo": "repos/products/bravetto",
+      "status": "already_on_origin_main",
+      "evidence": [
+        "c0185a2 fix: make Bravetto witness fail loudly",
+        "4e7930b docs: mark collapse housekeeping committed",
+        "origin/main at 9366760 already contained those commits"
+      ]
+    },
+    {
+      "repo": "repos/clients/advancing-eye-care",
+      "status": "pushed",
+      "sha": "22be9ea",
+      "remote": "github.com:bravetto/advancing-eye-care.git",
+      "ref": "main"
+    },
+    {
+      "repo": "repos/products/abedesigns",
+      "status": "pushed",
+      "sha": "fd2d11f",
+      "remote": "github.com:bravetto/abedesigns.git",
+      "ref": "main"
+    },
+    {
+      "repo": "repos/products/bravetto-ai",
+      "status": "pushed",
+      "sha": "2d768c0",
+      "remote": "github.com:bravetto/bravetto-ai.git",
+      "ref": "main",
+      "note": "GitHub reported branch-rule bypass and existing Dependabot vulnerabilities; push still succeeded."
+    },
+    {
+      "repo": "repos/products/bravetto-growth",
+      "status": "pushed_via_temp_worktree",
+      "local_sha": "ee2e23c",
+      "remote_sha": "0e69f0b",
+      "remote": "github.com:bravetto/bravetto-growth.git",
+      "ref": "main",
+      "note": "Remote had advanced by three commits; the local commit was cherry-picked onto origin/main in /private/tmp/bravetto-growth-push-20260506 and pushed as 0e69f0b."
+    }
+  ],
+  "bugs_gaps_deltas": [
+    {
+      "id": "BGD-001",
+      "severity": "P1",
+      "description": "Bravetto Growth local main remains ahead/behind origin/main because the remote push used a temporary worktree and the local worktree has unrelated dirty CLAUDE.md.",
+      "next_action": "After the dirty CLAUDE.md ownership is resolved, fast-forward or rebase local main onto origin/main; do not reset while dirty."
+    },
+    {
+      "id": "BGD-002",
+      "severity": "P2",
+      "description": "Several repos still contain unowned dirty files from concurrent windows.",
+      "next_action": "Treat them as separate owner lanes; do not include them in collapse commits."
+    },
+    {
+      "id": "BGD-003",
+      "severity": "P2",
+      "description": "This second collapse artifact is intentionally committed locally only unless the operator explicitly asks for another push.",
+      "next_action": "Push this artifact commit only if GitHub should receive the second collapse trace."
+    }
+  ],
+  "manifest_coherence": [
+    {
+      "type": "emergent_pattern",
+      "target": "collapse execution discipline",
+      "next_action": "When collapse owns an explicit path list, use it as the staging manifest unless a same-file conflict is observed.",
+      "priority": "P1"
+    },
+    {
+      "type": "surface_registration",
+      "target": "GitHub push lane",
+      "next_action": "For dirty local worktrees behind remote, prefer temporary clean worktree cherry-pick over stash/reset/rebase.",
+      "priority": "P1"
+    }
+  ],
+  "ownership": {
+    "pre_collapse_owned_files": [],
+    "collapse_artifact": "repos/products/bravetto/.github/traces/collapse-github-push-2026-05-06T15-20Z.json",
+    "unowned_dirty_files": [
+      "repos/products/bravetto/.github/agents/architecture-mapper.agent.md",
+      "repos/products/bravetto/.vscode/mcp.json",
+      "repos/products/bravetto/CLAUDE.md",
+      "repos/products/bravetto/abeone/index.html",
+      "repos/products/bravetto/api/mayo-speak.js",
+      "repos/products/bravetto/index.html",
+      "repos/products/bravetto/node_modules/.package-lock.json",
+      "repos/products/bravetto/robots.txt",
+      "repos/products/bravetto/sales.html",
+      "repos/products/bravetto/scripts/create-live-products.mjs",
+      "repos/products/bravetto/vercel.json",
+      "repos/products/bravetto/# Code Citations.md",
+      "repos/products/bravetto/VALIDATION-A11Y-PROPOSAL.md",
+      "repos/products/bravetto/abeone/ABEONE-CONVERGENCE-REPORT.md",
+      "repos/products/bravetto/abeone/react/abeone-bravetto/",
+      "repos/products/bravetto/api/chat.js",
+      "repos/products/bravetto/api/lead.js",
+      "repos/products/bravetto/gate/",
+      "repos/products/bravetto/lab-archive/abeone-architecture.html",
+      "repos/products/bravetto/scripts/sellable-catalog.mjs",
+      "repos/products/bravetto/scripts/validate-product-catalog.mjs",
+      "repos/products/bravetto/talk.html",
+      "repos/products/bravetto/the-room/",
+      "repos/clients/advancing-eye-care/* remaining dirty lane",
+      "repos/products/abedesigns/* remaining dirty lane",
+      "repos/products/bravetto-ai/CLAUDE.md",
+      "repos/products/bravetto-growth/CLAUDE.md"
+    ]
+  },
+  "next_session": {
+    "atomic_phase": "Sync local Bravetto Growth safely.",
+    "first_action": "Inspect repos/products/bravetto-growth/CLAUDE.md ownership, then decide whether to commit it, discard it with explicit approval, or preserve it before fast-forwarding local main to origin/main.",
+    "dod": {
+      "validation_command": "git -C /Users/michaelmataluni/repos/products/bravetto-growth status --short --branch && git -C /Users/michaelmataluni/repos/products/bravetto-growth log --oneline --left-right HEAD...origin/main",
+      "expected_result": "No unaccounted local commit is lost; local branch state is intentionally reconciled or explicitly deferred."
+    },
+    "open_items": [
+      "P1: Resolve Bravetto Growth local ahead/behind without reset while CLAUDE.md is dirty.",
+      "P1: Push this second collapse artifact if remote trace continuity is required.",
+      "P2: Leave all remaining dirty files in their owner lanes until explicitly assigned."
+    ]
+  }
+}
