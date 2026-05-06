@@ -33,6 +33,12 @@ async function fetch_with_timeout(url, options = {}) {
 }
 
 async function validate_live_bridge() {
+  const require_live = process.env.REQUIRE_LIVE_WITNESS === "1";
+  if (!require_live && !process.env.BRAVETTO_SITE_ORIGIN) {
+    console.log("skip - live bravetto /api/witness bridge (set REQUIRE_LIVE_WITNESS=1)");
+    return;
+  }
+
   const site_origin_env = process.env.BRAVETTO_SITE_ORIGIN;
   if (!site_origin_env) {
     fail("live bravetto /api/witness bridge origin", "BRAVETTO_SITE_ORIGIN is required");
@@ -60,10 +66,12 @@ async function validate_live_bridge() {
 async function validate_live_organism() {
   const origin = process.env.ABEONE_MCP_ORIGIN?.replace(/\/$/, "");
   const token = process.env.MCP_AUTH_TOKEN;
+  const require_live = process.env.REQUIRE_LIVE_WITNESS === "1";
 
   if (!origin || !token) {
     const message = "ABEONE_MCP_ORIGIN and MCP_AUTH_TOKEN are required";
-    fail("live organism witness credentials", message);
+    if (require_live) fail("live organism witness credentials", message);
+    else console.log(`skip - live organism witness credentials (${message})`);
     return;
   }
 

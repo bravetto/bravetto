@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "test:catalog": "node scripts/validate-product-catalog.mjs",
-    "test:stream": "node scripts/validate-witness-stream.js"
+    "test:stream": "node scripts/validate-witness-stream.js",
+    "test:stream:live": "REQUIRE_LIVE_WITNESS=1 node scripts/validate-witness-stream.js"
   },
   "devDependencies": {
     "@playwright/test": "^1.52.0"
