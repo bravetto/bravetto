@@ -20,7 +20,7 @@ function success_url_for(slug) {
   if (AIGUARDIAN_SLUGS.has(slug)) {
     return "https://mcp.aiguardian.ai/keys";
   }
-  return `${process.env.SITE_URL || "https://bravetto.com"}/welcome?session_id={CHECKOUT_SESSION_ID}`;
+  return `${process.env.SITE_URL}/welcome?session_id={CHECKOUT_SESSION_ID}`;
 }
 
 export default async function handler(req, res) {
@@ -63,12 +63,13 @@ export default async function handler(req, res) {
 
     const price = await stripe.prices.retrieve(price_id);
     const checkout_mode = price.type === "recurring" ? "subscription" : "payment";
+    if (!process.env.SITE_URL) throw new Error("SITE_URL is required for checkout");
 
     const session_params = {
       mode: checkout_mode,
       line_items: [{ price: price_id, quantity: 1 }],
       success_url: success_url_for(slug),
-      cancel_url: `${process.env.SITE_URL || "https://bravetto.com"}/pricing`,
+      cancel_url: `${process.env.SITE_URL}/pricing`,
       metadata: {
         source: "bravetto-catalog",
         product: slug || product.name,

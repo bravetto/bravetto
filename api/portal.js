@@ -32,10 +32,11 @@ export default async function handler(req, res) {
     if (!customers.data.length) {
       return res.status(404).json({ error: "no customer found with that email" });
     }
+    if (!process.env.SITE_URL) throw new Error("SITE_URL is required for billing portal");
 
     const portal_session = await stripe.billingPortal.sessions.create({
       customer: customers.data[0].id,
-      return_url: `${process.env.SITE_URL || "https://bravetto.com"}/pricing`,
+      return_url: `${process.env.SITE_URL}/pricing`,
     });
 
     return res.json({ url: portal_session.url });

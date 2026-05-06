@@ -1130,13 +1130,13 @@
                 <div class="node" data-search="secret injection env keys api">
                   <div class="node-title">secret injection</div>
                   <div class="node-desc">
-                    priority cascade: ENV vars → keys-core local → null.
-                    services: elevenlabs, openai, supabase_url, supabase_key.
+                    explicit env only. missing runtime keys fail closed.
+                    services: stripe, organism witness, the room gate, supabase.
                   </div>
                   <div class="node-tags">
                     <span class="node-tag">env vars</span>
-                    <span class="node-tag">keys-core</span>
-                    <span class="node-tag">4 services</span>
+                    <span class="node-tag">fail closed</span>
+                    <span class="node-tag">no fallback</span>
                   </div>
                 </div>
               </div>
@@ -1332,11 +1332,11 @@
                   <div class="node-desc">
                     pre-deploy and live validator. checks: sales lead calls
                     /api/witness, server bridge keeps token private, organism
-                    witness and stream endpoints respond when credentials exist.
+                    witness and stream endpoints respond with required credentials.
                   </div>
                   <div class="node-tags">
                     <span class="node-tag green">npm test:stream</span>
-                    <span class="node-tag green">npm test:stream:live</span>
+                    <span class="node-tag green">fail loud</span>
                   </div>
                 </div>
               </div>

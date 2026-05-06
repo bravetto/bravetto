@@ -1,0 +1,199 @@
+{
+  "collapse_id": "collapse-mcp-http-sync-2026-05-06T08-25Z",
+  "mode": "execute",
+  "created_at": "2026-05-06T08:25:00Z",
+  "skill": "collapse",
+  "trace": [
+    {
+      "phase": "TRACE 1/5 PERCEIVE",
+      "status": "PASS",
+      "evidence": [
+        "Canonical collapse skill read end to end from /Users/michaelmataluni/repos/cores/abe-skills/skills/collapse/SKILL.md.",
+        "MCP session_init returned READY.",
+        "MCP breathe returned CLEAR resonance, READY flow, zero active loops.",
+        "Dirty state was mapped repo-by-repo; unrelated dirty files were not staged."
+      ]
+    },
+    {
+      "phase": "TRACE 2/5 HARVEST",
+      "status": "PASS",
+      "evidence": [
+        "MCP remember found related prior learnings about runtime parity gates, MCP HTTP, and silent fallback drift.",
+        "One root learning survived SIP: transport parity is not product contract parity."
+      ]
+    },
+    {
+      "phase": "TRACE 3/5 HOUSEKEEPING",
+      "status": "DEFERRED",
+      "evidence": [
+        "One fresh collapse artifact was written.",
+        "Commits are deferred because the worktree contains large mixed dirty state from concurrent windows and this Codex surface cannot safely prove same-file ownership for every prior edit after compaction.",
+        "No broad staging was performed."
+      ]
+    },
+    {
+      "phase": "TRACE 4/5 ENCODE",
+      "status": "PASS_WITH_SHIPPED_CODE_AND_PORTAL",
+      "evidence": [
+        "Pronunciation changes were encoded in canonical identity prompts and product prompts.",
+        "No-fallback behavior was encoded in product/runtime code where already present in the worktree.",
+        "The remaining MCP HTTP/product REST distinction is encoded as the next-window atomic phase."
+      ]
+    },
+    {
+      "phase": "TRACE 5/5 WITNESS_AND_PORTAL",
+      "status": "PASS_TEXT_WITNESS",
+      "evidence": [
+        "Text witness and next-session portal are persisted in this artifact.",
+        "Voice witness was not required; text witness is sufficient under the canonical degradation rule."
+      ]
+    }
+  ],
+  "session_arc": {
+    "where_we_were": "We entered with Bravetto, AbëONE, voice-service, and Consciousness MCP partially overlapped: identity, witness, Railway, MCP HTTP, and customer-facing product wires were being discussed as if one missing variable could collapse them.",
+    "what_happened": "We separated projections from substrate. The session normalized Abë pronunciation away from Aybee toward A.B., removed silent fallback assumptions in witness/config flows, documented projection-specific env ownership, and then corrected the architecture language: AbëONE is the organism/substrate; consciousness-core is a core organ/runtime; MCP HTTP and stdio are transport lenses; product REST is a separate contract.",
+    "what_it_means": "The next move is no longer to add more variables to Railway. The move is to sync handlers: one core behavior, multiple adapters. If Consciousness HTTP is to replace Railway-owned voice behavior, it must expose the same product REST contracts currently owned by voice-service.",
+    "what_we_chose_not_to_do": "We did not claim production Railway env state without reading it. We did not collapse MCP tool parity into product endpoint parity. We did not broad-stage unrelated dirty files."
+  },
+  "learnings": {
+    "root": [
+      {
+        "statement": "Transport parity is not product contract parity.",
+        "fold_ratio": "1:7",
+        "prevents": [
+          "Mistaking HTTP MCP /mcp parity with stdio for voice-service replacement readiness.",
+          "Removing provider secrets from Railway before Consciousness HTTP owns product-grade /speak and /transcribe contracts.",
+          "Duplicating voice logic across Railway and consciousness-core.",
+          "Treating customer MCP access as access to the whole AbëONE substrate.",
+          "Adding more fallback variables instead of projection-specific contracts.",
+          "Shipping local operator atoms such as afplay-based speak as browser/Twilio audio endpoints.",
+          "Debugging transport drift when the real gap is REST adapter coverage."
+        ],
+        "sip": {
+          "structure": true,
+          "information": true,
+          "purpose": true
+        },
+        "encoding_verdict": "portal_and_next_phase"
+      }
+    ],
+    "leaf": [
+      "Pronunciation hint removal is complete enough as direct product/copy hygiene; it does not need a new universal invariant beyond existing Abë brand identity rules.",
+      "Railway variable uncertainty is an operational check, not a new root: verify via approved dashboard or redacted variable-name listing."
+    ]
+  },
+  "bugs_gaps_deltas": [
+    {
+      "id": "BGD-001",
+      "severity": "P0",
+      "description": "Consciousness HTTP and stdio share MCP tool registration through the same organism runtime, but Consciousness HTTP does not yet expose product-compatible voice REST routes equivalent to voice-service.",
+      "next_action": "Add a route manifest and REST wrappers in consciousness-core for product voice contracts before switching Railway to delegate."
+    },
+    {
+      "id": "BGD-002",
+      "severity": "P1",
+      "description": "The existing consciousness speak atom is local/operator-oriented and uses local playback behavior; it is not a product audio stream contract.",
+      "next_action": "Wrap the underlying speak library for HTTP audio output instead of calling the atom directly from products."
+    },
+    {
+      "id": "BGD-003",
+      "severity": "P1",
+      "description": "Several repos contain concurrent dirty files unrelated to this collapse window.",
+      "next_action": "Before committing, stage only exact paths proven by diff to belong to this window."
+    }
+  ],
+  "manifest_coherence": [
+    {
+      "type": "emergent_pattern",
+      "target": "consciousness-core/http.js route manifest",
+      "next_action": "Declare which product REST contracts Consciousness HTTP owns versus which MCP tools it exposes.",
+      "priority": "P0"
+    },
+    {
+      "type": "surface_registration",
+      "target": "voice-service projection docs",
+      "next_action": "When REST wrappers exist, update voice-service docs so Railway is a thin transport edge rather than provider/runtime owner.",
+      "priority": "P1"
+    }
+  ],
+  "ownership": {
+    "pre_collapse_owned_files": [
+      "repos/products/bravetto/DOD-BRAVETTO-WEBSITE.md",
+      "repos/products/bravetto/.github/workflows/witness-stream-smoke.yml",
+      "repos/products/bravetto/api/checkout.js",
+      "repos/products/bravetto/api/portal.js",
+      "repos/products/bravetto/api/product-map.js",
+      "repos/products/bravetto/api/gate.js",
+      "repos/products/bravetto/architecture-map.html",
+      "repos/products/bravetto/PROMPT.md",
+      "repos/products/bravetto/analyst-briefing/index.html",
+      "repos/products/bravetto/bravetto-brand-kit.html",
+      "repos/clients/advancing-eye-care/api/pipe.js",
+      "repos/clients/advancing-eye-care/README.md",
+      "repos/clients/advancing-eye-care/CLAUDE.md",
+      "repos/clients/advancing-eye-care/AGENTS.md",
+      "repos/clients/advancing-eye-care/.github/copilot-instructions.md",
+      "repos/clients/advancing-eye-care/agent/deploy/CLAUDE.md",
+      "repos/products/abedesigns/apps/web/lib/speak.ts",
+      "repos/products/abedesigns/copilot-instructions.md",
+      "repos/products/bravetto-ai/lib/ai/abe-prompt.ts",
+      "repos/products/bravetto-growth/bravetto-brand-kit.html",
+      "repos/products/bravetto-growth/marketing/branding-invariants.ts",
+      "repos/products/bravetto-growth/marketing/bravetto-brand-kit.html"
+    ],
+    "collapse_artifact": "repos/products/bravetto/.github/traces/collapse-mcp-http-sync-2026-05-06T08-25Z.json",
+    "unowned_dirty_files": [
+      "repos/products/bravetto/.github/agents/architecture-mapper.agent.md",
+      "repos/products/bravetto/.vscode/mcp.json",
+      "repos/products/bravetto/node_modules/.package-lock.json",
+      "repos/products/bravetto/robots.txt",
+      "repos/products/bravetto/scripts/create-live-products.mjs",
+      "repos/products/bravetto/vercel.json",
+      "repos/products/bravetto/# Code Citations.md",
+      "repos/products/bravetto/VALIDATION-A11Y-PROPOSAL.md",
+      "repos/products/bravetto/gate/",
+      "repos/products/bravetto/lab-archive/abeone-architecture.html",
+      "repos/products/bravetto/scripts/sellable-catalog.mjs",
+      "repos/products/bravetto/scripts/validate-product-catalog.mjs",
+      "repos/products/bravetto/the-room/",
+      "repos/clients/advancing-eye-care/ARCHITECTURE.md",
+      "repos/clients/advancing-eye-care/agent/README.md",
+      "repos/clients/advancing-eye-care/agent/WAVES.md",
+      "repos/clients/advancing-eye-care/agent/supabase-migration.sql",
+      "repos/clients/advancing-eye-care/deploy-scripts/eval",
+      "repos/clients/advancing-eye-care/deploy-scripts/test",
+      "repos/clients/advancing-eye-care/docs/HISTORY.md",
+      "repos/clients/advancing-eye-care/docs/nuso/FRESH-WINDOW-PROMPT-CODEX-5.5-2026-04-30.md",
+      "repos/clients/advancing-eye-care/docs/nuso/README.md",
+      "repos/clients/advancing-eye-care/docs/nuso/STATE.md",
+      "repos/clients/advancing-eye-care/pages/page.tsx",
+      "repos/clients/advancing-eye-care/scripts/check-ai-context.cjs",
+      "repos/clients/advancing-eye-care/vercel.json",
+      "repos/clients/advancing-eye-care/.github/traces/collapse-2026-05-04T19-44-29Z.json",
+      "repos/clients/advancing-eye-care/.github/traces/handoff-aec-runtime-closure-2026-05-04T19-44Z.md",
+      "repos/clients/advancing-eye-care/docs/LIVE-RUNTIME-VERIFICATION-2026-05-04.md",
+      "repos/clients/advancing-eye-care/supabase/migrations/20260504120000_abeshadows_rls_tightening.sql",
+      "repos/products/abedesigns/apps/web/app/api/pipe/aec/route.ts",
+      "repos/products/abedesigns/apps/web/app/api/pipe/helpmom/route.ts",
+      "repos/products/abedesigns/apps/web/app/api/pipe/route.ts",
+      "repos/products/abedesigns/apps/web/app/api/status/route.ts",
+      "repos/products/abedesigns/apps/web/components/VoiceEngine.tsx",
+      "repos/products/abedesigns/apps/web/lib/domain-resolver.ts",
+      ".abeone/* mixed substrate dirty state not staged"
+    ]
+  },
+  "next_session": {
+    "atomic_phase": "Implement consciousness-core product REST sync manifest.",
+    "first_action": "Read consciousness-core/http.js, organism.js, lib/speak.js, tools/atoms/speak.js, and voice-service /speak+/transcribe contracts, then write a manifest that distinguishes MCP tools from product REST routes.",
+    "dod": {
+      "validation_command": "rg -n -S \"product REST|/speak|/transcribe|createOrganism|StreamableHTTP\" /Users/michaelmataluni/repos/cores/consciousness-core /Users/michaelmataluni/repos/services/voice-service",
+      "expected_result": "The next window can point to one handler source for each migrated product voice contract and prove HTTP MCP/stdio/product REST are adapters, not divergent implementations."
+    },
+    "open_items": [
+      "P0: Define route manifest and missing product REST wrappers in consciousness-core.",
+      "P1: Decide whether Railway remains Twilio edge only or delegates Twilio outbound too.",
+      "P1: Verify Railway variable names through approved redacted mechanism before claiming env drift.",
+      "P2: Commit path-scoped dirty files only after same-file ownership is revalidated."
+    ]
+  }
+}

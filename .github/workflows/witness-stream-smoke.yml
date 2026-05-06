@@ -35,3 +35,7 @@ jobs:
 
       - name: Validate witness stream contract
         run: npm run test:stream
+        env:
+          BRAVETTO_SITE_ORIGIN: ${{ secrets.BRAVETTO_SITE_ORIGIN }}
+          ABEONE_MCP_ORIGIN: ${{ secrets.ABEONE_MCP_ORIGIN }}
+          MCP_AUTH_TOKEN: ${{ secrets.MCP_AUTH_TOKEN }}

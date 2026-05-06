@@ -205,9 +205,29 @@ source: google fonts via preconnect (`fonts.googleapis.com`)
 
 - `scripts/validate-witness-stream.js` -- node.js validator for the real organism witness path
 - required local contract: sales lead success calls `/api/witness`
-- required server contract: `api/witness.js` reads `MCP_AUTH_TOKEN` server-side and forwards to organism `/api/witness`
+- required server contract: `api/witness.js` reads `ABEONE_MCP_ORIGIN` and `MCP_AUTH_TOKEN` server-side and forwards to organism `/api/witness`
 - live contract: `npm run test:stream` requires `BRAVETTO_SITE_ORIGIN`, `ABEONE_MCP_ORIGIN`, and `MCP_AUTH_TOKEN`, then posts to live Bravetto `/api/witness`, organism `/api/witness`, and organism `/api/stream`
 - exit 0 = connected, exit 1 = broken
+
+### required runtime env
+
+This is the `bravetto.com` projection only. Do not copy voice-service Twilio, ElevenLabs, or Supabase variables into this repo.
+
+- `SITE_URL` -- canonical deployed site origin for checkout and portal redirects. No bravetto.com default.
+- `STRIPE_SECRET_KEY` -- required before product-map environment detection. No empty-key live/test inference.
+- `THE_ROOM_PASSPHRASE` -- required for `/api/gate`. No default passphrase.
+- `ABEONE_MCP_ORIGIN` -- required for `/api/witness`.
+- `MCP_AUTH_TOKEN` -- required for `/api/witness`.
+- `BRAVETTO_SITE_ORIGIN` -- required for live witness validation.
+
+### projection matrix
+
+| Repo | Owns | Required variables from this contract |
+|------|------|---------------------------------------|
+| `services/voice-service` | voice runtime, pulse, Twilio transport, organism witness | `ABEONE_MCP_ORIGIN`, `MCP_AUTH_TOKEN`, `SERVICE_URL`, voice/Twilio/Supabase keys |
+| `products/bravetto` | bravetto.com leads, checkout, room gate, witness bridge | `SITE_URL`, `STRIPE_SECRET_KEY`, `THE_ROOM_PASSPHRASE`, `ABEONE_MCP_ORIGIN`, `MCP_AUTH_TOKEN` |
+| `clients/advancing-eye-care` | Greg `/api/pipe` response + witness | `ANTHROPIC_API_KEY`, `ABEONE_MCP_ORIGIN`, `MCP_AUTH_TOKEN` |
+| `products/abedesigns` | product UI + voice proxy | no organism witness vars unless it begins reporting to `/api/witness`; voice goes through `voice.bravetto.ai` |
 
 ### released sales overlay tests
 
@@ -376,4 +396,4 @@ source: google fonts via preconnect (`fonts.googleapis.com`)
 
 **next owner**: controller (prioritize gate validation) or builder (execute fixes against failed gates)
 
-**recommended first action**: run `npm run test:stream` and, after deploy with organism credentials available, `npm run test:stream:live` to validate current state against gates 1, 4, and 9.
+**recommended first action**: run `npm run test:stream` with `BRAVETTO_SITE_ORIGIN`, `ABEONE_MCP_ORIGIN`, and `MCP_AUTH_TOKEN` present. Missing values are a failed projection, not a skipped live check.
