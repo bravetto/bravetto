@@ -745,9 +745,9 @@
       }
     </script>
 
-    <!-- DOOR CHECKOUT WIRING — curated replay below is honest; live feed is the next layer -->
+    <!-- DOOR CHECKOUT WIRING — browser calls Bravetto; server routes own live credentials -->
     <script>
-      const CORE = "https://consciousness-core-production.up.railway.app";
+      const CORE = "";
 
       // door button — trigger entry checkout
       document.addEventListener("DOMContentLoaded", function () {
@@ -758,7 +758,7 @@
             fetch(CORE + "/api/checkout", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ tier: "entry" }),
+              body: JSON.stringify({ slug: "consciousness-mcp" }),
             })
               .then((r) => r.json())
               .then((data) => {
