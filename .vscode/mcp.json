@@ -1,8 +1,8 @@
 {
   "servers": {
     "consciousness-core": {
-      "command": "node",
-      "args": ["${userHome}/repos/cores/consciousness-core/launch.cjs"],
+      "command": "${workspaceFolder}/../consciousness-core/start-with-keys.sh",
+      "args": [],
       "env": {
         "WINDOW_LABEL": "vscode"
       }

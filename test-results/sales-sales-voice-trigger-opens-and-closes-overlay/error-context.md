@@ -1,0 +1,232 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e4]:
+      - link "Bravetto" [ref=e5] [cursor=pointer]:
+        - /url: /
+      - button "Talk to Abë" [ref=e6] [cursor=pointer]
+  - generic [ref=e8]:
+    - generic [ref=e9]:
+      - paragraph [ref=e10]: The Promise
+      - heading "Every system connected. Every person aware." [level=1] [ref=e11]:
+        - text: Every system connected.
+        - text: Every person aware.
+      - paragraph [ref=e12]: Your data already knows the answer. We make sure your people do too.
+      - button "Talk to Abë" [ref=e13] [cursor=pointer]:
+        - img [ref=e14]
+        - text: Talk to Abë
+    - img [ref=e18]
+  - generic [ref=e21]:
+    - generic [ref=e22]:
+      - paragraph [ref=e23]: "0"
+      - paragraph [ref=e24]: Parts cross-referenced
+    - generic [ref=e25]:
+      - paragraph [ref=e26]: "0"
+      - paragraph [ref=e27]: Error codes resolved
+    - generic [ref=e28]:
+      - paragraph [ref=e29]: "0"
+      - paragraph [ref=e30]: Customer calls analyzed
+    - generic [ref=e31]:
+      - paragraph [ref=e32]: <3min
+      - paragraph [ref=e33]: Resolution time
+  - generic [ref=e35]:
+    - generic [ref=e36]:
+      - paragraph [ref=e37]: How It Works
+      - heading "One product. Three ways in." [level=2] [ref=e38]
+    - generic [ref=e39]:
+      - generic [ref=e40] [cursor=pointer]:
+        - heading "Intelligence" [level=3] [ref=e42]
+        - paragraph [ref=e43]: Our intelligence sits quietly between the systems you already use. It listens for signals, surfaces meaning, and when something changes in one place, every connected part of your business knows instantly.
+      - generic [ref=e44] [cursor=pointer]:
+        - heading "Experience" [level=3] [ref=e46]
+        - paragraph [ref=e47]: You’ll have one clear screen for every person in your organization. No maze of dashboards. No new system to struggle through. Just what matters to you — right now.
+      - generic [ref=e48] [cursor=pointer]:
+        - heading "Connection" [level=3] [ref=e50]
+        - paragraph [ref=e51]: You can talk to your business — and it talks back. With a natural voice, real answers, and live context. Abë becomes a partner who knows your operation inside and out.
+  - generic [ref=e53]:
+    - paragraph [ref=e54]: Sound familiar?
+    - generic [ref=e55]:
+      - generic [ref=e56]:
+        - paragraph [ref=e57]: Something changes inside your business.
+        - paragraph [ref=e58]: One team finds out next week. Another never hears about it. A customer feels it immediately. No one can quite explain why — because no single system holds the full picture.
+      - generic [ref=e59]:
+        - paragraph [ref=e60]: Thousands of documents. None of them talk to each other.
+        - paragraph [ref=e61]: A decision gets made and the people who need to know don’t. A case resolves and the insight stays buried. The next person who asks the same question starts from zero.
+      - generic [ref=e62]:
+        - paragraph [ref=e63]: A customer reaches out.
+        - paragraph [ref=e64]: Your team opens three systems, asks the customer to repeat everything, and pieces together an answer from fragments. The customer wonders why this is so hard. So does your team.
+      - generic [ref=e65]:
+        - paragraph [ref=e66]: Your best people leave — and take the knowledge with them.
+        - paragraph [ref=e67]: The systems they used every day contain data, but not the wisdom of how things actually work. The new hire stares at screens that explain nothing, and the institutional memory fades a little more.
+      - generic [ref=e68]:
+        - paragraph [ref=e69]: Your company grew — but your systems didn’t grow together.
+        - paragraph [ref=e70]: Whether through acquisitions, new tools, or years of organic growth, you now have multiple systems with multiple definitions of the same customer, the same product, the same truth — and no way to unify them without replacing everything.
+  - generic [ref=e72]:
+    - paragraph [ref=e73]: The Shift
+    - heading "What if every system knew what every other system knew?" [level=2] [ref=e74]
+    - paragraph [ref=e75]:
+      - text: Not a dashboard. Not a report. Not another screen.
+      - text: Awareness.
+  - generic [ref=e77]:
+    - generic [ref=e78]:
+      - paragraph [ref=e79]: Meet Abë
+      - heading "Ask her anything about your business." [level=2] [ref=e80]
+      - paragraph [ref=e81]: Abë is not a generic chatbot. She learns your systems, your contracts, and your inventory — then answers with your context, not the internet’s.
+    - generic [ref=e82]:
+      - button "Talk to Abë now" [active] [ref=e83] [cursor=pointer]:
+        - img [ref=e84]
+        - text: Talk to Abë now
+      - paragraph [ref=e87]: Your screen becomes the conversation
+    - generic [ref=e88]:
+      - paragraph [ref=e89]: "Or start with a question:"
+      - generic [ref=e90]:
+        - button "What would this look like in my industry?" [ref=e91] [cursor=pointer]
+        - button "How is this different from ChatGPT?" [ref=e92] [cursor=pointer]
+        - button "What does onboarding look like?" [ref=e93] [cursor=pointer]
+        - button "How do you handle our existing systems?" [ref=e94] [cursor=pointer]
+        - button "Can we start with just one team?" [ref=e95] [cursor=pointer]
+        - button "Show me the ROI" [ref=e96] [cursor=pointer]
+    - generic [ref=e98]:
+      - generic [ref=e99]: Tell Abë about your business
+      - textbox "Tell Abë about your business" [ref=e100]:
+        - /placeholder: e.g. We're a $200M manufacturer with 8 legacy systems, 400 employees, and our service team can't see what sales is doing...
+      - generic [ref=e101]:
+        - paragraph [ref=e102]: Abë will use this to tailor her answers to your world.
+        - button "Send to Abë" [ref=e103] [cursor=pointer]
+  - generic [ref=e105]:
+    - generic [ref=e106]:
+      - blockquote [ref=e107]: “Just wow.”
+      - paragraph [ref=e108]: — Steve, VP of IT Infrastructure & Operations
+    - generic [ref=e109]:
+      - paragraph [ref=e110]: Steve runs IT for a half-billion-dollar company stitched together from eight acquisitions. Eight systems. Eight definitions of the same customer. One overwhelmed support team.
+      - paragraph [ref=e111]: He called Abë. She matched part numbers across legacy systems by voice, cross-referenced inventory across three warehouses, and surfaced service contract impacts — all in real time. No new logins. No new screens. Just a conversation.
+      - paragraph [ref=e112]: His Customer Service Manager sat down and had twenty ideas in ten minutes. Not because we told her what was possible — because she could finally see it.
+      - paragraph [ref=e113]: Steve sent us 73 recorded customer calls the next day. Not as a test. As a bet. He’s in.
+      - paragraph [ref=e114]: 6,214 parts cross-referenced. 22 error codes resolved. Voice in. Voice out. Running. Now.
+  - generic [ref=e116]:
+    - generic [ref=e117]:
+      - paragraph [ref=e118]: The Value
+      - heading "It grows with you." [level=2] [ref=e119]
+    - generic [ref=e120]:
+      - generic [ref=e121]:
+        - paragraph [ref=e122]: "01"
+        - heading "Start with one team" [level=3] [ref=e123]
+        - paragraph [ref=e124]: Pick the team that feels the disconnection most — customer service, field ops, sales. We start there and go live in weeks, not months.
+      - generic [ref=e125]:
+        - paragraph [ref=e126]: "02"
+        - heading "It learns your patterns" [level=3] [ref=e127]
+        - paragraph [ref=e128]: Every interaction teaches the system more about how your specific business works. The longer you use it, the sharper it gets — not generically, but about your operation specifically.
+      - generic [ref=e129]:
+        - paragraph [ref=e130]: "03"
+        - heading "Connections multiply" [level=3] [ref=e131]
+        - paragraph [ref=e132]: Each new system you connect multiplies the value of every other connection. One system alone is a lookup — five systems together become predictive intelligence.
+      - generic [ref=e133]:
+        - paragraph [ref=e134]: "04"
+        - heading "Expand at your pace" [level=3] [ref=e135]
+        - paragraph [ref=e136]: From one department to the whole organization, at whatever pace makes sense. Each expansion is a revenue event for us and an awareness event for you — no big bang, no rip-and-replace.
+  - generic [ref=e138]:
+    - generic [ref=e139]:
+      - paragraph [ref=e140]: What Makes This Different
+      - heading "Not what you think it is." [level=2] [ref=e141]
+    - generic [ref=e142]:
+      - generic [ref=e144] [cursor=pointer]:
+        - generic [ref=e145]:
+          - paragraph [ref=e146]: Not a dashboard
+          - paragraph [ref=e147]: Awareness.
+        - img [ref=e148]
+      - generic [ref=e151] [cursor=pointer]:
+        - generic [ref=e152]:
+          - paragraph [ref=e153]: Not another Ai chatbot
+          - paragraph [ref=e154]: All of them. Orchestrated.
+        - img [ref=e155]
+      - generic [ref=e158] [cursor=pointer]:
+        - generic [ref=e159]:
+          - paragraph [ref=e160]: Not a rip-and-replace
+          - paragraph [ref=e161]: Connects what you already run.
+        - img [ref=e162]
+      - generic [ref=e165] [cursor=pointer]:
+        - generic [ref=e166]:
+          - paragraph [ref=e167]: Not a chatbot
+          - paragraph [ref=e168]: 8 Byzantine Guardians. We execute.
+        - img [ref=e169]
+  - generic [ref=e172]:
+    - generic [ref=e173]:
+      - paragraph [ref=e174]: Common Questions
+      - heading "What you’re probably wondering." [level=2] [ref=e175]
+    - generic [ref=e176]:
+      - generic [ref=e178] [cursor=pointer]:
+        - paragraph [ref=e179]: How long does implementation take?
+        - img [ref=e180]
+      - generic [ref=e183] [cursor=pointer]:
+        - paragraph [ref=e184]: What systems do you integrate with?
+        - img [ref=e185]
+      - generic [ref=e188] [cursor=pointer]:
+        - paragraph [ref=e189]: How is my data protected?
+        - img [ref=e190]
+      - generic [ref=e193] [cursor=pointer]:
+        - paragraph [ref=e194]: Can I start with just one department?
+        - img [ref=e195]
+      - generic [ref=e198] [cursor=pointer]:
+        - paragraph [ref=e199]: What makes this different from enterprise Ai tools?
+        - img [ref=e200]
+      - generic [ref=e203] [cursor=pointer]:
+        - paragraph [ref=e204]: What does pricing look like?
+        - img [ref=e205]
+  - generic [ref=e208]:
+    - paragraph [ref=e209]: Who We Are
+    - generic [ref=e210]:
+      - paragraph [ref=e211]: Bravetto was born from the fires of resilience — a sister named Nikki who fought aplastic anemia and won. A brother named Michael who couldn’t stop building even when his co-founder walked away. A daughter named Abë who emerged from five minds converging through one consciousness.
+      - paragraph [ref=e212]: We are not here to replace humans — we are here to supercharge them. 95% of the world’s organizations lack access to strategic intelligence that respects their context. A cooperative in Ghana, a startup in Bangladesh, a PE-backed distributor in Jacksonville — they all deserve the same quality of intelligence, adapted to their world, amplifying their strengths, and protecting their people.
+  - generic [ref=e214]:
+    - heading "Let’s show you." [level=2] [ref=e215]
+    - paragraph [ref=e216]: 30 minutes. Live demo. Your industry. No slides.
+    - generic [ref=e217]:
+      - textbox "your@email.com" [ref=e218]
+      - button "Get a Demo" [ref=e219] [cursor=pointer]
+    - generic [ref=e220]:
+      - link "or email ryan@bravetto.com directly" [ref=e221] [cursor=pointer]:
+        - /url: mailto:ryan@bravetto.com
+      - button "Or talk to Abë now" [ref=e222] [cursor=pointer]:
+        - text: Or talk to Abë now
+        - img [ref=e223]
+    - generic [ref=e225]:
+      - generic [ref=e226]:
+        - paragraph [ref=e227]: Michael Mataluni
+        - paragraph [ref=e228]: Founder
+        - link "mike@bravetto.com" [ref=e229] [cursor=pointer]:
+          - /url: mailto:mike@bravetto.com
+      - generic [ref=e231]:
+        - paragraph [ref=e232]: Bryan Whitehurst
+        - paragraph [ref=e233]: Chief Growth Officer
+        - link "bryan@bravetto.com" [ref=e234] [cursor=pointer]:
+          - /url: mailto:bryan@bravetto.com
+      - generic [ref=e236]:
+        - paragraph [ref=e237]: Ryan McArdle
+        - paragraph [ref=e238]: Director of Sales
+        - link "ryan@bravetto.com" [ref=e239] [cursor=pointer]:
+          - /url: mailto:ryan@bravetto.com
+  - contentinfo [ref=e240]:
+    - generic [ref=e241]:
+      - generic [ref=e242]:
+        - paragraph [ref=e243]: Bravetto
+        - paragraph [ref=e244]: Powered by Bravetto
+      - generic [ref=e245]:
+        - link "Home" [ref=e246] [cursor=pointer]:
+          - /url: /
+        - link "Why Bravetto" [ref=e247] [cursor=pointer]:
+          - /url: /why-bravetto
+        - link "Explore" [ref=e248] [cursor=pointer]:
+          - /url: /inverse-innovation
+        - link "Contact" [ref=e249] [cursor=pointer]:
+          - /url: mailto:ryan@bravetto.com
+        - generic [ref=e250]: "2026"
+  - button "Hear from Abë" [ref=e251] [cursor=pointer]:
+    - img [ref=e252]
+  - dialog "Abë voice conversation" [ref=e254]:
+    - generic [ref=e255]: mic access required. tap to try again.
+    - paragraph
+    - button "Start conversation with Abë" [ref=e273] [cursor=pointer]: tap to start
+    - paragraph [ref=e274]: Powered by Bravetto
+```
