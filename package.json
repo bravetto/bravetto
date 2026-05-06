@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "bravetto company site — living canvas, elevenlabs voice widget, product demos",
   "private": true,
+  "type": "module",
   "scripts": {
     "test:catalog": "node scripts/validate-product-catalog.mjs",
-    "test:stream": "node scripts/validate-witness-stream.js",
-    "test:stream:live": "REQUIRE_LIVE_WITNESS=1 node scripts/validate-witness-stream.js"
+    "test:stream": "node scripts/validate-witness-stream.cjs",
+    "test:stream:live": "REQUIRE_LIVE_WITNESS=1 node scripts/validate-witness-stream.cjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.52.0"
