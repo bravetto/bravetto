@@ -24,11 +24,11 @@
     },
     {
       "phase": "TRACE 3/5 HOUSEKEEPING",
-      "status": "DEFERRED",
+      "status": "PASS",
       "evidence": [
         "One fresh collapse artifact was written.",
-        "Commits are deferred because the worktree contains large mixed dirty state from concurrent windows and this Codex surface cannot safely prove same-file ownership for every prior edit after compaction.",
-        "No broad staging was performed."
+        "Path-scoped commits were created after the artifact ownership list was used as the staging source.",
+        "No broad staging was performed; unrelated dirty files remained unstaged."
       ]
     },
     {
@@ -117,6 +117,33 @@
     }
   ],
   "ownership": {
+    "commits": [
+      {
+        "repo": "repos/products/bravetto",
+        "sha": "c0185a2",
+        "subject": "fix: make Bravetto witness fail loudly"
+      },
+      {
+        "repo": "repos/clients/advancing-eye-care",
+        "sha": "22be9ea",
+        "subject": "fix: wire AEC witness contract loudly"
+      },
+      {
+        "repo": "repos/products/abedesigns",
+        "sha": "fd2d11f",
+        "subject": "fix: let voice service own speech normalization"
+      },
+      {
+        "repo": "repos/products/bravetto-ai",
+        "sha": "2d768c0",
+        "subject": "docs: pronounce Abë as A.B. in prompt"
+      },
+      {
+        "repo": "repos/products/bravetto-growth",
+        "sha": "ee2e23c",
+        "subject": "docs: align Bravetto brand pronunciation"
+      }
+    ],
     "pre_collapse_owned_files": [
       "repos/products/bravetto/DOD-BRAVETTO-WEBSITE.md",
       "repos/products/bravetto/.github/workflows/witness-stream-smoke.yml",
