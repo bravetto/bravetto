@@ -24,10 +24,6 @@
     { "source": "/analyst-briefing", "destination": "/analyst-briefing/index.html" },
     { "source": "/biasguard", "destination": "/biasguard/index.html" },
     {
-      "source": "/north-shore-voice",
-      "destination": "/north-shore-voice/index.html"
-    },
-    {
       "source": "/experiments",
       "destination": "/lab-archive/abe-experiments"
     },
