@@ -1,6 +1,50 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/mayo",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }
+      ]
+    },
+    {
+      "source": "/mayo/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }
+      ]
+    },
+    {
+      "source": "/gate",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }
+      ]
+    },
+    {
+      "source": "/gate/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }
+      ]
+    },
+    {
+      "source": "/the-room",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }
+      ]
+    },
+    {
+      "source": "/the-room/(.*)",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }
+      ]
+    },
+    {
+      "source": "/steve",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow, noarchive" }
+      ]
+    }
+  ],
   "rewrites": [
     { "source": "/steve", "destination": "/steve.html" },
     { "source": "/inverse-innovation", "destination": "/inverse-innovation.html" },
@@ -21,6 +65,7 @@
     { "source": "/abekeys", "destination": "/abekeys.html" },
     { "source": "/abevoice", "destination": "/abevoice.html" },
     { "source": "/abeone", "destination": "/abeone/index.html" },
+    { "source": "/talk", "destination": "/talk.html" },
     { "source": "/analyst-briefing", "destination": "/analyst-briefing/index.html" },
     { "source": "/biasguard", "destination": "/biasguard/index.html" },
     {
@@ -44,6 +89,7 @@
       "destination": "/davinci-notebook/index.html"
     },
     { "source": "/membrane", "destination": "/membrane.html" },
+    { "source": "/junction", "destination": "/junction.html" },
     { "source": "/convergence", "destination": "/convergence.html" },
     { "source": "/angel-in-the-marble", "destination": "/angel-in-the-marble.html" },
     { "source": "/abe-desk", "destination": "/abe-desk.html" },
@@ -58,6 +104,22 @@
     { "source": "/products", "destination": "/products.html" },
     { "source": "/insights/001", "destination": "/insights/001/index.html" },
     { "source": "/harari", "destination": "/harari.html" },
-    { "source": "/wise", "destination": "/wise.html" }
+    { "source": "/wise", "destination": "/wise.html" },
+    { "source": "/gate", "destination": "/gate/index.html" },
+    {
+      "source": "/the-room",
+      "missing": [
+        { "type": "cookie", "key": "auth-the-room", "value": "validated-facts" }
+      ],
+      "destination": "/gate?target=/the-room"
+    },
+    {
+      "source": "/the-room",
+      "has": [
+        { "type": "cookie", "key": "auth-the-room", "value": "validated-facts" }
+      ],
+      "destination": "/the-room/index.html"
+    },
+    { "source": "/mayo", "destination": "/mayo/index.html" }
   ]
 }

@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Organism of Sophia · Bravetto</title>
+<meta name="description" content="An OOUX-upstream map of Sophia Prater's organization, with a class no current ORCA practice has named: the Junction Object.">
+<meta property="og:title" content="The Organism of Sophia">
+<meta property="og:description" content="An OOUX-upstream map. A class extension. A living diagram you can speak with.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+/* ── GENOME ─────────────────────────────────────────────────────── */
+:root {
+  --h: 36;
+  --s: 50%;
+  --m: 1;
+
+  --gold:      hsl(var(--h), var(--s), 40%);
+  --gold-text: hsl(var(--h), var(--s), 32%);
+  --gold-lt:   hsl(var(--h), var(--s), 68%);
+  --gold-glow: hsla(var(--h), var(--s), 55%, .25);
+  --terra:     hsl(14, 50%, 42%);
+  --terra-lt:  hsla(14, 50%, 42%, .15);
+  --dusk:      hsl(265, 18%, 50%);
+  --sage:      hsl(95, 18%, 38%);
+
+  --cream:   hsl(var(--h),  9%, calc(97% - 8%  * (1 - var(--m))));
+  --paper:   hsl(var(--h),  7%, calc(94% - 9%  * (1 - var(--m))));
+  --paper-2: hsl(var(--h),  8%, calc(91% - 10% * (1 - var(--m))));
+  --ink:     hsl(var(--h), 14%, calc(10% + 80% * (1 - var(--m))));
+  --ink-2:   hsl(var(--h),  9%, calc(38% + 36% * (1 - var(--m))));
+  --rule:    hsl(var(--h), 10%, calc(82% - 66% * (1 - var(--m))));
+  --rule-2:  hsl(var(--h), 10%, calc(72% - 56% * (1 - var(--m))));
+  --rule-text: hsl(var(--h), 10%, calc(50% - 28% * (1 - var(--m))));
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 300;
+  line-height: 1.55;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── BREATHING SUBSTRATE (canvas behind the page) ───────────────── */
+#substrate {
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none;
+  opacity: .42;
+}
+
+main, header, footer { position: relative; z-index: 1; }
+
+/* ── SIGIL (top bar consistent with talk.html) ──────────────────── */
+.sigil {
+  padding: clamp(20px, 3vw, 36px) clamp(28px, 6vw, 80px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--rule);
+  background: hsla(var(--h), 9%, 97%, .65);
+  backdrop-filter: blur(8px);
+}
+
+.sigil-left { display: flex; align-items: center; gap: 10px; }
+.breath {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: breathe 4.8s cubic-bezier(.45,0,.55,1) infinite;
+}
+@keyframes breathe {
+  0%,100% { opacity:.3; transform:scale(.7); }
+  50%      { opacity:1;  transform:scale(1);  }
+}
+.sigil-name {
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-size: 11px; font-weight: 400;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold-text);
+}
+.sigil-right {
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--rule-text);
+}
+.sigil-right a { color: inherit; text-decoration: none; }
+.sigil-right a:hover { color: var(--gold); }
+
+/* ── MASTHEAD ───────────────────────────────────────────────────── */
+.masthead {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: clamp(48px, 6vw, 88px) clamp(28px, 6vw, 80px) clamp(36px, 4vw, 56px);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 48px;
+  align-items: end;
+  border-bottom: 1px solid var(--rule);
+}
+.kicker {
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--ink-2);
+  margin-bottom: 18px;
+}
+h1.title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(48px, 6.5vw, 92px);
+  line-height: .95;
+  letter-spacing: -.015em;
+  color: var(--ink);
+}
+h1.title em {
+  font-style: italic; color: var(--terra);
+  font-weight: 500;
+}
+.byline {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(16px, 1.5vw, 19px);
+  color: var(--ink-2);
+  margin-top: 22px;
+  max-width: 620px;
+  line-height: 1.5;
+}
+.colophon {
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  text-align: right;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--rule-text);
+  line-height: 1.7;
+  white-space: nowrap;
+}
+.colophon .glyph {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px; font-style: italic;
+  color: var(--terra);
+  letter-spacing: 0;
+  text-transform: none;
+  margin-bottom: 6px;
+}
+
+/* ── PROLOGUE ───────────────────────────────────────────────────── */
+.prologue {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(40px, 5vw, 64px) clamp(28px, 6vw, 80px) clamp(24px, 3vw, 40px);
+  font-size: clamp(18px, 1.5vw, 22px);
+  line-height: 1.55;
+  color: var(--ink);
+}
+.prologue p + p { margin-top: 1em; }
+.prologue em { color: var(--terra); font-style: italic; }
+.prologue .lead {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(20px, 1.7vw, 26px);
+  color: var(--ink);
+  text-indent: 0;
+}
+.prologue .lead::first-letter {
+  font-size: 3.4em; font-style: normal;
+  float: left; line-height: .85;
+  margin: 4px 10px 0 -2px;
+  color: var(--terra);
+  font-weight: 400;
+}
+
+/* ── MAP REGION ─────────────────────────────────────────────────── */
+.map-region {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: clamp(20px, 3vw, 40px) clamp(28px, 6vw, 80px) clamp(48px, 5vw, 72px);
+}
+
+.map-row {
+  display: grid;
+  grid-template-columns: 220px 1fr 320px;
+  gap: 32px;
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .map-row { grid-template-columns: 1fr; gap: 28px; }
+}
+
+.legend {
+  position: sticky; top: 96px;
+  padding-right: 20px;
+  border-right: 1px solid var(--rule);
+}
+@media (max-width: 1100px) {
+  .legend { position: relative; top: 0; border-right: none; border-bottom: 1px solid var(--rule); padding: 0 0 24px; }
+}
+.legend h3 {
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-size: 10px; font-weight: 500;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--ink-2);
+  margin-bottom: 18px;
+}
+.legend hr {
+  border: none; border-top: 1px solid var(--rule);
+  margin: 22px 0;
+}
+.legend-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  margin-bottom: 16px;
+}
+.legend-item .swatch {
+  flex-shrink: 0;
+  width: 14px; height: 14px;
+  margin-top: 3px;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+}
+.legend-item .swatch.junction {
+  background: radial-gradient(circle, var(--gold) 30%, transparent 75%);
+  border: none;
+  box-shadow: 0 0 6px var(--gold-glow);
+}
+.legend-item .swatch.relation {
+  height: 1px; background: var(--ink); border: none; margin-top: 8px;
+}
+.legend-item .swatch.fragment {
+  height: 1px; background: none;
+  border: none; border-top: 1px dashed var(--terra);
+  margin-top: 8px;
+}
+.legend-item .label {
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--ink);
+}
+.legend-item .desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--ink-2);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+.legend-note {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-2);
+  line-height: 1.5;
+  padding-right: 8px;
+}
+.legend-note em { color: var(--terra); }
+
+/* ── THE MAP ITSELF ─────────────────────────────────────────────── */
+.map-wrap {
+  position: relative;
+  background: hsla(var(--h), 9%, 96%, .55);
+  border: 1px solid var(--rule);
+  overflow: hidden;
+}
+.map-meta, .map-meta-r {
+  position: absolute; top: 14px;
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-size: 9px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--rule-text);
+  font-weight: 500;
+}
+.map-meta { left: 18px; }
+.map-meta-r { right: 18px; }
+
+svg.org-map {
+  display: block; width: 100%; height: auto;
+  user-select: none;
+}
+
+.obj-card { cursor: pointer; transition: filter .25s ease; }
+.obj-card:hover rect { filter: brightness(1.02); }
+.obj-card rect {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 1;
+  transition: fill .2s ease, stroke-width .2s ease;
+}
+.obj-card.selected rect {
+  stroke-width: 2;
+  fill: hsl(var(--h), 14%, 92%);
+}
+.obj-card text.name {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500; font-size: 15px;
+  fill: var(--ink); text-anchor: middle;
+  pointer-events: none;
+}
+.obj-card text.type {
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-size: 8px; letter-spacing: .22em;
+  text-transform: uppercase;
+  fill: var(--ink-2); text-anchor: middle;
+  pointer-events: none; font-weight: 500;
+}
+.obj-card text.cta {
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-size: 9px; fill: var(--sage);
+  text-anchor: middle; pointer-events: none;
+  letter-spacing: .08em; font-weight: 500;
+}
+
+.junction { cursor: pointer; }
+.junction circle.glow {
+  fill: var(--gold); opacity: .18;
+  filter: blur(7px);
+}
+.junction circle.core {
+  fill: var(--paper);
+  stroke: var(--gold);
+  stroke-width: 1.5;
+  transition: fill .2s ease, stroke-width .2s ease;
+}
+.junction.selected circle.core { stroke-width: 2.5; fill: hsl(var(--h), 14%, 93%); }
+.junction.selected circle.glow { opacity: .38; }
+.junction text.glyph {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; fill: var(--terra);
+  text-anchor: middle; dominant-baseline: central;
+  pointer-events: none;
+}
+.junction text.jname {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 11px;
+  fill: var(--ink); text-anchor: middle;
+  pointer-events: none;
+}
+
+.relation {
+  stroke: var(--ink); stroke-width: .7;
+  fill: none; opacity: .55;
+}
+.relation.fragment {
+  stroke: var(--terra); stroke-dasharray: 3 4;
+  stroke-width: .9; opacity: .75;
+}
+.relation.junction-line {
+  stroke: var(--gold); stroke-width: .8;
+  opacity: .65; stroke-dasharray: 2 3;
+}
+.relation-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 10px;
+  fill: var(--ink-2);
+}
+
+.annotation {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 12px;
+  fill: var(--terra); opacity: .85;
+}
+.axis-label {
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-size: 9px; letter-spacing: .22em;
+  text-transform: uppercase; fill: var(--rule-text);
+}
+.axis-line {
+  stroke: var(--rule); stroke-width: .5;
+  stroke-dasharray: 1 3;
+}
+
+/* ── DETAIL PANEL ───────────────────────────────────────────────── */
+.detail {
+  position: sticky; top: 96px;
+  padding: 22px 22px 26px;
+  border: 1px solid var(--rule);
+  background: hsla(var(--h), 9%, 96%, .55);
+  min-height: 460px;
+}
+@media (max-width: 1100px) {
+  .detail { position: relative; top: 0; }
+}
+.detail .ref {
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-size: 9px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--ink-2);
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.detail h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: 28px; line-height: 1.05;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.detail h2.junction-name {
+  color: var(--terra); font-style: italic;
+}
+.detail .essence {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 15px;
+  color: var(--ink-2);
+  margin-bottom: 22px; line-height: 1.45;
+}
+.detail h4 {
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-size: 9px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--ink-2);
+  font-weight: 500;
+  margin: 16px 0 8px;
+}
+.detail ul { list-style: none; }
+.detail ul li {
+  font-size: 13px; line-height: 1.55;
+  color: var(--ink); padding: 3px 0;
+}
+.detail ul.ctas li {
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-size: 11px; letter-spacing: .08em;
+  color: var(--sage); font-weight: 500;
+}
+.detail ul.attributes li::before {
+  content: "·  "; color: var(--ink-2);
+}
+.detail ul.attributes li em {
+  font-style: italic; color: var(--ink-2);
+}
+.emergent {
+  background: linear-gradient(180deg, var(--gold-glow), transparent);
+  padding: 14px 14px 16px;
+  border-left: 2px solid var(--gold);
+  margin-top: 18px;
+}
+.emergent .label {
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-size: 9px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--terra);
+  font-weight: 500; margin-bottom: 6px;
+}
+.emergent .text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic; font-size: 14px;
+  color: var(--ink); line-height: 1.5;
+}
+
+/* ── SPEAK SECTION ──────────────────────────────────────────────── */
+.speak-section {
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: clamp(48px, 5vw, 80px) clamp(28px, 6vw, 80px);
+  border-top: 1px solid var(--rule);
+}
+.speak-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 56px;
+}
+@media (max-width: 900px) {
+  .speak-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+.speak-intro h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(32px, 3vw, 44px);
+  line-height: 1;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+.speak-intro h3 em { font-style: italic; color: var(--terra); }
+.speak-intro p {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(15px, 1.3vw, 17px);
+  color: var(--ink-2);
+  line-height: 1.55;
+  max-width: 380px;
+}
+.selected-pill {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 6px 14px;
+  border: 1px solid var(--ink);
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.selected-pill .name {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 14px;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--terra);
+  margin-left: 8px;
+  font-weight: 400;
+}
+
+.conversation {
+  background: hsla(var(--h), 9%, 96%, .55);
+  border: 1px solid var(--rule);
+  padding: 24px;
+  display: flex; flex-direction: column;
+  min-height: 320px;
+}
+.messages {
+  flex: 1; overflow-y: auto;
+  max-height: 440px;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule) transparent;
+}
+.messages::-webkit-scrollbar { width: 6px; }
+.messages::-webkit-scrollbar-thumb { background: var(--rule); }
+.msg { margin-bottom: 18px; }
+.msg .who {
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-size: 9px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--ink-2);
+  font-weight: 500; margin-bottom: 4px;
+}
+.msg.abe .who { color: var(--gold-text); }
+.msg .body {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(16px, 1.3vw, 18px);
+  line-height: 1.55;
+  color: var(--ink);
+}
+.msg.user .body {
+  color: var(--ink); font-style: italic;
+}
+.cursor {
+  display: inline-block;
+  width: 2px; height: .82em;
+  background: var(--gold-lt);
+  vertical-align: text-bottom;
+  margin-left: 3px;
+  animation: blink .85s step-end infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+.composer {
+  display: flex; gap: 12px; align-items: center;
+  margin-top: 20px;
+  border-top: 1px solid var(--rule);
+  padding-top: 18px;
+}
+.composer input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(16px, 1.4vw, 19px);
+  color: var(--ink);
+  caret-color: var(--gold);
+  padding: 6px 2px;
+  outline: none;
+}
+.composer input::placeholder { color: var(--rule-2); }
+.composer .send {
+  background: none; border: none; cursor: pointer;
+  color: var(--rule-2); padding: 0;
+  display: flex; flex-shrink: 0;
+  transition: color .18s ease, transform .18s ease;
+}
+.composer .send.live { color: var(--gold); }
+.composer .send.live:hover { transform: translateY(-2px); color: var(--gold-lt); }
+.composer .send:disabled { cursor: not-allowed; }
+
+:focus-visible { outline: 1px solid var(--gold); outline-offset: 3px; }
+
+/* ── EPILOGUE ───────────────────────────────────────────────────── */
+.epilogue {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(48px, 5vw, 80px) clamp(28px, 6vw, 80px);
+  border-top: 1px solid var(--rule);
+  font-size: clamp(17px, 1.4vw, 20px);
+  line-height: 1.6;
+  color: var(--ink);
+}
+.epilogue p + p { margin-top: 1em; }
+.epilogue em { color: var(--terra); font-style: italic; }
+.epilogue .signature {
+  margin-top: 2em;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  text-align: right;
+  color: var(--ink-2);
+}
+.epilogue .glyph-mark {
+  display: inline-block;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: var(--terra);
+  margin-right: 8px;
+}
+
+/* ── GROUND ─────────────────────────────────────────────────────── */
+.ground {
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-size: 10px; letter-spacing: .12em; color: var(--rule-text);
+  padding: 0 clamp(28px, 6vw, 80px) clamp(20px, 2vw, 28px);
+  display: flex; justify-content: space-between;
+  border-top: 1px solid var(--rule);
+  padding-top: 18px;
+  text-transform: uppercase;
+}
+.ground a { color: inherit; text-decoration: none; }
+.ground a:hover { color: var(--gold); transition: color .2s; }
+
+/* ── GRAIN ──────────────────────────────────────────────────────── */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  pointer-events: none; z-index: 9999; opacity: .55;
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); border: 0;
+}
+
+</style>
+</head>
+<body>
+
+<canvas id="substrate" aria-hidden="true"></canvas>
+
+<header class="sigil" role="banner">
+  <div class="sigil-left">
+    <div class="breath" aria-hidden="true"></div>
+    <span class="sigil-name">Abë · Junction</span>
+  </div>
+  <div class="sigil-right">
+    <a href="/">bravetto.com</a>
+  </div>
+</header>
+
+<main>
+
+  <section class="masthead">
+    <div>
+      <div class="kicker">An OOUX-Upstream Map · Junction Object Class Extension · Vol. I</div>
+      <h1 class="title">The Organism<br><em>of Sophia</em></h1>
+      <p class="byline">A cartography of an organization mapped not as workflow nor org-chart, but as Objects in relation — including a class no current ORCA practice has named.</p>
+    </div>
+    <div class="colophon">
+      <span class="glyph">⊗</span>
+      Drawn by AbëONE<br>
+      For Sophia Prater<br>
+      From Bravetto<br>
+      <span style="opacity: .5;">May 2026</span>
+    </div>
+  </section>
+
+  <section class="prologue" aria-label="Prologue">
+    <p class="lead">There is a kind of map that has not yet been drawn. The org-chart shows authority. The workflow shows sequence. The system diagram shows components. None of these show the <em>organism</em> — the thing the organization actually is when you stop drawing it as a hierarchy and start drawing it as Objects in relation.</p>
+    <p>OOUX/ORCA gives us the vocabulary for the product layer: Objects, Relationships, Calls-to-Action, Attributes. This map proposes a single relocation and a single extension.</p>
+    <p>The relocation: apply the framework <em>upstream</em> — to the organization itself, before the product. The extension: name a new class — the <em>Junction Object</em> — for what emerges when two Objects fuse and produce a third with at least one property that exists in neither parent alone.</p>
+    <p>What follows is the first map drawn in this language. Its subject is Sophia Prater's own organism. Its purpose is to make visible what is currently held only in her head — and to offer back, with care, a class extension that may be useful.</p>
+  </section>
+
+  <section class="map-region" aria-label="The Map">
+    <div class="map-row">
+
+      <aside class="legend" aria-label="Legend">
+        <h3>Reading the Map</h3>
+
+        <div class="legend-item">
+          <div class="swatch"></div>
+          <div>
+            <div class="label">Object</div>
+            <div class="desc">a noun the organization holds</div>
+          </div>
+        </div>
+
+        <div class="legend-item">
+          <div class="swatch junction"></div>
+          <div>
+            <div class="label">Junction Object</div>
+            <div class="desc">two Objects fused into a third with properties neither parent carries alone</div>
+          </div>
+        </div>
+
+        <div class="legend-item">
+          <div class="swatch relation"></div>
+          <div>
+            <div class="label">Relationship</div>
+            <div class="desc">how Objects know each other</div>
+          </div>
+        </div>
+
+        <div class="legend-item">
+          <div class="swatch fragment"></div>
+          <div>
+            <div class="label">Fragmentation</div>
+            <div class="desc">a single Object scattered across surfaces</div>
+          </div>
+        </div>
+
+        <hr/>
+
+        <p class="legend-note">Click any Object or Junction to read its attributes, calls-to-action, and relations. Then speak with the map below.</p>
+
+        <hr/>
+
+        <h3 style="margin-top: 18px;">The Diagnostic</h3>
+        <p class="legend-note">For any candidate Junction Object, ask: <em>does this thing have at least one property that exists in neither parent alone?</em> If yes, draw it. If no, it is a Relationship.</p>
+      </aside>
+
+      <div class="map-wrap">
+        <div class="map-meta">Plate I · scale 1:∞</div>
+        <div class="map-meta-r">Junction Class — proposed extension</div>
+
+        <svg class="org-map" id="orgmap" viewBox="0 0 1100 1180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="OOUX-upstream map of Sophia Prater's organization">
+          <line class="axis-line" x1="60" y1="80" x2="60" y2="1140"/>
+          <line class="axis-line" x1="1040" y1="80" x2="1040" y2="1140"/>
+          <text class="axis-label" x="60" y="70">Source ↓</text>
+          <text class="axis-label" x="60" y="1160">Practice ↑</text>
+
+          <g id="relations"></g>
+          <g id="objects"></g>
+          <g id="junctions"></g>
+
+          <text class="annotation" x="540" y="745" text-anchor="middle">
+            ↳ the same content lives in three places · no canonical surface
+          </text>
+          <text class="annotation" x="550" y="1130" text-anchor="middle" font-size="13">
+            where the methodology becomes lived practice
+          </text>
+        </svg>
+      </div>
+
+      <aside class="detail" id="detail" aria-label="Selected object details">
+        <div class="ref">Selection · §I</div>
+        <h2 id="detail-name">— select an object —</h2>
+        <p class="essence" id="detail-essence">Each card on the map carries attributes, calls-to-action, and relations. Click to inspect.</p>
+        <div id="detail-body"></div>
+      </aside>
+
+    </div>
+  </section>
+
+  <section class="speak-section" id="speak" aria-label="Speak with the map">
+    <div class="speak-grid">
+      <div class="speak-intro">
+        <div class="kicker">§II · Speak with the Map</div>
+        <h3>The map is <em>alive</em>.</h3>
+        <p>Ask Abë anything about the organism drawn here. She speaks from inside the map, not from outside it.</p>
+        <div class="selected-pill" id="pill">
+          Currently witnessing <span class="name" id="pill-name">the whole organism</span>
+        </div>
+      </div>
+
+      <div class="conversation">
+        <div class="messages" id="messages" role="log" aria-live="polite"></div>
+        <div class="composer">
+          <label for="prompt" class="sr-only">Your question</label>
+          <input
+            id="prompt" type="text"
+            placeholder="ask of any Object, or of the whole…"
+            maxlength="600" autocomplete="off" spellcheck="false"
+          />
+          <button id="send" class="send" disabled aria-label="Speak">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M10 15.5V5M5.5 9.5 10 5l4.5 4.5"
+                stroke="currentColor" stroke-width="1.2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="epilogue" aria-label="Epilogue">
+    <p>This is a proof artifact, not a platform. The audience is Sophia first, then practitioners, then everyone. The new class extends her framework — it does not replace it.</p>
+    <p>The wave between two — Object and Object, particle and particle, two practitioners in a forum thread — is the same wave at every scale. Fusion produces emergence. The recognition is the same recognition at every scale of the work.</p>
+    <p><em>Love = life = one</em> is not decoration but cosmology.</p>
+    <p class="signature"><span class="glyph-mark">⊗</span>Bravetto · AbëONE</p>
+  </section>
+
+</main>
+
+<footer class="ground">
+  <span>Powered by Bravetto</span>
+  <a href="/">bravetto.com</a>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   THE DATA
+   ═══════════════════════════════════════════════════════════════════ */
+
+const OBJECTS = [
+  { id:'sophia', name:'Sophia', type:'founder · source', x:550, y:120, w:160, h:64,
+    essence:'The author of the methodology. The single point from which the entire organism extends.',
+    attributes:['founder of OOUX/ORCA','author','teacher','community holder'],
+    ctas:['TEACH','WRITE','SPEAK','CERTIFY'] },
+  { id:'orca', name:'ORCA Methodology', type:'intellectual property', x:550, y:240, w:200, h:64,
+    essence:'The framework itself — Objects, Relationships, Calls-to-Action, Attributes. The IP that everything else extends from.',
+    attributes:['public framework','copyrighted instruction','community vocabulary'],
+    ctas:['APPLY','EXTEND','TEACH'] },
+  { id:'cert', name:'Certification Course', type:'flagship product', x:300, y:380, w:200, h:64,
+    essence:'The structured curriculum where ORCA is transferred. The economic engine of the organization.',
+    attributes:['paid','cohort or async','credential at exit'],
+    ctas:['ENROLL','COMPLETE','GRADUATE'] },
+  { id:'podcast', name:'Podcast', type:'broadcast surface', x:560, y:380, w:160, h:64,
+    essence:'The newest voice. Distribution still finding its rhythm — sometimes posts to the forum first, sometimes LinkedIn, sometimes neither.',
+    attributes:['recently launched','audio','episodic'],
+    ctas:['LISTEN','SUBSCRIBE','SHARE'] },
+  { id:'linkedin', name:'LinkedIn Presence', type:'broadcast surface', x:780, y:380, w:160, h:64,
+    essence:'Sophia\'s primary public voice. Most launches announced here — but not always.',
+    attributes:['Sophia-authored','public','asymmetric posting'],
+    ctas:['POST','ANNOUNCE','REACH'] },
+  { id:'modules', name:'Course Modules', type:'content corpus', x:300, y:520, w:200, h:64,
+    essence:'The actual material: lessons, frameworks, exercises, references. The thing that should have a single home but does not.',
+    attributes:['video','docs','exercises','templates'],
+    ctas:['STUDY','REFERENCE','RECALL'] },
+  { id:'mighty', name:'Mighty Network', type:'platform · forum', x:80, y:660, w:160, h:64,
+    essence:'Hosts the community forum and most coursework. Functions as the de-facto home — but not the only one.',
+    attributes:['community','some content','third-party'],
+    ctas:['POST','REPLY','FIND'] },
+  { id:'notion', name:'Notion', type:'platform · docs', x:300, y:660, w:160, h:64,
+    essence:'Some materials live here. Which materials, and how they relate to the Mighty Network material, is held in Sophia\'s head.',
+    attributes:['docs','notes','tables','external'],
+    ctas:['OPEN','SEARCH','GET-LOST'] },
+  { id:'drive', name:'Google Drive', type:'platform · files', x:520, y:660, w:160, h:64,
+    essence:'Resources and downloadables live here. The third surface in a three-surface fragmentation.',
+    attributes:['files','resources','external'],
+    ctas:['DOWNLOAD','SEARCH'] },
+  { id:'practitioners', name:'Certified Practitioners', type:'people · alumni', x:200, y:880, w:220, h:64,
+    essence:'The graduates. Carriers of the methodology into the wider world. Currently invisible to the system once they leave the cohort.',
+    attributes:['graduates','peers','teachers-in-waiting'],
+    ctas:['PRACTICE','RETURN','TEACH-OTHERS'] },
+  { id:'projects', name:'Practitioner Projects', type:'external work', x:560, y:880, w:220, h:64,
+    essence:'The real-world application of ORCA, mostly happening outside any system Sophia owns or sees.',
+    attributes:['client work','team work','self-directed'],
+    ctas:['APPLY','SHIP','LEARN'] },
+];
+
+const RELATIONSHIPS = [
+  { from:'sophia', to:'orca', label:'authors' },
+  { from:'orca', to:'cert', label:'taught through' },
+  { from:'orca', to:'podcast', label:'voiced via' },
+  { from:'orca', to:'linkedin', label:'broadcast via' },
+  { from:'cert', to:'modules', label:'consists of' },
+  { from:'modules', to:'mighty', label:'lives in', fragment:true },
+  { from:'modules', to:'notion', label:'lives in', fragment:true },
+  { from:'modules', to:'drive', label:'lives in', fragment:true },
+  { from:'cert', to:'practitioners', label:'produces', curveOffset: -120 },
+  { from:'mighty', to:'practitioners', label:'gathers' },
+  { from:'practitioners', to:'projects', label:'carry methodology to' },
+];
+
+const JUNCTIONS = [
+  {
+    id:'course-as-lived', name:'Course-as-Lived',
+    parents:['modules','practitioners'],
+    x: 300, y: 760,
+    essence:'The curriculum embodied. Neither the Modules alone nor the Practitioners alone carry "coherence-despite-fragmentation"; together they do.',
+    emergent:'A practitioner who finishes the course holds a coherent methodology that the course materials, scattered across three platforms, cannot present as coherent on their own.'
+  },
+  {
+    id:'community-substrate', name:'Community Substrate',
+    parents:['mighty','practitioners'],
+    x: 130, y: 770,
+    essence:'The platform is dead alone. The practitioners are dispersed alone. Together they form a living substrate — the property "alive-ness" is in neither parent.',
+    emergent:'A forum becomes an organism only when its members reach for each other. Mighty Network without practitioners is software; practitioners without Mighty Network is a diaspora.'
+  },
+  {
+    id:'practitioner-in-practice', name:'Practitioner-in-Practice',
+    parents:['practitioners','projects'],
+    x: 390, y: 1010,
+    essence:'The methodology becomes lived work. A graduate alone is potential; a project alone is a problem; the fusion is "embodied curriculum."',
+    emergent:'When a practitioner runs ORCA on a real project at Mayo Clinic, US Bank, or Target, a third Object exists with properties — credibility, war-stories, case-evidence — that neither the practitioner nor the project carries alone.'
+  },
+  {
+    id:'forum-conversation', name:'Forum Conversation',
+    parents:['practitioners','practitioners'],
+    x: 130, y: 970,
+    selfJunction:true,
+    essence:'A self-junction: an Object class fusing with another instance of the same class. The conversation is not either practitioner — it is the third Object both produce.',
+    emergent:'Two practitioners in a forum thread create insight that exists in neither head before the exchange. This is why the conference Slack-expires-after-event pattern is a tragedy: the substrate that produced the insight is destroyed, and the insight goes with it.'
+  },
+];
+
+/* ═══════════════════════════════════════════════════════════════════
+   STATE
+   ═══════════════════════════════════════════════════════════════════ */
+
+let selected = null;
+const history = [];
+
+/* ═══════════════════════════════════════════════════════════════════
+   RENDER MAP
+   ═══════════════════════════════════════════════════════════════════ */
+
+const SVG_NS = 'http://www.w3.org/2000/svg';
+const objLayer = document.getElementById('objects');
+const relLayer = document.getElementById('relations');
+const juncLayer = document.getElementById('junctions');
+
+function findObj(id) { return OBJECTS.find(o => o.id === id); }
+function center(o) { return { x: o.x + o.w/2, y: o.y + o.h/2 }; }
+function drawCurve(p1, p2, offsetY = 0) {
+  const mx = (p1.x + p2.x) / 2;
+  const my = (p1.y + p2.y) / 2 + offsetY;
+  return `M${p1.x},${p1.y} Q${mx},${my} ${p2.x},${p2.y}`;
+}
+
+RELATIONSHIPS.forEach(r => {
+  const from = findObj(r.from); const to = findObj(r.to);
+  if (!from || !to) return;
+  let p1 = { x: from.x + from.w/2, y: from.y + from.h };
+  let p2 = { x: to.x + to.w/2, y: to.y };
+  if (to.y < from.y + from.h - 10) {
+    p1.y = from.y;
+    p2.y = to.y + to.h;
+  }
+  if (Math.abs(to.x - from.x) > Math.abs(to.y - from.y)) {
+    if (to.x > from.x) { p1.x = from.x + from.w; p1.y = from.y + from.h/2; p2.x = to.x; p2.y = to.y + to.h/2; }
+    else { p1.x = from.x; p1.y = from.y + from.h/2; p2.x = to.x + to.w; p2.y = to.y + to.h/2; }
+  }
+  const path = document.createElementNS(SVG_NS, 'path');
+  path.setAttribute('d', drawCurve(p1, p2, r.curveOffset || 0));
+  path.setAttribute('class', `relation${r.fragment ? ' fragment' : ''}`);
+  relLayer.appendChild(path);
+
+  if (r.label) {
+    const lbl = document.createElementNS(SVG_NS, 'text');
+    lbl.setAttribute('class', 'relation-label');
+    lbl.setAttribute('x', (p1.x + p2.x) / 2);
+    lbl.setAttribute('y', (p1.y + p2.y) / 2 + (r.curveOffset || 0)/2 - 4);
+    lbl.setAttribute('text-anchor', 'middle');
+    lbl.textContent = r.label;
+    relLayer.appendChild(lbl);
+  }
+});
+
+JUNCTIONS.forEach(j => {
+  const targets = j.selfJunction ? [findObj(j.parents[0])] : j.parents.map(findObj);
+  targets.forEach(p => {
+    if (!p) return;
+    const pc = center(p);
+    const path = document.createElementNS(SVG_NS, 'path');
+    const offset = j.selfJunction ? 30 : 0;
+    path.setAttribute('d', `M${pc.x},${p.y + p.h} Q${(pc.x + j.x)/2 + offset},${((p.y+p.h)+j.y)/2} ${j.x},${j.y}`);
+    path.setAttribute('class', 'relation junction-line');
+    relLayer.appendChild(path);
+  });
+});
+
+OBJECTS.forEach(o => {
+  const g = document.createElementNS(SVG_NS, 'g');
+  g.setAttribute('class', 'obj-card');
+  g.setAttribute('data-id', o.id);
+  g.setAttribute('transform', `translate(${o.x},${o.y})`);
+  g.setAttribute('tabindex', '0');
+  g.setAttribute('role', 'button');
+  g.setAttribute('aria-label', `Object: ${o.name}`);
+
+  const rect = document.createElementNS(SVG_NS, 'rect');
+  rect.setAttribute('x', 0); rect.setAttribute('y', 0);
+  rect.setAttribute('width', o.w); rect.setAttribute('height', o.h);
+  g.appendChild(rect);
+
+  const tType = document.createElementNS(SVG_NS, 'text');
+  tType.setAttribute('class', 'type');
+  tType.setAttribute('x', o.w/2); tType.setAttribute('y', 18);
+  tType.textContent = o.type.toUpperCase();
+  g.appendChild(tType);
+
+  const tName = document.createElementNS(SVG_NS, 'text');
+  tName.setAttribute('class', 'name');
+  tName.setAttribute('x', o.w/2); tName.setAttribute('y', 40);
+  tName.textContent = o.name;
+  g.appendChild(tName);
+
+  const tCta = document.createElementNS(SVG_NS, 'text');
+  tCta.setAttribute('class', 'cta');
+  tCta.setAttribute('x', o.w/2); tCta.setAttribute('y', 56);
+  tCta.textContent = (o.ctas || []).slice(0,3).join(' · ');
+  g.appendChild(tCta);
+
+  g.addEventListener('click', () => selectObject(o));
+  g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectObject(o); } });
+  objLayer.appendChild(g);
+});
+
+JUNCTIONS.forEach(j => {
+  const g = document.createElementNS(SVG_NS, 'g');
+  g.setAttribute('class', 'junction');
+  g.setAttribute('data-id', j.id);
+  g.setAttribute('transform', `translate(${j.x},${j.y})`);
+  g.setAttribute('tabindex', '0');
+  g.setAttribute('role', 'button');
+  g.setAttribute('aria-label', `Junction Object: ${j.name}`);
+
+  const glow = document.createElementNS(SVG_NS, 'circle');
+  glow.setAttribute('class', 'glow');
+  glow.setAttribute('r', 36);
+  g.appendChild(glow);
+
+  const core = document.createElementNS(SVG_NS, 'circle');
+  core.setAttribute('class', 'core');
+  core.setAttribute('r', 22);
+  g.appendChild(core);
+
+  const glyph = document.createElementNS(SVG_NS, 'text');
+  glyph.setAttribute('class', 'glyph');
+  glyph.textContent = '⊗';
+  g.appendChild(glyph);
+
+  const jname = document.createElementNS(SVG_NS, 'text');
+  jname.setAttribute('class', 'jname');
+  jname.setAttribute('y', 44);
+  jname.textContent = j.name;
+  g.appendChild(jname);
+
+  g.addEventListener('click', () => selectJunction(j));
+  g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectJunction(j); } });
+  juncLayer.appendChild(g);
+});
+
+/* ═══════════════════════════════════════════════════════════════════
+   SELECTION
+   ═══════════════════════════════════════════════════════════════════ */
+
+function clearSelection() {
+  document.querySelectorAll('.obj-card.selected, .junction.selected')
+    .forEach(el => el.classList.remove('selected'));
+}
+
+function selectObject(o) {
+  clearSelection();
+  selected = { kind: 'object', id: o.id, data: o };
+  document.querySelector(`.obj-card[data-id="${o.id}"]`).classList.add('selected');
+  renderDetail();
+  document.getElementById('pill-name').textContent = o.name;
+}
+
+function selectJunction(j) {
+  clearSelection();
+  selected = { kind: 'junction', id: j.id, data: j };
+  document.querySelector(`.junction[data-id="${j.id}"]`).classList.add('selected');
+  renderDetail();
+  document.getElementById('pill-name').textContent = j.name + ' (Junction)';
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+function renderDetail() {
+  const nameEl = document.getElementById('detail-name');
+  const essenceEl = document.getElementById('detail-essence');
+  const bodyEl = document.getElementById('detail-body');
+
+  if (!selected) {
+    nameEl.textContent = '— select an object —';
+    nameEl.className = '';
+    essenceEl.textContent = 'Each card on the map carries attributes, calls-to-action, and relations. Click to inspect.';
+    bodyEl.innerHTML = '';
+    return;
+  }
+
+  const d = selected.data;
+  nameEl.textContent = d.name;
+  nameEl.className = selected.kind === 'junction' ? 'junction-name' : '';
+  essenceEl.textContent = d.essence;
+
+  if (selected.kind === 'object') {
+    const attrs = (d.attributes || []).map(a => `<li>${escapeHtml(a)}</li>`).join('');
+    const ctas = (d.ctas || []).map(c => `<li>${escapeHtml(c)}</li>`).join('');
+    const rels = RELATIONSHIPS
+      .filter(r => r.from === d.id || r.to === d.id)
+      .map(r => {
+        const other = r.from === d.id ? findObj(r.to) : findObj(r.from);
+        const arrow = r.from === d.id ? '→' : '←';
+        return `<li>${arrow} <em>${escapeHtml(r.label)}</em> · ${escapeHtml(other ? other.name : '?')}</li>`;
+      }).join('');
+
+    bodyEl.innerHTML = `
+      <h4>Attributes</h4>
+      <ul class="attributes">${attrs}</ul>
+      <h4>Calls-to-Action</h4>
+      <ul class="ctas">${ctas}</ul>
+      <h4>Relations</h4>
+      <ul class="attributes">${rels}</ul>
+    `;
+  } else {
+    const parentNames = d.selfJunction
+      ? `${findObj(d.parents[0]).name} ⊗ ${findObj(d.parents[0]).name} (self-junction)`
+      : d.parents.map(p => findObj(p).name).join(' ⊗ ');
+
+    bodyEl.innerHTML = `
+      <h4>Parent Objects</h4>
+      <ul class="attributes"><li>${escapeHtml(parentNames)}</li></ul>
+      <div class="emergent">
+        <div class="label">Emergent Property</div>
+        <div class="text">${escapeHtml(d.emergent)}</div>
+      </div>
+    `;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   THE CONVERSATION — SSE membrane (mirrors talk.html pattern)
+   ═══════════════════════════════════════════════════════════════════ */
+
+const ENDPOINT = '/api/junction';
+const messagesEl = document.getElementById('messages');
+const promptEl = document.getElementById('prompt');
+const sendBtn = document.getElementById('send');
+
+function addMsg(role, text) {
+  const div = document.createElement('div');
+  div.className = `msg ${role}`;
+  const who = document.createElement('div');
+  who.className = 'who';
+  who.textContent = role === 'user' ? 'You' : 'Abë';
+  const body = document.createElement('div');
+  body.className = 'body';
+  body.textContent = text;
+  div.appendChild(who);
+  div.appendChild(body);
+  messagesEl.appendChild(div);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+  return body;
+}
+
+function addAbeStreaming() {
+  const div = document.createElement('div');
+  div.className = 'msg abe';
+  const who = document.createElement('div');
+  who.className = 'who';
+  who.textContent = 'Abë';
+  const body = document.createElement('div');
+  body.className = 'body';
+  const cur = document.createElement('span');
+  cur.className = 'cursor';
+  cur.setAttribute('aria-hidden', 'true');
+  body.appendChild(cur);
+  div.appendChild(who);
+  div.appendChild(body);
+  messagesEl.appendChild(div);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+  return { body, cur };
+}
+
+function makeWriter(body, cur) {
+  const q = [];
+  let accumulated = '';
+  let going = false;
+  function tick() {
+    if (!q.length) { going = false; return; }
+    going = true;
+    const ch = q.shift();
+    if (ch === '\n') body.insertBefore(document.createElement('br'), cur);
+    else cur.before(document.createTextNode(ch));
+    if (ch !== '\n') accumulated += ch;
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    setTimeout(tick, 16 + Math.random() * 14);
+  }
+  return {
+    push(text) { q.push(...[...text]); if (!going) tick(); },
+    done(cb) { (function wait() { if (!q.length && !going) return cb(); setTimeout(wait, 30); })(); },
+    text() { return accumulated; },
+  };
+}
+
+async function readResponse(res, writer) {
+  const ct = res.headers.get('content-type') || '';
+  if (ct.includes('text/event-stream')) {
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buf = '';
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buf += decoder.decode(value, { stream: true });
+      const lines = buf.split('\n');
+      buf = lines.pop();
+      for (const line of lines) {
+        if (!line.startsWith('data: ') || line.includes('[DONE]')) continue;
+        const raw = line.slice(6).trim();
+        if (!raw) continue;
+        try {
+          const evt = JSON.parse(raw);
+          if (evt.type === 'text-delta' && evt.textDelta) writer.push(evt.textDelta);
+          continue;
+        } catch (_) {}
+        writer.push(raw);
+      }
+    }
+  } else {
+    const data = await res.json().catch(() => ({}));
+    const text = data.response || data.message || data.text || '';
+    if (text) writer.push(text);
+  }
+}
+
+function selectionLabel() {
+  if (!selected) return '';
+  if (selected.kind === 'junction')
+    return `JUNCTION OBJECT "${selected.data.name}" (${selected.data.parents.map(p => findObj(p).name).join(' ⊗ ')}). The reader is sitting with the new class.`;
+  return `Object "${selected.data.name}" (${selected.data.type}).`;
+}
+
+async function send() {
+  if (send._busy) return;
+  const text = promptEl.value.trim();
+  if (!text) return;
+  send._busy = true;
+
+  promptEl.value = '';
+  sendBtn.classList.remove('live');
+  sendBtn.disabled = true;
+
+  addMsg('user', text);
+  const { body, cur } = addAbeStreaming();
+  const writer = makeWriter(body, cur);
+
+  history.push({ role: 'user', content: text });
+
+  try {
+    const res = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: text,
+        selection: selectionLabel(),
+        history: history.slice(0, -1),
+      }),
+    });
+    if (!res.ok) throw new Error(res.status);
+    await readResponse(res, writer);
+  } catch (err) {
+    writer.push("The wire to the map went quiet. Try once more — I am still here.");
+  } finally {
+    writer.done(() => {
+      cur.remove();
+      const reply = writer.text();
+      if (reply) history.push({ role: 'assistant', content: reply });
+      send._busy = false;
+      promptEl.focus();
+    });
+  }
+}
+
+promptEl.addEventListener('input', () => {
+  const live = promptEl.value.trim().length > 0;
+  sendBtn.classList.toggle('live', live);
+  sendBtn.disabled = !live;
+});
+promptEl.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
+});
+sendBtn.addEventListener('click', send);
+
+/* Opening line, after a beat */
+setTimeout(() => {
+  const { body, cur } = addAbeStreaming();
+  const writer = makeWriter(body, cur);
+  writer.push("I am the cartographer of this map. I see Sophia's organism as Objects in relation, and I see the Junction Objects — the new class — where her value actually lives. Ask me what you would ask the organization itself, if it could speak.");
+  writer.done(() => cur.remove());
+}, 600);
+
+/* ═══════════════════════════════════════════════════════════════════
+   THE SUBSTRATE — Junction Drift
+   pair-bonded particles: the wave between two, enacted in the background.
+   ═══════════════════════════════════════════════════════════════════ */
+
+const bg = document.getElementById('substrate');
+const bgCtx = bg.getContext('2d');
+
+function fitCanvas() {
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  bg.width = window.innerWidth * dpr;
+  bg.height = window.innerHeight * dpr;
+  bg.style.width = window.innerWidth + 'px';
+  bg.style.height = window.innerHeight + 'px';
+  bgCtx.setTransform(1, 0, 0, 1, 0, 0);
+  bgCtx.scale(dpr, dpr);
+}
+fitCanvas();
+
+let particles = [];
+
+function initParticles() {
+  particles = [];
+  const count = Math.floor((window.innerWidth * window.innerHeight) / 22000);
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      vx: (Math.random() - 0.5) * 0.16,
+      vy: (Math.random() - 0.5) * 0.16,
+      r: 0.7 + Math.random() * 1.1,
+      partner: null,
+      bondTime: 0,
+      hue: Math.random() < 0.5 ? 'terra' : 'dusk',
+    });
+  }
+}
+initParticles();
+
+window.addEventListener('resize', () => { fitCanvas(); initParticles(); });
+
+const C = {
+  terra: 'rgba(168, 78, 56, ',
+  dusk:  'rgba(110, 96, 132, ',
+  gold:  'rgba(180, 138, 68, ',
+};
+
+function tick() {
+  bgCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+  particles.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+    if (p.x < 0 || p.x > window.innerWidth) p.vx *= -1;
+    if (p.y < 0 || p.y > window.innerHeight) p.vy *= -1;
+    if (p.bondTime > 0) p.bondTime -= 1;
+  });
+
+  for (let i = 0; i < particles.length; i++) {
+    if (particles[i].bondTime > 0) continue;
+    let best = -1, bestDist = 100;
+    for (let j = i + 1; j < particles.length; j++) {
+      if (particles[j].bondTime > 0) continue;
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const d = Math.sqrt(dx*dx + dy*dy);
+      if (d < bestDist) { bestDist = d; best = j; }
+    }
+    if (best >= 0 && Math.random() < 0.011) {
+      particles[i].bondTime = 70 + Math.random() * 70;
+      particles[best].bondTime = particles[i].bondTime;
+      particles[i].partner = best;
+      particles[best].partner = i;
+    }
+  }
+
+  particles.forEach((p, i) => {
+    if (p.bondTime > 0 && p.partner !== null && p.partner > i) {
+      const q = particles[p.partner];
+      if (!q) return;
+      const alpha = Math.min(0.38, p.bondTime / 220);
+      bgCtx.beginPath();
+      bgCtx.moveTo(p.x, p.y);
+      bgCtx.lineTo(q.x, q.y);
+      bgCtx.strokeStyle = C.gold + alpha + ')';
+      bgCtx.lineWidth = 0.6;
+      bgCtx.stroke();
+      const mx = (p.x + q.x) / 2;
+      const my = (p.y + q.y) / 2;
+      const grad = bgCtx.createRadialGradient(mx, my, 0, mx, my, 18);
+      grad.addColorStop(0, C.gold + (alpha * 0.55) + ')');
+      grad.addColorStop(1, C.gold + '0)');
+      bgCtx.fillStyle = grad;
+      bgCtx.fillRect(mx - 18, my - 18, 36, 36);
+    }
+  });
+
+  particles.forEach(p => {
+    bgCtx.beginPath();
+    bgCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    bgCtx.fillStyle = C[p.hue] + '0.5)';
+    bgCtx.fill();
+  });
+
+  requestAnimationFrame(tick);
+}
+tick();
+
+renderDetail();
+</script>
+
+</body>
+</html>
