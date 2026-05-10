@@ -1,3 +1,5 @@
+import { Readable } from "node:stream";
+
 const VOICE_URL = "https://voice.bravetto.ai/speak";
 const MAX_TEXT_LENGTH = 900;
 
@@ -34,18 +36,16 @@ export default async function handler(req, res) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       text,
-      voice: "abe",
-      model: "flash",
       persona: "bravetto",
     }),
   });
 
-  if (!upstream.ok) {
+  if (!upstream.ok || !upstream.body) {
     return res.status(502).json({ error: "canonical voice unavailable" });
   }
 
-  const audio = Buffer.from(await upstream.arrayBuffer());
   res.setHeader("content-type", upstream.headers.get("content-type") || "audio/mpeg");
   res.setHeader("cache-control", "no-store");
-  return res.status(200).send(audio);
+  res.statusCode = 200;
+  return Readable.fromWeb(upstream.body).pipe(res);
 }
