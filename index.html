@@ -730,17 +730,10 @@
     <!-- VOICE TRIGGER -->
     <script>
       function openVoice() {
-        // dispatch to widget; widget owns its own UI
-        window.dispatchEvent(new CustomEvent("voice:open"));
-        // visual feedback on the button
-        var btn = document.querySelector(".voice-btn");
-        if (btn) {
-          var original = btn.innerHTML;
-          btn.innerHTML =
-            '<span class="pulse-dot" style="animation: none; opacity: 1;"></span> Listening&hellip;';
-          setTimeout(function () {
-            btn.innerHTML = original;
-          }, 3000);
+        if (window.abe_voice && window.abe_voice.speak) {
+          window.abe_voice.speak();
+        } else {
+          window.dispatchEvent(new CustomEvent('voice:open'));
         }
       }
     </script>
