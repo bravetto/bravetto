@@ -90,6 +90,7 @@
     },
     { "source": "/membrane", "destination": "/membrane.html" },
     { "source": "/junction", "destination": "/junction.html" },
+    { "source": "/angie", "destination": "/angie.html" },
     { "source": "/convergence", "destination": "/convergence.html" },
     { "source": "/angel-in-the-marble", "destination": "/angel-in-the-marble.html" },
     { "source": "/abe-desk", "destination": "/abe-desk.html" },

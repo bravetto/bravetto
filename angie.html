@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angie King · of Objects · Bravetto</title>
+<meta name="description" content="A Person rendered as the system she teaches organizations to find inside themselves. Angie King — Content Strategist, Certified OOUX Strategist, Mayo Clinic, Bravetto.">
+<meta property="og:title" content="Angie King · of Objects">
+<meta property="og:description" content="A Person rendered as the system she teaches organizations to find inside themselves.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0f;
+    --ink-soft: #2a2a30;
+    --muted: #6b6b78;
+    --rule: #d6d6d4;
+    --page: #faf9f5;
+    --display: "Instrument Sans", system-ui, sans-serif;
+    --serif: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--page);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 20px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 120px 32px 160px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 110px;
+  }
+  header h1 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 44px;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    margin: 0 0 14px;
+    color: var(--ink);
+  }
+  header h1 .of {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 6px;
+  }
+  header .meta {
+    font-family: var(--display);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  header .meta .sep {
+    display: inline-block;
+    margin: 0 12px;
+    opacity: 0.5;
+  }
+
+  .stars {
+    text-align: center;
+    color: var(--muted);
+    letter-spacing: 1.2em;
+    margin: 80px 0;
+    font-family: var(--serif);
+    font-size: 16px;
+    opacity: 0.7;
+  }
+
+  section { margin: 0; }
+  section h2 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 0 0 32px;
+  }
+  section h2 .marker {
+    color: var(--muted);
+    font-weight: 400;
+    margin-right: 14px;
+  }
+  section h2 .cardinality {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--muted);
+    margin-left: 12px;
+  }
+
+  p {
+    margin: 0 0 22px;
+    color: var(--ink-soft);
+  }
+  p strong { font-weight: 600; color: var(--ink); }
+  em { font-style: italic; }
+  .lede {
+    font-size: 22px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  /* GLOSSARY */
+  dl.glossary { margin: 0; }
+  dl.glossary dt {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 24px 0 6px;
+  }
+  dl.glossary dt:first-child { margin-top: 0; }
+  dl.glossary dd {
+    margin: 0;
+    color: var(--ink-soft);
+  }
+
+  /* OBJECT INSTANCE BLOCK */
+  .obj {
+    margin: 0 0 40px;
+    padding: 0;
+  }
+  .obj:last-child { margin-bottom: 0; }
+  .obj .obj-tag {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 6px;
+  }
+  .obj .obj-tag .current {
+    color: var(--ink);
+    font-weight: 600;
+    margin-left: 8px;
+    padding: 1px 8px;
+    border: 1px solid var(--ink);
+    border-radius: 3px;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+  }
+  .obj .obj-name {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 20px;
+    color: var(--ink);
+    margin: 0 0 12px;
+    letter-spacing: -0.005em;
+    line-height: 1.3;
+  }
+  .obj .attrs {
+    margin: 0 0 10px;
+    color: var(--ink-soft);
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  .obj .attrs .k {
+    font-family: var(--display);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .obj .relates {
+    font-family: var(--display);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin: 8px 0 0;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .obj .relates .arrow { opacity: 0.5; margin: 0 8px; }
+  .obj .narrative {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin: 8px 0 0;
+    font-family: var(--serif);
+  }
+
+  blockquote {
+    margin: 24px 0 14px;
+    padding-left: 22px;
+    border-left: 1px solid var(--rule);
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 18px;
+  }
+
+  a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+  a:hover { color: var(--muted); }
+
+  footer {
+    margin-top: 140px;
+    padding-top: 36px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--display);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    font-weight: 500;
+  }
+  footer .glyph { font-size: 14px; margin-right: 6px; }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 70px 22px 100px; }
+    header h1 { font-size: 34px; }
+    .lede { font-size: 19px; }
+    header .meta .sep { display: none; }
+    header .meta span { display: block; margin: 4px 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <h1>Angie King<br><span class="of"><em>of Objects</em></span></h1>
+    <p class="meta">
+      <span>Content Strategist</span><span class="sep">·</span>
+      <span>Certified OOUX</span><span class="sep">·</span>
+      <span>2026</span>
+    </p>
+  </header>
+
+  <p class="lede">
+    Most people see what they can click. Angie sees the <em>things</em> behind the clicks — the
+    objects, the relationships between them, and the work of arranging meaning so an organization
+    can finally hear itself. What follows is not a résumé. It is her, rendered as the system she
+    teaches organizations to find inside themselves.
+  </p>
+
+  <div class="stars">* &nbsp;&nbsp; * &nbsp;&nbsp; *</div>
+
+  <!-- §I — GLOSSARY -->
+  <section>
+    <h2><span class="marker">§I</span>Glossary</h2>
+    <p>Four words carry everything that follows.</p>
+    <dl class="glossary">
+      <dt>Object</dt>
+      <dd>
+        A thing that exists in its own right — with structure (attributes), instances (multiple real
+        occurrences), and purpose (it matters to a person or a business). A <em>clinical trial</em>
+        is an object. A <em>position at a company</em> is an object. A <em>certification</em> is an
+        object.
+      </dd>
+      <dt>Relationship</dt>
+      <dd>
+        How two objects connect. A Person <em>holds</em> a Certification. A Person <em>worked at</em>
+        an Organization. A Patient <em>was referred to</em> a Care Pathway.
+      </dd>
+      <dt>Junction Object</dt>
+      <dd>
+        A thing that exists <em>only</em> because two other things met. A <em>position</em> is the
+        junction of a Person and an Organization across a Period. An <em>appointment</em> is the
+        junction of a Patient and a Clinician at a moment in time. The junction is where the
+        meaning lives.
+      </dd>
+      <dt>Wrapper</dt>
+      <dd>
+        A label that pretends to be an object but isn't. <em>"Dashboard." "Profile." "Currently."
+        "How To Reach Her."</em> Wrappers fragment objects across screens and obscure the things
+        that actually carry the work. The discipline of OOUX is the discipline of refusing them.
+      </dd>
+    </dl>
+  </section>
+
+  <div class="stars">* &nbsp;&nbsp; * &nbsp;&nbsp; *</div>
+
+  <!-- §II — PERSON -->
+  <section>
+    <h2><span class="marker">§II</span>Person<span class="cardinality">— one instance</span></h2>
+
+    <div class="obj">
+      <p class="obj-tag">Object · Person</p>
+      <p class="obj-name">Angela "Angie" King</p>
+      <p class="attrs">
+        <span class="k">Pronouns</span> She / Her ·
+        <span class="k">Located</span> Tarpon Springs, FL ·
+        <span class="k">From</span> Minneapolis, MN ·
+        <span class="k">Network</span> 500+ LinkedIn connections, 3,227 followers
+      </p>
+      <p class="attrs">
+        <span class="k">LinkedIn</span> <a href="https://www.linkedin.com/in/angieking/">linkedin.com/in/angieking</a> ·
+        <span class="k">Email</span> <a href="mailto:angie@bravetto.com">angie@bravetto.com</a>
+      </p>
+    </div>
+  </section>
+
+  <div class="stars">* &nbsp;&nbsp; * &nbsp;&nbsp; *</div>
+
+  <!-- §III — CERTIFICATION -->
+  <section>
+    <h2><span class="marker">§III</span>Certification<span class="cardinality">— one instance</span></h2>
+
+    <div class="obj">
+      <p class="obj-tag">Object · Certification</p>
+      <p class="obj-name">OOUX Strategist · ORCA Method</p>
+      <p class="attrs">
+        <span class="k">Issuer</span> Sophia Prater ·
+        <span class="k">Issuing Body</span> Rewired &amp; the OOUX Strategist Certification Program ·
+        <span class="k">Year</span> Fall 2025 ·
+        <span class="k">Cohort 12 Mentor</span> Invited by Sophia, fall 2026
+      </p>
+      <p class="relates">
+        Person <span class="arrow">→</span> holds <span class="arrow">→</span> Certification
+      </p>
+    </div>
+  </section>
+
+  <div class="stars">* &nbsp;&nbsp; * &nbsp;&nbsp; *</div>
+
+  <!-- §IV — POSITION -->
+  <section>
+    <h2><span class="marker">§IV</span>Position<span class="cardinality">— six instances · junction of Person × Organization × Period</span></h2>
+
+    <div class="obj">
+      <p class="obj-tag">Position <span class="current">Current</span></p>
+      <p class="obj-name">Content Strategy Manager · Mayo Clinic</p>
+      <p class="attrs">
+        <span class="k">Period</span> 2025 — present ·
+        <span class="k">Working With</span> Becky (SEO, share-of-answers) · Alicia Bartz (Health Education &amp; Content Services)
+      </p>
+      <p class="narrative">
+        Enterprise web content strategy for patient experience. The work of resolving an organization
+        where the condition page is owned by marketing and the appointment object is owned by digital,
+        and the two have never been introduced.
+      </p>
+    </div>
+
+    <div class="obj">
+      <p class="obj-tag">Position <span class="current">Current</span></p>
+      <p class="obj-name">Executive Director of Product &amp; Human Experience · Bravetto</p>
+      <p class="attrs">
+        <span class="k">Period</span> 2025 — present ·
+        <span class="k">Hub</span> Innovation ·
+        <span class="k">Reports To</span> Michael Mataluni (CEO)
+      </p>
+      <p class="narrative">
+        Object-modeling authority across the product portfolio. PolyWiSE ORCA system map. Internal
+        design experience architecture.
+      </p>
+    </div>
+
+    <div class="obj">
+      <p class="obj-tag">Position</p>
+      <p class="obj-name">Content Design Practice Lead · UST</p>
+      <p class="attrs">
+        <span class="k">Period</span> Sep 2024 — Sep 2025 ·
+        <span class="k">Mode</span> Remote
+      </p>
+      <p class="narrative">
+        Heading up a new content design practice. During this year a colleague's unofficial workshop
+        became her first encounter with OOUX — the framework she would later be certified in.
+      </p>
+    </div>
+
+    <div class="obj">
+      <p class="obj-tag">Position</p>
+      <p class="obj-name">Content Designer → Vice President, UX Design · U.S. Bank</p>
+      <p class="attrs">
+        <span class="k">Period</span> ~2019 — 2024 (five years) ·
+        <span class="k">Team Led</span> Platform team of ~60
+      </p>
+      <p class="narrative">
+        Placed as a contractor on US Bank's authenticated-digital and mobile redesign. Promoted
+        Content Designer → UX Lead → VP UX Design across five years. Did the work before having the
+        framework that named it.
+      </p>
+    </div>
+
+    <div class="obj">
+      <p class="obj-tag">Position</p>
+      <p class="obj-name">Independent Consultant · Self-Employed</p>
+      <p class="attrs">
+        <span class="k">Period</span> Before U.S. Bank ·
+        <span class="k">Clients</span> 3M · Boston Scientific · Optum ·
+        <span class="k">Cadence</span> ~20 billable hours per week
+      </p>
+      <p class="narrative">
+        Freelance content strategy structured around time at home with her son Charlie. Loved being
+        her own boss; hated running her own business.
+      </p>
+    </div>
+
+    <div class="obj">
+      <p class="obj-tag">Position</p>
+      <p class="obj-name">Content Lead · Bachman's (Floral, Gift, Garden)</p>
+      <p class="attrs">
+        <span class="k">Period</span> Early career ·
+        <span class="k">Location</span> Twin Cities
+      </p>
+      <p class="narrative">
+        All content for a Twin Cities brand. Left to consult after Charlie was born.
+      </p>
+    </div>
+
+    <div class="obj">
+      <p class="obj-tag">Position · Origin</p>
+      <p class="obj-name">Content Strategist · Brain Traffic</p>
+      <p class="attrs">
+        <span class="k">Period</span> Career start ·
+        <span class="k">Witness To</span> The drafts of Kristina Halvorson's foundational book
+      </p>
+      <p class="narrative">
+        The agency where content strategy was first practiced as a named discipline. The room where
+        the room was being built.
+      </p>
+    </div>
+  </section>
+
+  <div class="stars">* &nbsp;&nbsp; * &nbsp;&nbsp; *</div>
+
+  <!-- §V — PROJECT -->
+  <section>
+    <h2><span class="marker">§V</span>Project<span class="cardinality">— one current instance</span></h2>
+
+    <div class="obj">
+      <p class="obj-tag">Project <span class="current">Active</span></p>
+      <p class="obj-name">Care Hub OOUX · Lung Transplant Pilot</p>
+      <p class="attrs">
+        <span class="k">Client</span> Mayo Clinic ·
+        <span class="k">Co-lead</span> Nalie ·
+        <span class="k">Primary Object Under Test</span> <em>Care Family</em> ·
+        <span class="k">Surfaces</span> 5 ·
+        <span class="k">Open Validation Questions</span> 5 ·
+        <span class="k">Seeded</span> 2026-05-01
+      </p>
+      <p class="relates">
+        Position (Bravetto) <span class="arrow">→</span> delivers <span class="arrow">→</span> Project
+        <span class="arrow">→</span> tests <span class="arrow">→</span> Object (Care Family)
+      </p>
+    </div>
+  </section>
+
+  <div class="stars">* &nbsp;&nbsp; * &nbsp;&nbsp; *</div>
+
+  <!-- §VI — SPEAKING -->
+  <section>
+    <h2><span class="marker">§VI</span>Speaking<span class="cardinality">— one instance</span></h2>
+
+    <div class="obj">
+      <p class="obj-tag">Speaking</p>
+      <p class="obj-name">The UX Level-Up Podcast · Episode 093</p>
+      <p class="attrs">
+        <span class="k">Title</span> The Key to Leveling Up for Content Designers ·
+        <span class="k">Host</span> Sophia Prater ·
+        <span class="k">Published</span> 2026-05-08 ·
+        <span class="k">Duration</span> 58 min
+      </p>
+
+      <blockquote>
+        "One of the heaviest hitters in content strategy — a certified OOUX strategist who believes
+        OOUX is the key — in all caps the key — for content designers to level up."
+        <br><br>— Sophia Prater, opening Episode 093
+      </blockquote>
+
+      <p class="attrs">
+        On the episode Sophia publicly invited Angie to mentor OOUX Strategist Cohort 12 in the fall
+        of 2026. <a href="https://www.youtube.com/watch?v=dZhzmSN7GJk">Listen to the episode.</a>
+      </p>
+
+      <p class="relates">
+        Person <span class="arrow">→</span> appears on <span class="arrow">→</span> Speaking <span class="arrow">→</span> hosted by <span class="arrow">→</span> Person (Sophia)
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <span class="glyph">⊗</span>Bravetto · AbëONE
+  </footer>
+
+</div>
+
+</body>
+</html>
