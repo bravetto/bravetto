@@ -59,7 +59,7 @@
       nav {
         position: fixed; top: 0; left: 0; right: 0;
         z-index: 50;
-        padding: 1.25rem 2rem;
+        padding: clamp(0.9rem, 2vw, 1.25rem) clamp(1rem, 4vw, 2rem);
         background: rgba(250, 249, 246, 0.85);
         backdrop-filter: blur(20px);
         border-bottom: 1px solid var(--cream-border);
@@ -67,11 +67,14 @@
       nav .inner {
         max-width: 1080px; margin: 0 auto;
         display: flex; justify-content: space-between; align-items: center;
+        gap: 1rem;
       }
       nav a {
         color: var(--ink-light);
         text-decoration: none;
         font-size: 0.85rem;
+        line-height: 1;
+        white-space: nowrap;
         transition: color 0.2s;
       }
       nav a:hover { color: var(--ink); }
@@ -80,21 +83,22 @@
         font-size: 1.4rem;
         font-weight: 500;
         color: var(--ink);
+        white-space: nowrap;
       }
-      nav .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+      nav .nav-links { display: flex; gap: clamp(0.85rem, 3vw, 1.5rem); align-items: center; }
 
       main { padding-top: 80px; }
 
       .editorial {
         max-width: 1080px;
         margin: 0 auto;
-        padding: 3rem 2rem 1rem;
+        padding: clamp(2rem, 5vw, 3rem) clamp(1.25rem, 4vw, 2rem) 1rem;
       }
       .editorial header {
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
-        margin-bottom: 2rem;
+        margin-bottom: clamp(1.25rem, 3vw, 2rem);
         flex-wrap: wrap;
         gap: 1.5rem;
       }
@@ -308,6 +312,16 @@
       }
       footer a:hover { color: var(--gold-warm); }
 
+      @media (max-width: 860px) {
+        nav .nav-links { gap: 0.9rem; }
+        nav a { font-size: 0.78rem; }
+        .editorial header { align-items: flex-start; gap: 0.9rem; }
+        .editorial .meta {
+          text-align: left;
+          letter-spacing: 0.22em;
+        }
+      }
+
       @media (max-width: 720px) {
         .editorial { padding: 2rem 1.25rem 1rem; }
         .controls-wrap { padding: 0 1.25rem; }
@@ -443,12 +457,12 @@
         function resize() {
           const dpr = window.devicePixelRatio || 1;
           const r = c.getBoundingClientRect();
-          // desktop keeps the artwork band under the fold threshold; mobile keeps the original frame.
-          const is_desktop = window.innerWidth >= 1024;
-          const aspect_ratio = is_desktop ? 1080 / 480 : 1016 / 640;
+          // artboard fold: wide/tablet frames stay gallery-wide; phone keeps the original frame.
+          const is_wide_artboard = r.width >= 720;
+          const aspect_ratio = is_wide_artboard ? 1080 / 480 : 1016 / 640;
           const natural_h = Math.round(r.width / aspect_ratio);
           const max_desktop_h = Math.max(320, Math.round(window.innerHeight * 0.6 - 74));
-          const target_h = is_desktop ? Math.min(natural_h, max_desktop_h) : natural_h;
+          const target_h = is_wide_artboard ? Math.min(natural_h, max_desktop_h) : natural_h;
           c.style.height = target_h + "px";
           c.width = r.width * dpr;
           c.height = target_h * dpr;
