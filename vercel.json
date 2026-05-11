@@ -59,6 +59,8 @@
     { "source": "/aec", "destination": "/aec.html" },
     { "source": "/neuromorphic", "destination": "/neuromorphic.html" },
     { "source": "/living-canvas", "destination": "/living-canvas.html" },
+    { "source": "/iris-bloom", "destination": "/assets/iris-bloom.html" },
+    { "source": "/iris", "destination": "/assets/iris-bloom.html" },
     { "source": "/predictive-maintenance", "destination": "/predictive-maintenance.html" },
     { "source": "/command", "destination": "/command.html" },
     { "source": "/how-we-build", "destination": "/how-we-build.html" },
