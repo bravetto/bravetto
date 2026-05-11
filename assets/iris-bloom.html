@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iris Bloom — For Kristen Tischler | Bravetto</title>
+    <meta
+      name="description"
+      content="Iris Bloom — a living generative artwork. Edition One. For Kristen Tischler, CMO of Advancing Eyecare. An alliance of sight."
+    />
+    <link rel="canonical" href="https://bravetto.com/assets/iris-bloom" />
+    <meta property="og:title" content="Iris Bloom — Edition One" />
+    <meta
+      property="og:description"
+      content="A living iris, breathing every five seconds. Bravètto gold core, AEC blue field. For Kristen Tischler, CMO."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bravetto.com/assets/iris-bloom" />
+    <meta property="og:site_name" content="Bravetto" />
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2212%22%20fill%3D%22%23c9a227%22%2F%3E%3C%2Fsvg%3E" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --cream: #faf9f6;
+        --cream-mid: #f5f3ef;
+        --cream-border: #eae7e0;
+        --gold: #c9a227;
+        --gold-warm: #d4a843;
+        --gold-glow: #e8d48b;
+        --ink: #1a1a1a;
+        --ink-light: #4a4a4a;
+        --ink-caption: #8a8a8a;
+        --dark: #0a0a0a;
+        --blue: #2563eb;
+        --blue-deep: #0c2358;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        background: var(--cream);
+        color: var(--ink);
+        font-family: "Inter", system-ui, sans-serif;
+        font-weight: 300;
+        line-height: 1.75;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      .font-serif { font-family: "Cormorant Garamond", Georgia, serif; }
+      .font-mono { font-family: "JetBrains Mono", monospace; }
+
+      nav {
+        position: fixed; top: 0; left: 0; right: 0;
+        z-index: 50;
+        padding: 1.25rem 2rem;
+        background: rgba(250, 249, 246, 0.85);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--cream-border);
+      }
+      nav .inner {
+        max-width: 1080px; margin: 0 auto;
+        display: flex; justify-content: space-between; align-items: center;
+      }
+      nav a {
+        color: var(--ink-light);
+        text-decoration: none;
+        font-size: 0.85rem;
+        transition: color 0.2s;
+      }
+      nav a:hover { color: var(--ink); }
+      nav .wordmark {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 1.4rem;
+        font-weight: 500;
+        color: var(--ink);
+      }
+      nav .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+
+      main { padding-top: 80px; }
+
+      .editorial {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 3rem 2rem 1rem;
+      }
+      .editorial header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+      }
+      .editorial .title {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: clamp(2.4rem, 5vw, 4rem);
+        font-weight: 400;
+        color: var(--ink);
+        line-height: 1;
+        letter-spacing: -0.01em;
+      }
+      .editorial .title em {
+        font-style: italic;
+        color: var(--gold);
+        font-weight: 500;
+      }
+      .editorial .meta {
+        text-align: right;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--ink-caption);
+        line-height: 1.9;
+      }
+      .editorial .meta b {
+        color: var(--gold);
+        font-weight: 400;
+      }
+
+      .canvas-frame {
+        background: var(--dark);
+        border: 1px solid rgba(201, 162, 39, 0.18);
+        border-radius: 12px;
+        overflow: hidden;
+        max-width: 1080px;
+        margin: 0 auto 1.25rem;
+      }
+      #canvas {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: var(--dark);
+      }
+      .plaque {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.1rem 1.5rem;
+        border-top: 0.5px solid rgba(201, 162, 39, 0.2);
+        background: var(--dark);
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+      .plaque .name {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-style: italic;
+        font-size: 1.15rem;
+        color: var(--gold);
+        letter-spacing: 0.02em;
+      }
+      .plaque .tag {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.28em;
+        color: rgba(250, 249, 246, 0.5);
+        text-transform: uppercase;
+      }
+
+      .controls-wrap {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+      .controls {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.9rem;
+        margin-bottom: 0.9rem;
+      }
+      .control {
+        background: var(--cream-mid);
+        border: 1px solid var(--cream-border);
+        border-radius: 10px;
+        padding: 0.9rem 1.1rem;
+      }
+      .control label {
+        display: block;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.22em;
+        color: var(--ink-caption);
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+      }
+      .control input[type="range"] {
+        width: 100%;
+        accent-color: var(--gold);
+        cursor: pointer;
+      }
+      .control .val {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-style: italic;
+        font-size: 1.15rem;
+        color: var(--gold);
+        margin-top: 0.2rem;
+      }
+
+      .actions {
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+      }
+      .btn {
+        flex: 1;
+        min-width: 130px;
+        padding: 0.75rem 1.2rem;
+        background: transparent;
+        border: 1px solid var(--gold);
+        border-radius: 999px;
+        color: var(--gold);
+        font-family: "Inter", sans-serif;
+        font-size: 0.72rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .btn:hover {
+        background: var(--gold);
+        color: var(--cream);
+      }
+      .btn.primary {
+        background: var(--gold);
+        color: var(--cream);
+      }
+      .btn.primary:hover {
+        background: var(--gold-warm);
+      }
+
+      .colophon {
+        max-width: 720px;
+        margin: 4rem auto 2rem;
+        padding: 2.5rem 2rem 0;
+        border-top: 1px solid var(--cream-border);
+      }
+      .colophon .label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 1rem;
+      }
+      .colophon p {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-style: italic;
+        font-size: 1.15rem;
+        color: var(--ink-light);
+        line-height: 1.65;
+        margin-bottom: 1rem;
+      }
+      .colophon p:last-of-type { margin-bottom: 0; }
+      .colophon .signed {
+        margin-top: 1.5rem;
+        font-family: "JetBrains Mono", monospace;
+        font-style: normal;
+        font-size: 0.65rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--ink-caption);
+      }
+
+      .seed-row {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 0.6rem 2rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.65rem;
+        color: var(--ink-caption);
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .seed-row code {
+        color: var(--gold);
+        font-weight: 500;
+      }
+      .seed-row .hint {
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+
+      footer {
+        text-align: center;
+        padding: 3rem 2rem;
+        border-top: 1px solid var(--cream-border);
+        margin-top: 4rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--ink-caption);
+      }
+      footer a {
+        color: var(--gold);
+        text-decoration: none;
+      }
+      footer a:hover { color: var(--gold-warm); }
+
+      @media (max-width: 720px) {
+        .editorial { padding: 2rem 1.25rem 1rem; }
+        .controls-wrap { padding: 0 1.25rem; }
+        .controls { grid-template-columns: 1fr; }
+        .actions .btn { flex: 1 1 calc(50% - 0.3rem); min-width: 0; }
+        .colophon { padding: 2rem 1.25rem 0; }
+        .seed-row { padding: 0.6rem 1.25rem 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="inner">
+        <a href="/" class="wordmark">Bravetto</a>
+        <div class="nav-links">
+          <a href="/living-canvas">Living Canvas</a>
+          <a href="/abeone">AbëONE</a>
+          <a href="/">Home</a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <section class="editorial">
+        <header>
+          <h1 class="title">Iris <em>Bloom</em></h1>
+          <div class="meta">
+            <b>Bravètto × Advancing Eyecare</b><br />
+            11 May 2026 · Edition One
+          </div>
+        </header>
+      </section>
+
+      <div class="canvas-frame">
+        <canvas id="canvas" width="1016" height="640" aria-label="A breathing iris in warm gold and AEC blue, generated live"></canvas>
+        <div class="plaque">
+          <div class="name">For Kristen Tischler, CMO</div>
+          <div class="tag">An alliance of sight</div>
+        </div>
+      </div>
+
+      <div class="controls-wrap">
+        <div class="controls">
+          <div class="control">
+            <label>Aperture</label>
+            <input id="aperture" type="range" min="0.2" max="1" step="0.01" value="0.55" />
+            <div class="val" id="aperture-v">0.55</div>
+          </div>
+          <div class="control">
+            <label>Filaments</label>
+            <input id="filaments" type="range" min="80" max="520" step="10" value="260" />
+            <div class="val" id="filaments-v">260</div>
+          </div>
+          <div class="control">
+            <label>Field drift</label>
+            <input id="drift" type="range" min="0" max="2" step="0.05" value="0.65" />
+            <div class="val" id="drift-v">0.65</div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn primary" id="regen">New vision</button>
+          <button class="btn" id="seed-kristen">Kristen's seed</button>
+          <button class="btn" id="seed-steve">Steve's seed</button>
+          <button class="btn" id="seed-aec">Alliance seed</button>
+          <button class="btn" id="save">Save still ↓</button>
+        </div>
+
+        <div class="seed-row">
+          <div><span class="hint">Seed</span> <code id="seed-v">20260508</code></div>
+          <div class="hint">Hover the iris · breath cycles every five seconds</div>
+        </div>
+      </div>
+
+      <section class="colophon">
+        <div class="label">Colophon</div>
+        <p>
+          A living iris, generated fresh on each visit. The warm gold core honors Bravètto. The blue field at the periphery honors Advancing Eyecare. The pupil is void &mdash; the still place from which all attention is directed.
+        </p>
+        <p>
+          Move your cursor and the eye follows. Each seed is a different way of seeing. Save a still and the moment becomes yours.
+        </p>
+        <div class="signed">Made for you · 11 May 2026 · Edition One</div>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        <a href="/">Bravetto</a> &middot;
+        <a href="/living-canvas">Living Canvas</a> &middot;
+        <a href="/privacy">Privacy</a>
+      </p>
+    </footer>
+
+    <script>
+      (function () {
+        const GOLD = [201, 162, 39],
+          GOLD_HI = [212, 175, 55],
+          BLUE = [37, 99, 235],
+          BLUE_DEEP = [12, 35, 90],
+          CREAM = [250, 249, 246];
+        const SEEDS = { kristen: 20260508, steve: 19831024, aec: 111111 };
+        let seed = SEEDS.kristen,
+          aperture = 0.55,
+          filaments = 260,
+          drift = 0.65;
+        let hoverX = 0.5,
+          hoverY = 0.5,
+          hovering = false;
+        const t0 = performance.now();
+
+        function mulberry32(a) {
+          return function () {
+            a |= 0;
+            a = (a + 0x6d2b79f5) | 0;
+            let t = Math.imul(a ^ (a >>> 15), 1 | a);
+            t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+            return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+          };
+        }
+        const lerp = (a, b, t) => a + (b - a) * t;
+        const lerpC = (a, b, t) => [
+          a[0] + (b[0] - a[0]) * t,
+          a[1] + (b[1] - a[1]) * t,
+          a[2] + (b[2] - a[2]) * t,
+        ];
+        const rgba = (c, a) =>
+          `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`;
+
+        const c = document.getElementById("canvas"),
+          ctx = c.getContext("2d");
+
+        function resize() {
+          const dpr = window.devicePixelRatio || 1;
+          const r = c.getBoundingClientRect();
+          // desktop keeps the artwork band under the fold threshold; mobile keeps the original frame.
+          const is_desktop = window.innerWidth >= 1024;
+          const aspect_ratio = is_desktop ? 1080 / 480 : 1016 / 640;
+          const natural_h = Math.round(r.width / aspect_ratio);
+          const max_desktop_h = Math.max(320, Math.round(window.innerHeight * 0.6 - 74));
+          const target_h = is_desktop ? Math.min(natural_h, max_desktop_h) : natural_h;
+          c.style.height = target_h + "px";
+          c.width = r.width * dpr;
+          c.height = target_h * dpr;
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+        resize();
+        window.addEventListener("resize", resize);
+
+        c.addEventListener("mousemove", (e) => {
+          const r = c.getBoundingClientRect();
+          hoverX = (e.clientX - r.left) / r.width;
+          hoverY = (e.clientY - r.top) / r.height;
+          hovering = true;
+        });
+        c.addEventListener("mouseleave", () => {
+          hovering = false;
+        });
+        c.addEventListener("touchmove", (e) => {
+          if (e.touches[0]) {
+            const r = c.getBoundingClientRect(),
+              t = e.touches[0];
+            hoverX = (t.clientX - r.left) / r.width;
+            hoverY = (t.clientY - r.top) / r.height;
+            hovering = true;
+          }
+        });
+
+        function bind(id, onChange) {
+          const el = document.getElementById(id),
+            v = document.getElementById(id + "-v");
+          el.addEventListener("input", () => {
+            const x = parseFloat(el.value);
+            onChange(x);
+            v.textContent =
+              id === "filaments" ? String(Math.round(x)) : x.toFixed(2);
+          });
+        }
+        bind("aperture", (x) => (aperture = x));
+        bind("filaments", (x) => (filaments = Math.round(x)));
+        bind("drift", (x) => (drift = x));
+
+        function setSeed(s) {
+          seed = s;
+          document.getElementById("seed-v").textContent = s;
+          noise = makeNoise(seed);
+        }
+        document
+          .getElementById("regen")
+          .addEventListener("click", () =>
+            setSeed(Math.floor(Math.random() * 99999999)),
+          );
+        document
+          .getElementById("seed-kristen")
+          .addEventListener("click", () => setSeed(SEEDS.kristen));
+        document
+          .getElementById("seed-steve")
+          .addEventListener("click", () => setSeed(SEEDS.steve));
+        document
+          .getElementById("seed-aec")
+          .addEventListener("click", () => setSeed(SEEDS.aec));
+        document.getElementById("save").addEventListener("click", () => {
+          const link = document.createElement("a");
+          link.download = `iris-bloom-seed-${seed}.png`;
+          link.href = c.toDataURL("image/png");
+          link.click();
+        });
+
+        function makeNoise(s) {
+          const rng = mulberry32(s);
+          const G = 256,
+            grid = new Float32Array(G * G);
+          for (let i = 0; i < grid.length; i++) grid[i] = rng();
+          const smooth = (t) => t * t * (3 - 2 * t);
+          return function (x, y) {
+            const xi = Math.floor(x),
+              yi = Math.floor(y),
+              xf = x - xi,
+              yf = y - yi;
+            const a = grid[(xi & 255) + (yi & 255) * G];
+            const b = grid[((xi + 1) & 255) + (yi & 255) * G];
+            const cc = grid[(xi & 255) + ((yi + 1) & 255) * G];
+            const d = grid[((xi + 1) & 255) + ((yi + 1) & 255) * G];
+            const u = smooth(xf),
+              v = smooth(yf);
+            return lerp(lerp(a, b, u), lerp(cc, d, u), v);
+          };
+        }
+        let noise = makeNoise(seed);
+
+        function draw() {
+          const r = c.getBoundingClientRect();
+          const W = r.width,
+            H = r.height;
+          const cx = W / 2,
+            cy = H / 2;
+          const t = (performance.now() - t0) / 1000;
+          const breath = 0.5 + 0.5 * Math.sin((t * 2 * Math.PI) / 5);
+          const apertureNow = aperture * (0.85 + 0.15 * breath);
+
+          ctx.fillStyle = "#0A0A0A";
+          ctx.fillRect(0, 0, W, H);
+
+          const maxR = Math.min(W, H) * 0.42;
+          const pupilR = maxR * apertureNow * 0.4;
+
+          const fieldN = 240;
+          for (let i = 0; i < fieldN; i++) {
+            const ang = (i / fieldN) * Math.PI * 2 + t * 0.04 * drift;
+            const orbit = maxR * 0.92 + Math.sin(t * 0.3 + i * 0.7) * maxR * 0.08;
+            const nx = Math.cos(ang) * orbit,
+              ny = Math.sin(ang) * orbit;
+            const nz = noise(
+              (nx + W) * 0.011 + t * 0.06 * drift,
+              (ny + H) * 0.011 + t * 0.04 * drift,
+            );
+            const rad = orbit + (nz - 0.5) * 80;
+            const px = cx + Math.cos(ang) * rad,
+              py = cy + Math.sin(ang) * rad;
+            ctx.fillStyle = rgba(lerpC(BLUE_DEEP, BLUE, nz), 0.1 + nz * 0.2);
+            ctx.beginPath();
+            ctx.arc(px, py, 0.7 + nz * 1.6, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          const N = filaments;
+          const rngLine = mulberry32(seed ^ 0x9e3779b9);
+          for (let i = 0; i < N; i++) {
+            const a = (i / N) * Math.PI * 2;
+            const wob = noise(Math.cos(a) * 3 + t * 0.08, Math.sin(a) * 3 + t * 0.04);
+            const r0 = pupilR * (1.02 + 0.05 * rngLine());
+            const r1 =
+              maxR * (0.6 + 0.3 * wob + 0.05 * Math.sin(a * 6 + t * 0.4));
+            const segments = 18;
+            ctx.beginPath();
+            for (let s = 0; s <= segments; s++) {
+              const tt = s / segments;
+              const rad = lerp(r0, r1, tt);
+              const jitter =
+                noise(Math.cos(a) * 4 + tt * 2, Math.sin(a) * 4 + t * 0.06) - 0.5;
+              const ang = a + jitter * 0.045 * tt;
+              const px = cx + Math.cos(ang) * rad;
+              const py = cy + Math.sin(ang) * rad;
+              if (s === 0) ctx.moveTo(px, py);
+              else ctx.lineTo(px, py);
+            }
+            const edgeMix = Math.min(1, (r1 - pupilR) / (maxR * 0.7));
+            const col = lerpC(GOLD, BLUE, edgeMix * 0.82);
+            ctx.strokeStyle = rgba(col, 0.2 + wob * 0.32);
+            ctx.lineWidth = 0.6;
+            ctx.stroke();
+          }
+
+          for (let ring = 0; ring < 4; ring++) {
+            ctx.beginPath();
+            ctx.arc(cx, cy, pupilR * (1.04 + ring * 0.018), 0, Math.PI * 2);
+            ctx.strokeStyle = rgba(GOLD_HI, 0.46 - ring * 0.1);
+            ctx.lineWidth = 0.85;
+            ctx.stroke();
+          }
+
+          const cilN = Math.min(filaments, 180);
+          for (let i = 0; i < cilN; i++) {
+            const a = (i / cilN) * Math.PI * 2 + 0.5;
+            const r0 = pupilR * 1.06;
+            const r1 =
+              pupilR *
+              (1.18 +
+                0.1 * noise(Math.cos(a) * 8, Math.sin(a) * 8 + t * 0.05));
+            ctx.beginPath();
+            ctx.moveTo(cx + Math.cos(a) * r0, cy + Math.sin(a) * r0);
+            ctx.lineTo(cx + Math.cos(a) * r1, cy + Math.sin(a) * r1);
+            ctx.strokeStyle = rgba(GOLD_HI, 0.35);
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+
+          ctx.fillStyle = "#000";
+          ctx.beginPath();
+          ctx.arc(cx, cy, pupilR, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.arc(cx, cy, pupilR, 0, Math.PI * 2);
+          ctx.strokeStyle = rgba(GOLD_HI, 0.55);
+          ctx.lineWidth = 0.9;
+          ctx.stroke();
+
+          const hx = hovering
+            ? (hoverX - 0.5) * pupilR * 0.65
+            : -pupilR * 0.22;
+          const hy = hovering
+            ? (hoverY - 0.5) * pupilR * 0.65
+            : -pupilR * 0.22;
+          ctx.fillStyle = rgba(CREAM, 0.88);
+          ctx.beginPath();
+          ctx.arc(cx + hx, cy + hy, pupilR * 0.11, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = rgba(CREAM, 0.32);
+          ctx.beginPath();
+          ctx.arc(
+            cx + hx * 0.6 + pupilR * 0.12,
+            cy + hy * 0.6 + pupilR * 0.14,
+            pupilR * 0.055,
+            0,
+            Math.PI * 2,
+          );
+          ctx.fill();
+
+          ctx.font = '10px "Inter",system-ui,sans-serif';
+          ctx.fillStyle = rgba(CREAM, 0.3);
+          ctx.textAlign = "left";
+          ctx.fillText("KT · 0508", 20, H - 18);
+          ctx.textAlign = "right";
+          ctx.fillText("seed " + seed, W - 20, H - 18);
+          ctx.textAlign = "left";
+          ctx.fillText("breath " + breath.toFixed(2), 20, 22);
+          ctx.textAlign = "right";
+          ctx.fillText("aperture " + apertureNow.toFixed(2), W - 20, 22);
+
+          requestAnimationFrame(draw);
+        }
+        requestAnimationFrame(draw);
+      })();
+    </script>
+  </body>
+</html>
