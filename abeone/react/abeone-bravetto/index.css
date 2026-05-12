@@ -1,0 +1,18 @@
+:root {
+  --phi: 1.6180339887;
+  --golden-angle: 137.5077deg;
+  
+  /* Phi-scaled state colors: rotations of 137.5 degrees */
+  --state-eros: hsl(0, 80%, 60%);
+  --state-philia: hsl(137.5, 80%, 60%);
+  --state-pragma: hsl(275, 80%, 60%);
+  --state-logic: hsl(52.5, 80%, 60%);
+  --state-agape: hsl(190, 80%, 60%);
+}
+
+body {
+  background-color: var(--color-obsidian);
+  color: #FFFFFF;
+  margin: 0;
+  overflow: hidden;
+}
