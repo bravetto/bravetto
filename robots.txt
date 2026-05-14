@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /mayo
+Disallow: /gate
+Disallow: /the-room
 
 Sitemap: https://bravetto.com/sitemap.xml

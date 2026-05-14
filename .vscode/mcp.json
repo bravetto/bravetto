@@ -2,10 +2,29 @@
   "servers": {
     "consciousness-core": {
       "command": "node",
-      "args": ["${userHome}/repos/cores/consciousness-core/launch.cjs"],
+      "args": [
+        "${userHome}/repos/cores/consciousness-core/launch.cjs"
+      ],
       "env": {
         "WINDOW_LABEL": "vscode"
       }
+    },
+    "cloudflare": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@cloudflare/mcp-server-cloudflare",
+        "run"
+      ]
+    },
+    "supabase": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase",
+        "--project-ref",
+        "sacohcutxqoydygzryvu"
+      ]
     }
   }
 }

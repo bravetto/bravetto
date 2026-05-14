@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Private Room | Bravetto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #faf9f6;
+      --paper: #ffffff;
+      --ink: #1a1a1a;
+      --muted: #5f5a52;
+      --line: #e8e2d4;
+      --gold: #c9a227;
+      --gold-deep: #8c6f13;
+      --danger: #7f1d1d;
+      --danger-bg: #fef2f2;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+      padding: 24px;
+    }
+
+    main {
+      width: min(100%, 520px);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: clamp(28px, 6vw, 48px);
+      box-shadow: 0 24px 70px rgba(26, 26, 26, 0.08);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--gold-deep);
+      font: 600 0.75rem/1.2 "JetBrains Mono", monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(2.35rem, 9vw, 4.2rem);
+      line-height: 0.92;
+      letter-spacing: 0;
+    }
+
+    .lede {
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    form {
+      margin-top: 30px;
+      display: grid;
+      gap: 14px;
+    }
+
+    label {
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    input {
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 0 14px;
+      color: var(--ink);
+      background: var(--cream);
+      font: 500 1rem/1 Inter, sans-serif;
+    }
+
+    input:focus-visible,
+    button:focus-visible {
+      outline: 3px solid rgba(201, 162, 39, 0.35);
+      outline-offset: 2px;
+    }
+
+    button {
+      min-height: 48px;
+      border: 1px solid var(--ink);
+      border-radius: 6px;
+      background: var(--ink);
+      color: var(--cream);
+      font: 700 0.9rem/1 Inter, sans-serif;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      cursor: wait;
+      opacity: 0.7;
+    }
+
+    .error {
+      display: none;
+      margin: 6px 0 0;
+      padding: 10px 12px;
+      border: 1px solid rgba(127, 29, 29, 0.18);
+      border-radius: 6px;
+      background: var(--danger-bg);
+      color: var(--danger);
+      font-size: 0.9rem;
+    }
+
+    footer {
+      margin-top: 30px;
+      color: var(--muted);
+      font: 600 0.72rem/1.4 "JetBrains Mono", monospace;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Private decision room</p>
+    <h1>The room opens with truth.</h1>
+    <p class="lede">This page is gated so the partners can review the contribution map, IP map, and option set without turning an unfinished conversation into public positioning.</p>
+
+    <form id="gate-form">
+      <label for="passphrase">Passphrase</label>
+      <input id="passphrase" name="passphrase" type="password" autocomplete="current-password" required>
+      <button id="submit-button" type="submit">Enter</button>
+      <p class="error" id="error-message">That passphrase did not open this room.</p>
+    </form>
+
+    <footer>Powered by Bravetto</footer>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const target = params.get("target") || "/the-room";
+    const form = document.getElementById("gate-form");
+    const input = document.getElementById("passphrase");
+    const button = document.getElementById("submit-button");
+    const error = document.getElementById("error-message");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      button.disabled = true;
+      error.style.display = "none";
+
+      try {
+        const result = await fetch("/api/gate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ passphrase: input.value, target }),
+        });
+
+        if (!result.ok) {
+          throw new Error("invalid");
+        }
+
+        const payload = await result.json();
+        window.location.assign(payload.target || "/the-room");
+      } catch (err) {
+        error.style.display = "block";
+        input.select();
+      } finally {
+        button.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

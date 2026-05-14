@@ -1,0 +1,765 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>The Room Before The Terms | Bravetto</title>
+  <script>
+    if (!document.cookie.includes("auth-the-room=validated-facts")) {
+      window.location.replace("/gate?target=/the-room");
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #faf9f6;
+      --paper: #ffffff;
+      --ink: #1a1a1a;
+      --muted: #625d55;
+      --quiet: #8a8378;
+      --line: #e8e2d4;
+      --gold: #c9a227;
+      --gold-deep: #8c6f13;
+      --green: #274c3a;
+      --blue: #203f62;
+      --rose: #6d3333;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.58;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      min-height: 92vh;
+      display: grid;
+      align-items: end;
+      padding: 28px 0 58px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      background: rgba(250, 249, 246, 0.94);
+      border-bottom: 1px solid rgba(232, 226, 212, 0.84);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-inner {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      font: 700 0.78rem/1 "JetBrains Mono", monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 14px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.62fr);
+      gap: clamp(36px, 7vw, 90px);
+      align-items: end;
+      padding-top: 78px;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--gold-deep);
+      font: 600 0.76rem/1.2 "JetBrains Mono", monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 900px;
+      margin: 0;
+      font-size: clamp(4rem, 12vw, 9rem);
+      line-height: 0.84;
+      font-weight: 700;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(2.45rem, 7vw, 5.4rem);
+      line-height: 0.9;
+      font-weight: 700;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: clamp(1.55rem, 3.6vw, 2.3rem);
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .lede {
+      margin-top: 28px;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: clamp(1.12rem, 2.2vw, 1.4rem);
+      line-height: 1.55;
+    }
+
+    .hero-note {
+      border-top: 2px solid var(--ink);
+      padding-top: 22px;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .hero-note strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--ink);
+      font: 700 0.76rem/1.2 "JetBrains Mono", monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    section {
+      padding: clamp(64px, 10vw, 120px) 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: minmax(240px, 0.46fr) minmax(0, 1fr);
+      gap: clamp(32px, 7vw, 90px);
+      align-items: start;
+    }
+
+    .section-kicker {
+      position: sticky;
+      top: 88px;
+    }
+
+    .section-kicker p {
+      margin-top: 18px;
+      color: var(--muted);
+      max-width: 360px;
+    }
+
+    .stack {
+      display: grid;
+      gap: 20px;
+    }
+
+    .panel,
+    .option,
+    .person,
+    .term,
+    .decision {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: clamp(20px, 3vw, 30px);
+    }
+
+    .panel strong,
+    .option strong,
+    .person strong,
+    .term strong,
+    .decision strong {
+      color: var(--ink);
+    }
+
+    .panel p + p,
+    .option p + p,
+    .person p + p,
+    .term p + p,
+    .decision p + p {
+      margin-top: 12px;
+    }
+
+    .label {
+      margin-bottom: 12px;
+      color: var(--gold-deep);
+      font: 700 0.72rem/1.2 "JetBrains Mono", monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .quote {
+      padding: clamp(28px, 5vw, 52px);
+      border-left: 5px solid var(--gold);
+      background: #fffdf8;
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(2rem, 5vw, 4.35rem);
+      line-height: 0.98;
+      font-weight: 700;
+    }
+
+    .map {
+      display: grid;
+      gap: 14px;
+    }
+
+    .person {
+      display: grid;
+      grid-template-columns: 170px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .person-name {
+      font: 700 0.82rem/1.35 "JetBrains Mono", monospace;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .person-role {
+      margin-top: 8px;
+      color: var(--quiet);
+      font-size: 0.86rem;
+    }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .option {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+      min-height: 280px;
+    }
+
+    .option code,
+    .tag {
+      display: inline-flex;
+      width: fit-content;
+      border-radius: 999px;
+      border: 1px solid rgba(201, 162, 39, 0.32);
+      padding: 5px 9px;
+      background: rgba(201, 162, 39, 0.08);
+      color: var(--gold-deep);
+      font: 700 0.72rem/1 "JetBrains Mono", monospace;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .option[data-status="closest"] {
+      border-color: rgba(39, 76, 58, 0.42);
+      box-shadow: inset 0 0 0 1px rgba(39, 76, 58, 0.16);
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .principle {
+      padding: 20px;
+      border-top: 3px solid var(--gold);
+      background: var(--paper);
+    }
+
+    .principle:nth-child(2) {
+      border-color: var(--green);
+    }
+
+    .principle:nth-child(3) {
+      border-color: var(--blue);
+    }
+
+    .principle h3 {
+      font-size: 1.45rem;
+      margin-bottom: 10px;
+    }
+
+    .terms {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .term {
+      min-height: 210px;
+    }
+
+    .decision-row {
+      display: grid;
+      grid-template-columns: 210px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .decision-row:last-child {
+      border-bottom: 0;
+    }
+
+    .decision-label {
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .step {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+    }
+
+    .step-number {
+      margin-bottom: 12px;
+      color: var(--gold-deep);
+      font: 700 0.72rem/1 "JetBrains Mono", monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .callout {
+      background: var(--ink);
+      color: var(--cream);
+      border-radius: 8px;
+      padding: clamp(28px, 5vw, 52px);
+    }
+
+    .callout h2,
+    .callout .label {
+      color: var(--cream);
+    }
+
+    .callout p {
+      color: rgba(250, 249, 246, 0.78);
+    }
+
+    footer {
+      padding: 34px 0 50px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      border-top: 1px solid var(--line);
+      padding-top: 22px;
+    }
+
+    .powered {
+      color: var(--ink);
+      font: 700 0.76rem/1.3 "JetBrains Mono", monospace;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .section-grid,
+      .person,
+      .decision-row {
+        grid-template-columns: 1fr;
+      }
+
+      .section-kicker {
+        position: static;
+      }
+
+      .option-grid,
+      .principles,
+      .terms,
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .wrap {
+        width: min(100% - 28px, 1120px);
+      }
+
+      header {
+        min-height: 86vh;
+      }
+
+      h1 {
+        font-size: clamp(3.5rem, 23vw, 5.4rem);
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="wrap nav-inner">
+      <div class="brand">Bravetto / private room</div>
+      <div class="nav-links" aria-label="Page sections">
+        <a href="#contributions">Contributions</a>
+        <a href="#ip">IP</a>
+        <a href="#options">Options</a>
+        <a href="#roles">Roles</a>
+      </div>
+    </div>
+  </nav>
+
+  <header>
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Advanced Knock / Advanced Ring</p>
+        <h1>The room before the terms.</h1>
+        <p class="lede">This is a working decision page for Michael, Caleb, Hudson, Jimmy, Kristin, and Bravetto. Its job is simple: protect the truth of what was built, honor every real contribution, and create options that let the work move without turning the partnership into an IP fight.</p>
+      </div>
+      <aside class="hero-note">
+        <strong>Working standard</strong>
+        This page is not legal advice, a valuation opinion, or final deal language. It is the clean factual room before counsel turns the shape into paper.
+      </aside>
+    </div>
+  </header>
+
+  <main>
+    <section id="why">
+      <div class="wrap section-grid">
+        <div class="section-kicker">
+          <p class="eyebrow">01 / why this room exists</p>
+          <h2>Win-win-win needs a clean center.</h2>
+          <p>Equity cannot carry unclear IP, unclear operating responsibility, and unequal capital contribution all at once.</p>
+        </div>
+        <div class="stack">
+          <div class="quote">If we clean this now, we can speak to the market from one center. If we do not, every future deal carries the fracture inside it.</div>
+          <div class="panel">
+            <p><strong>The goal is not to win against each other.</strong> The goal is to define what each stream actually contributed, decide what each stream owns, and choose a structure that gives Advanced Knock a real chance to sell without asking Bravetto to pretend its architecture has no value.</p>
+            <p class="muted">The clean move is to separate contribution, ownership, license rights, operating roles, decision rights, and upside. When those are separated, the conversation gets calmer because each question has its own lane.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="principles">
+      <div class="wrap section-grid">
+        <div class="section-kicker">
+          <p class="eyebrow">02 / operating principles</p>
+          <h2>Begin with the end in mind.</h2>
+          <p>The end is a company that can sell honestly, support customers responsibly, and keep the reusable Bravetto substrate intact.</p>
+        </div>
+        <div class="principles">
+          <div class="principle">
+            <h3>Protect the work.</h3>
+            <p class="muted">Bravetto, Michael, and Jimmy built the architecture, code, voice architecture, deployment path, and reusable substrate. That contribution must remain visible.</p>
+          </div>
+          <div class="principle">
+            <h3>Honor the market.</h3>
+            <p class="muted">Caleb originated the concept and brings live channel opportunity. Hudson contributed the surface and product participation. Those contributions matter.</p>
+          </div>
+          <div class="principle">
+            <h3>Move fast cleanly.</h3>
+            <p class="muted">The fastest path is not pretending everything is solved. The fastest path is choosing terms simple enough to execute this week.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contributions">
+      <div class="wrap section-grid">
+        <div class="section-kicker">
+          <p class="eyebrow">03 / contribution map</p>
+          <h2>What each stream brought.</h2>
+          <p>This is the current honest map. It should be corrected by the people in the room if any material fact is wrong.</p>
+        </div>
+        <div class="map">
+          <article class="person">
+            <div>
+              <div class="person-name">Bravetto</div>
+              <div class="person-role">Architecture, code, substrate</div>
+            </div>
+            <div>
+              <p>Bravetto contributed the core software architecture, backend logic, voice architecture, deployment model, operating patterns, and reusable technical foundation that make Advanced Ring usable as a product rather than only an idea or surface.</p>
+              <p class="muted">Jimmy's development contribution belongs inside this stream unless he separately asserts a distinct ownership claim. He developed as Bravetto, in Bravetto repos, and should be honored in the Bravetto contribution record.</p>
+            </div>
+          </article>
+          <article class="person">
+            <div>
+              <div class="person-name">Michael</div>
+              <div class="person-role">Founder, architect, builder</div>
+            </div>
+            <div>
+              <p>Michael contributed the capital base, system architecture, product judgment, and build leadership that turned the work into a near-launch software asset. The stated internal investment in the tools and architecture is approximately $300,000.</p>
+              <p class="muted">Michael should not be treated as the default CTO of Advanced Knock. Any technical support should flow through Bravetto under written scope, support terms, and compensation.</p>
+            </div>
+          </article>
+          <article class="person">
+            <div>
+              <div class="person-name">Caleb</div>
+              <div class="person-role">Origin, channel, sales motion</div>
+            </div>
+            <div>
+              <p>Caleb originated the market concept and brings relationships, especially the John Porter / Global Life channel possibility. His highest-value lane is sales, pipeline creation, customer discovery, and turning the product into revenue.</p>
+              <p class="muted">The current signal is that Caleb is ready to move. That readiness has value if it becomes documented pipeline, meetings, pilots, signed customers, or revenue.</p>
+            </div>
+          </article>
+          <article class="person">
+            <div>
+              <div class="person-name">Hudson</div>
+              <div class="person-role">Surface, product experience</div>
+            </div>
+            <div>
+              <p>Hudson contributed the visual surface, UI layer, product experience, and meaningful product participation. That contribution should be recognized as real, especially where his work shaped what users see and touch.</p>
+              <p class="muted">Leadership responsibility is a separate question from contribution. If Hudson wants operating leadership, the decision should be based on present readiness, clear commitments, and follow-through, not assumed from past contribution alone.</p>
+            </div>
+          </article>
+          <article class="person">
+            <div>
+              <div class="person-name">John / Porter</div>
+              <div class="person-role">Content and market proof</div>
+            </div>
+            <div>
+              <p>Any John Porter training material, methods, likeness, scripts, or proprietary sales content should be treated as separate rights until permission or license is written down.</p>
+              <p class="muted">The product can be valuable without blurring that boundary. A clean content license protects everyone before a customer sees the system.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="ip">
+      <div class="wrap section-grid">
+        <div class="section-kicker">
+          <p class="eyebrow">04 / IP ownership map</p>
+          <h2>What belongs where.</h2>
+          <p>The cleanest structure separates reusable architecture from the market vehicle that sells into one field.</p>
+        </div>
+        <div class="stack">
+          <div class="terms">
+            <article class="term">
+              <div class="label">Bravetto-owned</div>
+              <p>Reusable code, architecture, prompts, voice infrastructure, deployment patterns, data structures, product methods, and the broader substrate that can serve other markets.</p>
+            </article>
+            <article class="term">
+              <div class="label">Advanced Knock vehicle</div>
+              <p>The sales vehicle, customer contracts, insurance-specific positioning, operating process, customer relationships, and field-of-use commercial motion.</p>
+            </article>
+            <article class="term">
+              <div class="label">Third-party rights</div>
+              <p>John Porter content, Global Life access, partner names, training methods, and any outside materials that require written permission before commercial use.</p>
+            </article>
+          </div>
+          <div class="panel">
+            <p><strong>Core position:</strong> Advanced Knock can license and sell the product without owning the Bravetto substrate outright. That protects the architecture and still gives Caleb and Hudson a real business to operate.</p>
+            <p class="muted">If the partners want exclusivity, exclusivity should be priced, limited by field, tied to performance, and reversible if execution stalls.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="options">
+      <div class="wrap section-grid">
+        <div class="section-kicker">
+          <p class="eyebrow">05 / real options</p>
+          <h2>Three paths, plus the clean exit.</h2>
+          <p>Each path is legitimate. The room should choose one because it is true, not because conflict made everyone tired.</p>
+        </div>
+        <div class="option-grid">
+          <article class="option">
+            <code>option a</code>
+            <h3>Bravetto product</h3>
+            <p>Bravetto keeps the product, owns the customer relationship, and may compensate Caleb and Hudson for sales, surface contribution, or advisory support.</p>
+            <p class="muted">Best when Bravetto is the operator and the others want upside without carrying company leadership.</p>
+          </article>
+          <article class="option" data-status="closest">
+            <code>option b</code>
+            <h3>Licensed Advanced Knock vehicle</h3>
+            <p>ADVANCEDKNOCK LLC remains the sales vehicle and licenses Bravetto's substrate for a defined field of use. Contribution, operating control, compensation, and ownership are documented cleanly.</p>
+            <p class="muted">This is the likely path of least resistance if Caleb is ready to sell and Bravetto wants to retain architecture rights.</p>
+            <span class="tag">closest fit</span>
+          </article>
+          <article class="option">
+            <code>option c</code>
+            <h3>90-day pilot license</h3>
+            <p>The partners do not lock permanent ownership yet. They run a short pilot with clear revenue share, support scope, customer rules, and a review date.</p>
+            <p class="muted">Best when trust needs evidence. If pipeline becomes real, permanent terms get easier.</p>
+          </article>
+          <article class="option">
+            <code>option d</code>
+            <h3>Clean move-on</h3>
+            <p>The partners agree not to operate together. Each side keeps its owned work, third-party rights are respected, and nobody drags the fracture into future deals.</p>
+            <p class="muted">This is not failure. It is the honest path if the operating fit is not there.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="model">
+      <div class="wrap section-grid">
+        <div class="section-kicker">
+          <p class="eyebrow">06 / license and revenue model</p>
+          <h2>Simple enough to sign.</h2>
+          <p>The model should reward sales execution without converting technical support into an unpaid executive job.</p>
+        </div>
+        <div class="stack">
+          <div class="panel">
+            <p><strong>Recommended default:</strong> a field-of-use software license from Bravetto to ADVANCEDKNOCK LLC for insurance sales training and related insurance sales enablement.</p>
+            <p class="muted">The license can be non-exclusive at first. If Advanced Knock wants exclusive rights in the insurance vertical, exclusivity should require minimum revenue, minimum customer activity, and a defined term.</p>
+          </div>
+          <div class="terms">
+            <article class="term">
+              <div class="label">Revenue share</div>
+              <p>Example range: 10% to 20% of gross collected revenue, or 15% to 25% of net revenue after direct platform costs. Counsel and CPA should tune the definitions.</p>
+            </article>
+            <article class="term">
+              <div class="label">Support retainer</div>
+              <p>Bravetto support should be scoped. Example: a launch retainer, monthly support fee, or billable engineering bank. No open-ended CTO expectation.</p>
+            </article>
+            <article class="term">
+              <div class="label">Buyout option</div>
+              <p>If the vehicle proves revenue, Advanced Knock can negotiate a future buyout, exclusive license, or source escrow. The trigger should be revenue-based, not hope-based.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="roles">
+      <div class="wrap section-grid">
+        <div class="section-kicker">
+          <p class="eyebrow">07 / roles and decision rights</p>
+          <h2>Contribution is not the same as control.</h2>
+          <p>People can be honored for what they brought without giving every person veto power over every decision.</p>
+        </div>
+        <div class="decision">
+          <div class="decision-row">
+            <div class="decision-label">Technical architecture</div>
+            <p class="muted">Bravetto decides what is technically safe, reusable, supportable, and licensable. Advanced Knock can request product changes through a scoped process.</p>
+          </div>
+          <div class="decision-row">
+            <div class="decision-label">Sales and customers</div>
+            <p class="muted">The operating lead owns pipeline, customer commitments, pilot sequencing, and revenue accountability. If Caleb accepts that role, he needs clear authority and clear reporting.</p>
+          </div>
+          <div class="decision-row">
+            <div class="decision-label">Product surface</div>
+            <p class="muted">Hudson can own or advise the visible experience if he wants that lane and commits to delivery. Product authority should be tied to actual shipped work.</p>
+          </div>
+          <div class="decision-row">
+            <div class="decision-label">Company leadership</div>
+            <p class="muted">Someone other than Michael likely needs to lead the Advanced Knock company. Michael and Bravetto can support the software without becoming the management layer.</p>
+          </div>
+          <div class="decision-row">
+            <div class="decision-label">Bravetto governance</div>
+            <p class="muted">Kristin and Bravetto governance should review how any deal relates to Bravetto, Mataluni Enterprises, capital contribution, taxes, liability, and reusable IP rights.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pilot">
+      <div class="wrap section-grid">
+        <div class="section-kicker">
+          <p class="eyebrow">08 / 90-day pilot path</p>
+          <h2>The quickest clean move.</h2>
+          <p>If the room wants momentum, run a pilot. Do not spend a month arguing over a permanent split before revenue exists.</p>
+        </div>
+        <div class="timeline">
+          <article class="step">
+            <div class="step-number">week 1</div>
+            <p>Confirm the option, finish launch-critical code, write the short license memo, and identify which John Porter rights require permission.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">weeks 2-4</div>
+            <p>Caleb drives customer meetings and pilot discovery. Bravetto supports only within the agreed launch scope.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">days 30/60</div>
+            <p>Review pipeline, product gaps, support load, customer signal, and actual follow-through. Adjust scope before stress builds.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">day 90</div>
+            <p>Choose permanent license, equity restructure, acquisition, extension, or clean move-on based on evidence.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="decide">
+      <div class="wrap">
+        <div class="callout">
+          <p class="label">09 / what we decide together</p>
+          <h2>Do we want to operate together, license the work, or bless the separation?</h2>
+          <p class="lede">The next meeting does not need to solve every term. It needs to answer one honest question: which path gives the market, the code, and the people the best chance to move cleanly?</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div>Private working page. Not legal advice. Not a final valuation.</div>
+      <div class="powered">Powered by Bravetto</div>
+    </div>
+  </footer>
+</body>
+</html>

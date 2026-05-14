@@ -96,6 +96,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://bravetto.com/assets/iris-bloom</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://bravetto.com/abevoice</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -122,6 +127,11 @@
   </url>
   <url>
     <loc>https://bravetto.com/why-bravetto</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://bravetto.com/junction</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

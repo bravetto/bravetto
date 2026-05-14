@@ -4,20 +4,9 @@
 // output: slug, product_id, price_id — paste into api/product-map.js
 
 import Stripe from "stripe";
+import { sellable_catalog } from "./sellable-catalog.mjs";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-
-const products = [
-  { slug: "voice-starter",      name: "Voice Agent Starter",         cents: 9900,  interval: "month" },
-  { slug: "voice-growth",       name: "Voice Agent Growth",          cents: 29900, interval: "month" },
-  { slug: "biasguards-pro",     name: "BiasGuards Pro",              cents: 2900,  interval: "month" },
-  { slug: "consciousness-mcp",  name: "Consciousness MCP",           cents: 29900, interval: "month" },
-  { slug: "aiguardian-basic",   name: "AiGuardian Suite - Basic",    cents: 9900,  interval: "month" },
-  { slug: "aiguardian-pro",     name: "AiGuardian Suite - Pro",      cents: 29900, interval: "month" },
-  { slug: "advancedring-agent", name: "AdvancedRing Agent",          cents: 2000,  interval: "month" },
-  { slug: "advancedring-leader",name: "AdvancedRing Leader",         cents: 8000,  interval: "month" },
-  { slug: "domain-reservation", name: "Premium Ai Domain Reservation", cents: 9900, interval: null },
-];
 
 async function main() {
   const key_prefix = process.env.STRIPE_SECRET_KEY?.slice(0, 8);
@@ -31,7 +20,7 @@ async function main() {
 
   const results = [];
 
-  for (const p of products) {
+  for (const p of sellable_catalog) {
     const params = {
       name: p.name,
       metadata: { slug: p.slug, source: "bravetto-catalog" },
@@ -47,9 +36,10 @@ async function main() {
     }
 
     const product = await stripe.products.create(params);
-    const price_id = typeof product.default_price === "object"
-      ? product.default_price.id
-      : product.default_price;
+    const price_id =
+      typeof product.default_price === "object"
+        ? product.default_price.id
+        : product.default_price;
 
     results.push({ slug: p.slug, product_id: product.id, price_id });
     console.log(`  ${p.slug}: ${product.id} (${price_id})`);

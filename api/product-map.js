@@ -27,11 +27,7 @@ export const live_product_ids = {
   "domain-reservation": "prod_UHf9MfPJ0S5Ler",
 };
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error("STRIPE_SECRET_KEY is required for product map");
-}
-
-const is_test = process.env.STRIPE_SECRET_KEY.startsWith("sk_test_");
+const is_test = process.env.STRIPE_SECRET_KEY?.startsWith("sk_test_") || false;
 const product_ids = is_test ? test_product_ids : live_product_ids;
 
 // slug -> stripe product id. absent if slug not in current mode.
