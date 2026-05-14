@@ -425,6 +425,7 @@
           CREAM = [250, 249, 246];
         const SEEDS = { kristen: 20260508, steve: 19831024, aec: 111111 };
         const motion_mode = "wake";
+        const subject_scale = 1.2;
         let seed = SEEDS.kristen,
           aperture = 0.55,
           filaments = 260,
@@ -564,7 +565,8 @@
             phase,
             swell: 0.5 + 0.5 * Math.sin(phase),
             undertow: 0.5 + 0.5 * Math.sin(phase - 0.9),
-            drift: t * 0.024 * drift,
+            cross: 0.5 + 0.5 * Math.sin(phase * 0.63 + 1.7),
+            drift: t * 0.034 * drift,
           };
         }
 
@@ -577,16 +579,53 @@
           const wake =
             Math.sin(radius01 * 10.5 - state.phase + angle * 0.65) *
             membrane *
-            0.045;
+            0.063;
           const ripple =
             Math.sin(radius01 * 18 - state.phase * 0.72 - angle * 0.18) *
             membrane *
-            0.014;
+            0.02;
           return wake + ripple;
         }
 
         function collapse_motion(parts) {
           return parts.identity * 0.55 + parts.wake * 0.3 + parts.breath * 0.15;
+        }
+
+        function draw_ocean_current(ctx, W, H, state, breath) {
+          const bands = 30;
+          ctx.save();
+          ctx.globalCompositeOperation = "screen";
+          for (let i = 0; i < bands; i++) {
+            const lane = i / (bands - 1);
+            const y =
+              H * lane +
+              Math.sin(state.phase * 0.45 + lane * 7.2) * H * 0.018 +
+              Math.sin(state.phase * 0.22 - lane * 11.6) * H * 0.012;
+            const sweep = W * (0.06 + 0.025 * Math.sin(state.phase + lane * 5));
+            const alpha =
+              0.018 +
+              0.026 * membrane_at(Math.abs(lane - 0.5) * 2) +
+              0.012 * state.cross;
+            const grad = ctx.createLinearGradient(0, y, W, y);
+            grad.addColorStop(0, rgba(BLUE_DEEP, 0));
+            grad.addColorStop(0.38, rgba(BLUE_DEEP, alpha));
+            grad.addColorStop(0.62, rgba(BLUE, alpha * 0.58));
+            grad.addColorStop(1, rgba(GOLD_HI, alpha * 0.18));
+            ctx.beginPath();
+            ctx.moveTo(-sweep, y);
+            ctx.bezierCurveTo(
+              W * 0.24,
+              y + Math.sin(state.phase + lane * 4.4) * H * 0.035,
+              W * 0.72,
+              y - Math.sin(state.phase * 0.78 + lane * 5.8) * H * 0.032,
+              W + sweep,
+              y + (breath - 0.5) * H * 0.035,
+            );
+            ctx.strokeStyle = grad;
+            ctx.lineWidth = 1.1 + 1.8 * state.cross;
+            ctx.stroke();
+          }
+          ctx.restore();
         }
 
         function draw() {
@@ -607,7 +646,15 @@
           ctx.fillStyle = "#0A0A0A";
           ctx.fillRect(0, 0, W, H);
 
-          const maxR = Math.min(W, H) * 0.42;
+          if (motion_mode === "wake") draw_ocean_current(ctx, W, H, state, breath);
+
+          const min_dim = Math.min(W, H);
+          const safety_margin = min_dim < 420 ? 24 : 32;
+          const subject_breath =
+            motion_mode === "wake" ? 1 + (breath - 0.5) * 0.08 : 1;
+          const target_max_r =
+            min_dim * 0.42 * (motion_mode === "wake" ? subject_scale : 1) * subject_breath;
+          const maxR = Math.min(target_max_r, min_dim / 2 - safety_margin);
           const pupilR = maxR * apertureNow * 0.4;
 
           const fieldN = 240;
@@ -616,9 +663,9 @@
             const radius01 = 0.92;
             const wake = wake_at(radius01, base_ang, state);
             const collapsed = collapse_motion({
-              identity: Math.sin(t * 0.3 + i * 0.7) * 0.08,
+              identity: Math.sin(t * 0.3 + i * 0.7) * 0.06,
               wake,
-              breath: (breath - 0.5) * 0.06,
+              breath: (breath - 0.5) * 0.12,
             });
             const ang =
               motion_mode === "wake"
@@ -626,7 +673,7 @@
                 : base_ang + t * 0.04 * drift;
             const orbit =
               motion_mode === "wake"
-                ? maxR * (0.92 + collapsed)
+                ? maxR * (0.84 + collapsed)
                 : maxR * 0.92 + Math.sin(t * 0.3 + i * 0.7) * maxR * 0.08;
             const nx = Math.cos(ang) * orbit,
               ny = Math.sin(ang) * orbit;
@@ -641,14 +688,14 @@
                 ? orbit + collapse_motion({
                     identity: nz - 0.5,
                     wake,
-                    breath: breath - 0.5,
-                  }) * 54
+                    breath: (breath - 0.5) * 1.35,
+                  }) * 58
                 : orbit + (nz - 0.5) * 80;
             const px = cx + Math.cos(ang) * rad,
               py = cy + Math.sin(ang) * rad;
             const field_alpha =
               motion_mode === "wake"
-                ? 0.1 + nz * 0.16 + state.undertow * 0.04
+                ? 0.13 + nz * 0.18 + state.undertow * 0.06
                 : 0.1 + nz * 0.2;
             ctx.fillStyle = rgba(lerpC(BLUE_DEEP, BLUE, nz), field_alpha);
             ctx.beginPath();
@@ -670,7 +717,7 @@
             const r1 =
               motion_mode === "wake"
                 ? maxR *
-                  (0.6 + 0.28 * wob + line_wake * 1.3 + (breath - 0.5) * 0.025)
+                  (0.58 + 0.3 * wob + line_wake * 1.48 + (breath - 0.5) * 0.075)
                 : maxR * (0.6 + 0.3 * wob + 0.05 * Math.sin(a * 6 + t * 0.4));
             const segments = 18;
             ctx.beginPath();
@@ -679,7 +726,7 @@
               const segment_wake = wake_at(tt, a, state);
               const rad =
                 motion_mode === "wake"
-                  ? lerp(r0, r1 + segment_wake * maxR * 0.32, tt)
+                  ? lerp(r0, r1 + segment_wake * maxR * 0.46, tt)
                   : lerp(r0, r1, tt);
               const jitter =
                 motion_mode === "wake"
@@ -701,7 +748,7 @@
             const col = lerpC(GOLD, BLUE, edgeMix * 0.82);
             const filament_alpha =
               motion_mode === "wake"
-                ? 0.22 + wob * 0.28 + state.undertow * 0.04
+                ? 0.24 + wob * 0.3 + state.undertow * 0.06
                 : 0.2 + wob * 0.32;
             ctx.strokeStyle = rgba(col, filament_alpha);
             ctx.lineWidth = 0.6;
